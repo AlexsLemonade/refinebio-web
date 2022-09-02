@@ -1,0 +1,17 @@
+# NOTE: Pass the env_file 'docker-compose.env' when running the container;
+# $ docker-compose --env-file docker-compose.env up 
+version: "3.9"
+
+services:
+  client:
+    image: refinebio-client-dev 
+    ports: 
+     - ${CLIENT_PORT}:${CLIENT_PORT}
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    command: yarn dev -p ${CLIENT_PORT}
+    volumes:
+      - ./client/src:/app/src
+      - ./client/public:/app/public
+
