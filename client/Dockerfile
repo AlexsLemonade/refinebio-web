@@ -1,5 +1,4 @@
-ARG NODE_VER=16.17-alpine 
-FROM node:$NODE_VER
+FROM node:16.17-alpine 
 # Temp directory
 WORKDIR /app
 COPY package.json yarn.lock ./
