@@ -9,15 +9,17 @@
 # - comment out "command: yarn dev -p ${CLIENT_PORT}" 
 # The final Image size is 121MB
 
+ARG NODE_VER=16.17-alpine 
+
 # Dependency Installation:
-FROM node:16.17-alpine as deps
+FROM node:$NODE_VER as deps
 # Temp directory
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install  --frozen-lockfile
 
 # Build:
-FROM node:16.17-alpine as builder
+FROM node:$NODE_VER as builder
 # Temp directory
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
@@ -28,7 +30,7 @@ COPY . .
 RUN yarn build
 
 # Production:
-FROM node:16.17-alpine as runner
+FROM node:$NODE_VER as runner
 ENV NODE_ENV=production
 # For security, create a new user and group:
 RUN addgroup -g 1001 -S nodejs
