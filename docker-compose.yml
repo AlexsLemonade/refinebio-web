@@ -6,11 +6,11 @@ services:
     ports:
       - ${CLIENT_PORT}:${CLIENT_PORT}
     build:
-      context: ./client
+      context: .
       dockerfile: Dockerfile
     command: >
       bash -c 'cd /app &&
              yarn && 
              yarn dev -p ${CLIENT_PORT}'
     volumes:
-      - ./client:/app
+      - ./:/app
