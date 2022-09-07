@@ -2,16 +2,15 @@ version: "3.9"
 
 services:
   client:
-    image: refinebio-client-dev 
-    ports: 
-     - ${CLIENT_PORT}:${CLIENT_PORT}
-    build: 
+    image: refinebio-web
+    ports:
+      - ${CLIENT_PORT}:${CLIENT_PORT}
+    build:
       context: ./client
       dockerfile: Dockerfile
-    command: > 
+    command: >
       bash -c 'cd /app &&
              yarn && 
              yarn dev -p ${CLIENT_PORT}'
     volumes:
       - ./client:/app
-
