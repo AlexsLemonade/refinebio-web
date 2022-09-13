@@ -1,4 +1,5 @@
-import { useRouter, useEffect } from 'next/router'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 const ErrorPage = () => {
   const router = useRouter()
