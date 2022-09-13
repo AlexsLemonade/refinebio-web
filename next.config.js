@@ -7,6 +7,8 @@ const { withSentryConfig } = require('@sentry/nextjs')
 const moduleExports = {
   reactStrictMode: true,
   swcMinify: true,
+  // https://nextjs.org/docs/advanced-features/output-file-tracing#automatically-copying-traced-files
+  output: 'standalone',
   env: {
     SENTRY_DSN: process.env.SENTRY_DSN
   },

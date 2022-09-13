@@ -6,13 +6,19 @@ This project was bootstrapped with [`create-next-app`](https://github.com/vercel
 
 ## Getting Started
 
-First, run the development server:
+### Run the docker container:
 
 ```bash
-yarn dev
+yarn up
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Stop the docker container:
+
+```bash
+yarn up
+```
+
+Open [http://localhost:7000](http://localhost:7000) with your browser to see the result.
 
 ## Other resources
 
