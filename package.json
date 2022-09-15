@@ -13,9 +13,12 @@
   },
   "dependencies": {
     "@sentry/nextjs": "^7.12.1",
+    "grommet": "^2.25.3",
+    "grommet-icons": "^4.8.0",
     "next": "12.2.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
