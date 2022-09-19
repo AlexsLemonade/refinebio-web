@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/nextjs'
 import { Grommet } from 'grommet'
-import theme from 'themes'
+import { theme } from 'themes'
 import ErrorPage from 'pages/_error'
 
 const Fallback = () => <ErrorPage />
