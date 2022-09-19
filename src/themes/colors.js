@@ -1,8 +1,4 @@
 export const colors = {
-  gradient: {
-    dark: 'linear-gradient(180deg, rgba(12, 52, 131, 0.937981) 0%, #6B8CCE 131.35%, #A2B6DF 190.36%, #A1B6DF 190.36%, #A2B6DF 190.36%)',
-    light: 'linear-gradient(180deg, #DFE9F3 7.13%, #FFFFFF 75%)'
-  },
   // RULE: all color palettes should be define as top-level variables
   /* 
   /* Primary
@@ -72,7 +68,15 @@ export const colors = {
   'refinebio-blue-tint-20': '#5689C9',
   'refinebio-blue-shade-20': '#2C578C',
   'refinebio-blue-shade-40': '#214169',
-  'refinebio-blue-shade-60': '#162B46'
+  'refinebio-blue-shade-60': '#162B46',
+  /* 
+  /* Others
+  */
+  // Gradients
+  gradient: {
+    dark: 'linear-gradient(180deg, rgba(12, 52, 131, 0.937981) 0%, #6B8CCE 131.35%, #A2B6DF 190.36%, #A1B6DF 190.36%, #A2B6DF 190.36%)',
+    light: 'linear-gradient(180deg, #DFE9F3 7.13%, #FFFFFF 75%)'
+  }
 }
 
 export default colors

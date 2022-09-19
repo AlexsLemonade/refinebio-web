@@ -6,8 +6,8 @@ export default {
     1: {
       small: {},
       medium: {
-        size: '1.625rem',
-        height: '1.938rem'
+        size: '26px', // 1.625rem
+        height: 1.2 // 32px
       },
       large: {},
       xlarge: {}
@@ -15,8 +15,8 @@ export default {
     2: {
       small: {},
       medium: {
-        size: '1.375rem',
-        height: '1.625rem'
+        size: '22px', // 1.375rem
+        height: 1.2 // 26px
       },
       large: {},
       xlarge: {}
@@ -24,8 +24,8 @@ export default {
     3: {
       small: {},
       medium: {
-        size: '1.25rem',
-        height: '1.5rem'
+        size: '20px', // 1.25rem
+        height: 1.2 // 24px
       },
       large: {},
       xlarge: {}
@@ -33,8 +33,8 @@ export default {
     4: {
       small: {},
       medium: {
-        size: '1.125rem',
-        height: '1.688rem'
+        size: '18px', // 1.125rem
+        height: 1.5 // 27px
       },
       large: {},
       xlarge: {}
@@ -42,8 +42,8 @@ export default {
     5: {
       small: {},
       medium: {
-        size: '1rem',
-        height: '1.5rem'
+        size: '16px', // 1rem
+        height: 1.5 // 24px
       },
       large: {},
       xlarge: {}
