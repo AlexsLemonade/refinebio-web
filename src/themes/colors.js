@@ -5,19 +5,29 @@ export const colors = {
   */
   black: '#000',
   // Alex's Navy (old)
-  brand: '#002F6C',
-  'brand-tint-90': '#D6E8FF',
-  'brand-tint-80': '#AED1FE',
-  'brand-tint-60': '#5EA4FE',
-  'brand-tint-40': '#0D76FF',
-  'brand-tint-20': '#0051BC',
+  'alex-navy': '#002F6C',
+  'alex-navy-tint-90': '#D6E8FF',
+  'alex-navy-tint-80': '#AED1FE',
+  'alex-navy-tint-60': '#5EA4FE',
+  'alex-navy-tint-40': '#0D76FF',
+  'alex-navy-tint-20': '#0051BC',
   white: '#FDFDFD',
   /* 
   /* Accent
   */
+  // Brand - Refinebio Blue
+  brand: '#386DB0',
+  'brand-tint-90': '#E9F0F8',
+  'brand-tint-80': '#D4E1F1',
+  'brand-tint-60': '#AAC4E4',
+  'brand-tint-40': '#80A6D6',
+  'brand-tint-20': '#5689C9',
+  'brand-shade-20': '#2C578C',
+  'brand-shade-40': '#214169',
+  'brand-shade-60': '#162B46',
   // Alex's Yellow (new)
   'alex-yellow': '#FFDD00',
-  // Accent - Alex's Yellow (old)
+  // Alex's Yellow (old)
   'alex-yellow-old': '#F3E500',
   'alex-yellow-old-tint-90': '#FFFDE4',
   'alex-yellow-old-tint-40': '#FFF55E',
@@ -59,16 +69,6 @@ export const colors = {
   'pastel-green-shade-20': '#348257',
   'pastel-green-shade-40': '#266141',
   'pastel-green-shade-160': '#1A412B',
-  // Refinebio Blue
-  'refinebio-blue': '#386DB0',
-  'refinebio-blue-tint-90': '#E9F0F8',
-  'refinebio-blue-tint-80': '#D4E1F1',
-  'refinebio-blue-tint-60': '#AAC4E4',
-  'refinebio-blue-tint-40': '#80A6D6',
-  'refinebio-blue-tint-20': '#5689C9',
-  'refinebio-blue-shade-20': '#2C578C',
-  'refinebio-blue-shade-40': '#214169',
-  'refinebio-blue-shade-60': '#162B46',
   /* 
   /* Others
   */
@@ -78,5 +78,3 @@ export const colors = {
     light: 'linear-gradient(180deg, #DFE9F3 7.13%, #FFFFFF 75%)'
   }
 }
-
-export default colors
