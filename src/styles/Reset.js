@@ -23,7 +23,7 @@ export const Reset = createGlobalStyle`
         padding: 0;
         border: 0;
         font-size: 100%;
-        font: inherit;
+        font-family: inherit;
         vertical-align: baseline;
     }
     *, ::before, ::after { 

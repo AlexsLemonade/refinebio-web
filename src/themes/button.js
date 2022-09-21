@@ -14,7 +14,7 @@ export default {
     }
   },
   primary: {
-    background: { dark: '#ff0000', light: 'brand' },
+    background: 'brand',
     border: { color: 'brand', width: '1px' },
     color: 'white',
     extend: ({ theme }) => `
@@ -87,6 +87,7 @@ export default {
     }
   },
   extend: () => `
+    white-space: nowrap;
     &:active:not([disabled]) {
       box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
     }
