@@ -10,17 +10,29 @@ export default {
   },
   default: {
     color: 'brand',
-    border: { color: 'brand' },
     padding: {
       horizontal: '24px',
       vertical: '4px'
-    }
+    },
+    extend: ({ theme }) => `
+       &.text {
+          font-size: 26px;
+          border-bottom: 2px solid transparent;
+          padding: 8px 2px;
+          &:hover {
+            padding: 8px 0;
+            border-color: ${normalizeColor('brand', theme)};
+            font-weight: bold;
+          }
+       }
+    `
   },
   primary: {
     background: 'brand',
     border: { color: 'brand', width: '1px' },
     color: 'white',
     extend: ({ theme }) => `
+      // For dark background
       &.light {
         background: ${normalizeColor('white', theme)};
         border-color: ${normalizeColor('white', theme)};
@@ -38,6 +50,7 @@ export default {
     border: { color: 'brand', width: '1px' },
     color: 'brand',
     extend: ({ theme }) => `
+      // For dark background
       &.light {
         background: none;
         border-color: ${normalizeColor('white', theme)};
