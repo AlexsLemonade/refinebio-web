@@ -72,6 +72,11 @@ export const colors = {
   /* 
   /* Others
   */
+  // Form Elements TODO: Make variables
+  'form-brand': 'brand',
+  'form-brand-light': 'brand-tint-20',
+  'form-gray-999': 'gray-shade-40',
+  'form-white': 'white',
   // Gradients
   gradient: {
     dark: 'linear-gradient(180deg, rgba(12, 52, 131, 0.937981) 0%, #6B8CCE 131.35%, #A2B6DF 190.36%, #A1B6DF 190.36%, #A2B6DF 190.36%)',

@@ -1,5 +1,5 @@
 import { normalizeColor } from 'grommet/utils'
-// TODO: Ask about the size 16px vs 24px
+import { form } from 'themes/variables'
 
 export default {
   border: {
@@ -11,8 +11,10 @@ export default {
     }
   },
   extend: ({ theme }) => `
+    height: ${form.SIZE_16};
+    width: ${form.SIZE_16};
     input:not([disabled]) + div:hover {
-        box-shadow: 0 0 1px 1px ${normalizeColor('gray-shade-20', theme)};
+        box-shadow: ${form.BOXSHADOW(normalizeColor('gray-shade-20', theme))};
     }
      input:checked:not([disabled]) + div {
         box-shadow: none;

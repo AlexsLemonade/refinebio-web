@@ -1,8 +1,11 @@
 import { normalizeColor } from 'grommet/utils'
+import { form } from 'themes/variables'
+
+const BOXSHADOW = `0px 3px 4px rgba(0, 0, 0, 0.3)`
 
 export default {
   border: {
-    radius: '3px',
+    radius: form.RADIUS,
     width: '1px'
   },
   default: {
@@ -89,7 +92,7 @@ export default {
   extend: () => `
     white-space: nowrap;
     &:active:not([disabled]) {
-      box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
+      box-shadow: ${BOXSHADOW};
     }
     `
 }

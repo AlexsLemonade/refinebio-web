@@ -1,13 +1,14 @@
 import { normalizeColor } from 'grommet/utils'
+import { form } from 'themes/variables'
 
 export default {
-  height: '32px',
+  height: form.HEIGHT,
   background: {
     color: 'white'
   },
   border: {
     color: 'gray-shade-40',
-    radius: '3px'
+    radius: form.RADIUS
   },
   control: {
     extend: ({ theme }) => `
@@ -40,7 +41,7 @@ export default {
     margin: '0 8px'
   },
   options: {
-    height: '32px',
+    height: form.HEIGHT,
     container: {
       pad: 'xsmall'
     }
