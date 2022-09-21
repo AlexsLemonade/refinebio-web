@@ -7,5 +7,11 @@ export default {
   },
   medium: {
     size: '16px' // 1rem
-  }
+  },
+
+  extend: () => `
+     + p {
+        margin-top:16px;
+     }
+  `
 }
