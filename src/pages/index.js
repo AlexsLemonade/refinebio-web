@@ -10,7 +10,8 @@ import {
   Select,
   Tab,
   Tabs,
-  Text
+  Text,
+  Anchor
 } from 'grommet'
 import { BadgedButton } from 'components/BadgedButton'
 import { IconBadge } from 'components/IconBadge'
@@ -86,9 +87,17 @@ const Home = () => {
                   <i>Lato Body Text 16px</i>
                 </Paragraph>
               </Box>
-              <Box>
+              <Box margin={{ right: '60px' }}>
                 <Paragraph size="small">Lato Caption 14px</Paragraph>
                 <Paragraph size="xsmall">Lato Label 12px</Paragraph>
+              </Box>
+              <Box>
+                <Paragraph>
+                  <Anchor>Lato Body Link 16px</Anchor>
+                </Paragraph>
+                <Text weight="bold">
+                  <Anchor>Lato Body Link 16px</Anchor>
+                </Text>
               </Box>
             </Box>
             <Paragraph>

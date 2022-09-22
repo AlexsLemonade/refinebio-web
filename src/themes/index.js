@@ -1,3 +1,4 @@
+import anchor from 'themes/anchor'
 import button from 'themes/button'
 import checkBox from 'themes/checkBox'
 import global from 'themes/global'
@@ -11,6 +12,7 @@ import text from 'themes/text'
 import { textInput } from 'themes/textInput'
 
 export const theme = {
+  anchor,
   button,
   checkBox,
   global,
