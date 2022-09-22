@@ -497,7 +497,7 @@ const Home = () => {
                   onChange={(event) => setChecked(event.target.checked)}
                 />
               </Box>
-              <Box margin={{ right: '80px' }}>
+              <Box margin={{ top: '4px', right: '80px' }}>
                 <Text size="small" margin={{ bottom: '10px' }}>
                   (Disable)
                 </Text>

@@ -1,6 +1,7 @@
 import { normalizeColor } from 'grommet/utils'
 import { form } from 'themes/variables'
 
+// NOTE: Add class name 'light' for the dark background
 const BOXSHADOW = `0px 3px 4px rgba(0, 0, 0, 0.3)`
 
 export default {

@@ -3,27 +3,27 @@ import { form } from 'themes/variables'
 
 export default {
   border: {
-    color: 'form-gray-999'
+    color: form.GRAY
   },
   hover: {
     border: {
-      color: 'form-gray-999'
+      color: form.GRAY
     }
   },
   extend: ({ theme }) => `
     height: ${form.SIZE_16};
     width: ${form.SIZE_16};
     input:not([disabled]) + div:hover {
-        box-shadow: ${form.BOXSHADOW(normalizeColor('gray-shade-20', theme))};
+        box-shadow: ${form.BOXSHADOW(theme)};
     }
      input:checked:not([disabled]) + div {
         box-shadow: none;
         &:hover {
-            border-color: ${normalizeColor('brand', theme)};
+            border-color: ${form.ACTIVE(theme)};
         }
      }
      input:disabled + div {
-        background: ${normalizeColor('gray-shade-5', theme)};
+        background: ${normalizeColor(form.GRAY_LIGHT, theme)};
         cursor: not-allowed;
      }
   `

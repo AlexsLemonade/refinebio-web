@@ -1,28 +1,26 @@
 import { normalizeColor } from 'grommet/utils'
 import { form } from 'themes/variables'
 
+const RADIUS = '1px'
+
 export const textInput = {
   extend: ({ theme }) => `
-    border: 1px solid ${normalizeColor('gray-shade-40', theme)};
-    border-radius: 1px;
+    background-color: ${form.BACKGROUND};
+    border-radius: ${RADIUS};
     height: ${form.HEIGHT};
     padding: 4px 8px;
     &:hover {
-      border-color: ${normalizeColor('gray-shade-40', theme)};
-      box-shadow: ${form.BOXSHADOW(normalizeColor('gray-shade-20', theme))};
+      box-shadow: ${form.BOXSHADOW(theme)};
     }
     &:focus-visible {
-      border-color: ${normalizeColor('brand', theme)};
-      box-shadow: ${form.BOXSHADOW(normalizeColor('brand', theme))};
-    }
-    &::placeholder {
-      color: ${normalizeColor('gray-shade-40', theme)};
+      border-color: ${form.ACTIVE(theme)};
+      box-shadow: ${form.BOXSHADOW_CUSTOM(normalizeColor('brand', theme))};
     }
     &.error {
-      border-color:  ${normalizeColor('coral', theme)};
-      color:  ${normalizeColor('black', theme)};
+      border-color: ${form.ERROR(theme)};
+      color: ${normalizeColor('black', theme)};
       &:hover, &:focus-visible {
-        border-color: ${normalizeColor('coral', theme)};
+        border-color: ${form.ERROR(theme)};
         box-shadow: none;
       }
     }

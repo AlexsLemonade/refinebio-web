@@ -72,11 +72,6 @@ export const colors = {
   /* 
   /* Others
   */
-  // Form Elements TODO: Make variables
-  'form-brand': 'brand',
-  'form-brand-light': 'brand-tint-20',
-  'form-gray-999': 'gray-shade-40',
-  'form-white': 'white',
   // status
   error: 'coral',
   info: '#002F6C', // 'alex-navy'
@@ -86,8 +81,12 @@ export const colors = {
   warning: '#FFDD00', // 'alex-yellow',
   'warning-bg': '#FFFDE4', // 'alex-yellow-old-tint-90'
   // Gradients
-  gradient: {
-    dark: 'linear-gradient(180deg, rgba(12, 52, 131, 0.937981) 0%, #6B8CCE 131.35%, #A2B6DF 190.36%, #A1B6DF 190.36%, #A2B6DF 190.36%)',
-    light: 'linear-gradient(180deg, #DFE9F3 7.13%, #FFFFFF 75%)'
+  gradient:
+    'linear-gradient(180deg, rgba(12, 52, 131, 0.937981) 0%, #6B8CCE 131.35%, #A2B6DF 190.36%, #A1B6DF 190.36%, #A2B6DF 190.36%)',
+  'gradient-light': 'linear-gradient(180deg, #DFE9F3 7.13%, #FFFFFF 75%)',
+  // default font color
+  text: {
+    dark: '',
+    light: 'black'
   }
 }

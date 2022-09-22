@@ -4,7 +4,7 @@ const BACKGROUND = {
   default: 'white',
   active: 'gray-shade-5'
 }
-const FONT_SIZE = '1rem'
+const FONT_SIZE = '16px'
 const HEIGHT = '36px'
 
 export default {

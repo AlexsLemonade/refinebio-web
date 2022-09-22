@@ -3,11 +3,11 @@ import { form } from 'themes/variables'
 
 export default {
   border: {
-    color: 'form-gray-999'
+    color: form.GRAY
   },
   hover: {
     border: {
-      color: 'form-gray-999'
+      color: form.GRAY
     }
   },
   extend: ({ theme }) => `
@@ -17,23 +17,23 @@ export default {
     width: ${form.SIZE_16};
   }
   input:not([disabled]) + div:hover {
-    box-shadow: ${form.BOXSHADOW(normalizeColor('gray-shade-20', theme))};
+    box-shadow: ${form.BOXSHADOW(theme)};
   }
   input:checked:not([disabled]) + div {
-      background: ${normalizeColor('brand', theme)};
+      background: ${form.ACTIVE(theme)};
       box-shadow: none;
       &:hover {
-          border-color: ${normalizeColor('brand', theme)};
+          border-color: ${form.ACTIVE(theme)};
       }
       svg {
         path {
-          stroke: ${normalizeColor('white', theme)};
+          stroke: ${normalizeColor(form.BACKGROUND, theme)};
           stroke-width: 2px;
         }
       }
    }
    input:disabled + div {
-      background: ${normalizeColor('gray-shade-5', theme)};
+      background: ${normalizeColor(form.GRAY_LIGHT, theme)};
       cursor: not-allowed;
    }
 `
