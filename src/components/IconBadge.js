@@ -18,12 +18,13 @@ const SVGs = {
 }
 
 export const IconBadge = ({ name, label, ...props }) => {
-  const Badges = SVGs[name]
+  const SVGIcon = SVGs[name]
+
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Box direction="row" align="center" width="max-content" {...props}>
       <Box>
-        <Badges role="presentation" aria-hidden="true" focusable="false" />
+        <SVGIcon role="presentation" aria-hidden="true" focusable="false" />
       </Box>
       <Paragraph margin={{ left: 'small' }}>{label}</Paragraph>
     </Box>
