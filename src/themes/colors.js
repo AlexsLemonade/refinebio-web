@@ -1,9 +1,10 @@
 export const colors = {
-  // RULE: all color palettes should be define as top-level variables
+  // RULE: all color palettes should be defined as top-level variables
   /* 
   /* Primary
   */
   black: '#000',
+  white: '#FDFDFD',
   // Alex's Navy (old)
   'alex-navy': '#002F6C',
   'alex-navy-tint-90': '#D6E8FF',
@@ -11,7 +12,6 @@ export const colors = {
   'alex-navy-tint-60': '#5EA4FE',
   'alex-navy-tint-40': '#0D76FF',
   'alex-navy-tint-20': '#0051BC',
-  white: '#FDFDFD',
   /* 
   /* Accent
   */
@@ -77,6 +77,14 @@ export const colors = {
   'form-brand-light': 'brand-tint-20',
   'form-gray-999': 'gray-shade-40',
   'form-white': 'white',
+  // status
+  error: 'coral',
+  info: '#002F6C', // 'alex-navy'
+  'info-bg': '#D6E8FF', // 'alex-navy-tint-90'
+  success: '#41A36D', // 'pastel-green'
+  'success-bg': '#EAF6F0', // 'pastel-green-tint-90'
+  warning: '#FFDD00', // 'alex-yellow',
+  'warning-bg': '#FFFDE4', // 'alex-yellow-old-tint-90'
   // Gradients
   gradient: {
     dark: 'linear-gradient(180deg, rgba(12, 52, 131, 0.937981) 0%, #6B8CCE 131.35%, #A2B6DF 190.36%, #A1B6DF 190.36%, #A2B6DF 190.36%)',

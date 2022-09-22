@@ -291,18 +291,27 @@ const Home = () => {
         <Heading level={1} size="large">
           Inline Messages
         </Heading>
+        <Paragraph margin={{ bottom: '10px' }}>
+          <strong>Status:</strong> success | info | error
+        </Paragraph>
         <Box direction="row">
           <InlineMessage
             label="Added to Dataset"
-            name="Success"
+            status="success"
             pad={{ right: '20px' }}
           />
           <InlineMessage
             label="Platform not supported"
-            name="Info"
+            status="info"
             pad={{ right: '20px' }}
           />
-          <InlineMessage label="Encountered an error" name="Warning" />
+          <InlineMessage label="Encountered an error" status="error" />
+          <InlineMessage
+            label="Error message with no icon"
+            labelOnly
+            status="error"
+            margin={{ left: '20px' }}
+          />
         </Box>
       </Section>
       {/* ============ Badges ============ */}
@@ -330,22 +339,43 @@ const Home = () => {
           </Box>
           <Box margin={{ right: '60px' }}>
             <Heading level={2}>Processing Info Badges</Heading>
-            <Box margin={{ bottom: '10px' }}>
-              <Pill
-                background="pastel-green-tint-90"
-                color="pastel-green"
-                label="refinebio processed"
-              />
-            </Box>
-            <Box margin={{ bottom: '10px' }}>
-              <Pill label="Quantile normailzation skipped" />
-            </Box>
-            <Box margin={{ bottom: '10px' }}>
-              <Pill
-                background="alex-yellow-old-tint-90"
-                color="alex-yellow"
-                label="Submitter processed"
-              />
+            <Paragraph margin={{ bottom: '10px' }}>
+              <strong>Status:</strong> success | info | warning
+            </Paragraph>
+            <Box direction="row" margin={{ right: '60px' }}>
+              <Box margin={{ right: '60px' }}>
+                <Box margin={{ bottom: '10px' }}>
+                  <Pill label="refinebio processed" status="success" />
+                </Box>
+                <Box margin={{ bottom: '10px' }}>
+                  <Pill label="Quantile normailzation skipped" status="info" />
+                </Box>
+                <Box margin={{ bottom: '10px' }}>
+                  <Pill label="Submitter processed" status="warning" />
+                </Box>
+              </Box>
+              <Box>
+                <Box margin={{ bottom: '10px' }}>
+                  <Text size="small" margin={{ bottom: '10px' }}>
+                    (Any color)
+                  </Text>
+                  <Pill
+                    background="gray-shade-5"
+                    color="black"
+                    label="Custom color"
+                  />
+                </Box>
+                <Box margin={{ bottom: '10px' }}>
+                  <Text size="small" margin={{ bottom: '10px' }}>
+                    (Label only)
+                  </Text>
+                  <Pill
+                    background="pastel-green-tint-90"
+                    label="Label only"
+                    labelOnly
+                  />
+                </Box>
+              </Box>
             </Box>
           </Box>
           <Box>
@@ -383,7 +413,7 @@ const Home = () => {
           </Box>
           {/* Error Text Input */}
           <Box pad={{ top: '50px', bottom: '60px' }}>
-            <InlineMessage label="Error Message" labelOnly name="Warning" />
+            <InlineMessage label="Error Message" labelOnly status="error" />
             <Input error value="Invalid" />
           </Box>
         </Box>

@@ -1,24 +1,27 @@
 import { Box, Paragraph } from 'grommet'
 
+// status: error, info, warning
+
 export const Pill = ({
+  background = '',
+  color = '',
   label = '',
-  color = 'alex-navy',
-  background = 'alex-navy-tint-90',
-  bullet = 'true'
+  labelOnly = false,
+  status = ''
 }) => {
   return (
     <Box
       align="center"
-      background={background}
+      background={status ? `${status}-bg` : background}
       direction="row"
       flex
       pad={{ horizontal: 'small', vertical: 'xsmall' }}
       round="30px"
       width="max-content"
     >
-      {bullet && (
+      {!labelOnly && (
         <Box
-          background={color}
+          background={status || color}
           width="7px"
           height="7px"
           margin={{ right: 'xsmall' }}

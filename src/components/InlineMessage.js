@@ -1,34 +1,31 @@
 import { Box, Paragraph } from 'grommet'
 import styled, { css } from 'styled-components'
-import Info from '../images/info.svg'
-import Success from '../images/success.svg'
-import Warning from '../images/warning.svg'
+import InfoIcon from '../images/info.svg'
+import SuccessIcon from '../images/success.svg'
+import ErrorIcon from '../images/warning.svg'
+
+// status: error, info, success
 
 const SVGs = {
-  Info,
-  Success,
-  Warning
+  InfoIcon,
+  SuccessIcon,
+  ErrorIcon
 }
 
 const P = styled(Paragraph)`
   ${({ theme }) => css`
-    color: ${(props) =>
-      // eslint-disable-next-line no-nested-ternary
-      props.name === 'Success'
-        ? theme.global.colors['pastel-green']
-        : props.name === 'Info'
-        ? theme.global.colors['alex-navy']
-        : theme.global.colors.coral};
+    color: ${(props) => theme.global.colors[props.status]};
   `}
 `
 
 export const InlineMessage = ({
   label = '',
   labelOnly = false,
-  name = 'Info',
+  status = 'info',
   ...props
 }) => {
-  const SVGIcon = SVGs[name]
+  const SVGIcon =
+    SVGs[`${status.substring(0, 1).toUpperCase()}${status.substring(1)}Icon`]
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
@@ -38,7 +35,7 @@ export const InlineMessage = ({
           <SVGIcon role="presentation" aria-hidden="true" focusable="false" />
         </Box>
       )}
-      <P name={name} size="small">
+      <P status={status} size="small">
         {label}
       </P>
     </Box>
