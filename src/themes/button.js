@@ -22,7 +22,7 @@ export default {
           padding: 8px 2px;
           &:hover {
             padding: 8px 0;
-            border-color: ${normalizeColor('brand', theme)};
+            border-color: ${form.ACTIVE(theme)};
             font-weight: bold;
           }
        }
@@ -37,11 +37,11 @@ export default {
       &.light {
         background: ${normalizeColor('white', theme)};
         border-color: ${normalizeColor('white', theme)};
-        color: ${normalizeColor('brand', theme)};
+        color: ${form.ACTIVE(theme)};
         &:hover {
           background: ${normalizeColor('alex-navy-tint-90', theme)};
           border-color: ${normalizeColor('alex-navy-tint-90', theme)};
-          color: ${normalizeColor('brand', theme)};
+          color: ${form.ACTIVE(theme)};
         }
       }  
       `
@@ -82,6 +82,9 @@ export default {
     `
   },
   hover: {
+    default: {
+      color: 'brand'
+    },
     primary: {
       background: { color: 'brand-tint-20' },
       border: { color: 'brand-tint-20' },
@@ -93,6 +96,9 @@ export default {
     }
   },
   active: {
+    default: {
+      color: 'brand'
+    },
     primary: {
       background: { color: 'brand-tint-20' },
       border: { color: 'brand-tint-20' },

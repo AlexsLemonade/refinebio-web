@@ -3,6 +3,7 @@ import button from 'themes/button'
 import checkBox from 'themes/checkBox'
 import global from 'themes/global'
 import heading from 'themes/heading'
+import menu from 'themes/menu'
 import paragraph from 'themes/paragraph'
 import radioButton from 'themes/radioButton'
 import select from 'themes/select'
@@ -17,6 +18,7 @@ export const theme = {
   checkBox,
   global,
   heading,
+  menu,
   paragraph,
   radioButton,
   select,
