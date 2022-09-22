@@ -17,7 +17,7 @@ export default {
             &:hover {
                 box-shadow: none;
             }
-            &:focus {
+            &:focus-visible {
                 box-shadow: none;
             }
         }
@@ -50,7 +50,7 @@ export default {
     extend: ({ theme }) => `
        button {
             &[aria-selected="true"] {
-                &:hover, &:focus {
+                &:hover, &:focus-visible {
                     background: ${normalizeColor('brand', theme)}; 
                     color: ${normalizeColor('white', theme)}; 
                 }

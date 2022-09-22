@@ -22,15 +22,22 @@ const P = styled(Paragraph)`
   `}
 `
 
-export const InlineMessage = ({ label = '', name = 'Info', ...props }) => {
+export const InlineMessage = ({
+  label = '',
+  labelOnly = false,
+  name = 'Info',
+  ...props
+}) => {
   const SVGIcon = SVGs[name]
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Box direction="row" align="center" width="max-content" {...props}>
-      <Box margin={{ right: '8px' }}>
-        <SVGIcon role="presentation" aria-hidden="true" focusable="false" />
-      </Box>
+      {!labelOnly && (
+        <Box margin={{ right: '8px' }}>
+          <SVGIcon role="presentation" aria-hidden="true" focusable="false" />
+        </Box>
+      )}
       <P name={name} size="small">
         {label}
       </P>
