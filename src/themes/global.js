@@ -5,6 +5,6 @@ export default {
   font: {
     family: `'Lato', sans-serif`,
     size: '16px', // 1rem
-    height: 1.5 // 24px
+    height: 1.5
   }
 }

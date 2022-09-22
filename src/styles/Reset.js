@@ -1,4 +1,4 @@
-// NOTE: No support IE browsers
+// NOTE: No IE browsers support
 import { createGlobalStyle } from 'styled-components'
 
 export const Reset = createGlobalStyle`
