@@ -2,7 +2,7 @@ import { normalizeColor } from 'grommet/utils'
 
 export default {
   drop: {
-    align: { top: '24px' }
+    align: { top: 'bottom' }
   },
   icons: {
     margin: '4px 0 0'

@@ -14,6 +14,7 @@ import {
   Anchor
 } from 'grommet'
 import { BadgedButton } from 'components/BadgedButton'
+import { DropDown } from 'components/DropDown'
 import { IconBadge } from 'components/IconBadge'
 import { InlineMessage } from 'components/InlineMessage'
 import { Input } from 'components/Input'
@@ -35,8 +36,10 @@ const Home = () => {
   const [checked, setChecked] = useState(false)
 
   return (
-    <Box background="gray-shade-20">
-      <Paragraph size="xxlarge">Refinebio Style Guide</Paragraph>
+    <Box background="gray-shade-20" pad="10px 10%">
+      <Heading level="1" size="large">
+        Refinebio Style Guide
+      </Heading>
       {/* ============ Font Styles ============ */}
       <Section>
         <Heading level={1} size="large">
@@ -320,6 +323,21 @@ const Home = () => {
             labelOnly
             status="error"
             margin={{ left: '20px' }}
+          />
+        </Box>
+      </Section>
+      {/* ============ Navigation ============ */}
+      <Section>
+        <Heading level={1} size="large">
+          Navigation
+        </Heading>
+        <Box direction="row">
+          <DropDown
+            label="Search"
+            items={[
+              { label: 'Menu Item 1', onClick: () => {} },
+              { label: 'Menu Item 2', onClick: () => {} }
+            ]}
           />
         </Box>
       </Section>
