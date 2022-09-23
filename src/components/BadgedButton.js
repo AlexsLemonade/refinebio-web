@@ -6,7 +6,7 @@ export const BadgedButton = ({ count = 0, light = false, ...props }) => {
     <Box style={{ position: 'relative' }}>
       <NumberBadge light={light} count={count} />
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <GrommetButton {...props} />
+      <GrommetButton secondary className={light ? 'light' : ''} {...props} />
     </Box>
   )
 }

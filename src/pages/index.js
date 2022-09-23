@@ -214,22 +214,13 @@ const Home = () => {
               <div style={{ display: 'flex' }}>
                 <Box margin={{ right: '60px' }}>
                   <Box margin="small">
-                    <BadgedButton primary count={0} label="View Samples" />
+                    <BadgedButton count={0} label="View Samples" />
                   </Box>
                   <Box margin="small">
-                    <BadgedButton primary count={99} label="View Samples" />
+                    <BadgedButton count={99} label="View Samples" />
                   </Box>
                   <Box margin="small">
-                    <BadgedButton primary count="12k" label="View Samples" />
-                  </Box>
-                  <Box margin="small">
-                    <BadgedButton secondary count={0} label="View Samples" />
-                  </Box>
-                  <Box margin="small">
-                    <BadgedButton secondary count={99} label="View Samples" />
-                  </Box>
-                  <Box margin="small">
-                    <BadgedButton secondary count="1.3k" label="View Samples" />
+                    <BadgedButton count="1.3k" label="View Samples" />
                   </Box>
                 </Box>
                 <Box align="center" background="brand" pad="small">
@@ -238,58 +229,13 @@ const Home = () => {
                   </Text>
                   <Box>
                     <Box margin="small">
-                      <BadgedButton
-                        primary
-                        className="light"
-                        count={0}
-                        label="View Samples"
-                        light
-                      />
+                      <BadgedButton count={0} label="View Samples" light />
                     </Box>
                     <Box margin="small">
-                      <BadgedButton
-                        primary
-                        className="light"
-                        count={99}
-                        label="View Samples"
-                        light
-                      />
+                      <BadgedButton count={99} label="View Samples" light />
                     </Box>
                     <Box margin="small">
-                      <BadgedButton
-                        primary
-                        className="light"
-                        count="12k"
-                        label="View Samples"
-                        light
-                      />
-                    </Box>
-                    <Box margin="small">
-                      <BadgedButton
-                        secondary
-                        className="light"
-                        count={0}
-                        label="View Samples"
-                        light
-                      />
-                    </Box>
-                    <Box margin="small">
-                      <BadgedButton
-                        secondary
-                        className="light"
-                        count={99}
-                        label="View Samples"
-                        light
-                      />
-                    </Box>
-                    <Box margin="small">
-                      <BadgedButton
-                        secondary
-                        className="light"
-                        count="1.3k"
-                        label="View Samples"
-                        light
-                      />
+                      <BadgedButton count="1.3k" label="View Samples" light />
                     </Box>
                   </Box>
                 </Box>
