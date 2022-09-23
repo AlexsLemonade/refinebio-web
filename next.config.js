@@ -1,20 +1,41 @@
-// Sets a custom webpack configuration to use Next.js app with Sentry:
+// Custom webpack configuration for Next.js app with Sentry:
 // https://nextjs.org/docs/api-reference/next.config.js/introduction
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
+// Vercel for GitHub:
+// https://vercel.com/docs/concepts/git/vercel-for-github#configuring-for-github
 
 const { withSentryConfig } = require('@sentry/nextjs')
 
-const moduleExports = {
-  reactStrictMode: true,
-  swcMinify: true,
-  // https://nextjs.org/docs/advanced-features/output-file-tracing#automatically-copying-traced-files
-  output: 'standalone',
-  sentry: {
-    // Sentry SDK creates sourcemaps and uploads them to its server to deminify errors
-    // To prevent the original code to be visible in browser devtools in production, set hideSourceMaps to true
-    // https://webpack.js.org/configuration/devtool/
-    // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/#use-hidden-source-map
-    hideSourceMaps: true
+const moduleExports = () => {
+  const isProduction = process.env.VERCEL_GIT_COMMIT_REF === 'main'
+
+  // Set the env variables for 'staging' if not 'production'
+  const env = {
+    API_PATH: isProduction ? process.env.API_PATH : process.env.STAGE_API_PATH,
+    API_VERSION: isProduction
+      ? process.env.API_VERSION
+      : process.env.STAGE_API_VERSION,
+    SENTRY_DSN: isProduction
+      ? process.env.SENTRY_DSN
+      : process.env.STAGE_SENTRY_DSN,
+    SENTRY_ENV: isProduction
+      ? process.env.SENTRY_ENV
+      : process.env.STAGE_SENTRY_ENV
+  }
+
+  return {
+    env,
+    reactStrictMode: true,
+    swcMinify: true,
+    // https://nextjs.org/docs/advanced-features/output-file-tracing#automatically-copying-traced-files
+    output: 'standalone',
+    sentry: {
+      // Sentry SDK creates sourcemaps and uploads them to its server to deminify errors
+      // To prevent the original code to be visible in browser devtools in production, set hideSourceMaps to true
+      // https://webpack.js.org/configuration/devtool/
+      // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/#use-hidden-source-map
+      hideSourceMaps: true
+    }
   }
 }
 
