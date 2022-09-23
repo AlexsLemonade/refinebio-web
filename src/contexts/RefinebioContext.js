@@ -1,9 +1,9 @@
 import { createContext, useMemo } from 'react'
 import { useLocalStorage } from 'hooks/useLocalStorage'
 
-export const PortalContext = createContext({})
+export const RefinebioContext = createContext({})
 
-export const PortalContextProvider = ({ children }) => {
+export const RefinebioContextProvider = ({ children }) => {
   const [email, setEmail] = useLocalStorage('refinebio-user-email', null)
   const [token, setToken] = useLocalStorage('refinebio-api-token', null)
 
@@ -15,6 +15,8 @@ export const PortalContextProvider = ({ children }) => {
   }))
 
   return (
-    <PortalContext.Provider value={value}>{children}</PortalContext.Provider>
+    <RefinebioContext.Provider value={value}>
+      {children}
+    </RefinebioContext.Provider>
   )
 }
