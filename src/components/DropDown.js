@@ -14,9 +14,6 @@ const Wrapper = styled(Box)`
         fill: ${theme.global.colors.black};
         stroke: ${theme.global.colors.black};
       }
-      &:hover {
-        border-bottom: 1px solid ${theme.global.colors.brand};
-      }
       &:hover,
       &[aria-expanded='true'] {
         border-bottom: 1px solid ${theme.global.colors.brand};
@@ -24,6 +21,17 @@ const Wrapper = styled(Box)`
         svg {
           fill: ${theme.global.colors.brand};
           stroke: ${theme.global.colors.brand};
+        }
+      }
+      &.light {
+        color: ${theme.global.colors.white};
+        svg {
+          fill: ${theme.global.colors.white};
+          stroke: ${theme.global.colors.white};
+        }
+        &:hover,
+        &[aria-expanded='true'] {
+          border-bottom: 1px solid ${theme.global.colors.white};
         }
       }
     }

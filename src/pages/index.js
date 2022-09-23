@@ -284,13 +284,36 @@ const Home = () => {
           Navigation
         </Heading>
         <Box direction="row">
-          <DropDown
-            label="Search"
-            items={[
-              { label: 'Menu Item 1', onClick: () => {} },
-              { label: 'Menu Item 2', onClick: () => {} }
-            ]}
-          />
+          <Box margin={{ right: '10px' }}>
+            <Text size="small" margin={{ bottom: '10px' }}>
+              (Normal)
+            </Text>
+            <DropDown
+              label="Search"
+              items={[
+                { label: 'Menu Item 1', onClick: () => {} },
+                { label: 'Menu Item 2', onClick: () => {} }
+              ]}
+            />
+          </Box>
+          <Box
+            align="center"
+            background="brand"
+            pad={{ horizontal: 'medium', vertical: 'small' }}
+            height="200px"
+          >
+            <Text color="white" size="small" margin={{ bottom: '10px' }}>
+              (with bg)
+            </Text>
+            <DropDown
+              className="light"
+              label="Search"
+              items={[
+                { label: 'Menu Item 1', onClick: () => {} },
+                { label: 'Menu Item 2', onClick: () => {} }
+              ]}
+            />
+          </Box>
         </Box>
       </Section>
       {/* ============ Badges ============ */}
