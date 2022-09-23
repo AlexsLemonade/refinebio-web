@@ -14,19 +14,7 @@ export default {
     padding: {
       horizontal: '24px',
       vertical: '4px'
-    },
-    extend: ({ theme }) => `
-       &.text {
-          font-size: 26px;
-          border-bottom: 2px solid transparent;
-          padding: 8px 2px;
-          &:hover {
-            padding: 8px 0;
-            border-color: ${form.ACTIVE(theme)};
-            font-weight: bold;
-          }
-       }
-    `
+    }
   },
   primary: {
     background: 'brand',

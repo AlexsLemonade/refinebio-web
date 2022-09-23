@@ -202,8 +202,14 @@ const Home = () => {
           {/* Text Buttons */}
           <Box>
             <Heading level={2}>Text Buttons</Heading>
-            <Button className="text" label="Normalized Compendia" />
-            <Button className="text" label="Normalized Compendia" />
+            <Tabs className="text">
+              <Tab title="Normalized Compendia">
+                <Box pad="medium" />
+              </Tab>
+              <Tab title="RNA-seq Sample Compendia">
+                <Box pad="medium" />
+              </Tab>
+            </Tabs>
           </Box>
         </Box>
         <Box>
