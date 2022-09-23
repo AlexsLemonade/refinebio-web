@@ -38,7 +38,7 @@ const Wrapper = styled(Box)`
   `}
 `
 
-export const DropDown = ({ label, items, ...props }) => {
+export const NavDropDown = ({ label, items, ...props }) => {
   return (
     <Wrapper>
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
@@ -47,4 +47,4 @@ export const DropDown = ({ label, items, ...props }) => {
   )
 }
 
-export default DropDown
+export default NavDropDown

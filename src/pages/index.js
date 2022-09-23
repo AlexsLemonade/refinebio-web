@@ -14,12 +14,14 @@ import {
   Anchor
 } from 'grommet'
 import { BadgedButton } from 'components/BadgedButton'
-import { DropDown } from 'components/DropDown'
 import { IconBadge } from 'components/IconBadge'
 import { InlineMessage } from 'components/InlineMessage'
 import { Input } from 'components/Input'
 import { NumberBadge } from 'components/NumberBadge'
+import { NavDropDown } from 'components/header/NavDropDown'
+import { NavLink } from 'components/header/NavLink'
 import { Pill } from 'components/Pill'
+import { Logo } from 'components/header/Logo'
 import styled from 'styled-components'
 
 // TEMPORARY
@@ -220,6 +222,9 @@ const Home = () => {
               <div style={{ display: 'flex' }}>
                 <Box margin={{ right: '60px' }}>
                   <Box margin="small">
+                    <Text size="small" margin={{ bottom: '10px' }}>
+                      (Normal)
+                    </Text>
                     <BadgedButton count={0} label="View Samples" />
                   </Box>
                   <Box margin="small">
@@ -284,28 +289,54 @@ const Home = () => {
           Navigation
         </Heading>
         <Box direction="row">
-          <Box margin={{ right: '10px' }}>
-            <Text size="small" margin={{ bottom: '10px' }}>
-              (Normal)
-            </Text>
-            <DropDown
-              label="Search"
-              items={[
-                { label: 'Menu Item 1', onClick: () => {} },
-                { label: 'Menu Item 2', onClick: () => {} }
-              ]}
-            />
+          <Box margin={{ right: '80px' }}>
+            <Heading level={2}>Logo</Heading>
+            <Box pad={{ horizontal: 'medium', vertical: 'small' }}>
+              <Text size="small" margin={{ bottom: '10px' }}>
+                (Normal)
+              </Text>
+              <Logo />
+            </Box>
+            <Box
+              background="brand"
+              pad={{ horizontal: 'medium', vertical: 'small' }}
+            >
+              <Text color="white" size="small" margin={{ bottom: '10px' }}>
+                (with bg)
+              </Text>
+              <Logo className="light" />
+            </Box>
+          </Box>
+          <Box>
+            <Heading level={2}>Links</Heading>
+            <Box margin={{ right: '10px' }}>
+              <Text size="small" margin={{ bottom: '10px' }}>
+                (Normal)
+              </Text>
+              <Box margin={{ bottom: '16px' }}>
+                <NavLink>Search</NavLink>
+              </Box>
+              <NavDropDown
+                label="Search"
+                items={[
+                  { label: 'Menu Item 1', onClick: () => {} },
+                  { label: 'Menu Item 2', onClick: () => {} }
+                ]}
+              />
+            </Box>
           </Box>
           <Box
-            align="center"
             background="brand"
-            pad={{ horizontal: 'medium', vertical: 'small' }}
-            height="200px"
+            pad={{ horizontal: 'medium', top: '40px' }}
+            height="250px"
           >
             <Text color="white" size="small" margin={{ bottom: '10px' }}>
               (with bg)
             </Text>
-            <DropDown
+            <Box margin={{ bottom: '16px' }}>
+              <NavLink className="light">Search</NavLink>
+            </Box>
+            <NavDropDown
               className="light"
               label="Search"
               items={[
