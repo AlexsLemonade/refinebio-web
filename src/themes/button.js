@@ -31,12 +31,12 @@ export default {
   primary: {
     background: 'brand',
     border: { color: 'brand', width: '1px' },
-    color: 'white',
+    color: form.WHITE,
     extend: ({ theme }) => `
       // For dark background
       &.light {
-        background: ${normalizeColor('white', theme)};
-        border-color: ${normalizeColor('white', theme)};
+        background: ${normalizeColor(form.WHITE, theme)};
+        border-color: ${normalizeColor(form.WHITE, theme)};
         color: ${form.ACTIVE(theme)};
         &:hover {
           background: ${normalizeColor('alex-navy-tint-90', theme)};
@@ -47,18 +47,19 @@ export default {
       `
   },
   secondary: {
-    background: { color: 'white' },
+    background: { color: form.WHITE },
     border: { color: 'brand', width: '1px' },
     color: 'brand',
     extend: ({ theme }) => `
       // For dark background
       &.light {
         background: none;
-        border-color: ${normalizeColor('white', theme)};
-        color: ${normalizeColor('white', theme)};
+        border-color: ${normalizeColor(form.WHITE, theme)};
+        color: ${normalizeColor(form.WHITE, theme)};
         &:hover {
-          border-color: ${normalizeColor('alex-navy-tint-90', theme)};
-          color: ${normalizeColor('alex-navy-tint-90', theme)};
+          border-color: ${normalizeColor(form.WHITE, theme)};
+          background: ${normalizeColor(form.WHITE, theme)};
+          color: ${form.ACTIVE(theme)};
         }
       }  
       `
@@ -68,10 +69,10 @@ export default {
     primary: {
       background: 'gray-shade-40',
       border: { color: 'gray-shade-40', width: '1px' },
-      color: 'white'
+      color: form.WHITE
     },
     secondary: {
-      background: 'white',
+      background: form.WHITE,
       border: { color: 'gray-shade-40', width: '1px' },
       color: 'gray-shade-40'
     },
@@ -88,11 +89,11 @@ export default {
     primary: {
       background: { color: 'brand-tint-20' },
       border: { color: 'brand-tint-20' },
-      color: 'white'
+      color: form.WHITE
     },
     secondary: {
       background: { color: 'brand' },
-      color: 'white'
+      color: form.WHITE
     }
   },
   active: {
@@ -102,11 +103,11 @@ export default {
     primary: {
       background: { color: 'brand-tint-20' },
       border: { color: 'brand-tint-20' },
-      color: 'white'
+      color: form.WHITE
     },
     secondary: {
       background: { color: 'brand' },
-      color: 'white'
+      color: form.WHITE
     }
   },
   extend: () => `

@@ -3,7 +3,7 @@ import { form } from 'themes/variables'
 
 export default {
   background: {
-    color: form.BACKGROUND
+    color: form.WHITE
   },
   control: {
     extend: ({ theme }) => `
@@ -43,7 +43,7 @@ export default {
             &[aria-selected="true"] {
                 &:hover, &:focus-visible {
                     background: ${form.ACTIVE(theme)}; 
-                    color: ${normalizeColor(form.BACKGROUND, theme)}; 
+                    color: ${normalizeColor(form.WHITE, theme)}; 
                 }
             }
             &:not([aria-selected="true"]):hover, &:not([aria-selected="true"]):focus {

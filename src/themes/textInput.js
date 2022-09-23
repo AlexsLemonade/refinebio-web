@@ -5,7 +5,7 @@ const RADIUS = '1px'
 
 export const textInput = {
   extend: ({ theme }) => `
-    background-color: ${form.BACKGROUND};
+    background-color: ${form.WHITE};
     border-radius: ${RADIUS};
     height: ${form.HEIGHT};
     padding: 4px 8px;

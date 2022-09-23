@@ -27,7 +27,7 @@ export default {
       }
       svg {
         path {
-          stroke: ${normalizeColor(form.BACKGROUND, theme)};
+          stroke: ${normalizeColor(form.WHITE, theme)};
           stroke-width: 2px;
         }
       }

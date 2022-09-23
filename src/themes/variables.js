@@ -2,7 +2,7 @@ import { normalizeColor } from 'grommet/utils'
 
 export const form = {
   // General
-  BACKGROUND: 'white',
+  WHITE: 'white',
   HEIGHT: '32px',
   RADIUS: '3px',
   GRAY: 'gray-shade-40',
