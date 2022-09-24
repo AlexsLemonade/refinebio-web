@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import {
-  Button,
   Box,
   CheckBox,
   Heading,
@@ -13,7 +12,7 @@ import {
   Text,
   Anchor
 } from 'grommet'
-import { BadgedButton } from 'components/BadgedButton'
+import { Button } from 'components/Button'
 import { IconBadge } from 'components/IconBadge'
 import { InlineMessage } from 'components/InlineMessage'
 import { Input } from 'components/Input'
@@ -225,13 +224,13 @@ const Home = () => {
                     <Text size="small" margin={{ bottom: '10px' }}>
                       (Normal)
                     </Text>
-                    <BadgedButton count={0} label="View Samples" />
+                    <Button badged count={0} label="View Samples" />
                   </Box>
                   <Box margin="small">
-                    <BadgedButton count={99} label="View Samples" />
+                    <Button badged count={99} label="View Samples" />
                   </Box>
                   <Box margin="small">
-                    <BadgedButton count="1.3k" label="View Samples" />
+                    <Button badged count="1.3k" label="View Samples" />
                   </Box>
                 </Box>
                 <Box align="center" background="brand" pad="small">
@@ -240,13 +239,13 @@ const Home = () => {
                   </Text>
                   <Box>
                     <Box margin="small">
-                      <BadgedButton count={0} label="View Samples" light />
+                      <Button badged count={0} label="View Samples" light />
                     </Box>
                     <Box margin="small">
-                      <BadgedButton count={99} label="View Samples" light />
+                      <Button badged count={99} label="View Samples" light />
                     </Box>
                     <Box margin="small">
-                      <BadgedButton count="1.3k" label="View Samples" light />
+                      <Button badged count="1.3k" label="View Samples" light />
                     </Box>
                   </Box>
                 </Box>
