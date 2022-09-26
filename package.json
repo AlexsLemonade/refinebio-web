@@ -3,14 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "up": "docker-compose --env-file ./docker-compose.env -f ./docker-compose.yml up",
-    "down": "docker-compose --env-file ./docker-compose.env -f ./docker-compose.yml down",
+    "compose": "docker-compose --env-file ./docker-compose.env -f ./docker-compose.yml",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "storybook": "start-storybook -p 7001",
+    "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "dependencies": {

@@ -5,23 +5,14 @@ services:
     image: refinebio-web
     ports:
       - ${CLIENT_PORT}:${CLIENT_PORT}
+      - ${STORYBOOK_PORT}:${STORYBOOK_PORT}
     build:
       context: .
       dockerfile: Dockerfile
     command: >
       bash -c 'cd /app &&
              yarn && 
-             yarn dev -p ${CLIENT_PORT}'
+             (yarn storybook --quiet -p ${STORYBOOK_PORT} &
+              yarn dev -p ${CLIENT_PORT})'
     volumes:
       - ./:/app
-  storybook:
-    image: refinebio-web-storybook    
-    ports:
-      - ${STORYBOOK_PORT}:${STORYBOOK_PORT}
-    build: 
-      context: .
-      dockerfile: Dockerfile.storybook
-    command: >
-      bash -c 'cd /app &&
-             yarn && 
-             yarn start-storybook -p ${STORYBOOK_PORT}'  
