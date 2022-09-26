@@ -5,11 +5,10 @@ module.exports = {
     jest: true
   },
   extends: [
-    // https://www.npmjs.com/package/eslint-plugin-react
     'plugin:react/recommended',
     'airbnb',
-    // https://github.com/prettier/eslint-plugin-prettier
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
+    'plugin:storybook/recommended'
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -45,7 +44,12 @@ module.exports = {
     'import/prefer-default-export': 0,
     'import/no-mutable-exports': 0,
     'no-class-assign': 0,
-    'no-console': [1, { allow: ['error'] }],
+    'no-console': [
+      1,
+      {
+        allow: ['error']
+      }
+    ],
     'no-continue': 0,
     'no-func-assign': 0,
     'no-nested-ternary': 1,
@@ -61,7 +65,12 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     // JSX-specific
     'jsx-a11y/click-events-have-key-events': 0,
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-filename-extension': [
+      1,
+      {
+        extensions: ['.js', '.jsx']
+      }
+    ],
     'react/jsx-one-expression-per-line': 0,
     'react/jsx-props-no-spreading': 1
   },
