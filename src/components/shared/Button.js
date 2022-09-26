@@ -1,6 +1,12 @@
 import { Box, Button as GrommetButton } from 'grommet'
 import { NumberBadge } from 'components/shared/NumberBadge'
 
+/* NOTE: 
+- Set the prop 'light' to true for the dark background
+- Set the prop 'badged' to true for the badged button
+  (required prop: 'count')
+*/
+
 export const Button = ({
   badged = false,
   count = 0,

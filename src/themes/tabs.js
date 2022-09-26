@@ -1,7 +1,5 @@
 import { normalizeColor } from 'grommet/utils'
 
-// NOTE: Add class name 'text' for the 'Text Button' tabs
-
 export default {
   header: {
     extend: ({ theme }) => `

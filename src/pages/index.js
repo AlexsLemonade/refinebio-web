@@ -303,7 +303,7 @@ const Home = () => {
               <Text color="white" size="small" margin={{ bottom: '10px' }}>
                 (with bg)
               </Text>
-              <Logo className="light" />
+              <Logo light />
             </Box>
           </Box>
           <Box>
@@ -333,7 +333,7 @@ const Home = () => {
               (with bg)
             </Text>
             <Box margin={{ bottom: '16px' }}>
-              <NavLink className="light">Search</NavLink>
+              <NavLink light>Search</NavLink>
             </Box>
             <NavDropDown
               className="light"

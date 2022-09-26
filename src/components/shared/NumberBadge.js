@@ -1,6 +1,8 @@
 import { Box } from 'grommet'
 import styled, { css } from 'styled-components'
 
+// NOTE: Set the prop 'light' to true for the dark background
+
 const Badge = styled(Box)`
   border-radius: 30px;
   display: flex;

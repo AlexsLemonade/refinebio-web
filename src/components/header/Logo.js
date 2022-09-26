@@ -2,7 +2,7 @@ import { Box } from 'grommet'
 import styled, { css } from 'styled-components'
 import { LogoSvg } from '../../images/logo.svg'
 
-// NOTE: Add class name 'light' for the dark background
+// NOTE: Set the prop 'light' to true for the dark background
 
 const Wrapper = styled(Box)`
   ${({ theme }) => css`
@@ -13,10 +13,10 @@ const Wrapper = styled(Box)`
   `}
 `
 
-export const Logo = ({ ...props }) => {
+export const Logo = ({ light = false, ...props }) => {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Wrapper {...props}>
+    <Wrapper className={light ? 'light' : ''} {...props}>
       <LogoSvg />
     </Wrapper>
   )

@@ -1,6 +1,8 @@
 import { Box, Anchor as GrommetAnchor } from 'grommet'
 import styled, { css } from 'styled-components'
 
+// NOTE: Set the prop 'light' to true for the dark background
+
 const Wrapper = styled(Box)`
   ${({ theme }) => css`
     font-family: 'Rubik', sans-serif;
@@ -27,10 +29,10 @@ const Wrapper = styled(Box)`
   `}
 `
 
-export const NavLink = ({ link, children, ...props }) => {
+export const NavLink = ({ light = false, link, children, ...props }) => {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Wrapper {...props}>
+    <Wrapper className={light ? 'light' : ''} {...props}>
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <GrommetAnchor link={link} {...props}>
         {children}

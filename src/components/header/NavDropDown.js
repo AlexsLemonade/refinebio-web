@@ -1,7 +1,7 @@
 import { Box, Menu as GrommetMenu } from 'grommet'
 import styled, { css } from 'styled-components'
 
-// NOTE: Add class name 'light' for the dark background
+// NOTE: Set the prop 'light' to true for the dark background
 
 const Wrapper = styled(Box)`
   font-family: 'Rubik', sans-serif;
@@ -38,11 +38,16 @@ const Wrapper = styled(Box)`
   `}
 `
 
-export const NavDropDown = ({ label, items, ...props }) => {
+export const NavDropDown = ({ label, light = false, items, ...props }) => {
   return (
     <Wrapper>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <GrommetMenu label={label} items={items} {...props} />
+      <GrommetMenu
+        className={light ? 'light' : ''}
+        label={label}
+        items={items}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+      />
     </Wrapper>
   )
 }
