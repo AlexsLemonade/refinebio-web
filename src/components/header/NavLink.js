@@ -31,7 +31,10 @@ export const NavLink = ({ link, children, ...props }) => {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Wrapper {...props}>
-      <GrommetAnchor link={link}>{children}</GrommetAnchor>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      <GrommetAnchor link={link} {...props}>
+        {children}
+      </GrommetAnchor>
     </Wrapper>
   )
 }

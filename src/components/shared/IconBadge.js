@@ -1,11 +1,11 @@
 import { Box, Paragraph } from 'grommet'
-import Accession from '../images/accession.svg'
-import Help from '../images/help.svg'
-import Organism from '../images/organism.svg'
-import MicroArray from '../images/microarray.svg'
-import MixedPlatform from '../images/mixed-platform.svg'
-import Rna from '../images/rna.svg'
-import Samples from '../images/samples.svg'
+import Accession from '../../images/accession.svg'
+import Help from '../../images/help.svg'
+import Organism from '../../images/organism.svg'
+import MicroArray from '../../images/microarray.svg'
+import MixedPlatform from '../../images/mixed-platform.svg'
+import Rna from '../../images/rna.svg'
+import Samples from '../../images/samples.svg'
 
 const SVGs = {
   Accession,

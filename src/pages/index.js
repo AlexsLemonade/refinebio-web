@@ -12,14 +12,14 @@ import {
   Text,
   Anchor
 } from 'grommet'
-import { Button } from 'components/Button'
-import { IconBadge } from 'components/IconBadge'
-import { InlineMessage } from 'components/InlineMessage'
-import { Input } from 'components/Input'
-import { NumberBadge } from 'components/NumberBadge'
+import { Button } from 'components/shared/Button'
+import { IconBadge } from 'components/shared/IconBadge'
+import { InlineMessage } from 'components/shared/InlineMessage'
+import { Input } from 'components/shared/Input'
+import { NumberBadge } from 'components/shared/NumberBadge'
 import { NavDropDown } from 'components/header/NavDropDown'
 import { NavLink } from 'components/header/NavLink'
-import { Pill } from 'components/Pill'
+import { Pill } from 'components/shared/Pill'
 import { Logo } from 'components/header/Logo'
 import styled from 'styled-components'
 

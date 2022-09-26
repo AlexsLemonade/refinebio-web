@@ -99,7 +99,7 @@ export default {
     }
   },
   extend: () => `
-    width: min-content;
+    width: max-content;
     white-space: nowrap;
     &:active:not([disabled]) {
       box-shadow: ${BOXSHADOW};

@@ -1,5 +1,5 @@
 import { Box, Button as GrommetButton } from 'grommet'
-import { NumberBadge } from 'components/NumberBadge'
+import { NumberBadge } from 'components/shared/NumberBadge'
 
 export const Button = ({
   badged = false,
@@ -10,7 +10,6 @@ export const Button = ({
   return (
     <Box style={{ position: 'relative' }}>
       {badged && <NumberBadge light={light} count={count} />}
-
       <GrommetButton
         secondary={badged}
         className={light ? 'light' : ''}

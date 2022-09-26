@@ -1,8 +1,8 @@
 import { Box, Paragraph, Text } from 'grommet'
 import styled, { css } from 'styled-components'
-import InfoIcon from '../images/info.svg'
-import SuccessIcon from '../images/success.svg'
-import ErrorIcon from '../images/warning.svg'
+import InfoIcon from '../../images/info.svg'
+import SuccessIcon from '../../images/success.svg'
+import ErrorIcon from '../../images/warning.svg'
 
 // status: error, info, success
 const SVGs = {
