@@ -10,7 +10,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 7001",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
