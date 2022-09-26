@@ -31,14 +31,17 @@ export const InlineMessage = ({
     <Box
       align="center"
       direction="row"
-      height={{ min: '24px' }}
+      height="24px"
       width="max-content"
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       {!labelOnly && (
-        <Box margin={{ right: '8px' }}>
-          <Text color={status === 'error' ? errorIconColor : status}>
+        <Box margin={{ right: '8px' }} height="inherit">
+          <Text
+            color={status === 'error' ? errorIconColor : status}
+            height="24px"
+          >
             <SVGIcon role="presentation" aria-hidden="true" focusable="false" />
           </Text>
         </Box>
