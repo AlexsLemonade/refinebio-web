@@ -22,6 +22,8 @@ services:
         dockerfile: Dockerfile
         target: local
       command: >
-        bash -c 'cd /app && yarn storybook --quiet -p ${STORYBOOK_PORT}'
+        bash -c 'cd /app &&
+                 yarn install --slient  --frozen-lockfile &&
+                 yarn storybook --quiet -p ${STORYBOOK_PORT}'
       volumes:
         - ./:/app  
