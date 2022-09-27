@@ -43,6 +43,13 @@ module.exports = {
     'class-methods-use-this': 0,
     'import/prefer-default-export': 0,
     'import/no-mutable-exports': 0,
+    // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md#options
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: true
+      }
+    ],
     'no-class-assign': 0,
     'no-console': [
       1,
