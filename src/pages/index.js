@@ -16,7 +16,6 @@ import { Button } from 'components/shared/Button'
 import { IconBadge } from 'components/shared/IconBadge'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Input } from 'components/shared/Input'
-import { NumberBadge } from 'components/shared/NumberBadge'
 import { NavDropDown } from 'components/header/NavDropDown'
 import { NavLink } from 'components/header/NavLink'
 import { Pill } from 'components/shared/Pill'
@@ -221,31 +220,47 @@ const Home = () => {
               <div style={{ display: 'flex' }}>
                 <Box margin={{ right: '60px' }}>
                   <Box margin="small">
-                    <Text size="small" margin={{ bottom: '10px' }}>
-                      (Normal)
-                    </Text>
-                    <Button badged count={0} label="View Samples" />
+                    <Text size="small">(Normal)</Text>
                   </Box>
                   <Box margin="small">
-                    <Button badged count={99} label="View Samples" />
+                    <Button
+                      badge={{ max: 10000, value: 1 }}
+                      label="View Samples"
+                    />
                   </Box>
                   <Box margin="small">
-                    <Button badged count="1.3k" label="View Samples" />
+                    <Button
+                      badge={{ max: 10000, value: 99 }}
+                      label="View Samples"
+                    />
                   </Box>
                 </Box>
                 <Box align="center" background="brand" pad="small">
                   <Text color="white" size="small">
                     (with bg)
                   </Text>
-                  <Box>
+                  <Box margin={{ top: '8px' }}>
                     <Box margin="small">
-                      <Button badged count={0} label="View Samples" light />
+                      <Button
+                        badge={{
+                          max: 10000,
+                          value: 1,
+                          background: { color: 'white' }
+                        }}
+                        label="View Samples"
+                        light
+                      />
                     </Box>
                     <Box margin="small">
-                      <Button badged count={99} label="View Samples" light />
-                    </Box>
-                    <Box margin="small">
-                      <Button badged count="1.3k" label="View Samples" light />
+                      <Button
+                        badge={{
+                          max: 10000,
+                          value: 99,
+                          background: { color: 'white' }
+                        }}
+                        label="View Samples"
+                        light
+                      />
                     </Box>
                   </Box>
                 </Box>
@@ -352,23 +367,6 @@ const Home = () => {
           Badges
         </Heading>
         <Box direction="row">
-          <Box margin={{ right: '60px' }}>
-            <Heading level={2}>Number Badges</Heading>
-            <Box direction="row" align="center">
-              <Box margin={{ left: '4px' }}>
-                <NumberBadge count={0} style={{ position: 'relative' }} />
-              </Box>
-              <Box margin={{ left: '4px' }}>
-                <NumberBadge count={99} style={{ position: 'relative' }} />
-              </Box>
-              <Box margin={{ left: '4px' }}>
-                <NumberBadge count="12k" style={{ position: 'relative' }} />
-              </Box>
-              <Box margin={{ left: '4px' }}>
-                <NumberBadge count="1.3k" style={{ position: 'relative' }} />
-              </Box>
-            </Box>
-          </Box>
           <Box margin={{ right: '60px' }}>
             <Heading level={2}>Processing Info Badges</Heading>
             <Paragraph margin={{ bottom: '10px' }}>

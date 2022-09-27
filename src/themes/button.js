@@ -97,8 +97,20 @@ export default {
       color: form.WHITE
     }
   },
+  // Badge
+  badge: {
+    text: {
+      size: { medium: '12px' }
+    },
+    container: {
+      pad: {
+        vertical: '4px',
+        horizontal: '8px'
+      }
+    }
+  },
+
   extend: () => `
-    width: max-content;
     white-space: nowrap;
     &:active:not([disabled]) {
       box-shadow: ${BOXSHADOW};
