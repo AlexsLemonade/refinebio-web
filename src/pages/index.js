@@ -16,10 +16,11 @@ import { Button } from 'components/shared/Button'
 import { IconBadge } from 'components/shared/IconBadge'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Input } from 'components/shared/Input'
+import { Logo } from 'components/header/Logo'
 import { NavDropDown } from 'components/header/NavDropDown'
 import { NavLink } from 'components/header/NavLink'
 import { Pill } from 'components/shared/Pill'
-import { Logo } from 'components/header/Logo'
+import { Tag } from 'components/shared/Tag'
 import styled from 'styled-components'
 
 // TEMPORARY
@@ -524,6 +525,19 @@ const Home = () => {
                 </Text>
                 <CheckBox disabled />
               </Box>
+            </Box>
+          </Box>
+          {/* Filter Tags */}
+          <Box>
+            <Heading level={2}>Filter Tags</Heading>
+            <Box margin={{ bottom: '16px' }}>
+              <Tag label="Homo sapiens" />
+            </Box>
+            <Box margin={{ bottom: '16px' }}>
+              <Text size="small" margin={{ bottom: '10px' }}>
+                (Custum color)
+              </Text>
+              <Tag background="forest-tint-90" label="Mus musculus" />
             </Box>
           </Box>
         </Box>
