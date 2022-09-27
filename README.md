@@ -4,36 +4,42 @@ Refinebio Client using [Next.js](https://nextjs.org/)
 
 ## Getting Started
 
-### Run the local environment:
+### Ports
+
+- `client`: http://localhost:7000
+
+- Storybook: http://localhost:6006
+
+### Run the Local Environment
 
 The following command starts both `client` and Storybook:
 
 ```bash
-yarn compose up
+yarn start-local
 ```
 
-**Ports**
+### Run `client`
 
-- `client`: [7000](http://localhost:7000)
-
-- Storybook: [6006](http://localhost:6006)
-
-### Run only `client`:
+The following command starts `client`:
 
 ```bash
-yarn compose up client
+yarn start-client
 ```
 
-### Run only Storybook:
+### Run Storybook
+
+The following command starts Storybook:
 
 ```bash
-yarn compose up storybook
+yarn start-storybook
 ```
 
-### Stop the docker container:
+### Stop Docker
+
+The following command stop all the running container(s):
 
 ```bash
-yarn down
+yarn stop-docker
 ```
 
 ## Other resources
