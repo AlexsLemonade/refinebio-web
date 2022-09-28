@@ -1,3 +1,7 @@
+import { Grommet, Box } from 'grommet'
+import { theme } from 'themes'
+import { Reset } from 'styles/Reset'
+
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
@@ -13,3 +17,16 @@ export const parameters = {
         : a[1].id.localeCompare(b[1].id, undefined, { numeric: true })
   }
 }
+
+export const decorators = [
+  (Story) => (
+    <>
+      <Reset />
+      <Grommet theme={theme}>
+        <Box align="center">
+          <Story />
+        </Box>
+      </Grommet>
+    </>
+  )
+]
