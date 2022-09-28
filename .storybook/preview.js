@@ -24,7 +24,9 @@ export const decorators = [
       <Reset />
       <Grommet theme={theme}>
         <Box align="center">
-          <Story />
+          <Box>
+            <Story />
+          </Box>
         </Box>
       </Grommet>
     </>

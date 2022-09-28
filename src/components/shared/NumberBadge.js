@@ -20,9 +20,9 @@ const Badge = styled(Box)`
       : theme.global.colors.brand};
     color: ${light ? theme.global.colors.brand : theme.global.colors.white};
     line-height: ${Number.isNaN(Number(count)) ? '12px' : '16px'};
-    padding: ${Number.isNaN(Number(count)) ? '0 4px' : 0};
+    padding: ${Number.isNaN(Number(count)) ? '0 4px' : '0 2px'};
     height: ${Number.isNaN(Number(count)) ? '12px' : '16px'};
-    width: ${Number.isNaN(Number(count)) ? 'max-content' : '16px'};
+    min-width: ${Number.isNaN(Number(count)) ? 'max-content' : '16px'};
   `}
 `
 

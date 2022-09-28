@@ -4,6 +4,7 @@ import Warning from '../../images/warning.svg'
 
 const InputWrapper = styled(Box)`
   position: relative;
+  width: max-content;
   ${({ theme, error }) => css`
     background-color: ${theme.global.colors.white};
     color: ${error ? theme.global.colors.coral : 'inherit'};

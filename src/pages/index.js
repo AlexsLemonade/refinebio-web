@@ -73,7 +73,7 @@ const Home = () => {
                 28px
               </Heading>
               <Heading level={1}>26px</Heading>
-              <Heading level={2}>26px</Heading>
+              <Heading level={2}>22px</Heading>
               <Heading level={3}>20px</Heading>
               <Heading level={4}>18px</Heading>
               <Heading level={5}>16px</Heading>
