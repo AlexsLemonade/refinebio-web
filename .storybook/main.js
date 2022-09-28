@@ -6,6 +6,7 @@ module.exports = {
     './stories/**/*.stories.@(js|jsx|ts|tsx)'
   ],
   addons: [
+    '@storybook/addon-a11y',
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions'
@@ -17,8 +18,7 @@ module.exports = {
   },
   webpackFinal: async (config, { configType }) => {
     // (resource) https://storybook.js.org/docs/react/builders/webpack
-    // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
-    // You can change the configuration based on that.
+    //  Change the configuration based on `configType` which has a value of 'DEVELOPMENT' or 'PRODUCTION'
     // 'PRODUCTION' is used when building the static version of storybook.
 
     config.resolve.modules.push(path.resolve(__dirname, './../src'))
