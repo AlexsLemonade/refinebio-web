@@ -17,7 +17,7 @@ export const Pill = ({
       flex
       pad={{ horizontal: 'small', vertical: 'xsmall' }}
       round="30px"
-      width="max-content"
+      width={{ max: 'max-content' }}
     >
       {!labelOnly && (
         <Box
