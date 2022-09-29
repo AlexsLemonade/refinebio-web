@@ -13,6 +13,17 @@ export default {
       radius: '3px'
     }
   },
+  edgeSize: {
+    xxsmall: '4px',
+    xsmall: '8px',
+    small: '16px',
+    medium: '24px'
+  },
+  elevation: {
+    light: {
+      medium: '0px 3px 20px rgba(0, 0, 0, 0.1)'
+    }
+  },
   font: {
     family: `'Lato', sans-serif`,
     size: '16px', // 1rem
