@@ -118,7 +118,10 @@ export default {
     // For link button  
       &.link {
         font-size: 14px;
+        padding: 0;
+        text-decoration: underline;
         &:hover {
+          box-shadow: none;
           text-decoration: underline;
         }
      }
