@@ -30,7 +30,7 @@ export default {
           border-color: ${normalizeColor('alex-navy-tint-90', theme)};
           color: ${form.ACTIVE(theme)};
         }
-      }  
+      }
       `
   },
   secondary: {
@@ -115,5 +115,12 @@ export default {
     &:active:not([disabled]) {
       box-shadow: ${BOXSHADOW};
     }
+    // For link button  
+      &.link {
+        font-size: 14px;
+        &:hover {
+          text-decoration: underline;
+        }
+     }
     `
 }

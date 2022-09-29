@@ -4,13 +4,14 @@ import { Box, Button as GrommetButton } from 'grommet'
 - Set the prop 'light' to true for the dark background
 */
 
-export const Button = ({ badge, light = false, ...props }) => {
+export const Button = ({ badge, link = false, light = false, ...props }) => {
   return (
     <Box width="max-content">
       <GrommetButton
         badge={badge}
         secondary={!!badge}
-        className={light ? 'light' : ''}
+        // eslint-disable-next-line no-nested-ternary
+        className={light ? 'light' : link ? 'link' : ''}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       />
