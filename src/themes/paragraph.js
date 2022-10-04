@@ -9,6 +9,7 @@ export default {
     size: '16px' // 1rem
   },
   extend: () => `
+     max-width: none;
      + p {
         margin-top:16px;
      }

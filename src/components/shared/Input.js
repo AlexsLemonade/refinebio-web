@@ -12,7 +12,7 @@ const InputWrapper = styled(Box)`
 
 export const Input = ({ error = false, ...props }) => {
   return (
-    <InputWrapper error={error}>
+    <InputWrapper error={error} fill>
       {error && (
         // TODO: Create Icon component
         <Text color="coral-shade-20">
@@ -30,8 +30,11 @@ export const Input = ({ error = false, ...props }) => {
           />
         </Text>
       )}
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <GrommetTextInput {...props} className={error ? 'error' : ''} />
+      <GrommetTextInput
+        className={error ? 'error' : ''}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+      />
     </InputWrapper>
   )
 }

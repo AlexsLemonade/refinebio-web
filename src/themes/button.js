@@ -112,6 +112,7 @@ export default {
 
   extend: () => `
     white-space: nowrap;
+    width: fit-content;
     &:active:not([disabled]) {
       box-shadow: ${BOXSHADOW};
     }

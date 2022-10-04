@@ -6,7 +6,7 @@ import { Box, Button as GrommetButton } from 'grommet'
 
 export const Button = ({ badge, link = false, light = false, ...props }) => {
   return (
-    <Box width="max-content">
+    <Box width="fit-content">
       <GrommetButton
         badge={badge}
         secondary={!!badge}
