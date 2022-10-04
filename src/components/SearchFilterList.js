@@ -4,7 +4,7 @@ import { Button } from 'components/shared/Button'
 import { SearchFilter } from 'components/SearchFilter'
 import data from 'api/data'
 
-export const SearchFilters = () => {
+export const SearchFilterList = () => {
   // The preferred order of the filters to render in UI
   const filterOrder = [
     { label: 'Organism', type: 'organism' },
@@ -58,4 +58,4 @@ export const SearchFilters = () => {
   )
 }
 
-export default SearchFilters
+export default SearchFilterList
