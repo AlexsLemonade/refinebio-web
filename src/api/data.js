@@ -1,4 +1,15 @@
 export default {
+  SearchBulkActions: {
+    PAGE_SIZES: [10, 20, 50],
+    SORTBY_OPTIONS: [
+      'Best Match',
+      'Most No. of samples',
+      'Least No. of samples',
+      'Newest Experiment',
+      'Oldest Experiment'
+    ],
+    totalResults: 120
+  },
   SearchCardHeader: {
     title:
       'Transcription profiling of human neuroblast tumours reveals two distinct gene signatures identify malignant Neuroblast and Schwannian stromal cells',
