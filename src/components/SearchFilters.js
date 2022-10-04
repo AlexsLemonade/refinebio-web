@@ -1,72 +1,11 @@
-import { useState, useEffect, useMemo } from 'react'
-import { Box, CheckBox, Heading, Text } from 'grommet'
+import { useState, useEffect } from 'react'
+import { Box, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
-import { SearchInput } from 'components/SearchInput'
-import { formatFilterOption } from 'helpers/formatFilterOption'
+import { SearchFilter } from 'components/SearchFilter'
 import data from 'api/data'
 
-const FilterGroup = ({ filterGroup, label }) => {
-  const MAX_COUNT = 5
-  const options = useMemo(() => {
-    return Object.entries(filterGroup)
-  }, [])
-
-  const FILTER_LENGTH = options.length
-
-  const [filterdResult, setFilterdResult] = useState(options)
-  const [open, setOpen] = useState(false)
-
-  const filterOptions = (val) => {
-    setOpen(true)
-
-    if (val.trim() !== '') {
-      setFilterdResult(() =>
-        options.filter((option) =>
-          formatFilterOption(option[0])
-            .toLowerCase()
-            .includes(val.toLowerCase())
-        )
-      )
-    } else {
-      setFilterdResult(options)
-    }
-  }
-
-  const getOptionsToRender = () =>
-    open ? filterdResult : filterdResult.slice(0, MAX_COUNT)
-
-  return (
-    <>
-      <Heading level={4} margin={{ bottom: 'xsmall' }}>
-        {label}
-      </Heading>
-
-      {FILTER_LENGTH > MAX_COUNT && (
-        <SearchInput
-          placeholder="Filter options"
-          onChange={(e) => filterOptions(e.target.value)}
-        />
-      )}
-
-      {getOptionsToRender().map((option) => (
-        <Box key={option[0]} direction="row">
-          <CheckBox label={formatFilterOption(option[0])} />
-          <Text margin={{ left: 'xxsmall' }}>({option[1]})</Text>
-        </Box>
-      ))}
-
-      {FILTER_LENGTH > MAX_COUNT && (
-        <Button
-          label={open ? '- see less' : `+ ${FILTER_LENGTH - MAX_COUNT} more`}
-          onClick={() => setOpen(!open)}
-        />
-      )}
-    </>
-  )
-}
-
 export const SearchFilters = () => {
-  // The order of the filter types to render in UI
+  // The preferred order of the filters to render in UI
   const filterOrder = [
     { label: 'Organism', type: 'organism' },
     { label: 'Technology', type: 'technology' },
@@ -106,7 +45,7 @@ export const SearchFilters = () => {
           pad={{ bottom: 'medium' }}
         >
           {filterGroup[i] && (
-            <FilterGroup
+            <SearchFilter
               filterOrder={filterOrder}
               filterGroup={filterGroup[i]}
               label={f.label}
