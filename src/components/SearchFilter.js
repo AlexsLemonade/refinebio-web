@@ -1,8 +1,26 @@
 import { useState, useMemo } from 'react'
 import { Box, CheckBox, Heading, Text } from 'grommet'
-import { Button } from 'components/shared/Button'
+import { Button as sharedButton } from 'components/shared/Button'
 import { SearchInput } from 'components/SearchInput'
 import { formatFilterOption } from 'helpers/formatFilterOption'
+import { scrollToId } from 'helpers/scrollToId'
+import styled, { css } from 'styled-components'
+
+const Button = styled(sharedButton)`
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  margin: 8px 24px 0;
+  padding: 0;
+  transition: border-bottom 0.3s ease-in;
+  &:active:not([disabled]) {
+    box-shadow: none;
+  }
+  ${({ theme }) => css`
+    &:hover {
+      border-bottom: 1px solid ${theme.global.colors.brand};
+    }
+  `}
+`
 
 export const SearchFilter = ({ filterGroup, label }) => {
   const options = useMemo(() => {
@@ -36,7 +54,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
 
   return (
     <>
-      <Heading level={4} margin={{ bottom: 'xsmall' }}>
+      <Heading level={4} margin={{ bottom: 'xsmall' }} id={label.toLowerCase()}>
         {label}
       </Heading>
 
@@ -56,6 +74,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
           </Box>
         ))}
       </Box>
+
       {filteredResult.length === 0 && (
         <Text color="gray-shade-40">
           <i>No match found</i>
@@ -72,7 +91,10 @@ export const SearchFilter = ({ filterGroup, label }) => {
               ? `+ ${FILTER_LENGTH - MAX_COUNT} more`
               : ''
           }
-          onClick={() => setOpen(!open)}
+          onClick={() => {
+            setOpen(!open)
+            scrollToId(label.toLowerCase())
+          }}
         />
       )}
     </>
