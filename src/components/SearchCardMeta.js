@@ -1,15 +1,8 @@
 import { Box } from 'grommet'
 import { IconBadge } from 'components/shared/IconBadge'
+import data from 'api/data'
 
-/* TEMPORARY ====== */
-const data = [
-  { id: 1, name: 'Organism', label: 'Homo sapiens' },
-  { id: 2, name: 'Samples', label: '23 Downloadable Samples' },
-  { id: 3, name: 'MicroArray', label: 'Affymetrix-335' }
-]
-/* ================ */
-
-export const SearchResultExperimentHeader = () => {
+export const SearchCardMeta = () => {
   return (
     <Box
       align="center"
@@ -26,7 +19,7 @@ export const SearchResultExperimentHeader = () => {
       direction="row"
       pad={{ vertical: 'xsmall' }}
     >
-      {data.map((d) => (
+      {data.SearchCardMeta.map((d) => (
         <Box key={d.id} flex="grow">
           <IconBadge label={d.label} name={d.name} />
         </Box>
@@ -35,4 +28,4 @@ export const SearchResultExperimentHeader = () => {
   )
 }
 
-export default SearchResultExperimentHeader
+export default SearchCardMeta
