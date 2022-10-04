@@ -32,12 +32,12 @@ export const InlineMessage = ({
       align="center"
       direction="row"
       height="24px"
-      width="max-content"
+      width="fit-content"
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       {!labelOnly && (
-        <Box margin={{ right: '8px' }} height="inherit">
+        <Box margin={{ right: '8px' }}>
           <Text
             color={status === 'error' ? errorIconColor : status}
             height="24px"

@@ -39,7 +39,7 @@ export const SearchCardHeader = () => {
       <Box fill style={{ border: '1px dotted green' }}>
         <SearchCardTitle
           accessionId={data.SearchCardHeader.accessionId}
-          title={data.title}
+          title={data.SearchCardHeader.title}
         />
       </Box>
       <RightCol
