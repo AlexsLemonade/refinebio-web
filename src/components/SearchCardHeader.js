@@ -9,9 +9,13 @@ import data from 'api/data'
 
 // Sub Components
 // For the card title
-const SearchCardTitle = ({ accessionId, title }) => (
+const SearchCardTitle = ({ accessionCode, title }) => (
   <>
-    <IconBadge name="Accession" label={accessionId} pad={{ bottom: '20px' }} />
+    <IconBadge
+      name="Accession"
+      label={accessionCode}
+      pad={{ bottom: '20px' }}
+    />
     <Heading level={3}>
       <strong>
         <Link href="#url" label={title} />
@@ -25,7 +29,7 @@ const Wrapper = styled(Box)`
   flex-direction: row;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 20px;
+  padding-bottom: 20px;
 `
 
 // RightCol
@@ -45,7 +49,7 @@ const RightCol = styled(Box)`
 `
 
 /* TEMPORARY the following prop is added for demo purpose
-prop: status 
+prop name: 'status' 
    - ''(default)
    - added
    - processing 
@@ -56,19 +60,17 @@ prop: status
    - qn_skipped
 */
 
-export const SearchCardHeader = ({ status }) => {
+export const SearchCardHeader = ({
+  accessionCode = '',
+  status = '',
+  title = ''
+}) => {
   return (
     <Wrapper>
       <Box fill>
-        <SearchCardTitle
-          accessionId={data.SearchCardHeader.accessionId}
-          title={data.SearchCardHeader.title}
-        />
+        <SearchCardTitle accessionCode={accessionCode} title={title} />
         {status === 'qn_skipped' && (
-          <Pill
-            label={data.SearchCardHeader.token[status]}
-            status={data.SearchCardHeader.token.info}
-          />
+          <Pill label={data.SearchCardHeader.token[status]} status="info" />
         )}
       </Box>
       <RightCol style={{ display: status === 'qn_skipped' ? 'none' : 'flex' }}>
@@ -87,7 +89,7 @@ export const SearchCardHeader = ({ status }) => {
               <Box>
                 <InlineMessage
                   label={data.SearchCardHeader.token[status]}
-                  status={data.SearchCardHeader.token.success}
+                  status="success"
                 />
                 <Button label="Remove" link margin={{ left: 'xsmall' }} />
               </Box>
@@ -99,10 +101,7 @@ export const SearchCardHeader = ({ status }) => {
           {/* state: processing  */}
           {status === 'processing' && (
             <>
-              <Pill
-                label={data.SearchCardHeader.token[status]}
-                status={data.SearchCardHeader.token.info}
-              />
+              <Pill label={data.SearchCardHeader.token[status]} status="info" />
               <Button label="Add to Dataset" primary />
             </>
           )}
@@ -113,7 +112,7 @@ export const SearchCardHeader = ({ status }) => {
               <Button label="Add Remaining" secondary />
               <InlineMessage
                 label={data.SearchCardHeader.token[status]}
-                status={data.SearchCardHeader.token.info}
+                status="info"
               />
               <Button label="Download Now" secondary />
             </>
@@ -126,7 +125,7 @@ export const SearchCardHeader = ({ status }) => {
               <Box style={{ flexDirection: 'column' }}>
                 <InlineMessage
                   label={data.SearchCardHeader.token[status]}
-                  status={data.SearchCardHeader.token.info}
+                  status="info"
                 />
                 <Link
                   href={data.SearchCardHeader.token.learnmore}
@@ -149,7 +148,7 @@ export const SearchCardHeader = ({ status }) => {
             <Box style={{ flexDirection: 'column', alignItems: 'center' }}>
               <InlineMessage
                 label={data.SearchCardHeader.token[status]}
-                status={data.SearchCardHeader.token.error}
+                status="error"
               />
               <Link
                 href={data.SearchCardHeader.token.learnmore}

@@ -12,7 +12,7 @@ const Wrapper = styled(Box)`
 `
 
 /* TEMPORARY the following prop is added for demo purpose
-prop: status 
+prop name: `status` 
    - ''(default)
    - added
    - processing 
@@ -23,12 +23,21 @@ prop: status
    - qn_skipped
 */
 
-export const SearchCard = ({ status = '' }) => {
+export const SearchCard = ({ result = {} }) => {
   return (
     <Wrapper elevation="medium" pad="medium">
-      <SearchCardHeader status={status} />
+      <SearchCardHeader
+        accessionCode={result.accession_code}
+        status={result.status}
+        title={result.title}
+      />
       <SearchCardMeta />
-      <SearchCardBody />
+      <SearchCardBody
+        alternateAccessionCode={result.alternate_accession_code}
+        description={result.description}
+        publicationTitle={result.publication_title}
+        sampleMetadataFields={result.sample_metadata_fields}
+      />
       <SearchCardFooter />
     </Wrapper>
   )
