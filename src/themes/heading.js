@@ -36,5 +36,8 @@ export default {
         size: '16px' // 1rem
       }
     }
-  }
+  },
+  extend: () => `
+    max-width: fit-content;
+  `
 }

@@ -14,19 +14,17 @@ export default {
     title:
       'Transcription profiling of human neuroblast tumours reveals two distinct gene signatures identify malignant Neuroblast and Schwannian stromal cells',
     accessionId: 'GSE7530',
-    inlineMessage: {
-      successLabel: 'Added to Dataset',
+    token: {
+      error: 'error',
       success: 'success',
-      infoLabel: 'Platform not supported',
-      infoLabel2: '4 samples already in My Dataset',
       info: 'info',
-      info_learnmore: '#',
-      errorLabel: 'Not available',
-      error: 'error'
-    },
-    processInfo: {
-      infoLabel: 'Processing Dataset',
-      info: 'info'
+      learnmore: '#',
+      added: 'Added to Dataset',
+      not_supported: 'Platform not supported',
+      add_remaining: '4 samples already in My Dataset',
+      unavailable: 'Not available',
+      processing: 'Processing Dataset',
+      qn_skipped: 'Quantile normailzation will be skipped'
     }
   },
   SearchCardMeta: [

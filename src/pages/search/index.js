@@ -28,7 +28,10 @@ export const Search = () => {
           ]}
           columns={['250px', 'auto']}
           rows={['auto', 'auto']}
-          gap="large"
+          gap={{
+            row: 'large',
+            column: 'xlarge'
+          }}
         >
           <Box gridArea="top" style={{ display: 'block' }}>
             <SearchInput placeholder="Enter keyword" large />
@@ -38,11 +41,18 @@ export const Search = () => {
           </Box>
           <Box gridArea="main">
             <SearchBulkActions />
-            {[...Array(10)].map((a, i) => (
+            <SearchCard />
+            <SearchCard status="added" />
+            <SearchCard status="processing" />
+            <SearchCard status="add_remaining" />
+            <SearchCard status="not_supported" />
+            <SearchCard status="request" />
+            <SearchCard status="unavailable" />
+            <SearchCard status="qn_skipped" />
+            {[...Array(2)].map((a, i) => (
               // eslint-disable-next-line react/no-array-index-key
               <SearchCard key={i} />
             ))}
-            <SearchCard />
           </Box>
         </Grid>
       </Wrapper>
