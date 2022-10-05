@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react'
 import { Box, CheckBox, Heading, Text } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
 import { SearchInput } from 'components/SearchInput'
-import { formatFilterOption } from 'helpers/formatFilterOption'
+import { formatString } from 'helpers/formatString'
 import { scrollToId } from 'helpers/scrollToId'
 import styled, { css } from 'styled-components'
 
@@ -39,9 +39,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
     if (val.trim() !== '') {
       setfilteredResult(() =>
         options.filter((option) =>
-          formatFilterOption(option[0])
-            .toLowerCase()
-            .startsWith(val.toLowerCase())
+          formatString(option[0]).toLowerCase().startsWith(val.toLowerCase())
         )
       )
     } else {
@@ -69,9 +67,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
       <Box style={{ animation: open ? 'fadeIn .35s' : '' }}>
         {getOptionsToRender().map((option) => (
           <Box key={option[0]} margin={{ bottom: 'xsmall' }}>
-            <CheckBox
-              label={`${formatFilterOption(option[0])} (${option[1]})`}
-            />
+            <CheckBox label={`${formatString(option[0])} (${option[1]})`} />
           </Box>
         ))}
       </Box>
