@@ -5,6 +5,7 @@ import { SearchCard } from 'components/SearchCard'
 import { SearchInput } from 'components/SearchInput'
 import { SearchFilterList } from 'components/SearchFilterList'
 import styled from 'styled-components'
+import data from 'api/data'
 
 // TEMPORARY Wrapper/Grid layout to render the search result page's components(agnostic) in UI
 // TODO: Create a seprate issue for the site structure(desfine Layout, Header, Footer, Sidebar/responsive etc)
@@ -41,17 +42,8 @@ export const Search = () => {
           </Box>
           <Box gridArea="main">
             <SearchBulkActions />
-            <SearchCard />
-            <SearchCard status="added" />
-            <SearchCard status="processing" />
-            <SearchCard status="add_remaining" />
-            <SearchCard status="not_supported" />
-            <SearchCard status="request" />
-            <SearchCard status="unavailable" />
-            <SearchCard status="qn_skipped" />
-            {[...Array(2)].map((a, i) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <SearchCard key={i} />
+            {data.SearchResults.results.map((result) => (
+              <SearchCard result={result} />
             ))}
           </Box>
         </Grid>
