@@ -33,8 +33,6 @@ export const SearchFilter = ({ filterGroup, label }) => {
   const [useInput, setUserInput] = useState('')
 
   const filterOptions = (val) => {
-    setOpen(!open)
-
     setUserInput(val)
 
     if (val.trim() !== '') {
