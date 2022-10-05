@@ -69,7 +69,11 @@ export const SearchCardHeader = ({
             </strong>
           </Heading>
           {status === 'qn_skipped' && (
-            <Pill label={data.SearchCardHeader.token[status]} status="info" />
+            <Pill
+              label={data.SearchCardHeader.token[status]}
+              status="info"
+              margin={{ top: 'xsmall' }}
+            />
           )}
         </Box>
         <RightCol

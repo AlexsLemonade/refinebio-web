@@ -7,7 +7,8 @@ export const Pill = ({
   color = '',
   label = '',
   labelOnly = false,
-  status = ''
+  status = '',
+  ...props
 }) => {
   return (
     <Box
@@ -18,6 +19,8 @@ export const Pill = ({
       pad={{ horizontal: 'small', vertical: 'xsmall' }}
       round="30px"
       width={{ max: 'max-content' }}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     >
       {!labelOnly && (
         <Box
