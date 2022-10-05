@@ -43,7 +43,7 @@ export const Search = () => {
           <Box gridArea="main">
             <SearchBulkActions />
             {data.SearchResults.results.map((result) => (
-              <SearchCard result={result} />
+              <SearchCard key={result.id} result={result} />
             ))}
           </Box>
         </Grid>
