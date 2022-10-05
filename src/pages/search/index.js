@@ -6,8 +6,8 @@ import { SearchInput } from 'components/SearchInput'
 import { SearchFilterList } from 'components/SearchFilterList'
 import styled from 'styled-components'
 
-// TEMPORARY Wrapper/Grid layout to demonstrate the agnostic nature of component style rules
-// TODO: Create a seprate issue for the site structure(desfine Layout component etc) and responsiveness
+// TEMPORARY Wrapper/Grid layout to render the search result page's components(agnostic) in UI
+// TODO: Create a seprate issue for the site structure(desfine Layout, Header, Footer, Sidebar/responsive etc)
 const Wrapper = styled(Box)`
   flex-direction: row;
   justify-content: center;

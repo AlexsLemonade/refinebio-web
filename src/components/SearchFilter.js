@@ -68,9 +68,10 @@ export const SearchFilter = ({ filterGroup, label }) => {
 
       <Box style={{ animation: open ? 'fadeIn .35s' : '' }}>
         {getOptionsToRender().map((option) => (
-          <Box key={option[0]} direction="row">
-            <CheckBox label={formatFilterOption(option[0])} />
-            <Text margin={{ left: 'xxsmall' }}>({option[1]})</Text>
+          <Box key={option[0]} margin={{ bottom: 'xsmall' }}>
+            <CheckBox
+              label={`${formatFilterOption(option[0])} (${option[1]})`}
+            />
           </Box>
         ))}
       </Box>
