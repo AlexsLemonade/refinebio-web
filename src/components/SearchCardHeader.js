@@ -11,9 +11,15 @@ import data from 'api/data'
 const Wrapper = styled(Box)`
   > div {
     flex-direction: row;
-    align-items: flex-end;
     justify-content: space-between;
     padding-bottom: 20px;
+
+    &:nth-child(2) {
+      align-items: flex-end;
+      > div:first-child {
+        align-self: self-start;
+      }
+    }
   }
 `
 // RightCol
