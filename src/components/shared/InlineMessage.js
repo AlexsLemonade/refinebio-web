@@ -11,6 +11,12 @@ const SVGs = {
   ErrorIcon
 }
 
+const Wrapper = styled(Box)`
+  > div {
+    flex: 0 0 auto;
+  }
+`
+
 const P = styled(Paragraph)`
   ${({ theme }) => css`
     color: ${(props) => theme.global.colors[props.status]};
@@ -28,19 +34,24 @@ export const InlineMessage = ({
   const errorIconColor = 'coral-shade-20'
 
   return (
-    <Box
+    <Wrapper
       align="center"
+      className="inline-message"
       direction="row"
-      height="24px"
       width="fit-content"
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       {!labelOnly && (
-        <Box margin={{ right: '8px' }}>
+        <Box
+          align="center"
+          margin={{ right: 'xxsmall' }}
+          width="24px"
+          height="24px"
+        >
           <Text
             color={status === 'error' ? errorIconColor : status}
-            height="24px"
+            style={{ lineHeight: 0 }}
           >
             <SVGIcon role="presentation" aria-hidden="true" focusable="false" />
           </Text>
@@ -49,6 +60,6 @@ export const InlineMessage = ({
       <P status={status} size="small">
         {label}
       </P>
-    </Box>
+    </Wrapper>
   )
 }

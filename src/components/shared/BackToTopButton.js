@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react'
 import { Button as sharedButton } from 'components/shared/Button'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const Button = styled(sharedButton)`
+  padding: 4px 10px;
   position: fixed;
   bottom: 5vh;
   right: 5vh;
   z-index: 10;
+   ${({ theme }) => css`
+   &:hover {
+    background: ${theme.global.colors['gray-shade-5']}
+   `}
+  }
 `
 
 export const BackToTopButton = () => {

@@ -7,35 +7,21 @@ import { Pill } from 'components/shared/Pill'
 import styled from 'styled-components'
 import data from 'api/data'
 
-// Sub Components
-// For the card title
-const SearchCardTitle = ({ accessionCode, title }) => (
-  <>
-    <IconBadge
-      name="Accession"
-      label={accessionCode}
-      pad={{ bottom: '20px' }}
-    />
-    <Heading level={3}>
-      <strong>
-        <Link href="#url" label={title} />
-      </strong>
-    </Heading>
-  </>
-)
-
 // Wrapper
 const Wrapper = styled(Box)`
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding-bottom: 20px;
+  > div {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 20px;
+  }
 `
-
 // RightCol
 const RightCol = styled(Box)`
-  min-width: 240px;
+  margin-left: 16px;
+  min-width: 205px;
   > div {
+    align-items: center;
     > div {
       align-self: self-end;
       flex-direction: row;
@@ -44,6 +30,9 @@ const RightCol = styled(Box)`
       &:not(:first-child) {
         margin-top: 20px;
       }
+    }
+    .inline-message {
+      max-width: 180px;
     }
   }
 `
@@ -67,65 +56,103 @@ export const SearchCardHeader = ({
 }) => {
   return (
     <Wrapper>
-      <Box fill>
-        <SearchCardTitle accessionCode={accessionCode} title={title} />
-        {status === 'qn_skipped' && (
-          <Pill label={data.SearchCardHeader.token[status]} status="info" />
-        )}
-      </Box>
-      <RightCol style={{ display: status === 'qn_skipped' ? 'none' : 'flex' }}>
-        <Box align="center">
-          {/* state: default  */}
-          {!status && (
-            <>
-              <Button label="Add to Dataset" primary />
-              <Button label="Download Now" secondary />
-            </>
+      <IconBadge
+        name="Accession"
+        label={accessionCode}
+        pad={{ bottom: '20px' }}
+      />
+      <Box>
+        <Box fill>
+          <Heading level={3}>
+            <strong>
+              <Link href="#url" label={title} />
+            </strong>
+          </Heading>
+          {status === 'qn_skipped' && (
+            <Pill label={data.SearchCardHeader.token[status]} status="info" />
           )}
+        </Box>
+        <RightCol
+          style={{ display: status === 'qn_skipped' ? 'none' : 'flex' }}
+        >
+          <Box>
+            {/* state: default  */}
+            {!status && (
+              <>
+                <Button label="Add to Dataset" primary />
+                <Button label="Download Now" secondary />
+              </>
+            )}
 
-          {/* state: added  */}
-          {status === 'added' && (
-            <>
-              <Box>
-                <InlineMessage
+            {/* state: added  */}
+            {status === 'added' && (
+              <>
+                <Box>
+                  <InlineMessage
+                    label={data.SearchCardHeader.token[status]}
+                    status="success"
+                  />
+                  <Button label="Remove" link margin={{ left: 'xsmall' }} />
+                </Box>
+
+                <Button label="Download Now" secondary />
+              </>
+            )}
+
+            {/* state: processing  */}
+            {status === 'processing' && (
+              <>
+                <Pill
                   label={data.SearchCardHeader.token[status]}
-                  status="success"
+                  status="info"
                 />
-                <Button label="Remove" link margin={{ left: 'xsmall' }} />
-              </Box>
+                <Button label="Add to Dataset" primary />
+              </>
+            )}
 
-              <Button label="Download Now" secondary />
-            </>
-          )}
-
-          {/* state: processing  */}
-          {status === 'processing' && (
-            <>
-              <Pill label={data.SearchCardHeader.token[status]} status="info" />
-              <Button label="Add to Dataset" primary />
-            </>
-          )}
-
-          {/* state: add-remaining  */}
-          {status === 'add_remaining' && (
-            <>
-              <Button label="Add Remaining" secondary />
-              <InlineMessage
-                label={data.SearchCardHeader.token[status]}
-                status="info"
-              />
-              <Button label="Download Now" secondary />
-            </>
-          )}
-
-          {/* state: not-supported  */}
-          {status === 'not_supported' && (
-            <>
-              <Button label="View Source" secondary />
-              <Box style={{ flexDirection: 'column' }}>
+            {/* state: add-remaining  */}
+            {status === 'add_remaining' && (
+              <>
+                <Button label="Add Remaining" secondary />
                 <InlineMessage
                   label={data.SearchCardHeader.token[status]}
                   status="info"
+                />
+                <Button label="Download Now" secondary />
+              </>
+            )}
+
+            {/* state: not-supported  */}
+            {status === 'not_supported' && (
+              <>
+                <Button label="View Source" secondary />
+                <Box style={{ flexDirection: 'column' }}>
+                  <InlineMessage
+                    label={data.SearchCardHeader.token[status]}
+                    status="info"
+                  />
+                  <Link
+                    href={data.SearchCardHeader.token.learnmore}
+                    label="Learn more"
+                    margin={{ left: 'large', top: 'xxsmall' }}
+                    size="small"
+                    underline
+                  />
+                </Box>
+              </>
+            )}
+
+            {/* state: request  */}
+            {status === 'request' && (
+              <Button label="Request Experiment" secondary />
+            )}
+
+            {/* state: unavailable  */}
+            {status === 'unavailable' && (
+              <Box style={{ flexDirection: 'column', alignItems: 'center' }}>
+                <InlineMessage
+                  label={data.SearchCardHeader.token[status]}
+                  status="error"
                 />
                 <Link
                   href={data.SearchCardHeader.token.learnmore}
@@ -135,32 +162,10 @@ export const SearchCardHeader = ({
                   underline
                 />
               </Box>
-            </>
-          )}
-
-          {/* state: request  */}
-          {status === 'request' && (
-            <Button label="Request Experiment" secondary />
-          )}
-
-          {/* state: unavailable  */}
-          {status === 'unavailable' && (
-            <Box style={{ flexDirection: 'column', alignItems: 'center' }}>
-              <InlineMessage
-                label={data.SearchCardHeader.token[status]}
-                status="error"
-              />
-              <Link
-                href={data.SearchCardHeader.token.learnmore}
-                label="Learn more"
-                margin={{ left: 'large', top: 'xxsmall' }}
-                size="small"
-                underline
-              />
-            </Box>
-          )}
-        </Box>
-      </RightCol>
+            )}
+          </Box>
+        </RightCol>
+      </Box>
     </Wrapper>
   )
 }
