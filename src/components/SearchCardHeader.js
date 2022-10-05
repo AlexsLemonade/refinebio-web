@@ -20,89 +20,149 @@ const SearchCardTitle = ({ accessionId, title }) => (
   </>
 )
 
+// Wrapper
+const Wrapper = styled(Box)`
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 20px;
+`
+
 // RightCol
 const RightCol = styled(Box)`
+  min-width: 240px;
   > div {
-    align-item: center;
-    flex-direction: row;
-    justify-content: flex-end;
-    margin-top: 20px;
-    &:first-child {
-      margin-top: 0;
+    > div {
+      align-self: self-end;
+      flex-direction: row;
+      justify-content: flex-end;
+
+      &:not(:first-child) {
+        margin-top: 20px;
+      }
     }
   }
 `
 
-export const SearchCardHeader = () => {
+/* TEMPORARY the following prop is added for demo purpose
+prop: status 
+   - ''(default)
+   - added
+   - processing 
+   - add_remaining
+   - not_supporte
+   - request
+   - unavailable
+   - qn_skipped
+*/
+
+export const SearchCardHeader = ({ status }) => {
   return (
-    <Box direction="row" pad="medium" justify="between">
-      <Box fill style={{ border: '1px dotted green' }}>
+    <Wrapper>
+      <Box fill>
         <SearchCardTitle
           accessionId={data.SearchCardHeader.accessionId}
           title={data.SearchCardHeader.title}
         />
-      </Box>
-      <RightCol
-        style={{ border: '1px dotted hotpink' }}
-        width={{ min: '204px' }}
-      >
-        <Box>
-          <InlineMessage
-            label={data.SearchCardHeader.inlineMessage.successLabel}
-            status={data.SearchCardHeader.inlineMessage.success}
-          />
-          <Button label="Remove" link margin={{ left: 'xsmall' }} />
-        </Box>
-        <Box>
+        {status === 'qn_skipped' && (
           <Pill
-            label={data.SearchCardHeader.processInfo.infoLabel}
-            status={data.SearchCardHeader.processInfo.info}
+            label={data.SearchCardHeader.token[status]}
+            status={data.SearchCardHeader.token.info}
           />
-        </Box>
-        <Box>
-          <Box align="end">
-            <Button label="Add Remaining" secondary />
-            <InlineMessage
-              label={data.SearchCardHeader.inlineMessage.infoLabel2}
-              status={data.SearchCardHeader.inlineMessage.info}
-            />
-            <Button label="Download Now" secondary />
-          </Box>
-        </Box>
-        <Box>
-          <Button label="Add to Dataset" primary />
-        </Box>
-        <Box>
-          <Box>
-            <InlineMessage
-              label={data.SearchCardHeader.inlineMessage.infoLabel}
-              status={data.SearchCardHeader.inlineMessage.info}
-            />
-            <Link
-              href={data.SearchCardHeader.inlineMessage.info_learnmore}
-              label="Learn more"
-              size="small"
-              underline
-            />
-          </Box>
-        </Box>
-        <Box>
-          <Button label="Download Now" secondary />
-        </Box>
-        <Box>
-          <InlineMessage
-            label={data.SearchCardHeader.inlineMessage.errorLabel}
-            status={data.SearchCardHeader.inlineMessage.error}
-          />
-          <Link
-            href={data.SearchCardHeader.inlineMessage.error_learnmore}
-            label="Learn more"
-            size="small"
-            underline
-          />
+        )}
+      </Box>
+      <RightCol style={{ display: status === 'qn_skipped' ? 'none' : 'flex' }}>
+        <Box align="center">
+          {/* state: default  */}
+          {!status && (
+            <>
+              <Button label="Add to Dataset" primary />
+              <Button label="Download Now" secondary />
+            </>
+          )}
+
+          {/* state: added  */}
+          {status === 'added' && (
+            <>
+              <Box>
+                <InlineMessage
+                  label={data.SearchCardHeader.token[status]}
+                  status={data.SearchCardHeader.token.success}
+                />
+                <Button label="Remove" link margin={{ left: 'xsmall' }} />
+              </Box>
+
+              <Button label="Download Now" secondary />
+            </>
+          )}
+
+          {/* state: processing  */}
+          {status === 'processing' && (
+            <>
+              <Pill
+                label={data.SearchCardHeader.token[status]}
+                status={data.SearchCardHeader.token.info}
+              />
+              <Button label="Add to Dataset" primary />
+            </>
+          )}
+
+          {/* state: add-remaining  */}
+          {status === 'add_remaining' && (
+            <>
+              <Button label="Add Remaining" secondary />
+              <InlineMessage
+                label={data.SearchCardHeader.token[status]}
+                status={data.SearchCardHeader.token.info}
+              />
+              <Button label="Download Now" secondary />
+            </>
+          )}
+
+          {/* state: not-supported  */}
+          {status === 'not_supported' && (
+            <>
+              <Button label="View Source" secondary />
+              <Box style={{ flexDirection: 'column' }}>
+                <InlineMessage
+                  label={data.SearchCardHeader.token[status]}
+                  status={data.SearchCardHeader.token.info}
+                />
+                <Link
+                  href={data.SearchCardHeader.token.learnmore}
+                  label="Learn more"
+                  margin={{ left: 'large', top: 'xxsmall' }}
+                  size="small"
+                  underline
+                />
+              </Box>
+            </>
+          )}
+
+          {/* state: request  */}
+          {status === 'request' && (
+            <Button label="Request Experiment" secondary />
+          )}
+
+          {/* state: unavailable  */}
+          {status === 'unavailable' && (
+            <Box style={{ flexDirection: 'column', alignItems: 'center' }}>
+              <InlineMessage
+                label={data.SearchCardHeader.token[status]}
+                status={data.SearchCardHeader.token.error}
+              />
+              <Link
+                href={data.SearchCardHeader.token.learnmore}
+                label="Learn more"
+                margin={{ left: 'large', top: 'xxsmall' }}
+                size="small"
+                underline
+              />
+            </Box>
+          )}
         </Box>
       </RightCol>
-    </Box>
+    </Wrapper>
   )
 }
 
