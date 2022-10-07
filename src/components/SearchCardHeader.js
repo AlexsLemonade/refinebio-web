@@ -12,7 +12,7 @@ const Wrapper = styled(Box)`
   > div {
     flex-direction: row;
     justify-content: space-between;
-    padding-bottom: 20px;
+    padding-bottom: 24px;
 
     &:nth-child(2) {
       align-items: flex-end;
@@ -34,7 +34,7 @@ const RightCol = styled(Box)`
       justify-content: flex-end;
 
       &:not(:first-child) {
-        margin-top: 20px;
+        margin-top: 24px;
       }
     }
     .inline-message {
@@ -64,7 +64,7 @@ export const SearchCardHeader = ({
       <IconBadge
         name="Accession"
         label={accessionCode}
-        pad={{ bottom: '20px' }}
+        pad={{ bottom: '24px' }}
       />
       <Box>
         <Box fill>
