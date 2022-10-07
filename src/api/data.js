@@ -25,8 +25,7 @@ export default {
       not_supported: 'Platform not supported',
       add_remaining: '4 samples already in My Dataset',
       unavailable: 'Not available',
-      processing: 'Processing Dataset',
-      qn_skipped: 'Quantile normailzation will be skipped'
+      processing: 'Processing Dataset'
     }
   },
   SearchCardMeta: [
@@ -296,7 +295,6 @@ export default {
    - not_supported
    - request
    - unavailable
-   - qn_skipped
   */
   SearchResults: {
     results: [
@@ -640,7 +638,6 @@ export default {
         source_first_published: '2018-05-12T00:00:00+00:00'
       },
       {
-        status: 'qn_skipped',
         id: 51542,
         title:
           'Single cell RNA sequencing of interneurons of the mouse dorsolateral striatum II',

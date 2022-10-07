@@ -20,7 +20,6 @@ prop name: `status`
    - not_supported
    - request
    - unavailable
-   - qn_skipped
 */
 
 export const SearchCard = ({ result = {} }) => {

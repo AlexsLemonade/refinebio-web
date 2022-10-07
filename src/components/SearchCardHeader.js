@@ -52,7 +52,6 @@ prop name: 'status'
    - not_supporte
    - request
    - unavailable
-   - qn_skipped
 */
 
 export const SearchCardHeader = ({
@@ -74,17 +73,8 @@ export const SearchCardHeader = ({
               <Link href="#url" label={title} />
             </strong>
           </Heading>
-          {status === 'qn_skipped' && (
-            <Pill
-              label={data.SearchCardHeader.token[status]}
-              status="info"
-              margin={{ top: 'xsmall' }}
-            />
-          )}
         </Box>
-        <RightCol
-          style={{ display: status === 'qn_skipped' ? 'none' : 'flex' }}
-        >
+        <RightCol>
           <Box>
             {/* state: default  */}
             {!status && (

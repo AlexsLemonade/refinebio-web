@@ -14,8 +14,7 @@ export const SearchFilterList = () => {
 
   const [filterGroup, setFilterGroup] = useState({})
   useEffect(() => {
-    const temp = filterOrder.map((f) => data.SearchFilters[f.type])
-    setFilterGroup(temp)
+    setFilterGroup(() => filterOrder.map((f) => data.SearchFilters[f.type]))
   }, [])
 
   return (
