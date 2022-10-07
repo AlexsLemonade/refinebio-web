@@ -30,7 +30,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
   const FILTER_LENGTH = options.length
   const [filteredResult, setfilteredResult] = useState(options)
   const [open, setOpen] = useState(false)
-  const [useInput, setUserInput] = useState('')
+  const [userInput, setUserInput] = useState('')
 
   const filterOptions = (val) => {
     setUserInput(val)
@@ -58,7 +58,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
       {FILTER_LENGTH > MAX_COUNT && (
         <SearchInput
           placeholder="Filter options"
-          value={useInput}
+          value={userInput}
           onChange={(e) => filterOptions(e.target.value)}
         />
       )}
@@ -81,9 +81,9 @@ export const SearchFilter = ({ filterGroup, label }) => {
         <Button
           label={
             // eslint-disable-next-line no-nested-ternary
-            open && !useInput.trim()
+            open && !userInput.trim()
               ? '- see less'
-              : !open && !useInput.trim()
+              : !open && !userInput.trim()
               ? `+ ${FILTER_LENGTH - MAX_COUNT} more`
               : ''
           }
