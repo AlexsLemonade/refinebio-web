@@ -35,7 +35,10 @@ export const Search = () => {
           }}
         >
           <Box gridArea="top" style={{ display: 'block' }}>
-            <SearchInput placeholder="Enter keyword" large />
+            <SearchInput
+              placeholder={data.SearchInput.token.placeholder}
+              large
+            />
           </Box>
           <Box gridArea="side" style={{ display: 'block' }}>
             <SearchFilterList />

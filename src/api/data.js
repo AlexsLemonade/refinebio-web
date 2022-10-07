@@ -1,6 +1,9 @@
 // (temp) mock data for the UI development
 
 export default {
+  SearchInput: {
+    token: { placeholder: 'Search accessions, pathways, diseases, etc.,' }
+  },
   SearchBulkActions: {
     PAGE_SIZES: [10, 20, 50],
     SORTBY_OPTIONS: [

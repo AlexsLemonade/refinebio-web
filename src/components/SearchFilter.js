@@ -57,7 +57,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
 
       {FILTER_LENGTH > MAX_COUNT && (
         <SearchInput
-          placeholder="Filter options"
+          placeholder={`Filter ${label}`}
           value={userInput}
           onChange={(e) => filterOptions(e.target.value)}
         />
