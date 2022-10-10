@@ -16,13 +16,5 @@ export const textInput = {
       border-color: ${form.ACTIVE(theme)};
       box-shadow: ${form.BOXSHADOW_CUSTOM(normalizeColor('brand', theme))};
     }
-    &.error {
-      border-color: ${form.ERROR(theme)};
-      color: ${normalizeColor('black', theme)};
-      &:hover, &:focus-visible {
-        border-color: ${form.ERROR(theme)};
-        box-shadow: none;
-      }
-    }
   `
 }
