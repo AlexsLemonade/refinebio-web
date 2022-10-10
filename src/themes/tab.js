@@ -1,18 +1,12 @@
-import { normalizeColor } from 'grommet/utils'
-
-const BACKGROUND = {
-  default: 'white',
-  active: 'gray-shade-5'
-}
 const FONT_SIZE = '16px'
 const HEIGHT = '36px'
 
 export default {
   active: {
-    background: BACKGROUND.active
+    background: 'gray-shade-5'
   },
   background: {
-    color: BACKGROUND.default
+    color: 'white'
   },
   border: {
     size: '3px',
@@ -27,10 +21,10 @@ export default {
   margin: '0',
   pad: { horizontal: 'medium', vertical: 'xsmall' },
   extend: ({ theme }) => `
-    border-right: 1px solid ${normalizeColor('gray-shade-40', theme)};
+    border-right: 1px solid ${theme.global.colors['gray-shade-40']};
     height: ${HEIGHT};
     span {
-        color: ${normalizeColor('black', theme)};
+        color: ${theme.global.colors.black};
         font-size: ${FONT_SIZE};
     }
   `

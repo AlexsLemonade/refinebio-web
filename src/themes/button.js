@@ -17,24 +17,24 @@ export default {
   primary: {
     background: 'brand',
     border: { color: 'brand', width: '1px' },
-    color: form.WHITE
+    color: 'white'
   },
   secondary: {
-    background: { color: form.WHITE },
+    background: { color: 'white' },
     border: { color: 'brand', width: '1px' },
     color: 'brand'
   },
   disabled: {
     opacity: 1,
     primary: {
-      background: 'gray-shade-40',
-      border: { color: 'gray-shade-40', width: '1px' },
-      color: form.WHITE
+      background: form.GRAY,
+      border: { color: form.GRAY, width: '1px' },
+      color: 'white'
     },
     secondary: {
-      background: form.WHITE,
-      border: { color: 'gray-shade-40', width: '1px' },
-      color: 'gray-shade-40'
+      background: 'white',
+      border: { color: form.GRAY, width: '1px' },
+      color: form.GRAY
     },
     extend: () => `
     &:hover {
@@ -49,11 +49,11 @@ export default {
     primary: {
       background: { color: 'brand-tint-20' },
       border: { color: 'brand-tint-20' },
-      color: form.WHITE
+      color: 'white'
     },
     secondary: {
       background: { color: 'brand' },
-      color: form.WHITE
+      color: 'white'
     }
   },
   active: {
@@ -63,11 +63,11 @@ export default {
     primary: {
       background: { color: 'brand-tint-20' },
       border: { color: 'brand-tint-20' },
-      color: form.WHITE
+      color: 'white'
     },
     secondary: {
       background: { color: 'brand' },
-      color: form.WHITE
+      color: 'white'
     }
   },
   // Badge

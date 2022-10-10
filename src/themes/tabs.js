@@ -1,11 +1,9 @@
-import { normalizeColor } from 'grommet/utils'
-
 export default {
   header: {
     extend: ({ theme }) => `
-    border-top: 1px solid ${normalizeColor('gray-shade-40', theme)};
-    border-bottom: 1px solid ${normalizeColor('gray-shade-40', theme)};
-    border-left: 1px solid ${normalizeColor('gray-shade-40', theme)};
+    border-top: 1px solid ${theme.global.colors['gray-shade-40']};
+    border-bottom: 1px solid  ${theme.global.colors['gray-shade-40']};
+    border-left: 1px solid  ${theme.global.colors['gray-shade-40']};
     `
   },
   extend: ({ theme }) => `
@@ -19,18 +17,18 @@ export default {
           }
           span {
             border-bottom: 1px solid transparent;
-            color: ${normalizeColor('brand', theme)};
+            color:  ${theme.global.colors.brand};
             font-size: 26px;
             padding-bottom: 8px;
           }
           &:hover {
             span {
-              border-color: ${normalizeColor('brand', theme)};
+              border-color: ${theme.global.colors.brand};
             }
           }
           &[aria-selected="true"] {
             span {
-              border-bottom-color: ${normalizeColor('brand', theme)};
+              border-bottom-color:${theme.global.colors.brand};
               border-bottom-width: 2px;
               font-weight: bold;
             }
