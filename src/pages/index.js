@@ -136,14 +136,14 @@ const Home = () => {
                     <Text size="small" margin={{ bottom: '10px' }}>
                       (Normal)
                     </Text>
-                    <Button primary label="Download" />
+                    <Button label="Download" primary />
                   </Box>
                   <Box pad="small">
                     <Text size="small" margin={{ bottom: '10px' }}>
                       (Disabled)
                     </Text>
 
-                    <Button primary disabled label="Download" />
+                    <Button disabled label="Download" primary />
                   </Box>
                   <Box align="center" background="brand" pad="small">
                     <Text
@@ -153,7 +153,7 @@ const Home = () => {
                     >
                       (with bg)
                     </Text>
-                    <Button primary className="light" label="Sign Up" />
+                    <Button label="Sign Up" light primary />
                   </Box>
                 </Box>
               </Box>
@@ -161,16 +161,16 @@ const Home = () => {
                 <Heading level={3}>Secondary</Heading>
                 <Box direction="row">
                   <Box pad="small">
-                    <Text size="small" margin={{ bottom: '10px' }}>
+                    <Text margin={{ bottom: '10px' }} size="small">
                       (Normal)
                     </Text>
-                    <Button secondary label="View Samples" />
+                    <Button label="View Samples" secondary />
                   </Box>
                   <Box pad="small">
                     <Text size="small" margin={{ bottom: '10px' }}>
                       (Disabled)
                     </Text>
-                    <Button secondary disabled label="View Samples" />
+                    <Button disabled label="View Samples" secondary />
                   </Box>
                   <Box align="center" background="brand" pad="small">
                     <Text
@@ -180,7 +180,7 @@ const Home = () => {
                     >
                       (with bg)
                     </Text>
-                    <Button secondary className="light" label="View Samples" />
+                    <Button label="View Samples" light secondary />
                   </Box>
                 </Box>
               </Box>
@@ -227,12 +227,14 @@ const Home = () => {
                     <Button
                       badge={{ max: 10000, value: 1 }}
                       label="View Samples"
+                      secondary
                     />
                   </Box>
                   <Box margin="small">
                     <Button
                       badge={{ max: 10000, value: 99 }}
                       label="View Samples"
+                      secondary
                     />
                   </Box>
                 </Box>
@@ -250,6 +252,7 @@ const Home = () => {
                         }}
                         label="View Samples"
                         light
+                        secondary
                       />
                     </Box>
                     <Box margin="small">
@@ -261,6 +264,7 @@ const Home = () => {
                         }}
                         label="View Samples"
                         light
+                        secondary
                       />
                     </Box>
                   </Box>
@@ -352,8 +356,8 @@ const Home = () => {
               <NavLink light>Search</NavLink>
             </Box>
             <NavDropDown
-              className="light"
               label="Search"
+              light
               items={[
                 { label: 'Menu Item 1', onClick: () => {} },
                 { label: 'Menu Item 2', onClick: () => {} }

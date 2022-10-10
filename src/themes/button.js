@@ -1,4 +1,3 @@
-import { normalizeColor } from 'grommet/utils'
 import { form } from 'themes/variables'
 
 const BOXSHADOW = `0px 3px 4px rgba(0, 0, 0, 0.3)`
@@ -18,38 +17,12 @@ export default {
   primary: {
     background: 'brand',
     border: { color: 'brand', width: '1px' },
-    color: form.WHITE,
-    extend: ({ theme }) => `
-      // For dark background
-      &.light {
-        background: ${normalizeColor(form.WHITE, theme)};
-        border-color: ${normalizeColor(form.WHITE, theme)};
-        color: ${form.ACTIVE(theme)};
-        &:hover {
-          background: ${normalizeColor('alex-navy-tint-90', theme)};
-          border-color: ${normalizeColor('alex-navy-tint-90', theme)};
-          color: ${form.ACTIVE(theme)};
-        }
-      }  
-      `
+    color: form.WHITE
   },
   secondary: {
     background: { color: form.WHITE },
     border: { color: 'brand', width: '1px' },
-    color: 'brand',
-    extend: ({ theme }) => `
-      // For dark background
-      &.light {
-        background: none;
-        border-color: ${normalizeColor(form.WHITE, theme)};
-        color: ${normalizeColor(form.WHITE, theme)};
-        &:hover {
-          border-color: ${normalizeColor(form.WHITE, theme)};
-          background: ${normalizeColor(form.WHITE, theme)};
-          color: ${form.ACTIVE(theme)};
-        }
-      }  
-      `
+    color: 'brand'
   },
   disabled: {
     opacity: 1,
