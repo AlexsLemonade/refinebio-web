@@ -8,7 +8,6 @@ import {
   RadioButtonGroup,
   Select,
   Tab,
-  Tabs,
   Text,
   Anchor
 } from 'grommet'
@@ -20,6 +19,7 @@ import { Logo } from 'components/header/Logo'
 import { NavDropDown } from 'components/header/NavDropDown'
 import { NavLink } from 'components/header/NavLink'
 import { Pill } from 'components/shared/Pill'
+import { Tabs } from 'components/shared/Tabs'
 import { Tag } from 'components/shared/Tag'
 import styled from 'styled-components'
 
@@ -203,7 +203,7 @@ const Home = () => {
           {/* Text Buttons */}
           <Box>
             <Heading level={2}>Text Buttons</Heading>
-            <Tabs className="text">
+            <Tabs text>
               <Tab title="Normalized Compendia">
                 <Box pad="medium" />
               </Tab>
