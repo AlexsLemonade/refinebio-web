@@ -10,7 +10,7 @@ services:
       dockerfile: Dockerfile
     command: >
       bash -c 'cd /app &&
-             yarn install --frozen-lockfile && 
+             yarn install && 
              yarn dev -p ${CLIENT_PORT}'
     volumes:
       - ./:/app
