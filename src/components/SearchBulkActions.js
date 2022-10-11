@@ -4,16 +4,17 @@ import styled from 'styled-components'
 import data from 'api/data'
 
 const Wrapper = styled(Box)`
+  padding-bottom: 24px;
+
   * {
     align-items: center;
     flex-direction: row;
   }
-  > div {
-    margin-bottom: 24px;
-  }
-  div:nth-child(1) {
+
+  > div:first-child {
     justify-content: space-between;
     flex-direction: row;
+    margin-bottom: 16px;
     .select {
       &__page-size {
         button {

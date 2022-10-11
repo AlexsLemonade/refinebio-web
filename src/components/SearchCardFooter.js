@@ -3,7 +3,7 @@ import { Button } from 'components/shared/Button'
 
 export const SearchCardFooter = () => {
   return (
-    <Box margin={{ top: 'small' }}>
+    <Box>
       <Button label="View Samples" secondary />
     </Box>
   )

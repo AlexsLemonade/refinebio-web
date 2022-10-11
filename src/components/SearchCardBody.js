@@ -4,8 +4,13 @@ import { formatString } from 'helpers/formatString'
 import styled from 'styled-components'
 import data from 'api/data'
 
-const Section = styled(Box)`
-  margin-top: 16px;
+const Wrapper = styled(Box)`
+  padding: 24px 0 16px;
+  > div {
+    + div {
+      margin-top: 16px;
+    }
+  }
 `
 
 export const SearchCardBody = ({
@@ -15,12 +20,12 @@ export const SearchCardBody = ({
   sampleMetadataFields = []
 }) => {
   return (
-    <>
-      <Section>
+    <Wrapper>
+      <Box>
         <Heading level={4}>Description</Heading>
         <Paragraph>{description}</Paragraph>
-      </Section>
-      <Section>
+      </Box>
+      <Box>
         <Heading level={4}>Publication Title</Heading>
         {publicationTitle ? (
           <Text>{publicationTitle}</Text>
@@ -29,20 +34,20 @@ export const SearchCardBody = ({
             <i>No associated publication</i>
           </Text>
         )}
-      </Section>
-      <Section>
+      </Box>
+      <Box>
         <Heading level={4}>Alternate Accession IDs</Heading>
         <Link href={data.SearchCardBody.url} label={alternateAccessionCode} />
-      </Section>
-      <Section>
+      </Box>
+      <Box>
         <Heading level={4}>Sample Metadata Fields</Heading>
         <Box direction="row">
           {sampleMetadataFields.map((field, i) => (
             <Text key={field}>{(i ? ', ' : '') + formatString(field)}</Text>
           ))}
         </Box>
-      </Section>
-    </>
+      </Box>
+    </Wrapper>
   )
 }
 
