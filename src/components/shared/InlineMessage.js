@@ -36,7 +36,6 @@ export const InlineMessage = ({
   return (
     <Wrapper
       align="center"
-      className="inline-message"
       direction="row"
       width="fit-content"
       // eslint-disable-next-line react/jsx-props-no-spreading

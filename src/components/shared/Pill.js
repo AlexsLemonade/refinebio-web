@@ -16,7 +16,7 @@ export const Pill = ({
       background={status ? `${status}-bg` : background}
       direction="row"
       flex
-      pad={{ horizontal: 'small', vertical: 'xsmall' }}
+      pad={{ horizontal: 'xsmall', vertical: 'xxsmall' }}
       round="30px"
       width={{ max: 'max-content' }}
       // eslint-disable-next-line react/jsx-props-no-spreading
@@ -27,7 +27,7 @@ export const Pill = ({
           background={status || color}
           width="7px"
           height="7px"
-          margin={{ right: 'xsmall' }}
+          margin={{ right: 'xxsmall' }}
           round="50%"
         />
       )}
