@@ -45,7 +45,8 @@ const Wrapper = styled(Box)`
 
 export const SearchInput = ({ large = false, ...props }) => {
   return (
-    <Wrapper large={large} role="search">
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <Wrapper large={large} role="search" {...props}>
       <FormField a11yTitle="Search" htmlFor="search" fill>
         <Box>
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
