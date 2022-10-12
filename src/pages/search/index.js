@@ -34,7 +34,11 @@ export const Search = () => {
             column: 'xlarge'
           }}
         >
-          <Box gridArea="top" style={{ display: 'block' }}>
+          <Box
+            gridArea="top"
+            style={{ display: 'block' }}
+            margin={{ bottom: 'xlarge' }}
+          >
             <SearchInput
               placeholder={data.SearchInput.token.placeholder}
               large

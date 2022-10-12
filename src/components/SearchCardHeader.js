@@ -9,10 +9,10 @@ import data from 'api/data'
 
 // Wrapper
 const Wrapper = styled(Box)`
+  padding-bottom: 24px;
   > div {
     flex-direction: row;
     justify-content: space-between;
-    padding-bottom: 24px;
 
     &:nth-child(2) {
       align-items: flex-end;
@@ -22,26 +22,44 @@ const Wrapper = styled(Box)`
     }
   }
 `
+
 // RightCol
 const RightCol = styled(Box)`
-  margin-left: 16px;
+  align-self: stretch;
+  justify-content: center;
+  margin-left: 32px;
   min-width: 205px;
+
   > div {
     align-items: center;
+
     > div {
-      align-self: self-end;
       flex-direction: row;
-      justify-content: flex-end;
+      align-self: flex-end;
 
       &:not(:first-child) {
         margin-top: 24px;
       }
     }
-    .inline-message {
-      max-width: 180px;
-    }
   }
 `
+
+// Sub Components
+// For the card title
+const SearchCardTitle = ({ accessionCode, title }) => (
+  <>
+    <IconBadge
+      name="Accession"
+      label={accessionCode}
+      pad={{ bottom: '16px' }}
+    />
+    <Heading level={3}>
+      <strong>
+        <Link href="#url" label={title} />
+      </strong>
+    </Heading>
+  </>
+)
 
 /* TEMPORARY the following prop is added for demo purpose
 prop name: 'status' 
@@ -61,18 +79,9 @@ export const SearchCardHeader = ({
 }) => {
   return (
     <Wrapper>
-      <IconBadge
-        name="Accession"
-        label={accessionCode}
-        pad={{ bottom: '24px' }}
-      />
       <Box>
         <Box fill>
-          <Heading level={3}>
-            <strong>
-              <Link href="#url" label={title} />
-            </strong>
-          </Heading>
+          <SearchCardTitle accessionCode={accessionCode} title={title} />
         </Box>
         <RightCol>
           <Box>
@@ -117,8 +126,13 @@ export const SearchCardHeader = ({
                 <InlineMessage
                   label={data.SearchCardHeader.token[status]}
                   status="info"
+                  style={{ marginTop: '8px', width: '184px' }}
                 />
-                <Button label="Download Now" secondary />
+                <Button
+                  label="Download Now"
+                  secondary
+                  style={{ marginTop: '4px' }}
+                />
               </>
             )}
 
@@ -126,7 +140,7 @@ export const SearchCardHeader = ({
             {status === 'not_supported' && (
               <>
                 <Button label="View Source" secondary />
-                <Box style={{ flexDirection: 'column' }}>
+                <Box style={{ flexDirection: 'column', marginTop: '16px' }}>
                   <InlineMessage
                     label={data.SearchCardHeader.token[status]}
                     status="info"
