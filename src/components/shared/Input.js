@@ -4,16 +4,18 @@ import { form } from 'themes/variables'
 import styled, { css } from 'styled-components'
 import Warning from '../../images/warning.svg'
 
-const TextInputError = styled(GrommetTextInput)`
-  ${({ theme }) => css`
-    border-color: ${theme.global.colors.error};
-    color: ${theme.global.colors.black};
-    &:hover,
-    &:focus-visible {
+const CustomInput = styled(GrommetTextInput)`
+  ${({ theme, error }) =>
+    error &&
+    css`
       border-color: ${theme.global.colors.error};
-      box-shadow: ${form.BOXSHADOW_CUSTOM(normalizeColor('error', theme))};
-    }
-  `}
+      color: ${theme.global.colors.black};
+      &:hover,
+      &:focus-visible {
+        border-color: ${theme.global.colors.error};
+        box-shadow: ${form.BOXSHADOW_CUSTOM(normalizeColor('error', theme))};
+      }
+    `}
 `
 
 export const Input = ({ error = false, ...props }) => {
@@ -37,7 +39,7 @@ export const Input = ({ error = false, ...props }) => {
         </Text>
       )}
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      {error ? <TextInputError {...props} /> : <GrommetTextInput {...props} />}
+      <CustomInput error={error} {...props} />
     </Box>
   )
 }
