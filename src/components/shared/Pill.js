@@ -15,7 +15,7 @@ export const Pill = ({
       background={status ? `${status}-bg` : background}
       direction="row"
       flex
-      pad={{ horizontal: 'small', vertical: 'xsmall' }}
+      pad={{ horizontal: 'xsmall', vertical: 'xxsmall' }}
       round="30px"
       width="max-content"
     >
