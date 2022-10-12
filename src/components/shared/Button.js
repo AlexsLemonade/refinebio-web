@@ -6,7 +6,8 @@ import { Box, Button as GrommetButton } from 'grommet'
 
 export const Button = ({ badge, link = false, light = false, ...props }) => {
   return (
-    <Box width="fit-content">
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <Box width="fit-content" {...props}>
       <GrommetButton
         badge={badge}
         secondary={!!badge}

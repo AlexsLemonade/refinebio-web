@@ -57,13 +57,17 @@ export const SearchFilter = ({ filterGroup, label }) => {
 
       {FILTER_LENGTH > MAX_COUNT && (
         <SearchInput
+          pad={{ bottom: '8px' }}
           placeholder={`Filter ${label}`}
           value={userInput}
           onChange={(e) => filterOptions(e.target.value)}
         />
       )}
 
-      <Box style={{ animation: open ? 'fadeIn .35s' : '' }}>
+      <Box
+        margin={{ top: '8px' }}
+        style={{ animation: open ? 'fadeIn .35s' : '' }}
+      >
         {getOptionsToRender().map((option) => (
           <Box key={option[0]} margin={{ bottom: 'xsmall' }}>
             <CheckBox label={`${formatString(option[0])} (${option[1]})`} />
