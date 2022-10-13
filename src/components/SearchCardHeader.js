@@ -140,7 +140,7 @@ export const SearchCardHeader = ({
             {status === 'not_supported' && (
               <>
                 <Button label="View Source" secondary />
-                <Box style={{ flexDirection: 'column', marginTop: '16px' }}>
+                <Box style={{ flexDirection: 'column' }}>
                   <InlineMessage
                     label={data.SearchCardHeader.token[status]}
                     status="info"
