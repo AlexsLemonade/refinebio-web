@@ -9,15 +9,16 @@ import styled, { css } from 'styled-components'
 const Button = styled(sharedButton)`
   border-bottom: 1px solid transparent;
   border-radius: 0;
+  box-shadow: none;
   margin: 8px 0 0 14px;
   padding: 0;
   transition: border-bottom 0.3s ease-in;
-  &:active:not([disabled]) {
-    box-shadow: none;
-  }
+
   ${({ theme }) => css`
     &:hover {
-      border-bottom: 1px solid ${theme.global.colors.brand};
+      button {
+        border-bottom: 1px solid ${theme.global.colors.brand};
+      }
     }
   `}
 `
