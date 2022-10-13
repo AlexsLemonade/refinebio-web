@@ -19,7 +19,8 @@ export default {
     small: '16px',
     medium: '24px',
     large: '32px',
-    xlarge: '48px'
+    xlarge: '48px',
+    xxlarge: '96px'
   },
   elevation: {
     light: {

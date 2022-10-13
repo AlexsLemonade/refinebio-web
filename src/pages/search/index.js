@@ -30,8 +30,8 @@ export const Search = () => {
           columns={['250px', 'auto']}
           rows={['auto', 'auto']}
           gap={{
-            row: 'large',
-            column: 'xlarge'
+            row: 0,
+            column: 'xxlarge'
           }}
         >
           <Box
