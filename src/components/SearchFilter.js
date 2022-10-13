@@ -9,7 +9,7 @@ import styled, { css } from 'styled-components'
 const Button = styled(sharedButton)`
   border-bottom: 1px solid transparent;
   border-radius: 0;
-  margin: 8px 24px 0;
+  margin: 8px 0 0 14px;
   padding: 0;
   transition: border-bottom 0.3s ease-in;
   &:active:not([disabled]) {
@@ -68,8 +68,11 @@ export const SearchFilter = ({ filterGroup, label }) => {
         margin={{ top: '8px' }}
         style={{ animation: open ? 'fadeIn .35s' : '' }}
       >
-        {getOptionsToRender().map((option) => (
-          <Box key={option[0]} margin={{ bottom: 'xsmall' }}>
+        {getOptionsToRender().map((option, i, arr) => (
+          <Box
+            key={option[0]}
+            margin={{ bottom: i !== arr.length - 1 ? 'xsmall' : '0' }}
+          >
             <CheckBox label={`${formatString(option[0])} (${option[1]})`} />
           </Box>
         ))}

@@ -37,7 +37,7 @@ export const Search = () => {
           <Box
             gridArea="top"
             style={{ display: 'block' }}
-            margin={{ bottom: 'xlarge' }}
+            margin={{ top: '40px', bottom: 'xlarge' }}
           >
             <SearchInput
               placeholder={data.SearchInput.token.placeholder}

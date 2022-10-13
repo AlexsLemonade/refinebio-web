@@ -38,7 +38,7 @@ const RightCol = styled(Box)`
       align-self: flex-end;
 
       &:not(:first-child) {
-        margin-top: 24px;
+        margin-top: 16px;
       }
     }
   }
