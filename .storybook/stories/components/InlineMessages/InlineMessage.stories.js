@@ -5,7 +5,7 @@ export default {
   title: `${title.InlineMessages}Inline Message`,
   component: InlineMessage,
   argTypes: {
-    status: {
+    color: {
       control: 'select',
       options: ['success', 'info', 'error']
     }
@@ -13,7 +13,7 @@ export default {
   args: {
     label: 'Added to Dataset',
     labelOnly: false,
-    status: 'success'
+    color: 'success' || alternatievColor
   }
 }
 

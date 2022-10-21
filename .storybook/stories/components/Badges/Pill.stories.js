@@ -23,7 +23,7 @@ export default {
     background: '',
     color: '',
     label: 'refinebio processed',
-    labelOnly: false,
+    dot: true,
     status: 'success'
   }
 }

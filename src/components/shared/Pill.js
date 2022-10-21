@@ -6,7 +6,7 @@ export const Pill = ({
   background = '',
   color = '',
   label = '',
-  labelOnly = false,
+  dot = true,
   status = ''
 }) => {
   return (
@@ -15,11 +15,11 @@ export const Pill = ({
       background={status ? `${status}-bg` : background}
       direction="row"
       flex
-      pad={{ horizontal: 'small', vertical: 'xsmall' }}
+      pad={{ horizontal: 'xsmall', vertical: 'xxsmall' }}
       round="30px"
       width="max-content"
     >
-      {!labelOnly && (
+      {dot && (
         <Box
           background={status || color}
           width="7px"
