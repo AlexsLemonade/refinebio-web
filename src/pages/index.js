@@ -284,20 +284,20 @@ const Home = () => {
         </Paragraph>
         <Box direction="row">
           <InlineMessage
+            color="success"
             label="Added to Dataset"
-            status="success"
             pad={{ right: '20px' }}
           />
           <InlineMessage
+            color="info"
             label="Platform not supported"
-            status="info"
             pad={{ right: '20px' }}
           />
-          <InlineMessage label="Encountered an error" status="error" />
+          <InlineMessage color="error" label="Encountered an error" />
           <InlineMessage
+            color="error"
             label="Error message with no icon"
             labelOnly
-            status="error"
             margin={{ left: '20px' }}
           />
         </Box>
