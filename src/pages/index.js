@@ -407,7 +407,7 @@ const Home = () => {
                   <Pill
                     background="pastel-green-tint-90"
                     label="Label only"
-                    labelOnly
+                    dot={false}
                   />
                 </Box>
               </Box>

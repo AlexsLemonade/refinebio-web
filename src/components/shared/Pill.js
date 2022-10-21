@@ -6,7 +6,7 @@ export const Pill = ({
   background = '',
   color = '',
   label = '',
-  labelOnly = false,
+  dot = true,
   status = ''
 }) => {
   return (
@@ -19,7 +19,7 @@ export const Pill = ({
       round="30px"
       width="max-content"
     >
-      {!labelOnly && (
+      {dot && (
         <Box
           background={status || color}
           width="7px"
