@@ -8,7 +8,6 @@ import {
   RadioButtonGroup,
   Select,
   Tab,
-  Tabs,
   Text,
   Anchor
 } from 'grommet'
@@ -16,11 +15,12 @@ import { Button } from 'components/shared/Button'
 import { IconBadge } from 'components/shared/IconBadge'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Input } from 'components/shared/Input'
-import { NumberBadge } from 'components/shared/NumberBadge'
+import { Logo } from 'components/header/Logo'
 import { NavDropDown } from 'components/header/NavDropDown'
 import { NavLink } from 'components/header/NavLink'
 import { Pill } from 'components/shared/Pill'
-import { Logo } from 'components/header/Logo'
+import { Tabs } from 'components/shared/Tabs'
+import { Tag } from 'components/shared/Tag'
 import styled from 'styled-components'
 
 // TEMPORARY
@@ -73,7 +73,7 @@ const Home = () => {
                 28px
               </Heading>
               <Heading level={1}>26px</Heading>
-              <Heading level={2}>22px</Heading>
+              <Heading level={2}>26px</Heading>
               <Heading level={3}>20px</Heading>
               <Heading level={4}>18px</Heading>
               <Heading level={5}>16px</Heading>
@@ -136,14 +136,14 @@ const Home = () => {
                     <Text size="small" margin={{ bottom: '10px' }}>
                       (Normal)
                     </Text>
-                    <Button primary label="Download" />
+                    <Button label="Download" primary />
                   </Box>
                   <Box pad="small">
                     <Text size="small" margin={{ bottom: '10px' }}>
                       (Disabled)
                     </Text>
 
-                    <Button primary disabled label="Download" />
+                    <Button disabled label="Download" primary />
                   </Box>
                   <Box align="center" background="brand" pad="small">
                     <Text
@@ -153,7 +153,7 @@ const Home = () => {
                     >
                       (with bg)
                     </Text>
-                    <Button primary className="light" label="Sign Up" />
+                    <Button label="Sign Up" light primary />
                   </Box>
                 </Box>
               </Box>
@@ -161,16 +161,16 @@ const Home = () => {
                 <Heading level={3}>Secondary</Heading>
                 <Box direction="row">
                   <Box pad="small">
-                    <Text size="small" margin={{ bottom: '10px' }}>
+                    <Text margin={{ bottom: '10px' }} size="small">
                       (Normal)
                     </Text>
-                    <Button secondary label="View Samples" />
+                    <Button label="View Samples" secondary />
                   </Box>
                   <Box pad="small">
                     <Text size="small" margin={{ bottom: '10px' }}>
                       (Disabled)
                     </Text>
-                    <Button secondary disabled label="View Samples" />
+                    <Button disabled label="View Samples" secondary />
                   </Box>
                   <Box align="center" background="brand" pad="small">
                     <Text
@@ -180,7 +180,7 @@ const Home = () => {
                     >
                       (with bg)
                     </Text>
-                    <Button secondary className="light" label="View Samples" />
+                    <Button label="View Samples" light secondary />
                   </Box>
                 </Box>
               </Box>
@@ -203,7 +203,7 @@ const Home = () => {
           {/* Text Buttons */}
           <Box>
             <Heading level={2}>Text Buttons</Heading>
-            <Tabs className="text">
+            <Tabs text>
               <Tab title="Normalized Compendia">
                 <Box pad="medium" />
               </Tab>
@@ -221,31 +221,51 @@ const Home = () => {
               <div style={{ display: 'flex' }}>
                 <Box margin={{ right: '60px' }}>
                   <Box margin="small">
-                    <Text size="small" margin={{ bottom: '10px' }}>
-                      (Normal)
-                    </Text>
-                    <Button badged count={0} label="View Samples" />
+                    <Text size="small">(Normal)</Text>
                   </Box>
                   <Box margin="small">
-                    <Button badged count={99} label="View Samples" />
+                    <Button
+                      badge={{ max: 10000, value: 1 }}
+                      label="View Samples"
+                      secondary
+                    />
                   </Box>
                   <Box margin="small">
-                    <Button badged count="1.3k" label="View Samples" />
+                    <Button
+                      badge={{ max: 10000, value: 99 }}
+                      label="View Samples"
+                      secondary
+                    />
                   </Box>
                 </Box>
                 <Box align="center" background="brand" pad="small">
                   <Text color="white" size="small">
                     (with bg)
                   </Text>
-                  <Box>
+                  <Box margin={{ top: '8px' }}>
                     <Box margin="small">
-                      <Button badged count={0} label="View Samples" light />
+                      <Button
+                        badge={{
+                          max: 10000,
+                          value: 1,
+                          background: { color: 'white' }
+                        }}
+                        label="View Samples"
+                        light
+                        secondary
+                      />
                     </Box>
                     <Box margin="small">
-                      <Button badged count={99} label="View Samples" light />
-                    </Box>
-                    <Box margin="small">
-                      <Button badged count="1.3k" label="View Samples" light />
+                      <Button
+                        badge={{
+                          max: 10000,
+                          value: 99,
+                          background: { color: 'white' }
+                        }}
+                        label="View Samples"
+                        light
+                        secondary
+                      />
                     </Box>
                   </Box>
                 </Box>
@@ -264,20 +284,20 @@ const Home = () => {
         </Paragraph>
         <Box direction="row">
           <InlineMessage
-            label="Added to Dataset"
             color="success"
+            label="Added to Dataset"
             pad={{ right: '20px' }}
           />
           <InlineMessage
-            label="Platform not supported"
             color="info"
+            label="Platform not supported"
             pad={{ right: '20px' }}
           />
-          <InlineMessage label="Encountered an error" color="error" />
+          <InlineMessage color="error" label="Encountered an error" />
           <InlineMessage
+            color="error"
             label="Error message with no icon"
             labelOnly
-            color="error"
             margin={{ left: '20px' }}
           />
         </Box>
@@ -336,8 +356,8 @@ const Home = () => {
               <NavLink light>Search</NavLink>
             </Box>
             <NavDropDown
-              className="light"
               label="Search"
+              light
               items={[
                 { label: 'Menu Item 1', onClick: () => {} },
                 { label: 'Menu Item 2', onClick: () => {} }
@@ -352,23 +372,6 @@ const Home = () => {
           Badges
         </Heading>
         <Box direction="row">
-          <Box margin={{ right: '60px' }}>
-            <Heading level={2}>Number Badges</Heading>
-            <Box direction="row" align="center">
-              <Box margin={{ left: '4px' }}>
-                <NumberBadge count={0} style={{ position: 'relative' }} />
-              </Box>
-              <Box margin={{ left: '4px' }}>
-                <NumberBadge count={99} style={{ position: 'relative' }} />
-              </Box>
-              <Box margin={{ left: '4px' }}>
-                <NumberBadge count="12k" style={{ position: 'relative' }} />
-              </Box>
-              <Box margin={{ left: '4px' }}>
-                <NumberBadge count="1.3k" style={{ position: 'relative' }} />
-              </Box>
-            </Box>
-          </Box>
           <Box margin={{ right: '60px' }}>
             <Heading level={2}>Processing Info Badges</Heading>
             <Paragraph margin={{ bottom: '10px' }}>
@@ -404,7 +407,7 @@ const Home = () => {
                   <Pill
                     background="pastel-green-tint-90"
                     label="Label only"
-                    labelOnly
+                    dot={false}
                   />
                 </Box>
               </Box>
@@ -526,6 +529,19 @@ const Home = () => {
                 </Text>
                 <CheckBox disabled />
               </Box>
+            </Box>
+          </Box>
+          {/* Filter Tags */}
+          <Box>
+            <Heading level={2}>Filter Tags</Heading>
+            <Box margin={{ bottom: '16px' }}>
+              <Tag label="Homo sapiens" />
+            </Box>
+            <Box margin={{ bottom: '16px' }}>
+              <Text size="small" margin={{ bottom: '10px' }}>
+                (Custum color)
+              </Text>
+              <Tag background="forest-tint-90" label="Mus musculus" />
             </Box>
           </Box>
         </Box>

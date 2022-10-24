@@ -5,18 +5,17 @@ import { LogoSvg } from '../../images/logo.svg'
 // NOTE: Set the prop 'light' to true for the dark background
 
 const Wrapper = styled(Box)`
-  ${({ theme }) => css`
-    color: ${theme.global.colors['alex-navy']};
-    &.light {
-      color: ${theme.global.colors.white};
-    }
+  ${({ theme, light }) => css`
+    color: ${light
+      ? theme.global.colors.white
+      : theme.global.colors['alex-navy']};
   `}
 `
 
 export const Logo = ({ light = false, ...props }) => {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Wrapper className={light ? 'light' : ''} {...props}>
+    <Wrapper light={light} {...props}>
       <LogoSvg />
     </Wrapper>
   )
