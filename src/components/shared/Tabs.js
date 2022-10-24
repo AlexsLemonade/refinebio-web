@@ -7,29 +7,35 @@ const CustomTabs = styled(GrommetTabs)`
   ${({ theme, text }) =>
     text &&
     css`
-      div > div {
-        border: none;
-        button {
-          > div {
-            background: none;
-            border: none;
-          }
-          span {
-            border-bottom: 1px solid transparent;
-            color: ${theme.global.colors.brand};
-            font-size: 26px;
-            padding-bottom: 8px;
-          }
-          &:hover {
-            span {
-              border-color: ${theme.global.colors.brand};
+      div {
+        height: 42px;
+
+        > div {
+          border: none;
+
+          button {
+            > div {
+              background: none;
+              border: none;
             }
-          }
-          &[aria-selected='true'] {
             span {
-              border-bottom-color: ${theme.global.colors.brand};
-              border-bottom-width: 2px;
-              font-weight: bold;
+              display: block;
+              border-bottom: 1px solid transparent;
+              color: ${theme.global.colors.brand};
+              font-size: 26px;
+              padding-bottom: 8px;
+            }
+            &:hover {
+              span {
+                border-color: ${theme.global.colors.brand};
+              }
+            }
+            &[aria-selected='true'] {
+              span {
+                border-bottom-color: ${theme.global.colors.brand};
+                border-bottom-width: 2px;
+                font-weight: bold;
+              }
             }
           }
         }
