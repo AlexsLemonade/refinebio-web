@@ -8,7 +8,7 @@ const CustomTabs = styled(GrommetTabs)`
     text &&
     css`
       div {
-        height: 42px;
+        height: 44px;
 
         > div {
           border: none;
