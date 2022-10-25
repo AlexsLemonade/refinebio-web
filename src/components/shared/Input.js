@@ -1,18 +1,26 @@
 import { Box, Text, TextInput as GrommetTextInput } from 'grommet'
+import { normalizeColor } from 'grommet/utils'
+import { form } from 'themes/variables'
 import styled, { css } from 'styled-components'
 import Warning from '../../images/warning.svg'
 
-const InputWrapper = styled(Box)`
-  position: relative;
-  ${({ theme, error }) => css`
-    background-color: ${theme.global.colors.white};
-    color: ${error ? theme.global.colors.coral : 'inherit'};
-  `};
+const CustomInput = styled(GrommetTextInput)`
+  ${({ theme, error }) =>
+    error &&
+    css`
+      border-color: ${theme.global.colors.error};
+      color: ${theme.global.colors.black};
+      &:hover,
+      &:focus-visible {
+        border-color: ${theme.global.colors.error};
+        box-shadow: ${form.BOXSHADOW_CUSTOM(normalizeColor('error', theme))};
+      }
+    `}
 `
 
 export const Input = ({ error = false, ...props }) => {
   return (
-    <InputWrapper error={error} fill>
+    <Box style={{ position: 'relative' }}>
       {error && (
         // TODO: Create Icon component
         <Text color="coral-shade-20">
@@ -30,11 +38,8 @@ export const Input = ({ error = false, ...props }) => {
           />
         </Text>
       )}
-      <GrommetTextInput
-        className={error ? 'error' : ''}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...props}
-      />
-    </InputWrapper>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      <CustomInput error={error} {...props} />
+    </Box>
   )
 }

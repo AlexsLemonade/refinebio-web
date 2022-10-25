@@ -3,7 +3,7 @@ import { form } from 'themes/variables'
 
 export default {
   background: {
-    color: form.WHITE
+    color: 'white'
   },
   control: {
     extend: ({ theme }) => `
@@ -14,7 +14,7 @@ export default {
             }
         }
         &:disabled * {
-            background: ${normalizeColor(form.GRAY_LIGHT, theme)}; 
+            background: ${form.DISABLED_BG(theme)}; 
             color: ${normalizeColor(form.GRAY, theme)};
             cursor: not-allowed;
             svg {
@@ -24,7 +24,7 @@ export default {
             }
         }
         &:hover:not([disabled]) {
-            border-color: ${form.ACTIVE(theme)}; 
+            border-color: ${theme.global.colors.brand}; 
         }
     `
   },
@@ -42,12 +42,12 @@ export default {
        button {
             &[aria-selected="true"] {
                 &:hover, &:focus-visible {
-                    background: ${form.ACTIVE(theme)}; 
-                    color: ${normalizeColor(form.WHITE, theme)}; 
+                    background: ${theme.global.colors.brand}; 
+                    color: ${theme.global.colors.white}; 
                 }
             }
             &:not([aria-selected="true"]):hover, &:not([aria-selected="true"]):focus {
-                color: ${form.ACTIVE(theme)}; 
+                color: ${theme.global.colors.brand}; 
             }
        }
     `

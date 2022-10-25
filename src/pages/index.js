@@ -8,7 +8,6 @@ import {
   RadioButtonGroup,
   Select,
   Tab,
-  Tabs,
   Text,
   Anchor
 } from 'grommet'
@@ -20,6 +19,7 @@ import { Logo } from 'components/header/Logo'
 import { NavDropDown } from 'components/header/NavDropDown'
 import { NavLink } from 'components/header/NavLink'
 import { Pill } from 'components/shared/Pill'
+import { Tabs } from 'components/shared/Tabs'
 import { Tag } from 'components/shared/Tag'
 import styled from 'styled-components'
 
@@ -136,14 +136,14 @@ const Home = () => {
                     <Text size="small" margin={{ bottom: '10px' }}>
                       (Normal)
                     </Text>
-                    <Button primary label="Download" />
+                    <Button label="Download" primary />
                   </Box>
                   <Box pad="small">
                     <Text size="small" margin={{ bottom: '10px' }}>
                       (Disabled)
                     </Text>
 
-                    <Button primary disabled label="Download" />
+                    <Button disabled label="Download" primary />
                   </Box>
                   <Box align="center" background="brand" pad="small">
                     <Text
@@ -153,7 +153,7 @@ const Home = () => {
                     >
                       (with bg)
                     </Text>
-                    <Button primary className="light" label="Sign Up" />
+                    <Button label="Sign Up" light primary />
                   </Box>
                 </Box>
               </Box>
@@ -161,16 +161,16 @@ const Home = () => {
                 <Heading level={3}>Secondary</Heading>
                 <Box direction="row">
                   <Box pad="small">
-                    <Text size="small" margin={{ bottom: '10px' }}>
+                    <Text margin={{ bottom: '10px' }} size="small">
                       (Normal)
                     </Text>
-                    <Button secondary label="View Samples" />
+                    <Button label="View Samples" secondary />
                   </Box>
                   <Box pad="small">
                     <Text size="small" margin={{ bottom: '10px' }}>
                       (Disabled)
                     </Text>
-                    <Button secondary disabled label="View Samples" />
+                    <Button disabled label="View Samples" secondary />
                   </Box>
                   <Box align="center" background="brand" pad="small">
                     <Text
@@ -180,7 +180,7 @@ const Home = () => {
                     >
                       (with bg)
                     </Text>
-                    <Button secondary className="light" label="View Samples" />
+                    <Button label="View Samples" light secondary />
                   </Box>
                 </Box>
               </Box>
@@ -203,7 +203,7 @@ const Home = () => {
           {/* Text Buttons */}
           <Box>
             <Heading level={2}>Text Buttons</Heading>
-            <Tabs className="text">
+            <Tabs text>
               <Tab title="Normalized Compendia">
                 <Box pad="medium" />
               </Tab>
@@ -227,12 +227,14 @@ const Home = () => {
                     <Button
                       badge={{ max: 10000, value: 1 }}
                       label="View Samples"
+                      secondary
                     />
                   </Box>
                   <Box margin="small">
                     <Button
                       badge={{ max: 10000, value: 99 }}
                       label="View Samples"
+                      secondary
                     />
                   </Box>
                 </Box>
@@ -250,6 +252,7 @@ const Home = () => {
                         }}
                         label="View Samples"
                         light
+                        secondary
                       />
                     </Box>
                     <Box margin="small">
@@ -261,6 +264,7 @@ const Home = () => {
                         }}
                         label="View Samples"
                         light
+                        secondary
                       />
                     </Box>
                   </Box>
@@ -280,20 +284,20 @@ const Home = () => {
         </Paragraph>
         <Box direction="row">
           <InlineMessage
+            color="success"
             label="Added to Dataset"
-            status="success"
             pad={{ right: '20px' }}
           />
           <InlineMessage
+            color="info"
             label="Platform not supported"
-            status="info"
             pad={{ right: '20px' }}
           />
-          <InlineMessage label="Encountered an error" status="error" />
+          <InlineMessage color="error" label="Encountered an error" />
           <InlineMessage
+            color="error"
             label="Error message with no icon"
             labelOnly
-            status="error"
             margin={{ left: '20px' }}
           />
         </Box>
@@ -352,8 +356,8 @@ const Home = () => {
               <NavLink light>Search</NavLink>
             </Box>
             <NavDropDown
-              className="light"
               label="Search"
+              light
               items={[
                 { label: 'Menu Item 1', onClick: () => {} },
                 { label: 'Menu Item 2', onClick: () => {} }
@@ -403,7 +407,7 @@ const Home = () => {
                   <Pill
                     background="pastel-green-tint-90"
                     label="Label only"
-                    labelOnly
+                    dot={false}
                   />
                 </Box>
               </Box>

@@ -1,4 +1,3 @@
-import { normalizeColor } from 'grommet/utils'
 import { form } from 'themes/variables'
 
 const BOXSHADOW = `0px 3px 4px rgba(0, 0, 0, 0.3)`
@@ -18,50 +17,24 @@ export default {
   primary: {
     background: 'brand',
     border: { color: 'brand', width: '1px' },
-    color: form.WHITE,
-    extend: ({ theme }) => `
-      // For dark background
-      &.light {
-        background: ${normalizeColor(form.WHITE, theme)};
-        border-color: ${normalizeColor(form.WHITE, theme)};
-        color: ${form.ACTIVE(theme)};
-        &:hover {
-          background: ${normalizeColor('alex-navy-tint-90', theme)};
-          border-color: ${normalizeColor('alex-navy-tint-90', theme)};
-          color: ${form.ACTIVE(theme)};
-        }
-      }
-      `
+    color: 'white'
   },
   secondary: {
-    background: { color: form.WHITE },
+    background: { color: 'white' },
     border: { color: 'brand', width: '1px' },
-    color: 'brand',
-    extend: ({ theme }) => `
-      // For dark background
-      &.light {
-        background: none;
-        border-color: ${normalizeColor(form.WHITE, theme)};
-        color: ${normalizeColor(form.WHITE, theme)};
-        &:hover {
-          border-color: ${normalizeColor(form.WHITE, theme)};
-          background: ${normalizeColor(form.WHITE, theme)};
-          color: ${form.ACTIVE(theme)};
-        }
-      }  
-      `
+    color: 'brand'
   },
   disabled: {
     opacity: 1,
     primary: {
-      background: 'gray-shade-40',
-      border: { color: 'gray-shade-40', width: '1px' },
-      color: form.WHITE
+      background: form.GRAY,
+      border: { color: form.GRAY, width: '1px' },
+      color: 'white'
     },
     secondary: {
-      background: form.WHITE,
-      border: { color: 'gray-shade-40', width: '1px' },
-      color: 'gray-shade-40'
+      background: 'white',
+      border: { color: form.GRAY, width: '1px' },
+      color: form.GRAY
     },
     extend: () => `
     &:hover {
@@ -76,11 +49,11 @@ export default {
     primary: {
       background: { color: 'brand-tint-20' },
       border: { color: 'brand-tint-20' },
-      color: form.WHITE
+      color: 'white'
     },
     secondary: {
       background: { color: 'brand' },
-      color: form.WHITE
+      color: 'white'
     }
   },
   active: {
@@ -90,11 +63,11 @@ export default {
     primary: {
       background: { color: 'brand-tint-20' },
       border: { color: 'brand-tint-20' },
-      color: form.WHITE
+      color: 'white'
     },
     secondary: {
       background: { color: 'brand' },
-      color: form.WHITE
+      color: 'white'
     }
   },
   // Badge
@@ -112,19 +85,8 @@ export default {
 
   extend: () => `
     white-space: nowrap;
-    width: fit-content;
     &:active:not([disabled]) {
       box-shadow: ${BOXSHADOW};
     }
-    // For link button  
-      &.link {
-        font-size: 14px;
-        padding: 0;
-        text-decoration: underline;
-        &:hover {
-          box-shadow: none;
-          text-decoration: underline;
-        }
-     }
     `
 }

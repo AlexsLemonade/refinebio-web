@@ -1,5 +1,3 @@
-import { normalizeColor } from 'grommet/utils'
-
 export default {
   drop: {
     align: { top: 'bottom' }
@@ -8,8 +6,8 @@ export default {
     margin: '4px 0 0'
   },
   extend: ({ theme }) => `
-    background: ${normalizeColor('white', theme)};
-    button:hover { color: ${normalizeColor('brand', theme)}; }
+    background: ${theme.global.colors.white};
+    button:hover { color: ${theme.global.colors.brand}; }
     }
   `
 }
