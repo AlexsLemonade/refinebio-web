@@ -99,7 +99,7 @@ export const SearchCardHeader = ({
                 <Box>
                   <InlineMessage
                     label={data.SearchCardHeader.token[status]}
-                    status="success"
+                    color="success"
                   />
                   <Button label="Remove" link margin={{ left: 'xsmall' }} />
                 </Box>
@@ -125,8 +125,8 @@ export const SearchCardHeader = ({
                 <Button label="Add Remaining" secondary />
                 <InlineMessage
                   label={data.SearchCardHeader.token[status]}
-                  status="info"
-                  style={{ marginTop: '8px', width: '184px' }}
+                  color="info"
+                  style={{ width: '184px' }}
                 />
                 <Button
                   label="Download Now"
@@ -143,7 +143,7 @@ export const SearchCardHeader = ({
                 <Box style={{ flexDirection: 'column' }}>
                   <InlineMessage
                     label={data.SearchCardHeader.token[status]}
-                    status="info"
+                    color="info"
                   />
                   <Link
                     href={data.SearchCardHeader.token.learnmore}
@@ -166,7 +166,7 @@ export const SearchCardHeader = ({
               <Box style={{ flexDirection: 'column', alignItems: 'center' }}>
                 <InlineMessage
                   label={data.SearchCardHeader.token[status]}
-                  status="error"
+                  color="error"
                 />
                 <Link
                   href={data.SearchCardHeader.token.learnmore}

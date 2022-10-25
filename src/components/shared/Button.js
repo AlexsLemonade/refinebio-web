@@ -34,6 +34,22 @@ const CustomButton = styled(GrommetButton)`
         color: ${theme.global.colors.brand};
       }
     `}
+
+    ${({ theme, link }) =>
+    link &&
+    css`
+      background: none;
+      border: 0;
+      font-size: 14px;
+      padding: 0;
+      text-decoration: underline;
+
+      &:hover {
+        background: ${theme.global.colors.white};
+        border-color: ${theme.global.colors.white};
+        color: ${theme.global.colors.brand};
+      }
+    `}
 `
 
 export const Button = ({ ...props }) => {
