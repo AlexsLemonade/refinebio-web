@@ -7,7 +7,7 @@
     "start-local": "yarn compose up",
     "start-client": "yarn start-local client",
     "start-storybook": "yarn start-local storybook",
-    "stop-docker": "yarn compose down",
+    "stop-local": "yarn compose down",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

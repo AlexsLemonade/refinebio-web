@@ -34,12 +34,12 @@ The following command starts Storybook:
 yarn start-storybook
 ```
 
-### Stop Docker
+### Stop the Local Environment
 
-The following command stop all the running container(s):
+The following command stops both `client` and Storybook:
 
 ```bash
-yarn stop-docker
+yarn stop-local
 ```
 
 ## Other resources
