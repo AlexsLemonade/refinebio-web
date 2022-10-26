@@ -6,7 +6,7 @@ Refinebio Client using [Next.js](https://nextjs.org/)
 
 ### Ports
 
-- `client`: http://localhost:7000
+- `client`: http://localhost:3002
 
 - Storybook: http://localhost:6006
 
