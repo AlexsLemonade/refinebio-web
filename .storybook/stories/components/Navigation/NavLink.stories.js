@@ -1,4 +1,4 @@
-import { NavLink } from 'components/header/NavLink'
+import { NavLink } from 'components/Header/NavLink'
 import title from '../../../utils/titles'
 
 export default {

@@ -1,4 +1,4 @@
-import { NavDropDown } from 'components/header/NavDropDown'
+import { NavDropDown } from 'components/Header/NavDropDown'
 import title from '../../../utils/titles'
 
 export default {

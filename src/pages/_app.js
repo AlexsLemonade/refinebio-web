@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
-import { Reset } from 'styles/Reset'
+import { GlobalStyle } from 'styles/GlobalStyle'
 import { Grommet } from 'grommet'
 import { theme } from 'themes'
 import { RefinebioContextProvider } from 'contexts/RefinebioContext'
@@ -10,7 +10,7 @@ const Fallback = () => <ErrorPage />
 const Portal = ({ Component, pageProps }) => {
   return (
     <>
-      <Reset />
+      <GlobalStyle />
       <Grommet theme={theme}>
         <RefinebioContextProvider>
           <Sentry.ErrorBoundary fallback={Fallback} showDialog>

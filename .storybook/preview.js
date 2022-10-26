@@ -1,6 +1,6 @@
 import { Grommet, Box } from 'grommet'
 import { theme } from 'themes'
-import { Reset } from 'styles/Reset'
+import { GlobalStyle } from 'styles/GlobalStyle'
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -21,7 +21,7 @@ export const parameters = {
 export const decorators = [
   (Story) => (
     <>
-      <Reset />
+      <GlobalStyle />
       <Grommet theme={theme}>
         <Box align="center">
           <Box>

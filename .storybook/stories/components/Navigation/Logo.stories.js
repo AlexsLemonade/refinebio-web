@@ -1,4 +1,4 @@
-import { Logo } from 'components/header/Logo'
+import { Logo } from 'components/Header/Logo'
 import title from '../../../utils/titles'
 
 export default {
