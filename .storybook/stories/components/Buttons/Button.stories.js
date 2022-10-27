@@ -1,5 +1,5 @@
 import { Button } from 'components/shared/Button'
-import title from '../../../utils/titles'
+import title from 'utils/titles'
 
 export default {
   title: `${title.Buttons}Button`,

@@ -1,5 +1,5 @@
 import { IconBadge } from 'components/shared/IconBadge'
-import title from '../../../utils/titles'
+import title from 'utils/titles'
 
 export default {
   title: `${title.Badges}IconBadge`,

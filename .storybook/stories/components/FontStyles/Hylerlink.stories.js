@@ -1,5 +1,5 @@
 import { Text, Anchor } from 'grommet'
-import title from '../../../utils/titles'
+import title from 'utils/titles'
 
 export default {
   title: `${title.FontStyles}Hyperlink`,

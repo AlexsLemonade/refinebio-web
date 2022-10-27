@@ -1,5 +1,5 @@
 import { InlineMessage } from 'components/shared/InlineMessage'
-import title from '../../../utils/titles'
+import title from 'utils/titles'
 
 export default {
   title: `${title.InlineMessages}Inline Message`,

@@ -1,5 +1,5 @@
 import { NavLink } from 'components/Header/NavLink'
-import title from '../../../utils/titles'
+import title from 'utils/titles'
 
 export default {
   title: `${title.Navigation}Link`,

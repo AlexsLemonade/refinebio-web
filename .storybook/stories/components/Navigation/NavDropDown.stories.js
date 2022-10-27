@@ -1,5 +1,5 @@
 import { NavDropDown } from 'components/Header/NavDropDown'
-import title from '../../../utils/titles'
+import title from 'utils/titles'
 
 export default {
   title: `${title.Navigation}DropDown`,

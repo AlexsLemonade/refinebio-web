@@ -1,6 +1,6 @@
 import { Input } from 'components/shared/Input'
 import { InlineMessage } from 'components/shared/InlineMessage'
-import title from '../../../utils/titles'
+import title from 'utils/titles'
 
 export default {
   title: `${title.FormElements}TextInput`,

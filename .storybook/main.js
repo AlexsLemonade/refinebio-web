@@ -22,7 +22,7 @@ module.exports = {
     // 'PRODUCTION' is used when building the static version of storybook.
 
     config.resolve.modules.push(path.resolve(__dirname, './../src'))
-
+    config.resolve.alias['utils'] = path.resolve(__dirname, './utils')
     // Return the altered config
     return config
   }

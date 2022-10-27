@@ -1,5 +1,5 @@
 import { Pill } from 'components/shared/Pill'
-import title from '../../../utils/titles'
+import title from 'utils/titles'
 
 export default {
   title: `${title.Badges}Process Info`,
