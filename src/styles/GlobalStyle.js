@@ -23,10 +23,18 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         border: 0;
         font-size: 100%;
-        font-family: inherit;
         vertical-align: baseline;
     }
     *, ::before, ::after { 
         box-sizing: border-box; 
     }
+    // animation
+    @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
 `
