@@ -1,10 +1,13 @@
 import { Box, Heading } from 'grommet'
+import { FixedContainer } from 'components/shared/FixedContainer'
 
 const Home = () => {
   return (
-    <Box>
-      <Heading level={1}>Home</Heading>
-    </Box>
+    <FixedContainer>
+      <Box>
+        <Heading level={1}>Home</Heading>
+      </Box>
+    </FixedContainer>
   )
 }
 
