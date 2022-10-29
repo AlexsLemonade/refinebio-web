@@ -1,4 +1,5 @@
-import { Box } from 'grommet'
+import { Anchor, Box } from 'grommet'
+import { SrOnly } from 'components/shared/SrOnly'
 import styled, { css } from 'styled-components'
 import { LogoSvg } from '../../images/logo.svg'
 
@@ -6,17 +7,23 @@ import { LogoSvg } from '../../images/logo.svg'
 
 const Wrapper = styled(Box)`
   ${({ theme, light }) => css`
-    color: ${light
-      ? theme.global.colors.white
-      : theme.global.colors['alex-navy']};
+  a {
+    line-height: 0;
+    color: ${
+      light ? theme.global.colors.white : theme.global.colors['alex-navy']
+    };
   `}
+  } 
 `
 
 export const Logo = ({ light = false, ...props }) => {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Wrapper light={light} {...props}>
-      <LogoSvg />
+      <Anchor href="/">
+        <LogoSvg role="img" />
+        <SrOnly>Go to refine.bio homepage</SrOnly>
+      </Anchor>
     </Wrapper>
   )
 }
