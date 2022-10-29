@@ -5,6 +5,16 @@ export default {
     medium: '1px',
     large: '2px'
   },
+  breakpoints: {
+    small: {
+      // for a phone
+      value: 750
+    },
+    medium: {
+      // for a tablet
+      value: 1024
+    }
+  },
   colors,
   control: {
     // default border for inputs
@@ -14,12 +24,23 @@ export default {
     }
   },
   edgeSize: {
+    xxxsmall: '2px',
     xxsmall: '4px',
     xsmall: '8px',
     small: '16px',
     medium: '24px',
     large: '32px',
-    xlarge: '48px'
+    xlarge: '40px',
+    xxlarge: '48px',
+    xxxlarge: '56px',
+    xxxxlarge: '64px',
+    xxxxxlarge: '72px'
+  },
+  elevation: {
+    light: {
+      medium: '0px 3px 20px rgba(0, 0, 0, 0.1)',
+      large: '0px 3px 20px rgba(0, 0, 0, 0.2)'
+    }
   },
   font: {
     family: `'Lato', sans-serif`,
