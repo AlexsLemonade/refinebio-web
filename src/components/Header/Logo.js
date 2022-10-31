@@ -20,7 +20,7 @@ export const Logo = ({ light = false, ...props }) => {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Wrapper light={light} {...props}>
-      <Anchor href="/" id="logo">
+      <Anchor href="/">
         <LogoSvg role="img" />
         <SrOnly>Go to refine.bio homepage</SrOnly>
       </Anchor>

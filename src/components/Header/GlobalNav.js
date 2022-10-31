@@ -1,5 +1,12 @@
 import { useResponsive } from 'hooks/useResponsive'
-import { Anchor, Box, Button, Menu, Nav as GrommentNav, Text } from 'grommet'
+import {
+  Anchor,
+  Box,
+  Menu as GrommetMenu,
+  Nav as GrommentNav,
+  Text
+} from 'grommet'
+import { Button } from 'components/shared/Button'
 import { SrOnly } from 'components/shared/SrOnly'
 import styled, { css } from 'styled-components'
 import { Logo } from './Logo'
@@ -9,7 +16,6 @@ const NavIcon = styled(Box)`
   ${({ theme, light }) => css`
     box-shadow: none;
     cursor: pointer;
-    display: block;
     height: 32px;
     width: 32px;
     position: absolute;
@@ -28,7 +34,7 @@ const NavIcon = styled(Box)`
       background: ${light
         ? theme.global.colors.white
         : theme.global.colors.black};
-      border-radius: 3px;
+      border-radius: 2px;
       display: block;
       height: 4px;
       width: 100%;
@@ -55,29 +61,12 @@ const NavIcon = styled(Box)`
     `}
 `
 
-const CustomNav = styled(GrommentNav)`
+const CustomMenu = styled(GrommetMenu)`
   ${({ theme, light }) => css`
-    font-family: 'Rubik', sans-serif;
-    flex-direction: row;
-    a {
-      margin-left: 16px;
-      color: ${light ? theme.global.colors.white : theme.global.colors.black};
-      &:not(:first-child) {
-      }
-      &:hover,
-      &:focus {
-        border-bottom: 1px solid
-          ${light ? theme.global.colors.white : theme.global.colors.brand};
-        color: ${light ? theme.global.colors.white : theme.global.colors.brand};
-        text-decoration: none;
-      }
-    }
     button[aria-label='Open Menu'] {
       border-radius: 0;
       color: ${light ? theme.global.colors.white : theme.global.colors.black};
-      margin-left: 16px;
       padding: 0;
-
       svg {
         fill: ${light ? theme.global.colors.white : theme.global.colors.black};
         stroke: ${light
@@ -100,61 +89,92 @@ const CustomNav = styled(GrommentNav)`
       }
     }
   `}
+`
+
+const List = styled(Box)`
+  display: flex;
+  align-items: center;
+
+  ${({ theme, light }) => css`
+    li {
+      margin-left: 16px;
+
+      a {
+        color: ${light ? theme.global.colors.white : theme.global.colors.black};
+        &:hover,
+        &:focus {
+          border-bottom: 1px solid
+            ${light ? theme.global.colors.white : theme.global.colors.brand};
+          color: ${light
+            ? theme.global.colors.white
+            : theme.global.colors.brand};
+          text-decoration: none;
+        }
+      }
+    }
+  `}
+
+  ${({ theme, viewport }) =>
+    viewport === 'small' &&
+    css`
+      align-items: start;
+      flex-direction: column;
+
+      li {
+        margin-left: 0;
+        width: 100%;
+
+        a {
+          display: flex;
+          align-items: center;
+          font-size: 20px;
+          height: 56px;
+          width: 100%;
+          margin: 0;
+          padding: 40px 0 40px 40px;
+
+          &:hover,
+          &:focus {
+            background: ${theme.global.colors['gray-shade-5']};
+            border: none;
+          }
+        }
+
+        button {
+          font-size: 18px;
+          margin-left: 40px;
+          padding: 12px 0;
+          width: 80vw;
+        }
+
+        &:last-child {
+          margin-top: 24px;
+        }
+      }
+    `}
+`
+
+const CustomNav = styled(GrommentNav)`
+  font-family: 'Rubik', sans-serif;
 
   ${({ theme, viewport }) =>
     viewport === 'small' &&
     css`
       background: ${theme.global.colors.white};
-      flex-direction: column;
       height: 100vh;
       width: 100vw;
       padding: 64px 0;
       position: fixed;
-      bottom: 0;
+      left: 0;
       top: 0;
-      right: 0;
-      z-index: 2;
       transform: translate3d(100%, 0, 0);
-
-      #logo {
-        &:hover {
-          border: none;
-        }
-      }
-
-      a:not(#logo) {
-        display: flex;
-        align-items: center;
-        font-size: 20px;
-        height: 56px;
-        width: 100%;
-        margin: 0;
-        padding: 40px 0 40px 40px;
-
-        &:hover {
-          background: ${theme.global.colors['gray-shade-5']};
-          border: none;
-        }
-      }
-      button {
-        font-size: 18px;
-        margin: 0;
-        padding: 12px 0;
-        width: 88vw;
-      }
+      z-index: 2;
     `}
 
-    ${({ toggle }) =>
-    toggle &&
-    css`
-      animation: slideInRight 0.2s cubic-bezier(0, 0.49, 0.56, 1.04) forwards;
-    `}
-    
-    ${({ toggle }) =>
-    !toggle &&
-    css`
-      animation: slideInRight 0.15s cubic-bezier(0, 0.49, 0.56, 1.04) reverse;
-    `}
+  ${({ toggle }) => css`
+    animation: slideInRight ${toggle ? '0.2s' : '0.15s'}
+      cubic-bezier(0, 0.49, 0.56, 1.04) ${toggle ? 'forwards' : 'reverse'};
+  `}
 `
 
 export const GlobalNav = ({
@@ -163,7 +183,8 @@ export const GlobalNav = ({
   setToggle,
   ...props
 }) => {
-  const { viewport, setResponsive } = useResponsive()
+  const { viewport } = useResponsive()
+
   return (
     <>
       {viewport === 'small' && (
@@ -188,54 +209,60 @@ export const GlobalNav = ({
         {...props}
       >
         {viewport === 'small' && (
-          <Logo light={false} margin={{ top: 'large', bottom: 'small' }} />
+          <Logo light={false} margin={{ vertical: 'large' }} />
         )}
-        <Anchor label="Search " href="/search" />
-        {viewport === 'small' ? (
-          <>
-            <Box
-              alignSelf="start"
-              pad={{ vertical: 'medium' }}
-              margin={{ horizontal: '40px' }}
-              width="80vw"
-            >
-              <Text size="18px">
-                Compendia <ArrowDownIcon />
-              </Text>
-            </Box>
-
-            <Anchor label="Normalized Compendia" href="/" />
-            <Anchor label="RNA-seq Sample Compendia" href="/" />
-          </>
-        ) : (
-          <Menu
-            gap="0"
-            label="Compendia"
-            items={[
-              { label: 'Normalized Compendia', onClick: () => {} },
-              { label: 'RNA-seq Sample Compendia', onClick: () => {} }
-            ]}
-          />
-        )}
-        <Anchor
-          label="Docs "
-          href="https://docs.refine.bio"
-          target="_blank"
-          rel="noopener noreferrer"
-        />
-        <Anchor
-          label="About "
-          href="/about"
-          margin={{ bottom: setResponsive('24px', '0') }}
-        />
-        <Button
-          label="My Dataset"
-          aria-label="View My Dataset"
-          badge={{ max: 10000, value: 0 }}
-          light={light}
-          margin={{ left: 'small' }}
-          secondary
-        />
+        <List as="ul" light={light} viewport={viewport}>
+          <Box as="li">
+            <Anchor label="Search " href="/search" />
+          </Box>
+          <Box as="li">
+            {viewport === 'small' ? (
+              <>
+                <Box
+                  alignSelf="start"
+                  pad={{ vertical: 'medium' }}
+                  margin={{ horizontal: '40px' }}
+                  width="80vw"
+                >
+                  <Text size="18px">
+                    Compendia <ArrowDownIcon />
+                  </Text>
+                </Box>
+                <Anchor label="Normalized Compendia" href="/" />
+                <Anchor label="RNA-seq Sample Compendia" href="/" />
+              </>
+            ) : (
+              <CustomMenu
+                gap="0"
+                label="Compendia"
+                items={[
+                  { label: 'Normalized Compendia', onClick: () => {} },
+                  { label: 'RNA-seq Sample Compendia', onClick: () => {} }
+                ]}
+              />
+            )}
+          </Box>
+          <Box as="li">
+            <Anchor
+              label="Docs "
+              href="https://docs.refine.bio"
+              target="_blank"
+              rel="noopener noreferrer"
+            />
+          </Box>
+          <Box as="li">
+            <Anchor label="About " href="/about" />
+          </Box>
+          <Box as="li">
+            <Button
+              label="My Dataset"
+              aria-label="View My Dataset"
+              badge={{ max: 10000, value: 0 }}
+              light={light}
+              secondary
+            />
+          </Box>
+        </List>
       </CustomNav>
     </>
   )
