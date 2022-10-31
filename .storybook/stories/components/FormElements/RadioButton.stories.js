@@ -2,7 +2,7 @@ import { RadioButton } from 'grommet'
 import title from 'utils/titles'
 
 export default {
-  title: `${title.FormElements}RadioButtons/Single`,
+  title: `${title.FormElements}RadioButton`,
   component: RadioButton,
   args: {
     checked: true,
@@ -14,4 +14,4 @@ export default {
 const Template = (args) => <RadioButton {...args} />
 
 export const Default = Template.bind({})
-Default.storyName = 'Single'
+Default.storyName = 'RadioButton'
