@@ -1,7 +1,7 @@
 import { useState } from 'react'
+import { useResponsive } from 'hooks/useResponsive'
 import { Box, Header as GrommetHeader } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
-
 import styled, { css } from 'styled-components'
 import { Logo } from './Logo'
 import { GlobalNav } from './GlobalNav'
@@ -25,7 +25,9 @@ const Overlay = styled(Box)`
 `
 
 export const Header = ({ light = false, ...props }) => {
+  const { viewport } = useResponsive()
   const [toggle, setToggle] = useState(false)
+
   return (
     <GrommetHeader
       gap="0"
@@ -35,7 +37,7 @@ export const Header = ({ light = false, ...props }) => {
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
-      {toggle && <Overlay toggle={toggle} />}
+      {viewport === 'small' && toggle && <Overlay toggle={toggle} />}
       <FixedContainer direction="row" justify="between">
         <Logo light={light} />
         <Box align="center" direction="row">
