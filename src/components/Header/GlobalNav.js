@@ -1,11 +1,5 @@
 import { useResponsive } from 'hooks/useResponsive'
-import {
-  Anchor,
-  Box,
-  Menu as GrommetMenu,
-  Nav as GrommentNav,
-  Text
-} from 'grommet'
+import { Anchor, Box, Menu, Nav as GrommentNav, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { SrOnly } from 'components/shared/SrOnly'
 import styled, { css } from 'styled-components'
@@ -61,36 +55,6 @@ const NavIcon = styled(Box)`
     `}
 `
 
-const CustomMenu = styled(GrommetMenu)`
-  ${({ theme, light }) => css`
-    button[aria-label='Open Menu'] {
-      border-radius: 0;
-      color: ${light ? theme.global.colors.white : theme.global.colors.black};
-      padding: 0;
-      svg {
-        fill: ${light ? theme.global.colors.white : theme.global.colors.black};
-        stroke: ${light
-          ? theme.global.colors.white
-          : theme.global.colors.black};
-      }
-      &:hover,
-      &[aria-expanded='true'] {
-        border-bottom: 1px solid
-          ${light ? theme.global.colors.white : theme.global.colors.brand};
-        color: ${light ? theme.global.colors.white : theme.global.colors.brand};
-        svg {
-          fill: ${light
-            ? theme.global.colors.white
-            : theme.global.colors.brand};
-          stroke: ${light
-            ? theme.global.colors.white
-            : theme.global.colors.brand};
-        }
-      }
-    }
-  `}
-`
-
 const List = styled(Box)`
   display: flex;
   align-items: center;
@@ -109,6 +73,36 @@ const List = styled(Box)`
             ? theme.global.colors.white
             : theme.global.colors.brand};
           text-decoration: none;
+        }
+      }
+
+      button[aria-label='Open Menu'] {
+        border-radius: 0;
+        color: ${light ? theme.global.colors.white : theme.global.colors.black};
+        padding: 0;
+        svg {
+          fill: ${light
+            ? theme.global.colors.white
+            : theme.global.colors.black};
+          stroke: ${light
+            ? theme.global.colors.white
+            : theme.global.colors.black};
+        }
+        &:hover,
+        &[aria-expanded='true'] {
+          border-bottom: 1px solid
+            ${light ? theme.global.colors.white : theme.global.colors.brand};
+          color: ${light
+            ? theme.global.colors.white
+            : theme.global.colors.brand};
+          svg {
+            fill: ${light
+              ? theme.global.colors.white
+              : theme.global.colors.brand};
+            stroke: ${light
+              ? theme.global.colors.white
+              : theme.global.colors.brand};
+          }
         }
       }
     }
@@ -232,7 +226,7 @@ export const GlobalNav = ({
                 <Anchor label="RNA-seq Sample Compendia" href="/" />
               </>
             ) : (
-              <CustomMenu
+              <Menu
                 gap="0"
                 label="Compendia"
                 items={[

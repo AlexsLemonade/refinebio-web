@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/nextjs'
 import { GlobalStyle } from 'styles/GlobalStyle'
 import { Grommet } from 'grommet'
-import { Layout } from 'components/shared/Layout'
+import { Layout } from 'components/Layout'
 import { theme } from 'themes'
 import { RefinebioContextProvider } from 'contexts/RefinebioContext'
 import ErrorPage from 'pages/_error'
