@@ -28,6 +28,13 @@ export const GlobalStyle = createGlobalStyle`
     *, ::before, ::after { 
         box-sizing: border-box; 
     }
+    body {
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+    }
+    html {
+      height: -webkit-fill-available;
+    }
     // animation
     @keyframes fadeIn {
         from {
@@ -37,4 +44,12 @@ export const GlobalStyle = createGlobalStyle`
           opacity: 1;
         }
       }
+    @keyframes slideInRight {
+        from {
+          transform: translate3d(100%, 0, 0);
+        }
+        to {
+          transform: translate3d(0, 0, 0);
+        }
+    }  
 `
