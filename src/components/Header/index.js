@@ -1,29 +1,45 @@
+import { useState } from 'react'
 import { Box, Header as GrommetHeader } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { Button } from 'components/shared/Button'
+
+import styled, { css } from 'styled-components'
 import { Logo } from './Logo'
 import { GlobalNav } from './GlobalNav'
 
+const Overlay = styled(Box)`
+  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+
+  ${({ toggle }) =>
+    toggle &&
+    css`
+      animation: fadeIn 0.15s ease-in forwards;
+    `}
+`
+
 export const Header = ({ light = false, ...props }) => {
+  const [toggle, setToggle] = useState(false)
   return (
     <GrommetHeader
+      gap="0"
       justify="center"
       pad={{ top: 'medium' }}
       role="banner"
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
+      {toggle && <Overlay toggle={toggle} />}
       <FixedContainer direction="row" justify="between">
         <Logo light={light} />
         <Box align="center" direction="row">
-          <GlobalNav light={light} />
-          <Button
-            label="My Dataset"
-            badge={{ max: 10000, value: 0 }}
-            light={light}
-            margin={{ left: 'small' }}
-            secondary
-          />
+          <GlobalNav light={light} toggle={toggle} setToggle={setToggle} />
         </Box>
       </FixedContainer>
     </GrommetHeader>

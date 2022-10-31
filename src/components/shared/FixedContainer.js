@@ -8,6 +8,7 @@ export const FixedContainer = ({ children, ...props }) => {
       margin={{ horizontal: 'auto' }}
       pad={setResponsive({ horizontal: 'large' }, { horizontal: 'medium' })}
       width="1250px" // to preserve UI layout for wider screens
+      style={{ position: 'relative' }}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
