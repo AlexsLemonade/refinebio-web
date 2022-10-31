@@ -17,7 +17,7 @@ module.exports = {
     builder: '@storybook/builder-webpack5'
   },
   webpackFinal: async (config) => {
-    // (resource) 'configType': https://storybook.js.org/docs/react/builders/webpack#extending-storybooks-webpack-config
+    // (resource) 'configType' https://storybook.js.org/docs/react/builders/webpack#extending-storybooks-webpack-config
 
     config.resolve.modules.push(path.resolve(__dirname, './../src'))
     config.resolve.alias['utils'] = path.resolve(__dirname, './utils')
