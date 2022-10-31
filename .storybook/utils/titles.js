@@ -3,6 +3,5 @@ export default {
   Buttons: 'Buttons/',
   FormElements: 'Form Elements/',
   FontStyles: 'Font Styles/',
-  InlineMessages: 'Inline Messages/',
-  Navigation: 'Navigation/'
+  InlineMessages: 'Inline Messages/'
 }
