@@ -40,21 +40,30 @@ const NavIcon = styled(Box)`
       width: 100%;
       transition: transform 0.25s ease-out;
     }
+
     &:before,
     span {
       margin-bottom: 4px;
     }
   `}
 
-  ${({ toggle }) =>
+  ${({ theme, toggle }) =>
     toggle &&
     css`
+      &::before,
+      &::after,
+      span {
+        background: ${theme.global.colors.black};
+      }
+
       &::before {
         transform: translateY(10px) rotate(-45deg);
       }
+
       &::after {
         transform: translateY(-6px) rotate(45deg);
       }
+
       span {
         opacity: 0;
       }
@@ -63,7 +72,7 @@ const NavIcon = styled(Box)`
 
 const CustomMenu = styled(GrommetMenu)`
   ${({ theme, light }) => css`
-    button[aria-label='Open Menu'] {
+    button {
       border-radius: 0;
       color: ${light ? theme.global.colors.white : theme.global.colors.black};
       padding: 0;
@@ -125,6 +134,7 @@ const List = styled(Box)`
         width: 100%;
 
         a {
+          color: ${theme.global.colors.black};
           display: flex;
           align-items: center;
           font-size: 20px;
@@ -135,6 +145,7 @@ const List = styled(Box)`
 
           &:hover,
           &:focus {
+            color: ${theme.global.colors.brand};
             background: ${theme.global.colors['gray-shade-5']};
             border: none;
           }
@@ -185,6 +196,8 @@ export const GlobalNav = ({
 }) => {
   const { viewport } = useResponsive()
 
+  console.log(light)
+
   return (
     <>
       {viewport === 'small' && (
@@ -208,9 +221,7 @@ export const GlobalNav = ({
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       >
-        {viewport === 'small' && (
-          <Logo light={false} margin={{ vertical: 'large' }} />
-        )}
+        {viewport === 'small' && <Logo margin={{ vertical: 'large' }} />}
         <List as="ul" light={light} viewport={viewport}>
           <Box as="li">
             <Anchor label="Search " href="/search" />
@@ -235,6 +246,7 @@ export const GlobalNav = ({
               <CustomMenu
                 gap="0"
                 label="Compendia"
+                light={light}
                 items={[
                   { label: 'Normalized Compendia', onClick: () => {} },
                   { label: 'RNA-seq Sample Compendia', onClick: () => {} }
@@ -244,21 +256,21 @@ export const GlobalNav = ({
           </Box>
           <Box as="li">
             <Anchor
-              label="Docs "
+              label="Docs"
               href="https://docs.refine.bio"
               target="_blank"
               rel="noopener noreferrer"
             />
           </Box>
           <Box as="li">
-            <Anchor label="About " href="/about" />
+            <Anchor label="About" href="/about" />
           </Box>
           <Box as="li">
             <Button
               label="My Dataset"
               aria-label="View My Dataset"
               badge={{ max: 10000, value: 0 }}
-              light={light}
+              light={viewport !== 'small' ? light : false}
               secondary
             />
           </Box>
