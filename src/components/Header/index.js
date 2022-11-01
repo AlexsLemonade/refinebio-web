@@ -24,14 +24,14 @@ const Overlay = styled(Box)`
 `
 
 export const Header = ({ light = false, ...props }) => {
-  const { viewport } = useResponsive()
+  const { viewport, setResponsive } = useResponsive()
   const [toggle, setToggle] = useState(false)
 
   return (
     <GrommetHeader
       gap="0"
       justify="center"
-      pad={{ top: 'medium' }}
+      pad={{ top: setResponsive('large', 'medium') }}
       role="banner"
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
