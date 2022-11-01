@@ -51,7 +51,7 @@ export const Footer = () => {
       role="contentinfo"
     >
       <FixedContainer align="center">
-        <Box pad={{ horizontal: 'large' }}>
+        <Box pad={{ horizontal: setResponsive('0', '0', 'xlarge') }}>
           <Box direction={setResponsive('column', 'row')} justify="between">
             <Col viewport={viewport}>
               <Paragraph>
