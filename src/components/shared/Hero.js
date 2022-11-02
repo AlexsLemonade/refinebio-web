@@ -11,7 +11,7 @@ export const Hero = ({ header, body, ...props }) => {
           align="center"
           background="white"
           elevation="xlarge"
-          pad={{ vertical: 'xxxxlarge' }}
+          pad={{ horizontal: '96px', vertical: 'xxxxlarge' }}
           round="8px"
         >
           {body}

@@ -7,5 +7,8 @@ export default {
   },
   medium: {
     size: '16px' // 1rem
+  },
+  large: {
+    size: '22px' // 1rem
   }
 }
