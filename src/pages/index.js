@@ -1,7 +1,7 @@
 import { Box, Heading } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { SearchBox } from 'components/shared/SearchBox'
-import { Hero } from 'components/Hero'
+import { Hero } from 'components/shared/Hero'
 
 const HeroContent = () => {
   return (
