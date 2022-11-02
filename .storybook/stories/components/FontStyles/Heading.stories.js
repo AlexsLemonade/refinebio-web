@@ -1,8 +1,8 @@
 import { Heading } from 'grommet'
-import title from 'utils/titles'
+import { getTitle } from 'utils/getTitle'
 
 export default {
-  title: `${title.FontStyles}Heading`,
+  title: getTitle('Heading'),
   component: Heading,
   argTypes: {
     level: {

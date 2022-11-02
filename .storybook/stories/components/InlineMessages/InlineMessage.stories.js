@@ -1,8 +1,8 @@
 import { InlineMessage } from 'components/shared/InlineMessage'
-import title from 'utils/titles'
+import { getTitle } from 'utils/getTitle'
 
 export default {
-  title: `${title.InlineMessages}Inline Message`,
+  title: getTitle('InlineMessage'),
   component: InlineMessage,
   argTypes: {
     color: {

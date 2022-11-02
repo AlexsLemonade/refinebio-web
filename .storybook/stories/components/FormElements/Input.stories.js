@@ -1,9 +1,9 @@
 import { Input } from 'components/shared/Input'
 import { InlineMessage } from 'components/shared/InlineMessage'
-import title from 'utils/titles'
+import { getTitle } from 'utils/getTitle'
 
 export default {
-  title: `${title.FormElements}Input`,
+  title: getTitle('Input'),
   component: Input,
   argTypes: {
     value: { control: 'text' }

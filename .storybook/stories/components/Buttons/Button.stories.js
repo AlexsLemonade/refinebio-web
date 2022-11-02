@@ -1,8 +1,8 @@
 import { Button } from 'components/shared/Button'
-import title from 'utils/titles'
+import { getTitle } from 'utils/getTitle'
 
 export default {
-  title: `${title.Buttons}Button`,
+  title: getTitle('Button'),
   component: Button,
   argTypes: {
     count: { control: 'text' },
@@ -36,4 +36,3 @@ export const Badged = Template.bind({})
 Badged.args = {
   ...types[2]
 }
-Badged.storyName = 'Badged'
