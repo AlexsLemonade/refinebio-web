@@ -1,11 +1,24 @@
 import { Box, Heading } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
+import { SearchBox } from 'components/shared/SearchBox'
+import { Hero } from 'components/Hero'
+
+const HeroContent = () => {
+  return (
+    <>
+      <Heading level={1} size="large">
+        Search for normalized transcriptome data
+      </Heading>
+      <SearchBox large primary />
+    </>
+  )
+}
 
 const Home = () => {
   return (
     <FixedContainer>
       <Box>
-        <Heading level={1}>Home</Heading>
+        <Hero body={<HeroContent />} />
       </Box>
     </FixedContainer>
   )
