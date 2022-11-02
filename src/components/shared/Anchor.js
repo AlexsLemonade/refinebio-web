@@ -2,23 +2,17 @@ import { Anchor as GrommetAnchor } from 'grommet'
 import styled, { css } from 'styled-components'
 
 const CustomAnchor = styled(GrommetAnchor)`
-  &:hover,
-  &:focus {
-    text-decoration: underline;
-  }
-  ${({ noUnderline }) =>
-    noUnderline &&
-    css`
-      &:hover,
-      &:focus {
-        text-decoration: none;
-      }
-    `}
+  ${({ icon, underline }) => css`
+    &:hover,
+    &:focus {
+      text-decoration: ${icon || underline ? 'underline' : 'none'};
+    }
+  `}
 `
 
-export const Anchor = ({ ...props }) => {
+export const Anchor = ({ icon, underline = true, ...props }) => {
   // eslint-disable-next-line react/jsx-props-no-spreading
-  return <CustomAnchor {...props} />
+  return <CustomAnchor icon={icon} underline={underline} {...props} />
 }
 
 export default Anchor

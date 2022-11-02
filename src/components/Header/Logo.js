@@ -1,4 +1,5 @@
-import { Anchor, Box } from 'grommet'
+import { Box } from 'grommet'
+import { Anchor } from 'components/shared/Anchor'
 import { SrOnly } from 'components/shared/SrOnly'
 import styled, { css } from 'styled-components'
 import { LogoSvg } from '../../images/logo.svg'
@@ -20,7 +21,7 @@ export const Logo = ({ light = false, ...props }) => {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Wrapper light={light} {...props}>
-      <Anchor href="/">
+      <Anchor href="/" underline={false}>
         <LogoSvg role="img" />
         <SrOnly>Go to refine.bio homepage</SrOnly>
       </Anchor>
