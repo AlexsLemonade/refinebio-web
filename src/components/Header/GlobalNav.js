@@ -1,5 +1,6 @@
 import { useResponsive } from 'hooks/useResponsive'
-import { Anchor, Box, Menu, Nav as GrommentNav, Text } from 'grommet'
+import { Box, Menu, Nav as GrommentNav, Text } from 'grommet'
+import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { SrOnly } from 'components/shared/SrOnly'
 import styled, { css } from 'styled-components'
@@ -72,7 +73,6 @@ const List = styled(Box)`
           color: ${light
             ? theme.global.colors.white
             : theme.global.colors.brand};
-          text-decoration: none;
         }
       }
 
@@ -207,7 +207,7 @@ export const GlobalNav = ({
         )}
         <List as="ul" light={light} viewport={viewport}>
           <Box as="li">
-            <Anchor label="Search " href="/search" />
+            <Anchor label="Search " href="/search" underline={false} />
           </Box>
           <Box as="li">
             {viewport === 'small' ? (
@@ -222,8 +222,16 @@ export const GlobalNav = ({
                     Compendia <ArrowDownIcon />
                   </Text>
                 </Box>
-                <Anchor label="Normalized Compendia" href="/" />
-                <Anchor label="RNA-seq Sample Compendia" href="/" />
+                <Anchor
+                  label="Normalized Compendia"
+                  href="/"
+                  underline={false}
+                />
+                <Anchor
+                  label="RNA-seq Sample Compendia"
+                  href="/"
+                  underline={false}
+                />
               </>
             ) : (
               <Menu
@@ -242,10 +250,11 @@ export const GlobalNav = ({
               href="https://docs.refine.bio"
               target="_blank"
               rel="noopener noreferrer"
+              underline={false}
             />
           </Box>
           <Box as="li">
-            <Anchor label="About " href="/about" />
+            <Anchor label="About " href="/about" underline={false} />
           </Box>
           <Box as="li">
             <Button
