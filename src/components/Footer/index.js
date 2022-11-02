@@ -85,6 +85,7 @@ export const Footer = () => {
                     ariaLabel="CCDL Twitter"
                     href={links.ccdlTwitter}
                     icon={<TwitterIcon aria-hidden />}
+                    margin={{ horizontal: setResponsive('24px', '0') }}
                     target="_blank"
                     rel="noopener noreferrer"
                   />
