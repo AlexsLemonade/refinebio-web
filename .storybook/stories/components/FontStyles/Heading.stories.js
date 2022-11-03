@@ -1,8 +1,9 @@
 import { Heading } from 'grommet'
-import title from 'utils/titles'
+import { getTitle } from 'utils/getTitle'
+import { useThemeContext } from 'utils/useThemeContext'
 
 export default {
-  title: `${title.FontStyles}Heading`,
+  title: getTitle('Heading'),
   component: Heading,
   argTypes: {
     level: {
@@ -16,13 +17,17 @@ export default {
   }
 }
 
-const size = ['- 26px', '- 22px', '- 20px', '- 18px', '- 16px']
-
-const Template = (args) => (
-  <Heading {...args}>
-    {args.children} {size[args.level - 1]}
-  </Heading>
-)
+const Template = (args) => {
+  const theme = useThemeContext()
+  const fontSize = theme.heading.level[args.level].medium.size
+  return (
+    <Heading {...args}>
+      {args.children === 'Heading'
+        ? `${args.children} - ${fontSize}`
+        : args.children}
+    </Heading>
+  )
+}
 
 export const Defalt = Template.bind({})
 Defalt.storyName = 'Heading'

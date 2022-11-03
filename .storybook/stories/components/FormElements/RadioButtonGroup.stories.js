@@ -1,8 +1,8 @@
 import { RadioButtonGroup } from 'grommet'
-import title from 'utils/titles'
+import { getTitle } from 'utils/getTitle'
 
 export default {
-  title: `${title.FormElements}RadioButtons/Group`,
+  title: getTitle('RadioButtonGroup'),
   component: RadioButtonGroup,
   argTypes: {
     name: { control: 'text' }
@@ -16,5 +16,5 @@ export default {
 
 const Template = (args) => <RadioButtonGroup {...args} />
 
-export const RadioGroup = Template.bind({})
-RadioGroup.storyName = 'Group'
+export const Default = Template.bind({})
+Default.storyName = 'RadioButton Group'
