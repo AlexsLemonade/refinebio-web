@@ -8,9 +8,22 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: local
     command: >
-      bash -c 'cd /app &&
-             yarn install && 
-             yarn dev -p ${CLIENT_PORT}'
+      bash -c 'cd /app && yarn dev -p ${CLIENT_PORT}'
     volumes:
       - ./:/app
+  storybook:
+      image: refinebio-web-storybook
+      ports:
+        - ${STORYBOOK_PORT}:${STORYBOOK_PORT}
+      build:
+        context: .
+        dockerfile: Dockerfile
+        target: local
+      command: >
+        bash -c 'cd /app &&
+                 yarn install &&
+                 yarn storybook --quiet -p ${STORYBOOK_PORT}'
+      volumes:
+        - ./:/app  

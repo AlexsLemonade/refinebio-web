@@ -24,18 +24,22 @@ const moduleExports = () => {
   }
 
   return {
+    compiler: {
+      // https://nextjs.org/docs/advanced-features/compiler#styled-components
+      styledComponents: true
+    },
     env,
-    reactStrictMode: true,
-    swcMinify: true,
-    // https://nextjs.org/docs/advanced-features/output-file-tracing#automatically-copying-traced-files
     output: 'standalone',
+    reactStrictMode: true,
+    // https://nextjs.org/docs/advanced-features/output-file-tracing#automatically-copying-traced-files
     sentry: {
       // Sentry SDK creates sourcemaps and uploads them to its server to deminify errors
       // To prevent the original code to be visible in browser devtools in production, set hideSourceMaps to true
       // https://webpack.js.org/configuration/devtool/
       // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/#use-hidden-source-map
       hideSourceMaps: true
-    }
+    },
+    swcMinify: true
   }
 }
 

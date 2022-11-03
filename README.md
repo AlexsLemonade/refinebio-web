@@ -1,27 +1,49 @@
 # refinebio-web
 
-Refinebio Client for [Next.js](https://nextjs.org/)
-
-This project was bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Refinebio Client using [Next.js](https://nextjs.org/)
 
 ## Getting Started
 
-### Run the docker container:
+### Ports
+
+- `client`: http://localhost:3002
+
+- Storybook: http://localhost:6006
+
+### Run the Local Environment
+
+The following command starts both `client` and Storybook:
 
 ```bash
-yarn up
+yarn start-local
 ```
 
-### Stop the docker container:
+### Run `client`
+
+The following command starts `client`:
 
 ```bash
-yarn up
+yarn start-client
 ```
 
-Open [http://localhost:7000](http://localhost:7000) with your browser to see the result.
+### Run Storybook
+
+The following command starts Storybook:
+
+```bash
+yarn start-storybook
+```
+
+### Stop the Local Environment
+
+The following command stops both `client` and Storybook:
+
+```bash
+yarn stop-local
+```
 
 ## Other resources
 
-- [Next.js GitHub repository](https://github.com/vercel/next.js/)
-- [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
-- [Next.js deployment documentation](https://nextjs.org/docs/deployment)
+- [Vercel with Next.js](https://vercel.com/solutions/nextjs)
+- [Next.js docs](https://nextjs.org/docs)
+- [Storybook CLI](https://storybook.js.org/docs/react/api/cli-options)
