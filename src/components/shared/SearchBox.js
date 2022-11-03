@@ -1,3 +1,4 @@
+import { useResponsive } from 'hooks/useResponsive'
 import { Box, FormField } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Input } from 'components/shared/Input'
@@ -8,17 +9,23 @@ const Wrapper = styled(Box)`
   width: 100%;
 
   > div {
-    &:first-child {
-      width: calc(100% - 96px);
-    }
     position: relative;
+    &:first-child {
+      width: 100%;
+    }
   }
+
+  button {
+    margin-left: 16px;
+  }
+
   input {
     flex: 1 0 0;
     &::-webkit-search-cancel-button {
       display: none;
     }
   }
+
   svg {
     position: absolute;
     right: 8px;
@@ -26,43 +33,60 @@ const Wrapper = styled(Box)`
     transform: translateY(-50%);
     z-index: 1;
   }
+
   ${({ size }) =>
     size &&
     `
+    > div:first-child {
+      width: calc(100% - 96px);
+    }
+
     button {
       padding:${size === 'xlarge' ? '10px 20px' : '4px 16px'};
-      width: 96px;
     }
+    
     input {
       padding: ${size === 'xlarge' ? '22px' : '16px'};
       font-size: ${size === 'xlarge' ? '22px' : '16px'};
     }
-    svg {
-      display: none;
+  `}
+
+  ${({ size, viewport }) =>
+    viewport === 'small' &&
+    size === 'xlarge' &&
+    `
+    flex-direction: column;
+    
+    > div:first-child {
+      width: 100%;
+    }
+
+    button {
+      margin: 16px 0 0 0;
     }
   `}
 `
 
 export const SearchBox = ({
+  btnWidth = '',
+  placeHolder = '',
   primary = false,
   secondary = false,
-  size = '',
-  ...props
+  size = ''
 }) => {
+  const { viewport } = useResponsive()
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <Wrapper direction="row" justify="between" size={size}>
+    <Wrapper direction="row" justify="between" size={size} viewport={viewport}>
       <FormField a11yTitle="Search" htmlFor="search" role="search">
         <Box>
-          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          <Input id="search" type="search" {...props} />
-          <SearchIcon />
+          <Input id="search" type="search" placeholder={placeHolder} />
+          {!size && <SearchIcon />}
         </Box>
       </FormField>
       {size && (
         <Button
+          width={btnWidth}
           label="Search"
-          margin={{ left: '8px' }}
           type="submit"
           primary={primary}
           secondary={secondary}

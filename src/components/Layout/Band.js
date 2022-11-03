@@ -1,12 +1,14 @@
+import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
 
 export const Band = ({ ...props }) => {
+  const { setResponsive } = useResponsive()
   return (
     <Box
       background="gradient_dark"
       elevation="large"
-      height="420px"
+      height={setResponsive('480px', '368px')}
       width="100%"
       style={{ position: 'absolute', zIndex: -1 }}
       // eslint-disable-next-line react/jsx-props-no-spreading
