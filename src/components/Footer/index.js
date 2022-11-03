@@ -82,7 +82,7 @@ export const Footer = () => {
                 />
                 <Box align="center" direction="row" gap="medium">
                   <Anchor
-                    ariaLabel="CCDL Twitter"
+                    aria-label="CCDL Twitter"
                     href={links.ccdlTwitter}
                     icon={<TwitterIcon aria-hidden />}
                     margin={{ horizontal: setResponsive('24px', '0') }}
@@ -90,7 +90,7 @@ export const Footer = () => {
                     rel="noopener noreferrer"
                   />
                   <Anchor
-                    ariaLabel="CCDL Github"
+                    aria-label="CCDL Github"
                     href={links.ccdlGithub}
                     icon={<GithubIcon aria-hidden />}
                     target="_blank"
