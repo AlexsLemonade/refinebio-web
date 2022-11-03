@@ -5,12 +5,16 @@ import styled from 'styled-components'
 import { SearchIcon } from '../../images/search.svg'
 
 const Wrapper = styled(Box)`
-  display: flex;
-  flex-direction: row;
-  div {
+  width: 100%;
+
+  > div {
+    &:first-child {
+      width: calc(100% - 96px);
+    }
     position: relative;
   }
   input {
+    flex: 1 0 0;
     &::-webkit-search-cancel-button {
       display: none;
     }
@@ -22,44 +26,43 @@ const Wrapper = styled(Box)`
     transform: translateY(-50%);
     z-index: 1;
   }
-  ${({ large }) =>
-    large &&
+  ${({ size }) =>
+    size &&
     `
-      button {
-        height: 40px;
-        margin-left: 16px;
-        width: 96px;
-      }
-      input {
-        height: 40px;
-        padding: 8px 16px;
-      }
-      svg {
-       display:none;
-      }
-   `}
+    button {
+      padding:${size === 'xlarge' ? '10px 20px' : '4px 16px'};
+      width: 96px;
+    }
+    input {
+      padding: ${size === 'xlarge' ? '22px' : '16px'};
+      font-size: ${size === 'xlarge' ? '22px' : '16px'};
+    }
+    svg {
+      display: none;
+    }
+  `}
 `
 
 export const SearchBox = ({
-  large = false,
-  w,
   primary = false,
   secondary = false,
+  size = '',
   ...props
 }) => {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Wrapper large={large} role="search" {...props} width={`calc(${w} - 16px)`}>
-      <FormField a11yTitle="Search" htmlFor="search" fill>
+    <Wrapper direction="row" justify="between" size={size}>
+      <FormField a11yTitle="Search" htmlFor="search" role="search">
         <Box>
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
           <Input id="search" type="search" {...props} />
           <SearchIcon />
         </Box>
       </FormField>
-      {large && (
+      {size && (
         <Button
           label="Search"
+          margin={{ left: '8px' }}
           type="submit"
           primary={primary}
           secondary={secondary}
