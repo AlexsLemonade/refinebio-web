@@ -171,12 +171,7 @@ const CustomNav = styled(GrommentNav)`
   `}
 `
 
-export const GlobalNav = ({
-  light = false,
-  toggle = false,
-  setToggle,
-  ...props
-}) => {
+export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const { viewport } = useResponsive()
 
   return (
@@ -189,7 +184,9 @@ export const GlobalNav = ({
           role="button"
         >
           <Box as="span" />
-          <SrOnly>Open the site navigation</SrOnly>
+          <SrOnly>
+            {toggle ? 'Close the site navigation' : 'Open the site navigation'}
+          </SrOnly>
         </NavIcon>
       )}
       <CustomNav
@@ -199,8 +196,6 @@ export const GlobalNav = ({
         role="navigation"
         toggle={toggle}
         viewport={viewport}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...props}
       >
         {viewport === 'small' && (
           <Logo light={false} margin={{ vertical: 'large' }} />
