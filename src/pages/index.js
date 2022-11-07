@@ -53,10 +53,13 @@ const HeroContent = () => {
 }
 
 const Home = () => {
+  const { viewport } = useResponsive()
+
   return (
     <FixedContainer>
       <Box>
         <Hero body={<HeroContent />} />
+        <h1>Home {viewport}</h1>
       </Box>
     </FixedContainer>
   )
