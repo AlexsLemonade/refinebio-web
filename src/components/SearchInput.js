@@ -5,8 +5,6 @@ import styled from 'styled-components'
 import { SearchIcon } from '../images/search.svg'
 
 const Wrapper = styled(Box)`
-  display: flex;
-  flex-direction: row;
   div {
     position: relative;
   }
@@ -15,7 +13,6 @@ const Wrapper = styled(Box)`
       display: none;
     }
   }
-
   svg {
     position: absolute;
     right: 8px;
@@ -46,7 +43,7 @@ const Wrapper = styled(Box)`
 export const SearchInput = ({ large = false, ...props }) => {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Wrapper large={large} role="search" {...props}>
+    <Wrapper direction="row" large={large} role="search" {...props}>
       <FormField a11yTitle="Search" htmlFor="search" fill>
         <Box>
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}

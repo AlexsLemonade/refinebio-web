@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import data from 'api/data'
 
 const Wrapper = styled(Box)`
-  padding: 24px 0 16px;
   > div {
     + div {
       margin-top: 16px;
@@ -20,7 +19,7 @@ export const SearchCardBody = ({
   sampleMetadataFields = []
 }) => {
   return (
-    <Wrapper>
+    <Wrapper pad={{ top: 'medium', bottom: 'small' }}>
       <Box>
         <Heading level={4}>Description</Heading>
         <Paragraph>{description}</Paragraph>

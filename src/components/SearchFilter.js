@@ -58,7 +58,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
 
       {FILTER_LENGTH > MAX_COUNT && (
         <SearchInput
-          pad={{ bottom: '8px' }}
+          pad={{ bottom: 'xsmall' }}
           placeholder={`Filter ${label}`}
           value={userInput}
           onChange={(e) => filterOptions(e.target.value)}
@@ -66,7 +66,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
       )}
 
       <Box
-        margin={{ top: '8px' }}
+        margin={{ top: 'xsmall' }}
         animation={{ type: open ? 'fadeIn' : '', duration: '.5s' }}
       >
         {getOptionsToRender().map((option, i, arr) => (

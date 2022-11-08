@@ -7,9 +7,7 @@ import { Pill } from 'components/shared/Pill'
 import styled from 'styled-components'
 import data from 'api/data'
 
-// Wrapper
 const Wrapper = styled(Box)`
-  padding-bottom: 24px;
   > div {
     flex-direction: row;
     justify-content: space-between;
@@ -23,7 +21,6 @@ const Wrapper = styled(Box)`
   }
 `
 
-// RightCol
 const RightCol = styled(Box)`
   align-self: stretch;
   justify-content: center;
@@ -51,7 +48,7 @@ const SearchCardTitle = ({ accessionCode, title }) => (
     <IconBadge
       name="Accession"
       label={accessionCode}
-      pad={{ bottom: '16px' }}
+      pad={{ bottom: 'small' }}
     />
     <Heading level={3}>
       <strong>
@@ -78,7 +75,7 @@ export const SearchCardHeader = ({
   title = ''
 }) => {
   return (
-    <Wrapper>
+    <Wrapper pad={{ bottom: 'medium' }}>
       <Box>
         <Box fill>
           <SearchCardTitle accessionCode={accessionCode} title={title} />

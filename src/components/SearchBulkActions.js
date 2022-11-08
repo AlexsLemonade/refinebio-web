@@ -10,8 +10,6 @@ import styled from 'styled-components'
 import data from 'api/data'
 
 const Wrapper = styled(Box)`
-  padding-bottom: 24px;
-
   * {
     align-items: center;
     flex-direction: row;
@@ -28,7 +26,7 @@ const SortByControl = styled(GrommetSelect)`
 
 export const SearchBulkActions = () => {
   return (
-    <Wrapper>
+    <Wrapper pad={{ bottom: 'medium' }}>
       <Box justify="between" margin={{ bottom: 'small' }}>
         <Box>
           <FormField a11yTitle="Page size" htmlFor="page-size">
