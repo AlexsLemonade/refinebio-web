@@ -67,7 +67,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
 
       <Box
         margin={{ top: '8px' }}
-        style={{ animation: open ? 'fadeIn .35s' : '' }}
+        animation={{ type: open ? 'fadeIn' : '', duration: '.5s' }}
       >
         {getOptionsToRender().map((option, i, arr) => (
           <Box

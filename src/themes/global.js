@@ -14,6 +14,7 @@ export default {
     }
   },
   edgeSize: {
+    xxxsmall: '2px',
     xxsmall: '4px',
     xsmall: '8px',
     small: '16px',

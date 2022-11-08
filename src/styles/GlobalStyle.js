@@ -40,14 +40,4 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         position: absolute;
     }
-
-    // animation
-    @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
 `

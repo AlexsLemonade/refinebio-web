@@ -10,16 +10,9 @@ const Button = styled(sharedButton)`
   right: 5vh;
   z-index: 1000;
 
-  > span {  
-    font-size: 12.8px;
-    font-weight: bolder;
-  }
    ${({ theme }) => css`
      background: ${theme.global.colors['gray-shade-5']};
      box-shadow: ${theme.global.elevation.light.medium};
-     > span {
-       color: ${theme.global.colors.brand};
-     }
      &:hover {
        box-shadow: none;
      }
@@ -86,13 +79,13 @@ export const BackToTopButton = () => {
           behavior: 'smooth'
         })
       }
-      style={{
-        animation: show ? 'fadeIn .35s' : 'none',
-        display: show ? 'block' : 'none'
-      }}
+      animation={{ type: show ? 'fadeIn' : '', duration: '.5s' }}
+      style={{ display: show ? 'block' : 'none' }}
     >
       <ArrowIcon />
-      <Text>Back to Top</Text>
+      <Text color="brand" size="small">
+        <strong>Back to Top</strong>
+      </Text>
     </Button>
   )
 }

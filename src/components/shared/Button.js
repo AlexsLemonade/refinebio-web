@@ -52,9 +52,9 @@ const CustomButton = styled(GrommetButton)`
     `}
 `
 
-export const Button = ({ ...props }) => {
+export const Button = ({ animation, ...props }) => {
   return (
-    <Box width="max-content">
+    <Box width="max-content" animation={animation}>
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <CustomButton {...props} />
     </Box>
