@@ -149,7 +149,7 @@ const List = styled(Box)`
           font-size: 18px;
           margin-left: 40px;
           padding: 12px 0;
-          width: 80vw;
+          width: calc(100% - 40px);
         }
 
         &:last-child {
@@ -271,6 +271,7 @@ export const GlobalNav = ({
               label="My Dataset"
               aria-label="View My Dataset"
               badge={{ max: 10000, value: 0 }}
+              btnWidth={viewport === 'small' ? '80vw' : 'max-content'}
               light={viewport !== 'small' ? light : false}
               secondary
             />

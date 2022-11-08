@@ -85,7 +85,7 @@ export const SearchBox = ({
       </FormField>
       {size && (
         <Button
-          width={btnWidth}
+          btnWidth={btnWidth}
           label="Search"
           type="submit"
           primary={primary}
