@@ -1,4 +1,10 @@
-import { Box, CheckBox, Select, Text } from 'grommet'
+import {
+  Box,
+  CheckBox,
+  FormField,
+  Select as GrommetSelect,
+  Text
+} from 'grommet'
 import { Button } from 'components/shared/Button'
 import styled from 'styled-components'
 import data from 'api/data'
@@ -10,50 +16,42 @@ const Wrapper = styled(Box)`
     align-items: center;
     flex-direction: row;
   }
+`
 
-  > div:first-child {
-    justify-content: space-between;
-    flex-direction: row;
-    margin-bottom: 16px;
-    .select {
-      &__page-size {
-        button {
-          input {
-            width: 36px;
-          }
-        }
-      }
-      &__sortby {
-        button {
-          input {
-            width: 160px;
-          }
-        }
-      }
-    }
-  }
+const PageSizeControl = styled(GrommetSelect)`
+  width: 36px;
+`
+
+const SortByControl = styled(GrommetSelect)`
+  width: 160px;
 `
 
 export const SearchBulkActions = () => {
   return (
     <Wrapper>
-      <Box>
-        <Box className="select__page-size">
-          <Text>Showing</Text>
-          <Select
-            defaultValue={data.SearchBulkActions.PAGE_SIZES[0]}
-            options={data.SearchBulkActions.PAGE_SIZES}
-            margin={{ horizontal: 'xxsmall' }}
-          />
+      <Box justify="between" margin={{ bottom: 'small' }}>
+        <Box>
+          <FormField a11yTitle="Page size" htmlFor="page-size">
+            Showing
+            <PageSizeControl
+              defaultValue={data.SearchBulkActions.PAGE_SIZES[0]}
+              id="page-size"
+              options={data.SearchBulkActions.PAGE_SIZES}
+              margin={{ horizontal: 'xxsmall' }}
+            />
+          </FormField>
           <Text>of {data.SearchBulkActions.totalResults} results</Text>
         </Box>
-        <Box className="select__sortby">
-          <Text>Sort by</Text>
-          <Select
-            defaultValue={data.SearchBulkActions.SORTBY_OPTIONS[0]}
-            options={data.SearchBulkActions.SORTBY_OPTIONS}
-            margin={{ horizontal: 'xxsmall' }}
-          />
+        <Box>
+          <FormField a11yTitle="Sort by" htmlFor="sort-by">
+            Sort by
+            <SortByControl
+              defaultValue={data.SearchBulkActions.SORTBY_OPTIONS[0]}
+              id="sort-by"
+              options={data.SearchBulkActions.SORTBY_OPTIONS}
+              margin={{ horizontal: 'xxsmall' }}
+            />
+          </FormField>
         </Box>
         <Box>
           <Button label="Add Page to Dataset" secondary />
