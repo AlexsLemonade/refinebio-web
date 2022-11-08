@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import { Fragment } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import {
