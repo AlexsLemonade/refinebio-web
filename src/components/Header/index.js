@@ -27,7 +27,7 @@ export const Header = ({ light = false }) => {
     >
       {viewport === 'small' && toggle && (
         <Overlay
-          animation={{ type: toggle ? 'fadeIn' : '', duration: 0.15 }}
+          animation={{ type: toggle ? 'fadeIn' : 'fedeOut', duration: 150 }}
           background="rgba_3"
           fill
           toggle={toggle}
