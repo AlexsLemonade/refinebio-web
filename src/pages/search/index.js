@@ -30,7 +30,7 @@ export const Search = () => {
           columns={['250px', 'auto']}
           rows={['auto', 'auto']}
           gap={{
-            row: 0,
+            row: '0',
             column: 'xxlarge'
           }}
         >

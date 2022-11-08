@@ -79,7 +79,7 @@ export const BackToTopButton = () => {
           behavior: 'smooth'
         })
       }
-      animation={{ type: show ? 'fadeIn' : '', duration: '.5s' }}
+      animation={{ type: show ? 'fadeIn' : 'fadeOut', duration: 500 }}
       style={{ display: show ? 'block' : 'none' }}
     >
       <ArrowIcon />
