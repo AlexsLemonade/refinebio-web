@@ -1,0 +1,33 @@
+import { Box } from 'grommet'
+import styled, { css } from 'styled-components'
+
+const Wrapper = styled(Box)`
+  width: fit-content;
+  border: dashed tomato 1px;
+  ${({ viewport }) =>
+    viewport === 'small' &&
+    css`
+      margin: 24px 0;
+    `}
+  ${({ viewport }) =>
+    viewport === 'medium' &&
+    css`
+      margin: 0 32px;
+    `}
+    ${({ viewport }) =>
+    viewport === 'large' &&
+    css`
+      margin: 0 56px;
+    `}
+`
+
+export const Col = ({ viewport, children, ...props }) => {
+  return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <Wrapper viewport={viewport} {...props}>
+      {children}
+    </Wrapper>
+  )
+}
+
+export default Col

@@ -11,7 +11,9 @@ import {
 } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
+import { Col } from 'components/shared/Col'
 import { FixedContainer } from 'components/shared/FixedContainer'
+import { Row } from 'components/shared/Row'
 import { SrOnly } from 'components/shared/SrOnly'
 
 import styled, { css } from 'styled-components'
@@ -35,25 +37,6 @@ const GithubLink = styled(Anchor)`
   `}
 `
 
-const Col = styled(Box)`
-  width: fit-content;
-  ${({ viewport }) =>
-    viewport === 'small' &&
-    css`
-      margin: 24px 0;
-    `}
-  ${({ viewport }) =>
-    viewport === 'medium' &&
-    css`
-      margin: 0 32px;
-    `}
-    ${({ viewport }) =>
-    viewport === 'large' &&
-    css`
-      margin: 0 56px;
-    `}
-`
-
 export const Footer = () => {
   const { viewport, setResponsive } = useResponsive()
   const { links } = defaultConfig
@@ -71,7 +54,7 @@ export const Footer = () => {
     >
       <FixedContainer align="center">
         <Box pad={{ horizontal: setResponsive('0', '0', 'xlarge') }}>
-          <Box direction={setResponsive('column', 'row')} justify="between">
+          <Row justify="between">
             <Col viewport={viewport}>
               <Paragraph>
                 {texts.about}{' '}
@@ -169,7 +152,7 @@ export const Footer = () => {
                 <i>{texts.note}</i>
               </Paragraph>
             </Col>
-          </Box>
+          </Row>
         </Box>
 
         <Box
