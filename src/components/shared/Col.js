@@ -1,3 +1,4 @@
+import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
 import styled, { css } from 'styled-components'
 
@@ -20,7 +21,9 @@ const Wrapper = styled(Box)`
     `}
 `
 
-export const Col = ({ viewport, children, ...props }) => {
+export const Col = ({ children, ...props }) => {
+  const { viewport } = useResponsive()
+
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Wrapper viewport={viewport} {...props}>

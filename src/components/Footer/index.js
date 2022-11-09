@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import config from 'components/Footer/config'
 import { useResponsive } from 'hooks/useResponsive'
 import {
   Box,
@@ -11,9 +12,9 @@ import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Col } from 'components/shared/Col'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import config from 'components/Footer/config'
-import styled, { css } from 'styled-components'
+import { Row } from 'components/shared/Row'
 import { SrOnly } from 'components/shared/SrOnly'
+import styled, { css } from 'styled-components'
 import { CoinIcon } from '../../images/coin.svg'
 import { TwitterIcon } from '../../images/twitter.svg'
 import { GithubIcon } from '../../images/github.svg'
@@ -35,7 +36,7 @@ const GithubLink = styled(Anchor)`
 `
 
 export const Footer = () => {
-  const { viewport, setResponsive } = useResponsive()
+  const { setResponsive } = useResponsive()
   const { links, contributors, texts } = config
   return (
     <GrommentFooter
@@ -49,8 +50,8 @@ export const Footer = () => {
     >
       <FixedContainer align="center">
         <Box pad={{ horizontal: setResponsive('0', '0', 'xlarge') }}>
-          <Box direction={setResponsive('column', 'row')} justify="between">
-            <Col viewport={viewport}>
+          <Row>
+            <Col>
               <Paragraph>
                 {texts.about}{' '}
                 <Anchor
@@ -120,7 +121,7 @@ export const Footer = () => {
                 </Text>
               </Box>
             </Col>
-            <Col viewport={viewport}>
+            <Col>
               <Heading
                 level={5}
                 style={{ fontFamily: `'Lato', sans-serif`, fontWeight: '700' }}
@@ -147,7 +148,7 @@ export const Footer = () => {
                 <i>{texts.note}</i>
               </Paragraph>
             </Col>
-          </Box>
+          </Row>
         </Box>
 
         <Box
