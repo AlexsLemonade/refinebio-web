@@ -1,22 +1,17 @@
+import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
-import styled, { css } from 'styled-components'
 
-const Wrapper = styled(Box)`
-  flex-direction: row;
-  border: dashed lime 1px;
-  ${({ viewport }) =>
-    viewport === 'small' &&
-    css`
-      flex-direction: column;
-    `}
-`
-
-export const Row = ({ viewport, children, ...props }) => {
+export const Row = ({ justify = 'between', children, ...props }) => {
+  const { setResponsive } = useResponsive()
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <Wrapper viewport={viewport} {...props}>
+    <Box
+      direction={setResponsive('column', 'row')}
+      justify={justify}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    >
       {children}
-    </Wrapper>
+    </Box>
   )
 }
 

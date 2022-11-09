@@ -38,7 +38,7 @@ const GithubLink = styled(Anchor)`
 `
 
 export const Footer = () => {
-  const { viewport, setResponsive } = useResponsive()
+  const { setResponsive } = useResponsive()
   const { links } = defaultConfig
   const { contributors, texts } = config
 
@@ -54,8 +54,8 @@ export const Footer = () => {
     >
       <FixedContainer align="center">
         <Box pad={{ horizontal: setResponsive('0', '0', 'xlarge') }}>
-          <Row justify="between">
-            <Col viewport={viewport}>
+          <Row>
+            <Col>
               <Paragraph>
                 {texts.about}{' '}
                 <Anchor
@@ -125,7 +125,7 @@ export const Footer = () => {
                 </Text>
               </Box>
             </Col>
-            <Col viewport={viewport}>
+            <Col>
               <Heading
                 level={5}
                 style={{ fontFamily: `'Lato', sans-serif`, fontWeight: '700' }}
