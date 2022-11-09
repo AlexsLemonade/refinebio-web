@@ -7,12 +7,11 @@ export const Hero = ({ header, body, ...props }) => {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Box direction="row" justify="center" {...props}>
-      {/* fixed max width to preserve the UI layout */}
       <Box
-        width="815px"
+        width="815px" // fixed value to preserve the UI layout
         margin={{
-          top: setResponsive('xxxlarge', '80px'),
-          bottom: setResponsive('xxxlarge', '96px')
+          top: setResponsive('xxxlarge', 'xxxxxxlarge'),
+          bottom: setResponsive('xxxlarge', 'xxxxxxxlarge')
         }}
       >
         {header}
@@ -21,7 +20,7 @@ export const Hero = ({ header, body, ...props }) => {
           background="white"
           elevation="xlarge"
           pad={{
-            horizontal: setResponsive('large', '96px'),
+            horizontal: setResponsive('large', 'xxxxxxxlarge'),
             vertical: setResponsive('32px', 'xxxxlarge')
           }}
           round="8px"

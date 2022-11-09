@@ -34,7 +34,9 @@ export default {
     xxlarge: '48px',
     xxxlarge: '56px',
     xxxxlarge: '64px',
-    xxxxxlarge: '72px'
+    xxxxxlarge: '72px',
+    xxxxxxlarge: '80px',
+    xxxxxxxlarge: '96px'
   },
   elevation: {
     light: {
