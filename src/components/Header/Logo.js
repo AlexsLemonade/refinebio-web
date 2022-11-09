@@ -22,7 +22,7 @@ export const Logo = ({ light = false }) => {
     <Wrapper light={light}>
       <Anchor href="/" underline={false}>
         <LogoSvg role="img" title="refine.bio" />
-        <SrOnly>Go to refine.bio homepage</SrOnly>
+        <SrOnly label="Go to refine.bio homepage " />
       </Anchor>
     </Wrapper>
   )

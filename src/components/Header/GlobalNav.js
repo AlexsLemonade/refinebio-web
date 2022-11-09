@@ -179,9 +179,11 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
           role="button"
         >
           <Box as="span" />
-          <SrOnly>
-            {toggle ? 'Close the site navigation' : 'Open the site navigation'}
-          </SrOnly>
+          <SrOnly
+            label={
+              toggle ? 'Close the site navigation' : 'Open the site navigation'
+            }
+          />
         </NavIcon>
       )}
 

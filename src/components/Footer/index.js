@@ -12,6 +12,7 @@ import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import config from 'components/Footer/config'
 import styled, { css } from 'styled-components'
+import { SrOnly } from 'components/shared/SrOnly'
 import { CoinIcon } from '../../images/coin.svg'
 import { TwitterIcon } from '../../images/twitter.svg'
 import { GithubIcon } from '../../images/github.svg'
@@ -98,7 +99,6 @@ export const Footer = () => {
                 />
                 <Box align="center" direction="row" gap="medium">
                   <TwitterLink
-                    aria-label="CCDL Twitter"
                     color="gray-shade-40"
                     href={links.ccdlTwitter}
                     margin={{ horizontal: setResponsive('24px', '0') }}
@@ -106,15 +106,16 @@ export const Footer = () => {
                     rel="noopener noreferrer"
                   >
                     <TwitterIcon aria-hidden />
+                    <SrOnly label="Follow us on Twitter" />
                   </TwitterLink>
                   <GithubLink
-                    aria-label="CCDL Github"
                     color="gray-shade-40"
                     href={links.ccdlGithub}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <GithubIcon aria-hidden />
+                    <SrOnly label="View our refine.bio Github repository" />
                   </GithubLink>
                 </Box>
               </Box>
