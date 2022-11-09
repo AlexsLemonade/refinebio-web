@@ -13,6 +13,6 @@ const Wrapper = styled(Text)`
   position: absolute;
 `
 
-export const SrOnly = ({ children }) => {
-  return <Wrapper>{children}</Wrapper>
+export const SrOnly = ({ label = '' }) => {
+  return <Wrapper>{label}</Wrapper>
 }

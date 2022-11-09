@@ -2,6 +2,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Box, Menu, Nav as GrommentNav, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
+import { Layer } from 'components/shared/Layer'
 import { SrOnly } from 'components/shared/SrOnly'
 import styled, { css } from 'styled-components'
 import { Logo } from './Logo'
@@ -16,7 +17,7 @@ const NavIcon = styled(Box)`
     position: absolute;
     right: 24px;
     top: 8px;
-    z-index: 3;
+    z-index: 100;
 
     &::before,
     &::after {
@@ -97,6 +98,7 @@ const List = styled(Box)`
             ? theme.global.colors.white
             : theme.global.colors.black};
         }
+
         &:hover,
         &[aria-expanded='true'] {
           border-bottom: 1px solid
@@ -136,7 +138,6 @@ const List = styled(Box)`
           width: 100%;
           margin: 0;
           padding: 40px 0 40px 40px;
-
           &:hover,
           &:focus {
             color: ${theme.global.colors.brand};
@@ -168,26 +169,12 @@ const CustomNav = styled(GrommentNav)`
       background: ${theme.global.colors.white};
       height: 100vh;
       width: 100vw;
-      padding: 64px 0;
+      padding: 40px 0;
       position: fixed;
-      left: 0;
-      top: 0;
-      transform: translate3d(100%, 0, 0);
       z-index: 2;
     `}
-
-  ${({ toggle }) => css`
-    animation: slideInRight ${toggle ? '0.2s' : '0.15s'}
-      cubic-bezier(0, 0.49, 0.56, 1.04) ${toggle ? 'forwards' : 'reverse'};
-  `}
 `
-
-export const GlobalNav = ({
-  light = false,
-  toggle = false,
-  setToggle,
-  ...props
-}) => {
+export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const { viewport } = useResponsive()
 
   return (
@@ -200,84 +187,88 @@ export const GlobalNav = ({
           role="button"
         >
           <Box as="span" />
-          <SrOnly>Open the site navigation</SrOnly>
+          <SrOnly
+            label={
+              toggle ? 'Close the site navigation' : 'Open the site navigation'
+            }
+          />
         </NavIcon>
       )}
-      <CustomNav
-        align="center"
-        gap="0"
-        light={light}
-        role="navigation"
-        toggle={toggle}
-        viewport={viewport}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...props}
-      >
-        {viewport === 'small' && <Logo margin={{ vertical: 'large' }} />}
-        <List as="ul" light={light} viewport={viewport}>
-          <Box as="li">
-            <Anchor label="Search " href="/search" underline={false} />
-          </Box>
-          <Box as="li">
-            {viewport === 'small' ? (
-              <>
-                <Box
-                  alignSelf="start"
-                  pad={{ vertical: 'medium' }}
-                  margin={{ horizontal: '40px' }}
-                  width="80vw"
-                >
-                  <Text size="18px">
-                    Compendia <ArrowDownIcon />
-                  </Text>
-                </Box>
-                <Anchor
-                  label="Normalized Compendia"
-                  href="/"
-                  underline={false}
+      <Layer position="right" show={toggle}>
+        <CustomNav
+          align="center"
+          gap="0"
+          light={light}
+          role="navigation"
+          toggle={toggle}
+          viewport={viewport}
+        >
+          {viewport === 'small' && <Logo margin={{ vertical: 'large' }} />}
+          <List as="ul" light={light} viewport={viewport}>
+            <Box as="li">
+              <Anchor label="Search " href="/search" underline={false} />
+            </Box>
+            <Box as="li">
+              {viewport === 'small' ? (
+                <>
+                  <Box
+                    alignSelf="start"
+                    pad={{ vertical: 'medium' }}
+                    margin={{ horizontal: '40px' }}
+                    width="80vw"
+                  >
+                    <Text size="18px">
+                      Compendia <ArrowDownIcon />
+                    </Text>
+                  </Box>
+                  <Anchor
+                    label="Normalized Compendia"
+                    href="/"
+                    underline={false}
+                  />
+                  <Anchor
+                    label="RNA-seq Sample Compendia"
+                    href="/"
+                    underline={false}
+                  />
+                </>
+              ) : (
+                <Menu
+                  gap="0"
+                  label="Compendia"
+                  light={light}
+                  items={[
+                    { label: 'Normalized Compendia', onClick: () => {} },
+                    { label: 'RNA-seq Sample Compendia', onClick: () => {} }
+                  ]}
                 />
-                <Anchor
-                  label="RNA-seq Sample Compendia"
-                  href="/"
-                  underline={false}
-                />
-              </>
-            ) : (
-              <Menu
-                gap="0"
-                label="Compendia"
-                light={light}
-                items={[
-                  { label: 'Normalized Compendia', onClick: () => {} },
-                  { label: 'RNA-seq Sample Compendia', onClick: () => {} }
-                ]}
+              )}
+            </Box>
+            <Box as="li">
+              <Anchor
+                label="Docs"
+                href="https://docs.refine.bio"
+                target="_blank"
+                rel="noopener noreferrer"
+                underline={false}
               />
-            )}
-          </Box>
-          <Box as="li">
-            <Anchor
-              label="Docs"
-              href="https://docs.refine.bio"
-              target="_blank"
-              rel="noopener noreferrer"
-              underline={false}
-            />
-          </Box>
-          <Box as="li">
-            <Anchor label="About" href="/about" underline={false} />
-          </Box>
-          <Box as="li">
-            <Button
-              label="My Dataset"
-              aria-label="View My Dataset"
-              badge={{ max: 10000, value: 0 }}
-              btnWidth={viewport === 'small' ? '80vw' : 'max-content'}
-              light={viewport !== 'small' ? light : false}
-              secondary
-            />
-          </Box>
-        </List>
-      </CustomNav>
+            </Box>
+            <Box as="li">
+              <Anchor label="About" href="/about" underline={false} />
+            </Box>
+            <Box as="li">
+              <Button
+                label="My Dataset"
+                aria-label="View My Dataset"
+                badge={{ max: 10000, value: 0 }}
+                btnWidth={viewport === 'small' ? '80vw' : 'max-content'}
+                light={viewport !== 'small' ? light : false}
+                secondary
+              />
+            </Box>
+          </List>
+        </CustomNav>
+      </Layer>
     </>
   )
 }

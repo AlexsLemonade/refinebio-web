@@ -1,8 +1,8 @@
 import { IconBadge } from 'components/shared/IconBadge'
-import title from 'utils/titles'
+import { getTitle } from 'utils/getTitle'
 
 export default {
-  title: `${title.Badges}IconBadge`,
+  title: getTitle('IconBadge'),
   component: IconBadge,
   argTypes: {
     name: {

@@ -12,9 +12,26 @@ import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import config from 'components/Footer/config'
 import styled, { css } from 'styled-components'
+import { SrOnly } from 'components/shared/SrOnly'
 import { CoinIcon } from '../../images/coin.svg'
 import { TwitterIcon } from '../../images/twitter.svg'
 import { GithubIcon } from '../../images/github.svg'
+
+const TwitterLink = styled(Anchor)`
+  ${({ theme }) => css`
+    &:hover {
+      color: ${theme.global.colors.twitter};
+    }
+  `}
+`
+
+const GithubLink = styled(Anchor)`
+  ${({ theme }) => css`
+    &:hover {
+      color: ${theme.global.colors.black};
+    }
+  `}
+`
 
 const Col = styled(Box)`
   width: fit-content;
@@ -41,6 +58,7 @@ export const Footer = () => {
   return (
     <GrommentFooter
       background="gradient_light"
+      elevation="medium"
       justify="center"
       fill
       gap="0"
@@ -78,21 +96,25 @@ export const Footer = () => {
                   rel="noopener noreferrer"
                 />
                 <Box align="center" direction="row" gap="medium">
-                  <Anchor
-                    aria-label="CCDL Twitter"
+                  <TwitterLink
+                    color="gray-shade-40"
                     href={links.ccdlTwitter}
-                    icon={<TwitterIcon aria-hidden />}
                     margin={{ horizontal: setResponsive('24px', '0') }}
                     target="_blank"
                     rel="noopener noreferrer"
-                  />
-                  <Anchor
-                    aria-label="CCDL Github"
+                  >
+                    <TwitterIcon aria-hidden />
+                    <SrOnly label="Follow us on Twitter" />
+                  </TwitterLink>
+                  <GithubLink
+                    color="gray-shade-40"
                     href={links.ccdlGithub}
-                    icon={<GithubIcon aria-hidden />}
                     target="_blank"
                     rel="noopener noreferrer"
-                  />
+                  >
+                    <GithubIcon aria-hidden />
+                    <SrOnly label="View our refine.bio Github repository" />
+                  </GithubLink>
                 </Box>
               </Box>
               <Box>

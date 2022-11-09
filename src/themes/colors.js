@@ -87,6 +87,10 @@ export const colors = {
   gradient_light: 'linear-gradient(360deg, #DFE9F3 7.13%, #FFFFFF 75%)',
   gradient_dark:
     'linear-gradient(179.93deg, rgba(12, 52, 131, 0.937981) -11.89%, rgba(25, 64, 142, 0.946665) 21.67%, #6b8cce 75.91%, #a2b6df 129.12%, #a2b6df 192.17%)',
+  // Opaque
+  rgba_3: 'rgba(0, 0, 0, 0.3)',
+  // Social Media
+  twitter: '#55acee',
   // default font color
   text: {
     dark: '',

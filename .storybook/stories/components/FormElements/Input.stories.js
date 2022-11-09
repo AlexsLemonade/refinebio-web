@@ -1,9 +1,9 @@
 import { Input } from 'components/shared/Input'
 import { InlineMessage } from 'components/shared/InlineMessage'
-import title from 'utils/titles'
+import { getTitle } from 'utils/getTitle'
 
 export default {
-  title: `${title.FormElements}TextInput`,
+  title: getTitle('Input'),
   component: Input,
   argTypes: {
     value: { control: 'text' }
@@ -19,12 +19,12 @@ const Template = (args) => {
   return (
     <>
       {args.error && (
-        <InlineMessage label="Error Message" labelOnly status="error" />
+        <InlineMessage label="Error Message" labelOnly color="error" />
       )}
       <Input {...args} />
     </>
   )
 }
 
-export const TextInput = Template.bind({})
-TextInput.storyName = 'Text Input'
+export const Default = Template.bind({})
+Default.storyName = 'Input'
