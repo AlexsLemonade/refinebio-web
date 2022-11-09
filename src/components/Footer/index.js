@@ -16,6 +16,22 @@ import { CoinIcon } from '../../images/coin.svg'
 import { TwitterIcon } from '../../images/twitter.svg'
 import { GithubIcon } from '../../images/github.svg'
 
+const TwitterLink = styled(Anchor)`
+  ${({ theme }) => css`
+    &:hover {
+      color: ${theme.global.colors.twitter};
+    }
+  `}
+`
+
+const GithubLink = styled(Anchor)`
+  ${({ theme }) => css`
+    &:hover {
+      color: ${theme.global.colors.black};
+    }
+  `}
+`
+
 const Col = styled(Box)`
   width: fit-content;
   ${({ viewport }) =>
@@ -43,6 +59,7 @@ export const Footer = () => {
   return (
     <GrommentFooter
       background="gradient_light"
+      elevation="medium"
       justify="center"
       fill
       gap="0"
@@ -80,21 +97,25 @@ export const Footer = () => {
                   rel="noopener noreferrer"
                 />
                 <Box align="center" direction="row" gap="medium">
-                  <Anchor
+                  <TwitterLink
                     aria-label="CCDL Twitter"
+                    color="gray-shade-40"
                     href={links.ccdlTwitter}
-                    icon={<TwitterIcon aria-hidden />}
                     margin={{ horizontal: setResponsive('24px', '0') }}
                     target="_blank"
                     rel="noopener noreferrer"
-                  />
-                  <Anchor
+                  >
+                    <TwitterIcon aria-hidden />
+                  </TwitterLink>
+                  <GithubLink
                     aria-label="CCDL Github"
+                    color="gray-shade-40"
                     href={links.ccdlGithub}
-                    icon={<GithubIcon aria-hidden />}
                     target="_blank"
                     rel="noopener noreferrer"
-                  />
+                  >
+                    <GithubIcon aria-hidden />
+                  </GithubLink>
                 </Box>
               </Box>
               <Box>

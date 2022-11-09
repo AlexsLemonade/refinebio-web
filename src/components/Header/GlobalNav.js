@@ -161,7 +161,7 @@ const CustomNav = styled(GrommentNav)`
       background: ${theme.global.colors.white};
       height: 100vh;
       width: 100vw;
-      padding: 64px 0;
+      padding: 40px 0;
       position: fixed;
       z-index: 2;
     `}
