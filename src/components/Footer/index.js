@@ -55,7 +55,7 @@ export const Footer = () => {
       <FixedContainer align="center">
         <Box pad={{ horizontal: setResponsive('0', '0', 'xlarge') }}>
           <Row>
-            <Col>
+            <Col marginSide={setResponsive('0', '32px', '56px')}>
               <Paragraph>
                 {texts.about}{' '}
                 <Anchor

@@ -3,30 +3,30 @@ import { Box } from 'grommet'
 import styled, { css } from 'styled-components'
 
 const Wrapper = styled(Box)`
-  width: fit-content;
-  border: dashed tomato 1px;
-  ${({ viewport }) =>
+  flex: 1 1 0;
+
+  ${({ marginSide, viewport }) =>
     viewport === 'small' &&
     css`
-      margin: 16px 0;
+      margin: 16px ${marginSide};
     `}
-  ${({ viewport }) =>
+  ${({ marginSide, viewport }) =>
     viewport === 'medium' &&
     css`
-      margin: 0 32px;
+      margin: 0 ${marginSide};
     `}
-    ${({ viewport }) =>
+    ${({ marginSide, viewport }) =>
     viewport === 'large' &&
     css`
-      margin: 0 56px;
+      margin: 0 ${marginSide};
     `}
 `
 
-export const Col = ({ children, ...props }) => {
+export const Col = ({ marginSide = '0', children, ...props }) => {
   const { viewport } = useResponsive()
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Wrapper viewport={viewport} {...props}>
+    <Wrapper marginSide={marginSide} viewport={viewport} {...props}>
       {children}
     </Wrapper>
   )
