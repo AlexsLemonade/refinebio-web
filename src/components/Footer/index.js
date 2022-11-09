@@ -9,6 +9,7 @@ import {
 } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
+import { Col } from 'components/shared/Col'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import config from 'components/Footer/config'
 import styled, { css } from 'styled-components'
@@ -31,27 +32,6 @@ const GithubLink = styled(Anchor)`
       color: ${theme.global.colors.black};
     }
   `}
-`
-
-const Col = styled(Box)`
-  width: fit-content;
-  ${({ viewport }) =>
-    viewport === 'small' &&
-    css`
-      margin: 24px 0;
-    `}
-
-  ${({ viewport }) =>
-    viewport === 'medium' &&
-    css`
-      margin: 0 32px;
-    `}
-
-    ${({ viewport }) =>
-    viewport === 'large' &&
-    css`
-      margin: 0 56px;
-    `}
 `
 
 export const Footer = () => {
