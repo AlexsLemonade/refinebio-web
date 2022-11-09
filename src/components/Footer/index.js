@@ -1,4 +1,6 @@
 import { Fragment } from 'react'
+import defaultConfig from 'utils/config'
+import config from 'components/Footer/config'
 import { useResponsive } from 'hooks/useResponsive'
 import {
   Box,
@@ -10,9 +12,9 @@ import {
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import config from 'components/Footer/config'
-import styled, { css } from 'styled-components'
 import { SrOnly } from 'components/shared/SrOnly'
+
+import styled, { css } from 'styled-components'
 import { CoinIcon } from '../../images/coin.svg'
 import { TwitterIcon } from '../../images/twitter.svg'
 import { GithubIcon } from '../../images/github.svg'
@@ -54,7 +56,9 @@ const Col = styled(Box)`
 
 export const Footer = () => {
   const { viewport, setResponsive } = useResponsive()
-  const { links, contributors, texts } = config
+  const { links } = defaultConfig
+  const { contributors, texts } = config
+
   return (
     <GrommentFooter
       background="gradient_light"
