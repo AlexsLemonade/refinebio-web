@@ -2,7 +2,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Box, FormField } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Input } from 'components/shared/Input'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { SearchIcon } from '../../images/search.svg'
 
 const Wrapper = styled(Box)`
@@ -12,18 +12,14 @@ const Wrapper = styled(Box)`
       width: 100%;
     }
   }
-
   button {
     margin-left: 16px;
   }
-
   input {
-    flex: 1 0 0;
     &::-webkit-search-cancel-button {
       display: none;
     }
   }
-
   svg {
     position: absolute;
     right: 8px;
@@ -31,10 +27,6 @@ const Wrapper = styled(Box)`
     transform: translateY(-50%);
     z-index: 1;
   }
-
-  ${({ width }) => css`
-    width: ${width || '100%'};
-  `}
 
   ${({ size }) =>
     size &&
@@ -53,16 +45,13 @@ const Wrapper = styled(Box)`
     }
   `}
 
-  ${({ size, viewport }) =>
+  ${({ responsive, viewport }) =>
     viewport === 'small' &&
-    size === 'xlarge' &&
+    responsive &&
     `
-    flex-direction: column;
-    
     > div:first-child {
       width: 100%;
     }
-
     button {
       margin: 16px 0 0 0;
     }
@@ -73,18 +62,20 @@ export const SearchBox = ({
   btnWidth = '',
   placeHolder = '',
   primary = false,
+  responsive = false,
   secondary = false,
   size = '',
-  width = ''
+  wrapperWidth = ''
 }) => {
   const { viewport } = useResponsive()
   return (
     <Wrapper
-      direction="row"
+      direction={responsive && viewport === 'small' ? 'column' : 'row'}
       justify="between"
       size={size}
-      width={width}
+      width={wrapperWidth || '100%'}
       viewport={viewport}
+      responsive={responsive}
     >
       <FormField a11yTitle="Search" htmlFor="search" role="search">
         <Box>
@@ -94,7 +85,7 @@ export const SearchBox = ({
       </FormField>
       {size && (
         <Button
-          btnWidth={btnWidth}
+          btnWidth={responsive && viewport === 'small' ? '100%' : btnWidth}
           label="Search"
           type="submit"
           primary={primary}

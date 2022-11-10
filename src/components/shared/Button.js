@@ -1,3 +1,4 @@
+import { useResponsive } from 'hooks/useResponsive'
 import { Box, Button as GrommetButton } from 'grommet'
 import styled, { css } from 'styled-components'
 
@@ -5,6 +6,14 @@ import styled, { css } from 'styled-components'
 - Set the prop 'light' to true for the dark background
 - Set the prop 'badge' to true for the badged button
 */
+
+const Wrapper = styled(Box)`
+  ${({ responsive, viewport }) =>
+    responsive &&
+    css`
+      width: ${viewport !== 'small' ? 'max-content' : '100%'};
+    `}
+`
 
 const CustomButton = styled(GrommetButton)`
   ${({ theme, light, primary }) =>
@@ -36,12 +45,17 @@ const CustomButton = styled(GrommetButton)`
     `}
 `
 
-export const Button = ({ btnWidth, ...props }) => {
+export const Button = ({ btnWidth, responsive = false, ...props }) => {
+  const { viewport } = useResponsive()
   return (
-    <Box width={btnWidth || 'max-content'}>
+    <Wrapper
+      responsive={responsive}
+      width={btnWidth || 'max-content'}
+      viewport={viewport}
+    >
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <CustomButton btnWidth={btnWidth} {...props} />
-    </Box>
+    </Wrapper>
   )
 }
 
