@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react'
 import { ResponsiveContext } from 'grommet'
 
 /*
-  small = a phone <= 500
+  small = a phone <= 750
   medium = a tablet <= 1024 
   large = a computer >= 1025
 */

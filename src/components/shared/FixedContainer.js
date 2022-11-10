@@ -11,7 +11,7 @@ export const FixedContainer = ({ children, ...props }) => {
         { horizontal: 'small' },
         { horizontal: 'large' }
       )}
-      width="1250px" // to preserve UI layout for wider screens
+      width="1250px" // fixed value to preserve UI layout for wider screens
       style={{ position: 'relative' }}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
