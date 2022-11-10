@@ -38,7 +38,8 @@ const CustomButton = styled(GrommetButton)`
 
 export const Button = ({ ...props }) => {
   return (
-    <Box width="max-content">
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <Box width="max-content" {...props}>
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <CustomButton {...props} />
     </Box>
