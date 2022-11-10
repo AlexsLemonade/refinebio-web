@@ -10,8 +10,7 @@ export const Hero = ({ header, body, ...props }) => {
       <Box
         width="815px" // fixed value to preserve the UI layout
         margin={{
-          top: setResponsive('xxxlarge', 'xxxxxxlarge'),
-          bottom: setResponsive('xxxlarge', 'xxxxxxxlarge')
+          bottom: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxxxlarge')
         }}
       >
         {header}

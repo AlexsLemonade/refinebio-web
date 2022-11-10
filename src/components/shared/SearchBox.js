@@ -2,12 +2,10 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Box, FormField } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Input } from 'components/shared/Input'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { SearchIcon } from '../../images/search.svg'
 
 const Wrapper = styled(Box)`
-  width: 100%;
-
   > div {
     position: relative;
     &:first-child {
@@ -33,6 +31,10 @@ const Wrapper = styled(Box)`
     transform: translateY(-50%);
     z-index: 1;
   }
+
+  ${({ width }) => css`
+    width: ${width || '100%'};
+  `}
 
   ${({ size }) =>
     size &&
@@ -72,11 +74,18 @@ export const SearchBox = ({
   placeHolder = '',
   primary = false,
   secondary = false,
-  size = ''
+  size = '',
+  width = ''
 }) => {
   const { viewport } = useResponsive()
   return (
-    <Wrapper direction="row" justify="between" size={size} viewport={viewport}>
+    <Wrapper
+      direction="row"
+      justify="between"
+      size={size}
+      width={width}
+      viewport={viewport}
+    >
       <FormField a11yTitle="Search" htmlFor="search" role="search">
         <Box>
           <Input id="search" type="search" placeholder={placeHolder} />

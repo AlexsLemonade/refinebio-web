@@ -8,7 +8,10 @@ export default {
   breakpoints: {
     small: {
       // for a phone
-      value: 750
+      value: 750,
+      edgeSize: {
+        xlarge: '40px'
+      }
     },
     medium: {
       // for a tablet

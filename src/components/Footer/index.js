@@ -55,7 +55,7 @@ export const Footer = () => {
       <FixedContainer align="center">
         <Box pad={{ horizontal: setResponsive('0', '0', 'xlarge') }}>
           <Row>
-            <Col marginSide={setResponsive('0', '32px', '56px')}>
+            <Col margin={{ right: setResponsive('0', 'xxlarge', '128px') }}>
               <Paragraph>
                 {texts.about}{' '}
                 <Anchor
@@ -86,7 +86,7 @@ export const Footer = () => {
                   <TwitterLink
                     color="gray-shade-40"
                     href={links.ccdlTwitter}
-                    margin={{ horizontal: setResponsive('24px', '0') }}
+                    margin={{ horizontal: setResponsive('medium', '0') }}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

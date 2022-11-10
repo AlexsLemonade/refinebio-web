@@ -7,35 +7,21 @@ const Wrapper = styled(Box)`
     flex: ${flexValue};
   `}
 
-  ${({ marginSide, viewport }) =>
+  ${({ viewport }) =>
     viewport === 'small' &&
     css`
       flex: 1 1 auto;
-      margin: 16px ${marginSide};
-    `}
-  ${({ marginSide, viewport }) =>
-    viewport === 'medium' &&
-    css`
-      margin: 0 ${marginSide};
-    `}
-    ${({ marginSide, viewport }) =>
-    viewport === 'large' &&
-    css`
-      margin: 0 ${marginSide};
+      + div {
+        margin-top: 16px;
+      }
     `}
 `
 
-export const Col = ({
-  flexValue = '1 1 0',
-  marginSide = '0',
-  children,
-  ...props
-}) => {
+export const Col = ({ flexValue = '1 1 0', children, ...props }) => {
   const { viewport } = useResponsive()
   return (
     <Wrapper
       flexValue={flexValue}
-      marginSide={marginSide}
       viewport={viewport}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}

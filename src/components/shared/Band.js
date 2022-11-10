@@ -8,7 +8,7 @@ export const Band = ({ ...props }) => {
     <Box
       background="gradient_dark"
       elevation="large"
-      height={setResponsive('480px', '368px')}
+      height={setResponsive('480px', '368px')} // fixed value to preserve the UI layout
       width="100%"
       style={{ position: 'absolute', zIndex: -1 }}
       // eslint-disable-next-line react/jsx-props-no-spreading
