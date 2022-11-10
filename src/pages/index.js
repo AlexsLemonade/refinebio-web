@@ -30,19 +30,19 @@ const HeroContent = () => {
         Search for normalized transcriptome data
       </Heading>
       <SearchBox
-        btnWidth={setResponsive('100%', '120px')}
         size="xlarge"
         placeHolder={setResponsive(
           'Search accessions, pathways, etc.,',
           'Search accessions, pathways, diseases, etc.,'
         )}
         primary
+        responsive
       />
       <Box
         align={setResponsive('center', 'start')}
         direction={setResponsive('column', 'row')}
         justify="between"
-        margin={{ top: setResponsive('32px', 'medium') }}
+        margin={{ top: setResponsive('large', 'medium') }}
         width="100%"
       >
         <Text size="large">Try searching for:</Text>
@@ -62,13 +62,81 @@ const HeroContent = () => {
   )
 }
 
+// Columns for each layer
+// 1st Layer
+const LayerCol1 = ({ heading, body, svgIcon, ...props }) => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Col {...props}>
+    <Row>
+      <Box margin={{ right: 'large' }} aria-hidden>
+        {svgIcon}
+      </Box>
+      <Col>
+        <Heading level={1} margin={{ bottom: 'small' }}>
+          {heading}
+        </Heading>
+        <Paragraph size="large">{body}</Paragraph>
+      </Col>
+    </Row>
+  </Col>
+)
+// 2nd Layer
+const LayerCol2 = ({ heading, body, footer, svgIcon, ...props }) => {
+  const { setResponsive } = useResponsive()
+
+  return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <Col background="white" pad={setResponsive('large', 'medium')} {...props}>
+      <Box height="xxxlarge" margin={{ bottom: 'medium' }} aria-hidden>
+        {svgIcon}
+      </Box>
+      <Heading level={4} margin={{ bottom: 'small' }}>
+        {heading}
+      </Heading>
+      <Paragraph>{body}</Paragraph>
+      <Box align="center" margin={{ top: setResponsive('large', 'medium') }}>
+        {footer}
+      </Box>
+    </Col>
+  )
+}
+// 3rd Layer
+const LayerCol3 = ({ heading, body, footer, img, ...props }) => {
+  const { setResponsive } = useResponsive()
+
+  return (
+    <Col
+      background={{
+        image: `url('${img}')`,
+        position: 'bottom right',
+        repeat: 'no-repeat',
+        size: '100%'
+      }}
+      elevation="medium"
+      pad={{
+        horizontal: setResponsive('large', 'xxlarge', 'xxxlarge'),
+        top: setResponsive('large', 'xlarge'),
+        bottom: setResponsive('large', 'xlarge', 'xxxxlarge')
+      }}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    >
+      <Heading level={1} margin={{ bottom: setResponsive('medium', 'small') }}>
+        {heading}
+      </Heading>
+      <Paragraph>{body}</Paragraph>
+      <Box margin={{ top: setResponsive('large', 'medium') }}>{footer}</Box>
+    </Col>
+  )
+}
+
 const Home = () => {
   const { links } = config
   const { setResponsive } = useResponsive()
 
   return (
     <>
-      {/* 1st Row */}
+      {/* 1st Layer */}
       <Box
         pad={{
           top: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxxxlarge'),
@@ -78,199 +146,140 @@ const Home = () => {
         <FixedContainer>
           <Hero body={<HeroContent />} />
           <Row>
-            <Col>
-              <Row>
-                <Box margin={{ right: 'large' }}>
-                  <SearchIcon />
-                </Box>
-                <Col flexValue="1">
-                  <Heading level={1} margin={{ bottom: 'small' }}>
-                    Find the data you need
-                  </Heading>
-                  <Paragraph size="large">
-                    Search the multi-organism collection of genome wide gene
-                    expression data obtained from publicly available sources
-                    like GEO, ArrayExpress, and SRA. The data has been processed
-                    uniformly and normalized using a set of{' '}
-                    <Anchor
-                      href={links.standard_pipeline}
-                      label="standardized pipelines"
-                      rel="noopener noreferrer"
-                    />{' '}
-                    curated by the{' '}
-                    <Anchor
-                      href={links.ccdl}
-                      label="Childhood Cancer Data Lab (CCDL)"
-                      rel="noopener noreferrer"
-                    />
-                  </Paragraph>
-                </Col>
-              </Row>
-            </Col>
-            <Col>
-              <Row>
-                <Box margin={{ right: 'large' }}>
-                  <FolderIcon />
-                </Box>
-                <Col flexValue="1">
-                  <Heading level={1} margin={{ bottom: 'small' }}>
-                    Create custom datasets
-                  </Heading>
-                  <Paragraph size="large">
-                    Build and download custom datasets tailored to your needs
-                    including gene expression matrices and sample metadata.
-                  </Paragraph>
-                </Col>
-              </Row>
-            </Col>
+            <LayerCol1
+              heading=" Find the data you need"
+              body={
+                <>
+                  Search the multi-organism collection of genome wide gene
+                  expression data obtained from publicly available sources like
+                  GEO, ArrayExpress, and SRA. The data has been processed
+                  uniformly and normalized using a set of{' '}
+                  <Anchor
+                    href={links.standard_pipeline}
+                    label="standardized pipelines"
+                    rel="noopener noreferrer"
+                  />{' '}
+                  curated by the{' '}
+                  <Anchor
+                    href={links.ccdl}
+                    label="Childhood Cancer Data Lab (CCDL)"
+                    rel="noopener noreferrer"
+                  />
+                </>
+              }
+              svgIcon={<SearchIcon />}
+              margin={{ right: 'xxxlarge' }}
+            />
+            <LayerCol1
+              heading="Create custom datasets"
+              body="Build and download custom datasets tailored to your needs
+              including gene expression matrices and sample metadata."
+              svgIcon={<FolderIcon />}
+              margin={{
+                top: setResponsive('500px', '0'),
+                left: setResponsive('', 'medium', 'xxxlarge')
+              }}
+              pad={{
+                top: setResponsive('large', '0')
+              }}
+            />
           </Row>
         </FixedContainer>
       </Box>
-      {/* 2st Row */}
+      {/* 2st Layer */}
       <Box
         background="gradient_dark"
         pad={{ vertical: setResponsive('large', 'xxlarge', 'xxxxxxlarge') }}
       >
-        <FixedContainer>
-          <Row>
-            <Paragraph
-              color="white"
-              size="xlarge"
-              textAlign="center"
-              margin={{
-                bottom: setResponsive('large', 'xlarge', 'xxxxxxlarge')
-              }}
-            >
+        <FixedContainer
+          pad={{ horizontal: setResponsive('large', 'medium', 'xxxxlarge') }}
+        >
+          <Row
+            margin={{
+              bottom: setResponsive('large', 'xlarge', 'xxlarge')
+            }}
+          >
+            <Paragraph color="white" size="xlarge" textAlign="center">
               You can use refine.bio datasets for preliminary assessment of
               biological signals and to accelerate validation of your research
               findings.
             </Paragraph>
           </Row>
           <Row>
-            <Col background="white" pad={setResponsive('medium', 'small')}>
-              <Box height="56px" margin={{ bottom: 'medium' }}>
-                <WaySignsIcon />
-              </Box>
-              <Heading level={2} margin={{ bottom: 'small' }} weight="700">
-                Get Started using refine.bio data
-              </Heading>
-              <Paragraph>
-                Explore the different ways you can use refine.bio data to help
-                with your scientific questions.
-              </Paragraph>
-              <Box align="center">
-                <Button label="Get Started" secondary />
-              </Box>
-            </Col>
-            <Col
-              background="white"
-              margin={{ left: setResponsive('0', '40px') }}
-              pad={setResponsive('medium', 'small')}
-            >
-              <Box height="56px" margin={{ bottom: 'medium' }}>
-                <HeadMapIcon />
-              </Box>
-              <Heading level={2} margin={{ bottom: 'small' }} weight="700">
-                Get Started using refine.bio data
-              </Heading>
-              <Paragraph>
-                Learn how you can do differential expression analysis with
-                refine.bio datasets.
-              </Paragraph>
-              <Box align="center">
-                <Button label="RNA-seq Example" secondary />
-                <Button label="Microarray Example" secondary />
-              </Box>
-            </Col>
-            <Col
-              background="white"
-              margin={{ left: setResponsive('0', '40px') }}
-              pad={setResponsive('medium', 'small')}
-            >
-              <Box height="56px" margin={{ bottom: 'medium' }}>
-                <PathwayIcon />
-              </Box>
-              <Heading level={2} margin={{ bottom: 'small' }} weight="700">
-                Get Started using refine.bio data
-              </Heading>
-              <Paragraph>
-                Learn how you can use refine.bio data to identify pathways that
-                are active in your biological condition of interest.
-              </Paragraph>
-              <Box align="center">
-                <Button label="RNA-seq Example" secondary />
-                <Button label="Microarray Example" secondary />
-              </Box>
-            </Col>
+            <LayerCol2
+              heading="Get Started using refine.bio data"
+              body="Explore the different ways you can use refine.bio data to help
+                with your scientific questions."
+              footer={<Button label="Get Started" secondary responsive />}
+              svgIcon={<WaySignsIcon />}
+            />
+            <LayerCol2
+              heading="Differential Expression Analysis"
+              body="Learn how you can do differential expression analysis with refine.bio datasets."
+              footer={
+                <>
+                  <Button label="RNA-seq Example" secondary responsive />
+                  <Button
+                    label="Microarray Example"
+                    margin={{ top: setResponsive('small', 'medium') }}
+                    secondary
+                    responsive
+                  />
+                </>
+              }
+              svgIcon={<HeadMapIcon />}
+              margin={{ left: setResponsive('0', 'medium', 'xlarge') }}
+            />
+            <LayerCol2
+              heading="Pathway Analysis"
+              body="Learn how you can use refine.bio data to identify pathways that are active in your biological condition of interest."
+              footer={
+                <>
+                  <Button label="RNA-seq Example" secondary responsive />
+                  <Button
+                    label="Microarray Example"
+                    margin={{ top: setResponsive('small', 'medium') }}
+                    secondary
+                    responsive
+                  />
+                </>
+              }
+              svgIcon={<PathwayIcon />}
+              margin={{ left: setResponsive('0', 'medium', 'xlarge') }}
+            />
           </Row>
         </FixedContainer>
       </Box>
-      {/* 3rd Row */}
+      {/* 3rd Layer */}
       <Box pad={{ vertical: setResponsive('large', 'xxlarge', 'xxxxxxlarge') }}>
-        <FixedContainer>
+        <FixedContainer
+          pad={{ horizontal: setResponsive('large', 'medium', 'xxxxxlarge') }}
+        >
           <Row>
-            <Col
-              background={{
-                image: " url('network.svg')",
-                position: 'bottom right',
-                repeat: 'no-repeat'
-              }}
-              elevation="medium"
-              height="320px"
-              pad={{
-                horizontal: setResponsive('large', 'xxlarge', 'xxxlarge'),
-                vertical: setResponsive('large', 'xlarge')
-              }}
-            >
-              <Heading
-                level={1}
-                margin={{ bottom: setResponsive('medium', 'small') }}
-              >
-                refine.bio Compendia
-              </Heading>
-              <Paragraph>
-                refine.bio compendia are collections of samples that have been
-                processed and packaged for broad and felxible use.
-              </Paragraph>
-              <Box>
-                <Button label="Learn More" secondary />
-              </Box>
-            </Col>
-            <Col
-              background={{
-                image: " url('undraw_files.svg')",
-                position: 'bottom right',
-                repeat: 'no-repeat'
-              }}
-              elevation="medium"
-              height="320px"
-              pad={{
-                horizontal: setResponsive('large', 'xxlarge', 'xxxlarge'),
-                vertical: setResponsive('large', 'xlarge')
-              }}
-              margin={{ left: setResponsive('0', 'xlarge') }}
-            >
-              <Heading
-                level={1}
-                margin={{ bottom: setResponsive('medium', 'small') }}
-              >
-                Explore the docs
-              </Heading>
-              <Paragraph>
-                refine.bio compendia are collections of samples that have been
-                processed and packaged for broad and felxible use.
-              </Paragraph>
-              <Box>
-                <Button label="Take me to the docs" secondary />
-              </Box>
-            </Col>
+            <LayerCol3
+              heading="refine.bio Compendia"
+              body="refine.bio compendia are collections of samples that have been
+                processed and packaged for broad and felxible use."
+              footer={<Button label="Learn More" secondary responsive />}
+              img="network.svg"
+            />
+            <LayerCol3
+              heading="Explore the docs"
+              body="Learn about how we source and process data and other downstream 
+              analyses you can do with refine.bio data."
+              footer={
+                <Button label="Take me to the docs" secondary responsive />
+              }
+              img="undraw_files.svg"
+              margin={{ left: setResponsive('0', 'large', 'xxxlarge') }}
+            />
           </Row>
         </FixedContainer>
       </Box>
-      {/* 4th Row */}
+      {/* 4th Layer */}
       <Box
         background="gradient_dark"
-        pad={{ vertical: setResponsive('large', 'xxlarge', '148px') }}
+        pad={{ vertical: setResponsive('xlarge', 'xxxlarge', 'xxxxxxxlarge') }}
       >
         <FixedContainer align="center">
           <Heading
@@ -283,6 +292,7 @@ const Home = () => {
           <Paragraph
             color="white"
             margin={{ bottom: setResponsive('large', 'medium') }}
+            textAlign="center"
             size="large"
           >
             Be the first one to know about new features, compendia releases and
@@ -290,9 +300,10 @@ const Home = () => {
           </Paragraph>
           <SearchBox
             placeHolder="jdoe@example.com"
+            responsive
             secondary
             size="large"
-            width="560px" // fixed value to preserve the UI layout for wider screens
+            wrapperWidth={setResponsive('', '60%', '45%')}
           />
         </FixedContainer>
       </Box>
