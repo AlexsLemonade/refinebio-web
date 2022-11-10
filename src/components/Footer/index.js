@@ -53,9 +53,10 @@ export const Footer = () => {
       role="contentinfo"
     >
       <FixedContainer align="center">
-        <Box pad={{ horizontal: setResponsive('0', '0', 'xlarge') }}>
+        <Box pad={{ horizontal: setResponsive('0', '0', 'xxxxxlarge') }}>
           <Row>
-            <Col margin={{ right: setResponsive('0', 'xxlarge', '128px') }}>
+            {/* fixed svalue to preserve UI layout for wider screens */}
+            <Col margin={{ right: setResponsive('0', 'xxlarge', '148px') }}>
               <Paragraph>
                 {texts.about}{' '}
                 <Anchor
@@ -155,17 +156,15 @@ export const Footer = () => {
           </Row>
         </Box>
 
-        <Box
+        <Row
           align={setResponsive('start', 'center')}
-          direction={setResponsive('column', 'row')}
-          justify="between"
           fill
-          margin={{ top: setResponsive('0', 'large', 'xxxxlarge') }}
+          margin={{ top: setResponsive('large', 'large', 'xxxxlarge') }}
           pad={{
-            horizontal: setResponsive('large', 'xxxxlarge', '88px')
+            horizontal: setResponsive('0', 'xxxxlarge', 'xxxxxlarge')
           }}
         >
-          <Box direction={setResponsive('column', 'row')} gap="medium">
+          <Row gap="medium">
             <Anchor
               color="gray-shade-40"
               label="BDS 3-Clause License"
@@ -174,13 +173,13 @@ export const Footer = () => {
             <Anchor color="gray-shade-40" label="Privacy" href="#url" />
             <Anchor color="gray-shade-40" label="Terms of Use" href="#url" />
             <Anchor color="gray-shade-40" label="Contact" href={links.mailTo} />
-          </Box>
+          </Row>
           <Box margin={{ top: setResponsive('medium', '0') }}>
             <Text color="gray-shade-40" size="xsmall">
               Version 24354-23111
             </Text>
           </Box>
-        </Box>
+        </Row>
       </FixedContainer>
     </GrommentFooter>
   )

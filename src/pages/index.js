@@ -95,11 +95,13 @@ const Home = () => {
                     <Anchor
                       href={links.standard_pipeline}
                       label="standardized pipelines"
+                      rel="noopener noreferrer"
                     />{' '}
                     curated by the{' '}
                     <Anchor
                       href={links.ccdl}
                       label="Childhood Cancer Data Lab (CCDL)"
+                      rel="noopener noreferrer"
                     />
                   </Paragraph>
                 </Col>
@@ -290,7 +292,7 @@ const Home = () => {
             placeHolder="jdoe@example.com"
             secondary
             size="large"
-            width="560px" // fixed value to preserve the UI layout
+            width="560px" // fixed value to preserve the UI layout for wider screens
           />
         </FixedContainer>
       </Box>
