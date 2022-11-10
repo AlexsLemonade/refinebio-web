@@ -38,6 +38,7 @@ const GithubLink = styled(Anchor)`
 export const Footer = () => {
   const { setResponsive } = useResponsive()
   const { links, contributors, texts } = config
+
   return (
     <GrommentFooter
       background="gradient_light"
@@ -51,7 +52,7 @@ export const Footer = () => {
       <FixedContainer align="center">
         <Box pad={{ horizontal: setResponsive('0', '0', 'xlarge') }}>
           <Row>
-            <Col>
+            <Col margin={{ right: setResponsive('0', 'xxlarge', '128px') }}>
               <Paragraph>
                 {texts.about}{' '}
                 <Anchor
@@ -82,7 +83,7 @@ export const Footer = () => {
                   <TwitterLink
                     color="gray-shade-40"
                     href={links.ccdlTwitter}
-                    margin={{ horizontal: setResponsive('24px', '0') }}
+                    margin={{ horizontal: setResponsive('medium', '0') }}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
