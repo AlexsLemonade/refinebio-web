@@ -90,7 +90,7 @@ const LayerCol2 = ({ heading, body, footer, svgIcon, ...props }) => {
       <Box height="xxxlarge" margin={{ bottom: 'medium' }} aria-hidden>
         {svgIcon}
       </Box>
-      <Heading level={4} margin={{ bottom: 'small' }}>
+      <Heading level={4} margin={{ bottom: 'small' }} weight="500">
         {heading}
       </Heading>
       <Paragraph>{body}</Paragraph>
