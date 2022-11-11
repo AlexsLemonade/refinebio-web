@@ -75,6 +75,7 @@ const List = styled(Box)`
       margin-left: 16px;
 
       a {
+        border-bottom: 1px solid transparent;
         color: ${light ? theme.global.colors.white : theme.global.colors.black};
         &:hover,
         &:focus {
@@ -87,6 +88,7 @@ const List = styled(Box)`
       }
 
       button[aria-label='Open Menu'] {
+        border-bottom: 1px solid transparent;
         border-radius: 0;
         color: ${light ? theme.global.colors.white : theme.global.colors.black};
         padding: 0;

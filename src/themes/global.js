@@ -10,6 +10,7 @@ export default {
       // for a phone
       value: 750,
       edgeSize: {
+        small: '16px',
         xlarge: '40px'
       }
     },

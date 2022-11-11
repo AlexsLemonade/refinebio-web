@@ -23,7 +23,7 @@ const HeroContent = () => {
       <Heading
         level={1}
         margin={{ bottom: setResponsive('large', 'medium') }}
-        size="large"
+        size={setResponsive('h1_small', 'h1_large')}
         textAlign={setResponsive('center', 'start')}
       >
         Search for normalized transcriptome data
@@ -67,22 +67,30 @@ const HeroContent = () => {
 
 // Columns for each layer
 // 1st Layer
-const LayerCol1 = ({ heading, body, svgIcon, ...props }) => (
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  <Col {...props}>
-    <Row>
-      <Box margin={{ bottom: 'large', right: 'large' }} aria-hidden>
-        {svgIcon}
-      </Box>
-      <Col>
-        <Heading level={1} margin={{ bottom: 'small' }}>
-          {heading}
-        </Heading>
-        <Paragraph size="large">{body}</Paragraph>
-      </Col>
-    </Row>
-  </Col>
-)
+const LayerCol1 = ({ heading, body, svgIcon, ...props }) => {
+  const { setResponsive } = useResponsive()
+
+  return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <Col {...props}>
+      <Row>
+        <Box margin={{ bottom: 'small', right: 'large' }} aria-hidden>
+          {svgIcon}
+        </Box>
+        <Col>
+          <Heading
+            level={2}
+            margin={{ bottom: setResponsive('medium', 'small') }}
+            size={setResponsive('h2_small', 'h2_large')}
+          >
+            {heading}
+          </Heading>
+          <Paragraph size="large">{body}</Paragraph>
+        </Col>
+      </Row>
+    </Col>
+  )
+}
 // 2nd Layer
 const LayerCol2 = ({ heading, body, footer, svgIcon, ...props }) => {
   const { setResponsive } = useResponsive()
@@ -93,7 +101,12 @@ const LayerCol2 = ({ heading, body, footer, svgIcon, ...props }) => {
       <Box height="xxxlarge" margin={{ bottom: 'medium' }} aria-hidden>
         {svgIcon}
       </Box>
-      <Heading level={4} margin={{ bottom: 'small' }} weight="500">
+      <Heading
+        level={4}
+        margin={{ bottom: 'small' }}
+        size={setResponsive('h4_small', 'medium')}
+        weight="500"
+      >
         {heading}
       </Heading>
       <Paragraph>{body}</Paragraph>
