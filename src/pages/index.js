@@ -14,7 +14,7 @@ import { PathwayIcon } from '../images/graphic-pathway.svg'
 import { SearchIcon } from '../images/graphic-search.svg'
 import { WaySignsIcon } from '../images/graphic-way-signs.svg'
 
-const HeroContent = () => {
+const HeroBody = () => {
   const { setResponsive } = useResponsive()
   const queries = ['Notch', 'medulloblastoma', 'GSE24528']
 
@@ -155,12 +155,12 @@ const Home = () => {
       {/* 1st Layer */}
       <Box
         pad={{
-          top: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxxxlarge'),
+          top: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxxlarge'),
           bottom: setResponsive('xlarge', 'xlarge', 'xxxxxxxlarge')
         }}
       >
         <FixedContainer>
-          <Hero body={<HeroContent />} />
+          <Hero body={<HeroBody />} />
           <Row>
             <LayerCol1
               heading=" Find the data you need"

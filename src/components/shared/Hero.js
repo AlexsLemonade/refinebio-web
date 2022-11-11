@@ -6,14 +6,14 @@ export const Hero = ({ header, body, ...props }) => {
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Box direction="row" justify="center" {...props}>
+    <Box align={setResponsive('start', 'center')} {...props}>
+      {header}
       <Box
         width="815px" // fixed value to preserve the UI layout
         margin={{
           bottom: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxxxlarge')
         }}
       >
-        {header}
         <Box
           align="center"
           background="white"
