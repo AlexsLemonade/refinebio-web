@@ -62,7 +62,6 @@ export const Footer = () => {
                 <Anchor
                   label="Childhood Cancer Data Lab (CCDL)"
                   href={links.ccdl}
-                  target="_blank"
                   rel="noopener noreferrer"
                 />
               </Paragraph>
@@ -80,7 +79,6 @@ export const Footer = () => {
                   label="Fund the CCDL"
                   icon={<CoinIcon aria-hidden />}
                   primary
-                  target="_blank"
                   rel="noopener noreferrer"
                 />
                 <Box align="center" direction="row" gap="medium">
@@ -88,7 +86,6 @@ export const Footer = () => {
                     color="gray-shade-40"
                     href={links.ccdlTwitter}
                     margin={{ horizontal: setResponsive('medium', '0') }}
-                    target="_blank"
                     rel="noopener noreferrer"
                   >
                     <TwitterIcon aria-hidden />
@@ -97,7 +94,6 @@ export const Footer = () => {
                   <GithubLink
                     color="gray-shade-40"
                     href={links.ccdlGithub}
-                    target="_blank"
                     rel="noopener noreferrer"
                   >
                     <GithubIcon aria-hidden />
@@ -111,7 +107,6 @@ export const Footer = () => {
                   <Anchor
                     label="Childhood Cancer Data Lab"
                     href={links.ccdl}
-                    target="_blank"
                     rel="noopener noreferrer"
                   />
                 </Text>
@@ -120,7 +115,6 @@ export const Footer = () => {
                   <Anchor
                     label="Alex’s Lemonade Stand Foundation"
                     href={links.alsf}
-                    target="_blank"
                     rel="noopener noreferrer"
                   />
                 </Text>

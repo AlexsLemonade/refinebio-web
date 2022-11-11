@@ -1,6 +1,5 @@
 import config from 'utils/config'
 import { useResponsive } from 'hooks/useResponsive'
-import Link from 'next/link'
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
@@ -46,15 +45,19 @@ const HeroContent = () => {
         width="100%"
       >
         <Text size="large">Try searching for:</Text>
+
         {queries.map((query) => (
           <Text
             key={query}
             size="large"
             margin={{ top: setResponsive('small') }}
           >
-            <Link href={{ pathname: '/search', query: { query } }} size="large">
-              {query}
-            </Link>
+            <Anchor
+              defaultUnderline
+              label={query}
+              href={{ pathname: '/search', query: { query } }}
+              size="large"
+            />
           </Text>
         ))}
       </Box>
@@ -68,7 +71,7 @@ const LayerCol1 = ({ heading, body, svgIcon, ...props }) => (
   // eslint-disable-next-line react/jsx-props-no-spreading
   <Col {...props}>
     <Row>
-      <Box margin={{ right: 'large' }} aria-hidden>
+      <Box margin={{ bottom: 'large', right: 'large' }} aria-hidden>
         {svgIcon}
       </Box>
       <Col>
