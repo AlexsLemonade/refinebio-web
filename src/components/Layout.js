@@ -10,10 +10,11 @@ export const Layout = ({ children }) => {
   const router = useRouter()
   const { band, setBand } = useBand()
   const [path, setPath] = useState('')
+  const pathWithBand = ['/', '/about']
 
   useEffect(() => {
     setPath(router.asPath)
-    setBand(path === '/' || path === '/about')
+    setBand(pathWithBand.includes(path))
   }, [router, path])
 
   return (
