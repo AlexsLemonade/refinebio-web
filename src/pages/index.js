@@ -22,7 +22,7 @@ const HeroBody = () => {
     <>
       <Heading
         level={1}
-        margin={{ bottom: setResponsive('large', 'medium') }}
+        margin={{ bottom: setResponsive('medium', 'medium', 'xlarge') }}
         size={setResponsive('h1_small', 'h1_large')}
         textAlign="center"
       >
@@ -41,10 +41,10 @@ const HeroBody = () => {
         align={setResponsive('center', 'start')}
         direction={setResponsive('column', 'row')}
         justify="between"
-        margin={{ top: setResponsive('large', 'medium') }}
+        margin={{ top: setResponsive('large', 'large', 'xlarge') }}
         width="100%"
       >
-        <Text size="large">Try searching for:</Text>
+        <Text size="xlarge">Try searching for:</Text>
 
         {queries.map((query) => (
           <Text
@@ -56,7 +56,7 @@ const HeroBody = () => {
               defaultUnderline
               label={query}
               href={{ pathname: '/search', query: { query } }}
-              size="large"
+              size="xlarge"
             />
           </Text>
         ))}
@@ -72,7 +72,7 @@ const LayerCol1 = ({ heading, body, svgIcon, ...props }) => {
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Col {...props}>
+    <Col flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')} {...props}>
       <Row>
         <Box margin={{ bottom: 'small', right: 'large' }} aria-hidden>
           {svgIcon}
@@ -80,12 +80,14 @@ const LayerCol1 = ({ heading, body, svgIcon, ...props }) => {
         <Col>
           <Heading
             level={2}
-            margin={{ bottom: setResponsive('medium', 'small') }}
+            margin={{ bottom: 'small' }}
             size={setResponsive('h2_small', 'h2_large')}
           >
             {heading}
           </Heading>
-          <Paragraph size="xlarge">{body}</Paragraph>
+          <Paragraph size={setResponsive('large', 'large', 'xlarge')}>
+            {body}
+          </Paragraph>
         </Col>
       </Row>
     </Col>
@@ -104,7 +106,7 @@ const LayerCol2 = ({ heading, body, footer, svgIcon, ...props }) => {
       <Heading
         level={4}
         margin={{ bottom: 'small' }}
-        size={setResponsive('h4_small', 'medium')}
+        size="h4_small"
         weight="500"
       >
         {heading}
@@ -148,7 +150,7 @@ const LayerCol3 = ({ heading, body, footer, img, ...props }) => {
 
 const Home = () => {
   const { links } = config
-  const { setResponsive } = useResponsive()
+  const { viewport, setResponsive } = useResponsive()
 
   return (
     <>
@@ -161,7 +163,7 @@ const Home = () => {
       >
         <FixedContainer>
           <Hero body={<HeroBody />} />
-          <Row>
+          <Row direction={setResponsive('column', 'column', 'row')}>
             <LayerCol1
               heading=" Find the data you need"
               body={
@@ -174,29 +176,36 @@ const Home = () => {
                     href={links.standard_pipeline}
                     label="standardized pipelines"
                     rel="noopener noreferrer"
+                    target="_blank"
                   />{' '}
                   curated by the{' '}
                   <Anchor
                     href={links.ccdl}
                     label="Childhood Cancer Data Lab (CCDL)"
                     rel="noopener noreferrer"
+                    target="_blank"
                   />
                 </>
               }
               svgIcon={<SearchIcon />}
-              margin={{ right: 'xxxlarge' }}
+              margin={{ right: 'xxxxxlarge' }}
             />
+            {viewport === 'large' && (
+              <Box
+                border={{ color: 'gray-shade-5', side: 'left', size: 'large' }}
+              />
+            )}
             <LayerCol1
               heading="Create custom datasets"
               body="Build and download custom datasets tailored to your needs
               including gene expression matrices and sample metadata."
               svgIcon={<FolderIcon />}
               margin={{
-                top: setResponsive('500px', '0'),
-                left: setResponsive('', 'medium', 'xxxlarge')
+                top: setResponsive('xxxlarge', '0'),
+                left: setResponsive('0', '0', 'xxxxxlarge')
               }}
               pad={{
-                top: setResponsive('large', '0')
+                top: setResponsive('0', 'xlarge', '0')
               }}
             />
           </Row>
@@ -205,17 +214,21 @@ const Home = () => {
       {/* 2st Layer */}
       <Box
         background="gradient_dark"
-        pad={{ vertical: setResponsive('large', 'xxlarge', 'xxxxxxlarge') }}
+        pad={{ vertical: setResponsive('medium', 'xxlarge', 'xxxxxxlarge') }}
       >
         <FixedContainer
-          pad={{ horizontal: setResponsive('large', 'medium', 'xxxxlarge') }}
+          pad={{ horizontal: setResponsive('medium', 'medium', 'xxxxlarge') }}
         >
           <Row
             margin={{
-              bottom: setResponsive('large', 'xlarge', 'xxlarge')
+              bottom: setResponsive('medium', 'xlarge', 'xxxxxxlarge')
             }}
           >
-            <Paragraph color="white" size="xxxlarge" textAlign="center">
+            <Paragraph
+              color="white"
+              size={setResponsive('xlarge', 'xxlarge')}
+              textAlign="center"
+            >
               You can use refine.bio datasets for preliminary assessment of
               biological signals and to accelerate validation of your research
               findings.
@@ -228,6 +241,7 @@ const Home = () => {
                 with your scientific questions."
               footer={<Button label="Get Started" secondary responsive />}
               svgIcon={<WaySignsIcon />}
+              margin={{ bottom: setResponsive('large', 'medium') }}
             />
             <LayerCol2
               heading="Differential Expression Analysis"
@@ -244,7 +258,10 @@ const Home = () => {
                 </>
               }
               svgIcon={<HeadMapIcon />}
-              margin={{ left: setResponsive('0', 'medium', 'xlarge') }}
+              margin={{
+                left: setResponsive('0', 'medium', 'xlarge'),
+                bottom: setResponsive('large', '0')
+              }}
             />
             <LayerCol2
               heading="Pathway Analysis"
@@ -261,13 +278,17 @@ const Home = () => {
                 </>
               }
               svgIcon={<PathwayIcon />}
-              margin={{ left: setResponsive('0', 'medium', 'xlarge') }}
+              margin={{
+                left: setResponsive('0', 'medium', 'xlarge')
+              }}
             />
           </Row>
         </FixedContainer>
       </Box>
       {/* 3rd Layer */}
-      <Box pad={{ vertical: setResponsive('large', 'xxlarge', 'xxxxxxlarge') }}>
+      <Box
+        pad={{ vertical: setResponsive('xlarge', 'xxlarge', 'xxxxxxlarge') }}
+      >
         <FixedContainer
           pad={{ horizontal: setResponsive('large', 'medium', 'xxxxxlarge') }}
         >
@@ -278,6 +299,7 @@ const Home = () => {
                 processed and packaged for broad and felxible use."
               footer={<Button label="Learn More" secondary responsive />}
               img="network.svg"
+              margin={{ bottom: setResponsive('large', '0') }}
             />
             <LayerCol3
               heading="Explore the docs"
@@ -295,19 +317,15 @@ const Home = () => {
       {/* 4th Layer */}
       <Box
         background="gradient_dark"
-        pad={{ vertical: setResponsive('xlarge', 'xxxlarge', 'xxxxxxxlarge') }}
+        pad={{ vertical: setResponsive('medium', 'xxxlarge', '140px') }}
       >
         <FixedContainer align="center">
-          <Heading
-            level={1}
-            color="white"
-            margin={{ bottom: setResponsive('large', 'medium') }}
-          >
+          <Heading level={1} color="white" margin={{ bottom: 'medium' }}>
             Sign Up for Updates
           </Heading>
           <Paragraph
             color="white"
-            margin={{ bottom: setResponsive('large', 'medium') }}
+            margin={{ bottom: 'small' }}
             textAlign="center"
             size="large"
           >

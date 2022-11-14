@@ -49,28 +49,34 @@ export const Footer = () => {
       justify="center"
       fill
       gap="0"
-      pad={{ vertical: setResponsive('large', 'xlarge') }}
+      pad={{ vertical: 'xlarge' }}
       role="contentinfo"
     >
       <FixedContainer align="center">
         <Box pad={{ horizontal: setResponsive('0', '0', 'xxxxxlarge') }}>
           <Row>
             {/* fixed svalue to preserve UI layout for wider screens */}
-            <Col margin={{ right: setResponsive('0', 'xxlarge', '148px') }}>
+            <Col
+              margin={{
+                bottom: setResponsive('medium', 'small'),
+                right: setResponsive('0', 'xxlarge', '148px')
+              }}
+            >
               <Paragraph>
                 {texts.about}{' '}
                 <Anchor
                   label="Childhood Cancer Data Lab (CCDL)"
                   href={links.ccdl}
                   rel="noopener noreferrer"
+                  target="_blank"
                 />
               </Paragraph>
               <Box
                 direction="row"
                 justify="between"
                 margin={{
-                  top: setResponsive('large', 'xxlarge'),
-                  bottom: setResponsive('medium', 'small')
+                  top: setResponsive('medium', 'xxlarge'),
+                  bottom: 'small'
                 }}
               >
                 <Button
@@ -80,13 +86,15 @@ export const Footer = () => {
                   icon={<CoinIcon aria-hidden />}
                   primary
                   rel="noopener noreferrer"
+                  target="_blank"
                 />
                 <Box align="center" direction="row" gap="medium">
                   <TwitterLink
                     color="gray-shade-40"
                     href={links.ccdlTwitter}
-                    margin={{ horizontal: setResponsive('medium', '0') }}
+                    margin={{ horizontal: setResponsive('xsmall', '0') }}
                     rel="noopener noreferrer"
+                    target="_blank"
                   >
                     <TwitterIcon aria-hidden />
                     <SrOnly label="Follow us on Twitter" />
@@ -95,6 +103,7 @@ export const Footer = () => {
                     color="gray-shade-40"
                     href={links.ccdlGithub}
                     rel="noopener noreferrer"
+                    target="_blank"
                   >
                     <GithubIcon aria-hidden />
                     <SrOnly label="View our refine.bio Github repository" />
@@ -108,6 +117,7 @@ export const Footer = () => {
                     label="Childhood Cancer Data Lab"
                     href={links.ccdl}
                     rel="noopener noreferrer"
+                    target="_blank"
                   />
                 </Text>
                 <Text>
@@ -116,6 +126,7 @@ export const Footer = () => {
                     label="Alex’s Lemonade Stand Foundation"
                     href={links.alsf}
                     rel="noopener noreferrer"
+                    target="_blank"
                   />
                 </Text>
               </Box>
@@ -153,7 +164,7 @@ export const Footer = () => {
         <Row
           align={setResponsive('start', 'center')}
           fill
-          margin={{ top: setResponsive('large', 'large', 'xxxxlarge') }}
+          margin={{ top: setResponsive('medium', 'large', 'xxxxlarge') }}
           pad={{
             horizontal: setResponsive('0', 'xxxxlarge', 'xxxxxlarge')
           }}
@@ -168,7 +179,7 @@ export const Footer = () => {
             <Anchor color="gray-shade-40" label="Terms of Use" href="#url" />
             <Anchor color="gray-shade-40" label="Contact" href={links.mailTo} />
           </Row>
-          <Box margin={{ top: setResponsive('medium', '0') }}>
+          <Box margin={{ top: setResponsive('small', '0') }}>
             <Text color="gray-shade-40" size="xsmall">
               Version 24354-23111
             </Text>

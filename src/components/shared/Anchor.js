@@ -29,7 +29,6 @@ export const Anchor = ({
       defaultUnderline={defaultUnderline}
       href={href}
       icon={icon}
-      target="_blank"
       underline={underline}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}

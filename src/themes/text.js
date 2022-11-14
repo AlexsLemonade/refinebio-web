@@ -9,6 +9,9 @@ export default {
     size: '16px' // 1rem
   },
   large: {
-    size: '20px' // 1rem
+    size: '18px' // 1rem
+  },
+  xlarge: {
+    size: '22px' // 1rem
   }
 }

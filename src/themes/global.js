@@ -16,9 +16,15 @@ export default {
         large: '3px'
       },
       edgeSize: {
+        xxxsmall: '2px',
+        xxsmall: '4px',
+        xsmall: '8px',
         small: '16px',
+        medium: '24px',
+        large: '32px',
         xlarge: '40px',
-        xxlarge: '48px'
+        xxlarge: '48px',
+        xxxlarge: '56px'
       }
     },
     medium: {
