@@ -72,7 +72,7 @@ const LayerCol1 = ({ heading, body, svgIcon, ...props }) => {
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Col {...props}>
+    <Col flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')} {...props}>
       <Row>
         <Box margin={{ bottom: 'small', right: 'large' }} aria-hidden>
           {svgIcon}
@@ -148,7 +148,7 @@ const LayerCol3 = ({ heading, body, footer, img, ...props }) => {
 
 const Home = () => {
   const { links } = config
-  const { setResponsive } = useResponsive()
+  const { viewport, setResponsive } = useResponsive()
 
   return (
     <>
@@ -161,7 +161,7 @@ const Home = () => {
       >
         <FixedContainer>
           <Hero body={<HeroBody />} />
-          <Row>
+          <Row direction={setResponsive('column', 'column', 'row')}>
             <LayerCol1
               heading=" Find the data you need"
               body={
@@ -186,6 +186,11 @@ const Home = () => {
               svgIcon={<SearchIcon />}
               margin={{ right: 'xxxlarge' }}
             />
+            {viewport === 'large' && (
+              <Box
+                border={{ color: 'gray-shade-5', side: 'left', size: 'large' }}
+              />
+            )}
             <LayerCol1
               heading="Create custom datasets"
               body="Build and download custom datasets tailored to your needs
@@ -193,10 +198,10 @@ const Home = () => {
               svgIcon={<FolderIcon />}
               margin={{
                 top: setResponsive('500px', '0'),
-                left: setResponsive('', 'medium', 'xxxlarge')
+                left: setResponsive('0', '0', 'xxxlarge')
               }}
               pad={{
-                top: setResponsive('large', '0')
+                top: setResponsive('large', 'xlarge', '0')
               }}
             />
           </Row>

@@ -2,8 +2,9 @@ import { colors } from 'themes/colors'
 // RULE: font-size should be defined in 'px' unit
 export default {
   borderSize: {
-    medium: '1px',
-    large: '2px'
+    small: '1px',
+    medium: '2px',
+    large: '3px'
   },
   breakpoints: {
     small: {
