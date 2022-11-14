@@ -9,6 +9,6 @@ export default {
     size: '16px' // 1rem
   },
   large: {
-    size: '22px' // 1rem
+    size: '20px' // 1rem
   }
 }

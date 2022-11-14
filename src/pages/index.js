@@ -24,7 +24,7 @@ const HeroBody = () => {
         level={1}
         margin={{ bottom: setResponsive('large', 'medium') }}
         size={setResponsive('h1_small', 'h1_large')}
-        textAlign={setResponsive('center', 'start')}
+        textAlign="center"
       >
         Search for normalized transcriptome data
       </Heading>
@@ -85,7 +85,7 @@ const LayerCol1 = ({ heading, body, svgIcon, ...props }) => {
           >
             {heading}
           </Heading>
-          <Paragraph size="large">{body}</Paragraph>
+          <Paragraph size="xlarge">{body}</Paragraph>
         </Col>
       </Row>
     </Col>
@@ -215,7 +215,7 @@ const Home = () => {
               bottom: setResponsive('large', 'xlarge', 'xxlarge')
             }}
           >
-            <Paragraph color="white" size="xlarge" textAlign="center">
+            <Paragraph color="white" size="xxxlarge" textAlign="center">
               You can use refine.bio datasets for preliminary assessment of
               biological signals and to accelerate validation of your research
               findings.

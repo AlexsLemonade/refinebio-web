@@ -7,12 +7,10 @@ import { Col } from 'components/shared/Col'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Hero } from 'components/shared/Hero'
 import { Row } from 'components/shared/Row'
-import { SearchBox } from 'components/shared/SearchBox'
-import { FolderIcon } from '../../images/graphic-folder.svg'
-import { HeadMapIcon } from '../../images/graphic-heatmap.svg'
-import { PathwayIcon } from '../../images/graphic-pathway.svg'
-import { SearchIcon } from '../../images/graphic-search.svg'
-import { WaySignsIcon } from '../../images/graphic-way-signs.svg'
+import { SVGSavingTime } from '../../images/illustration-saving-time.svg'
+import { SVGOneRepo } from '../../images/illustration-one-repo.svg'
+import { SVGNetworkBottle } from '../../images/illustration-network-bottle.svg'
+import { CCDLxALSF } from '../../images/CCDL-x-ALSF.svg'
 
 const HeroHeader = () => {
   const { viewport, setResponsive } = useResponsive()
@@ -22,7 +20,7 @@ const HeroHeader = () => {
       level={1}
       margin={{ bottom: setResponsive('large', 'xxxlarge') }}
       size={setResponsive('h1_small', 'h1_xlarge')}
-      textAlign={setResponsive('start', 'center')}
+      textAlign="center"
     >
       Fighting childhood cancer, {viewport !== 'small' && <br />}thousands of
       datasets at a time
@@ -30,52 +28,63 @@ const HeroHeader = () => {
   )
 }
 
+const HeroBodyCol = ({ count, text }) => {
+  const { setResponsive } = useResponsive()
+
+  return (
+    <Box align="center" margin={{ top: setResponsive('large', '0') }}>
+      <Text
+        margin={{ bottom: setResponsive('xsmall', 'small') }}
+        size={setResponsive('32px', '36px')}
+      >
+        <Anchor href="#url" label={`${count}M`} />
+      </Text>
+      <Text size={setResponsive('small', 'large')} textAlign="center">
+        {count} {text}
+      </Text>
+    </Box>
+  )
+}
 const HeroBody = () => {
   const { setResponsive } = useResponsive()
-  const queries = ['Notch', 'medulloblastoma', 'GSE24528']
+  // TEMP
+  const data = {
+    gene_count: 60000,
+    sample_count: 1.5,
+    organism_count: 3,
+    raw_data_count: 11.7
+  }
 
   return (
     <>
       <Heading
         level={1}
-        margin={{ bottom: setResponsive('large', 'medium') }}
+        margin={{ bottom: setResponsive('0', 'xlarge') }}
         size={setResponsive('h1_small', 'h1_large')}
-        textAlign={setResponsive('center', 'start')}
+        textAlign="center"
       >
-        Search for normalized transcriptome data
+        refine.bio has harmonized over {data.gene_count.toLocaleString()} gene
+        expression experiments
       </Heading>
-      <SearchBox
-        size="xlarge"
-        placeHolder={setResponsive(
-          'Search accessions, pathways, etc.,',
-          'Search accessions, pathways, diseases, etc.,'
-        )}
-        primary
-        responsive
-      />
+
       <Box
         align={setResponsive('center', 'start')}
         direction={setResponsive('column', 'row')}
         justify="between"
-        margin={{ top: setResponsive('large', 'medium') }}
         width="100%"
       >
-        <Text size="large">Try searching for:</Text>
-
-        {queries.map((query) => (
-          <Text
-            key={query}
-            size="large"
-            margin={{ top: setResponsive('small') }}
-          >
-            <Anchor
-              defaultUnderline
-              label={query}
-              href={{ pathname: '/search', query: { query } }}
-              size="large"
-            />
-          </Text>
-        ))}
+        <HeroBodyCol
+          count={data.sample_count}
+          text="million samples available"
+        />
+        <HeroBodyCol
+          count={data.organism_count}
+          text="Support for 3000 organisms"
+        />
+        <HeroBodyCol
+          count={data.raw_data_count}
+          text="terabytes of raw data processed"
+        />
       </Box>
     </>
   )
@@ -83,55 +92,46 @@ const HeroBody = () => {
 
 // Columns for each layer
 // 1st Layer
-const LayerCol1 = ({ heading, body, svgIcon, ...props }) => {
+const LayerRow1 = ({
+  align = 'end',
+  direction = 'row',
+  heading,
+  body,
+  svg,
+  ...props
+}) => {
   const { setResponsive } = useResponsive()
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Col {...props}>
-      <Row>
-        <Box margin={{ bottom: 'small', right: 'large' }} aria-hidden>
-          {svgIcon}
-        </Box>
-        <Col>
-          <Heading
-            level={2}
-            margin={{ bottom: setResponsive('medium', 'small') }}
-            size={setResponsive('h2_small', 'h2_large')}
-          >
-            {heading}
-          </Heading>
-          <Paragraph size="large">{body}</Paragraph>
-        </Col>
-      </Row>
-    </Col>
-  )
-}
-// 2nd Layer
-const LayerCol2 = ({ heading, body, footer, svgIcon, ...props }) => {
-  const { setResponsive } = useResponsive()
-
-  return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <Col background="white" pad={setResponsive('large', 'medium')} {...props}>
-      <Box height="xxxlarge" margin={{ bottom: 'medium' }} aria-hidden>
-        {svgIcon}
-      </Box>
-      <Heading
-        level={4}
-        margin={{ bottom: 'small' }}
-        size={setResponsive('h4_small', 'medium')}
-        weight="500"
+    <Row {...props} direction={setResponsive('column', direction)}>
+      <Col
+        align={setResponsive('center', 'start')}
+        justify={setResponsive('start', 'center')}
       >
-        {heading}
-      </Heading>
-      <Paragraph>{body}</Paragraph>
-      <Box align="center" margin={{ top: setResponsive('large', 'medium') }}>
-        {footer}
-      </Box>
-    </Col>
+        <Heading
+          level={2}
+          margin={{ bottom: setResponsive('medium', 'small') }}
+          size={setResponsive('h2_xsmall', 'h2_large')}
+          weight={setResponsive(500, 'normal')}
+        >
+          {heading}
+        </Heading>
+        <Paragraph>{body}</Paragraph>
+      </Col>
+      <Col>
+        <Box
+          align={setResponsive('center', align)}
+          margin={{ bottom: 'small', right: 'large' }}
+          aria-hidden
+        >
+          {svg}
+        </Box>
+      </Col>
+    </Row>
   )
 }
+
 // 3rd Layer
 const LayerCol3 = ({ heading, body, footer, img, ...props }) => {
   const { setResponsive } = useResponsive()
@@ -168,7 +168,6 @@ const About = () => {
 
   return (
     <>
-      {/* 1st Layer */}
       <Box
         pad={{
           top: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxxlarge'),
@@ -178,165 +177,79 @@ const About = () => {
         <FixedContainer>
           <Hero header={<HeroHeader />} body={<HeroBody />} />
           <Row>
-            <LayerCol1
-              heading=" Find the data you need"
-              body={
-                <>
-                  Search the multi-organism collection of genome wide gene
-                  expression data obtained from publicly available sources like
-                  GEO, ArrayExpress, and SRA. The data has been processed
-                  uniformly and normalized using a set of{' '}
-                  <Anchor
-                    href={links.standard_pipeline}
-                    label="standardized pipelines"
-                    rel="noopener noreferrer"
-                  />{' '}
-                  curated by the{' '}
-                  <Anchor
-                    href={links.ccdl}
-                    label="Childhood Cancer Data Lab (CCDL)"
-                    rel="noopener noreferrer"
-                  />
-                </>
-              }
-              svgIcon={<SearchIcon />}
+            <LayerRow1
+              heading="Saving Time to Save Lives"
+              body="When childhood cancer researchers download transcriptome data 
+              (the collection of RNA molecules in a cell), each set can seem like its 
+              own language. Different studies use distinct technologies to collect the 
+              same type of data, and each technology has its own language. Researchers 
+              can spend up to 30% of their time translating these datasets into something 
+              they can use. This cumbersome process takes away valuable resources that 
+              could be spent in the lab discovering cutting-edge treatments and cures. 
+              refine.bio is here to fix that."
+              svg={<SVGSavingTime />}
               margin={{ right: 'xxxlarge' }}
             />
-            <LayerCol1
-              heading="Create custom datasets"
-              body="Build and download custom datasets tailored to your needs
-              including gene expression matrices and sample metadata."
-              svgIcon={<FolderIcon />}
-              margin={{
-                top: setResponsive('500px', '0'),
-                left: setResponsive('', 'medium', 'xxxlarge')
-              }}
-              pad={{
-                top: setResponsive('large', '0')
-              }}
+          </Row>
+          <Row>
+            <LayerRow1
+              align="start"
+              direction="row-reverse"
+              heading="One Language, One Repository"
+              body="It’s the Rosetta Stone for the vast amount of publicly available childhood 
+              cancer data. It’s the first project of its kind to harmonize this information across 
+              many different technologies into one universal repository. Now researchers can pull 
+              from this massive dataset, saving precious time."
+              svg={<SVGOneRepo />}
+              margin={{ right: 'xxxlarge' }}
+            />
+          </Row>
+          <Row>
+            <LayerRow1
+              heading="Better Medicine Through Machine Learning"
+              body="With the power of machine learning and the rich collection of data in refine.bio, 
+              researchers have the potential to extract more information about the biology of a patient’s 
+              sample. In turn researchers will be able to better classify patients and identify what types 
+              of treatments might be most effective on a case-by-case basis, further enhancing the 
+              burgeoning field of precision medicine."
+              svg={<SVGNetworkBottle />}
+              margin={{ right: 'xxxlarge' }}
             />
           </Row>
         </FixedContainer>
       </Box>
-      {/* 2st Layer */}
-      <Box
-        background="gradient_dark"
-        pad={{ vertical: setResponsive('large', 'xxlarge', 'xxxxxxlarge') }}
-      >
+
+      {/* 3rd Layer */}
+      <Box>
         <FixedContainer
-          pad={{ horizontal: setResponsive('large', 'medium', 'xxxxlarge') }}
+          border={{ color: 'gray-shade-5', side: 'top', size: 'large' }}
+          pad={{
+            horizontal: setResponsive('large', 'medium', 'xxxxxlarge'),
+            vertical: setResponsive('xxlarge', 'xxlarge', 'xxxxxlarge')
+          }}
         >
-          <Row
-            margin={{
-              bottom: setResponsive('large', 'xlarge', 'xxlarge')
-            }}
-          >
-            <Paragraph color="white" size="xlarge" textAlign="center">
-              You can use refine.bio datasets for preliminary assessment of
-              biological signals and to accelerate validation of your research
-              findings.
+          <Row>
+            <Paragraph size="xxlarge">
+              Created by the Childhood Cancer Data Lab (CCDL), powered by Alex’s
+              Lemonade Stand Foundation, this endeavor is harnessing the power
+              of big data to accelerate the pace of potential cures.
             </Paragraph>
           </Row>
-          <Row>
-            <LayerCol2
-              heading="Get Started using refine.bio data"
-              body="Explore the different ways you can use refine.bio data to help
-                with your scientific questions."
-              footer={<Button label="Get Started" secondary responsive />}
-              svgIcon={<WaySignsIcon />}
-            />
-            <LayerCol2
-              heading="Differential Expression Analysis"
-              body="Learn how you can do differential expression analysis with refine.bio datasets."
-              footer={
-                <>
-                  <Button label="RNA-seq Example" secondary responsive />
-                  <Button
-                    label="Microarray Example"
-                    margin={{ top: setResponsive('small', 'medium') }}
-                    secondary
-                    responsive
-                  />
-                </>
-              }
-              svgIcon={<HeadMapIcon />}
-              margin={{ left: setResponsive('0', 'medium', 'xlarge') }}
-            />
-            <LayerCol2
-              heading="Pathway Analysis"
-              body="Learn how you can use refine.bio data to identify pathways that are active in your biological condition of interest."
-              footer={
-                <>
-                  <Button label="RNA-seq Example" secondary responsive />
-                  <Button
-                    label="Microarray Example"
-                    margin={{ top: setResponsive('small', 'medium') }}
-                    secondary
-                    responsive
-                  />
-                </>
-              }
-              svgIcon={<PathwayIcon />}
-              margin={{ left: setResponsive('0', 'medium', 'xlarge') }}
-            />
+          <Row align="center" justify="center">
+            <CCDLxALSF />
           </Row>
-        </FixedContainer>
-      </Box>
-      {/* 3rd Layer */}
-      <Box pad={{ vertical: setResponsive('large', 'xxlarge', 'xxxxxxlarge') }}>
-        <FixedContainer
-          pad={{ horizontal: setResponsive('large', 'medium', 'xxxxxlarge') }}
-        >
-          <Row>
-            <LayerCol3
-              heading="refine.bio Compendia"
-              body="refine.bio compendia are collections of samples that have been
-                processed and packaged for broad and felxible use."
-              footer={<Button label="Learn More" secondary responsive />}
-              img="network.svg"
-            />
-            <LayerCol3
-              heading="Explore the docs"
-              body="Learn about how we source and process data and other downstream 
-              analyses you can do with refine.bio data."
-              footer={
-                <Button label="Take me to the docs" secondary responsive />
-              }
-              img="undraw_files.svg"
-              margin={{ left: setResponsive('0', 'large', 'xxxlarge') }}
-            />
+          <Row elevation="xlarge">
+            <Col>
+              <Paragraph size="xxlarge">
+                Donate today to support the CCDL’s efforts to give researchers
+                the tools to create a healthier, more prosperous future for kids
+                fighting cancer and beyond.
+              </Paragraph>
+            </Col>
+            <Col>
+              <Button label="Donate Now" primary responsive uppercase />
+            </Col>
           </Row>
-        </FixedContainer>
-      </Box>
-      {/* 4th Layer */}
-      <Box
-        background="gradient_dark"
-        pad={{ vertical: setResponsive('xlarge', 'xxxlarge', 'xxxxxxxlarge') }}
-      >
-        <FixedContainer align="center">
-          <Heading
-            level={1}
-            color="white"
-            margin={{ bottom: setResponsive('large', 'medium') }}
-          >
-            Sign Up for Updates
-          </Heading>
-          <Paragraph
-            color="white"
-            margin={{ bottom: setResponsive('large', 'medium') }}
-            textAlign="center"
-            size="large"
-          >
-            Be the first one to know about new features, compendia releases and
-            more!
-          </Paragraph>
-          <SearchBox
-            placeHolder="jdoe@example.com"
-            responsive
-            secondary
-            size="large"
-            wrapperWidth={setResponsive('', '60%', '45%')}
-          />
         </FixedContainer>
       </Box>
     </>

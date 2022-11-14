@@ -28,6 +28,9 @@ export default {
         size: '22px', // 1.375rem
         height: 1.18 // (approx)26px
       },
+      h2_xsmall: {
+        size: '20px'
+      },
       h2_small: {
         size: '22px'
       },

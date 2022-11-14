@@ -2,16 +2,23 @@ import { colors } from 'themes/colors'
 // RULE: font-size should be defined in 'px' unit
 export default {
   borderSize: {
-    medium: '1px',
-    large: '2px'
+    small: '1px',
+    medium: '2px',
+    large: '3px'
   },
   breakpoints: {
     small: {
       // for a phone
       value: 750,
+      borderSize: {
+        small: '1px',
+        medium: '2px',
+        large: '3px'
+      },
       edgeSize: {
         small: '16px',
-        xlarge: '40px'
+        xlarge: '40px',
+        xxlarge: '48px'
       }
     },
     medium: {

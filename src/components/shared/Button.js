@@ -16,6 +16,11 @@ const Wrapper = styled(Box)`
 `
 
 const CustomButton = styled(GrommetButton)`
+  ${({ uppercase }) =>
+    uppercase &&
+    css`
+      text-transform: uppercase;
+    `}
   ${({ theme, light, primary }) =>
     primary &&
     light &&
@@ -45,7 +50,12 @@ const CustomButton = styled(GrommetButton)`
     `}
 `
 
-export const Button = ({ btnWidth, responsive = false, ...props }) => {
+export const Button = ({
+  btnWidth,
+  responsive = false,
+  uppercase = false,
+  ...props
+}) => {
   const { viewport } = useResponsive()
   return (
     <Wrapper
@@ -54,7 +64,7 @@ export const Button = ({ btnWidth, responsive = false, ...props }) => {
       viewport={viewport}
     >
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <CustomButton btnWidth={btnWidth} {...props} />
+      <CustomButton btnWidth={btnWidth} uppercase={uppercase} {...props} />
     </Wrapper>
   )
 }

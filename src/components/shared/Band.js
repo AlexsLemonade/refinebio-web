@@ -21,7 +21,7 @@ export const Band = ({ ...props }) => {
         // fixed value to preserve the UI layout
         path === '/'
           ? setResponsive('500px', '368px')
-          : setResponsive('650px', '520px')
+          : setResponsive('440px', '520px')
       }
       width="100%"
       style={{ position: 'absolute', zIndex: -1 }}
