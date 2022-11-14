@@ -241,7 +241,7 @@ const Home = () => {
                 with your scientific questions."
               footer={<Button label="Get Started" secondary responsive />}
               svgIcon={<WaySignsIcon />}
-              margin={{ bottom: setResponsive('large', 'medium') }}
+              margin={{ bottom: setResponsive('large', '0') }}
             />
             <LayerCol2
               heading="Differential Expression Analysis"
