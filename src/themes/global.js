@@ -11,8 +11,15 @@ export default {
       // for a phone
       value: 750,
       edgeSize: {
+        xxxsmall: '2px',
+        xxsmall: '4px',
+        xsmall: '8px',
         small: '16px',
-        xlarge: '40px'
+        medium: '24px',
+        large: '32px',
+        xlarge: '40px',
+        xxlarge: '48px',
+        xxxlarge: '56px'
       }
     },
     medium: {

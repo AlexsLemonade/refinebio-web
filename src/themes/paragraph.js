@@ -9,9 +9,12 @@ export default {
     size: '16px' // 1rem
   },
   large: {
-    size: '20px' // 1.25rem
+    size: '18px' // 1.25rem
   },
   xlarge: {
+    size: '22px' // 1.375rem
+  },
+  xxlarge: {
     size: '26px' // 1.625rem
   },
   extend: () => `

@@ -11,9 +11,6 @@ const Wrapper = styled(Box)`
     viewport === 'small' &&
     css`
       flex: 1 1 auto;
-      + div {
-        margin-top: 16px;
-      }
     `}
 `
 
