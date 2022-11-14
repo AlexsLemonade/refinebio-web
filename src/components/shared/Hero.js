@@ -20,7 +20,7 @@ export const Hero = ({ header, body, ...props }) => {
           elevation="xlarge"
           pad={{
             horizontal: setResponsive('large', 'xxxxxxxlarge'),
-            vertical: setResponsive('32px', 'xxxxlarge')
+            vertical: setResponsive('large', 'xxxxlarge')
           }}
           round="8px"
         >
