@@ -6,12 +6,7 @@ import { Col } from 'components/shared/Col'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Hero } from 'components/shared/Hero'
 import { Row } from 'components/shared/Row'
-import styled from 'styled-components'
 import { CCDLxALSF } from '../../images/CCDL-x-ALSF.svg'
-
-const PRubik = styled(Paragraph)`
-  font-family: 'Rubik', sans-serif;
-`
 
 const HeroHeader = () => {
   const { viewport, setResponsive } = useResponsive()
