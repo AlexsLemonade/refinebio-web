@@ -1,7 +1,7 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
 
-export const Hero = ({ header, body, ...props }) => {
+export const Hero = ({ header, body, marginBottom = 'xxxlarge', ...props }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -11,7 +11,7 @@ export const Hero = ({ header, body, ...props }) => {
       <Box
         width="815px" // fixed value to preserve the UI layout
         margin={{
-          bottom: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxxxlarge')
+          bottom: setResponsive(marginBottom, 'xxxlarge', 'xxxxxxxlarge')
         }}
       >
         <Box
@@ -20,7 +20,7 @@ export const Hero = ({ header, body, ...props }) => {
           elevation="xlarge"
           pad={{
             horizontal: setResponsive('large', 'xxxxxxxlarge'),
-            vertical: setResponsive('32px', 'xxxxlarge')
+            vertical: setResponsive('large', 'xxxxlarge')
           }}
           round="8px"
         >

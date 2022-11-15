@@ -1,16 +1,17 @@
 import config from 'utils/config'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph, Text } from 'grommet'
-import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Col } from 'components/shared/Col'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Hero } from 'components/shared/Hero'
 import { Row } from 'components/shared/Row'
-import { SVGSavingTime } from '../../images/illustration-saving-time.svg'
-import { SVGOneRepo } from '../../images/illustration-one-repo.svg'
-import { SVGNetworkBottle } from '../../images/illustration-network-bottle.svg'
+import styled from 'styled-components'
 import { CCDLxALSF } from '../../images/CCDL-x-ALSF.svg'
+
+const PRubik = styled(Paragraph)`
+  font-family: 'Rubik', sans-serif;
+`
 
 const HeroHeader = () => {
   const { viewport, setResponsive } = useResponsive()
@@ -18,7 +19,7 @@ const HeroHeader = () => {
     <Heading
       color="white"
       level={1}
-      margin={{ bottom: setResponsive('large', 'xxxlarge') }}
+      margin={{ bottom: 'xxxxxxlarge' }}
       size={setResponsive('h1_small', 'h1_xlarge')}
       textAlign="center"
     >
@@ -32,14 +33,15 @@ const HeroBodyCol = ({ count, text }) => {
   const { setResponsive } = useResponsive()
 
   return (
-    <Box align="center" margin={{ top: setResponsive('large', '0') }}>
+    <Box align="center" margin={{ top: setResponsive('medium', '0') }}>
       <Text
+        color="brand"
         margin={{ bottom: setResponsive('xsmall', 'small') }}
-        size={setResponsive('32px', '36px')}
+        size={setResponsive('xxxlarge', 'xxxxlarge')}
       >
-        <Anchor href="#url" label={`${count}M`} />
+        {count}
       </Text>
-      <Text size={setResponsive('small', 'large')} textAlign="center">
+      <Text size={setResponsive('medium', 'large')} textAlign="center">
         {count} {text}
       </Text>
     </Box>
@@ -58,9 +60,9 @@ const HeroBody = () => {
   return (
     <>
       <Heading
-        level={1}
+        level={2}
         margin={{ bottom: setResponsive('0', 'xlarge') }}
-        size={setResponsive('h1_small', 'h1_large')}
+        size={setResponsive('h2_xsmall', 'h2_large')}
         textAlign="center"
       >
         refine.bio has harmonized over {data.gene_count.toLocaleString()} gene
@@ -74,15 +76,15 @@ const HeroBody = () => {
         width="100%"
       >
         <HeroBodyCol
-          count={data.sample_count}
+          count={`${data.sample_count}M`}
           text="million samples available"
         />
         <HeroBodyCol
-          count={data.organism_count}
+          count={`${data.organism_count}K`}
           text="Support for 3000 organisms"
         />
         <HeroBodyCol
-          count={data.raw_data_count}
+          count={`${data.raw_data_count} TB`}
           text="terabytes of raw data processed"
         />
       </Box>
@@ -97,85 +99,62 @@ const LayerRow1 = ({
   direction = 'row',
   heading,
   body,
-  svg,
+  img,
   ...props
 }) => {
   const { setResponsive } = useResponsive()
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Row {...props} direction={setResponsive('column', direction)}>
+    <Row {...props} direction={setResponsive('column-reverse', direction)}>
       <Col
         align={setResponsive('center', 'start')}
         justify={setResponsive('start', 'center')}
       >
         <Heading
           level={2}
-          margin={{ bottom: setResponsive('medium', 'small') }}
-          size={setResponsive('h2_xsmall', 'h2_large')}
-          weight={setResponsive(500, 'normal')}
+          margin={{ bottom: setResponsive('small', 'small') }}
+          size={setResponsive('h2_small', 'h2_large')}
         >
           {heading}
         </Heading>
         <Paragraph>{body}</Paragraph>
       </Col>
-      <Col>
-        <Box
-          align={setResponsive('center', align)}
-          margin={{ bottom: 'small', right: 'large' }}
-          aria-hidden
-        >
-          {svg}
-        </Box>
-      </Col>
+      <Col
+        align={setResponsive('center', align)}
+        margin={{ bottom: 'small', right: setResponsive('0', 'large') }}
+        aria-hidden
+        background={{
+          image: `url('${img}')`,
+          position: 'center',
+          repeat: 'no-repeat',
+          size: 'contain'
+        }}
+        // to preserve the height of SVG image
+        height={setResponsive('195px', '100%', '300px')}
+      />
     </Row>
-  )
-}
-
-// 3rd Layer
-const LayerCol3 = ({ heading, body, footer, img, ...props }) => {
-  const { setResponsive } = useResponsive()
-
-  return (
-    <Col
-      background={{
-        image: `url('${img}')`,
-        position: 'bottom right',
-        repeat: 'no-repeat',
-        size: '100%'
-      }}
-      elevation="medium"
-      pad={{
-        horizontal: setResponsive('large', 'xxlarge', 'xxxlarge'),
-        top: setResponsive('large', 'xlarge'),
-        bottom: setResponsive('large', 'xlarge', 'xxxxlarge')
-      }}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-    >
-      <Heading level={1} margin={{ bottom: setResponsive('medium', 'small') }}>
-        {heading}
-      </Heading>
-      <Paragraph>{body}</Paragraph>
-      <Box margin={{ top: setResponsive('large', 'medium') }}>{footer}</Box>
-    </Col>
   )
 }
 
 const About = () => {
   const { links } = config
-  const { setResponsive } = useResponsive()
+  const { viewport, setResponsive } = useResponsive()
 
   return (
     <>
       <Box
         pad={{
-          top: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxxlarge'),
-          bottom: setResponsive('xlarge', 'xlarge', 'xxxxxxxlarge')
+          top: 'xxxxxxxlarge',
+          bottom: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxlarge')
         }}
       >
         <FixedContainer>
-          <Hero header={<HeroHeader />} body={<HeroBody />} />
+          <Hero
+            header={<HeroHeader />}
+            body={<HeroBody />}
+            marginBottom="xlarge"
+          />
           <Row>
             <LayerRow1
               heading="Saving Time to Save Lives"
@@ -187,11 +166,11 @@ const About = () => {
               they can use. This cumbersome process takes away valuable resources that 
               could be spent in the lab discovering cutting-edge treatments and cures. 
               refine.bio is here to fix that."
-              svg={<SVGSavingTime />}
+              img="illustration-saving-time.svg"
               margin={{ right: 'xxxlarge' }}
             />
           </Row>
-          <Row>
+          <Row margin={{ top: setResponsive('xlarge', 'xxxxxxxlarge') }}>
             <LayerRow1
               align="start"
               direction="row-reverse"
@@ -200,11 +179,11 @@ const About = () => {
               cancer data. It’s the first project of its kind to harmonize this information across 
               many different technologies into one universal repository. Now researchers can pull 
               from this massive dataset, saving precious time."
-              svg={<SVGOneRepo />}
+              img="illustration-one-repo.svg"
               margin={{ right: 'xxxlarge' }}
             />
           </Row>
-          <Row>
+          <Row margin={{ top: setResponsive('xlarge', 'xxxxxxxlarge') }}>
             <LayerRow1
               heading="Better Medicine Through Machine Learning"
               body="With the power of machine learning and the rich collection of data in refine.bio, 
@@ -212,43 +191,63 @@ const About = () => {
               sample. In turn researchers will be able to better classify patients and identify what types 
               of treatments might be most effective on a case-by-case basis, further enhancing the 
               burgeoning field of precision medicine."
-              svg={<SVGNetworkBottle />}
+              img="illustration-network-bottle.svg"
               margin={{ right: 'xxxlarge' }}
             />
           </Row>
         </FixedContainer>
       </Box>
-
-      {/* 3rd Layer */}
       <Box>
         <FixedContainer
           border={{ color: 'gray-shade-5', side: 'top', size: 'large' }}
           pad={{
-            horizontal: setResponsive('large', 'medium', 'xxxxxlarge'),
-            vertical: setResponsive('xxlarge', 'xxlarge', 'xxxxxlarge')
+            horizontal: setResponsive('large', 'medium', '0'),
+            top: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxlarge'),
+            bottom: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxxxlarge')
           }}
         >
-          <Row>
-            <Paragraph size="xxlarge">
+          <Row margin={{ bottom: 'xlarge' }}>
+            <Paragraph size="xxlarge" textAlign="center">
               Created by the Childhood Cancer Data Lab (CCDL), powered by Alex’s
-              Lemonade Stand Foundation, this endeavor is harnessing the power
-              of big data to accelerate the pace of potential cures.
+              Lemonade Stand {viewport !== 'small' && <br />} Foundation, this
+              endeavor is harnessing the power of big data to accelerate the
+              pace of potential cures.
             </Paragraph>
           </Row>
-          <Row align="center" justify="center">
+          <Row align="center" justify="center" margin={{ bottom: 'xlarge' }}>
             <CCDLxALSF />
           </Row>
-          <Row elevation="xlarge">
-            <Col>
-              <Paragraph size="xxlarge">
+          <Row
+            justify={setResponsive('', 'around')}
+            elevation="xlarge"
+            pad={{
+              horizontal: setResponsive('medium', 'medium', '122px'),
+              vertical: setResponsive('medium', 'xlarge')
+            }}
+            round="8px"
+          >
+            <Box justify="center" width={setResponsive('auto', '500px')}>
+              <Paragraph size={setResponsive('large', 'xxlarge')}>
                 Donate today to support the CCDL’s efforts to give researchers
                 the tools to create a healthier, more prosperous future for kids
                 fighting cancer and beyond.
               </Paragraph>
-            </Col>
-            <Col>
-              <Button label="Donate Now" primary responsive uppercase />
-            </Col>
+            </Box>
+            <Box
+              justify="center"
+              margin={{ top: setResponsive('medium', '0') }}
+            >
+              <Button
+                label="Donate Now"
+                large
+                href={links.donate}
+                rel="noopener noreferrer"
+                target="_blank"
+                primary
+                responsive
+                uppercase
+              />
+            </Box>
           </Row>
         </FixedContainer>
       </Box>

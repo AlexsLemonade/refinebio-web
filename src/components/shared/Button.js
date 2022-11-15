@@ -21,6 +21,13 @@ const CustomButton = styled(GrommetButton)`
     css`
       text-transform: uppercase;
     `}
+
+  ${({ large, viewport }) =>
+    large &&
+    css`
+      font-size: ${viewport !== 'small' ? '20px' : '16px'};
+      padding: ${viewport !== 'small' ? '16px 32px' : '4px 24px'};
+    `}  
   ${({ theme, light, primary }) =>
     primary &&
     light &&
@@ -52,6 +59,7 @@ const CustomButton = styled(GrommetButton)`
 
 export const Button = ({
   btnWidth,
+  large = false,
   responsive = false,
   uppercase = false,
   ...props
@@ -63,8 +71,14 @@ export const Button = ({
       width={btnWidth || 'max-content'}
       viewport={viewport}
     >
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <CustomButton btnWidth={btnWidth} uppercase={uppercase} {...props} />
+      <CustomButton
+        btnWidth={btnWidth}
+        large={large}
+        uppercase={uppercase}
+        viewport={viewport}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+      />
     </Wrapper>
   )
 }
