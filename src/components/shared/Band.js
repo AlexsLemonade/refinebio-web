@@ -15,7 +15,7 @@ export const Band = ({ ...props }) => {
 
   return (
     <Box
-      background="gradient_dark"
+      background="gradient_blue"
       elevation="large"
       height={
         // fixed value to preserve the UI layout

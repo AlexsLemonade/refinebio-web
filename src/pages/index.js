@@ -213,7 +213,7 @@ const Home = () => {
       </Box>
       {/* 2st Layer */}
       <Box
-        background="gradient_dark"
+        background="gradient_blue_dark"
         pad={{ vertical: setResponsive('medium', 'xxlarge', 'xxxxxxlarge') }}
       >
         <FixedContainer
@@ -316,7 +316,7 @@ const Home = () => {
       </Box>
       {/* 4th Layer */}
       <Box
-        background="gradient_dark"
+        background="gradient_blue_dark"
         pad={{ vertical: setResponsive('medium', 'xxxlarge', '140px') }}
       >
         <FixedContainer align="center">
