@@ -162,7 +162,15 @@ const Home = () => {
         }}
       >
         <FixedContainer>
-          <Hero body={<HeroBody />} />
+          {/* fixed width to preserve UI layout in wider screens */}
+          <Hero
+            body={<HeroBody />}
+            boxPadding={{
+              horizontal: setResponsive('large', 'xxxxxxxlarge'),
+              vertical: setResponsive('large', 'xxxxlarge')
+            }}
+            containerWidth="815px"
+          />
           <Row direction={setResponsive('column', 'column', 'row')}>
             <LayerCol1
               heading=" Find the data you need"
