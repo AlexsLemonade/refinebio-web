@@ -17,9 +17,10 @@ const Wrapper = styled(Box)`
   } 
 `
 
-export const Logo = ({ light = false }) => {
+export const Logo = ({ light = false, ...props }) => {
   return (
-    <Wrapper light={light}>
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <Wrapper light={light} {...props}>
       <Anchor href="/" underline={false}>
         <LogoSvg role="img" title="refine.bio" />
         <SrOnly label="Go to refine.bio homepage " />

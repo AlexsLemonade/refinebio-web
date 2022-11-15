@@ -179,13 +179,17 @@ const CustomNav = styled(GrommentNav)`
 export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const { viewport } = useResponsive()
 
+  const handleClick = () => {
+    setToggle(!toggle)
+  }
+
   return (
     <>
       {viewport === 'small' && (
         <NavIcon
           light={light}
           toggle={toggle}
-          onClick={() => setToggle(!toggle)}
+          onClick={handleClick}
           role="button"
         >
           <Box as="span" />
@@ -205,7 +209,9 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
           toggle={toggle}
           viewport={viewport}
         >
-          {viewport === 'small' && <Logo margin={{ vertical: 'large' }} />}
+          {viewport === 'small' && (
+            <Logo margin={{ vertical: 'large' }} onClick={handleClick} />
+          )}
           <List as="ul" light={light} viewport={viewport}>
             <Box as="li">
               <Anchor label="Search " href="/search" underline={false} />
@@ -227,11 +233,13 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                     label="Normalized Compendia"
                     href="/"
                     underline={false}
+                    onClick={handleClick}
                   />
                   <Anchor
                     label="RNA-seq Sample Compendia"
                     href="/"
                     underline={false}
+                    onClick={handleClick}
                   />
                 </>
               ) : (
@@ -253,10 +261,16 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 underline={false}
+                onClick={handleClick}
               />
             </Box>
             <Box as="li">
-              <Anchor label="About" href="/about" underline={false} />
+              <Anchor
+                label="About"
+                href="/about"
+                underline={false}
+                onClick={handleClick}
+              />
             </Box>
             <Box as="li">
               <Button
