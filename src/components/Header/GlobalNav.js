@@ -75,11 +75,11 @@ const List = styled(Box)`
       margin-left: 16px;
 
       a {
-        border-bottom: 1px solid transparent;
+        border-bottom: 2px solid transparent;
         color: ${light ? theme.global.colors.white : theme.global.colors.black};
         &:hover,
         &:focus {
-          border-bottom: 1px solid
+          border-bottom: 2px solid
             ${light ? theme.global.colors.white : theme.global.colors.brand};
           color: ${light
             ? theme.global.colors.white
@@ -88,7 +88,7 @@ const List = styled(Box)`
       }
 
       button[aria-label='Open Menu'] {
-        border-bottom: 1px solid transparent;
+        border-bottom: 2px solid transparent;
         border-radius: 0;
         color: ${light ? theme.global.colors.white : theme.global.colors.black};
         padding: 0;
@@ -103,7 +103,7 @@ const List = styled(Box)`
 
         &:hover,
         &[aria-expanded='true'] {
-          border-bottom: 1px solid
+          border-bottom: 2px solid
             ${light ? theme.global.colors.white : theme.global.colors.brand};
           color: ${light
             ? theme.global.colors.white
