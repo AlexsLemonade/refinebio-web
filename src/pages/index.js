@@ -85,7 +85,7 @@ const LayerCol1 = ({ heading, body, svgIcon, ...props }) => {
           >
             {heading}
           </Heading>
-          <Paragraph size={setResponsive('large', 'large', 'xlarge')}>
+          <Paragraph size={setResponsive('medium', 'large', 'large')}>
             {body}
           </Paragraph>
         </Col>
@@ -196,7 +196,7 @@ const Home = () => {
                 </>
               }
               svgIcon={<SearchIcon />}
-              margin={{ right: 'xxxxxlarge' }}
+              margin={{ right: setResponsive('0', '0', 'xxxxxlarge') }}
             />
             {viewport === 'large' && (
               <Box
