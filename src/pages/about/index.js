@@ -6,8 +6,14 @@ import { Col } from 'components/shared/Col'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Hero } from 'components/shared/Hero'
 import { Row } from 'components/shared/Row'
-import { CCDLxALSF } from '../../images/CCDL-x-ALSF.svg'
+import styled from 'styled-components'
+import { SrOnly } from 'components/shared/SrOnly'
 
+const PRubik = styled(Paragraph)`
+  font-family: 'Rubik', sans-serif;
+`
+
+// Hero contents
 const HeroHeader = () => {
   const { viewport, setResponsive } = useResponsive()
   return (
@@ -16,14 +22,15 @@ const HeroHeader = () => {
       level={1}
       margin={{ bottom: 'xxxxxxlarge' }}
       size={setResponsive('h1_small', 'h1_xlarge')}
+      style={{ textShadow: '0 3px 19px rgba(0,0,0,.5)' }}
       textAlign="center"
+      weight="500"
     >
       Fighting childhood cancer, {viewport !== 'small' && <br />}thousands of
       datasets at a time
     </Heading>
   )
 }
-
 const HeroBodyCol = ({ count, text }) => {
   const { setResponsive } = useResponsive()
 
@@ -87,8 +94,7 @@ const HeroBody = () => {
   )
 }
 
-// Columns for each layer
-// 1st Layer
+// Row with an illustration
 const LayerRow1 = ({
   align = 'end',
   direction = 'row',
@@ -100,8 +106,12 @@ const LayerRow1 = ({
   const { setResponsive } = useResponsive()
 
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <Row {...props} direction={setResponsive('column-reverse', direction)}>
+    <Row
+      direction={setResponsive('column-reverse', direction)}
+      margin={{ right: setResponsive('0', 'xxxlarge') }}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    >
       <Col
         align={setResponsive('center', 'start')}
         justify={setResponsive('start', 'center')}
@@ -140,7 +150,7 @@ const About = () => {
     <>
       <Box
         pad={{
-          top: 'xxxxxxxlarge',
+          top: 'xxxxxxlarge',
           bottom: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxlarge')
         }}
       >
@@ -148,6 +158,10 @@ const About = () => {
           <Hero
             header={<HeroHeader />}
             body={<HeroBody />}
+            boxPadding={{
+              horizontal: setResponsive('small', 'xlarge'),
+              vertical: setResponsive('small', 'large')
+            }}
             marginBottom="xlarge"
           />
           <Row>
@@ -162,7 +176,6 @@ const About = () => {
               could be spent in the lab discovering cutting-edge treatments and cures. 
               refine.bio is here to fix that."
               img="illustration-saving-time.svg"
-              margin={{ right: 'xxxlarge' }}
             />
           </Row>
           <Row margin={{ top: setResponsive('xlarge', 'xxxxxxxlarge') }}>
@@ -175,7 +188,6 @@ const About = () => {
               many different technologies into one universal repository. Now researchers can pull 
               from this massive dataset, saving precious time."
               img="illustration-one-repo.svg"
-              margin={{ right: 'xxxlarge' }}
             />
           </Row>
           <Row margin={{ top: setResponsive('xlarge', 'xxxxxxxlarge') }}>
@@ -187,7 +199,6 @@ const About = () => {
               of treatments might be most effective on a case-by-case basis, further enhancing the 
               burgeoning field of precision medicine."
               img="illustration-network-bottle.svg"
-              margin={{ right: 'xxxlarge' }}
             />
           </Row>
         </FixedContainer>
@@ -201,32 +212,48 @@ const About = () => {
             bottom: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxxxlarge')
           }}
         >
-          <Row margin={{ bottom: 'xlarge' }}>
-            <Paragraph size="xxlarge" textAlign="center">
+          <Row justify="center" margin={{ bottom: 'xlarge' }}>
+            <PRubik size="xlarge" textAlign="center">
               Created by the Childhood Cancer Data Lab (CCDL), powered by Alex’s
-              Lemonade Stand {viewport !== 'small' && <br />} Foundation, this
+              Lemonade Stand {viewport === 'large' && <br />} Foundation, this
               endeavor is harnessing the power of big data to accelerate the
               pace of potential cures.
-            </Paragraph>
+            </PRubik>
           </Row>
-          <Row align="center" justify="center" margin={{ bottom: 'xlarge' }}>
-            <CCDLxALSF />
+          <Row align="center" justify="center" margin={{ bottom: 'xxxlarge' }}>
+            <Box
+              background={{
+                image: 'url(CCDL-x-ALSF.svg)',
+                position: 'center',
+                repeat: 'no-repeat',
+                size: 'contain'
+              }}
+              width="453px"
+              height="107px"
+            >
+              <SrOnly>
+                Childhood Cancer Data Lab powered by Alex's Lemonade Stand
+                Foundation
+              </SrOnly>
+            </Box>
           </Row>
           <Row
-            justify={setResponsive('', 'around')}
+            justify={setResponsive('start', 'around')}
             elevation="xlarge"
             pad={{
+              // fixed padding to preserve UI layout
               horizontal: setResponsive('medium', 'medium', '122px'),
               vertical: setResponsive('medium', 'xlarge')
             }}
             round="8px"
           >
+            {/* fixed width to preserve UI layout */}
             <Box justify="center" width={setResponsive('auto', '500px')}>
-              <Paragraph size={setResponsive('large', 'xxlarge')}>
+              <PRubik size={setResponsive('large', 'xlarge')}>
                 Donate today to support the CCDL’s efforts to give researchers
                 the tools to create a healthier, more prosperous future for kids
                 fighting cancer and beyond.
-              </Paragraph>
+              </PRubik>
             </Box>
             <Box
               justify="center"
