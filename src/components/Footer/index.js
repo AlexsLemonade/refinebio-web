@@ -15,7 +15,6 @@ import { Col } from 'components/shared/Col'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { SrOnly } from 'components/shared/SrOnly'
-
 import styled, { css } from 'styled-components'
 import { CoinIcon } from '../../images/coin.svg'
 import { TwitterIcon } from '../../images/twitter.svg'
