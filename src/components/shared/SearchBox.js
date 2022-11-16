@@ -6,14 +6,6 @@ import styled from 'styled-components'
 import { SearchIcon } from '../../images/search.svg'
 
 const Wrapper = styled(Box)`
-  svg {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-  }
-
   ${({ size }) =>
     size &&
     `
@@ -61,7 +53,17 @@ export const SearchBox = ({
       <FormField a11yTitle="Search" htmlFor="search" role="search" width="100%">
         <Box style={{ position: 'relative' }}>
           <Input id="search" type="search" placeholder={placeHolder} />
-          {!size && <SearchIcon />}
+          {!size && (
+            <SearchIcon
+              style={{
+                position: 'absolute',
+                right: '8px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                zIndex: 1
+              }}
+            />
+          )}
         </Box>
       </FormField>
       {size && (
