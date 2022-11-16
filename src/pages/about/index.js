@@ -145,6 +145,7 @@ const LayerRow1 = ({
 const About = () => {
   const { links } = config
   const { viewport, setResponsive } = useResponsive()
+  const PAGE_PADDING = '120px'
 
   return (
     <>
@@ -154,7 +155,9 @@ const About = () => {
           bottom: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxlarge')
         }}
       >
-        <FixedContainer>
+        <FixedContainer
+          pad={{ horizontal: setResponsive('large', 'medium', PAGE_PADDING) }}
+        >
           <Hero
             header={<HeroHeader />}
             body={<HeroBody />}
@@ -207,7 +210,7 @@ const About = () => {
         <FixedContainer
           border={{ color: 'gray-shade-5', side: 'top', size: 'large' }}
           pad={{
-            horizontal: setResponsive('large', 'medium', '0'),
+            horizontal: setResponsive('large', 'medium', PAGE_PADDING),
             top: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxlarge'),
             bottom: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxxxlarge')
           }}
