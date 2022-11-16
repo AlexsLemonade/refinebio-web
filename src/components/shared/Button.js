@@ -7,14 +7,6 @@ import styled, { css } from 'styled-components'
 - Set the prop 'badge' to true for the badged button
 */
 
-const Wrapper = styled(Box)`
-  ${({ responsive, viewport }) =>
-    responsive &&
-    css`
-      width: ${viewport !== 'small' ? 'max-content' : '100%'};
-    `}
-`
-
 const CustomButton = styled(GrommetButton)`
   ${({ theme, light, primary }) =>
     primary &&
@@ -48,14 +40,18 @@ const CustomButton = styled(GrommetButton)`
 export const Button = ({ btnWidth, responsive = false, ...props }) => {
   const { viewport } = useResponsive()
   return (
-    <Wrapper
+    <Box
       responsive={responsive}
-      width={btnWidth || 'max-content'}
+      width={
+        btnWidth || (responsive && viewport === 'small')
+          ? '100%'
+          : 'max-content'
+      }
       viewport={viewport}
     >
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <CustomButton btnWidth={btnWidth} {...props} />
-    </Wrapper>
+    </Box>
   )
 }
 
