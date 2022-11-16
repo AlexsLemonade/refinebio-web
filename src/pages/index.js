@@ -38,20 +38,6 @@ const HeroBody = () => {
         primary
         responsive
       />
-      <SearchBox
-        size="large"
-        placeHolder={setResponsive(
-          'Search data',
-          'Search accessions, pathways, diseases, etc.,'
-        )}
-        primary
-      />
-      <SearchBox
-        placeHolder={setResponsive(
-          'Search data',
-          'Search accessions, pathways, diseases, etc.,'
-        )}
-      />
       <Box
         align={setResponsive('center', 'start')}
         direction={setResponsive('column', 'row')}
