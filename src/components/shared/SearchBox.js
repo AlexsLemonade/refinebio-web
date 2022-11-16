@@ -6,20 +6,6 @@ import styled from 'styled-components'
 import { SearchIcon } from '../../images/search.svg'
 
 const Wrapper = styled(Box)`
-  > div {
-    position: relative;
-    &:first-child {
-      width: 100%;
-    }
-  }
-  button {
-    margin-left: 16px;
-  }
-  input {
-    &::-webkit-search-cancel-button {
-      display: none;
-    }
-  }
   svg {
     position: absolute;
     right: 8px;
@@ -34,11 +20,9 @@ const Wrapper = styled(Box)`
     > div:first-child {
       width: calc(100% - 96px);
     }
-
     button {
       padding:${size === 'xlarge' ? '10px 20px' : '4px 16px'};
     }
-    
     input {
       padding: ${size === 'xlarge' ? '22px' : '16px'};
       font-size: ${size === 'xlarge' ? '22px' : '16px'};
@@ -52,9 +36,6 @@ const Wrapper = styled(Box)`
     > div:first-child {
       width: 100%;
     }
-    button {
-      margin: 16px 0 0 0;
-    }
   `}
 `
 
@@ -67,7 +48,7 @@ export const SearchBox = ({
   size = '',
   wrapperWidth = ''
 }) => {
-  const { viewport } = useResponsive()
+  const { viewport, setResponsive } = useResponsive()
   return (
     <Wrapper
       direction={responsive && viewport === 'small' ? 'column' : 'row'}
@@ -77,8 +58,8 @@ export const SearchBox = ({
       viewport={viewport}
       responsive={responsive}
     >
-      <FormField a11yTitle="Search" htmlFor="search" role="search">
-        <Box>
+      <FormField a11yTitle="Search" htmlFor="search" role="search" width="100%">
+        <Box style={{ position: 'relative' }}>
           <Input id="search" type="search" placeholder={placeHolder} />
           {!size && <SearchIcon />}
         </Box>
@@ -87,6 +68,10 @@ export const SearchBox = ({
         <Button
           btnWidth={responsive && viewport === 'small' ? '100%' : btnWidth}
           label="Search"
+          margin={{
+            left: setResponsive('0', 'small'),
+            top: viewport === 'small' && responsive ? 'small' : '0'
+          }}
           type="submit"
           primary={primary}
           secondary={secondary}
