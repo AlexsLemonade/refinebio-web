@@ -98,9 +98,10 @@ const HeroBody = () => {
 const LayerRow1 = ({
   align = 'end',
   direction = 'row',
+  flexValue,
   heading,
   body,
-  img,
+  img: { url, position, width },
   ...props
 }) => {
   const { setResponsive } = useResponsive()
@@ -108,11 +109,11 @@ const LayerRow1 = ({
   return (
     <Row
       direction={setResponsive('column-reverse', direction)}
-      margin={{ right: setResponsive('0', 'xxxlarge') }}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       <Col
+        flexValue={flexValue}
         align={setResponsive('center', 'start')}
         justify={setResponsive('start', 'center')}
       >
@@ -127,16 +128,18 @@ const LayerRow1 = ({
       </Col>
       <Col
         align={setResponsive('center', align)}
-        margin={{ bottom: 'small', right: setResponsive('0', 'large') }}
+        flexValue={flexValue}
+        margin={{ bottom: 'small' }}
         aria-hidden
         background={{
-          image: `url('${img}')`,
-          position: 'center',
+          image: `url('${url}')`,
+          position: setResponsive('center', position),
           repeat: 'no-repeat',
           size: 'contain'
         }}
         // to preserve the height of SVG image
         height={setResponsive('195px', '100%', '300px')}
+        width={width}
       />
     </Row>
   )
@@ -178,7 +181,10 @@ const About = () => {
               they can use. This cumbersome process takes away valuable resources that 
               could be spent in the lab discovering cutting-edge treatments and cures. 
               refine.bio is here to fix that."
-              img="illustration-saving-time.svg"
+              img={{
+                url: 'illustration-saving-time.svg',
+                position: 'center right'
+              }}
             />
           </Row>
           <Row margin={{ top: setResponsive('xlarge', 'xxxxxxxlarge') }}>
@@ -190,7 +196,10 @@ const About = () => {
               cancer data. It’s the first project of its kind to harmonize this information across 
               many different technologies into one universal repository. Now researchers can pull 
               from this massive dataset, saving precious time."
-              img="illustration-one-repo.svg"
+              img={{
+                url: 'illustration-one-repo.svg',
+                position: 'center left'
+              }}
             />
           </Row>
           <Row margin={{ top: setResponsive('xlarge', 'xxxxxxxlarge') }}>
@@ -201,7 +210,12 @@ const About = () => {
               sample. In turn researchers will be able to better classify patients and identify what types 
               of treatments might be most effective on a case-by-case basis, further enhancing the 
               burgeoning field of precision medicine."
-              img="illustration-network-bottle.svg"
+              flexValue={setResponsive('1 1 auto', 'auto')}
+              img={{
+                url: 'illustration-network-bottle.svg',
+                position: 'center right',
+                width: '100%'
+              }}
             />
           </Row>
         </FixedContainer>
