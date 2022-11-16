@@ -1,7 +1,14 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
 
-export const Hero = ({ header, body, ...props }) => {
+export const Hero = ({
+  header,
+  body,
+  boxPadding = {},
+  boxWidth = '100%',
+  marginBottom = 'xxxlarge',
+  ...props
+}) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -9,19 +16,16 @@ export const Hero = ({ header, body, ...props }) => {
     <Box align={setResponsive('start', 'center')} {...props}>
       {header}
       <Box
-        width="815px" // fixed value to preserve the UI layout
+        width={boxWidth}
         margin={{
-          bottom: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxxxlarge')
+          bottom: setResponsive(marginBottom, 'xxxlarge', 'xxxxxxxlarge')
         }}
       >
         <Box
           align="center"
           background="white"
           elevation="xlarge"
-          pad={{
-            horizontal: setResponsive('large', 'xxxxxxxlarge'),
-            vertical: setResponsive('large', 'xxxxlarge')
-          }}
+          pad={boxPadding}
           round="8px"
         >
           {body}
