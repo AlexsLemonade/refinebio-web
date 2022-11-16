@@ -53,7 +53,6 @@ const HeroBody = () => {
             margin={{ top: setResponsive('small') }}
           >
             <Anchor
-              defaultUnderline
               label={query}
               href={{ pathname: '/search', query: { query } }}
               size="xlarge"
