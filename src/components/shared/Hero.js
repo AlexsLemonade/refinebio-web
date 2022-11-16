@@ -5,7 +5,7 @@ export const Hero = ({
   header,
   body,
   boxPadding = {},
-  containerWidth = '100%',
+  boxWidth = '100%',
   marginBottom = 'xxxlarge',
   ...props
 }) => {
@@ -16,7 +16,7 @@ export const Hero = ({
     <Box align={setResponsive('start', 'center')} {...props}>
       {header}
       <Box
-        width={containerWidth}
+        width={boxWidth}
         margin={{
           bottom: setResponsive(marginBottom, 'xxxlarge', 'xxxxxxxlarge')
         }}

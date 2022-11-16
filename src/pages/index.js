@@ -170,7 +170,7 @@ const Home = () => {
               horizontal: setResponsive('large', 'xxxxxxxlarge'),
               vertical: setResponsive('large', 'xxxxlarge')
             }}
-            containerWidth="815px"
+            boxWidth="815px"
           />
           <Row direction={setResponsive('column', 'column', 'row')}>
             <LayerCol1
