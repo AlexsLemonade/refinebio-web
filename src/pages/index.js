@@ -6,6 +6,7 @@ import { Button } from 'components/shared/Button'
 import { Col } from 'components/shared/Col'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Hero } from 'components/shared/Hero'
+import { Input } from 'components/shared/Input'
 import { Row } from 'components/shared/Row'
 import { SearchBox } from 'components/shared/SearchBox'
 import { FolderIcon } from '../images/graphic-folder.svg'
@@ -339,13 +340,21 @@ const Home = () => {
             Be the first one to know about new features, compendia releases and
             more!
           </Paragraph>
-          <SearchBox
-            placeHolder="jdoe@example.com"
-            responsive
-            secondary
-            size="large"
-            wrapperWidth={setResponsive('', '60%', '45%')}
-          />
+          {/* fixed width to preserve UI layout in wider screens */}
+          <Row width="500px">
+            <Col>
+              <Input placeHolder="jdoe@example.com" responsive secondary />
+            </Col>
+            <Button
+              label="Sign up"
+              margin={{
+                left: setResponsive('0', 'small'),
+                top: setResponsive('small', '0')
+              }}
+              secondary
+              responsive
+            />
+          </Row>
         </FixedContainer>
       </Box>
     </>
