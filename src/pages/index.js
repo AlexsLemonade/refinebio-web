@@ -1,4 +1,4 @@
-import config from 'utils/config'
+import config from 'config/'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
