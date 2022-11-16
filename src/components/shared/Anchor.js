@@ -3,7 +3,8 @@ import { Anchor as GrommetAnchor } from 'grommet'
 import styled, { css } from 'styled-components'
 
 const CustomAnchor = styled(GrommetAnchor)`
-  ${({ icon, underline }) => css`
+  ${({ defaultUnderline, icon, underline }) => css`
+    text-decoration: ${defaultUnderline ? 'underline' : 'none'};
     &:hover,
     &:focus {
       text-decoration: ${icon || underline ? 'underline' : 'none'};
@@ -16,9 +17,16 @@ const CustomAnchor = styled(GrommetAnchor)`
     `}
 `
 
-export const Anchor = ({ href = '', icon, underline = true, ...props }) => {
+export const Anchor = ({
+  defaultUnderline = false,
+  href = '',
+  icon,
+  underline = true,
+  ...props
+}) => {
   return typeof href === 'string' && href.startsWith('http') ? (
     <CustomAnchor
+      defaultUnderline={defaultUnderline}
       href={href}
       icon={icon}
       underline={underline}
@@ -28,6 +36,7 @@ export const Anchor = ({ href = '', icon, underline = true, ...props }) => {
   ) : (
     <Link href={href} passHref>
       <CustomAnchor
+        defaultUnderline={defaultUnderline}
         icon={icon}
         underline={underline}
         // eslint-disable-next-line react/jsx-props-no-spreading
