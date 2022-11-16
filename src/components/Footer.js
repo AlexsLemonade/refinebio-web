@@ -1,6 +1,4 @@
 import { Fragment } from 'react'
-import defaultConfig from 'utils/config'
-import config from 'components/Footer/config'
 import { useResponsive } from 'hooks/useResponsive'
 import {
   Box,
@@ -16,9 +14,10 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { SrOnly } from 'components/shared/SrOnly'
 import styled, { css } from 'styled-components'
-import { CoinIcon } from '../../images/coin.svg'
-import { TwitterIcon } from '../../images/twitter.svg'
-import { GithubIcon } from '../../images/github.svg'
+import config from 'config'
+import { CoinIcon } from '../images/coin.svg'
+import { TwitterIcon } from '../images/twitter.svg'
+import { GithubIcon } from '../images/github.svg'
 
 const TwitterLink = styled(Anchor)`
   ${({ theme }) => css`
@@ -38,8 +37,7 @@ const GithubLink = styled(Anchor)`
 
 export const Footer = () => {
   const { setResponsive } = useResponsive()
-  const { links } = defaultConfig
-  const { contributors, texts } = config
+  const { contributors, links } = config
 
   return (
     <GrommentFooter
@@ -62,7 +60,9 @@ export const Footer = () => {
               }}
             >
               <Paragraph>
-                {texts.about}{' '}
+                refine.bio is a repository of harmonized, ready-to-use
+                transcriptome data from publicly available sources. refine.bio
+                is a project of the{' '}
                 <Anchor
                   label="Childhood Cancer Data Lab (CCDL)"
                   href={links.ccdl}
@@ -143,7 +143,11 @@ export const Footer = () => {
                     {i ? ', ' : ''} {name}
                   </Fragment>
                 ))}
-                . <strong>{texts.refinebio}</strong>
+                .{' '}
+                <strong>
+                  refine.bio: a resource of uniformly processed publicly
+                  available gene expression datasets.
+                </strong>
               </Text>
               <Text>
                 URL:{' '}
@@ -154,7 +158,10 @@ export const Footer = () => {
                 />
               </Text>
               <Paragraph margin={{ top: 'small' }}>
-                <i>{texts.note}</i>
+                <i>
+                  Note that the contributor list is in alphabetical order as we
+                  prepare a manuscript for submission
+                </i>
               </Paragraph>
             </Col>
           </Row>
