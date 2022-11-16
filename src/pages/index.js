@@ -344,7 +344,7 @@ const Home = () => {
           {/* fixed width to preserve UI layout in wider screens */}
           <Row width="500px">
             <Col>
-              <Input placeHolder="jdoe@example.com" responsive secondary />
+              <Input placeholder="jdoe@example.com" responsive secondary />
             </Col>
             <Button
               label="Sign up"
