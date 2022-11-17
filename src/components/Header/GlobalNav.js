@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Menu, Nav as GrommentNav, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
@@ -66,6 +67,58 @@ const NavIcon = styled(Box)`
     `}
 `
 
+const A = styled(Anchor)`
+  ${({ theme, light, viewport }) => css`
+    border-bottom: 2px solid transparent;
+    color: ${light && viewport !== 'small'
+      ? theme.global.colors.white
+      : theme.global.colors.black};
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      border-bottom: 2px solid
+        ${light ? theme.global.colors.white : theme.global.colors.brand};
+      color: ${light ? theme.global.colors.white : theme.global.colors.brand};
+    }
+  `}
+
+  ${({ theme, viewport }) =>
+    viewport === 'small' &&
+    css`
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      height: 56px;
+      width: 100%;
+      margin: 0;
+      padding: 40px 0 40px 40px;
+      border: none;
+      &:hover,
+      &:focus {
+        color: ${theme.global.colors.brand};
+        background: ${theme.global.colors['gray-shade-5']};
+        border: none;
+      }
+    `}
+
+    ${({ theme, current, light, viewport }) =>
+    current &&
+    css`
+      border-bottom: 2px solid
+        ${light ? theme.global.colors.white : theme.global.colors.black};
+      border-bottom: ${viewport === 'small' && 'none'};
+      text-decoration: ${viewport === 'small' ? 'underline' : 'none'};
+      &:hover,
+      &:focus {
+        color: ${light && viewport !== 'small'
+          ? theme.global.colors.white
+          : theme.global.colors.black};
+        background: ${viewport === 'small' && 'none'};
+        text-decoration: ${viewport === 'small' ? 'underline' : 'none'};
+      }
+    `}
+`
+
 const List = styled(Box)`
   display: flex;
   align-items: center;
@@ -73,20 +126,6 @@ const List = styled(Box)`
   ${({ theme, light }) => css`
     li {
       margin-left: 16px;
-
-      a {
-        border-bottom: 2px solid transparent;
-        color: ${light ? theme.global.colors.white : theme.global.colors.black};
-        &:hover,
-        &:focus {
-          border-bottom: 2px solid
-            ${light ? theme.global.colors.white : theme.global.colors.brand};
-          color: ${light
-            ? theme.global.colors.white
-            : theme.global.colors.brand};
-        }
-      }
-
       button[aria-label='Open Menu'] {
         border-bottom: 2px solid transparent;
         border-radius: 0;
@@ -100,7 +139,6 @@ const List = styled(Box)`
             ? theme.global.colors.white
             : theme.global.colors.black};
         }
-
         &:hover,
         &[aria-expanded='true'] {
           border-bottom: 2px solid
@@ -121,7 +159,7 @@ const List = styled(Box)`
     }
   `}
 
-  ${({ theme, viewport }) =>
+  ${({ viewport }) =>
     viewport === 'small' &&
     css`
       align-items: start;
@@ -130,23 +168,6 @@ const List = styled(Box)`
       li {
         margin-left: 0;
         width: 100%;
-
-        a {
-          color: ${theme.global.colors.black};
-          display: flex;
-          align-items: center;
-          font-size: 20px;
-          height: 56px;
-          width: 100%;
-          margin: 0;
-          padding: 40px 0 40px 40px;
-          &:hover,
-          &:focus {
-            color: ${theme.global.colors.brand};
-            background: ${theme.global.colors['gray-shade-5']};
-            border: none;
-          }
-        }
 
         button {
           font-size: 18px;
@@ -176,9 +197,17 @@ const CustomNav = styled(GrommentNav)`
       z-index: 2;
     `}
 `
+
 export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
+  const router = useRouter()
+  const getCurrent = (path) => router.pathname === path
   const { viewport } = useResponsive()
   const WIDTH = '80vw'
+
+  const handleClick = () => {
+    if (viewport !== 'small') return
+    setToggle(!toggle)
+  }
 
   return (
     <>
@@ -186,7 +215,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
         <NavIcon
           light={light}
           toggle={toggle}
-          onClick={() => setToggle(!toggle)}
+          onClick={handleClick}
           role="button"
         >
           <Box as="span" />
@@ -207,14 +236,18 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
           viewport={viewport}
         >
           {viewport === 'small' && (
-            <Logo
-              clickHandler={() => setToggle(!toggle)}
-              margin={{ vertical: 'large' }}
-            />
+            <Logo margin={{ vertical: 'large' }} clickHandler={handleClick} />
           )}
           <List as="ul" light={light} viewport={viewport}>
             <Box as="li">
-              <Anchor label="Search " href="/search" underline={false} />
+              <A
+                current={getCurrent('/search')}
+                label="Search"
+                light={light}
+                href="/search"
+                viewport={viewport}
+                onClick={handleClick}
+              />
             </Box>
             <Box as="li">
               {viewport === 'small' ? (
@@ -229,15 +262,19 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                       Compendia <ArrowDownIcon />
                     </Text>
                   </Box>
-                  <Anchor
+                  <A
                     label="Normalized Compendia"
+                    light={light}
                     href="/"
-                    underline={false}
+                    viewport={viewport}
+                    onClick={handleClick}
                   />
-                  <Anchor
+                  <A
                     label="RNA-seq Sample Compendia"
+                    light={light}
                     href="/"
-                    underline={false}
+                    viewport={viewport}
+                    onClick={handleClick}
                   />
                 </>
               ) : (
@@ -253,16 +290,25 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
               )}
             </Box>
             <Box as="li">
-              <Anchor
+              <A
                 label="Docs"
+                light={light}
                 href="https://docs.refine.bio"
                 target="_blank"
                 rel="noopener noreferrer"
-                underline={false}
+                viewport={viewport}
+                onClick={handleClick}
               />
             </Box>
             <Box as="li">
-              <Anchor label="About" href="/about" underline={false} />
+              <A
+                current={router.pathname === '/about'}
+                light={light}
+                label="About"
+                href="/about"
+                viewport={viewport}
+                onClick={() => handleClick()}
+              />
             </Box>
             <Box as="li">
               <Button

@@ -54,10 +54,10 @@ const HeroBody = () => {
             margin={{ top: setResponsive('small') }}
           >
             <Anchor
-              defaultUnderline
               label={query}
               href={{ pathname: '/search', query: { query } }}
               size="xlarge"
+              underline
             />
           </Text>
         ))}
@@ -72,9 +72,9 @@ const LayerCol1 = ({ heading, body, svgIcon, ...props }) => {
   const { setResponsive } = useResponsive()
 
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
     <Column
       flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')}
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       <Row>
@@ -102,10 +102,10 @@ const LayerCol2 = ({ heading, body, footer, svgIcon, ...props }) => {
   const { setResponsive } = useResponsive()
 
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
     <Column
       background="white"
       pad={setResponsive('large', 'medium')}
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       <Box height="xxxlarge" margin={{ bottom: 'medium' }} aria-hidden>
