@@ -61,9 +61,8 @@ export const Button = ({
     <Box
       responsive={responsive}
       width={
-        btnWidth || (responsive && viewport === 'small')
-          ? '100%'
-          : 'max-content'
+        btnWidth ||
+        (responsive && viewport === 'small' ? '100%' : 'max-content')
       }
       viewport={viewport}
     >
