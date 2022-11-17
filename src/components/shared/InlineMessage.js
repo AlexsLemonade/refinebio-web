@@ -1,5 +1,4 @@
 import { Box, Paragraph, Text } from 'grommet'
-import styled, { css } from 'styled-components'
 import InfoIcon from '../../images/info.svg'
 import SuccessIcon from '../../images/success.svg'
 import ErrorIcon from '../../images/warning.svg'
@@ -11,12 +10,6 @@ const SVGs = {
   ErrorIcon
 }
 
-const P = styled(Paragraph)`
-  ${({ theme }) => css`
-    color: ${(props) => theme.global.colors[props.color]};
-  `}
-`
-
 export const InlineMessage = ({
   label = '',
   labelOnly = false,
@@ -25,30 +18,30 @@ export const InlineMessage = ({
 }) => {
   const SVGIcon =
     SVGs[`${color.substring(0, 1).toUpperCase()}${color.substring(1)}Icon`]
-  const errorIconColor = 'coral-shade-20'
+  const HEIGHT = '24px'
 
   return (
     <Box
       align="center"
       direction="row"
-      height="24px"
+      height={HEIGHT}
       width="max-content"
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       {!labelOnly && (
-        <Box margin={{ right: '8px' }} height="inherit">
+        <Box margin={{ right: 'xsmall' }} height="inherit">
           <Text
-            color={color === 'error' ? errorIconColor : color}
-            height="24px"
+            color={color === 'error' ? 'coral-shade-20' : color}
+            height={HEIGHT}
           >
             <SVGIcon role="presentation" aria-hidden="true" focusable="false" />
           </Text>
         </Box>
       )}
-      <P color={color} size="small">
+      <Paragraph color={color} size="small">
         {label}
-      </P>
+      </Paragraph>
     </Box>
   )
 }
