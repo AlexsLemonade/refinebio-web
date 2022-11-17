@@ -26,7 +26,7 @@ export const Hero = ({
           background="white"
           elevation="xlarge"
           pad={boxPadding}
-          round="8px"
+          round="xsmall"
         >
           {body}
         </Box>
