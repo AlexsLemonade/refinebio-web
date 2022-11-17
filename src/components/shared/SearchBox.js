@@ -1,7 +1,7 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, FormField } from 'grommet'
 import { Button } from 'components/shared/Button'
-import { Input } from 'components/shared/Input'
+import { TextInput } from 'components/shared/TextInput'
 import styled from 'styled-components'
 import { SearchIcon } from '../../images/search.svg'
 
@@ -52,7 +52,7 @@ export const SearchBox = ({
     >
       <FormField a11yTitle="Search" htmlFor="search" role="search" width="100%">
         <Box style={{ position: 'relative' }}>
-          <Input id="search" type="search" placeholder={placeHolder} />
+          <TextInput id="search" type="search" placeholder={placeHolder} />
           {!size && (
             <SearchIcon
               style={{

@@ -10,7 +10,7 @@ import {
 } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
-import { Col } from 'components/shared/Col'
+import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { SrOnly } from 'components/shared/SrOnly'
@@ -54,7 +54,7 @@ export const Footer = () => {
         <Box pad={{ horizontal: setResponsive('0', '0', 'xxxxxlarge') }}>
           <Row>
             {/* fixed svalue to preserve UI layout for wider screens */}
-            <Col
+            <Column
               margin={{
                 bottom: setResponsive('medium', 'small'),
                 right: setResponsive('0', 'xxlarge', '148px')
@@ -130,8 +130,8 @@ export const Footer = () => {
                   />
                 </Text>
               </Box>
-            </Col>
-            <Col>
+            </Column>
+            <Column>
               <Heading
                 level={5}
                 style={{ fontFamily: `'Lato', sans-serif`, fontWeight: '700' }}
@@ -164,7 +164,7 @@ export const Footer = () => {
                   prepare a manuscript for submission
                 </i>
               </Paragraph>
-            </Col>
+            </Column>
           </Row>
         </Box>
 
