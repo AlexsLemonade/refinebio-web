@@ -2,17 +2,8 @@ import { useState } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Header as GrommetHeader } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import styled from 'styled-components'
 import { Logo } from './Logo'
 import { GlobalNav } from './GlobalNav'
-
-const Overlay = styled(Box)`
-  opacity: 0;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 1;
-`
 
 export const Header = ({ light = false }) => {
   const { viewport } = useResponsive()
@@ -26,11 +17,12 @@ export const Header = ({ light = false }) => {
       role="banner"
     >
       {viewport === 'small' && toggle && (
-        <Overlay
+        <Box
           animation={{ type: toggle ? 'fadeIn' : 'fedeOut', duration: 150 }}
           background="rgba_3"
           fill
           toggle={toggle}
+          style={{ opacity: 0, position: 'fixed', left: 0, top: 0, zIndex: 1 }}
         />
       )}
       <FixedContainer direction="row" justify="between">
