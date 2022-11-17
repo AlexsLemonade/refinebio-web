@@ -3,6 +3,7 @@ import { Box } from 'grommet'
 
 export const FixedContainer = ({ children, ...props }) => {
   const { setResponsive } = useResponsive()
+  const MAX_WIDTH = '1250px' // to preserve UI layout for wider screens
   return (
     <Box
       margin={{ horizontal: 'auto' }}
@@ -11,7 +12,7 @@ export const FixedContainer = ({ children, ...props }) => {
         { horizontal: 'small' },
         { horizontal: 'large' }
       )}
-      width="1250px" // to preserve UI layout for wider screens
+      width={MAX_WIDTH}
       style={{ position: 'relative' }}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
