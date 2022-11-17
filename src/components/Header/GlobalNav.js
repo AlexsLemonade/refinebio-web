@@ -236,7 +236,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
           viewport={viewport}
         >
           {viewport === 'small' && (
-            <Logo margin={{ vertical: 'large' }} onClick={handleClick} />
+            <Logo margin={{ vertical: 'large' }} clickHandler={handleClick} />
           )}
           <List as="ul" light={light} viewport={viewport}>
             <Box as="li">
