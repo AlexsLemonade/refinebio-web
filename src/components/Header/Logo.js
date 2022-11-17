@@ -5,7 +5,7 @@ import { LogoSvg } from '../../images/logo.svg'
 
 // NOTE: Set the prop 'light' to true for the dark background
 
-export const Logo = ({ light = false }) => {
+export const Logo = ({ clickHandler, light = false }) => {
   return (
     <Box light={light}>
       <Anchor
@@ -13,6 +13,7 @@ export const Logo = ({ light = false }) => {
         href="/"
         underline={false}
         style={{ lineHeight: 0 }}
+        onClick={clickHandler}
       >
         <LogoSvg role="img" title="refine.bio" />
         <SrOnly label="Go to refine.bio homepage " />

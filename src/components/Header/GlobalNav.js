@@ -206,7 +206,12 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
           toggle={toggle}
           viewport={viewport}
         >
-          {viewport === 'small' && <Logo margin={{ vertical: 'large' }} />}
+          {viewport === 'small' && (
+            <Logo
+              clickHandler={() => setToggle(!toggle)}
+              margin={{ vertical: 'large' }}
+            />
+          )}
           <List as="ul" light={light} viewport={viewport}>
             <Box as="li">
               <Anchor label="Search " href="/search" underline={false} />
