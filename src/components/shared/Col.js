@@ -1,30 +1,18 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
-import styled, { css } from 'styled-components'
-
-const Wrapper = styled(Box)`
-  ${({ flexValue }) => css`
-    flex: ${flexValue};
-  `}
-
-  ${({ viewport }) =>
-    viewport === 'small' &&
-    css`
-      flex: 1 1 auto;
-    `}
-`
 
 export const Col = ({ flexValue = '1 1 0', children, ...props }) => {
   const { viewport } = useResponsive()
   return (
-    <Wrapper
+    <Box
       flexValue={flexValue}
       viewport={viewport}
+      style={{ flex: viewport === 'small' ? '1 1 auto' : flexValue }}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       {children}
-    </Wrapper>
+    </Box>
   )
 }
 
