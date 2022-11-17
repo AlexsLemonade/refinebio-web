@@ -9,6 +9,9 @@ export const Pill = ({
   dot = true,
   status = ''
 }) => {
+  const RADIUS = '30px'
+  const DOT_HEIGHT = '7px'
+
   return (
     <Box
       align="center"
@@ -16,14 +19,14 @@ export const Pill = ({
       direction="row"
       flex
       pad={{ horizontal: 'xsmall', vertical: 'xxsmall' }}
-      round="30px"
+      round={RADIUS}
       width="max-content"
     >
       {dot && (
         <Box
           background={status || color}
-          width="7px"
-          height="7px"
+          width={DOT_HEIGHT}
+          height={DOT_HEIGHT}
           margin={{ right: 'xsmall' }}
           round="50%"
         />
@@ -32,3 +35,5 @@ export const Pill = ({
     </Box>
   )
 }
+
+export default Pill

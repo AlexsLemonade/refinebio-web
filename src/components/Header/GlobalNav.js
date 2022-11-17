@@ -178,6 +178,7 @@ const CustomNav = styled(GrommentNav)`
 `
 export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const { viewport } = useResponsive()
+  const WIDTH = '80vw'
 
   return (
     <>
@@ -216,10 +217,10 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                   <Box
                     alignSelf="start"
                     pad={{ vertical: 'medium' }}
-                    margin={{ horizontal: '40px' }}
-                    width="80vw"
+                    margin={{ horizontal: 'xlarge' }}
+                    width={WIDTH}
                   >
-                    <Text size="18px">
+                    <Text size="large">
                       Compendia <ArrowDownIcon />
                     </Text>
                   </Box>
@@ -263,7 +264,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 label="My Dataset"
                 aria-label="View My Dataset"
                 badge={{ max: 10000, value: 0 }}
-                btnWidth={viewport === 'small' ? '80vw' : 'max-content'}
+                btnWidth={viewport === 'small' ? WIDTH : 'max-content'}
                 light={viewport !== 'small' ? light : false}
                 secondary
               />
