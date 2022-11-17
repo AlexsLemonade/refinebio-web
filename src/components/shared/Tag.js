@@ -11,8 +11,8 @@ export const Tag = ({ background = 'alex-navy-tint-90', label }) => {
     >
       <Box
         background={background}
-        pad={{ horizontal: '8px' }}
-        margin={{ right: '4px' }}
+        pad={{ horizontal: 'xsmall' }}
+        margin={{ right: 'xxsmall' }}
         style={{ borderRadius: '20px 0px 0px 20px' }}
       >
         <Text>{label}</Text>
@@ -20,7 +20,7 @@ export const Tag = ({ background = 'alex-navy-tint-90', label }) => {
       <Box
         background={background}
         justify="center"
-        pad={{ horizontal: '4px' }}
+        pad={{ horizontal: 'xxsmall' }}
         style={{ boxShadow: 'none' }}
         onClick={() => {}}
       >
