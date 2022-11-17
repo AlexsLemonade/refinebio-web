@@ -18,7 +18,7 @@ const CustomInput = styled(GrommetTextInput)`
     `}
 `
 
-export const Input = ({ error = false, ...props }) => {
+export const TextInput = ({ error = false, ...props }) => {
   return (
     <Box style={{ position: 'relative' }}>
       {error && (
@@ -43,3 +43,5 @@ export const Input = ({ error = false, ...props }) => {
     </Box>
   )
 }
+
+export default TextInput

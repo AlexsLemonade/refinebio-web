@@ -2,7 +2,7 @@ import config from 'config'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
-import { Col } from 'components/shared/Col'
+import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Hero } from 'components/shared/Hero'
 import { Row } from 'components/shared/Row'
@@ -112,7 +112,7 @@ const LayerRow1 = ({
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
-      <Col
+      <Column
         flexValue={flexValue}
         align={setResponsive('center', 'start')}
         justify={setResponsive('start', 'center')}
@@ -125,8 +125,8 @@ const LayerRow1 = ({
           {heading}
         </Heading>
         <Paragraph>{body}</Paragraph>
-      </Col>
-      <Col
+      </Column>
+      <Column
         align={setResponsive('center', align)}
         flexValue={flexValue}
         margin={{ bottom: 'small' }}

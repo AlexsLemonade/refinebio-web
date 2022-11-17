@@ -1,7 +1,7 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
 
-export const Col = ({ flexValue = '1 1 0', children, ...props }) => {
+export const Column = ({ flexValue = '1 1 0', children, ...props }) => {
   const { viewport } = useResponsive()
   return (
     <Box
@@ -16,4 +16,4 @@ export const Col = ({ flexValue = '1 1 0', children, ...props }) => {
   )
 }
 
-export default Col
+export default Column

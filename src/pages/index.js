@@ -2,10 +2,10 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
-import { Col } from 'components/shared/Col'
+import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Hero } from 'components/shared/Hero'
-import { Input } from 'components/shared/Input'
+import { TextInput } from 'components/shared/TextInput'
 import { Row } from 'components/shared/Row'
 import { SearchBox } from 'components/shared/SearchBox'
 import config from 'config'
@@ -73,12 +73,15 @@ const LayerCol1 = ({ heading, body, svgIcon, ...props }) => {
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Col flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')} {...props}>
+    <Column
+      flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')}
+      {...props}
+    >
       <Row>
         <Box margin={{ bottom: 'small', right: 'large' }} aria-hidden>
           {svgIcon}
         </Box>
-        <Col>
+        <Column>
           <Heading
             level={2}
             margin={{ bottom: 'small' }}
@@ -89,9 +92,9 @@ const LayerCol1 = ({ heading, body, svgIcon, ...props }) => {
           <Paragraph size={setResponsive('medium', 'large', 'large')}>
             {body}
           </Paragraph>
-        </Col>
+        </Column>
       </Row>
-    </Col>
+    </Column>
   )
 }
 // 2nd Layer
@@ -99,8 +102,12 @@ const LayerCol2 = ({ heading, body, footer, svgIcon, ...props }) => {
   const { setResponsive } = useResponsive()
 
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <Col background="white" pad={setResponsive('large', 'medium')} {...props}>
+    <Column
+      background="white"
+      pad={setResponsive('large', 'medium')}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    >
       <Box height="xxxlarge" margin={{ bottom: 'medium' }} aria-hidden>
         {svgIcon}
       </Box>
@@ -116,7 +123,7 @@ const LayerCol2 = ({ heading, body, footer, svgIcon, ...props }) => {
       <Box align="center" margin={{ top: setResponsive('large', 'medium') }}>
         {footer}
       </Box>
-    </Col>
+    </Column>
   )
 }
 // 3rd Layer
@@ -124,7 +131,7 @@ const LayerCol3 = ({ heading, body, footer, img, ...props }) => {
   const { setResponsive } = useResponsive()
 
   return (
-    <Col
+    <Column
       background={{
         image: `url('${img}')`,
         position: 'bottom right',
@@ -145,7 +152,7 @@ const LayerCol3 = ({ heading, body, footer, img, ...props }) => {
       </Heading>
       <Paragraph>{body}</Paragraph>
       <Box margin={{ top: setResponsive('large', 'medium') }}>{footer}</Box>
-    </Col>
+    </Column>
   )
 }
 
@@ -343,9 +350,9 @@ const Home = () => {
           </Paragraph>
           {/* fixed width to preserve UI layout in wider screens */}
           <Row width="500px">
-            <Col>
-              <Input placeholder="jdoe@example.com" responsive secondary />
-            </Col>
+            <Column>
+              <TextInput placeholder="jdoe@example.com" responsive secondary />
+            </Column>
             <Button
               label="Sign up"
               margin={{
