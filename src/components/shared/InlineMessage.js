@@ -1,14 +1,7 @@
-import { Box, Paragraph, Text } from 'grommet'
-import InfoIcon from '../../images/info.svg'
-import SuccessIcon from '../../images/success.svg'
-import ErrorIcon from '../../images/warning.svg'
+import { Box, Paragraph } from 'grommet'
+import { Icon } from 'components/shared/Icon'
 
 // status: error, info, success
-const SVGs = {
-  InfoIcon,
-  SuccessIcon,
-  ErrorIcon
-}
 
 export const InlineMessage = ({
   label = '',
@@ -16,8 +9,10 @@ export const InlineMessage = ({
   color = 'info',
   ...props
 }) => {
-  const SVGIcon =
-    SVGs[`${color.substring(0, 1).toUpperCase()}${color.substring(1)}Icon`]
+  const SVG =
+    color === 'error'
+      ? 'Warning'
+      : `${color.substring(0, 1).toUpperCase()}${color.substring(1)}`
   const HEIGHT = '24px'
 
   return (
@@ -31,12 +26,10 @@ export const InlineMessage = ({
     >
       {!labelOnly && (
         <Box margin={{ right: 'xsmall' }} height="inherit">
-          <Text
+          <Icon
             color={color === 'error' ? 'coral-shade-20' : color}
-            height={HEIGHT}
-          >
-            <SVGIcon role="presentation" aria-hidden="true" focusable="false" />
-          </Text>
+            name={SVG}
+          />
         </Box>
       )}
       <Paragraph color={color} size="small">

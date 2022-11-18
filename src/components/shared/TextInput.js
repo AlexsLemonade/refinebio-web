@@ -1,8 +1,8 @@
 import { Box, Text, TextInput as GrommetTextInput } from 'grommet'
 import { normalizeColor } from 'grommet/utils'
+import { Icon } from 'components/shared/Icon'
 import { form } from 'themes/variables'
 import styled, { css } from 'styled-components'
-import Warning from '../../images/warning.svg'
 
 const CustomInput = styled(GrommetTextInput)`
   ${({ theme, error }) =>
@@ -22,20 +22,16 @@ export const TextInput = ({ error = false, ...props }) => {
   return (
     <Box style={{ position: 'relative' }}>
       {error && (
-        // TODO: Create Icon component
-        <Text color="coral-shade-20">
-          <Warning
-            role="presentation"
-            aria-hidden="true"
-            focusable="false"
-            style={{
-              position: 'absolute',
-              top: '4px',
-              right: '4px',
-              transform: 'scale(.65)',
-              zIndex: '1'
-            }}
-          />
+        <Text
+          focusable="false"
+          style={{
+            position: 'absolute',
+            top: '6px',
+            right: '6px',
+            zIndex: '1'
+          }}
+        >
+          <Icon color="coral-shade-20" name="Warning" size="small" />
         </Text>
       )}
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}

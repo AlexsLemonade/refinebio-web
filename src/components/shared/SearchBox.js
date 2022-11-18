@@ -1,9 +1,9 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, FormField } from 'grommet'
 import { Button } from 'components/shared/Button'
+import { Icon } from 'components/shared/Icon'
 import { TextInput } from 'components/shared/TextInput'
 import styled from 'styled-components'
-import { SearchIcon } from '../../images/search.svg'
 
 const Wrapper = styled(Box)`
   ${({ size }) =>
@@ -54,15 +54,17 @@ export const SearchBox = ({
         <Box style={{ position: 'relative' }}>
           <TextInput id="search" type="search" placeholder={placeHolder} />
           {!size && (
-            <SearchIcon
+            <Box
               style={{
                 position: 'absolute',
                 right: '8px',
-                top: '50%',
+                top: '6px',
                 transform: 'translateY(-50%)',
                 zIndex: 1
               }}
-            />
+            >
+              <Icon name="Search" size="small" />
+            </Box>
           )}
         </Box>
       </FormField>
