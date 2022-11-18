@@ -142,7 +142,7 @@ const LayerCol3 = ({ heading, body, footer, img, ...props }) => {
       pad={{
         horizontal: setResponsive('large', 'xxlarge', 'xxxlarge'),
         top: setResponsive('large', 'xlarge'),
-        bottom: setResponsive('large', 'xlarge', 'xxxxlarge')
+        bottom: setResponsive('large', 'xlarge', 'basex8')
       }}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
@@ -165,8 +165,8 @@ const Home = () => {
       {/* 1st Layer */}
       <Box
         pad={{
-          top: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxxlarge'),
-          bottom: setResponsive('xlarge', 'xlarge', 'xxxxxxxlarge')
+          top: setResponsive('xxxlarge', 'xxxlarge', 'basex10'),
+          bottom: setResponsive('xlarge', 'xlarge', 'basex12')
         }}
       >
         <FixedContainer>
@@ -174,8 +174,8 @@ const Home = () => {
           <Hero
             body={<HeroBody />}
             boxPadding={{
-              horizontal: setResponsive('large', 'xxxxxxxlarge'),
-              vertical: setResponsive('large', 'xxxxlarge')
+              horizontal: setResponsive('large', 'basex12'),
+              vertical: setResponsive('large', 'basex8')
             }}
             boxWidth="815px"
           />
@@ -204,7 +204,7 @@ const Home = () => {
                 </>
               }
               svgIcon={<SearchIcon />}
-              margin={{ right: setResponsive('0', '0', 'xxxxxlarge') }}
+              margin={{ right: setResponsive('0', '0', 'basex9') }}
             />
             {viewport === 'large' && (
               <Box
@@ -218,7 +218,7 @@ const Home = () => {
               svgIcon={<FolderIcon />}
               margin={{
                 top: setResponsive('xxxlarge', '0'),
-                left: setResponsive('0', '0', 'xxxxxlarge')
+                left: setResponsive('0', '0', 'basex9')
               }}
               pad={{
                 top: setResponsive('0', 'xlarge', '0')
@@ -230,14 +230,14 @@ const Home = () => {
       {/* 2st Layer */}
       <Box
         background="gradient_blue_dark"
-        pad={{ vertical: setResponsive('medium', 'xxlarge', 'xxxxxxlarge') }}
+        pad={{ vertical: setResponsive('medium', 'xxlarge', 'basex10') }}
       >
         <FixedContainer
-          pad={{ horizontal: setResponsive('medium', 'medium', 'xxxxlarge') }}
+          pad={{ horizontal: setResponsive('medium', 'medium', 'basex8') }}
         >
           <Row
             margin={{
-              bottom: setResponsive('medium', 'xlarge', 'xxxxxxlarge')
+              bottom: setResponsive('medium', 'xlarge', 'basex10')
             }}
           >
             <Paragraph
@@ -302,11 +302,9 @@ const Home = () => {
         </FixedContainer>
       </Box>
       {/* 3rd Layer */}
-      <Box
-        pad={{ vertical: setResponsive('xlarge', 'xxlarge', 'xxxxxxlarge') }}
-      >
+      <Box pad={{ vertical: setResponsive('xlarge', 'xxlarge', 'basex10') }}>
         <FixedContainer
-          pad={{ horizontal: setResponsive('large', 'medium', 'xxxxxlarge') }}
+          pad={{ horizontal: setResponsive('large', 'medium', 'basex9') }}
         >
           <Row>
             <LayerCol3

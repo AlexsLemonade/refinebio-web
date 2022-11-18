@@ -50,10 +50,10 @@ export default {
     xlarge: '40px',
     xxlarge: '48px',
     xxxlarge: '56px',
-    xxxxlarge: '64px',
-    xxxxxlarge: '72px',
-    xxxxxxlarge: '80px',
-    xxxxxxxlarge: '96px'
+    basex8: '64px',
+    basex9: '72px',
+    basex10: '80px',
+    basex12: '96px'
   },
   elevation: {
     light: {

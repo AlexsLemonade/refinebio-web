@@ -20,7 +20,7 @@ const HeroHeader = () => {
     <Heading
       color="white"
       level={1}
-      margin={{ bottom: 'xxxxxxlarge' }}
+      margin={{ bottom: 'basex10' }}
       size={setResponsive('h1_small', 'h1_xlarge')}
       style={{ textShadow: '0 3px 19px rgba(0,0,0,.5)' }}
       textAlign="center"
@@ -39,7 +39,7 @@ const HeroBodyCol = ({ count, text }) => {
       <Text
         color="brand"
         margin={{ bottom: setResponsive('xsmall', 'small') }}
-        size={setResponsive('xxxlarge', 'xxxxlarge')}
+        size={setResponsive('xxxlarge', 'basex8')}
       >
         {count}
       </Text>
@@ -154,8 +154,8 @@ const About = () => {
     <>
       <Box
         pad={{
-          top: 'xxxxxxlarge',
-          bottom: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxlarge')
+          top: 'basex10',
+          bottom: setResponsive('xxxlarge', 'xxxlarge', 'basex9')
         }}
       >
         <FixedContainer
@@ -187,7 +187,7 @@ const About = () => {
               }}
             />
           </Row>
-          <Row margin={{ top: setResponsive('xlarge', 'xxxxxxxlarge') }}>
+          <Row margin={{ top: setResponsive('xlarge', 'basex12') }}>
             <LayerRow1
               align="start"
               direction="row-reverse"
@@ -202,7 +202,7 @@ const About = () => {
               }}
             />
           </Row>
-          <Row margin={{ top: setResponsive('xlarge', 'xxxxxxxlarge') }}>
+          <Row margin={{ top: setResponsive('xlarge', 'basex12') }}>
             <LayerRow1
               heading="Better Medicine Through Machine Learning"
               body="With the power of machine learning and the rich collection of data in refine.bio, 
@@ -225,8 +225,8 @@ const About = () => {
           border={{ color: 'gray-shade-5', side: 'top', size: 'large' }}
           pad={{
             horizontal: setResponsive('large', 'medium', PAGE_PADDING),
-            top: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxlarge'),
-            bottom: setResponsive('xxxlarge', 'xxxlarge', 'xxxxxxxlarge')
+            top: setResponsive('xxxlarge', 'xxxlarge', 'basex9'),
+            bottom: setResponsive('xxxlarge', 'xxxlarge', 'basex12')
           }}
         >
           <Row justify="center" margin={{ bottom: 'xlarge' }}>
