@@ -4,10 +4,10 @@ import { Box, Menu, Nav as GrommentNav, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Layer } from 'components/shared/Layer'
+import { Icon } from 'components/shared/Icon'
 import { SrOnly } from 'components/shared/SrOnly'
 import styled, { css } from 'styled-components'
 import { Logo } from './Logo'
-import { ArrowDownIcon } from '../../images/chevron-down.svg'
 
 const NavIcon = styled(Box)`
   ${({ theme, light }) => css`
@@ -259,7 +259,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                     width={WIDTH}
                   >
                     <Text size="large">
-                      Compendia <ArrowDownIcon />
+                      Compendia <Icon name="ChevronDown" size="xsmall" />
                     </Text>
                   </Box>
                   <A
@@ -315,7 +315,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 label="My Dataset"
                 aria-label="View My Dataset"
                 badge={{ max: 10000, value: 0 }}
-                btnWidth={viewport === 'small' ? WIDTH : 'max-content'}
+                width={viewport === 'small' ? WIDTH : 'max-content'}
                 light={viewport !== 'small' ? light : false}
                 secondary
               />

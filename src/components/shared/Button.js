@@ -50,7 +50,7 @@ const CustomButton = styled(GrommetButton)`
 `
 
 export const Button = ({
-  btnWidth,
+  width,
   large = false,
   responsive = false,
   uppercase = false,
@@ -61,13 +61,12 @@ export const Button = ({
     <Box
       responsive={responsive}
       width={
-        btnWidth ||
-        (responsive && viewport === 'small' ? '100%' : 'max-content')
+        width || (responsive && viewport === 'small' ? '100%' : 'max-content')
       }
       viewport={viewport}
     >
       <CustomButton
-        btnWidth={btnWidth}
+        width={width}
         large={large}
         uppercase={uppercase}
         viewport={viewport}

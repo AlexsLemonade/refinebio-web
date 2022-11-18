@@ -11,13 +11,11 @@ import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
+import { Icon } from 'components/shared/Icon'
 import { Row } from 'components/shared/Row'
-import { SrOnly } from 'components/shared/SrOnly'
 import styled, { css } from 'styled-components'
 import config from 'config'
 import { CoinIcon } from '../images/coin.svg'
-import { TwitterIcon } from '../images/twitter.svg'
-import { GithubIcon } from '../images/github.svg'
 
 const TwitterLink = styled(Anchor)`
   ${({ theme }) => css`
@@ -91,22 +89,20 @@ export const Footer = () => {
                   <TwitterLink
                     color="gray-shade-40"
                     href={links.ccdlTwitter}
+                    icon={<Icon link name="Twitter" />}
                     margin={{ horizontal: setResponsive('xsmall', '0') }}
+                    pad="0"
                     rel="noopener noreferrer"
                     target="_blank"
-                  >
-                    <TwitterIcon aria-hidden />
-                    <SrOnly label="Follow us on Twitter" />
-                  </TwitterLink>
+                  />
                   <GithubLink
                     color="gray-shade-40"
                     href={links.ccdlGithub}
+                    icon={<Icon link name="Github" />}
+                    pad="0"
                     rel="noopener noreferrer"
                     target="_blank"
-                  >
-                    <GithubIcon aria-hidden />
-                    <SrOnly label="View our refine.bio Github repository" />
-                  </GithubLink>
+                  />
                 </Box>
               </Box>
               <Box>
