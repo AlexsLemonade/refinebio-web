@@ -18,7 +18,7 @@ export const Hero = ({
       <Box
         width={boxWidth}
         margin={{
-          bottom: setResponsive(marginBottom, 'xxxlarge', 'xxxxxxxlarge')
+          bottom: setResponsive(marginBottom, 'xxxlarge', 'basex12')
         }}
       >
         <Box

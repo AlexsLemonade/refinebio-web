@@ -48,7 +48,7 @@ export const Footer = () => {
       role="contentinfo"
     >
       <FixedContainer align="center">
-        <Box pad={{ horizontal: setResponsive('0', '0', 'xxxxxlarge') }}>
+        <Box pad={{ horizontal: setResponsive('0', '0', 'basex9') }}>
           <Row>
             {/* fixed svalue to preserve UI layout for wider screens */}
             <Column
@@ -164,9 +164,9 @@ export const Footer = () => {
         <Row
           align={setResponsive('start', 'center')}
           fill
-          margin={{ top: setResponsive('medium', 'large', 'xxxxlarge') }}
+          margin={{ top: setResponsive('medium', 'large', 'basex8') }}
           pad={{
-            horizontal: setResponsive('0', 'xxxxlarge', 'xxxxxlarge')
+            horizontal: setResponsive('0', 'basex8', 'basex9')
           }}
         >
           <Row gap="medium">
