@@ -37,19 +37,18 @@ const CustomButton = styled(GrommetButton)`
     `}
 `
 
-export const Button = ({ btnWidth, responsive = false, ...props }) => {
+export const Button = ({ responsive = false, width, ...props }) => {
   const { viewport } = useResponsive()
   return (
     <Box
       responsive={responsive}
       width={
-        btnWidth ||
-        (responsive && viewport === 'small' ? '100%' : 'max-content')
+        width || (responsive && viewport === 'small' ? '100%' : 'max-content')
       }
       viewport={viewport}
     >
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <CustomButton btnWidth={btnWidth} {...props} />
+      <CustomButton width={width} {...props} />
     </Box>
   )
 }

@@ -315,7 +315,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 label="My Dataset"
                 aria-label="View My Dataset"
                 badge={{ max: 10000, value: 0 }}
-                btnWidth={viewport === 'small' ? WIDTH : 'max-content'}
+                width={viewport === 'small' ? WIDTH : 'max-content'}
                 light={viewport !== 'small' ? light : false}
                 secondary
               />

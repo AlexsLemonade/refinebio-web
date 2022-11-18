@@ -68,7 +68,7 @@ export const SearchBox = ({
       </FormField>
       {size && (
         <Button
-          btnWidth={responsive && viewport === 'small' ? '100%' : btnWidth}
+          width={responsive && viewport === 'small' ? '100%' : btnWidth}
           label="Search"
           margin={{
             left: setResponsive('0', 'small'),
