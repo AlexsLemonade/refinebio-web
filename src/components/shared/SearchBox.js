@@ -52,19 +52,16 @@ export const SearchBox = ({
     >
       <FormField a11yTitle="Search" htmlFor="search" role="search" width="100%">
         <Box style={{ position: 'relative' }}>
-          <TextInput id="search" type="search" placeholder={placeHolder} />
-          {!size && (
-            <Box
-              style={{
-                display: 'block',
-                position: 'absolute',
-                right: '8px',
-                top: '6px',
-                zIndex: 1
-              }}
-            >
-              <Icon name="Search" size="small" />
-            </Box>
+          {!size ? (
+            <TextInput
+              id="search"
+              type="search"
+              icon={!size && <Icon name="Search" size="small" />}
+              placeholder={placeHolder}
+              reverse
+            />
+          ) : (
+            <TextInput id="search" type="search" placeholder={placeHolder} />
           )}
         </Box>
       </FormField>
