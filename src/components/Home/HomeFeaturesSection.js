@@ -38,7 +38,7 @@ const Card = ({ heading, body, svgIcon, ...props }) => {
   )
 }
 
-export const HomeFeatures = () => {
+export const HomeFeaturesSection = () => {
   const { links } = config
   const { viewport, setResponsive } = useResponsive()
 
@@ -94,4 +94,4 @@ export const HomeFeatures = () => {
   )
 }
 
-export default HomeFeatures
+export default HomeFeaturesSection

@@ -1,9 +1,11 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { AboutCCDL } from './AboutCCDL'
-import { AboutHero } from './AboutHero'
-import { AboutOverview } from './AboutOverview'
+import {
+  AboutCCDLSection,
+  AboutOverviewSection,
+  AboutHero
+} from 'components/About'
 
 const About = () => {
   const { setResponsive } = useResponsive()
@@ -21,11 +23,11 @@ const About = () => {
           pad={{ horizontal: setResponsive('large', 'medium', PAGE_PADDING) }}
         >
           <AboutHero />
-          <AboutOverview />
+          <AboutOverviewSection />
         </FixedContainer>
       </Box>
       <Box>
-        <AboutCCDL />
+        <AboutCCDLSection />
       </Box>
     </>
   )

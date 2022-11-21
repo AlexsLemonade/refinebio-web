@@ -10,7 +10,7 @@ import styled from 'styled-components'
 const PRubik = styled(Paragraph)`
   font-family: 'Rubik', sans-serif;
 `
-export const AboutCCDL = () => {
+export const AboutCCDLSection = () => {
   const { viewport, setResponsive } = useResponsive()
   const { links } = config
   const PAGE_PADDING = '120px'
@@ -84,4 +84,4 @@ export const AboutCCDL = () => {
   )
 }
 
-export default AboutCCDL
+export default AboutCCDLSection

@@ -1,10 +1,10 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
-import { HomeDocuments } from 'pages/home/HomeDocuments'
-import { HomeExamples } from 'pages/home/HomeExamples'
-import { HomeFeatures } from 'pages/home/HomeFeatures'
-import { HomeHero } from 'pages/home/HomeHero'
-import { HomeSignUp } from 'pages/home/HomeSignUp'
+import { HomeDocumentsSection } from 'components/Home/HomeDocumentsSection'
+import { HomeExamplesSection } from 'components/Home/HomeExamplesSection'
+import { HomeFeaturesSection } from 'components/Home/HomeFeaturesSection'
+import { HomeHero } from 'components/Home/HomeHero'
+import { HomeSignUpSection } from 'components/Home/HomeSignUpSection'
 
 const Home = () => {
   const { setResponsive } = useResponsive()
@@ -18,11 +18,11 @@ const Home = () => {
         }}
       >
         <HomeHero />
-        <HomeFeatures />
+        <HomeFeaturesSection />
       </Box>
-      <HomeExamples />
-      <HomeDocuments />
-      <HomeSignUp />
+      <HomeExamplesSection />
+      <HomeDocumentsSection />
+      <HomeSignUpSection />
     </>
   )
 }

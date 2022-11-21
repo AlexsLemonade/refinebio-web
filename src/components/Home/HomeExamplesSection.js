@@ -37,7 +37,7 @@ const Card = ({ heading, body, footer, svgIcon, ...props }) => {
   )
 }
 
-export const HomeExamples = () => {
+export const HomeExamplesSection = () => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -117,4 +117,4 @@ export const HomeExamples = () => {
   )
 }
 
-export default HomeExamples
+export default HomeExamplesSection

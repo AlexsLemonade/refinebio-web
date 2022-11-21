@@ -6,7 +6,7 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { TextInput } from 'components/shared/TextInput'
 
-export const HomeSignUp = () => {
+export const HomeSignUpSection = () => {
   const { setResponsive } = useResponsive()
   return (
     <Box
@@ -46,4 +46,4 @@ export const HomeSignUp = () => {
   )
 }
 
-export default HomeSignUp
+export default HomeSignUpSection
