@@ -1,9 +1,9 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
-import { AboutCCDL } from 'components/about/AboutCCDL'
-import { AboutHero } from 'components/about/AboutHero'
-import { AboutOverview } from 'components/about/AboutOverview'
 import { FixedContainer } from 'components/shared/FixedContainer'
+import { AboutCCDL } from './AboutCCDL'
+import { AboutHero } from './AboutHero'
+import { AboutOverview } from './AboutOverview'
 
 const About = () => {
   const { setResponsive } = useResponsive()
