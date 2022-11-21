@@ -3,82 +3,71 @@ import { Box, FormField } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
 import { TextInput } from 'components/shared/TextInput'
-import styled from 'styled-components'
-
-const Wrapper = styled(Box)`
-  ${({ size }) =>
-    size &&
-    `
-    > div:first-child {
-      width: calc(100% - 96px);
-    }
-    button {
-      padding:${size === 'xlarge' ? '10px 20px' : '4px 16px'};
-    }
-    input {
-      padding: ${size === 'xlarge' ? '22px' : '16px'};
-      font-size: ${size === 'xlarge' ? '22px' : '16px'};
-    }
-  `}
-
-  ${({ responsive, viewport }) =>
-    viewport === 'small' &&
-    responsive &&
-    `
-    > div:first-child {
-      width: 100%;
-    }
-  `}
-`
 
 export const SearchBox = ({
+  btnType = 'primary',
   btnWidth = '',
   placeHolder = '',
-  primary = false,
   responsive = false,
-  secondary = false,
-  size = '',
-  wrapperWidth = ''
+  size = 'medium'
 }) => {
   const { viewport, setResponsive } = useResponsive()
   return (
-    <Wrapper
+    <Box
       direction={responsive && viewport === 'small' ? 'column' : 'row'}
       justify="between"
-      size={size}
-      width={wrapperWidth || '100%'}
-      viewport={viewport}
       responsive={responsive}
+      size={size}
+      viewport={viewport}
+      width="100%"
     >
-      <FormField a11yTitle="Search" htmlFor="search" role="search" width="100%">
+      <FormField
+        a11yTitle="Search"
+        htmlFor="search"
+        role="search"
+        width={
+          size !== 'small' && viewport !== 'small'
+            ? 'calc(100% - 96px)'
+            : '100%'
+        }
+      >
         <Box style={{ position: 'relative' }}>
-          {!size ? (
+          {size === 'small' ? (
             <TextInput
               id="search"
-              type="search"
-              icon={!size && <Icon name="Search" size="small" />}
+              icon={<Icon name="Search" size="small" />}
               placeholder={placeHolder}
+              type="search"
               reverse
             />
           ) : (
-            <TextInput id="search" type="search" placeholder={placeHolder} />
+            <TextInput
+              id="search"
+              placeholder={placeHolder}
+              type="search"
+              style={{
+                fontSize: size === 'large' ? '22px' : '16px',
+                padding: size === 'large' ? '22px' : '16px'
+              }}
+            />
           )}
         </Box>
       </FormField>
-      {size && (
+      {size !== 'small' && (
         <Button
-          width={responsive && viewport === 'small' ? '100%' : btnWidth}
           label="Search"
           margin={{
             left: setResponsive('0', 'small'),
             top: viewport === 'small' && responsive ? 'small' : '0'
           }}
+          primary={btnType === 'primary'}
+          secondary={btnType === 'secondary'}
+          style={{ padding: size === 'large' ? '10px 20px' : '4px 16px' }}
           type="submit"
-          primary={primary}
-          secondary={secondary}
+          width={responsive && viewport === 'small' ? '100%' : btnWidth}
         />
       )}
-    </Wrapper>
+    </Box>
   )
 }
 
