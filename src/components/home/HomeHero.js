@@ -20,7 +20,7 @@ const HeroBody = () => {
         Search for normalized transcriptome data
       </Heading>
       <SearchBox
-        size="xlarge"
+        size="large"
         placeHolder={setResponsive(
           'Search accessions, pathways, etc.,',
           'Search accessions, pathways, diseases, etc.,'
