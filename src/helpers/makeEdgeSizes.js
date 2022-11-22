@@ -1,4 +1,5 @@
-// retrun the edgeSize object using the specified base unit(base) and range(min, max)
+// return the Grommet edgeSize object(in themes/global)
+// using the specified base unit(base) and range values(min, max)
 
 export const makeEdgeSizes = (base, min, max) =>
   Object.fromEntries(
