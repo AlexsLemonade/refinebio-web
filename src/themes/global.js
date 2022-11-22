@@ -16,7 +16,6 @@ export default {
         large: '3px'
       },
       edgeSize: {
-        xxxsmall: '2px',
         xxsmall: '4px',
         xsmall: '8px',
         small: '16px',
@@ -53,7 +52,8 @@ export default {
     basex8: '64px',
     basex9: '72px',
     basex10: '80px',
-    basex12: '96px'
+    basex12: '96px',
+    basex15: '120px'
   },
   elevation: {
     light: {

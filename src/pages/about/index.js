@@ -9,7 +9,6 @@ import {
 
 const About = () => {
   const { setResponsive } = useResponsive()
-  const PAGE_PADDING = '120px'
 
   return (
     <>
@@ -20,7 +19,7 @@ const About = () => {
         }}
       >
         <FixedContainer
-          pad={{ horizontal: setResponsive('large', 'medium', PAGE_PADDING) }}
+          pad={{ horizontal: setResponsive('large', 'medium', 'basex15') }}
         >
           <AboutHero />
           <AboutOverviewSection />

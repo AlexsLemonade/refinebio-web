@@ -202,7 +202,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const router = useRouter()
   const getCurrent = (path) => router.pathname === path
   const { viewport } = useResponsive()
-  const WIDTH = '80vw'
+  const buttonWidth = '80vw'
 
   const handleClick = () => {
     if (viewport !== 'small') return
@@ -256,7 +256,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                     alignSelf="start"
                     pad={{ vertical: 'medium' }}
                     margin={{ horizontal: 'xlarge' }}
-                    width={WIDTH}
+                    width={buttonWidth}
                   >
                     <Text size="large">
                       Compendia <Icon name="ChevronDown" size="xsmall" />
@@ -315,7 +315,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 label="My Dataset"
                 aria-label="View My Dataset"
                 badge={{ max: 10000, value: 0 }}
-                width={viewport === 'small' ? WIDTH : 'max-content'}
+                width={viewport === 'small' ? buttonWidth : 'max-content'}
                 light={viewport !== 'small' ? light : false}
                 secondary
               />

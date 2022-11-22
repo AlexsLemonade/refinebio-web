@@ -13,13 +13,12 @@ const PRubik = styled(Paragraph)`
 export const AboutCCDLSection = () => {
   const { viewport, setResponsive } = useResponsive()
   const { links } = config
-  const PAGE_PADDING = '120px'
 
   return (
     <FixedContainer
       border={{ color: 'gray-shade-5', side: 'top', size: 'large' }}
       pad={{
-        horizontal: setResponsive('large', 'medium', PAGE_PADDING),
+        horizontal: setResponsive('large', 'medium', 'basex15'),
         top: setResponsive('xxxlarge', 'xxxlarge', 'basex9'),
         bottom: setResponsive('xxxlarge', 'xxxlarge', 'basex12')
       }}
