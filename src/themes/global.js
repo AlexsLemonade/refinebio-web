@@ -1,5 +1,13 @@
+import { makeEdgeSizes } from 'helpers/makeEdgeSizes'
 import { colors } from 'themes/colors'
-// RULE: font-size should be defined in 'px' unit
+
+/* RULE: 
+- font-size should be defined in 'px' unit 
+- a base unit for spacing is 8px
+*/
+
+const base = 8
+
 export default {
   borderSize: {
     small: '1px',
@@ -10,16 +18,20 @@ export default {
     small: {
       // for a phone
       value: 750,
+      borderSize: {
+        small: '1px',
+        medium: '2px',
+        large: '3px'
+      },
       edgeSize: {
-        xxxsmall: '2px',
+        none: '0px',
         xxsmall: '4px',
         xsmall: '8px',
         small: '16px',
         medium: '24px',
         large: '32px',
         xlarge: '40px',
-        xxlarge: '48px',
-        xxxlarge: '56px'
+        ...makeEdgeSizes(base, 6, 7)
       }
     },
     medium: {
@@ -36,19 +48,14 @@ export default {
     }
   },
   edgeSize: {
-    xxxsmall: '2px',
+    none: '0px',
     xxsmall: '4px',
     xsmall: '8px',
     small: '16px',
     medium: '24px',
     large: '32px',
     xlarge: '40px',
-    xxlarge: '48px',
-    xxxlarge: '56px',
-    basex8: '64px',
-    basex9: '72px',
-    basex10: '80px',
-    basex12: '96px'
+    ...makeEdgeSizes(base, 6, 18)
   },
   elevation: {
     light: {

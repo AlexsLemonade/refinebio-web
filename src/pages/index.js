@@ -1,12 +1,10 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
-import {
-  HomeDocumentsSection,
-  HomeExamplesSection,
-  HomeFeaturesSection,
-  HomeSignUpSection,
-  HomeHero
-} from 'components/Home'
+import { HomeDocumentsSection } from 'components/Home/HomeDcoumentsSection'
+import { HomeExamplesSection } from 'components/Home/HomeExamplesSection'
+import { HomeFeaturesSection } from 'components/Home/HomeFeaturesSection'
+import { HomeHero } from 'components/Home/HomeHero'
+import { HomeSignUpSection } from 'components/Home/HomeSignUpSection'
 
 const Home = () => {
   const { setResponsive } = useResponsive()
@@ -15,7 +13,7 @@ const Home = () => {
     <>
       <Box
         pad={{
-          top: setResponsive('xxxlarge', 'xxxlarge', 'basex10'),
+          top: setResponsive('basex7', 'basex7', 'basex10'),
           bottom: setResponsive('xlarge', 'xlarge', 'basex12')
         }}
       >

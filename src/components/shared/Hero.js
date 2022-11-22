@@ -6,7 +6,7 @@ export const Hero = ({
   body,
   boxPadding = {},
   boxWidth = '100%',
-  marginBottom = 'xxxlarge',
+  marginBottom = 'basex7',
   ...props
 }) => {
   const { setResponsive } = useResponsive()
@@ -18,7 +18,7 @@ export const Hero = ({
       <Box
         width={boxWidth}
         margin={{
-          bottom: setResponsive(marginBottom, 'xxxlarge', 'basex12')
+          bottom: setResponsive(marginBottom, 'basex7', 'basex12')
         }}
       >
         <Box

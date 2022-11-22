@@ -57,8 +57,8 @@ export const SearchBox = ({
         <Button
           label="Search"
           margin={{
-            left: setResponsive('0', 'small'),
-            top: viewport === 'small' && responsive ? 'small' : '0'
+            left: setResponsive('none', 'small'),
+            top: viewport === 'small' && responsive ? 'small' : 'none'
           }}
           primary={btnType === 'primary'}
           secondary={btnType === 'secondary'}
