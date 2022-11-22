@@ -1,3 +1,4 @@
+import { useResponsive } from 'hooks/useResponsive'
 import { Box, Button as GrommetButton } from 'grommet'
 import styled, { css } from 'styled-components'
 
@@ -36,11 +37,18 @@ const CustomButton = styled(GrommetButton)`
     `}
 `
 
-export const Button = ({ ...props }) => {
+export const Button = ({ responsive = false, width, ...props }) => {
+  const { viewport } = useResponsive()
   return (
-    <Box width="max-content">
+    <Box
+      responsive={responsive}
+      width={
+        width || (responsive && viewport === 'small' ? '100%' : 'max-content')
+      }
+      viewport={viewport}
+    >
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <CustomButton {...props} />
+      <CustomButton width={width} {...props} />
     </Box>
   )
 }
