@@ -1,7 +1,5 @@
 import { Box, Text, TextInput as GrommetTextInput } from 'grommet'
-import { normalizeColor } from 'grommet/utils'
 import { Icon } from 'components/shared/Icon'
-import { form } from 'themes/variables'
 import styled, { css } from 'styled-components'
 
 const CustomInput = styled(GrommetTextInput)`
@@ -13,7 +11,7 @@ const CustomInput = styled(GrommetTextInput)`
       &:hover,
       &:focus-visible {
         border-color: ${theme.global.colors.error};
-        box-shadow: ${form.BOXSHADOW_CUSTOM(normalizeColor('error', theme))};
+        box-shadow: 0 0 1px 1px ${theme.global.colors.error};
       }
     `}
 `
