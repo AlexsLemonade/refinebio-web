@@ -1,10 +1,10 @@
-import { form } from 'themes/variables'
-
-const BOXSHADOW = `0px 3px 4px rgba(0, 0, 0, 0.3)`
+const boxShadow = `0px 3px 4px rgba(0, 0, 0, 0.3)`
+const gray = 'gray-shade-40'
+const radius = '3px'
 
 export default {
   border: {
-    radius: form.RADIUS,
+    radius,
     width: '1px'
   },
   default: {
@@ -27,14 +27,14 @@ export default {
   disabled: {
     opacity: 1,
     primary: {
-      background: form.GRAY,
-      border: { color: form.GRAY, width: '1px' },
+      background: gray,
+      border: { color: gray, width: '1px' },
       color: 'white'
     },
     secondary: {
       background: 'white',
-      border: { color: form.GRAY, width: '1px' },
-      color: form.GRAY
+      border: { color: gray, width: '1px' },
+      color: gray
     },
     extend: () => `
     &:hover {
@@ -86,7 +86,7 @@ export default {
   extend: () => `
     white-space: nowrap;
     &:active:not([disabled]) {
-      box-shadow: ${BOXSHADOW};
+      box-shadow: ${boxShadow};
     }
     `
 }
