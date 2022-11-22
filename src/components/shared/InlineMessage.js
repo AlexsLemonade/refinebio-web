@@ -4,22 +4,23 @@ import { Icon } from 'components/shared/Icon'
 // status: error, info, success
 
 export const InlineMessage = ({
+  color = 'info',
+  height = '24px',
   label = '',
   labelOnly = false,
-  color = 'info',
+
   ...props
 }) => {
   const SVG =
     color === 'error'
       ? 'Warning'
       : `${color.substring(0, 1).toUpperCase()}${color.substring(1)}`
-  const HEIGHT = '24px'
 
   return (
     <Box
       align="center"
       direction="row"
-      height={HEIGHT}
+      height={height}
       width="max-content"
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
