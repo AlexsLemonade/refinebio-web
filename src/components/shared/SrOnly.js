@@ -11,7 +11,7 @@ export const SrOnly = ({ label = '' }) => {
         width: '1px',
         margin: '-1px',
         overflow: 'hidden',
-        padding: '0',
+        padding: 'none',
         position: 'absolute'
       }}
     >

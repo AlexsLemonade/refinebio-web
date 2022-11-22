@@ -15,7 +15,7 @@ const About = () => {
       <Box
         pad={{
           top: 'basex10',
-          bottom: setResponsive('xxxlarge', 'xxxlarge', 'basex9')
+          bottom: setResponsive('basex7', 'basex7', 'basex9')
         }}
       >
         <FixedContainer

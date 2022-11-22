@@ -19,8 +19,8 @@ export const AboutCCDLSection = () => {
       border={{ color: 'gray-shade-5', side: 'top', size: 'large' }}
       pad={{
         horizontal: setResponsive('large', 'medium', 'basex15'),
-        top: setResponsive('xxxlarge', 'xxxlarge', 'basex9'),
-        bottom: setResponsive('xxxlarge', 'xxxlarge', 'basex12')
+        top: setResponsive('basex7', 'basex7', 'basex9'),
+        bottom: setResponsive('basex7', 'basex7', 'basex12')
       }}
     >
       <Row justify="center" margin={{ bottom: 'xlarge' }}>
@@ -31,7 +31,7 @@ export const AboutCCDLSection = () => {
           potential cures.
         </PRubik>
       </Row>
-      <Row align="center" justify="center" margin={{ bottom: 'xxxlarge' }}>
+      <Row align="center" justify="center" margin={{ bottom: 'basex7' }}>
         <Box
           background={{
             image: 'url(CCDL-x-ALSF.svg)',
@@ -66,7 +66,7 @@ export const AboutCCDLSection = () => {
             fighting cancer and beyond.
           </PRubik>
         </Box>
-        <Box justify="center" margin={{ top: setResponsive('medium', '0') }}>
+        <Box justify="center" margin={{ top: setResponsive('medium', 'none') }}>
           <Button
             label="Donate Now"
             large

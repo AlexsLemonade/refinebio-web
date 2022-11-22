@@ -43,18 +43,18 @@ export const Footer = () => {
       elevation="medium"
       justify="center"
       fill
-      gap="0"
+      gap="none"
       pad={{ vertical: 'xlarge' }}
       role="contentinfo"
     >
       <FixedContainer align="center">
-        <Box pad={{ horizontal: setResponsive('0', '0', 'basex9') }}>
+        <Box pad={{ horizontal: setResponsive('none', 'none', 'basex9') }}>
           <Row>
             {/* fixed svalue to preserve UI layout for wider screens */}
             <Column
               margin={{
                 bottom: setResponsive('medium', 'small'),
-                right: setResponsive('0', 'xxlarge', '148px')
+                right: setResponsive('none', 'basex6', '148px')
               }}
             >
               <Paragraph>
@@ -72,7 +72,7 @@ export const Footer = () => {
                 direction="row"
                 justify="between"
                 margin={{
-                  top: setResponsive('medium', 'xxlarge'),
+                  top: setResponsive('medium', 'basex6'),
                   bottom: 'small'
                 }}
               >
@@ -90,7 +90,7 @@ export const Footer = () => {
                     color="gray-shade-40"
                     href={links.ccdlTwitter}
                     icon={<Icon link name="Twitter" />}
-                    margin={{ horizontal: setResponsive('xsmall', '0') }}
+                    margin={{ horizontal: setResponsive('xsmall', 'none') }}
                     pad="0"
                     rel="noopener noreferrer"
                     target="_blank"
@@ -168,7 +168,7 @@ export const Footer = () => {
           fill
           margin={{ top: setResponsive('medium', 'large', 'basex8') }}
           pad={{
-            horizontal: setResponsive('0', 'basex8', 'basex9')
+            horizontal: setResponsive('none', 'basex8', 'basex9')
           }}
         >
           <Row gap="medium">
@@ -181,7 +181,7 @@ export const Footer = () => {
             <Anchor color="gray-shade-40" label="Terms of Use" href="#url" />
             <Anchor color="gray-shade-40" label="Contact" href={links.mailTo} />
           </Row>
-          <Box margin={{ top: setResponsive('small', '0') }}>
+          <Box margin={{ top: setResponsive('small', 'none') }}>
             <Text color="gray-shade-40" size="xsmall">
               Version 24354-23111
             </Text>

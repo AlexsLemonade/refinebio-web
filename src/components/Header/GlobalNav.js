@@ -195,9 +195,9 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
         <Nav
           align="center"
           background={setResponsive('white', 'transparent')}
-          gap="0"
+          gap="none"
           height={setResponsive('100vh', 'auto')}
-          pad={{ vertical: setResponsive('xlarge', '0') }}
+          pad={{ vertical: setResponsive('xlarge', 'none') }}
           role="navigation"
           style={{
             fontFamily: "'Rubik', sans-serif",
@@ -254,7 +254,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 </>
               ) : (
                 <Menu
-                  gap="0"
+                  gap="none"
                   label="Compendia"
                   items={[
                     { label: 'Normalized Compendia', onClick: () => {} },
@@ -286,8 +286,8 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
             </NavItem>
             <NavItem
               margin={{
-                left: setResponsive('0', 'small'),
-                top: setResponsive('medium', '0')
+                left: setResponsive('none', 'small'),
+                top: setResponsive('medium', 'none')
               }}
               viewport={viewport}
             >

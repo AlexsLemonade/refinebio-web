@@ -11,7 +11,7 @@ export const HomeSignUpSection = () => {
   return (
     <Box
       background="gradient_blue_dark"
-      pad={{ vertical: setResponsive('medium', 'xxxlarge', '140px') }}
+      pad={{ vertical: setResponsive('medium', 'basex7', 'basex18') }}
     >
       <FixedContainer align="center">
         <Heading level={1} color="white" margin={{ bottom: 'medium' }}>
@@ -34,8 +34,8 @@ export const HomeSignUpSection = () => {
           <Button
             label="Sign up"
             margin={{
-              left: setResponsive('0', 'small'),
-              top: setResponsive('small', '0')
+              left: setResponsive('none', 'small'),
+              top: setResponsive('small', 'none')
             }}
             secondary
             responsive

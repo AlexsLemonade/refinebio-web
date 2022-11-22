@@ -13,7 +13,7 @@ const Home = () => {
     <>
       <Box
         pad={{
-          top: setResponsive('xxxlarge', 'xxxlarge', 'basex10'),
+          top: setResponsive('basex7', 'basex7', 'basex10'),
           bottom: setResponsive('xlarge', 'xlarge', 'basex12')
         }}
       >

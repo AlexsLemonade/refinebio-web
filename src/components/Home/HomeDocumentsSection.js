@@ -18,7 +18,7 @@ const Card = ({ heading, body, footer, img, ...props }) => {
       }}
       elevation="medium"
       pad={{
-        horizontal: setResponsive('large', 'xxlarge', 'xxxlarge'),
+        horizontal: setResponsive('large', 'basex6', 'basex7'),
         top: setResponsive('large', 'xlarge'),
         bottom: setResponsive('large', 'xlarge', 'basex8')
       }}
@@ -38,7 +38,7 @@ export const HomeDocumentsSection = () => {
   const { setResponsive } = useResponsive()
 
   return (
-    <Box pad={{ vertical: setResponsive('xlarge', 'xxlarge', 'basex10') }}>
+    <Box pad={{ vertical: setResponsive('xlarge', 'basex6', 'basex10') }}>
       <FixedContainer
         pad={{ horizontal: setResponsive('large', 'medium', 'basex9') }}
       >
@@ -49,7 +49,7 @@ export const HomeDocumentsSection = () => {
       processed and packaged for broad and felxible use."
             footer={<Button label="Learn More" secondary responsive />}
             img="network.svg"
-            margin={{ bottom: setResponsive('large', '0') }}
+            margin={{ bottom: setResponsive('large', 'none') }}
           />
           <Card
             heading="Explore the docs"
@@ -57,7 +57,7 @@ export const HomeDocumentsSection = () => {
     analyses you can do with refine.bio data."
             footer={<Button label="Take me to the docs" secondary responsive />}
             img="undraw_files.svg"
-            margin={{ left: setResponsive('0', 'large', 'xxxlarge') }}
+            margin={{ left: setResponsive('none', 'large', 'basex7') }}
           />
         </Row>
       </FixedContainer>

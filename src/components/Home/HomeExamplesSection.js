@@ -43,7 +43,7 @@ export const HomeExamplesSection = () => {
   return (
     <Box
       background="gradient_blue_dark"
-      pad={{ vertical: setResponsive('medium', 'xxlarge', 'basex10') }}
+      pad={{ vertical: setResponsive('medium', 'basex6', 'basex10') }}
     >
       <FixedContainer
         pad={{ horizontal: setResponsive('medium', 'medium', 'basex8') }}
@@ -70,7 +70,7 @@ export const HomeExamplesSection = () => {
       with your scientific questions."
             footer={<Button label="Get Started" secondary responsive />}
             svgIcon={<WaySignsIcon />}
-            margin={{ bottom: setResponsive('large', '0') }}
+            margin={{ bottom: setResponsive('large', 'none') }}
           />
           <Card
             heading="Differential Expression Analysis"
@@ -88,8 +88,8 @@ export const HomeExamplesSection = () => {
             }
             svgIcon={<HeadMapIcon />}
             margin={{
-              left: setResponsive('0', 'medium', 'xlarge'),
-              bottom: setResponsive('large', '0')
+              left: setResponsive('none', 'medium', 'xlarge'),
+              bottom: setResponsive('large', 'none')
             }}
           />
           <Card
@@ -108,7 +108,7 @@ export const HomeExamplesSection = () => {
             }
             svgIcon={<PathwayIcon />}
             margin={{
-              left: setResponsive('0', 'medium', 'xlarge')
+              left: setResponsive('none', 'medium', 'xlarge')
             }}
           />
         </Row>

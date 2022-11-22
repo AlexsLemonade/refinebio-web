@@ -25,7 +25,7 @@ const Block = ({ count, text }) => {
   const { setResponsive } = useResponsive()
 
   return (
-    <Box align="center" margin={{ top: setResponsive('medium', '0') }}>
+    <Box align="center" margin={{ top: setResponsive('medium', 'none') }}>
       <Text
         color="brand"
         margin={{ bottom: setResponsive('xsmall', 'small') }}
@@ -54,7 +54,7 @@ const HeroBody = () => {
     <>
       <Heading
         level={2}
-        margin={{ bottom: setResponsive('0', 'xlarge') }}
+        margin={{ bottom: setResponsive('none', 'xlarge') }}
         size={setResponsive('h2_xsmall', 'h2_large')}
         textAlign="center"
       >

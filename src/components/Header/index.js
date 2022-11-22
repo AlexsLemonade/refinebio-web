@@ -11,7 +11,7 @@ export const Header = ({ light = false }) => {
 
   return (
     <GrommetHeader
-      gap="0"
+      gap="none"
       justify="center"
       pad={{ top: 'large' }}
       role="banner"

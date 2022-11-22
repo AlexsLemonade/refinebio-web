@@ -69,7 +69,7 @@ export const HomeFeaturesSection = () => {
             </>
           }
           svgIcon={<SearchIcon />}
-          margin={{ right: setResponsive('0', '0', 'basex9') }}
+          margin={{ right: setResponsive('none', 'none', 'basex9') }}
         />
         {viewport === 'large' && (
           <Box
@@ -82,11 +82,11 @@ export const HomeFeaturesSection = () => {
               including gene expression matrices and sample metadata."
           svgIcon={<FolderIcon />}
           margin={{
-            top: setResponsive('xxxlarge', '0'),
-            left: setResponsive('0', '0', 'basex9')
+            top: setResponsive('basex7', 'none'),
+            left: setResponsive('none', 'none', 'basex9')
           }}
           pad={{
-            top: setResponsive('0', 'xlarge', '0')
+            top: setResponsive('none', 'xlarge', 'none')
           }}
         />
       </Row>
