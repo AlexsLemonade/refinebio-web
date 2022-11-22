@@ -1,10 +1,10 @@
-import { Input } from 'components/shared/Input'
+import { TextInput } from 'components/shared/TextInput'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { getTitle } from 'utils/getTitle'
 
 export default {
-  title: getTitle('Input'),
-  component: Input,
+  title: getTitle('TextInput'),
+  component: TextInput,
   argTypes: {
     value: { control: 'text' }
   },
@@ -21,10 +21,10 @@ const Template = (args) => {
       {args.error && (
         <InlineMessage label="Error Message" labelOnly color="error" />
       )}
-      <Input {...args} />
+      <TextInput {...args} />
     </>
   )
 }
 
 export const Default = Template.bind({})
-Default.storyName = 'Input'
+Default.storyName = 'TextInput'
