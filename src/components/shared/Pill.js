@@ -7,6 +7,8 @@ export const Pill = ({
   color = '',
   label = '',
   dot = true,
+  dotSize = '7px',
+  round = '30px',
   status = ''
 }) => {
   return (
@@ -16,14 +18,14 @@ export const Pill = ({
       direction="row"
       flex
       pad={{ horizontal: 'xsmall', vertical: 'xxsmall' }}
-      round="30px"
+      round={round}
       width="max-content"
     >
       {dot && (
         <Box
           background={status || color}
-          width="7px"
-          height="7px"
+          width={dotSize}
+          height={dotSize}
           margin={{ right: 'xsmall' }}
           round="50%"
         />
@@ -32,3 +34,5 @@ export const Pill = ({
     </Box>
   )
 }
+
+export default Pill

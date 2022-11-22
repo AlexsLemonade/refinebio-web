@@ -1,21 +1,24 @@
-import { form } from 'themes/variables'
+import { normalizeColor } from 'grommet/utils'
 
-const SIZE = '16px'
+const backgroundDisabled = 'gray-shade-5'
+const borderColor = 'gray-shade-40'
+const boxShadow = 'gray-shade-20'
+const size = '16px'
 
 export default {
   border: {
-    color: form.GRAY
+    color: borderColor
   },
   hover: {
     border: {
-      color: form.GRAY
+      color: borderColor
     }
   },
   extend: ({ theme }) => `
-    height: ${SIZE};
-    width: ${SIZE};
+    height: ${size};
+    width: ${size};
     input:not([disabled]) + div:hover {
-        box-shadow: ${form.BOXSHADOW(theme)};
+        box-shadow: 0 0 1px 1px ${normalizeColor(boxShadow, theme)};
     }
      input:checked:not([disabled]) + div {
         box-shadow: none;
@@ -24,7 +27,7 @@ export default {
         }
      }
      input:disabled + div {
-        background: ${form.DISABLED_BG(theme)};
+        background: ${normalizeColor(backgroundDisabled, theme)};
         cursor: not-allowed;
      }
   `
