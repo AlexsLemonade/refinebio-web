@@ -1,24 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Box, Text } from 'grommet'
-import { Button as sharedButton } from 'components/shared/Button'
 import styled, { css } from 'styled-components'
-
-const Button = styled(sharedButton)`
-  padding: 16px 8px 2px;
-  position: fixed;
-  bottom: 5vh;
-  right: 5vh;
-  z-index: 1000;
-
-   ${({ theme }) => css`
-     background: ${theme.global.colors['gray-shade-5']};
-     box-shadow: ${theme.global.elevation.light.medium};
-     &:hover {
-       box-shadow: none;
-     }
-   `}
-  }
-`
 
 const ArrowIcon = styled(Box)`
   ${({ theme }) => css`
@@ -28,12 +10,6 @@ const ArrowIcon = styled(Box)`
     }
   `}
   border-width: 1px 1px 0 0;
-  margin: 0 calc(50% - 4px) 8px;
-  height: 6px;
-  width: 6px;
-  position: relative;
-  transform: rotate(-45deg);
-
   &::before {
     content: '';
     border-radius: 50%;
@@ -47,15 +23,28 @@ const ArrowIcon = styled(Box)`
 
 export const BackToTopButton = () => {
   const isWindow = typeof window !== 'undefined'
-  const OFFSET = 350
+  const offset = 350
   const [show, setShow] = useState(false)
+
+  const handleClick = () =>
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+
+  const handleKeyDown = (event) => {
+    event.preventDefault()
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleClick()
+    }
+  }
 
   useEffect(() => {
     const toggleShow = () => {
       const scrolled = document.documentElement.scrollTop
-      if (scrolled > OFFSET) {
+      if (scrolled > offset) {
         setShow(true)
-      } else if (scrolled <= OFFSET) {
+      } else if (scrolled <= offset) {
         setShow(false)
       }
     }
@@ -72,21 +61,34 @@ export const BackToTopButton = () => {
   }, [])
 
   return (
-    <Button
-      onClick={() =>
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        })
-      }
+    <Box
       animation={{ type: show ? 'fadeIn' : 'fadeOut', duration: 500 }}
-      style={{ display: show ? 'block' : 'none' }}
+      role="button"
+      background="gray-shade-5"
+      pad={{ top: 'small', bottom: 'xsmall', horizontal: 'xsmall' }}
+      round="2px"
+      style={{
+        bottom: '5vh',
+        boxShadow: 'none',
+        display: show ? 'block' : 'none',
+        position: 'fixed',
+        right: '5vw',
+        zIndex: '1000'
+      }}
+      tabIndex="0"
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
     >
-      <ArrowIcon />
+      <ArrowIcon
+        height="6px"
+        width="6px"
+        margin={{ bottom: 'xsmall', horizontal: 'calc(50% - 4px)' }}
+        style={{ position: 'relative', transform: ' rotate(-45deg)' }}
+      />
       <Text color="brand" size="small">
         <strong>Back to Top</strong>
       </Text>
-    </Button>
+    </Box>
   )
 }
 
