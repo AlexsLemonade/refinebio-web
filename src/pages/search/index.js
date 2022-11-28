@@ -2,7 +2,7 @@ import { Box, Grid } from 'grommet'
 import { BackToTopButton } from 'components/shared/BackToTopButton'
 import { SearchBulkActions } from 'components/SearchBulkActions'
 import { SearchCard } from 'components/SearchCard'
-import { SearchInput } from 'components/SearchInput'
+import { SearchBox } from 'components/shared/SearchBox'
 import { SearchFilterList } from 'components/SearchFilterList'
 import styled from 'styled-components'
 import data from 'api/data'
@@ -36,12 +36,13 @@ export const Search = () => {
         >
           <Box
             gridArea="top"
-            style={{ display: 'block' }}
             margin={{ top: '40px', bottom: 'xlarge' }}
+            style={{ display: 'block' }}
+            width="550px"
           >
-            <SearchInput
+            <SearchBox
               placeholder={data.SearchInput.token.placeholder}
-              large
+              btnType="secondary"
             />
           </Box>
           <Box gridArea="side" style={{ display: 'block' }}>

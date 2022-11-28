@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { Box, CheckBox, Heading, Text } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
-import { SearchInput } from 'components/SearchInput'
+import { SearchBox } from 'components/shared/SearchBox'
 import { formatString } from 'helpers/formatString'
 import { scrollToId } from 'helpers/scrollToId'
 import styled, { css } from 'styled-components'
@@ -57,11 +57,12 @@ export const SearchFilter = ({ filterGroup, label }) => {
       </Heading>
 
       {FILTER_LENGTH > MAX_COUNT && (
-        <SearchInput
+        <SearchBox
           pad={{ bottom: 'xsmall' }}
           placeholder={`Filter ${label}`}
           value={userInput}
-          onChange={(e) => filterOptions(e.target.value)}
+          size="small"
+          changeHandler={(e) => filterOptions(e.target.value)}
         />
       )}
 
