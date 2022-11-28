@@ -1,26 +1,16 @@
 import { Box, Grid } from 'grommet'
 import { BackToTopButton } from 'components/shared/BackToTopButton'
+import { FixedContainer } from 'components/shared/FixedContainer'
 import { SearchBulkActions } from 'components/SearchBulkActions'
 import { SearchCard } from 'components/SearchCard'
 import { SearchBox } from 'components/shared/SearchBox'
 import { SearchFilterList } from 'components/SearchFilterList'
-import styled from 'styled-components'
 import data from 'api/data'
-
-// TEMPORARY Wrapper/Grid layout to render the search result page's components(agnostic) in UI
-// TODO: Create a seprate issue for the site structure(desfine Layout, Header, Footer, Sidebar/responsive etc)
-const Wrapper = styled(Box)`
-  flex-direction: row;
-  justify-content: center;
-  > div {
-    width: 1250px;
-  }
-`
 
 export const Search = () => {
   return (
     <>
-      <Wrapper pad="large">
+      <FixedContainer pad="large">
         <Grid
           areas={[
             { name: 'top', start: [1, 0], end: [1, 0] },
@@ -55,7 +45,7 @@ export const Search = () => {
             ))}
           </Box>
         </Grid>
-      </Wrapper>
+      </FixedContainer>
       <BackToTopButton />
     </>
   )
