@@ -21,7 +21,7 @@ export const Search = () => {
           rows={['auto', 'auto']}
           gap={{
             row: '0',
-            column: 'xxlarge'
+            column: 'basex12'
           }}
         >
           <Box
