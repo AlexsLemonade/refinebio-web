@@ -1,9 +1,18 @@
 import { Box, CheckBox, Select, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Row } from 'components/shared/Row'
-import data from 'api/data'
 
-export const SearchBulkActions = () => {
+export const SearchBulkActions = ({ results }) => {
+  const pageSizes = [10, 20, 50]
+  const sortByOptions = [
+    'Best Match',
+    'Most No. of samples',
+    'Least No. of samples',
+    'Newest Experiment',
+    'Oldest Experiment'
+  ]
+  const { count: totalResults } = results
+
   return (
     <Box pad={{ bottom: 'medium' }}>
       <Row margin={{ bottom: 'small' }}>
@@ -11,19 +20,19 @@ export const SearchBulkActions = () => {
           Showing
           <Box width="88px">
             <Select
-              defaultValue={data.SearchBulkActions.PAGE_SIZES[0]}
-              options={data.SearchBulkActions.PAGE_SIZES}
+              defaultValue={pageSizes[0]}
+              options={pageSizes}
               margin={{ horizontal: 'xxsmall' }}
             />
           </Box>
-          <Text>of {data.SearchBulkActions.totalResults} results</Text>
+          <Text>of {totalResults} results</Text>
         </Row>
         <Row align="center">
           Sort by
           <Box width="208px">
             <Select
-              defaultValue={data.SearchBulkActions.SORTBY_OPTIONS[0]}
-              options={data.SearchBulkActions.SORTBY_OPTIONS}
+              defaultValue={sortByOptions[0]}
+              options={sortByOptions}
               margin={{ horizontal: 'xxsmall' }}
             />
           </Box>
