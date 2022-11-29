@@ -1,7 +1,6 @@
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import { Link } from 'components/shared/Link'
 import { formatString } from 'helpers/formatString'
-import data from 'api/data'
 
 export const SearchCardBody = ({
   alternateAccessionCode = '',
@@ -27,7 +26,7 @@ export const SearchCardBody = ({
       </Box>
       <Box margin={{ top: 'small' }}>
         <Heading level={4}>Alternate Accession IDs</Heading>
-        <Link href={data.SearchCardBody.url} label={alternateAccessionCode} />
+        <Link href={SearchCardBody.url} label={alternateAccessionCode} />
       </Box>
       <Box margin={{ top: 'small' }}>
         <Heading level={4}>Sample Metadata Fields</Heading>

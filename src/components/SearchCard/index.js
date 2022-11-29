@@ -1,10 +1,11 @@
+import { formatString } from 'helpers/formatString'
 import { Box } from 'grommet'
 import { SearchCardHeader } from './SearchCardHeader'
 import { SearchCardBody } from './SearchCardBody'
 import { SearchCardFooter } from './SearchCardFooter'
 import { SearchCardMeta } from './SearchCardMeta'
 
-/* TEMPORARY the following prop is added for demo purpose
+/* TEMPORARY the following prop is added to the mock data for demo purpose
 prop name: `status` 
    - ''(default)
    - added
@@ -21,9 +22,16 @@ export const SearchCard = ({ result = {} }) => {
       <SearchCardHeader
         accessionCode={result.accession_code}
         status={result.status}
-        title={result.title}
+        title={formatString(result.title)}
       />
-      <SearchCardMeta />
+      <SearchCardMeta
+        metaData={{
+          downloadableSamples: result.num_downloadable_samples,
+          organismNames: result.organism_names,
+          platformNames: result.platform_names,
+          technology: result.technology
+        }}
+      />
       <SearchCardBody
         alternateAccessionCode={result.alternate_accession_code}
         description={result.description}

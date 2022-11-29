@@ -5,7 +5,7 @@ import { SearchBulkActions } from 'components/SearchBulkActions'
 import { SearchCard } from 'components/SearchCard'
 import { SearchBox } from 'components/shared/SearchBox'
 import { SearchFilterList } from 'components/SearchFilterList'
-import data from 'api/data'
+import data from 'api/mockData'
 
 export const Search = () => {
   return (
@@ -31,7 +31,7 @@ export const Search = () => {
             width="550px"
           >
             <SearchBox
-              placeholder={data.SearchInput.token.placeholder}
+              placeholder="Search accessions, pathways, diseases, etc.,"
               btnType="secondary"
             />
           </Box>
@@ -39,8 +39,8 @@ export const Search = () => {
             <SearchFilterList />
           </Box>
           <Box gridArea="main">
-            <SearchBulkActions />
-            {data.SearchResults.results.map((result) => (
+            <SearchBulkActions results={data} />
+            {data.results.map((result) => (
               <SearchCard key={result.id} result={result} />
             ))}
           </Box>

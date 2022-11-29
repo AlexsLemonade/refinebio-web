@@ -5,7 +5,6 @@ import { InlineMessage } from 'components/shared/InlineMessage'
 import { Link } from 'components/shared/Link'
 import { Pill } from 'components/shared/Pill'
 import { Row } from 'components/shared/Row'
-import data from 'api/data'
 
 /* TEMPORARY the following prop is added for demo purpose
 prop name: 'status' 
@@ -33,10 +32,7 @@ const DatasetCTA = ({ status }) => (
     {status === 'added' && (
       <Box align="end">
         <Box direction="row">
-          <InlineMessage
-            label={data.SearchCardHeader.token[status]}
-            color="success"
-          />
+          <InlineMessage label="Added to Datase" color="success" />
           <Button label="Remove" link margin={{ left: 'xsmall' }} />
         </Box>
         <Button label="Download Now" secondary margin={{ top: 'small' }} />
@@ -46,7 +42,7 @@ const DatasetCTA = ({ status }) => (
     {/* state: processing  */}
     {status === 'processing' && (
       <Box align="end">
-        <Pill label={data.SearchCardHeader.token[status]} status="info" />
+        <Pill label="Processing Dataset" status="info" />
         <Button label="Add to Dataset" primary margin={{ top: 'small' }} />
       </Box>
     )}
@@ -75,12 +71,12 @@ const DatasetCTA = ({ status }) => (
       <Box align="end">
         <Button label="View Source" secondary />
         <InlineMessage
-          label={data.SearchCardHeader.token[status]}
+          label="Platform not supported"
           color="info"
           margin={{ top: 'small' }}
         />
         <Link
-          href={data.SearchCardHeader.token.learnmore}
+          href="#TEMPORARY"
           label="Learn more"
           margin={{ left: 'large', top: 'xxsmall' }}
           size="small"
@@ -99,12 +95,9 @@ const DatasetCTA = ({ status }) => (
     {/* state: unavailable  */}
     {status === 'unavailable' && (
       <Box direction="column" align="end">
-        <InlineMessage
-          label={data.SearchCardHeader.token[status]}
-          color="error"
-        />
+        <InlineMessage label="Not available" color="error" />
         <Link
-          href={data.SearchCardHeader.token.learnmore}
+          href="#TEMPORARY"
           label="Learn more"
           margin={{ left: 'large', top: 'xxsmall' }}
           size="small"
