@@ -7,7 +7,8 @@ export const Pill = ({
   color = '',
   label = '',
   dot = true,
-  status = ''
+  status = '',
+  ...props
 }) => {
   return (
     <Box
@@ -18,6 +19,8 @@ export const Pill = ({
       pad={{ horizontal: 'xsmall', vertical: 'xxsmall' }}
       round="30px"
       width="max-content"
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     >
       {dot && (
         <Box
