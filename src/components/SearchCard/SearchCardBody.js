@@ -32,9 +32,7 @@ export const SearchCardBody = ({
       <Box margin={{ top: 'small' }}>
         <Heading level={4}>Sample Metadata Fields</Heading>
         <Box direction="row">
-          {sampleMetadataFields.map((field, i) => (
-            <Text key={field}>{(i ? ', ' : '') + formatString(field)}</Text>
-          ))}
+          {formatString(sampleMetadataFields.join(', '))}
         </Box>
       </Box>
     </Box>

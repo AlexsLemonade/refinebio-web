@@ -56,10 +56,15 @@ const DatasetCTA = ({ status }) => (
       <Box align="end">
         <Button label="Add Remaining" secondary />
         <InlineMessage
-          label={data.SearchCardHeader.token[status]}
+          label={
+            <>
+              60,000 samples already
+              <br />
+              in My Dataset
+            </>
+          }
           color="info"
           margin={{ top: 'small' }}
-          width="184px"
         />
         <Button label="Download Now" secondary margin={{ top: 'small' }} />
       </Box>

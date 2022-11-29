@@ -23,21 +23,21 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         border: 0;
         font-size: 100%;
-        font-family: inherit;
         vertical-align: baseline;
     }
     *, ::before, ::after { 
         box-sizing: border-box; 
     }
-    // https://webaim.org/techniques/css/invisiblecontent/
-    .sr-only {
-        clip: rect(1px, 1px, 1px, 1px);
-        clip-path: inset(50%);
-        height: 1px;
-        width: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
+    body {
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+    }
+    html {
+      height: -webkit-fill-available;
+    }
+    input {
+      &::-webkit-search-cancel-button {
+        display: none;
+      }
     }
 `
