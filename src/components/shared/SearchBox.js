@@ -7,7 +7,7 @@ import { TextInput } from 'components/shared/TextInput'
 export const SearchBox = ({
   btnType = 'primary',
   btnWidth = '',
-  placeHolder = '',
+  placeholder = '',
   responsive = false,
   size = 'medium',
   value = '',
@@ -38,7 +38,7 @@ export const SearchBox = ({
             <TextInput
               id="search"
               icon={<Icon name="Search" size="small" />}
-              placeholder={placeHolder}
+              placeholder={placeholder}
               type="search"
               reverse
               value={value}
@@ -47,7 +47,7 @@ export const SearchBox = ({
           ) : (
             <TextInput
               id="search"
-              placeholder={placeHolder}
+              placeholder={placeholder}
               type="search"
               style={{
                 fontSize: size === 'large' ? '22px' : '16px',

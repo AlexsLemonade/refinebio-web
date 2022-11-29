@@ -6,19 +6,11 @@ import { formatString } from 'helpers/formatString'
 import { scrollToId } from 'helpers/scrollToId'
 import styled, { css } from 'styled-components'
 
-const Button = styled(sharedButton)`
+const ToggleButton = styled(sharedButton)`
   border-bottom: 1px solid transparent;
-  border-radius: 0;
-  box-shadow: none;
-  margin: 8px 0 0 14px;
-  padding: 0;
-  transition: border-bottom 0.3s ease-in;
-
   ${({ theme }) => css`
     &:hover {
-      button {
-        border-bottom: 1px solid ${theme.global.colors.brand};
-      }
+      border-bottom: 1px solid ${theme.global.colors.brand};
     }
   `}
 `
@@ -27,11 +19,11 @@ export const SearchFilter = ({ filterGroup, label }) => {
   const options = useMemo(() => {
     return Object.entries(filterGroup)
   }, [filterGroup])
-  const MAX_COUNT = 5
-  const FILTER_LENGTH = options.length
   const [filteredResult, setfilteredResult] = useState(options)
   const [open, setOpen] = useState(false)
   const [userInput, setUserInput] = useState('')
+  const maxCount = 5
+  const filterLength = options.length
 
   const filterOptions = (val) => {
     setUserInput(val)
@@ -48,7 +40,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
   }
 
   const getOptionsToRender = () =>
-    open ? filteredResult : filteredResult.slice(0, MAX_COUNT)
+    open ? filteredResult : filteredResult.slice(0, maxCount)
 
   return (
     <>
@@ -56,7 +48,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
         {label}
       </Heading>
 
-      {FILTER_LENGTH > MAX_COUNT && (
+      {filterLength > maxCount && (
         <SearchBox
           pad={{ bottom: 'xsmall' }}
           placeholder={`Filter ${label}`}
@@ -86,16 +78,23 @@ export const SearchFilter = ({ filterGroup, label }) => {
         </Text>
       )}
 
-      {FILTER_LENGTH > MAX_COUNT && (
-        <Button
+      {filterLength > maxCount && (
+        <ToggleButton
           label={
             // eslint-disable-next-line no-nested-ternary
             open && !userInput.trim()
               ? '- see less'
               : !open && !userInput.trim()
-              ? `+ ${FILTER_LENGTH - MAX_COUNT} more`
+              ? `+ ${filterLength - maxCount} more`
               : ''
           }
+          margin={{ top: 'xsmall', left: 'medium' }}
+          style={{
+            borderRadius: '0',
+            boxShadow: 'none',
+            padding: '0',
+            transition: 'border-bottom 0.15s ease-in'
+          }}
           onClick={() => {
             setOpen(!open)
             scrollToId(label.toLowerCase())

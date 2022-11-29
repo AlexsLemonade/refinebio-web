@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Box, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
-import { SearchFilter } from 'components/SearchFilter'
 import data from 'api/data'
+import { SearchFilter } from './SearchFilter'
 
 export const SearchFilterList = () => {
-  // The preferred order of the filters to render in UI
+  // The order of the filters to render in UI
   const filterOrder = [
     { label: 'Organism', type: 'organism' },
     { label: 'Technology', type: 'technology' },
