@@ -1,15 +1,8 @@
 import { Box } from 'grommet'
-import { SearchCardHeader } from 'components/SearchCardHeader'
-import { SearchCardBody } from 'components/SearchCardBody'
-import { SearchCardFooter } from 'components/SearchCardFooter'
-import { SearchCardMeta } from 'components/SearchCardMeta'
-import styled from 'styled-components'
-
-const Wrapper = styled(Box)`
-  + div {
-    margin-top: 24px;
-  }
-`
+import { SearchCardHeader } from './SearchCardHeader'
+import { SearchCardBody } from './SearchCardBody'
+import { SearchCardFooter } from './SearchCardFooter'
+import { SearchCardMeta } from './SearchCardMeta'
 
 /* TEMPORARY the following prop is added for demo purpose
 prop name: `status` 
@@ -24,7 +17,7 @@ prop name: `status`
 
 export const SearchCard = ({ result = {} }) => {
   return (
-    <Wrapper elevation="medium" pad="medium">
+    <Box elevation="medium" margin={{ bottom: 'medium' }} pad="medium">
       <SearchCardHeader
         accessionCode={result.accession_code}
         status={result.status}
@@ -38,7 +31,7 @@ export const SearchCard = ({ result = {} }) => {
         sampleMetadataFields={result.sample_metadata_fields}
       />
       <SearchCardFooter />
-    </Wrapper>
+    </Box>
   )
 }
 

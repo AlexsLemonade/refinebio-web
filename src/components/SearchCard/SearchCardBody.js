@@ -1,16 +1,7 @@
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import { Link } from 'components/shared/Link'
 import { formatString } from 'helpers/formatString'
-import styled from 'styled-components'
 import data from 'api/data'
-
-const Wrapper = styled(Box)`
-  > div {
-    + div {
-      margin-top: 16px;
-    }
-  }
-`
 
 export const SearchCardBody = ({
   alternateAccessionCode = '',
@@ -19,12 +10,12 @@ export const SearchCardBody = ({
   sampleMetadataFields = []
 }) => {
   return (
-    <Wrapper pad={{ top: 'medium', bottom: 'small' }}>
+    <Box pad={{ top: 'medium', bottom: 'small' }}>
       <Box>
         <Heading level={4}>Description</Heading>
         <Paragraph>{description}</Paragraph>
       </Box>
-      <Box>
+      <Box margin={{ top: 'small' }}>
         <Heading level={4}>Publication Title</Heading>
         {publicationTitle ? (
           <Text>{publicationTitle}</Text>
@@ -34,11 +25,11 @@ export const SearchCardBody = ({
           </Text>
         )}
       </Box>
-      <Box>
+      <Box margin={{ top: 'small' }}>
         <Heading level={4}>Alternate Accession IDs</Heading>
         <Link href={data.SearchCardBody.url} label={alternateAccessionCode} />
       </Box>
-      <Box>
+      <Box margin={{ top: 'small' }}>
         <Heading level={4}>Sample Metadata Fields</Heading>
         <Box direction="row">
           {sampleMetadataFields.map((field, i) => (
@@ -46,7 +37,7 @@ export const SearchCardBody = ({
           ))}
         </Box>
       </Box>
-    </Wrapper>
+    </Box>
   )
 }
 
