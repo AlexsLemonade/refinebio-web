@@ -1,4 +1,4 @@
-import { Box, Paragraph } from 'grommet'
+import { Box, Text } from 'grommet'
 import Accession from '../../images/accession.svg'
 import Help from '../../images/help.svg'
 import Organism from '../../images/organism.svg'
@@ -17,7 +17,7 @@ const SVGs = {
   Samples
 }
 
-export const IconBadge = ({ name, label, ...props }) => {
+export const IconBadge = ({ name, label, size = 'small', ...props }) => {
   const SVGIcon = SVGs[name]
 
   return (
@@ -26,7 +26,9 @@ export const IconBadge = ({ name, label, ...props }) => {
       <Box>
         <SVGIcon role="presentation" aria-hidden="true" focusable="false" />
       </Box>
-      <Paragraph margin={{ left: 'xxsmall' }}>{label}</Paragraph>
+      <Text margin={{ left: 'xxsmall' }} size={size}>
+        {label}
+      </Text>
     </Box>
   )
 }

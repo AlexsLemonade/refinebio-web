@@ -121,6 +121,7 @@ export const SearchCardHeader = ({
             name="Accession"
             label={accessionCode}
             pad={{ bottom: 'small' }}
+            size="medium"
           />
           <Heading level={3}>
             <strong>

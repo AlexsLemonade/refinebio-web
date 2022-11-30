@@ -22,15 +22,15 @@ export const SearchCardMeta = ({
       direction="row"
       pad={{ vertical: 'xsmall' }}
     >
-      <Box flex="grow">
+      <Box flex="grow" width={{ max: '20%' }}>
         {organismNames.length > 0 ? (
-          organismNames.map((organismName) => (
-            <IconBadge
-              key={organismName}
-              label={formatString(organismName)}
-              name="Organism"
-            />
-          ))
+          <IconBadge
+            label={organismNames.map(
+              (organismName, i) =>
+                `${i > 0 ? ', ' : ''}${formatString(organismName)}`
+            )}
+            name="Organism"
+          />
         ) : (
           <Text color="gray-shade-40">
             <i>No species</i>
@@ -48,7 +48,7 @@ export const SearchCardMeta = ({
           <IconBadge
             label={platformNames.map(
               (platformName, i) =>
-                ` ${i > 0 ? ', ' : ''}${formatPlatformName(platformName)}`
+                `${i > 0 ? ', ' : ''}${formatPlatformName(platformName)}`
             )}
             name={technology === 'MICROARRAY' ? 'MicroArray' : 'Rna'}
           />
