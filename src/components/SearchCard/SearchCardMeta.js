@@ -40,7 +40,7 @@ export const SearchCardMeta = ({
       </Box>
       <Box flex="grow">
         <IconBadge
-          label={`${downloadableSamples} Downloadable Samples`}
+          label={`${downloadableSamples.toLocaleString()} Downloadable Samples`}
           name="Samples"
         />
       </Box>

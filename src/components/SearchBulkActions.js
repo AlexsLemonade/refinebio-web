@@ -25,7 +25,7 @@ export const SearchBulkActions = ({ results }) => {
               margin={{ horizontal: 'xxsmall' }}
             />
           </Box>
-          <Text>of {totalResults} results</Text>
+          <Text>of {totalResults.toLocaleString()} results</Text>
         </Row>
         <Row align="center">
           Sort by

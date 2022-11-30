@@ -67,7 +67,11 @@ export const SearchFilter = ({ filterGroup, label }) => {
             key={option[0]}
             margin={{ bottom: i !== arr.length - 1 ? 'xsmall' : '0' }}
           >
-            <CheckBox label={`${formatString(option[0])} (${option[1]})`} />
+            <CheckBox
+              label={`${formatString(
+                option[0]
+              )} (${option[1].toLocaleString()})`}
+            />
           </Box>
         ))}
       </Box>
