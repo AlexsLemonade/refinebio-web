@@ -36,7 +36,7 @@ export const Search = () => {
             />
           </Box>
           <Box gridArea="side" style={{ display: 'block' }}>
-            <SearchFilterList />
+            <SearchFilterList facets={data.facets} />
           </Box>
           <Box gridArea="main">
             <SearchBulkActions results={data} />

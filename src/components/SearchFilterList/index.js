@@ -1,20 +1,19 @@
 import { useState, useEffect } from 'react'
 import { Box, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
-import data from 'api/data'
 import { SearchFilter } from './SearchFilter'
 
-export const SearchFilterList = () => {
+export const SearchFilterList = ({ facets = {} }) => {
   // The order of the filters to render in UI
   const filterOrder = [
-    { label: 'Organism', type: 'organism' },
+    { label: 'Organism', type: 'downloadable_organism_names' },
     { label: 'Technology', type: 'technology' },
-    { label: 'Platforms', type: 'platforms' }
+    { label: 'Platforms', type: 'platform_accession_codes' }
   ]
 
   const [filterGroup, setFilterGroup] = useState({})
   useEffect(() => {
-    setFilterGroup(() => filterOrder.map((f) => data.SearchFilters[f.type]))
+    setFilterGroup(() => filterOrder.map((f) => facets[f.type]))
   }, [])
 
   return (
