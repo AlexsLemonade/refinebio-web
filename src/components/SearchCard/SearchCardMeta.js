@@ -20,9 +20,10 @@ export const SearchCardMeta = ({
         }
       ]}
       direction="row"
+      gap="small"
       pad={{ vertical: 'xsmall' }}
     >
-      <Box flex="grow" width={{ max: '20%' }}>
+      <Box flex="grow" width={{ max: '30%' }}>
         {organismNames.length > 0 ? (
           <IconBadge
             label={organismNames.map(
@@ -43,7 +44,7 @@ export const SearchCardMeta = ({
           name="Samples"
         />
       </Box>
-      <Box width={{ max: '40%' }}>
+      <Box flex="grow" width={{ max: '40%' }}>
         {platformNames.length > 0 ? (
           <IconBadge
             label={platformNames.map(

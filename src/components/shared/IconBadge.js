@@ -1,4 +1,4 @@
-import { Box, Text } from 'grommet'
+import { Box, Grid, Text } from 'grommet'
 import Accession from '../../images/accession.svg'
 import Help from '../../images/help.svg'
 import Organism from '../../images/organism.svg'
@@ -21,15 +21,29 @@ export const IconBadge = ({ name, label, size = 'small', ...props }) => {
   const SVGIcon = SVGs[name]
 
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <Box direction="row" align="center" width="max-content" {...props}>
-      <Box>
+    <Grid
+      align="center"
+      areas={[
+        { name: 'left', start: [0, 1], end: [0, 1] },
+        { name: 'right', start: [1, 1], end: [1, 1] }
+      ]}
+      columns={['24px', 'auto']}
+      rows={['auto', 'auto']}
+      gap={{
+        column: 'xxsmall'
+      }}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    >
+      <Box gridArea="left">
         <SVGIcon role="presentation" aria-hidden="true" focusable="false" />
       </Box>
-      <Text margin={{ left: 'xxsmall' }} size={size}>
-        {label}
-      </Text>
-    </Box>
+      <Box gridArea="right">
+        <Text margin={{ left: 'xxsmall' }} size={size}>
+          {label}
+        </Text>
+      </Box>
+    </Grid>
   )
 }
 
