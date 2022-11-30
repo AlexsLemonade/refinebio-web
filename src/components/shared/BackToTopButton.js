@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useResponsive } from 'hooks/useResponsive'
 import { Box, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 
@@ -22,6 +23,7 @@ const ArrowIcon = styled(Box)`
 `
 
 export const BackToTopButton = () => {
+  const { setResponsive } = useResponsive()
   const isWindow = typeof window !== 'undefined'
   const offset = 350
   const [show, setShow] = useState(false)
@@ -63,31 +65,37 @@ export const BackToTopButton = () => {
   return (
     <Box
       animation={{ type: show ? 'fadeIn' : 'fadeOut', duration: 500 }}
-      role="button"
       background="gray-shade-5"
-      pad={{ top: 'small', bottom: 'xsmall', horizontal: 'xsmall' }}
+      elevation={setResponsive('large', 'large', 'medium')}
       round="2px"
       style={{
         bottom: '5vh',
-        boxShadow: 'none',
         display: show ? 'block' : 'none',
         position: 'fixed',
         right: '5vw',
         zIndex: '1000'
       }}
-      tabIndex="0"
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
     >
-      <ArrowIcon
-        height="6px"
-        width="6px"
-        margin={{ bottom: 'xsmall', horizontal: 'calc(50% - 4px)' }}
-        style={{ position: 'relative', transform: ' rotate(-45deg)' }}
-      />
-      <Text color="brand" size="small">
-        <strong>Back to Top</strong>
-      </Text>
+      <Box
+        role="button"
+        pad={{ top: 'small', bottom: 'xsmall', horizontal: 'xsmall' }}
+        tabIndex="0"
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        style={{
+          boxShadow: 'none'
+        }}
+      >
+        <ArrowIcon
+          height="6px"
+          width="6px"
+          margin={{ bottom: 'xsmall', horizontal: 'calc(50% - 4px)' }}
+          style={{ position: 'relative', transform: ' rotate(-45deg)' }}
+        />
+        <Text color="brand" size="small">
+          <strong>Back to Top</strong>
+        </Text>
+      </Box>
     </Box>
   )
 }
