@@ -12,7 +12,13 @@ export const SearchCardBody = ({
     <Box pad={{ top: 'medium', bottom: 'small' }}>
       <Box>
         <Heading level={4}>Description</Heading>
-        <Paragraph>{description}</Paragraph>
+        {description ? (
+          <Paragraph>{description}</Paragraph>
+        ) : (
+          <Text color="gray-shade-40">
+            <i>No description</i>
+          </Text>
+        )}
       </Box>
       <Box margin={{ top: 'small' }}>
         <Heading level={4}>Publication Title</Heading>
@@ -26,12 +32,24 @@ export const SearchCardBody = ({
       </Box>
       <Box margin={{ top: 'small' }}>
         <Heading level={4}>Alternate Accession IDs</Heading>
-        <Link href={SearchCardBody.url} label={alternateAccessionCode} />
+        {alternateAccessionCode ? (
+          <Link href={SearchCardBody.url} label={alternateAccessionCode} />
+        ) : (
+          <Text color="gray-shade-40">
+            <i>None</i>
+          </Text>
+        )}
       </Box>
       <Box margin={{ top: 'small' }}>
         <Heading level={4}>Sample Metadata Fields</Heading>
         <Box direction="row">
-          {formatString(sampleMetadataFields.join(', '))}
+          {sampleMetadataFields.length > 0 ? (
+            <Text>{formatString(sampleMetadataFields.join(', '))}</Text>
+          ) : (
+            <Text color="gray-shade-40">
+              <i>No sample metadata fields</i>
+            </Text>
+          )}
         </Box>
       </Box>
     </Box>
