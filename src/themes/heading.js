@@ -3,7 +3,7 @@ export default {
     family: `'Rubik', sans-serif`,
     height: 1.5
   },
-  weight: 500,
+  weight: 400,
   level: {
     1: {
       medium: {

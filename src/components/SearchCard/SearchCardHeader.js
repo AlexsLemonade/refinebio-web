@@ -123,10 +123,8 @@ export const SearchCardHeader = ({
             pad={{ bottom: 'small' }}
             size="medium"
           />
-          <Heading level={3}>
-            <strong>
-              <Link href="#url" label={title} />
-            </strong>
+          <Heading level={3} weight="600">
+            <Link href="#url" label={title} />
           </Heading>
         </Box>
         <Box

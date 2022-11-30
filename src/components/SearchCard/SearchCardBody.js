@@ -11,7 +11,9 @@ export const SearchCardBody = ({
   return (
     <Box pad={{ top: 'medium', bottom: 'small' }}>
       <Box>
-        <Heading level={4}>Description</Heading>
+        <Heading level={4} weight="500">
+          Description
+        </Heading>
         {description ? (
           <Paragraph>{description}</Paragraph>
         ) : (
@@ -21,7 +23,9 @@ export const SearchCardBody = ({
         )}
       </Box>
       <Box margin={{ top: 'small' }}>
-        <Heading level={4}>Publication Title</Heading>
+        <Heading level={4} weight="500">
+          Publication Title
+        </Heading>
         {publicationTitle ? (
           <Text>{publicationTitle}</Text>
         ) : (
@@ -31,7 +35,9 @@ export const SearchCardBody = ({
         )}
       </Box>
       <Box margin={{ top: 'small' }}>
-        <Heading level={4}>Alternate Accession IDs</Heading>
+        <Heading level={4} weight="500">
+          Alternate Accession IDs
+        </Heading>
         {alternateAccessionCode ? (
           <Link href={SearchCardBody.url} label={alternateAccessionCode} />
         ) : (
@@ -41,7 +47,9 @@ export const SearchCardBody = ({
         )}
       </Box>
       <Box margin={{ top: 'small' }}>
-        <Heading level={4}>Sample Metadata Fields</Heading>
+        <Heading level={4} weight="500">
+          Sample Metadata Fields
+        </Heading>
         <Box direction="row">
           {sampleMetadataFields.length > 0 ? (
             <Text>{formatString(sampleMetadataFields.join(', '))}</Text>
