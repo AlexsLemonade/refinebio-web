@@ -10,30 +10,6 @@ import { SearchCard } from 'components/SearchCard'
 import { SearchBox } from 'components/shared/SearchBox'
 import { SearchFilterList } from 'components/SearchFilterList'
 import data from 'api/mockData'
-import styled, { css } from 'styled-components'
-
-const CloseIcon = styled(Box)`
-  ${({ theme }) => css`
-    box-shadow: none;
-    cursor: pointer;
-    &::before,
-    &::after {
-      content: '';
-      background: ${theme.global.colors.black};
-      border-radius: 2px;
-      display: block;
-      height: 4px;
-      width: 32px;
-    }
-    &:before {
-      margin-bottom: 4px;
-      transform: rotate(-45deg);
-    }
-    &::after {
-      transform: translateY(-8px) rotate(45deg);
-    }
-  `}
-`
 
 export const Search = () => {
   const { viewport, setResponsive } = useResponsive()
@@ -89,11 +65,14 @@ export const Search = () => {
           >
             {viewport !== 'large' && (
               <Box align="end" margin={{ bottom: 'small' }}>
-                <CloseIcon
+                <Box
                   aria-label="Close Filters"
                   role="button"
+                  width="max-content"
                   onClick={() => setToggleFilterList(false)}
-                />
+                >
+                  <Icon name="Close" size="large" />
+                </Box>
               </Box>
             )}
             <SearchFilterList facets={data.facets} />
