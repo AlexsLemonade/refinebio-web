@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react'
+import { useResponsive } from 'hooks/useResponsive'
 import { Box, CheckBox, Heading, Text } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
 import { SearchBox } from 'components/shared/SearchBox'
@@ -16,6 +17,7 @@ const ToggleButton = styled(sharedButton)`
 `
 
 export const SearchFilter = ({ filterGroup, label }) => {
+  const { setResponsive } = useResponsive()
   const options = useMemo(() => {
     return Object.entries(filterGroup)
   }, [filterGroup])
@@ -44,7 +46,12 @@ export const SearchFilter = ({ filterGroup, label }) => {
 
   return (
     <>
-      <Heading level={4} margin={{ bottom: 'xsmall' }} id={label.toLowerCase()}>
+      <Heading
+        level={4}
+        margin={{ bottom: 'xsmall' }}
+        id={label.toLowerCase()}
+        size={setResponsive('h4_xsmall', 'medium')}
+      >
         {label}
       </Heading>
 

@@ -3,12 +3,12 @@ import { useResponsive } from 'hooks/useResponsive'
 
 export const Layer = ({
   position = '',
-  hideInTablet = false,
+  tabletMode = false,
   show = false,
   children
 }) => {
   const { viewport } = useResponsive()
-  if (viewport === 'large' || (viewport === 'medium' && !hideInTablet)) {
+  if (viewport === 'large' || (viewport === 'medium' && !tabletMode)) {
     return children
   }
 
