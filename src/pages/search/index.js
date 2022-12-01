@@ -29,7 +29,7 @@ export const Search = () => {
         rows={['auto', 'auto']}
         gap={{
           row: 'none',
-          column: setResponsive('none', 'none', 'basex12')
+          column: setResponsive('none', 'none', '5%')
         }}
       >
         <Box
@@ -43,7 +43,8 @@ export const Search = () => {
         >
           <SearchBox
             placeholder="Search accessions, pathways, diseases, etc.,"
-            btnType="secondary"
+            btnType="primary"
+            size="large"
             responsive
           />
         </Box>
