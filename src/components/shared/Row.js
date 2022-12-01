@@ -3,6 +3,7 @@ import { Box } from 'grommet'
 
 export const Row = ({
   align = 'start',
+  direction = '',
   justify = 'between',
   children,
   ...props
@@ -11,7 +12,7 @@ export const Row = ({
   return (
     <Box
       align={align}
-      direction={setResponsive('column', 'row')}
+      direction={direction || setResponsive('column', 'row')}
       justify={justify}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}

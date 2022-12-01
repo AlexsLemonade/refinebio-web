@@ -1,14 +1,18 @@
+import { useResponsive } from 'hooks/useResponsive'
 import { formatString } from 'helpers/formatString'
 import { formatPlatformName } from 'helpers/formatPlatformName'
 import { Box, Text } from 'grommet'
 import { IconBadge } from 'components/shared/IconBadge'
+import { Row } from 'components/shared/Row'
 
 export const SearchCardMeta = ({
   metaData: { downloadableSamples, organismNames, platformNames, technology }
 }) => {
+  const { setResponsive } = useResponsive()
+
   return (
-    <Box
-      align="center"
+    <Row
+      align={setResponsive('start', 'start', 'center')}
       border={[
         {
           color: 'gray-shade-40',
@@ -19,11 +23,11 @@ export const SearchCardMeta = ({
           side: 'bottom'
         }
       ]}
-      direction="row"
+      direction={setResponsive('column', 'column', 'row')}
       gap="small"
-      pad={{ vertical: 'xsmall' }}
+      pad={{ vertical: setResponsive('small', 'xsmall') }}
     >
-      <Box flex="grow" width={{ max: '30%' }}>
+      <Box flex="grow" width={setResponsive('100%', '100%', { max: '30%' })}>
         {organismNames.length > 0 ? (
           <IconBadge
             label={organismNames.map(
@@ -44,7 +48,7 @@ export const SearchCardMeta = ({
           name="Samples"
         />
       </Box>
-      <Box flex="grow" width={{ max: '40%' }}>
+      <Box flex="grow" width={setResponsive('100%', '100%', { max: '40%' })}>
         {platformNames.length > 0 ? (
           <IconBadge
             label={platformNames.map(
@@ -59,7 +63,7 @@ export const SearchCardMeta = ({
           </Text>
         )}
       </Box>
-    </Box>
+    </Row>
   )
 }
 
