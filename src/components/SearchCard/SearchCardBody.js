@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import { Box, Heading, Paragraph, Text } from 'grommet'
+import { Icon } from 'components/shared/Icon'
 import { Link } from 'components/shared/Link'
 import { formatString } from 'helpers/formatString'
 
@@ -8,6 +10,11 @@ export const SearchCardBody = ({
   publicationTitle = '',
   sampleMetadataFields = []
 }) => {
+  const maxLength = 300
+  const [toggleDesciption, setToggleDescription] = useState(
+    description.length > maxLength
+  )
+
   return (
     <Box pad={{ top: 'medium', bottom: 'small' }}>
       <Box>
@@ -15,7 +22,49 @@ export const SearchCardBody = ({
           Description
         </Heading>
         {description ? (
-          <Paragraph>{description}</Paragraph>
+          <Box
+            animation={
+              !toggleDesciption ? { type: 'fadeIn', duration: 1000 } : {}
+            }
+          >
+            <Paragraph>
+              {toggleDesciption
+                ? `${description.slice(0, maxLength)} ...`
+                : description}
+              {description.length > maxLength && (
+                <Text
+                  color="brand"
+                  margin={{ left: 'xsmall' }}
+                  style={{ cursor: 'pointer', textDecoration: 'underline' }}
+                  role="button"
+                  onClick={() => setToggleDescription(!toggleDesciption)}
+                >
+                  View
+                  {toggleDesciption ? (
+                    <>
+                      {' '}
+                      more
+                      <Icon
+                        margin={{ left: 'xxsmall' }}
+                        name="ChevronDown"
+                        size="13px"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      {' '}
+                      less{' '}
+                      <Icon
+                        margin={{ left: 'xxsmall' }}
+                        name="ChevronUp"
+                        size="13px"
+                      />
+                    </>
+                  )}
+                </Text>
+              )}
+            </Paragraph>
+          </Box>
         ) : (
           <Text color="gray-shade-40">
             <i>No description</i>
