@@ -1,20 +1,24 @@
 import { useState, useEffect } from 'react'
+import { isWindow } from 'helpers/isWindow'
 
-// returns true if the document currently matches the mediaQuery, otherwise false
+// Returns true if the document currently matches the mediaQuery, otherwise false
+// e.g.) useMatchMedia('(max-width: 600px)')
 // (resource) https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList
 
 export const useMatchMedia = (mediaQueryString = '') => {
-  const isWindow = typeof window !== 'undefined'
+  if (!isWindow) return null
 
-  const media = isWindow && window.matchMedia(mediaQueryString)
+  const media = window.matchMedia(mediaQueryString)
   const [matches, setMatches] = useState(media.matches)
-  const changeHandler = (e) => setMatches(e.matches)
+  const changeHandler = (e) => {
+    if (media.matches !== matches) setMatches(e.matches)
+  }
 
   useEffect(() => {
     media.addEventListener('change', changeHandler)
 
     return () => media.removeEventListener('change', changeHandler)
-  }, [media])
+  }, [media, setMatches])
 
   return matches
 }

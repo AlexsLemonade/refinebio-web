@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
+import { isWindow } from 'helpers/isWindow'
 import { Box, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 
@@ -24,7 +25,6 @@ const ArrowIcon = styled(Box)`
 
 export const BackToTopButton = () => {
   const { setResponsive } = useResponsive()
-  const isWindow = typeof window !== 'undefined'
   const offset = 350
   const [show, setShow] = useState(false)
 
