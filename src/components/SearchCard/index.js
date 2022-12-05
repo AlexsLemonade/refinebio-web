@@ -25,7 +25,7 @@ export const SearchCard = ({ result = {} }) => {
     <Box
       background="white"
       elevation="medium"
-      margin={{ bottom: 'medium' }}
+      margin={{ bottom: setResponsive('large', 'medium') }}
       pad="medium"
     >
       <Grid
@@ -44,7 +44,7 @@ export const SearchCard = ({ result = {} }) => {
         columns={['1fr', 'auto']}
         rows={['auto', 'auto', 'auto']}
         gap={{
-          row: 'medium',
+          row: setResponsive('small', 'medium'),
           column: 'medium'
         }}
       >
