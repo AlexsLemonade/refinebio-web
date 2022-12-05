@@ -59,7 +59,7 @@ export const SearchCardMeta = ({
           />
         ) : (
           <Text color="gray-shade-40">
-            <i>Not available</i>
+            <i>No platform available</i>
           </Text>
         )}
       </Box>
