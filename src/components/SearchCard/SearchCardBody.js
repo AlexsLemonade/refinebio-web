@@ -39,11 +39,11 @@ export const SearchCardBody = ({
                   role="button"
                   onClick={() => setToggleDescription(!toggleDesciption)}
                 >
-                  View
+                  See
                   {toggleDesciption ? (
                     <>
                       {' '}
-                      more
+                      More
                       <Icon
                         margin={{ left: 'xxsmall' }}
                         name="ChevronDown"
@@ -53,7 +53,7 @@ export const SearchCardBody = ({
                   ) : (
                     <>
                       {' '}
-                      less{' '}
+                      Less{' '}
                       <Icon
                         margin={{ left: 'xxsmall' }}
                         name="ChevronUp"

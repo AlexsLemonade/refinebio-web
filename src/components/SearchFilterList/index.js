@@ -31,7 +31,7 @@ export const SearchFilterList = ({ facets = {} }) => {
           Filters
         </Heading>
         <Button
-          label="clear all"
+          label="Clear All"
           link
           linkFontSize={setResponsive('medlum', 'medlum', 'small')}
         />

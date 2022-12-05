@@ -94,9 +94,9 @@ export const SearchFilter = ({ filterGroup, label }) => {
           label={
             // eslint-disable-next-line no-nested-ternary
             open && !userInput.trim()
-              ? '- see less'
+              ? '- See Less'
               : !open && !userInput.trim()
-              ? `+ ${filterLength - maxCount} more`
+              ? `+ ${filterLength - maxCount} More`
               : ''
           }
           margin={{ top: 'xsmall', left: 'medium' }}

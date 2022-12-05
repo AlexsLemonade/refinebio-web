@@ -104,7 +104,7 @@ export const SearchCardCTAs = ({ status }) => {
             />
             <Link
               href="#TEMPORARY"
-              label="Learn more"
+              label="Learn More"
               margin={{
                 left: setResponsive('xsmall', 'large'),
                 top: setResponsive('small', 'xxsmall')
@@ -127,7 +127,7 @@ export const SearchCardCTAs = ({ status }) => {
           <InlineMessage label="Not available" color="error" />
           <Link
             href="#TEMPORARY"
-            label="Learn more"
+            label="Learn More"
             margin={{
               left: setResponsive('xsmall', 'large'),
               top: setResponsive('none', 'xxsmall')
