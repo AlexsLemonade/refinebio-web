@@ -27,7 +27,7 @@ const Card = ({
       >
         <Heading
           level={2}
-          margin={{ bottom: setResponsive('small', 'small') }}
+          margin={{ bottom: 'small' }}
           size={setResponsive('h2_small', 'h2_large')}
         >
           {heading}

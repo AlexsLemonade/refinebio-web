@@ -40,6 +40,7 @@ export const SignUpBlock = () => {
             }}
             primary
             light
+            responsive
           />
         </Row>
       </FixedContainer>
