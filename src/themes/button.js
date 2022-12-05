@@ -84,6 +84,9 @@ export default {
   },
 
   extend: () => `
+    > div {
+      border-radius: ${radius};
+    }
     white-space: nowrap;
     &:active:not([disabled]) {
       box-shadow: ${boxShadow};

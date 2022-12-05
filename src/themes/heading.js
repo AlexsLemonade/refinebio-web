@@ -43,12 +43,18 @@ export default {
       medium: {
         size: '20px', // 1.25rem
         height: 1.2 // 24px
+      },
+      h3_small: {
+        size: '20px'
       }
     },
     4: {
       medium: {
         size: '18px', // 1.125rem
         height: 1.5 // 27px
+      },
+      h4_xsmall: {
+        size: '18px'
       },
       h4_small: {
         size: '22px'
