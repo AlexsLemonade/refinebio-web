@@ -1,6 +1,7 @@
 import { Tab } from 'grommet'
 import { Tabs } from 'components/shared/Tabs'
 import { CompendiaNormalizedTab } from './CompendiaNormalizedTab'
+import { CompendiaRNASeqTab } from './CompendiaRNASeqTab'
 
 export const CompendiaTabs = () => {
   return (
@@ -8,7 +9,9 @@ export const CompendiaTabs = () => {
       <Tab title="Normalized Compendia">
         <CompendiaNormalizedTab />
       </Tab>
-      <Tab title="RNA-seq Sample Compendia">RNA-seq Sample Compendia</Tab>
+      <Tab title="RNA-seq Sample Compendia">
+        <CompendiaRNASeqTab />
+      </Tab>
     </Tabs>
   )
 }
