@@ -18,7 +18,7 @@ export const SearchCardBody = ({
   return (
     <Box pad={{ top: 'medium', bottom: 'small' }}>
       <Box>
-        <Heading level={4} weight="500">
+        <Heading level={5} weight="500">
           Description
         </Heading>
         {description ? (
@@ -72,7 +72,7 @@ export const SearchCardBody = ({
         )}
       </Box>
       <Box margin={{ top: 'small' }}>
-        <Heading level={4} weight="500">
+        <Heading level={5} weight="500">
           Publication Title
         </Heading>
         {publicationTitle ? (
@@ -84,7 +84,7 @@ export const SearchCardBody = ({
         )}
       </Box>
       <Box margin={{ top: 'small' }}>
-        <Heading level={4} weight="500">
+        <Heading level={5} weight="500">
           Alternate Accession IDs
         </Heading>
         {alternateAccessionCode ? (
@@ -96,7 +96,7 @@ export const SearchCardBody = ({
         )}
       </Box>
       <Box margin={{ top: 'small' }}>
-        <Heading level={4} weight="500">
+        <Heading level={5} weight="500">
           Sample Metadata Fields
         </Heading>
         <Box direction="row">
