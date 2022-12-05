@@ -6,8 +6,9 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { TextInput } from 'components/shared/TextInput'
 
-export const HomeSignUpSection = () => {
+export const SignUpBlock = () => {
   const { setResponsive } = useResponsive()
+
   return (
     <Box
       background="gradient_blue_dark"
@@ -37,8 +38,8 @@ export const HomeSignUpSection = () => {
               left: setResponsive('none', 'small'),
               top: setResponsive('small', 'none')
             }}
-            secondary
-            responsive
+            primary
+            light
           />
         </Row>
       </FixedContainer>
@@ -46,4 +47,4 @@ export const HomeSignUpSection = () => {
   )
 }
 
-export default HomeSignUpSection
+export default SignUpBlock
