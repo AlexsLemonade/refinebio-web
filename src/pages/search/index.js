@@ -80,7 +80,6 @@ export const Search = () => {
           </Box>
         </Layer>
         <Box gridArea="main">
-          <SearchBulkActions results={data} />
           {viewport !== 'large' && (
             <Button
               aria-label="Open Filters"
@@ -91,6 +90,8 @@ export const Search = () => {
               onClick={() => setToggleFilterList(true)}
             />
           )}
+          <SearchBulkActions results={data} />
+
           {data.results.map((result) => (
             <SearchCard key={result.id} result={result} />
           ))}
