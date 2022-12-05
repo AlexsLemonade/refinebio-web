@@ -85,6 +85,7 @@ export const colors = {
     'linear-gradient(180deg, rgba(12, 52, 131, 0.937981) 0%, #6B8CCE 131.35%, #A2B6DF 190.36%, #A1B6DF 190.36%, #A2B6DF 190.36%)',
   'gradient-light': 'linear-gradient(180deg, #DFE9F3 7.13%, #FFFFFF 75%)',
   gradient_light: 'linear-gradient(360deg, #DFE9F3 7.13%, #FFFFFF 75%)',
+  gradient_light_reverse: 'linear-gradient(180deg, #DFE9F3 7.13%, #FFFFFF 75%)',
   gradient_blue:
     'linear-gradient(179.93deg, rgba(12, 52, 131, 0.937981) -11.89%, rgba(25, 64, 142, 0.946665) 21.67%, #6b8cce 75.91%, #a2b6df 129.12%, #a2b6df 192.17%)',
   gradient_blue_dark:

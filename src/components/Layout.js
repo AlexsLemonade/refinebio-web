@@ -13,7 +13,7 @@ export const Layout = ({ children }) => {
   const { band, setBand } = useBand()
   const { setResponsive } = useResponsive()
   const [path, setPath] = useState('')
-  const pathWithBand = ['/', '/about']
+  const pathWithBand = ['/', '/about', '/compendia']
 
   useEffect(() => {
     setPath(router.asPath)
@@ -25,13 +25,14 @@ export const Layout = ({ children }) => {
       {band && (
         <Band
           bandHeight={
-            path === '/'
-              ? setResponsive('500px', '368px')
-              : setResponsive('650px', '520px')
+            path === '/about'
+              ? setResponsive('650px', '520px')
+              : setResponsive('500px', '368px')
           }
+          light={path === '/compendia'}
         />
       )}
-      <Header light={band} />
+      <Header light={band && path !== '/compendia'} />
       <Main role="main">{children}</Main>
       <Footer />
       <BackToTopButton />

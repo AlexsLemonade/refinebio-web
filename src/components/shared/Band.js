@@ -1,10 +1,10 @@
 import { Box } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
 
-export const Band = ({ bandHeight, ...props }) => {
+export const Band = ({ bandHeight, light = false, ...props }) => {
   return (
     <Box
-      background="gradient_blue"
+      background={light ? 'gradient_light_reverse' : 'gradient_blue'}
       elevation="large"
       height={bandHeight}
       width="100%"
@@ -15,12 +15,16 @@ export const Band = ({ bandHeight, ...props }) => {
       <FixedContainer height="100%">
         <Box
           aria-hidden
-          background={{
-            opacity: '0.1',
-            image: " url('circus-plot.svg')",
-            position: 'center 90%',
-            repeat: 'no-repeat'
-          }}
+          background={
+            !light
+              ? {
+                  opacity: '0.1',
+                  image: " url('circus-plot.svg')",
+                  position: 'center 90%',
+                  repeat: 'no-repeat'
+                }
+              : {}
+          }
           fill
           height="100%"
         />
