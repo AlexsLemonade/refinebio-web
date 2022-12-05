@@ -25,7 +25,7 @@ export const SearchCardMeta = ({
       ]}
       direction={setResponsive('column', 'column', 'row')}
       gap="small"
-      pad={{ vertical: setResponsive('small', 'xsmall') }}
+      pad={{ vertical: 'xsmall' }}
     >
       <Box flex="grow" width={setResponsive('100%', '100%', { max: '30%' })}>
         {organismNames.length > 0 ? (
