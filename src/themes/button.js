@@ -20,7 +20,7 @@ export default {
     color: 'white'
   },
   secondary: {
-    background: { color: 'white' },
+    background: { color: 'transparent' },
     border: { color: 'brand', width: '1px' },
     color: 'brand'
   },
