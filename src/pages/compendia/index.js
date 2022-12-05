@@ -1,5 +1,6 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
+import { CompendiaHero } from 'components/Compendia'
 
 export const Compendia = () => {
   const { setResponsive } = useResponsive()
@@ -10,7 +11,7 @@ export const Compendia = () => {
         top: setResponsive('basex7', 'basex7', 'basex10')
       }}
     >
-      Compendia
+      <CompendiaHero />
     </Box>
   )
 }

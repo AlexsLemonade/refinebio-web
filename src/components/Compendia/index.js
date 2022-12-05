@@ -1,0 +1,1 @@
+export { CompendiaHero } from './CompendiaHero'
