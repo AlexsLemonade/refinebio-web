@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { useBand } from 'hooks/useBand'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Main } from 'grommet'
+import { BackToTopButton } from 'components/shared/BackToTopButton'
 import { Band } from 'components/shared/Band'
 import { Footer } from 'components/Footer'
 import { Header } from 'components/Header'
@@ -33,6 +34,7 @@ export const Layout = ({ children }) => {
       <Header light={band} />
       <Main role="main">{children}</Main>
       <Footer />
+      <BackToTopButton />
     </Box>
   )
 }
