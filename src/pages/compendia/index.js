@@ -1,6 +1,6 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
-import { CompendiaHero } from 'components/Compendia'
+import { CompendiaHero, CompendiaTabs } from 'components/Compendia'
 import { SignUpBlock } from 'components/shared/SignUpBlock'
 
 export const Compendia = () => {
@@ -13,6 +13,7 @@ export const Compendia = () => {
       }}
     >
       <CompendiaHero />
+      <CompendiaTabs />
       <SignUpBlock />
     </Box>
   )
