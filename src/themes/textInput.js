@@ -4,7 +4,7 @@ import { form } from 'themes/variables'
 export const textInput = {
   extend: ({ theme }) => `
     background-color: ${theme.global.colors.white};
-    border-radius: 1px;
+    border-radius: 3px;
     height: ${form.HEIGHT};
     padding: 4px 8px;
     &:hover {
