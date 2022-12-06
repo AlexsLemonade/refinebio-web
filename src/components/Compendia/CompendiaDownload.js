@@ -14,8 +14,11 @@ import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
+import { formatBytes } from 'helpers/formatBytes'
+import { formatString } from 'helpers/formatString'
 import styled from 'styled-components'
 import config from 'config'
+import data from 'api/mockDataCompendia'
 
 const CustomSelect = styled(GrommetSelect)`
   padding-left: 32px;
@@ -27,7 +30,10 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
   const { links } = config
   const [agree, setAgree] = useState(!!token)
   const [options, setOptions] = useState([])
-  const [selectedOption, setSelectedOption] = useState('')
+  const [selectedOption, setSelectedOption] = useState({
+    result: null,
+    name: ''
+  })
 
   const clickHandle = () => {
     // TEMP
@@ -35,12 +41,8 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
   }
 
   useEffect(() => {
-    setOptions(() =>
-      isNormalized ? ['One', 'Two', 'Three'] : ['Four', 'Five', 'Six']
-    )
-  }, [])
-
-  useEffect(() => {}, [selectedOption])
+    setOptions(() => (isNormalized ? data[0].results : data[1].results))
+  }, [options])
 
   return (
     <Box background="white" pad={setResponsive('medium', 'large', 'xlarge')}>
@@ -66,10 +68,21 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
         </Box>
         <CustomSelect
           id="select-organism"
-          options={options}
-          value={selectedOption}
+          label={options.map((option) =>
+            formatString(option.primary_organism_name)
+          )}
+          options={options.map((option) =>
+            formatString(option.primary_organism_name)
+          )}
+          value={selectedOption.primary_organism_name}
           placeholder="Search for an organism"
-          onChange={({ option }) => setSelectedOption(option)}
+          onChange={({ option }) =>
+            options.map(
+              (o) =>
+                option === formatString(o.primary_organism_name) &&
+                setSelectedOption({ result: o, name: option })
+            )
+          }
         />
       </Box>
       {!isNormalized && (
@@ -92,9 +105,12 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
           flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')}
           margin={{ bottom: setResponsive('small', 'small', 'none') }}
         >
-          {selectedOption !== '' && (
+          {selectedOption.result && (
             <Box animation={{ type: 'fadeIn', duration: 800 }}>
-              <Text>Download Size: 65.91 MB</Text>
+              <Text>
+                Download Size:{' '}
+                {formatBytes(selectedOption.result.computed_file.size_in_bytes)}
+              </Text>
             </Box>
           )}
         </Column>
@@ -104,7 +120,7 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
         >
           <Button
             label="Download Now"
-            disabled={!agree || selectedOption === ''}
+            disabled={!agree || !selectedOption.result}
             primary
             responsive
             onClick={clickHandle}
