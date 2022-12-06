@@ -5,11 +5,11 @@ import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { CompendiaDownloadBlock } from './CompendiaDownloadBlock'
 
-export const CompendiaNormalizedTab = ({ type = 'normalized' }) => {
+export const CompendiaNormalizedTab = ({ type }) => {
   const { setResponsive } = useResponsive()
 
   return (
-    <>
+    <Box animation={{ type: 'fadeIn', duration: 500, delay: 150 }}>
       <CompendiaDownloadBlock type={type} />
       <FixedContainer
         pad={{
@@ -53,7 +53,7 @@ export const CompendiaNormalizedTab = ({ type = 'normalized' }) => {
           </Text>
         </Box>
       </FixedContainer>
-    </>
+    </Box>
   )
 }
 

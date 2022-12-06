@@ -6,7 +6,7 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { CompendiaDownload } from './CompendiaDownload'
 
-export const CompendiaDownloadBlock = ({ type = 'normalized' }) => {
+export const CompendiaDownloadBlock = ({ type }) => {
   const { setResponsive } = useResponsive()
   const isNormalized = type === 'normalized'
 
@@ -50,7 +50,7 @@ export const CompendiaDownloadBlock = ({ type = 'normalized' }) => {
         <FixedContainer>
           <Box
             background={{
-              image: `url(${svgImage})`,
+              image: `url(/${svgImage})`,
               position: 'center',
               repeat: 'no-repeat',
               size: '100%'

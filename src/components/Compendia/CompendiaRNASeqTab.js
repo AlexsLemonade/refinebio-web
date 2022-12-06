@@ -30,11 +30,11 @@ const Card = ({ heading, pad, children }) => {
   )
 }
 
-export const CompendiaRNASeqTab = ({ type = 'rna-seq' }) => {
+export const CompendiaRNASeqTab = ({ type }) => {
   const { setResponsive } = useResponsive()
 
   return (
-    <>
+    <Box animation={{ type: 'fadeIn', duration: 500, delay: 150 }}>
       <CompendiaDownloadBlock type={type} />
       <FixedContainer>
         <Row
@@ -88,7 +88,7 @@ export const CompendiaRNASeqTab = ({ type = 'rna-seq' }) => {
           </Card>
         </Row>
       </FixedContainer>
-    </>
+    </Box>
   )
 }
 
