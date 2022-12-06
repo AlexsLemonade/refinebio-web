@@ -175,10 +175,18 @@ export const Footer = () => {
             <Anchor
               color="gray-shade-40"
               label="BDS 3-Clause License"
-              href="#url"
+              href={links.license}
             />
-            <Anchor color="gray-shade-40" label="Privacy" href="#url" />
-            <Anchor color="gray-shade-40" label="Terms of Use" href="#url" />
+            <Anchor
+              color="gray-shade-40"
+              label="Privacy"
+              href={links.privacy}
+            />
+            <Anchor
+              color="gray-shade-40"
+              label="Terms of Use"
+              href={links.terms}
+            />
             <Anchor color="gray-shade-40" label="Contact" href={links.mailTo} />
           </Row>
           <Box margin={{ top: setResponsive('small', 'none') }}>

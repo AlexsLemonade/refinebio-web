@@ -14,6 +14,7 @@ import { Button } from 'components/shared/Button'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
 import styled from 'styled-components'
+import config from 'config'
 
 const CustomSelect = styled(GrommetSelect)`
   padding-left: 32px;
@@ -22,6 +23,7 @@ const CustomSelect = styled(GrommetSelect)`
 export const CompendiaDownload = ({ heading, isNormalized }) => {
   const { token, setToken } = useRefinebioContext()
   const { setResponsive } = useResponsive()
+  const { links } = config
   const [agree, setAgree] = useState(!!token)
   const [options, setOptions] = useState([])
   const [selectedOption, setSelectedOption] = useState('')
@@ -78,7 +80,7 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
         <CheckBox
           label={
             <Text>
-              I agree to the <Anchor href="#url">Terms of Use</Anchor>
+              I agree to the <Anchor href={links.terms}>Terms of Use</Anchor>
             </Text>
           }
           onClick={() => setAgree(!agree)}

@@ -8,6 +8,7 @@ import { List } from 'components/shared/List'
 import { Icon } from 'components/shared/Icon'
 import { SrOnly } from 'components/shared/SrOnly'
 import styled, { css } from 'styled-components'
+import config from 'config'
 import { Logo } from './Logo'
 
 const Anchor = styled(SharedAnchor)`
@@ -166,6 +167,7 @@ const NavItem = styled(Box)`
 export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const router = useRouter()
   const isActive = (path) => router.pathname === path
+  const { links } = config
   const { viewport, setResponsive } = useResponsive()
   const buttonWidth = '80vw'
 
@@ -267,7 +269,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
               <Anchor
                 label="Docs"
                 light={light}
-                href="https://docs.refine.bio"
+                href={links.refinebio_docs}
                 target="_blank"
                 rel="noopener noreferrer"
                 viewport={viewport}
