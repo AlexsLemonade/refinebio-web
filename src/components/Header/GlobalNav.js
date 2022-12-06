@@ -166,7 +166,7 @@ const NavItem = styled(Box)`
 
 export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const router = useRouter()
-  const isActive = (path) => router.pathname === path
+  const isActive = (path) => router.asPath === path
   const { links } = config
   const { viewport, setResponsive } = useResponsive()
   const buttonWidth = '80vw'
@@ -240,16 +240,18 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                     </Text>
                   </Box>
                   <Anchor
+                    active={isActive('/compendia/normalized')}
                     label="Normalized Compendia"
                     light={light}
-                    href="/"
+                    href="/compendia/normalized"
                     viewport={viewport}
                     onClick={handleClick}
                   />
                   <Anchor
+                    active={isActive('/compendia/rna-seq')}
                     label="RNA-seq Sample Compendia"
                     light={light}
-                    href="/"
+                    href="/compendia/rna-seq"
                     viewport={viewport}
                     onClick={handleClick}
                   />
@@ -259,8 +261,18 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                   gap="none"
                   label="Compendia"
                   items={[
-                    { label: 'Normalized Compendia', onClick: () => {} },
-                    { label: 'RNA-seq Sample Compendia', onClick: () => {} }
+                    {
+                      label: 'Normalized Compendia',
+                      onClick: () => {
+                        router.push('/compendia/normalized')
+                      }
+                    },
+                    {
+                      label: 'RNA-seq Sample Compendia',
+                      onClick: () => {
+                        router.push('/compendia/rna-seq')
+                      }
+                    }
                   ]}
                 />
               )}
