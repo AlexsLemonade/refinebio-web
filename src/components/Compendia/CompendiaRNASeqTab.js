@@ -1,9 +1,11 @@
+import { memo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
+import { CompendiaDownloadBlock } from './CompendiaDownloadBlock'
 
 const Card = ({ heading, pad, children }) => {
   const { setResponsive } = useResponsive()
@@ -28,11 +30,12 @@ const Card = ({ heading, pad, children }) => {
   )
 }
 
-export const CompendiaRNASeqTab = () => {
+export const CompendiaRNASeqTab = ({ type = 'rna-seq' }) => {
   const { setResponsive } = useResponsive()
 
   return (
-    <Box>
+    <>
+      <CompendiaDownloadBlock type={type} />
       <FixedContainer>
         <Row
           direction={setResponsive('column', 'column', 'row')}
@@ -85,8 +88,8 @@ export const CompendiaRNASeqTab = () => {
           </Card>
         </Row>
       </FixedContainer>
-    </Box>
+    </>
   )
 }
 
-export default CompendiaRNASeqTab
+export default memo(CompendiaRNASeqTab)

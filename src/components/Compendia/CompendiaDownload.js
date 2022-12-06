@@ -86,12 +86,16 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
       </Box>
       <Row>
         <Box margin={{ bottom: setResponsive('small', 'small', 'none') }}>
-          {selectedOption && <Text>Download Size: 65.91 MB</Text>}
+          {selectedOption !== '' && (
+            <Box animation={{ type: 'fadeIn', duration: 800 }}>
+              <Text>Download Size: 65.91 MB</Text>
+            </Box>
+          )}
         </Box>
         <Box align={setResponsive('start', 'end')}>
           <Button
             label="Download Now"
-            disabled={!agree}
+            disabled={!agree || selectedOption === ''}
             primary
             responsive
             onClick={clickHandle}
