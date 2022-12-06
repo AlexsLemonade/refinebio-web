@@ -11,6 +11,7 @@ import {
 } from 'grommet'
 import { Icon } from 'components/shared/Icon'
 import { Button } from 'components/shared/Button'
+import { Column } from 'components/shared/Column'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
 import styled from 'styled-components'
@@ -87,14 +88,20 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
         />
       </Box>
       <Row>
-        <Box margin={{ bottom: setResponsive('small', 'small', 'none') }}>
+        <Column
+          flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')}
+          margin={{ bottom: setResponsive('small', 'small', 'none') }}
+        >
           {selectedOption !== '' && (
             <Box animation={{ type: 'fadeIn', duration: 800 }}>
               <Text>Download Size: 65.91 MB</Text>
             </Box>
           )}
-        </Box>
-        <Box align={setResponsive('start', 'end')}>
+        </Column>
+        <Column
+          flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')}
+          align={setResponsive('start', 'end')}
+        >
           <Button
             label="Download Now"
             disabled={!agree || selectedOption === ''}
@@ -102,7 +109,7 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
             responsive
             onClick={clickHandle}
           />
-        </Box>
+        </Column>
       </Row>
     </Box>
   )

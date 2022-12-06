@@ -18,7 +18,7 @@ export const AboutCCDLSection = () => {
     <FixedContainer
       border={{ color: 'gray-shade-5', side: 'top', size: 'large' }}
       pad={{
-        horizontal: setResponsive('large', 'medium', 'basex15'),
+        horizontal: setResponsive('none', 'medium', 'basex15'),
         top: setResponsive('basex7', 'basex7', 'basex9'),
         bottom: setResponsive('basex7', 'basex7', 'basex12')
       }}

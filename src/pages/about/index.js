@@ -11,24 +11,29 @@ const About = () => {
   const { setResponsive } = useResponsive()
 
   return (
-    <>
-      <Box
-        pad={{
-          top: 'basex10',
-          bottom: setResponsive('basex7', 'basex7', 'basex9')
-        }}
+    <Box
+      pad={{
+        top: 'basex10',
+        bottom: setResponsive('basex7', 'basex7', 'basex9')
+      }}
+    >
+      <FixedContainer
+        pad={{ horizontal: setResponsive('none', 'medium', 'basex15') }}
       >
-        <FixedContainer
-          pad={{ horizontal: setResponsive('large', 'medium', 'basex15') }}
-        >
-          <AboutHero />
-          <AboutOverviewSection />
-        </FixedContainer>
-      </Box>
-      <Box>
+        <AboutHero />
+      </FixedContainer>
+
+      <FixedContainer
+        pad={{ horizontal: setResponsive('medium', 'medium', 'basex15') }}
+      >
+        <AboutOverviewSection />
+      </FixedContainer>
+      <FixedContainer
+        pad={{ horizontal: setResponsive('medium', 'medium', 'basex15') }}
+      >
         <AboutCCDLSection />
-      </Box>
-    </>
+      </FixedContainer>
+    </Box>
   )
 }
 

@@ -17,6 +17,7 @@ const Card = ({ heading, pad, children }) => {
         top: setResponsive('xlarge', 'basex6')
       }}
       pad={pad}
+      width="100%"
     >
       <Heading
         level={2}
@@ -34,7 +35,7 @@ export const CompendiaRNASeqTab = ({ type }) => {
   const { setResponsive } = useResponsive()
 
   return (
-    <Box animation={{ type: 'fadeIn', duration: 500, delay: 150 }}>
+    <Box animation={{ type: 'fadeIn', duration: 350, delay: 200 }}>
       <CompendiaDownloadBlock type={type} />
       <FixedContainer>
         <Row

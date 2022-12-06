@@ -1,37 +1,36 @@
+import { useResponsive } from 'hooks/useResponsive'
 import { Tabs as GrommetTabs } from 'grommet'
 import styled, { css } from 'styled-components'
 
 // NOTE: Set the prop 'text' to true for the text-based tab button
 
 const CustomTabs = styled(GrommetTabs)`
-  ${({ theme, text }) =>
+  ${({ theme, text, viewport }) =>
     text &&
     css`
       div {
-        > div {
-          button {
-            > div {
-              background: none;
-              border: none;
-            }
+        button {
+          > div {
+            background: none;
+            border: none;
+          }
+          span {
+            display: block;
+            border-bottom: 1px solid transparent;
+            color: ${theme.global.colors.brand};
+            font-size: ${viewport === 'small' ? '16px' : '26px'};
+            padding-bottom: 8px;
+          }
+          &:hover {
             span {
-              display: block;
-              border-bottom: 1px solid transparent;
-              color: ${theme.global.colors.brand};
-              font-size: 26px;
-              padding-bottom: 8px;
+              border-color: ${theme.global.colors.brand};
             }
-            &:hover {
-              span {
-                border-color: ${theme.global.colors.brand};
-              }
-            }
-            &[aria-selected='true'] {
-              span {
-                border-bottom-color: ${theme.global.colors.brand};
-                border-bottom-width: 2px;
-                font-weight: bold;
-              }
+          }
+          &[aria-selected='true'] {
+            span {
+              border-bottom-color: ${theme.global.colors.brand};
+              border-bottom-width: 2px;
+              font-weight: bold;
             }
           }
         }
@@ -40,8 +39,10 @@ const CustomTabs = styled(GrommetTabs)`
 `
 
 export const Tabs = ({ text = false, ...props }) => {
+  const { viewport } = useResponsive()
+
   // eslint-disable-next-line react/jsx-props-no-spreading
-  return <CustomTabs text={text} {...props} />
+  return <CustomTabs text={text} viewport={viewport} {...props} />
 }
 
 export default Tabs

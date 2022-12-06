@@ -10,7 +10,7 @@ export const HeroHeader = () => {
     <Heading
       color="alex-navy"
       level={1}
-      margin={{ bottom: 'basex10' }}
+      margin={{ bottom: 'basex7' }}
       size={setResponsive('h1_small', 'h1_large')}
       textAlign="center"
     >
@@ -22,7 +22,7 @@ export const HeroHeader = () => {
 export const CompendiaHero = () => {
   return (
     <FixedContainer width="850px">
-      <Hero header={<HeroHeader />} marginBottom="xlarge" />
+      <Hero header={<HeroHeader />} marginBottom="basex7" />
     </FixedContainer>
   )
 }

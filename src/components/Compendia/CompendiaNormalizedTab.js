@@ -9,7 +9,7 @@ export const CompendiaNormalizedTab = ({ type }) => {
   const { setResponsive } = useResponsive()
 
   return (
-    <Box animation={{ type: 'fadeIn', duration: 500, delay: 150 }}>
+    <Box animation={{ type: 'fadeIn', duration: 350, delay: 200 }}>
       <CompendiaDownloadBlock type={type} />
       <FixedContainer
         pad={{
