@@ -9,7 +9,7 @@ const Card = ({
   flexValue,
   heading,
   body,
-  img: { url, position, width },
+  img: { url, position },
   ...props
 }) => {
   const { setResponsive } = useResponsive()
@@ -46,8 +46,8 @@ const Card = ({
           size: 'contain'
         }}
         // to preserve the height of SVG image
-        height={setResponsive('195px', '100%', '300px')}
-        width={width}
+        height={setResponsive('195px', '240px', '300px')}
+        width="100%"
       />
     </Row>
   )
@@ -101,8 +101,7 @@ export const AboutOverviewSection = () => {
           flexValue={setResponsive('1 1 auto', 'auto')}
           img={{
             url: 'illustration-network-bottle.svg',
-            position: 'center right',
-            width: '100%'
+            position: 'center right'
           }}
         />
       </Row>

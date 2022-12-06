@@ -29,8 +29,8 @@ export const SignUpBlock = () => {
         </Paragraph>
         {/* fixed width to preserve UI layout in wider screens */}
         <Row width="500px">
-          <Column>
-            <TextInput placeholder="jdoe@example.com" responsive secondary />
+          <Column fill>
+            <TextInput placeholder="jdoe@example.com" />
           </Column>
           <Button
             label="Sign up"
