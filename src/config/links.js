@@ -7,6 +7,7 @@ export default {
   ccdlTwitter: 'https://twitter.com/CancerDataLab',
   ccdlGithub: 'https://github.com/AlexsLemonade/refinebio',
   mailTo: 'mailto:requests@ccdatalab.org',
+  salmon: 'https://combine-lab.github.io/salmon/',
   standard_pipeline:
     'https://docs.refine.bio/en/latest/main_text.html#processing-information',
   license: '/license',

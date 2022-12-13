@@ -1,10 +1,11 @@
 import { memo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, Heading, Paragraph } from 'grommet'
+import { Anchor, Box, Heading, Paragraph, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
+import config from 'config'
 import { CompendiaDownloadBlock } from './CompendiaDownloadBlock'
 
 const Card = ({ heading, pad, children }) => {
@@ -32,6 +33,7 @@ const Card = ({ heading, pad, children }) => {
 }
 
 export const CompendiaRNASeqTab = ({ type }) => {
+  const { links } = config
   const { setResponsive } = useResponsive()
 
   return (
@@ -60,8 +62,17 @@ export const CompendiaRNASeqTab = ({ type }) => {
             <Paragraph
               margin={{ bottom: setResponsive('xsmall', 'xsmall', 'large') }}
             >
-              All RNA-seq samples are uniformly processed using Salmon and the
-              output quant.sf files are zipped together.
+              All RNA-seq samples are uniformly processed using{' '}
+              <Anchor
+                href={links.salmon}
+                label="Salmon"
+                rel="noopener noreferrer"
+              />{' '}
+              and the output{' '}
+              <Text color="coral-shade-20" style={{ background: '#aac4e4' }}>
+                quant.sf
+              </Text>{' '}
+              files are zipped together.
             </Paragraph>
             <Paragraph>
               Note: This compendia is not normalized or aggregated.
@@ -78,7 +89,11 @@ export const CompendiaRNASeqTab = ({ type }) => {
             pad={{ left: setResponsive('none', 'none', 'basex10') }}
           >
             <Paragraph>
-              Choose the quant.sf files by experiment or samples using our API.
+              Choose the{' '}
+              <Text color="coral-shade-20" style={{ background: '#aac4e4' }}>
+                quant.sf
+              </Text>{' '}
+              files by experiment or samples using our API.
             </Paragraph>
             <Button
               label="Read the Docs"
