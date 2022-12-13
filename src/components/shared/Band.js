@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
+import { isMatchPath } from 'helpers/isMatchPath'
 import { Box } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
 
@@ -11,11 +11,6 @@ const ParticlesBg = dynamic(() => import('../ParticlesBg'), {
 
 export const Band = ({ bandHeight, light = false, ...props }) => {
   const router = useRouter()
-  const [path, setPath] = useState('')
-
-  useEffect(() => {
-    setPath(router.pathname)
-  }, [router, path])
 
   return (
     <Box
@@ -27,7 +22,7 @@ export const Band = ({ bandHeight, light = false, ...props }) => {
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
-      {path === '/compendia/[type]' && (
+      {isMatchPath(router.pathname, '/compendia/[type]') && (
         <Box
           height="10000%" // for the container to stretch
           style={{
