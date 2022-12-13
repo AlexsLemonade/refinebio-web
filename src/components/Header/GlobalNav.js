@@ -15,7 +15,7 @@ import { NavIcon } from './NavIcon'
 export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const { links } = config
   const router = useRouter()
-  const { pathname } = router
+  const { asPath, pathname } = router
   const { viewport, setResponsive } = useResponsive()
 
   const buttonWidth = '80vw' // TEMP until creatre a custom budged button component
@@ -64,7 +64,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 light={light}
                 href="/search"
                 viewport={viewport}
-                onClick={handleClick}
+                clickHandler={handleClick}
               />
             </Box>
             <Box
@@ -86,20 +86,20 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                     </Text>
                   </Box>
                   <NavLink
-                    active={isMatchPath(pathname, '/compendia/normalized')}
+                    active={isMatchPath(asPath, '/compendia/normalized')}
                     label="Normalized Compendia"
                     light={light}
                     href="/compendia/normalized"
                     viewport={viewport}
-                    onClick={handleClick}
+                    clickHandler={handleClick}
                   />
                   <NavLink
-                    active={isMatchPath(pathname, '/compendia/rna-seq')}
+                    active={isMatchPath(asPath, '/compendia/rna-seq')}
                     label="RNA-seq Sample Compendia"
                     light={light}
                     href="/compendia/rna-seq"
                     viewport={viewport}
-                    onClick={handleClick}
+                    clickHandler={handleClick}
                   />
                 </>
               ) : (
@@ -121,7 +121,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 viewport={viewport}
-                onClick={handleClick}
+                clickHandler={handleClick}
               />
             </Box>
             <Box
@@ -135,7 +135,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 label="About"
                 href="/about"
                 viewport={viewport}
-                onClick={() => handleClick()}
+                clickHandler={() => handleClick()}
               />
             </Box>
             <Box
