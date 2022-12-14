@@ -5,12 +5,14 @@ export default {
     Buttons: ['Button'],
     'Form Elements': [
       'Checkbox',
-      'Input',
+      'TextInput',
       'RadioButton',
       'RadioButtonGroup',
       'Select'
     ],
     'Font Styles': ['Heading'],
-    'Inline Messages': ['InlineMessage']
+    'Inline Messages': ['InlineMessage'],
+    Header: ['Header'],
+    Footer: ['Footer']
   }
 }

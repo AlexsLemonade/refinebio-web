@@ -5,6 +5,7 @@
             "api/*": ["api/*"],
             "components/*":["components/*"],
             "styles/*": ["styles/*"],
+            "utils/*":["utils/*"]
         }
     }
 }

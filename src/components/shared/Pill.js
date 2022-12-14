@@ -7,7 +7,10 @@ export const Pill = ({
   color = '',
   label = '',
   dot = true,
-  status = ''
+  dotSize = '7px',
+  round = '30px',
+  status = '',
+  props
 }) => {
   return (
     <Box
@@ -16,14 +19,16 @@ export const Pill = ({
       direction="row"
       flex
       pad={{ horizontal: 'xsmall', vertical: 'xxsmall' }}
-      round="30px"
+      round={round}
       width="max-content"
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     >
       {dot && (
         <Box
           background={status || color}
-          width="7px"
-          height="7px"
+          width={dotSize}
+          height={dotSize}
           margin={{ right: 'xsmall' }}
           round="50%"
         />
@@ -32,3 +37,5 @@ export const Pill = ({
     </Box>
   )
 }
+
+export default Pill
