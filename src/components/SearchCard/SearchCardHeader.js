@@ -1,4 +1,5 @@
 import { useResponsive } from 'hooks/useResponsive'
+import { formatURLString } from 'helpers/formatURLString'
 import { Box, Heading } from 'grommet'
 import { IconBadge } from 'components/shared/IconBadge'
 import { Link } from 'components/shared/Link'
@@ -19,7 +20,10 @@ export const SearchCardHeader = ({ accessionCode = '', title = '' }) => {
         weight="600"
         style={{ lineHeight: setResponsive('1', '1.5') }}
       >
-        <Link href="#url" label={title} />
+        <Link
+          href={`experiments/${accessionCode}/${formatURLString(title)}`}
+          label={title}
+        />
       </Heading>
     </Box>
   )
