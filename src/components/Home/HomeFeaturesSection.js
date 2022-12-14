@@ -4,7 +4,7 @@ import { Anchor } from 'components/shared/Anchor'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
-import links from 'config'
+import { links } from 'config'
 import { FolderIcon } from '../../images/graphic-folder.svg'
 import { SearchIcon } from '../../images/graphic-search.svg'
 

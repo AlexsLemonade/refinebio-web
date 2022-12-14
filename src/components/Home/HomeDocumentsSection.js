@@ -4,6 +4,7 @@ import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
+import { links } from 'config'
 
 const Card = ({ heading, body, footer, img, ...props }) => {
   const { setResponsive } = useResponsive()
@@ -47,7 +48,16 @@ export const HomeDocumentsSection = () => {
             heading="refine.bio Compendia"
             body="refine.bio compendia are collections of samples that have been
       processed and packaged for broad and felxible use."
-            footer={<Button label="Learn More" secondary responsive />}
+            footer={
+              <Button
+                href="/compendia/normalized"
+                label="Learn More"
+                secondary
+                responsive
+                rel="noopener noreferrer"
+                target="_blank"
+              />
+            }
             img="network.svg"
             margin={{ bottom: setResponsive('large', 'none') }}
           />
@@ -55,7 +65,16 @@ export const HomeDocumentsSection = () => {
             heading="Explore the docs"
             body="Learn about how we source and process data and other downstream 
     analyses you can do with refine.bio data."
-            footer={<Button label="Take me to the docs" secondary responsive />}
+            footer={
+              <Button
+                href={links.refinebio_docs}
+                label="Take me to the docs"
+                secondary
+                responsive
+                rel="noopener noreferrer"
+                target="_blank"
+              />
+            }
             img="undraw_files.svg"
             margin={{ left: setResponsive('none', 'large', 'basex7') }}
           />

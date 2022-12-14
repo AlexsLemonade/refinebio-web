@@ -14,7 +14,7 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import { Icon } from 'components/shared/Icon'
 import { Row } from 'components/shared/Row'
 import styled, { css } from 'styled-components'
-import config from 'config'
+import { contributors, links } from 'config'
 import { CoinIcon } from '../images/coin.svg'
 
 const TwitterLink = styled(Anchor)`
@@ -35,7 +35,6 @@ const GithubLink = styled(Anchor)`
 
 export const Footer = () => {
   const { setResponsive } = useResponsive()
-  const { contributors, links } = config
 
   return (
     <GrommentFooter

@@ -5,7 +5,7 @@ import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
-import links from 'config'
+import { links } from 'config'
 import { CompendiaDownloadBlock } from './CompendiaDownloadBlock'
 
 const Card = ({ heading, pad, children }) => {
@@ -101,7 +101,7 @@ export const CompendiaRNASeqTab = ({ type }) => {
             </Paragraph>
             <Button
               aria-label="Go to refinebio API docs"
-              href={links.refinebio_api_doc}
+              href={links.refinebio_api_docs}
               label="Read the Docs"
               margin={{ top: 'small' }}
               secondary

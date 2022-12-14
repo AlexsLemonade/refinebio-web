@@ -3,7 +3,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import links from 'config'
+import { links } from 'config'
 import { CompendiaDownloadBlock } from './CompendiaDownloadBlock'
 
 export const CompendiaNormalizedTab = ({ type }) => {

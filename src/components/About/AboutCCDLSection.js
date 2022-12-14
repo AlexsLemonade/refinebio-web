@@ -4,7 +4,7 @@ import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { SrOnly } from 'components/shared/SrOnly'
-import links from 'config'
+import { links } from 'config'
 import styled from 'styled-components'
 
 const PRubik = styled(Paragraph)`
@@ -17,7 +17,7 @@ export const AboutCCDLSection = () => {
     <FixedContainer
       border={{ color: 'gray-shade-5', side: 'top', size: 'large' }}
       pad={{
-        horizontal: setResponsive('none', 'medium', 'basex15'),
+        horizontal: setResponsive('none', 'medium', 'large'),
         top: setResponsive('basex7', 'basex7', 'basex9'),
         bottom: setResponsive('basex7', 'basex7', 'basex12')
       }}
@@ -48,11 +48,12 @@ export const AboutCCDLSection = () => {
         </Box>
       </Row>
       <Row
+        align="center"
         justify={setResponsive('start', 'around')}
         elevation="xlarge"
         pad={{
           // fixed padding to preserve UI layout
-          horizontal: setResponsive('medium', 'medium', '122px'),
+          horizontal: setResponsive('medium', 'medium', 'none'),
           vertical: setResponsive('medium', 'xlarge')
         }}
         round="8px"
@@ -67,14 +68,14 @@ export const AboutCCDLSection = () => {
         </Box>
         <Box justify="center" margin={{ top: setResponsive('medium', 'none') }}>
           <Button
+            href={links.donate}
             label="Donate Now"
             large
-            href={links.donate}
-            rel="noopener noreferrer"
-            target="_blank"
             primary
             responsive
             uppercase
+            rel="noopener noreferrer"
+            target="_blank"
           />
         </Box>
       </Row>

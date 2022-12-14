@@ -17,7 +17,7 @@ import { Row } from 'components/shared/Row'
 import { formatBytes } from 'helpers/formatBytes'
 import { formatString } from 'helpers/formatString'
 import styled from 'styled-components'
-import links from 'config'
+import { links } from 'config'
 import data from 'api/mockDataCompendia'
 
 const CustomSelect = styled(GrommetSelect)`

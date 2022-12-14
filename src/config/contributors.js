@@ -1,4 +1,4 @@
-export default [
+export const contributors = [
   'Casey S. Greene, Dongbo Hu',
   ' Richard W. W. Jones',
   'Stephanie Liu',
