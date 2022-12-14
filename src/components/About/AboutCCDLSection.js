@@ -53,7 +53,7 @@ export const AboutCCDLSection = () => {
         elevation="xlarge"
         pad={{
           // fixed padding to preserve UI layout
-          horizontal: setResponsive('medium', 'medium', 'none'),
+          horizontal: setResponsive('medium', 'medium', 'large'),
           vertical: setResponsive('medium', 'xlarge')
         }}
         round="8px"
@@ -66,7 +66,11 @@ export const AboutCCDLSection = () => {
             fighting cancer and beyond.
           </PRubik>
         </Box>
-        <Box justify="center" margin={{ top: setResponsive('medium', 'none') }}>
+        <Box
+          justify="center"
+          margin={{ top: setResponsive('medium', 'none') }}
+          width={setResponsive('100%', 'auto')}
+        >
           <Button
             href={links.donate}
             label="Donate Now"

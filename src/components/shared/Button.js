@@ -52,7 +52,6 @@ const CustomButton = styled(GrommetButton)`
 export const Button = ({
   large = false,
   link = false,
-  fontSize = 'medium',
   linkFontSize = 'small',
   responsive = false,
   uppercase = false,
@@ -84,7 +83,6 @@ export const Button = ({
         <CustomButton
           width={width}
           large={large}
-          style={{ fontSize }}
           uppercase={uppercase}
           viewport={viewport}
           // eslint-disable-next-line react/jsx-props-no-spreading
