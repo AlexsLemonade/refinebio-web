@@ -6,14 +6,13 @@ import { Button } from 'components/shared/Button'
 import { Layer } from 'components/shared/Layer'
 import { List } from 'components/shared/List'
 import { Icon } from 'components/shared/Icon'
-import config from 'config'
+import links from 'config'
 import { Logo } from './Logo'
 import { NavDropDown } from './NavDropDown'
 import { NavLink } from './NavLink'
 import { NavIcon } from './NavIcon'
 
 export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
-  const { links } = config
   const router = useRouter()
   const { asPath, pathname } = router
   const { viewport, setResponsive } = useResponsive()

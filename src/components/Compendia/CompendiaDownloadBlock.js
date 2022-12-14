@@ -15,7 +15,7 @@ export const CompendiaDownloadBlock = ({ type }) => {
     : 'gene-expression-matrix.svg'
 
   const heading = isNormalized
-    ? 'Compendia Normalized'
+    ? 'Normalized Compendia'
     : 'RNA-seq Sample Compendia'
 
   const TextContent = (

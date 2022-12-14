@@ -5,7 +5,7 @@ import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
-import config from 'config'
+import links from 'config'
 import { CompendiaDownloadBlock } from './CompendiaDownloadBlock'
 
 const Card = ({ heading, pad, children }) => {
@@ -33,7 +33,6 @@ const Card = ({ heading, pad, children }) => {
 }
 
 export const CompendiaRNASeqTab = ({ type }) => {
-  const { links } = config
   const { setResponsive } = useResponsive()
 
   return (
@@ -79,10 +78,14 @@ export const CompendiaRNASeqTab = ({ type }) => {
               Note: This compendia is not normalized or aggregated.
             </Paragraph>
             <Button
+              aria-label="Go to refinebio docs - RNA-seq Sample Compendia"
+              href={links.refinebio_docs_rna_seq_sample_compendia}
               label="Learn More"
               margin={{ top: 'small' }}
               secondary
               responsive
+              rel="noopener noreferrer"
+              target="_blank"
             />
           </Card>
           <Card
@@ -97,10 +100,14 @@ export const CompendiaRNASeqTab = ({ type }) => {
               files by experiment or samples using our API.
             </Paragraph>
             <Button
+              aria-label="Go to refinebio API docs"
+              href={links.refinebio_api_doc}
               label="Read the Docs"
               margin={{ top: 'small' }}
               secondary
               responsive
+              rel="noopener noreferrer"
+              target="_blank"
             />
           </Card>
         </Row>

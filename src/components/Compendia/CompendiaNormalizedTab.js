@@ -3,6 +3,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
+import links from 'config'
 import { CompendiaDownloadBlock } from './CompendiaDownloadBlock'
 
 export const CompendiaNormalizedTab = ({ type }) => {
@@ -35,7 +36,15 @@ export const CompendiaNormalizedTab = ({ type }) => {
             and imputing missing values with SVD impute. The final step is
             quantile normalization.
           </Heading>
-          <Button label="Learn More" secondary responsive />
+          <Button
+            aria-label="Go to refinebio docs - Normalized Compendia"
+            href={links.refinebio_docs_normalized_compendia}
+            label="Learn More"
+            secondary
+            responsive
+            rel="noopener noreferrer"
+            target="_blank"
+          />
         </Box>
         <Box align="center">
           <Heading

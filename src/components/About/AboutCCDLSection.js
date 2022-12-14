@@ -1,10 +1,10 @@
-import config from 'config'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { SrOnly } from 'components/shared/SrOnly'
+import links from 'config'
 import styled from 'styled-components'
 
 const PRubik = styled(Paragraph)`
@@ -12,7 +12,6 @@ const PRubik = styled(Paragraph)`
 `
 export const AboutCCDLSection = () => {
   const { viewport, setResponsive } = useResponsive()
-  const { links } = config
 
   return (
     <FixedContainer

@@ -1,10 +1,10 @@
-import config from 'config'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
+import links from 'config'
 import { FolderIcon } from '../../images/graphic-folder.svg'
 import { SearchIcon } from '../../images/graphic-search.svg'
 
@@ -39,7 +39,6 @@ const Card = ({ heading, body, svgIcon, ...props }) => {
 }
 
 export const HomeFeaturesSection = () => {
-  const { links } = config
   const { viewport, setResponsive } = useResponsive()
 
   return (

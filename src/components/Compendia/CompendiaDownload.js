@@ -17,7 +17,7 @@ import { Row } from 'components/shared/Row'
 import { formatBytes } from 'helpers/formatBytes'
 import { formatString } from 'helpers/formatString'
 import styled from 'styled-components'
-import config from 'config'
+import links from 'config'
 import data from 'api/mockDataCompendia'
 
 const CustomSelect = styled(GrommetSelect)`
@@ -27,7 +27,6 @@ const CustomSelect = styled(GrommetSelect)`
 export const CompendiaDownload = ({ heading, isNormalized }) => {
   const { token, setToken } = useRefinebioContext()
   const { setResponsive } = useResponsive()
-  const { links } = config
   const [agree, setAgree] = useState(!!token)
   const [options, setOptions] = useState([])
   const [selectedOption, setSelectedOption] = useState({

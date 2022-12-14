@@ -187,7 +187,11 @@ export const Footer = () => {
               label="Terms of Use"
               href={links.terms}
             />
-            <Anchor color="gray-shade-40" label="Contact" href={links.mailTo} />
+            <Anchor
+              color="gray-shade-40"
+              label="Contact"
+              href={`mailto:${links.email_request}`}
+            />
           </Row>
           <Box margin={{ top: setResponsive('small', 'none') }}>
             <Text color="gray-shade-40" size="xsmall">
