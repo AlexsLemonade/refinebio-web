@@ -9,7 +9,7 @@ import { SearchBulkActions } from 'components/SearchBulkActions'
 import { SearchCard } from 'components/SearchCard'
 import { SearchBox } from 'components/shared/SearchBox'
 import { SearchFilterList } from 'components/SearchFilterList'
-import data from 'api/mockData'
+import data from 'api/mockDataSearchResult'
 
 export const Search = () => {
   const { viewport, setResponsive } = useResponsive()
