@@ -34,16 +34,20 @@ export const GlobalStyle = createGlobalStyle`
     }
     html {
       height: -webkit-fill-available;
+      scroll-behavior: smooth;
     }
     input {
       &::-webkit-search-cancel-button {
         display: none;
       }
     }
+<<<<<<< HEAD
     // required by tsParticle 
     #tsparticles {
       width: 100%;
       height: 100%;
     }
 
+=======
+>>>>>>> nozomione/37-add-responsive-to-search-result-page
 `

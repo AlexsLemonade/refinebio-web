@@ -1,0 +1,8 @@
+<svg viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path d="M6 6.225 10.734.934 12 2.377S6.079 8.94 6 8.934c-.082.003-6-6.557-6-6.557L1.266.934 6 6.224z" id="a"/>
+</defs>
+<g fill="none" fill-rule="evenodd">
+<path d="m6 2.775 4.734 5.291L12 6.623S6.079.06 6 .066C5.918.063 0 6.623 0 6.623l1.266 1.443L6 2.776z" fill="currentColor" fill-rule="nonzero"/>
+</g>
+</svg>
