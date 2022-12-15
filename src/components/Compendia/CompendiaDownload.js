@@ -15,23 +15,29 @@ import { links } from 'config'
 import styled, { css } from 'styled-components'
 import data from 'api/mockDataCompendia'
 
+const DropDown = styled(Box)`
+  > div:nth-child(2) {
+    display: none;
+  }
+  &:focus-within > div:nth-child(2) {
+    display: block;
+  }
+`
+
 const Li = styled(Box)`
   ${({ theme, selected }) => css`
-    width: 100%;
-    background: ${selected
-      ? theme.global.colors.brand
-      : theme.global.colors.white};
     button {
+      background: ${selected
+        ? theme.global.colors.brand
+        : theme.global.colors.white};
       color: ${selected
         ? theme.global.colors.white
         : theme.global.colors.black};
-    }
-    &:hover {
-      background: ${selected
-        ? theme.global.colors.brand
-        : theme.global.colors['gray-shade-5']};
-
-      button {
+      &:hover,
+      &:focus-visible {
+        background: ${selected
+          ? theme.global.colors.brand
+          : theme.global.colors['gray-shade-5']};
         color: ${selected
           ? theme.global.colors.white
           : theme.global.colors.brand};
@@ -40,14 +46,25 @@ const Li = styled(Box)`
   `}
 `
 
-const ListItem = ({ selectedOption, label, children }) => {
+const ListItem = ({ label, selectedOption, clickHandler }) => {
   return (
     <Li
       as="li"
       selected={selectedOption === label}
-      style={{ listStyle: 'none' }}
+      style={{ listStyle: 'none', width: '100%' }}
     >
-      {children}
+      <Button
+        label={label}
+        width="100%"
+        style={{
+          borderRadius: '0',
+          display: 'block',
+          whiteSpace: 'nowrap',
+          padding: '8px 16px',
+          textAlign: 'left'
+        }}
+        clickHandler={clickHandler}
+      />
     </Li>
   )
 }
@@ -87,13 +104,6 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
     }, 200)
 
     updateFilteredOptions(val)
-  }
-
-  const handleBlur = () => {
-    clearTimeout(timer)
-    const timer = setTimeout(() => {
-      setShowOptions(false)
-    }, 200)
   }
 
   const handleFocus = () => {
@@ -144,7 +154,7 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
         >
           <Icon name="ChevronDown" size="xsmall" />
         </Box>
-        <Box style={{ position: 'relative' }}>
+        <DropDown style={{ position: 'relative' }}>
           <SearchBox
             padding="16px 32px"
             placeholder="Search for an organism"
@@ -152,50 +162,40 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
             reverse={false}
             responsive
             value={userInput}
-            blurHandler={handleBlur}
             changeHandler={(e) => handleChange(e.target.value)}
             focusHandler={handleFocus}
           />
-          {showOptions && (
+          {showOptions && filteredOptions.length > 0 && (
             <Box
+              animation={{ type: 'zoomIn', duration: 50 }}
               background="white"
               border={{ color: 'brand', size: 'medium' }}
               margin={{ top: 'xlarge' }}
               height={{ max: '200px' }}
               width="100%"
-              style={{ overflowY: 'scroll', position: 'absolute', zIndex: 1 }}
+              style={{
+                overflowY: 'scroll',
+                position: 'absolute',
+                zIndex: 1
+              }}
             >
               <List flexDirection="column">
                 {filteredOptions.map((option) => (
                   <ListItem
                     key={option.primary_organism_name}
+                    label={formatString(option.primary_organism_name)}
                     selectedOption={
                       selectedOption
                         ? formatString(selectedOption.primary_organism_name)
                         : null
                     }
-                    label={formatString(option.primary_organism_name)}
-                  >
-                    <Button
-                      background="transparent"
-                      color="black"
-                      label={formatString(option.primary_organism_name)}
-                      width="100%"
-                      style={{
-                        borderRadius: '0',
-                        display: 'block',
-                        whiteSpace: 'nowrap',
-                        padding: '8px 16px',
-                        textAlign: 'left'
-                      }}
-                      clickHandler={() => handleClick(option)}
-                    />
-                  </ListItem>
+                    clickHandler={() => handleClick(option)}
+                  />
                 ))}
               </List>
             </Box>
           )}
-        </Box>
+        </DropDown>
       </Box>
       {!isNormalized && (
         <Box margin={{ top: setResponsive('small', 'medium') }}>
