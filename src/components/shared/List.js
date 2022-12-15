@@ -5,10 +5,16 @@ export const List = ({
   display = 'flex',
   flexDirection = 'row',
   listType = 'ul',
-  children
+  children,
+  ...props
 }) => {
   return (
-    <Box as={listType} style={{ alignItems, display, flexDirection }}>
+    <Box
+      as={listType}
+      style={{ alignItems, display, flexDirection }}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    >
       {children}
     </Box>
   )
