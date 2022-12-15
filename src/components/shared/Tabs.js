@@ -16,7 +16,7 @@ const CustomTabs = styled(GrommetTabs)`
           }
           span {
             display: block;
-            border-bottom: 1px solid transparent;
+            border-bottom: 2px solid transparent;
             color: ${theme.global.colors.brand};
             font-size: ${viewport === 'small' ? '16px' : '26px'};
             padding-bottom: 8px;
@@ -29,7 +29,7 @@ const CustomTabs = styled(GrommetTabs)`
           &[aria-selected='true'] {
             span {
               border-bottom-color: ${theme.global.colors.brand};
-              border-bottom-width: 2px;
+              border-bottom-width: 3px;
               font-weight: bold;
             }
           }

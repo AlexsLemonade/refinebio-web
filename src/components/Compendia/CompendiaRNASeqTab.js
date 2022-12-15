@@ -69,7 +69,7 @@ export const CompendiaRNASeqTab = ({ type }) => {
                 target="_blank"
               />{' '}
               and the output{' '}
-              <Text color="coral-shade-20" style={{ background: '#aac4e4' }}>
+              <Text color="coral-shade-20" style={{ background: '#f2f2f2' }}>
                 quant.sf
               </Text>{' '}
               files are zipped together.
@@ -94,7 +94,7 @@ export const CompendiaRNASeqTab = ({ type }) => {
           >
             <Paragraph>
               Choose the{' '}
-              <Text color="coral-shade-20" style={{ background: '#aac4e4' }}>
+              <Text color="coral-shade-20" style={{ background: '#f2f2f2' }}>
                 quant.sf
               </Text>{' '}
               files by experiment or samples using our API.

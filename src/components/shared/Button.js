@@ -56,6 +56,7 @@ export const Button = ({
   responsive = false,
   uppercase = false,
   width,
+  clickHandler,
   ...props
 }) => {
   const { viewport } = useResponsive()
@@ -76,6 +77,7 @@ export const Button = ({
             padding: 0,
             textDecoration: 'underline'
           }}
+          onClick={clickHandler}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...props}
         />
@@ -85,6 +87,7 @@ export const Button = ({
           large={large}
           uppercase={uppercase}
           viewport={viewport}
+          onClick={clickHandler}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...props}
         />
