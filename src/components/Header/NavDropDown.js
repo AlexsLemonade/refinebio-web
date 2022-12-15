@@ -123,7 +123,7 @@ export const NavDropDown = ({ active, light }) => {
             pad="none"
             role="menu"
           >
-            {menuItems.map((menuItem, i) => (
+            {menuItems.map((menuItem) => (
               <ListItem
                 key={menuItem.label}
                 active={isMatchPath(asPath, menuItem.path)}
