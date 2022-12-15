@@ -98,11 +98,7 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
       setSelectedOption(null)
     }
 
-    clearTimeout(timer)
-    const timer = setTimeout(() => {
-      setUserInput(val)
-    }, 200)
-
+    setUserInput(val)
     updateFilteredOptions(val)
   }
 
