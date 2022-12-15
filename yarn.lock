@@ -10556,6 +10556,11 @@ react-sizeme@^3.0.1:
     shallowequal "^1.1.0"
     throttle-debounce "^3.0.1"
 
+react-table@^7.8.0:
+  version "7.8.0"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.8.0.tgz#07858c01c1718c09f7f1aed7034fcfd7bda907d2"
+  integrity sha512-hNaz4ygkZO4bESeFfnfOft73iBUj8K5oKi1EcSHPAibEydfsX2MyU6Z8KCr3mv3C9Kqqh71U+DhZkFvibbnPbA==
+
 react-tsparticles@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/react-tsparticles/-/react-tsparticles-2.6.0.tgz#226bbf6548afb50ffbde7326db9aebc4a91d8e80"
