@@ -80,7 +80,7 @@ export const NavDropDown = ({ active, light }) => {
   return (
     <Box
       onMouseEnter={() => setIsOpen(true)}
-      // onMouseLeave={() => setIsOpen(false)}
+      onMouseLeave={() => setIsOpen(false)}
     >
       <Box direction="row">
         <Button
