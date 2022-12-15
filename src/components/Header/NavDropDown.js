@@ -28,7 +28,6 @@ const Button = styled(SharedButton)`
 const Li = styled(Box)`
   ${({ theme, active }) => css`
     background: ${active ? theme.global.colors.brand : 'transparent'};
-
     &:hover {
       background: ${active
         ? theme.global.colors.brand
@@ -43,18 +42,22 @@ const Li = styled(Box)`
   `}
 `
 
-const ListItem = ({ active, label, href, clickHandler }) => {
+const ListItem = ({ active, href, label, clickHandler, ...props }) => {
   return (
     <Li
       as="li"
       active={active}
-      onClick={clickHandler}
+      role="none"
       style={{ listStyle: 'none' }}
+      onClick={clickHandler}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     >
       <Anchor
         color={active ? 'white' : 'black'}
-        label={label}
         href={href}
+        label={label}
+        role="menuitem"
         style={{ display: 'block', whiteSpace: 'nowrap', padding: '16px' }}
       />
     </Li>
@@ -64,6 +67,10 @@ const ListItem = ({ active, label, href, clickHandler }) => {
 export const NavDropDown = ({ active, light }) => {
   const router = useRouter()
   const { asPath } = router
+  const menuItems = [
+    { label: 'Normalized Compendia', path: '/compendia/normalized' },
+    { label: 'RNA-seq Example Compendia', path: '/compendia/rna-seq' }
+  ]
   const [isOpen, setIsOpen] = useState(false)
 
   const handleClick = () => {
@@ -73,11 +80,14 @@ export const NavDropDown = ({ active, light }) => {
   return (
     <Box
       onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
+      // onMouseLeave={() => setIsOpen(false)}
     >
       <Box direction="row">
         <Button
           active={active}
+          aria-controls="nav-menu"
+          aria-expanded={isOpen}
+          aria-haspopup="true"
           // eslint-disable-next-line no-nested-ternary
           color={active ? 'brand' : light ? 'white' : 'black'}
           gap="xsmall"
@@ -106,19 +116,22 @@ export const NavDropDown = ({ active, light }) => {
           margin={{ top: '24px', left: '-40px' }}
           style={{ position: 'absolute' }}
         >
-          <List alignItems="left" flexDirection="column" pad="medium">
-            <ListItem
-              active={isMatchPath(asPath, '/compendia/normalized')}
-              href="/compendia/normalized"
-              label="Normalized Compendia"
-              clickHandler={handleClick}
-            />
-            <ListItem
-              active={isMatchPath(asPath, '/compendia/rna-seq')}
-              href="/compendia/rna-seq"
-              label="RNA-seq Sample Compendia"
-              clickHandler={handleClick}
-            />
+          <List
+            alignItems="left"
+            flexDirection="column"
+            id="nav-menu"
+            pad="none"
+            role="menu"
+          >
+            {menuItems.map((menuItem, i) => (
+              <ListItem
+                key={menuItem.label}
+                active={isMatchPath(asPath, menuItem.path)}
+                href={menuItem.path}
+                label={menuItem.label}
+                clickHandler={handleClick}
+              />
+            ))}
           </List>
         </Box>
       )}
