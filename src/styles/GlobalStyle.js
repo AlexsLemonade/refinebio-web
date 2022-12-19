@@ -41,13 +41,10 @@ export const GlobalStyle = createGlobalStyle`
         display: none;
       }
     }
-<<<<<<< HEAD
     // required by tsParticle 
     #tsparticles {
       width: 100%;
       height: 100%;
     }
 
-=======
->>>>>>> nozomione/37-add-responsive-to-search-result-page
 `
