@@ -24,36 +24,31 @@ const DropDown = styled(Box)`
   }
 `
 
-const Li = styled(Box)`
+const DropDownButton = styled(Button)`
   ${({ theme, selected }) => css`
-    button {
+    background: ${selected
+      ? theme.global.colors.brand
+      : theme.global.colors.white};
+    &:hover,
+    &:focus-visible {
       background: ${selected
         ? theme.global.colors.brand
-        : theme.global.colors.white};
+        : theme.global.colors['gray-shade-5']};
       color: ${selected
         ? theme.global.colors.white
-        : theme.global.colors.black};
-      &:hover,
-      &:focus-visible {
-        background: ${selected
-          ? theme.global.colors.brand
-          : theme.global.colors['gray-shade-5']};
-        color: ${selected
-          ? theme.global.colors.white
-          : theme.global.colors.brand};
-      }
+        : theme.global.colors.brand};
     }
   `}
 `
 
 const ListItem = ({ label, selectedOption, clickHandler }) => {
+  const selected = selectedOption === label
+
   return (
-    <Li
-      as="li"
-      selected={selectedOption === label}
-      style={{ listStyle: 'none', width: '100%' }}
-    >
-      <Button
+    <Box as="li" style={{ listStyle: 'none', width: '100%' }}>
+      <DropDownButton
+        color={selected ? 'white' : 'black'}
+        selected={selected}
         label={label}
         width="100%"
         style={{
@@ -65,7 +60,7 @@ const ListItem = ({ label, selectedOption, clickHandler }) => {
         }}
         clickHandler={clickHandler}
       />
-    </Li>
+    </Box>
   )
 }
 
@@ -73,11 +68,11 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
   const { token, setToken } = useRefinebioContext()
   const { setResponsive } = useResponsive()
   const [agree, setAgree] = useState(!!token)
-  const [userInput, setUserInput] = useState('')
-  const [options, setOptions] = useState([])
   const [filteredOptions, setFilteredOptions] = useState([])
+  const [options, setOptions] = useState([])
   const [selectedOption, setSelectedOption] = useState(null)
   const [showOptions, setShowOptions] = useState(false)
+  const [userInput, setUserInput] = useState('')
 
   const updateFilteredOptions = (val) => {
     if (val.trim() !== '') {
@@ -115,7 +110,7 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
 
   const downloadCompendia = () => {
     // TEMP
-    setToken(true)
+    setToken(!token)
   }
 
   useEffect(() => {
