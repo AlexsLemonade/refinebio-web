@@ -6,7 +6,7 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import { links } from 'config'
 import { CompendiaDownloadBlock } from './CompendiaDownloadBlock'
 
-export const CompendiaNormalizedTab = ({ type }) => {
+export const CompendiaNormalizedTab = ({ type = 'normalized' }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -37,7 +37,7 @@ export const CompendiaNormalizedTab = ({ type }) => {
             quantile normalization.
           </Heading>
           <Button
-            aria-label="Go to refinebio docs - Normalized Compendia"
+            aria-label="Go to the refinebio docs - Normalized Compendia"
             href={links.refinebio_docs_normalized_compendia}
             label="Learn More"
             secondary
