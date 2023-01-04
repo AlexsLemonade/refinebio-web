@@ -9,6 +9,7 @@ import paragraph from 'themes/paragraph'
 import radioButton from 'themes/radioButton'
 import select from 'themes/select'
 import tab from 'themes/tab'
+import table from 'themes/table'
 import tabs from 'themes/tabs'
 import text from 'themes/text'
 import { textInput } from 'themes/textInput'
@@ -25,6 +26,7 @@ export const theme = {
   radioButton,
   select,
   tab,
+  table,
   tabs,
   text,
   textInput
