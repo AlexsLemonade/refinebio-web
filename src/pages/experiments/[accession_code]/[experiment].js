@@ -12,13 +12,13 @@ import data from 'api/mockDataExperiment'
 
 // TEMPORARY
 export const getServerSideProps = ({ query }) => {
-  const experiments =
+  const experiment =
     query.accession_code === 'GSE116436' ? data[0][0] : data[1][0]
 
-  return { props: { experiments } }
+  return { props: { experiment } }
 }
 
-export const Experiment = ({ experiments }) => {
+export const Experiment = ({ experiment }) => {
   const router = useRouter()
   const { setResponsive } = useResponsive()
 
@@ -50,7 +50,7 @@ export const Experiment = ({ experiments }) => {
               <SamplesTableCTA />
             </Column>
           </Row>
-          <SamplesTable experiments={experiments} />
+          <SamplesTable experiment={experiment} />
         </Box>
       </FixedContainer>
     </Box>

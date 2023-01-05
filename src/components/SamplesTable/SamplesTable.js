@@ -2,9 +2,9 @@ import { useMemo, memo } from 'react'
 import { DataTable } from 'components/shared/DataTable'
 import { AddSampleButton } from './AddSampleButton'
 
-export const SamplesTable = ({ experiments }) => {
+export const SamplesTable = ({ experiment }) => {
   const pageSizes = [10, 20, 50]
-  const data = useMemo(() => experiments.results, [])
+  const data = useMemo(() => experiment.results, [])
   // TEMEPORARY
   const columns = useMemo(
     () => [
@@ -44,7 +44,7 @@ export const SamplesTable = ({ experiments }) => {
     <DataTable
       columns={columns}
       data={data}
-      experiments={experiments}
+      fetchedData={experiment}
       pageSizes={pageSizes}
     />
   )
