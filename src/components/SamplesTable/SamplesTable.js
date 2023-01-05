@@ -1,5 +1,4 @@
 import { useMemo, memo } from 'react'
-import { Box } from 'grommet'
 import { DataTable } from 'components/shared/DataTable'
 import { AddSampleButton } from './AddSampleButton'
 
@@ -40,16 +39,7 @@ export const SamplesTable = ({ experiments }) => {
     []
   )
 
-  return (
-    <Box
-      border={{ color: 'gray-shade-40', side: 'right' }}
-      style={{
-        overflow: 'hidden'
-      }}
-    >
-      <DataTable columns={columns} data={data} />
-    </Box>
-  )
+  return <DataTable columns={columns} data={data} />
 }
 
 export default memo(SamplesTable)
