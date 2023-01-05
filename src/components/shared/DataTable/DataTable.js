@@ -7,9 +7,10 @@ import {
   TableCell,
   TableBody
 } from 'grommet'
-import { useTable, useGlobalFilter } from 'react-table'
+import { useTable, useGlobalFilter, useSortBy } from 'react-table'
 import { Row } from 'components/shared/Row'
 import { GlobalFilter } from 'components/shared/GlobalFilter'
+import { SortByIcon } from './SortByIcon'
 
 export const DataTable = ({ columns, data }) => {
   const tableInstance = useTable(
@@ -17,7 +18,8 @@ export const DataTable = ({ columns, data }) => {
       columns,
       data
     },
-    useGlobalFilter
+    useGlobalFilter,
+    useSortBy
   )
 
   const {
@@ -50,9 +52,20 @@ export const DataTable = ({ columns, data }) => {
               // eslint-disable-next-line react/jsx-props-no-spreading
               <TableRow {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
-                  // eslint-disable-next-line react/jsx-props-no-spreading
-                  <TableCell {...column.getHeaderProps()}>
-                    {column.render('Header')}
+                  <TableCell
+                    // eslint-disable-next-line react/jsx-props-no-spreading
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                  >
+                    <Row>
+                      {column.render('Header')}
+                      {column.canSort && (
+                        <SortByIcon
+                          isSorted={column.isSorted}
+                          isSortedDesc={column.isSortedDesc}
+                          margin={{ left: 'small' }}
+                        />
+                      )}
+                    </Row>
                   </TableCell>
                 ))}
               </TableRow>
