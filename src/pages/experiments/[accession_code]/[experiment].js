@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useRouter } from 'next/router'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading } from 'grommet'
@@ -56,4 +57,4 @@ export const Experiment = ({ experiments }) => {
   )
 }
 
-export default Experiment
+export default memo(Experiment)
