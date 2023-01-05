@@ -3,6 +3,7 @@ import { DataTable } from 'components/shared/DataTable'
 import { AddSampleButton } from './AddSampleButton'
 
 export const SamplesTable = ({ experiments }) => {
+  const pageSizes = [10, 20, 50]
   const data = useMemo(() => experiments.results, [])
   // TEMEPORARY
   const columns = useMemo(
@@ -39,7 +40,14 @@ export const SamplesTable = ({ experiments }) => {
     []
   )
 
-  return <DataTable columns={columns} data={data} />
+  return (
+    <DataTable
+      columns={columns}
+      data={data}
+      experiments={experiments}
+      pageSizes={pageSizes}
+    />
+  )
 }
 
 export default memo(SamplesTable)

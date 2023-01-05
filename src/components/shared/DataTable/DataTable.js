@@ -1,18 +1,23 @@
-import { memo } from 'react'
+import { useState, memo } from 'react'
+import { useTable, useGlobalFilter, useSortBy } from 'react-table'
+import { useResponsive } from 'hooks/useResponsive'
 import {
   Box,
+  CheckBox,
   Table,
   TableHeader,
   TableRow,
   TableCell,
   TableBody
 } from 'grommet'
-import { useTable, useGlobalFilter, useSortBy } from 'react-table'
 import { Row } from 'components/shared/Row'
-import { GlobalFilter } from 'components/shared/GlobalFilter'
+import { GlobalFilter } from './GlobalFilter'
+import { PageSizes } from './PageSizes'
 import { SortByIcon } from './SortByIcon'
 
-export const DataTable = ({ columns, data }) => {
+export const DataTable = ({ columns, data, experiments, pageSizes }) => {
+  const [pageSize, setPageSize] = useState(pageSizes[0])
+  const { setResponsive } = useResponsive()
   const tableInstance = useTable(
     {
       columns,
@@ -21,7 +26,6 @@ export const DataTable = ({ columns, data }) => {
     useGlobalFilter,
     useSortBy
   )
-
   const {
     getTableProps,
     headerGroups,
@@ -35,11 +39,35 @@ export const DataTable = ({ columns, data }) => {
   return (
     <>
       <Row margin={{ bottom: 'small' }}>
-        <Box />
-        <GlobalFilter
-          globalFilter={globalFilter}
-          setGlobalFilter={setGlobalFilter}
-        />
+        <Box
+          align={setResponsive('start', 'start', 'center')}
+          direction={setResponsive('column', 'column', 'row')}
+          margin={{ bottom: setResponsive('small', 'none') }}
+        >
+          <PageSizes
+            count={experiments.count}
+            pageSize={pageSize}
+            pageSizes={pageSizes}
+            setPageSize={setPageSize}
+          />
+          <Box
+            margin={{
+              left: setResponsive('none', 'none', 'small'),
+              top: setResponsive('xsmall', 'xsmall', 'none')
+            }}
+          >
+            <CheckBox label="Show only samples in current dataset" />
+          </Box>
+        </Box>
+        <Box
+          alignSelf={setResponsive('start', 'end', 'start')}
+          width={setResponsive('100%', 'auto')}
+        >
+          <GlobalFilter
+            globalFilter={globalFilter}
+            setGlobalFilter={setGlobalFilter}
+          />
+        </Box>
       </Row>
       <Box
         border={{ color: 'gray-shade-40', side: 'right' }}
