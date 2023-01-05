@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
+import 'regenerator-runtime'
 import { GlobalStyle } from 'styles/GlobalStyle'
 import { Grommet } from 'grommet'
 import { Layout } from 'components/Layout'
@@ -9,7 +10,7 @@ import ErrorPage from 'pages/_error'
 
 const Fallback = () => <ErrorPage />
 
-const Portal = ({ Component, pageProps }) => {
+const App = ({ Component, pageProps }) => {
   return (
     <>
       <GlobalStyle />
@@ -29,4 +30,4 @@ const Portal = ({ Component, pageProps }) => {
   )
 }
 
-export default Portal
+export default App

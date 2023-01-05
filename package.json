@@ -26,6 +26,7 @@
     "react-dom": "18.2.0",
     "react-table": "^7.8.0",
     "react-tsparticles": "^2.6.0",
+    "regenerator-runtime": "^0.13.11",
     "styled-components": "^5.3.5",
     "tsparticles": "^2.6.0"
   },
