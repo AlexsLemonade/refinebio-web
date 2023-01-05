@@ -20,15 +20,20 @@ export const GlobalFilter = ({ globalFilter, setGlobalFilter }) => {
 
   return (
     <Row justify="start" align={setResponsive('start', 'center')}>
-      <Text margin={{ right: 'small' }}>Filter</Text>
+      <Text
+        margin={{ right: 'small', bottom: setResponsive('xsmall', 'none') }}
+      >
+        Filter
+      </Text>
       <FormField
         htmlFor="global-filter"
         a11yTitle="Global Filter"
         role="search"
+        width={setResponsive('100%', 'auto')}
       >
         <TextInput
           id="global-filter"
-          type="search"
+          type="text"
           value={userInput || ''}
           placeholder="Filter table"
           onChange={(e) => {
