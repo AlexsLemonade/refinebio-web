@@ -15,7 +15,12 @@ import { GlobalFilter } from './GlobalFilter'
 import { PageSizes } from './PageSizes'
 import { SortByIcon } from './SortByIcon'
 
-export const DataTable = ({ columns, data, experiments, pageSizes }) => {
+export const DataTable = ({
+  columns,
+  data,
+  fetchedData: experiment,
+  pageSizes
+}) => {
   const [pageSize, setPageSize] = useState(pageSizes[0])
   const { setResponsive } = useResponsive()
   const tableInstance = useTable(
@@ -45,7 +50,7 @@ export const DataTable = ({ columns, data, experiments, pageSizes }) => {
           margin={{ bottom: setResponsive('small', 'none') }}
         >
           <PageSizes
-            count={experiments.count}
+            count={experiment.count}
             pageSize={pageSize}
             pageSizes={pageSizes}
             setPageSize={setPageSize}
@@ -69,10 +74,7 @@ export const DataTable = ({ columns, data, experiments, pageSizes }) => {
           />
         </Box>
       </Row>
-      <Box
-        border={{ color: 'gray-shade-40', side: 'right' }}
-        style={{ overflow: 'hidden' }}
-      >
+      <Box border={{ color: 'gray-shade-40', side: 'right' }}>
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Table {...getTableProps()}>
           <TableHeader>
