@@ -1,6 +1,8 @@
 import { useMemo, memo } from 'react'
 import { DataTable } from 'components/shared/DataTable'
-import { AddSampleButton } from './AddSampleButton'
+import { CellAddRemove } from './CellAddRemove'
+import { CellMetadataAnnotations } from './CellMetadataAnnotations'
+import { CellProcessingInformation } from './CellProcessingInformation'
 
 export const SamplesTable = ({ experiment }) => {
   const pageSizes = [10, 20, 50]
@@ -10,31 +12,46 @@ export const SamplesTable = ({ experiment }) => {
     () => [
       {
         Header: 'Add/Remove',
+        id: 'add_remove',
         // eslint-disable-next-line react/no-unstable-nested-components
-        Cell: () => <AddSampleButton />
+        Cell: () => <CellAddRemove />,
+        sticky: 'left',
+        width: 190
       },
       {
         Header: 'Accession Code',
-        accessor: 'accession_code'
+        accessor: 'accession_code',
+        sticky: 'left',
+        minWidth: 160,
+        width: 175
       },
-      { Header: 'Title', accessor: 'title' },
-      { Header: 'Sex', accessor: 'sex' },
-      { Header: 'Age', accessor: 'age' },
+      { Header: 'Title', accessor: 'title', sticky: 'left', minWidth: 190 },
+      // { Header: 'Sex', accessor: 'sex' },
+      // { Header: 'Age', accessor: 'age' },
       {
         Header: 'Specimen Part',
-        accessor: 'specimen_part'
+        accessor: 'specimen_part',
+        minWidth: 160
       },
       {
         Header: 'Platform',
         accessor: 'pretty_platform'
       },
       {
-        Header: 'Technology',
-        accessor: 'technology'
+        Header: 'Processing Information',
+        id: 'processing_information',
+        sortable: false,
+        // eslint-disable-next-line react/no-unstable-nested-components
+        Cell: () => <CellProcessingInformation />,
+        width: 200
       },
       {
-        Header: 'Manufacturer',
-        accessor: 'manufacturer'
+        Header: 'Additional Metadata',
+        id: 'additional_metadata',
+        sortable: false,
+        // eslint-disable-next-line react/no-unstable-nested-components
+        Cell: () => <CellMetadataAnnotations />,
+        width: 200
       }
     ],
     []
