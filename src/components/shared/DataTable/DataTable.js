@@ -1,19 +1,18 @@
 import { useState, memo } from 'react'
-import { useTable, useGlobalFilter, useSortBy } from 'react-table'
-import { useResponsive } from 'hooks/useResponsive'
 import {
-  Box,
-  CheckBox,
-  Table,
-  TableHeader,
-  TableRow,
-  TableCell,
-  TableBody
-} from 'grommet'
+  useBlockLayout,
+  useGlobalFilter,
+  useSortBy,
+  useTable
+} from 'react-table'
+import { useSticky } from 'react-table-sticky'
+import { useResponsive } from 'hooks/useResponsive'
+import { Box, CheckBox } from 'grommet'
 import { Row } from 'components/shared/Row'
+import { DataTableSticky } from './DataTableSticky'
 import { GlobalFilter } from './GlobalFilter'
-import { PageSizes } from './PageSizes'
 import { SortByIcon } from './SortByIcon'
+import { PageSizes } from './PageSizes'
 
 export const DataTable = ({
   columns,
@@ -29,7 +28,9 @@ export const DataTable = ({
       data
     },
     useGlobalFilter,
-    useSortBy
+    useSortBy,
+    useBlockLayout,
+    useSticky
   )
   const {
     getTableProps,
@@ -75,51 +76,55 @@ export const DataTable = ({
         </Box>
       </Row>
       <Box border={{ color: 'gray-shade-40', side: 'right' }}>
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-        <Table {...getTableProps()}>
-          <TableHeader>
-            {headerGroups.map((headerGroup) => (
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              <TableRow {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <TableCell
-                    // eslint-disable-next-line react/jsx-props-no-spreading
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                  >
-                    <Row>
-                      {column.render('Header')}
-                      {column.canSort && (
-                        <SortByIcon
-                          isSorted={column.isSorted}
-                          isSortedDesc={column.isSortedDesc}
-                          margin={{ left: 'small' }}
-                        />
-                      )}
-                    </Row>
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableHeader>
+        <DataTableSticky>
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          <TableBody {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row)
-
-              return (
+          <Box {...getTableProps()} style={{ width: '100%' }}>
+            <Box role="rowgroup" className="header">
+              {headerGroups.map((headerGroup) => (
+                // This tr must be a native HTML div tag to prevevnt UI bug
                 // eslint-disable-next-line react/jsx-props-no-spreading
-                <TableRow {...row.getRowProps()}>
-                  {row.cells.map((cell) => (
-                    // eslint-disable-next-line react/jsx-props-no-spreading
-                    <TableCell {...cell.getCellProps()}>
-                      {cell.render('Cell')}
-                    </TableCell>
+                <div {...headerGroup.getHeaderGroupProps()} className="tr">
+                  {headerGroup.headers.map((column) => (
+                    <Box
+                      // eslint-disable-next-line react/jsx-props-no-spreading
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                      className="th"
+                    >
+                      <Box direction="row" justify="between">
+                        {column.render('Header')}
+                        {column.canSort && (
+                          <SortByIcon
+                            isSorted={column.isSorted}
+                            isSortedDesc={column.isSortedDesc}
+                          />
+                        )}
+                      </Box>
+                    </Box>
                   ))}
-                </TableRow>
-              )
-            })}
-          </TableBody>
-        </Table>
+                </div>
+              ))}
+            </Box>
+            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+            <Box {...getTableBodyProps()} className="body">
+              {rows.map((row) => {
+                prepareRow(row)
+
+                return (
+                  // This tr must be a native HTML div tag to prevevnt UI bug
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+                  <div {...row.getRowProps()} className="tr">
+                    {row.cells.map((cell) => (
+                      // eslint-disable-next-line react/jsx-props-no-spreading
+                      <Box {...cell.getCellProps()} className="td">
+                        {cell.render('Cell')}
+                      </Box>
+                    ))}
+                  </div>
+                )
+              })}
+            </Box>
+          </Box>
+        </DataTableSticky>
       </Box>
     </>
   )
