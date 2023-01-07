@@ -15,45 +15,50 @@ export const SamplesTable = ({ experiment }) => {
         id: 'add_remove',
         // eslint-disable-next-line react/no-unstable-nested-components
         Cell: () => <CellAddRemove />,
-        sticky: 'left',
-        width: 190
+        sticky: 'left'
       },
       {
         Header: 'Accession Code',
         accessor: 'accession_code',
-        sticky: 'left',
-        minWidth: 160,
-        width: 175
+        sticky: 'left'
       },
-      { Header: 'Title', accessor: 'title', sticky: 'left', minWidth: 190 },
-      // { Header: 'Sex', accessor: 'sex' },
-      // { Header: 'Age', accessor: 'age' },
+      {
+        Header: 'Title',
+        accessor: 'title',
+        sticky: 'left'
+      },
       {
         Header: 'Specimen Part',
-        accessor: 'specimen_part',
-        minWidth: 160
+        accessor: 'specimen_part'
       },
       {
         Header: 'Platform',
         accessor: 'pretty_platform'
       },
       {
+        Header: 'Sex',
+        accessor: 'sex'
+      },
+      {
         Header: 'Processing Information',
         id: 'processing_information',
         sortable: false,
         // eslint-disable-next-line react/no-unstable-nested-components
-        Cell: () => <CellProcessingInformation />,
-        width: 200
+        Cell: () => <CellProcessingInformation />
       },
       {
         Header: 'Additional Metadata',
         id: 'additional_metadata',
         sortable: false,
         // eslint-disable-next-line react/no-unstable-nested-components
-        Cell: () => <CellMetadataAnnotations />,
-        width: 200
+        Cell: () => <CellMetadataAnnotations />
       }
     ],
+    []
+  )
+
+  const defaultColumn = useMemo(
+    () => ({ minWidth: 30, width: 160, maxWIdth: 250 }),
     []
   )
 
@@ -61,7 +66,8 @@ export const SamplesTable = ({ experiment }) => {
     <DataTable
       columns={columns}
       data={data}
-      fetchedData={experiment}
+      defaultColumn={defaultColumn}
+      original={experiment}
       pageSizes={pageSizes}
     />
   )

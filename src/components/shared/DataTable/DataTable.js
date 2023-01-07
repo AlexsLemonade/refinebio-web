@@ -1,13 +1,14 @@
 import { useState, memo } from 'react'
 import {
-  useBlockLayout,
+  useFlexLayout,
   useGlobalFilter,
+  useResizeColumns,
   useSortBy,
   useTable
 } from 'react-table'
 import { useSticky } from 'react-table-sticky'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, CheckBox } from 'grommet'
+import { Box, CheckBox, Text } from 'grommet'
 import { Row } from 'components/shared/Row'
 import { DataTableSticky } from './DataTableSticky'
 import { GlobalFilter } from './GlobalFilter'
@@ -17,7 +18,8 @@ import { PageSizes } from './PageSizes'
 export const DataTable = ({
   columns,
   data,
-  fetchedData: experiment,
+  defaultColumn = {},
+  original: experiment,
   pageSizes
 }) => {
   const [pageSize, setPageSize] = useState(pageSizes[0])
@@ -25,11 +27,13 @@ export const DataTable = ({
   const tableInstance = useTable(
     {
       columns,
-      data
+      data,
+      defaultColumn
     },
     useGlobalFilter,
     useSortBy,
-    useBlockLayout,
+    useResizeColumns,
+    useFlexLayout,
     useSticky
   )
   const {
@@ -75,15 +79,21 @@ export const DataTable = ({
           />
         </Box>
       </Row>
-      <Box border={{ color: 'gray-shade-40', side: 'right' }}>
+      <Box border={{ color: 'gray-shade-20', side: 'right' }}>
         <DataTableSticky>
-          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          <Box {...getTableProps()} style={{ width: '100%' }}>
-            <Box role="rowgroup" className="header">
+          <Box
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...getTableProps()}
+            style={{ width: '100%' }}
+          >
+            <Box className="header" role="rowgroup" style={{ width: '100%' }}>
               {headerGroups.map((headerGroup) => (
-                // This tr must be a native HTML div tag to prevevnt UI bug
-                // eslint-disable-next-line react/jsx-props-no-spreading
-                <div {...headerGroup.getHeaderGroupProps()} className="tr">
+                <Box
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+                  {...headerGroup.getHeaderGroupProps()}
+                  className="tr"
+                  direction="row"
+                >
                   {headerGroup.headers.map((column) => (
                     <Box
                       // eslint-disable-next-line react/jsx-props-no-spreading
@@ -91,7 +101,7 @@ export const DataTable = ({
                       className="th"
                     >
                       <Box direction="row" justify="between">
-                        {column.render('Header')}
+                        <Text>{column.render('Header')}</Text>
                         {column.canSort && (
                           <SortByIcon
                             isSorted={column.isSorted}
@@ -99,27 +109,36 @@ export const DataTable = ({
                           />
                         )}
                       </Box>
+                      {column.canResize && (
+                        <Box
+                          // eslint-disable-next-line react/jsx-props-no-spreading
+                          {...column.getResizerProps()}
+                          className={`resizer ${
+                            column.isResizing ? 'isResizing' : ''
+                          }`}
+                          onClick={(e) => e.stopPropagation()}
+                        />
+                      )}
                     </Box>
                   ))}
-                </div>
+                </Box>
               ))}
             </Box>
             {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <Box {...getTableBodyProps()} className="body">
+            <Box {...getTableBodyProps()} className="body" width="100%">
               {rows.map((row) => {
                 prepareRow(row)
 
                 return (
-                  // This tr must be a native HTML div tag to prevevnt UI bug
                   // eslint-disable-next-line react/jsx-props-no-spreading
-                  <div {...row.getRowProps()} className="tr">
+                  <Box {...row.getRowProps()} className="tr" direction="row">
                     {row.cells.map((cell) => (
                       // eslint-disable-next-line react/jsx-props-no-spreading
                       <Box {...cell.getCellProps()} className="td">
-                        {cell.render('Cell')}
+                        <Text>{cell.render('Cell')}</Text>
                       </Box>
                     ))}
-                  </div>
+                  </Box>
                 )
               })}
             </Box>
