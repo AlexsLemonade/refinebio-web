@@ -15,7 +15,8 @@ export const SamplesTable = ({ experiment }) => {
         id: 'add_remove',
         // eslint-disable-next-line react/no-unstable-nested-components
         Cell: () => <CellAddRemove />,
-        sticky: 'left'
+        sticky: 'left',
+        minWidth: 110
       },
       {
         Header: 'Accession Code',
@@ -43,6 +44,7 @@ export const SamplesTable = ({ experiment }) => {
         Header: 'Processing Information',
         id: 'processing_information',
         sortable: false,
+        width: 200,
         // eslint-disable-next-line react/no-unstable-nested-components
         Cell: () => <CellProcessingInformation />
       },
@@ -50,6 +52,7 @@ export const SamplesTable = ({ experiment }) => {
         Header: 'Additional Metadata',
         id: 'additional_metadata',
         sortable: false,
+        width: 200,
         // eslint-disable-next-line react/no-unstable-nested-components
         Cell: () => <CellMetadataAnnotations />
       }
@@ -58,7 +61,7 @@ export const SamplesTable = ({ experiment }) => {
   )
 
   const defaultColumn = useMemo(
-    () => ({ minWidth: 30, width: 160, maxWIdth: 250 }),
+    () => ({ minWidth: 60, width: 160, maxWIdth: 250 }),
     []
   )
 
