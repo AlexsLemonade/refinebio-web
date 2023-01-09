@@ -63,6 +63,9 @@ export const DataTableSticky = styled(Box)`
         z-index: 1;
         ${'' /* prevents from scrolling while dragging on touch devices */}
         touch-action:none;
+        &:hover {
+          background: ${theme.global.colors[alternateRowBg]};
+        }
         &.isResizing {
           background: ${rowHoverBG};
         }
