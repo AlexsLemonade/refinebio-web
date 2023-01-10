@@ -3,6 +3,8 @@ import { SrOnly } from 'components/shared/SrOnly'
 import { ChevronDown } from '../../images/chevron-down.svg'
 import { ChevronUp } from '../../images/chevron-up.svg'
 import { Close } from '../../images/close.svg'
+import { Collapse } from '../../images/collapse.svg'
+import { Expand } from '../../images/expand.svg'
 import { Filter } from '../../images/filter.svg'
 import { Github } from '../../images/github.svg'
 import { Info } from '../../images/info.svg'
@@ -15,6 +17,8 @@ const SVGs = {
   ChevronDown,
   ChevronUp,
   Close,
+  Collapse,
+  Expand,
   Filter,
   Github,
   Info,

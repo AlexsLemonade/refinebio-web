@@ -1,0 +1,23 @@
+import { Button } from 'components/shared/Button'
+import { Icon } from 'components/shared/Icon'
+
+export const ExpandTableButton = ({ tableExpanded, setTableExpanded }) => {
+  return (
+    <Button
+      icon={
+        <Icon
+          color="brand"
+          name={tableExpanded ? 'Collapse' : 'Expand'}
+          size="16px"
+          aria-hidden
+        />
+      }
+      gap="xsmall"
+      label={tableExpanded ? 'Collaspe Table' : 'Expand Table'}
+      style={{paddingRight: 0}}
+      clickHandler={() => setTableExpanded(!tableExpanded)}
+    />
+  )
+}
+
+export default ExpandTableButton

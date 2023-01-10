@@ -4,11 +4,12 @@ import styled, { css } from 'styled-components'
 const gray = 'gray-shade-20'
 const alternateRowBg = 'gray-shade-5'
 const rowHoverBG = '#E2E2E2'
+const resizerWidth = '10px'
 
 export const DataTableSticky = styled(Box)`
   ${({ theme }) => css`
-    border: 1px solid ${theme.global.colors[gray]};
     display: inline-block;
+    position: relative;
 
     .tr {
       &:last-child {
@@ -16,11 +17,13 @@ export const DataTableSticky = styled(Box)`
           border-bottom: 0;
         }
       }
+
       &:nth-child(even) {
         .td {
           background: ${theme.global.colors[alternateRowBg]};
         }
       }
+
       &:hover .td {
         background: ${rowHoverBG};
       }
@@ -30,6 +33,7 @@ export const DataTableSticky = styled(Box)`
       font-weight: bold;
       box-shadow: none;
     }
+
     .th,
     .td {
       background: ${theme.global.colors.white};
@@ -54,18 +58,17 @@ export const DataTableSticky = styled(Box)`
       .resizer {
         box-shadow: none;
         display: inline-block;
-        width: 8px;
+        width: ${resizerWidth};
         height: 100%;
         position: absolute;
         right: 0;
         top: 0;
-        transform: translateX(50%);
-        z-index: 1;
         ${'' /* prevents from scrolling while dragging on touch devices */}
         touch-action:none;
-        &:hover {
-          background: ${theme.global.colors[alternateRowBg]};
-        }
+        transform: translateX(50%);
+        z-index: 1;
+
+        &:hover,
         &.isResizing {
           background: ${rowHoverBG};
         }
@@ -74,6 +77,7 @@ export const DataTableSticky = styled(Box)`
 
     > div {
       overflow: scroll;
+
       .header {
         position: sticky;
         width: fit-content;

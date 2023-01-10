@@ -4,9 +4,12 @@ import { CellAddRemove } from './CellAddRemove'
 import { CellMetadataAnnotations } from './CellMetadataAnnotations'
 import { CellProcessingInformation } from './CellProcessingInformation'
 
-export const SamplesTable = ({ experiment }) => {
+export const SamplesTable = ({ experiment, samples }) => {
+  // the 'totalColumns' value matches the current refine.bio setting 
+  const totalColumns = experiment ? 4 + experiment.sample_metadata.length : 0
   const pageSizes = [10, 20, 50]
-  const data = useMemo(() => experiment.results, [])
+  const data = useMemo(() => samples.results, [])
+
   // TEMEPORARY
   const columns = useMemo(
     () => [
@@ -61,7 +64,7 @@ export const SamplesTable = ({ experiment }) => {
   )
 
   const defaultColumn = useMemo(
-    () => ({ minWidth: 60, width: 160, maxWIdth: 250 }),
+    () => ({ minWidth: 60, width: 160, maxWidth: 450 }),
     []
   )
 
@@ -70,8 +73,9 @@ export const SamplesTable = ({ experiment }) => {
       columns={columns}
       data={data}
       defaultColumn={defaultColumn}
-      original={experiment}
+      original={samples}
       pageSizes={pageSizes}
+      totalColumns={totalColumns}
     />
   )
 }
