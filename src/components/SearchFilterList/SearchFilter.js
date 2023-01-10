@@ -1,11 +1,12 @@
 /* eslint-disable no-nested-ternary */
 import { useState, useMemo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, CheckBox, Grid, Heading, Text } from 'grommet'
+import { Box, CheckBox, Grid, Heading } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
 import { SearchBox } from 'components/shared/SearchBox'
 import { formatString } from 'helpers/formatString'
 import { scrollToId } from 'helpers/scrollToId'
+import { TextNull } from 'components/shared/TextNull'
 import styled, { css } from 'styled-components'
 
 const ToggleButton = styled(sharedButton)`
@@ -88,11 +89,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
         ))}
       </Grid>
 
-      {filteredResult.length === 0 && (
-        <Text color="gray-shade-40">
-          <i>No match found</i>
-        </Text>
-      )}
+      {filteredResult.length === 0 && <TextNull text="No match found" />}
 
       {filterLength > maxCount && (
         <ToggleButton

@@ -1,9 +1,10 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { formatString } from 'helpers/formatString'
 import { formatPlatformName } from 'helpers/formatPlatformName'
-import { Box, Text } from 'grommet'
+import { Box } from 'grommet'
 import { IconBadge } from 'components/shared/IconBadge'
 import { Row } from 'components/shared/Row'
+import { TextNull } from 'components/shared/TextNull'
 
 export const SearchCardMeta = ({
   metadata: { downloadableSamples, organismNames, platformNames, technology }
@@ -37,9 +38,7 @@ export const SearchCardMeta = ({
             name="Organism"
           />
         ) : (
-          <Text color="gray-shade-40">
-            <i>No species</i>
-          </Text>
+          <TextNull text="No species" />
         )}
       </Box>
       <Box flex="grow">
@@ -58,9 +57,7 @@ export const SearchCardMeta = ({
             name={technology === 'MICROARRAY' ? 'MicroArray' : 'Rna'}
           />
         ) : (
-          <Text color="gray-shade-40">
-            <i>No platform available</i>
-          </Text>
+          <TextNull text="No platform available" />
         )}
       </Box>
     </Row>

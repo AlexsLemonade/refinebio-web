@@ -1,8 +1,9 @@
 import { useState } from 'react'
+import { formatString } from 'helpers/formatString'
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import { Icon } from 'components/shared/Icon'
 import { Link } from 'components/shared/Link'
-import { formatString } from 'helpers/formatString'
+import { TextNull } from 'components/shared/TextNull'
 
 export const SearchCardBody = ({
   alternateAccessionCode = '',
@@ -52,7 +53,6 @@ export const SearchCardBody = ({
                     </>
                   ) : (
                     <>
-                      {' '}
                       Less{' '}
                       <Icon
                         margin={{ left: 'xxsmall' }}
@@ -66,9 +66,7 @@ export const SearchCardBody = ({
             </Paragraph>
           </Box>
         ) : (
-          <Text color="gray-shade-40">
-            <i>No description</i>
-          </Text>
+          <TextNull text="No description" />
         )}
       </Box>
       <Box margin={{ top: 'small' }}>
@@ -78,9 +76,7 @@ export const SearchCardBody = ({
         {publicationTitle ? (
           <Text>{publicationTitle}</Text>
         ) : (
-          <Text color="gray-shade-40">
-            <i>No associated publication</i>
-          </Text>
+          <TextNull text="No associated publication" />
         )}
       </Box>
       <Box margin={{ top: 'small' }}>
@@ -90,9 +86,7 @@ export const SearchCardBody = ({
         {alternateAccessionCode ? (
           <Link href={SearchCardBody.url} label={alternateAccessionCode} />
         ) : (
-          <Text color="gray-shade-40">
-            <i>None</i>
-          </Text>
+          <TextNull text="None" />
         )}
       </Box>
       <Box margin={{ top: 'small' }}>
@@ -103,9 +97,7 @@ export const SearchCardBody = ({
           {sampleMetadataFields.length > 0 ? (
             <Text>{formatString(sampleMetadataFields.join(', '))}</Text>
           ) : (
-            <Text color="gray-shade-40">
-              <i>No sample metadata fields</i>
-            </Text>
+            <TextNull text="No sample metadata fields" />
           )}
         </Box>
       </Box>
