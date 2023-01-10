@@ -12,10 +12,10 @@ import { Box, CheckBox, Text } from 'grommet'
 import { LayerSimple } from 'components/shared/LayerSimple'
 import { Row } from 'components/shared/Row'
 import { DataTableSticky } from './DataTableSticky'
-import { ExpandTableButton } from './ExpandTableButton'
-import { GlobalFilter } from './GlobalFilter'
-import { PageSizes } from './PageSizes'
-import { SortByIcon } from './SortByIcon'
+import { ExpandTableButton } from './utils/ExpandTableButton'
+import { GlobalFilter } from './utils/GlobalFilter'
+import { PageSizes } from './utils/PageSizes'
+import { SortBy } from './utils/SortBy'
 
 export const DataTable = ({
   columns,
@@ -147,7 +147,7 @@ export const DataTable = ({
                       <Box direction="row" justify="between">
                         <Text>{column.render('Header')}</Text>
                         {column.canSort && (
-                          <SortByIcon
+                          <SortBy
                             isSorted={column.isSorted}
                             isSortedDesc={column.isSortedDesc}
                           />
