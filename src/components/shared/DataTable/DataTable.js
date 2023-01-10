@@ -23,6 +23,7 @@ export const DataTable = ({
   defaultColumn = {},
   original: samples,
   pageSizes,
+  hiddenColumns,
   totalColumns = 0
 }) => {
   const { viewport, setResponsive } = useResponsive()
@@ -34,7 +35,8 @@ export const DataTable = ({
     {
       columns,
       data,
-      defaultColumn
+      defaultColumn,
+      initialState: { hiddenColumns }
     },
     useGlobalFilter,
     useSortBy,
@@ -56,9 +58,10 @@ export const DataTable = ({
     <LayerSimple
       animation={{
         type: ['fadeIn', 'zoomIn'],
-        duration: 2500
+        duration: 2000
       }}
       full
+      modal
       position="center"
       show={tableExpanded}
     >
