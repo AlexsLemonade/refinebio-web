@@ -1,9 +1,9 @@
 import { memo } from 'react'
-import { Text } from 'grommet'
+import { TextNull } from 'components/shared/TextNull'
 
 // TEMP
 export const CellMetadataAnnotations = () => {
-  return <Text color="gray-shade-40">NA</Text>
+  return <TextNull text="N/A" />
 }
 
 export default memo(CellMetadataAnnotations)

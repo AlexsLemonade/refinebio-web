@@ -1,10 +1,11 @@
 import { useState, useMemo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, CheckBox, Heading, Text } from 'grommet'
-import { Button as sharedButton } from 'components/shared/Button'
-import { SearchBox } from 'components/shared/SearchBox'
 import { formatString } from 'helpers/formatString'
 import { scrollToId } from 'helpers/scrollToId'
+import { Box, CheckBox, Heading } from 'grommet'
+import { Button as sharedButton } from 'components/shared/Button'
+import { SearchBox } from 'components/shared/SearchBox'
+import { TextNull } from 'components/shared/TextNull'
 import styled, { css } from 'styled-components'
 
 const ToggleButton = styled(sharedButton)`
@@ -83,11 +84,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
         ))}
       </Box>
 
-      {filteredResult.length === 0 && (
-        <Text color="gray-shade-40">
-          <i>No match found</i>
-        </Text>
-      )}
+      {filteredResult.length === 0 && <TextNull text="No match found" />}
 
       {filterLength > maxCount && (
         <ToggleButton
