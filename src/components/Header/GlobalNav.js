@@ -3,7 +3,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { isMatchPath } from 'helpers/isMatchPath'
 import { Box, Nav, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
-import { Layer } from 'components/shared/Layer'
+import { LayerResponsive } from 'components/shared/LayerLayerResponsive'
 import { List } from 'components/shared/List'
 import { Icon } from 'components/shared/Icon'
 import { links } from 'config'
@@ -29,7 +29,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
       {viewport === 'small' && (
         <NavIcon light={light} toggle={toggle} clickHandler={handleClick} />
       )}
-      <Layer position="right" show={toggle}>
+      <LayerResponsive position="right" show={toggle}>
         <Nav
           align="center"
           background={setResponsive('white', 'transparent')}
@@ -161,7 +161,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
             </Box>
           </List>
         </Nav>
-      </Layer>
+      </LayerResponsive>
     </>
   )
 }
