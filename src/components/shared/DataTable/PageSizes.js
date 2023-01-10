@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Box, Select, Text } from 'grommet'
 
 export const PageSizes = ({ count, pageSize, pageSizes, setPageSize }) => {
@@ -24,4 +25,4 @@ export const PageSizes = ({ count, pageSize, pageSizes, setPageSize }) => {
   )
 }
 
-export default PageSizes
+export default memo(PageSizes)

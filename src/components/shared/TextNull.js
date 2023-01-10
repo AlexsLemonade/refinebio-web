@@ -1,4 +1,4 @@
-import { Text } from "grommet"
+import { Text } from 'grommet'
 
 export const TextNull = ({ text }) => (
   <Text color="gray-shade-40">
