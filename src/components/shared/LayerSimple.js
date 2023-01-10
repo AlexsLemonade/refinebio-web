@@ -7,9 +7,7 @@ export const LayerSimple = ({
   show = false,
   children
 }) => {
-  if (!show) {
-    return children
-  }
+  if (!show) return children
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment

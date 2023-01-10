@@ -1,7 +1,7 @@
 import { Layer as GrommetLayer } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 
-export const Layer = ({
+export const LayerResponsive = ({
   position = '',
   tabletMode = false,
   show = false,
@@ -19,4 +19,4 @@ export const Layer = ({
   return null
 }
 
-export default Layer
+export default LayerResponsive

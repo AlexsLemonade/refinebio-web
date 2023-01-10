@@ -3,7 +3,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Box, Grid } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { Layer } from 'components/shared/Layer'
+import { LayerResponsive } from 'components/shared/LayerLayerResponsive'
 import { Icon } from 'components/shared/Icon'
 import { SearchBulkActions } from 'components/SearchBulkActions'
 import { SearchCard } from 'components/SearchCard'
@@ -48,7 +48,7 @@ export const Search = () => {
             responsive
           />
         </Box>
-        <Layer position="left" show={toggleFilterList} tabletMode>
+        <LayerResponsive position="left" show={toggleFilterList} tabletMode>
           <Box
             background="white"
             gridArea="side"
@@ -78,7 +78,7 @@ export const Search = () => {
             )}
             <SearchFilterList facets={data.facets} />
           </Box>
-        </Layer>
+        </LayerResponsive>
         <Box gridArea="main">
           {viewport !== 'large' && (
             <Button
