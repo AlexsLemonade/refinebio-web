@@ -2,7 +2,7 @@ import { memo } from 'react'
 import { Box } from 'grommet'
 import { Icon } from 'components/shared/Icon'
 
-export const SortByIcon = ({ isSorted, isSortedDesc, margin = 'none' }) => {
+export const SortBy = ({ isSorted, isSortedDesc, margin = 'none' }) => {
   const size = '10px'
 
   return (
@@ -21,4 +21,4 @@ export const SortByIcon = ({ isSorted, isSortedDesc, margin = 'none' }) => {
   )
 }
 
-export default memo(SortByIcon)
+export default memo(SortBy)
