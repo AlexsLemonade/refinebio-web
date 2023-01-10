@@ -7,18 +7,32 @@ import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { SamplesTable, SamplesTableCTA } from 'components/SamplesTable'
-
-import data from 'api/mockDataExperiment'
+import experimentData from 'api/mockDataExperiment'
+import samplesTableData from 'api/mockDataSamplesTable'
 
 // TEMPORARY
 export const getServerSideProps = ({ query }) => {
-  const experiment =
-    query.accession_code === 'GSE116436' ? data[0][0] : data[1][0]
+  const { accession_code: accessionCode } = query
 
-  return { props: { experiment } }
+  let experiment
+  let samples
+
+  try {
+    // endpoint: 'v1/experiments/{accession_code}/'
+    experiment =
+      accessionCode === 'GSE116436' ? experimentData[0] : experimentData[1]
+    samples =
+      accessionCode === 'GSE116436'
+        ? samplesTableData[0][2]
+        : samplesTableData[1][2]
+  } catch (error) {
+    return { error }
+  }
+
+  return { props: { experiment, samples } }
 }
 
-export const Experiment = ({ experiment }) => {
+export const Experiment = ({ experiment, samples }) => {
   const router = useRouter()
   const { setResponsive } = useResponsive()
 
@@ -50,7 +64,7 @@ export const Experiment = ({ experiment }) => {
               <SamplesTableCTA />
             </Column>
           </Row>
-          <SamplesTable experiment={experiment} />
+          <SamplesTable experiment={experiment} samples={samples} />
         </Box>
       </FixedContainer>
     </Box>

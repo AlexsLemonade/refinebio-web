@@ -9,21 +9,27 @@ import {
 import { useSticky } from 'react-table-sticky'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, CheckBox, Text } from 'grommet'
+import { LayerSimple } from 'components/shared/LayerSimple'
 import { Row } from 'components/shared/Row'
 import { DataTableSticky } from './DataTableSticky'
+import { ExpandTableButton } from './ExpandTableButton'
 import { GlobalFilter } from './GlobalFilter'
-import { SortByIcon } from './SortByIcon'
 import { PageSizes } from './PageSizes'
+import { SortByIcon } from './SortByIcon'
 
 export const DataTable = ({
   columns,
   data,
   defaultColumn = {},
-  original: experiment,
-  pageSizes
+  original: samples,
+  pageSizes,
+  totalColumns = 0
 }) => {
+  const { viewport, setResponsive } = useResponsive()
+  const columnMinCount = 5
   const [pageSize, setPageSize] = useState(pageSizes[0])
-  const { setResponsive } = useResponsive()
+  const [tableExpanded, setTableExpanded] = useState(false)
+
   const tableInstance = useTable(
     {
       columns,
@@ -47,15 +53,33 @@ export const DataTable = ({
   } = tableInstance
 
   return (
-    <>
-      <Row margin={{ bottom: 'small' }}>
+    <LayerSimple
+      animation={{
+        type: ['fadeIn', 'zoomIn'],
+        duration: 2500
+      }}
+      full
+      position="center"
+      show={tableExpanded}
+    >
+      <Row
+        margin={{ bottom: 'small' }}
+        pad={{
+          top: tableExpanded
+            ? setResponsive('none', 'medium', 'large')
+            : 'none',
+          horizontal: tableExpanded
+            ? setResponsive('none', 'medium', 'large')
+            : 'none'
+        }}
+      >
         <Box
           align={setResponsive('start', 'start', 'center')}
           direction={setResponsive('column', 'column', 'row')}
           margin={{ bottom: setResponsive('small', 'none') }}
         >
           <PageSizes
-            count={experiment.count}
+            count={samples.count}
             pageSize={pageSize}
             pageSizes={pageSizes}
             setPageSize={setPageSize}
@@ -73,20 +97,37 @@ export const DataTable = ({
           alignSelf={setResponsive('start', 'end', 'start')}
           width={setResponsive('100%', 'auto')}
         >
-          <GlobalFilter
-            globalFilter={globalFilter}
-            setGlobalFilter={setGlobalFilter}
-          />
+          <Box direction="row">
+            <GlobalFilter
+              globalFilter={globalFilter}
+              setGlobalFilter={setGlobalFilter}
+            />
+            {viewport !== 'small' && totalColumns > columnMinCount && (
+              <ExpandTableButton
+                tableExpanded={tableExpanded}
+                setTableExpanded={setTableExpanded}
+              />
+            )}
+          </Box>
         </Box>
       </Row>
-      <Box border={{ color: 'gray-shade-20', side: 'right' }}>
+      <Box
+        border={{
+          color: 'gray-shade-20',
+          side: 'all'
+        }}
+        height={{ max: '75%' }}
+        margin={{
+          horizontal: tableExpanded
+            ? setResponsive('none', 'medium', 'large')
+            : 'none'
+        }}
+        style={{ overflowY: 'auto' }}
+      >
         <DataTableSticky>
-          <Box
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...getTableProps()}
-            style={{ width: '100%' }}
-          >
-            <Box className="header" role="rowgroup" style={{ width: '100%' }}>
+          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+          <Box {...getTableProps()} style={{ width: '100%' }}>
+            <Box className="header" style={{ width: '100%' }}>
               {headerGroups.map((headerGroup) => (
                 <Box
                   // eslint-disable-next-line react/jsx-props-no-spreading
@@ -124,8 +165,13 @@ export const DataTable = ({
                 </Box>
               ))}
             </Box>
-            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <Box {...getTableBodyProps()} className="body" width="100%">
+
+            <Box
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...getTableBodyProps()}
+              className="body"
+              width="100%"
+            >
               {rows.map((row) => {
                 prepareRow(row)
 
@@ -145,7 +191,7 @@ export const DataTable = ({
           </Box>
         </DataTableSticky>
       </Box>
-    </>
+    </LayerSimple>
   )
 }
 
