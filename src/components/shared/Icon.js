@@ -2,6 +2,8 @@ import { Text } from 'grommet'
 import { SrOnly } from 'components/shared/SrOnly'
 import { ChevronDown } from '../../images/chevron-down.svg'
 import { ChevronUp } from '../../images/chevron-up.svg'
+import { ChevronLeft } from '../../images/chevron-left.svg'
+import { ChevronRight } from '../../images/chevron-right.svg'
 import { Close } from '../../images/close.svg'
 import { Collapse } from '../../images/collapse.svg'
 import { Expand } from '../../images/expand.svg'
@@ -16,6 +18,8 @@ import { Warning } from '../../images/warning.svg'
 const SVGs = {
   ChevronDown,
   ChevronUp,
+  ChevronLeft,
+  ChevronRight,
   Close,
   Collapse,
   Expand,

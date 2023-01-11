@@ -18,6 +18,7 @@ export const getServerSideProps = ({ query }) => {
   let samples
 
   try {
+    // e.g.) getExperiment(accessionCode)
     // endpoint: 'v1/experiments/{accession_code}/'
     experiment =
       accessionCode === 'GSE116436' ? experimentData[0] : experimentData[1]
@@ -49,7 +50,10 @@ export const Experiment = ({ experiment, samples }) => {
         />
       </FixedContainer>
       <FixedContainer>
-        <Box elevation="medium" pad="medium">
+        <Box
+          elevation="medium"
+          pad={{ vertical: 'basex6', horizontal: 'basex8' }}
+        >
           <Row margin={{ bottom: 'medium' }}>
             <Column>
               <Heading
