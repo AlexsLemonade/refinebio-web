@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { Text } from 'grommet'
 import { TextNull } from 'components/shared/TextNull'
 
 // TEMP
@@ -7,7 +8,11 @@ export const CellMetadataAnnotations = ({ row: { original: sample } }) => {
     return <TextNull text="N/A" />
   }
 
-  return <TextNull text="Modal goes here" />
+  return (
+    <Text color="brand" style={{ textDecoration: 'underline' }}>
+      Modal Gose Here
+    </Text>
+  )
 }
 
 export default memo(CellMetadataAnnotations)

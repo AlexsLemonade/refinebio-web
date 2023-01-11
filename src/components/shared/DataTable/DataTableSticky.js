@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 const gray = 'gray-shade-20'
 const alternateRowBg = 'gray-shade-5'
 const rowHoverBG = '#E2E2E2'
-const resizerWidth = '10px'
+const resizerWidth = '15px'
 
 export const DataTableSticky = styled(Box)`
   ${({ theme }) => css`
@@ -77,6 +77,10 @@ export const DataTableSticky = styled(Box)`
 
     > div {
       overflow: scroll;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        width: 0;
+      }
 
       .header {
         position: sticky;

@@ -31,6 +31,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
       min-height: 100vh;
       min-height: -webkit-fill-available;
+      position: relative;
     }
     html {
       height: -webkit-fill-available;
@@ -47,4 +48,15 @@ export const GlobalStyle = createGlobalStyle`
       height: 100%;
     }
 
+    // required by the data table
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.85);
+        opacity: .85;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
 `
