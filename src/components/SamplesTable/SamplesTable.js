@@ -1,12 +1,18 @@
 import { useMemo, memo } from 'react'
+import { useResponsive } from 'hooks/useResponsive'
 import { formatString } from 'helpers/formatString'
+import { Anchor } from 'components/shared/Anchor'
 import { DataTable } from 'components/shared/DataTable'
+import { InlineMessage } from 'components/shared/InlineMessage'
+import { Row } from 'components/shared/Row'
 import { TextNull } from 'components/shared/TextNull'
+import { links } from 'config'
 import { CellAddRemove } from './CellAddRemove'
 import { CellMetadataAnnotations } from './CellMetadataAnnotations'
 import { CellProcessingInformation } from './CellProcessingInformation'
 
 export const SamplesTable = ({ experiment, samples }) => {
+  const { setResponsive } = useResponsive()
   // the 'totalColumns' value matches the current refine.bio setting
   const totalColumns = experiment ? 4 + experiment.sample_metadata.length : 0
   const pageSizes = [10, 20, 50]
@@ -72,17 +78,35 @@ export const SamplesTable = ({ experiment, samples }) => {
   )
 
   return (
-    <DataTable
-      columns={columns}
-      data={data}
-      defaultColumn={defaultColumn}
-      hiddenColumns={columns
-        .filter((column) => column.isVisible === false)
-        .map((column) => column.accessor)}
-      original={samples}
-      pageSizes={pageSizes}
-      totalColumns={totalColumns}
-    />
+    <>
+      <DataTable
+        columns={columns}
+        data={data}
+        defaultColumn={defaultColumn}
+        hiddenColumns={columns
+          .filter((column) => column.isVisible === false)
+          .map((column) => column.accessor)}
+        original={samples}
+        pageSizes={pageSizes}
+        totalColumns={totalColumns}
+      />
+      <Row justify="start" margin={{ top: 'small' }}>
+        <InlineMessage
+          color="info"
+          fontSize={setResponsive('small', 'medium')}
+          margin={{ right: 'xsmall', bottom: setResponsive('xsmall', 'none') }}
+          label="Some fields may be harmonized."
+          name="Info"
+        />
+        <Anchor
+          href={links.refinebio_docs_harmonized_metadata}
+          label="Learn More"
+          rel="noopener noreferrer"
+          size={setResponsive('small', 'medium')}
+          target="_blank"
+        />
+      </Row>
+    </>
   )
 }
 

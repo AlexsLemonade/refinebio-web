@@ -10,24 +10,25 @@ export const links = {
   refinebio: 'https://www.refine.bio',
   refinebio_api_docs: 'https://api.refine.bio/v1/#tag/compendia',
   refinebio_docs: 'https://docs.refine.bio',
+  refinebio_docs_harmonized_metadata:
+    'https://docs.refine.bio/en/latest/main_text.html#refine-bio-harmonized-metadata  ',
   refinebio_docs_normalized_compendia:
     'https://docs.refine.bio/en/latest/main_text.html#normalized-compendia',
-  refinebio_docs_differential_expression_rnaseq:
-    'https://alexslemonade.github.io/refinebio-examples/03-rnaseq/differential-expression_rnaseq_01.html',
-  refinebio_docs__differential_expression_microarray:
-    'https://alexslemonade.github.io/refinebio-examples/02-microarray/differential-expression_microarray_01_2-groups.html',
-  refinebio_docs_pathway_analysis_rnaseq:
-    'https://alexslemonade.github.io/refinebio-examples/03-rnaseq/pathway-analysis_rnaseq_02_gsea.html',
-  refinebio_docs_pathway_analysis_microarray:
-    'https://alexslemonade.github.io/refinebio-examples/02-microarray/pathway-analysis_microarray_02_gsea.html',
   refinebio_docs_rna_seq_sample_compendia:
     'https://docs.refine.bio/en/latest/main_text.html#rna-seq-sample-compendia',
-
-  refinebio_example:
-    'https://alexslemonade.github.io/refinebio-examples/index.html',
-  salmon: 'https://combine-lab.github.io/salmon/',
-  standard_pipeline:
+  refinebio_docs_standard_pipeline:
     'https://docs.refine.bio/en/latest/main_text.html#processing-information',
+  refinebio_github_differential_expression_rnaseq:
+    'https://alexslemonade.github.io/refinebio-examples/03-rnaseq/differential-expression_rnaseq_01.html',
+  refinebio_github_differential_expression_microarray:
+    'https://alexslemonade.github.io/refinebio-examples/02-microarray/differential-expression_microarray_01_2-groups.html',
+  refinebio_github_example:
+    'https://alexslemonade.github.io/refinebio-examples/index.html',
+  refinebio_github_pathway_analysis_rnaseq:
+    'https://alexslemonade.github.io/refinebio-examples/03-rnaseq/pathway-analysis_rnaseq_02_gsea.html',
+  refinebio_github_pathway_analysis_microarray:
+    'https://alexslemonade.github.io/refinebio-examples/02-microarray/pathway-analysis_microarray_02_gsea.html',
+  salmon: 'https://combine-lab.github.io/salmon/',
   terms: '/terms'
 }
 
