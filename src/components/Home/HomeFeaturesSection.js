@@ -53,7 +53,7 @@ export const HomeFeaturesSection = () => {
               ArrayExpress, and SRA. The data has been processed uniformly and
               normalized using a set of{' '}
               <Anchor
-                href={links.standard_pipeline}
+                href={links.refinebio_docs_standard_pipeline}
                 label="standardized pipelines"
                 rel="noopener noreferrer"
                 target="_blank"

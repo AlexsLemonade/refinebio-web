@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { formatString } from 'helpers/formatString'
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import { Icon } from 'components/shared/Icon'
-import { Link } from 'components/shared/Link'
+import { Anchor } from 'components/shared/Anchor'
 import { TextNull } from 'components/shared/TextNull'
 
 export const SearchCardBody = ({
@@ -84,7 +84,7 @@ export const SearchCardBody = ({
           Alternate Accession IDs
         </Heading>
         {alternateAccessionCode ? (
-          <Link href={SearchCardBody.url} label={alternateAccessionCode} />
+          <Anchor href={SearchCardBody.url} label={alternateAccessionCode} />
         ) : (
           <TextNull text="None" />
         )}

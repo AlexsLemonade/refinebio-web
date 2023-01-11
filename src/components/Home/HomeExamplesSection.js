@@ -71,7 +71,7 @@ export const HomeExamplesSection = () => {
       with your scientific questions."
             footer={
               <Button
-                href={links.refinebio_example}
+                href={links.refinebio_github_example}
                 label="Get Started"
                 secondary
                 responsive
@@ -88,7 +88,7 @@ export const HomeExamplesSection = () => {
             footer={
               <>
                 <Button
-                  href={links.refinebio_docs_differential_expression_rnaseq}
+                  href={links.refinebio_github_differential_expression_rnaseq}
                   label="RNA-seq Example"
                   secondary
                   responsive
@@ -97,7 +97,7 @@ export const HomeExamplesSection = () => {
                 />
                 <Button
                   href={
-                    links.refinebio_docs__differential_expression_microarray
+                    links.refinebio_github_differential_expression_microarray
                   }
                   label="Microarray Example"
                   margin={{ top: setResponsive('small', 'medium') }}
@@ -120,7 +120,7 @@ export const HomeExamplesSection = () => {
             footer={
               <>
                 <Button
-                  href={links.refinebio_docs_pathway_analysis_rnaseq}
+                  href={links.refinebio_github_pathway_analysis_rnaseq}
                   label="RNA-seq Example"
                   secondary
                   responsive
@@ -128,7 +128,7 @@ export const HomeExamplesSection = () => {
                   target="_blank"
                 />
                 <Button
-                  href={links.refinebio_docs_pathway_analysis_microarray}
+                  href={links.refinebio_github_pathway_analysis_microarray}
                   label="Microarray Example"
                   margin={{ top: setResponsive('small', 'medium') }}
                   secondary

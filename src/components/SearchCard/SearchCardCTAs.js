@@ -2,7 +2,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { InlineMessage } from 'components/shared/InlineMessage'
-import { Link } from 'components/shared/Link'
+import { Anchor } from 'components/shared/Anchor'
 import { Pill } from 'components/shared/Pill'
 /* TEMPORARY the following prop is added for demo purpose
 prop name: 'status' 
@@ -102,7 +102,7 @@ export const SearchCardCTAs = ({ status }) => {
               color="info"
               margin={{ top: 'small' }}
             />
-            <Link
+            <Anchor
               href="#TEMPORARY"
               label="Learn More"
               margin={{
@@ -125,7 +125,7 @@ export const SearchCardCTAs = ({ status }) => {
       {status === 'unavailable' && (
         <Box direction={setResponsive('row', 'column')}>
           <InlineMessage label="Not available" color="error" />
-          <Link
+          <Anchor
             href="#TEMPORARY"
             label="Learn More"
             margin={{
