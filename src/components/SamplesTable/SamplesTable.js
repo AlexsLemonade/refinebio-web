@@ -5,11 +5,12 @@ import { Anchor } from 'components/shared/Anchor'
 import { DataTable } from 'components/shared/DataTable'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
-import { TextNull } from 'components/shared/TextNull'
 import { links } from 'config'
-import { CellAddRemove } from './CellAddRemove'
-import { CellMetadataAnnotations } from './CellMetadataAnnotations'
-import { CellProcessingInformation } from './CellProcessingInformation'
+import { CellAccessionCode } from './cells/CellAccessionCode'
+import { CellAddRemove } from './cells/CellAddRemove'
+import { CellMetadataAnnotations } from './cells/CellMetadataAnnotations'
+import { CellProcessingInformation } from './cells/CellProcessingInformation'
+import { CellSampleMetadata } from './cells/CellSampleMetadata'
 
 export const SamplesTable = ({ experiment, samples }) => {
   const { viewport, setResponsive } = useResponsive()
@@ -24,14 +25,14 @@ export const SamplesTable = ({ experiment, samples }) => {
     const temp = [
       {
         Header: 'Add/Remove',
-        // eslint-disable-next-line react/no-unstable-nested-components
-        Cell: () => <CellAddRemove />,
+        Cell: CellAddRemove,
         id: 'add_remove',
         maxWidth: 160
       },
       {
         Header: 'Accession Code',
         accessor: 'accession_code',
+        Cell: CellAccessionCode,
         maxWidth: 160
       },
       {
@@ -48,8 +49,7 @@ export const SamplesTable = ({ experiment, samples }) => {
         id: column,
         accessor: column,
         Header: formatString(column),
-        // eslint-disable-next-line react/no-unstable-nested-components
-        Cell: ({ value }) => value || <TextNull text="N/A" />
+        Cell: CellSampleMetadata
       })),
       {
         Header: 'Processing Information',
