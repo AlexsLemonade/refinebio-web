@@ -46,6 +46,9 @@ export default {
       },
       h3_small: {
         size: '20px'
+      },
+      h3_large: {
+        size: '24px'
       }
     },
     4: {

@@ -3,6 +3,7 @@ import { Text } from 'grommet'
 import { TextNull } from 'components/shared/TextNull'
 
 // TEMP
+// TODO: modal implementation
 export const CellMetadataAnnotations = ({ row: { original: sample } }) => {
   if (sample.annotations.length === 0) {
     return <TextNull text="N/A" />
@@ -10,7 +11,7 @@ export const CellMetadataAnnotations = ({ row: { original: sample } }) => {
 
   return (
     <Text color="brand" style={{ textDecoration: 'underline' }}>
-      Modal Gose Here
+      View
     </Text>
   )
 }

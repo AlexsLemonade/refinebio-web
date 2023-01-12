@@ -1,36 +1,30 @@
 import { useState, useEffect } from 'react'
 // (resource) https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
-// Takes refs(one or more refs) and options(a second arg that needs to be passed onto the IntersectObserver API's constructor)
-// Returns a state 'nodes' which includes each ref's intersection status
+// Takes a ref and options(the second arg that needs to be passed onto the IntersectObserver API's constructor)
+// Returns a state 'target' which includes the ref's intersection status
 
-export const useIntersectObserver = (options, ...refs) => {
-  const [nodes, setNodes] = useState({})
+export const useIntersectObserver = (ref, options) => {
+  const [target, setTarget] = useState({})
 
   const callback = (entries) => {
-    const prefix = 'node'
-    entries.forEach((entry, i) =>
-      setNodes((prev) => ({
-        ...prev,
-        [`${prefix}_${i}`]: {
-          boundingClientRect: entry.boundingClientRect,
-          isIntersecting: entry.isIntersecting,
-          target: entry.target
-        }
-      }))
-    )
+    const [entry] = entries
+
+    setTarget({
+      boundingClientRect: entry.boundingClientRect,
+      isIntersecting: entry.isIntersecting,
+      target: entry.target
+    })
   }
 
   useEffect(() => {
-    // create an instance of IntersectionObserver and register refs
+    // create an instance of IntersectionObserver and register the ref
     const observer = new IntersectionObserver(callback, options)
-    refs.forEach((ref) => {
-      if (ref.current) observer.observe(ref.current)
-    })
+    if (ref.current) observer.observe(ref.current)
 
     return () => {
       observer.disconnect()
     }
   }, [])
 
-  return nodes
+  return target
 }
