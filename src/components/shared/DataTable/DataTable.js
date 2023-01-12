@@ -17,7 +17,7 @@ import { ExpandTableButton } from './utils/ExpandTableButton'
 import { GlobalFilter } from './utils/GlobalFilter'
 import { HorizontalScrollIndicator } from './utils/HorizontalScrollIndicator'
 import { PageSizes } from './utils/PageSizes'
-import { SortBy } from './utils/SortBy'
+import { SortByIcon } from './utils/SortByIcon'
 
 export const DataTable = ({
   columns,
@@ -28,18 +28,22 @@ export const DataTable = ({
   hiddenColumns,
   totalColumns = 0
 }) => {
-  const tableRef = useRef(null)
-  const lastCellRef = useRef(null)
   const { viewport, setResponsive } = useResponsive()
-  const nodes = useIntersectObserver(
-    {
-      root: tableRef.current,
-      rootMargin: '0px',
-      threshold: 1.0
-    },
-    lastCellRef
-  )
-  const isHorizontalScroll = nodes.node_0?.isIntersecting
+  const tableRef = useRef(null)
+  const firstCellRef = useRef(null)
+  const lastCellRef = useRef(null)
+  const firstCell = useIntersectObserver(firstCellRef, {
+    root: tableRef.current,
+    rootMargin: '0px',
+    threshold: 1.0
+  })
+  const lastCell = useIntersectObserver(lastCellRef, {
+    root: tableRef.current,
+    rootMargin: '0px',
+    threshold: 1.0
+  })
+  const isFirstCellVisible = firstCell.isIntersecting
+  const isLastCellVisible = lastCell.isIntersecting
   const columnMinCount = 5 // same as the current refine.bio
   const [pageSize, setPageSize] = useState(pageSizes[0])
   const [tableExpanded, setTableExpanded] = useState(false)
@@ -148,7 +152,8 @@ export const DataTable = ({
         >
           <DataTableSticky>
             <HorizontalScrollIndicator
-              isIntersecting={isHorizontalScroll}
+              isFirstCellVisible={isFirstCellVisible}
+              isLastCellVisible={isLastCellVisible}
               handleScroll={handleScroll}
             />
             {/* eslint-disable-next-line react/jsx-props-no-spreading */}
@@ -168,12 +173,19 @@ export const DataTable = ({
                           column.getSortByToggleProps()
                         )}
                         className="th"
-                        ref={i === arr.length - 1 ? lastCellRef : null}
+                        ref={
+                          // eslint-disable-next-line no-nested-ternary
+                          i === 0
+                            ? firstCellRef
+                            : i === arr.length - 1
+                            ? lastCellRef
+                            : null
+                        }
                       >
                         <Box direction="row" justify="between">
                           <Text>{column.render('Header')}</Text>
                           {column.canSort && (
-                            <SortBy
+                            <SortByIcon
                               isSorted={column.isSorted}
                               isSortedDesc={column.isSortedDesc}
                             />

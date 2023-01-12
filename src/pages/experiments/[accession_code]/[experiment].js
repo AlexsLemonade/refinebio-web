@@ -50,15 +50,12 @@ export const Experiment = ({ experiment, samples }) => {
         />
       </FixedContainer>
       <FixedContainer>
-        <Box
-          elevation="medium"
-          pad={{ vertical: 'basex6', horizontal: 'basex8' }}
-        >
+        <Box elevation="medium" pad="large" margin={{ bottom: 'basex6' }}>
           <Row margin={{ bottom: 'medium' }}>
             <Column>
               <Heading
-                level={3}
-                size="h3_small"
+                level={2}
+                size="h2_small"
                 margin={{ bottom: setResponsive('small', 'none') }}
               >
                 Samples
