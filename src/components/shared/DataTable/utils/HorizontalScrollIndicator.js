@@ -7,10 +7,17 @@ import { Icon } from 'components/shared/Icon'
 export const HorizontalScrollIndicator = ({
   isFirstCellVisible,
   isLastCellVisible,
-  handleScroll
+  target
 }) => {
   const { viewport } = useResponsive()
 
+  const handleScroll = (value) => {
+    target.scrollBy({
+      top: 0,
+      left: value,
+      behavior: 'smooth'
+    })
+  }
   return (
     <>
       {viewport !== 'large' && (

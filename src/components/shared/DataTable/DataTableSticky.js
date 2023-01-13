@@ -30,6 +30,7 @@ export const DataTableSticky = styled(Box)`
     }
 
     .th {
+      height: 44px;
       font-weight: bold;
       box-shadow: none;
     }
@@ -39,7 +40,6 @@ export const DataTableSticky = styled(Box)`
       background: ${theme.global.colors.white};
       border-bottom: 1px solid ${theme.global.colors[gray]};
       border-right: 1px solid ${theme.global.colors[gray]};
-      font-size: 14px;
       overflow: hidden;
       padding: 8px 16px;
       position: relative;
@@ -51,6 +51,7 @@ export const DataTableSticky = styled(Box)`
       }
 
       span {
+        font-size: 14px;
         overflow: hidden;
         text-overflow: ellipsis;
       }

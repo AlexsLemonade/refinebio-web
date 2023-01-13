@@ -24,8 +24,8 @@ export const getServerSideProps = ({ query }) => {
       accessionCode === 'GSE116436' ? experimentData[0] : experimentData[1]
     samples =
       accessionCode === 'GSE116436'
-        ? samplesTableData[0][2]
-        : samplesTableData[1][2]
+        ? samplesTableData[0][0]
+        : samplesTableData[1][0]
   } catch (error) {
     return { error }
   }

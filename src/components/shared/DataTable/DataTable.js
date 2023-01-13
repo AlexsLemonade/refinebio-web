@@ -35,12 +35,12 @@ export const DataTable = ({
   const firstCell = useIntersectObserver(firstCellRef, {
     root: tableRef.current,
     rootMargin: '0px',
-    threshold: 1.0
+    threshold: 0.99
   })
   const lastCell = useIntersectObserver(lastCellRef, {
     root: tableRef.current,
     rootMargin: '0px',
-    threshold: 1.0
+    threshold: 0.99
   })
   const isFirstCellVisible = firstCell.isIntersecting
   const isLastCellVisible = lastCell.isIntersecting
@@ -70,14 +70,6 @@ export const DataTable = ({
     state: { globalFilter },
     setGlobalFilter
   } = tableInstance
-
-  const handleScroll = (value) => {
-    tableRef.current.scrollBy({
-      top: 0,
-      left: value,
-      behavior: 'smooth'
-    })
-  }
 
   return (
     <>
@@ -154,7 +146,7 @@ export const DataTable = ({
             <HorizontalScrollIndicator
               isFirstCellVisible={isFirstCellVisible}
               isLastCellVisible={isLastCellVisible}
-              handleScroll={handleScroll}
+              target={tableRef.current}
             />
             {/* eslint-disable-next-line react/jsx-props-no-spreading */}
             <Box {...getTableProps()} ref={tableRef} style={{ width: '100%' }}>
@@ -188,6 +180,7 @@ export const DataTable = ({
                             <SortByIcon
                               isSorted={column.isSorted}
                               isSortedDesc={column.isSortedDesc}
+                              margin={{ top: '-2px' }}
                             />
                           )}
                         </Box>
@@ -201,6 +194,14 @@ export const DataTable = ({
                             onClick={(e) => e.stopPropagation()}
                           />
                         )}
+                        <Box
+                          background={
+                            column.isSorted ? 'gray-shade-70' : 'transparent'
+                          }
+                          height="3px"
+                          width="100%"
+                          style={{ position: 'absolute', left: 0, bottom: 0 }}
+                        />
                       </Box>
                     ))}
                   </Box>
@@ -212,7 +213,7 @@ export const DataTable = ({
                 {...getTableBodyProps()}
                 className="body"
                 width="100%"
-                height={tableExpanded ? '70vh' : '50vh'}
+                height={{ max: tableExpanded ? '70vh' : '54vh' }}
               >
                 {rows.map((row) => {
                   prepareRow(row)
