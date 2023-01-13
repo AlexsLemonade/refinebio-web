@@ -23,7 +23,7 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         border: 0;
         font-size: 100%;
-        vertical-align: baseline;
+        vertical-align: middle;
     }
     *, ::before, ::after { 
         box-sizing: border-box; 
