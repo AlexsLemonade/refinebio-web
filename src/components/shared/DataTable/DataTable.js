@@ -17,35 +17,43 @@ import { ExpandTableButton } from './utils/ExpandTableButton'
 import { GlobalFilter } from './utils/GlobalFilter'
 import { HorizontalScrollIndicator } from './utils/HorizontalScrollIndicator'
 import { PageSizes } from './utils/PageSizes'
+import { Pagination } from './utils/Pagination'
 import { SortByIcon } from './utils/SortByIcon'
 
 export const DataTable = ({
   columns,
   data,
   defaultColumn = {},
-  original: samples,
+  hiddenColumns = [],
+  label = '',
+  loading = false,
+  manualPagination = false,
   pageSizes,
-  hiddenColumns,
-  totalColumns = 0
+  filter, // for GlobalFilter
+  setFilters, // for GlobalFilter
+  page,
+  setPage,
+  pageSize,
+  setPageSize,
+  totalColumns = 0,
+  totalPages
 }) => {
   const { viewport, setResponsive } = useResponsive()
   const tableRef = useRef(null)
   const firstCellRef = useRef(null)
   const lastCellRef = useRef(null)
-  const firstCell = useIntersectObserver(firstCellRef, {
+  const isFirstCellVisible = useIntersectObserver(firstCellRef, {
     root: tableRef.current,
     rootMargin: '0px',
     threshold: 0.99
-  })
-  const lastCell = useIntersectObserver(lastCellRef, {
+  }).isIntersecting
+  const isLastCellVisible = useIntersectObserver(lastCellRef, {
     root: tableRef.current,
     rootMargin: '0px',
     threshold: 0.99
-  })
-  const isFirstCellVisible = firstCell.isIntersecting
-  const isLastCellVisible = lastCell.isIntersecting
-  const columnMinCount = 5 // same as the current refine.bio
-  const [pageSize, setPageSize] = useState(pageSizes[0])
+  }).isIntersecting
+  const minColumns = 5 // same as the current refine.bio
+
   const [tableExpanded, setTableExpanded] = useState(false)
 
   const tableInstance = useTable(
@@ -53,13 +61,14 @@ export const DataTable = ({
       columns,
       data,
       defaultColumn,
-      initialState: { hiddenColumns }
+      initialState: { hiddenColumns },
+      manualPagination
     },
     useGlobalFilter,
-    useSortBy,
     useResizeColumns,
     useFlexLayout,
-    useSticky
+    useSticky,
+    useSortBy
   )
   const {
     getTableProps,
@@ -72,169 +81,197 @@ export const DataTable = ({
   } = tableInstance
 
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {tableExpanded && <Overlay duration={0} toggle={tableExpanded} />}
-      <Box
-        background="white"
-        style={{
-          animation: tableExpanded ? 'zoomIn .1s ease-in-out forwards' : 'none',
-          width: tableExpanded ? '100vw' : '100%',
-          height: tableExpanded ? '100vh' : '100%',
-          position: tableExpanded ? 'fixed' : 'relative',
-          top: 0,
-          left: 0,
-          zIndex: tableExpanded ? 100 : 'inherit'
-        }}
-      >
-        <Row
-          margin={{ bottom: 'small' }}
-          pad={{
-            top: tableExpanded ? 'large' : 'none',
-            horizontal: tableExpanded ? 'basex6' : 'none'
-          }}
-        >
+      {loading ? null : (
+        <>
+          {tableExpanded && <Overlay duration={0} toggle={tableExpanded} />}
           <Box
-            align={setResponsive('start', 'start', 'center')}
-            direction={setResponsive('column', 'column', 'row')}
-            margin={{ bottom: setResponsive('small', 'none') }}
+            background="white"
+            style={{
+              animation: tableExpanded
+                ? 'zoomIn .1s ease-in-out forwards'
+                : 'none',
+              width: tableExpanded ? '100vw' : '100%',
+              height: tableExpanded ? '100vh' : '100%',
+              position: tableExpanded ? 'fixed' : 'relative',
+              top: 0,
+              left: 0,
+              zIndex: tableExpanded ? 100 : 'inherit'
+            }}
           >
-            <PageSizes
-              count={samples.count}
-              pageSize={pageSize}
-              pageSizes={pageSizes}
-              setPageSize={setPageSize}
-            />
-            <Box
-              margin={{
-                left: setResponsive('none', 'none', 'small'),
-                top: setResponsive('xsmall', 'xsmall', 'none')
+            <Row
+              margin={{ bottom: 'small' }}
+              pad={{
+                top: tableExpanded ? 'large' : 'none',
+                horizontal: tableExpanded ? 'basex6' : 'none'
               }}
             >
-              <CheckBox label="Show only samples in current dataset" />
-            </Box>
-          </Box>
-          <Box
-            alignSelf={setResponsive('start', 'end', 'start')}
-            width={setResponsive('100%', 'auto')}
-          >
-            <Box direction="row">
-              <GlobalFilter
-                globalFilter={globalFilter}
-                setGlobalFilter={setGlobalFilter}
-              />
-              {viewport !== 'small' && totalColumns > columnMinCount && (
-                <ExpandTableButton
-                  tableExpanded={tableExpanded}
-                  setTableExpanded={setTableExpanded}
+              <Box
+                align={setResponsive('start', 'start', 'center')}
+                direction={setResponsive('column', 'column', 'row')}
+                margin={{ bottom: setResponsive('small', 'none') }}
+              >
+                <PageSizes
+                  label={label}
+                  pageSize={pageSize}
+                  pageSizes={pageSizes}
+                  totalPages={totalPages}
+                  setPageSize={setPageSize}
                 />
-              )}
-            </Box>
-          </Box>
-        </Row>
+                <Box
+                  margin={{
+                    left: setResponsive('none', 'none', 'small'),
+                    top: setResponsive('xsmall', 'xsmall', 'none')
+                  }}
+                >
+                  <CheckBox label="Show only samples in current dataset" />
+                </Box>
+              </Box>
+              <Box
+                alignSelf={setResponsive('start', 'end', 'start')}
+                width={setResponsive('100%', 'auto')}
+              >
+                <Box direction="row">
+                  <GlobalFilter
+                    globalFilter={globalFilter}
+                    setGlobalFilter={setGlobalFilter}
+                  />
+                  {viewport !== 'small' && totalColumns > minColumns && (
+                    <ExpandTableButton
+                      tableExpanded={tableExpanded}
+                      setTableExpanded={setTableExpanded}
+                    />
+                  )}
+                </Box>
+              </Box>
+            </Row>
 
-        <Box
-          border={{
-            color: 'gray-shade-20',
-            side: 'all'
-          }}
-          margin={{
-            horizontal: tableExpanded ? 'basex6' : 'none'
-          }}
-          style={{ overflow: 'visible' }}
-        >
-          <DataTableSticky>
-            <HorizontalScrollIndicator
-              isFirstCellVisible={isFirstCellVisible}
-              isLastCellVisible={isLastCellVisible}
-              target={tableRef.current}
-            />
-            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <Box {...getTableProps()} ref={tableRef} style={{ width: '100%' }}>
-              <Box className="header" style={{ width: '100%' }}>
-                {headerGroups.map((headerGroup) => (
-                  <Box
-                    // eslint-disable-next-line react/jsx-props-no-spreading
-                    {...headerGroup.getHeaderGroupProps()}
-                    className="tr"
-                    direction="row"
-                  >
-                    {headerGroup.headers.map((column, i, arr) => (
+            <Box
+              border={{
+                color: 'gray-shade-20',
+                side: 'all'
+              }}
+              margin={{
+                horizontal: tableExpanded ? 'basex6' : 'none'
+              }}
+              style={{ overflow: 'visible' }}
+            >
+              <DataTableSticky>
+                <HorizontalScrollIndicator
+                  isFirstCellVisible={isFirstCellVisible}
+                  isLastCellVisible={isLastCellVisible}
+                  target={tableRef.current}
+                />
+                <Box
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+                  {...getTableProps()}
+                  ref={tableRef}
+                  style={{ width: '100%' }}
+                >
+                  <Box className="header" style={{ width: '100%' }}>
+                    {headerGroups.map((headerGroup) => (
                       <Box
                         // eslint-disable-next-line react/jsx-props-no-spreading
-                        {...column.getHeaderProps(
-                          column.getSortByToggleProps()
-                        )}
-                        className="th"
-                        ref={
-                          // eslint-disable-next-line no-nested-ternary
-                          i === 0
-                            ? firstCellRef
-                            : i === arr.length - 1
-                            ? lastCellRef
-                            : null
-                        }
+                        {...headerGroup.getHeaderGroupProps()}
+                        className="tr"
+                        direction="row"
                       >
-                        <Box direction="row" justify="between">
-                          <Text>{column.render('Header')}</Text>
-                          {column.canSort && (
-                            <SortByIcon
-                              isSorted={column.isSorted}
-                              isSortedDesc={column.isSortedDesc}
-                              margin={{ top: '-2px' }}
-                            />
-                          )}
-                        </Box>
-                        {column.canResize && (
+                        {headerGroup.headers.map((column, i, arr) => (
                           <Box
                             // eslint-disable-next-line react/jsx-props-no-spreading
-                            {...column.getResizerProps()}
-                            className={`resizer ${
-                              column.isResizing ? 'isResizing' : ''
-                            }`}
-                            onClick={(e) => e.stopPropagation()}
-                          />
-                        )}
-                        <Box
-                          background={
-                            column.isSorted ? 'gray-shade-70' : 'transparent'
-                          }
-                          height="3px"
-                          width="100%"
-                          style={{ position: 'absolute', left: 0, bottom: 0 }}
-                        />
+                            {...column.getHeaderProps(
+                              column.getSortByToggleProps()
+                            )}
+                            className="th"
+                            ref={
+                              // eslint-disable-next-line no-nested-ternary
+                              i === 0
+                                ? firstCellRef
+                                : i === arr.length - 1
+                                ? lastCellRef
+                                : null
+                            }
+                          >
+                            <Box direction="row" justify="between">
+                              <Text>{column.render('Header')}</Text>
+                              {column.canSort && (
+                                <SortByIcon
+                                  isSorted={column.isSorted}
+                                  isSortedDesc={column.isSortedDesc}
+                                  margin={{ top: '-2px' }}
+                                />
+                              )}
+                            </Box>
+                            {column.canResize && (
+                              <Box
+                                // eslint-disable-next-line react/jsx-props-no-spreading
+                                {...column.getResizerProps()}
+                                className={`resizer ${
+                                  column.isResizing ? 'isResizing' : ''
+                                }`}
+                                onClick={(e) => e.stopPropagation()}
+                              />
+                            )}
+                            <Box
+                              background={
+                                column.isSorted
+                                  ? 'gray-shade-70'
+                                  : 'transparent'
+                              }
+                              height="3px"
+                              width="100%"
+                              style={{
+                                position: 'absolute',
+                                left: 0,
+                                bottom: 0
+                              }}
+                            />
+                          </Box>
+                        ))}
                       </Box>
                     ))}
                   </Box>
-                ))}
-              </Box>
 
-              <Box
-                // eslint-disable-next-line react/jsx-props-no-spreading
-                {...getTableBodyProps()}
-                className="body"
-                width="100%"
-                height={{ max: tableExpanded ? '70vh' : '54vh' }}
-              >
-                {rows.map((row) => {
-                  prepareRow(row)
-
-                  return (
+                  <Box
                     // eslint-disable-next-line react/jsx-props-no-spreading
-                    <Box {...row.getRowProps()} className="tr" direction="row">
-                      {row.cells.map((cell) => (
-                        // eslint-disable-next-line react/jsx-props-no-spreading
-                        <Box {...cell.getCellProps()} className="td">
-                          <Text>{cell.render('Cell')}</Text>
+                    {...getTableBodyProps()}
+                    className="body"
+                    width="100%"
+                    height={{ max: tableExpanded ? '70vh' : '54vh' }}
+                  >
+                    {rows.map((row) => {
+                      prepareRow(row)
+
+                      return (
+                        <Box
+                          // eslint-disable-next-line react/jsx-props-no-spreading
+                          {...row.getRowProps()}
+                          className="tr"
+                          direction="row"
+                        >
+                          {row.cells.map((cell) => (
+                            // eslint-disable-next-line react/jsx-props-no-spreading
+                            <Box {...cell.getCellProps()} className="td">
+                              <Text>{cell.render('Cell')}</Text>
+                            </Box>
+                          ))}
                         </Box>
-                      ))}
-                    </Box>
-                  )
-                })}
-              </Box>
+                      )
+                    })}
+                  </Box>
+                </Box>
+              </DataTableSticky>
             </Box>
-          </DataTableSticky>
-        </Box>
-      </Box>
+            <Pagination
+              page={page}
+              pageSize={pageSize}
+              setPage={setPage}
+              totalPages={totalPages}
+            />
+          </Box>
+        </>
+      )}
     </>
   )
 }
