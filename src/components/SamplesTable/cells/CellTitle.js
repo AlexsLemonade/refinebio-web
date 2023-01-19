@@ -1,8 +1,8 @@
 import { TextHighlighted } from 'components/shared/TextHighlighted'
 import { TextNull } from 'components/shared/TextNull'
 
-export const CellSampleMetadata = ({ value }) => {
+export const CellTitle = ({ value }) => {
   return <TextHighlighted text={value} /> || <TextNull text="N/A" />
 }
 
-export default CellSampleMetadata
+export default CellTitle

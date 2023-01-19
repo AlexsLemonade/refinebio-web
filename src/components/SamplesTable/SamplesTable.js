@@ -1,29 +1,43 @@
 import { useMemo, memo, useState, useEffect } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
+import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import { formatString } from 'helpers/formatString'
+import { Box, CheckBox } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
-import { DataTable } from 'components/shared/DataTable'
+import {
+  DataTable,
+  ExpandTableButton,
+  GlobalFilter,
+  PageSizes,
+  Pagination
+} from 'components/shared/DataTable'
 import { InlineMessage } from 'components/shared/InlineMessage'
+import { Overlay } from 'components/shared/Ovevrlay'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
 import samplesTableMock from 'api/mockDataSamplesTable'
-import { CellAccessionCode } from './cells/CellAccessionCode'
-import { CellAddRemove } from './cells/CellAddRemove'
-import { CellMetadataAnnotations } from './cells/CellMetadataAnnotations'
-import { CellProcessingInformation } from './cells/CellProcessingInformation'
-import { CellSampleMetadata } from './cells/CellSampleMetadata'
+import {
+  CellAccessionCode,
+  CellAddRemove,
+  CellMetadataAnnotations,
+  CellProcessingInformation,
+  CellSampleMetadata,
+  CellTitle
+} from './cells'
 
 export const SamplesTable = ({ accessionCode, experiment, samples }) => {
   const { viewport, setResponsive } = useResponsive()
+  const minColumns = 5 // same as the current refine.bio
   const totalColumns = experiment ? 4 + experiment.sample_metadata.length : 0 // same as the current refine.bio
   const sampleMetadata = experiment.sample_metadata
   const stickyColumns = 3
   const pageSizes = [10, 20, 50]
+  const [tableExpanded, setTableExpanded] = useState(false)
   // for API calls(data, filter, pageSize, limit, offset, order)
   // endpoint: v1/samples/experiment_accession_code=${accessionCode}
   const [tableData, setTableData] = useState([])
   const [loading, setLoading] = useState(false)
-  const [filter, setFilter] = useState(null)
+  const [globalFilter, setGlobalFilter] = useState(null) // match with the react-table useGlobalFilter API's names
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(pageSizes[0])
   const data = useMemo(() => tableData, [tableData])
@@ -31,12 +45,13 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
   useEffect(() => {
     // TEMPORARY (for UI demo)
     setLoading(true)
+    // TODO: create helpers for building url query string
+    const url = `v1/samples/experiment_accession_code=${accessionCode}&offset=${
+      (page - 1) * pageSize
+    }&limit=${pageSize}`
     // eslint-disable-next-line no-console
-    console.log(
-      `v1/samples/experiment_accession_code=${accessionCode}&offset=${
-        (page - 1) * pageSize
-      }&limit=${pageSize}`
-    )
+    console.log(url, globalFilter)
+
     const isFirst = accessionCode === 'GSE116436'
 
     if (pageSize === pageSizes[0]) {
@@ -59,7 +74,7 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
       )
     }
     setLoading(false)
-  }, [filter, page, pageSize, tableData])
+  }, [globalFilter, page, pageSize, tableData])
 
   const columns = useMemo(() => {
     const temp = [
@@ -77,7 +92,8 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
       },
       {
         Header: 'Title',
-        accessor: 'title'
+        accessor: 'title',
+        Cell: CellTitle
       },
       {
         id: 'id',
@@ -123,44 +139,108 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
 
   return (
     <>
-      {loading ? null : (
-        <DataTable
-          columns={columns}
-          data={data}
-          defaultColumn={defaultColumn}
-          hiddenColumns={columns
-            .filter((column) => column.isVisible === false)
-            .map((column) => column.accessor)}
-          label="Samples"
-          loading={loading}
-          manualPagination
-          totalColumns={totalColumns}
-          totalPages={samples.count}
-          filter={filter}
-          setFilter={setFilter}
-          page={page}
-          setPage={setPage}
-          pageSizes={pageSizes}
-          pageSize={pageSize}
-          setPageSize={setPageSize}
-        />
-      )}
-      <Row justify="start" margin={{ top: 'small' }}>
-        <InlineMessage
-          color="info"
-          fontSize={setResponsive('small', 'medium')}
-          margin={{ right: 'xsmall', bottom: setResponsive('xsmall', 'none') }}
-          label="Some fields may be harmonized."
-          name="Info"
-        />
-        <Anchor
-          href={links.refinebio_docs_harmonized_metadata}
-          label="Learn More"
-          rel="noopener noreferrer"
-          size={setResponsive('small', 'medium')}
-          target="_blank"
-        />
-      </Row>
+      {tableExpanded && <Overlay duration={0} toggle={tableExpanded} />}
+      <Box
+        background="white"
+        style={{
+          animation: tableExpanded ? 'zoomIn .1s ease-in-out forwards' : 'none',
+          width: tableExpanded ? '100vw' : '100%',
+          height: tableExpanded ? '100vh' : '100%',
+          position: tableExpanded ? 'fixed' : 'relative',
+          top: 0,
+          left: 0,
+          zIndex: tableExpanded ? 100 : 'inherit'
+        }}
+      >
+        <Row
+          margin={{ bottom: 'small' }}
+          pad={{
+            top: tableExpanded ? 'large' : 'none',
+            horizontal: tableExpanded ? 'basex6' : 'none'
+          }}
+        >
+          <Box
+            align={setResponsive('start', 'start', 'center')}
+            direction={setResponsive('column', 'column', 'row')}
+            margin={{ bottom: setResponsive('small', 'none') }}
+          >
+            <PageSizes
+              pageSizeLabel="Total Samples"
+              pageSize={pageSize}
+              pageSizes={pageSizes}
+              totalPages={samples.count}
+              setPageSize={setPageSize}
+            />
+            <Box
+              margin={{
+                left: setResponsive('none', 'none', 'small'),
+                top: setResponsive('xsmall', 'xsmall', 'none')
+              }}
+            >
+              <CheckBox label="Show only samples in current dataset" />
+            </Box>
+          </Box>
+          <Box direction="row">
+            <GlobalFilter
+              globalFilter={globalFilter}
+              setGlobalFilter={setGlobalFilter}
+            />
+            {viewport !== 'small' && totalColumns > minColumns && (
+              <ExpandTableButton
+                tableExpanded={tableExpanded}
+                setTableExpanded={setTableExpanded}
+              />
+            )}
+          </Box>
+        </Row>
+        {loading ? null : (
+          <TextHighlightContextProvider match={globalFilter}>
+            <DataTable
+              columns={columns}
+              data={data}
+              defaultColumn={defaultColumn}
+              hiddenColumns={columns
+                .filter((column) => column.isVisible === false)
+                .map((column) => column.accessor)}
+              loading={loading}
+              manualPagination
+              tableExpanded={tableExpanded}
+            />
+          </TextHighlightContextProvider>
+        )}
+        <Row justify="start" margin={{ top: 'small' }}>
+          <InlineMessage
+            color="info"
+            fontSize={setResponsive('small', 'medium')}
+            margin={{
+              right: 'xsmall',
+              bottom: setResponsive('xsmall', 'none')
+            }}
+            label="Some fields may be harmonized."
+            name="Info"
+          />
+          <Anchor
+            href={links.refinebio_docs_harmonized_metadata}
+            label="Learn More"
+            rel="noopener noreferrer"
+            size={setResponsive('small', 'medium')}
+            target="_blank"
+          />
+        </Row>
+        <Box
+          align="center"
+          direction="row"
+          justify="center"
+          margin={{ top: 'large' }}
+        >
+          <Pagination
+            page={page}
+            pageSize={pageSize}
+            setPage={setPage}
+            totalPages={samples.count}
+          />
+        </Box>
+      </Box>
     </>
   )
 }
