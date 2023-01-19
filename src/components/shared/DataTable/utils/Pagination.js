@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { makePagination } from 'helpers/makePagination'
+import { nanoid } from 'nanoid'
 import { Box, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
@@ -35,7 +36,7 @@ export const Pagination = ({ page, pageSize, totalPages, setPage }) => {
   const [canPreviousPage, setCanPreviousPage] = useState(false)
   const [canNextPage, setCanNextPage] = useState(true)
 
-  // These names of methods match the react-table usePagination API's method names
+  // these names of methods match the react-table usePagination API's method names
   const nextPage = () => setCurrentPage(currentPage + 1)
   const previousPage = () => setCurrentPage(currentPage - 1)
   const gotoPage = (pageNumber) => {
@@ -55,7 +56,8 @@ export const Pagination = ({ page, pageSize, totalPages, setPage }) => {
     setUserInput(value)
   }
   const handleOnKeyPress = (e) => {
-    if (e.key === '.' || e.key === '-' || e.key === '+') {
+    const code = e.key !== undefined ? e.key : e.keyCode
+    if (!code.match(/^[0-9]+$/)) {
       e.preventDefault()
     }
   }
@@ -81,12 +83,7 @@ export const Pagination = ({ page, pageSize, totalPages, setPage }) => {
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {totalPages > 1 ? (
-        <Box
-          align="center"
-          direction="row"
-          justify="center"
-          margin={{ top: 'large' }}
-        >
+        <>
           <Box align="center" direction="row" margin={{ right: 'small' }}>
             <PaginationButton
               disabled={!canPreviousPage}
@@ -96,10 +93,9 @@ export const Pagination = ({ page, pageSize, totalPages, setPage }) => {
               style={{ padding: '2px 4px' }}
               clickHandler={previousPage}
             />
-            {pageNumbers.map((pageNumber, i) =>
+            {pageNumbers.map((pageNumber) =>
               pageNumber === '...' ? (
-                // eslint-disable-next-line react/no-array-index-key
-                <Text key={`${pageNumber}-${i}`}>{pageNumber}</Text>
+                <Text key={nanoid()}>{pageNumber}</Text>
               ) : (
                 <PaginationButton
                   current={pageNumber === currentPage}
@@ -129,19 +125,21 @@ export const Pagination = ({ page, pageSize, totalPages, setPage }) => {
                   justify="center"
                   label="Please enter a valid page number"
                   iconSize="small"
-                  style={{ position: 'absolute', right: 0, top: '-24px' }}
+                  style={{ position: 'absolute', right: '-80px', top: '-24px' }}
                 />
               </Box>
             )}
             <Text margin={{ right: 'xsmall' }}>Jump to page</Text>
-            <TextInput
-              min="1"
-              max={pageCount}
-              type="number"
-              value={userInput}
-              onChange={(e) => handleChange(e.target.value)}
-              onKeyPress={handleOnKeyPress}
-            />
+            <Box width="72px">
+              <TextInput
+                min="1"
+                max={pageCount}
+                type="number"
+                value={userInput}
+                onChange={(e) => handleChange(e.target.value)}
+                onKeyPress={handleOnKeyPress}
+              />
+            </Box>
             <Button
               disabled={isInvalid}
               label="Go"
@@ -150,7 +148,7 @@ export const Pagination = ({ page, pageSize, totalPages, setPage }) => {
               clickHandler={() => gotoPage(Number(userInput))}
             />
           </Box>
-        </Box>
+        </>
       ) : null}
     </>
   )

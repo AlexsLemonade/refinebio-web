@@ -1,2 +1,5 @@
 export { DataTable } from './DataTable'
-export { DataTableSticky } from './DataTableSticky'
+export { ExpandTableButton } from './utils/ExpandTableButton'
+export { GlobalFilter } from './utils/GlobalFilter'
+export { PageSizes } from './utils/PageSizes'
+export { Pagination } from './utils/Pagination'

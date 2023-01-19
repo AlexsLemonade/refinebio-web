@@ -2,8 +2,8 @@ import { memo } from 'react'
 import { Box, Select, Text } from 'grommet'
 
 export const PageSizes = ({
-  label = '',
   pageSize,
+  pageSizeLabel = '',
   pageSizes,
   totalPages,
   setPageSize
@@ -25,7 +25,7 @@ export const PageSizes = ({
         />
       </Box>
       <Text margin={{ left: 'xsmall' }}>
-        of {totalPages.toLocaleString()} Total {label}
+        of {totalPages.toLocaleString()} {pageSizeLabel}
       </Text>
     </Box>
   )
