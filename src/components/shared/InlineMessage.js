@@ -11,6 +11,7 @@ export const InlineMessage = ({
   height = '24px',
   label = '',
   labelOnly = false,
+  iconSize = 'medium',
   ...props
 }) => {
   const SVG =
@@ -32,10 +33,14 @@ export const InlineMessage = ({
           <Icon
             color={color === 'error' ? 'coral-shade-20' : color}
             name={SVG}
+            size={iconSize}
           />
         </Box>
       )}
-      <Paragraph color={fontColor} size={fontSize}>
+      <Paragraph
+        color={color === 'error' ? 'coral-shade-20' : fontColor}
+        size={fontSize}
+      >
         {label}
       </Paragraph>
     </Box>
