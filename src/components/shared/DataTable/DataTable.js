@@ -9,9 +9,97 @@ import { useSticky } from 'react-table-sticky'
 import { useIntersectObserver } from 'hooks/useIntersectObserver'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Text } from 'grommet'
-import { DataTableSticky } from './DataTableSticky'
-import { HorizontalScrollIndicator } from './utils/HorizontalScrollIndicator'
-import { SortByIcon } from './utils/SortByIcon'
+import styled, { css } from 'styled-components'
+import {
+  HorizontalScrollIndicator,
+  Resizer,
+  SortBy,
+  SortByBorder
+} from './utils'
+
+const borderColor = 'gray-shade-20'
+const alternateRowBg = 'gray-shade-5'
+const rowHoverBG = '#E2E2E2'
+const headerHeight = '44px'
+
+const Table = styled(Box)`
+  overflow: scroll;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+
+  [data-sticky-td] {
+    position: sticky;
+  }
+
+  ${({ theme }) => css`
+    [data-sticky-last-left-td] {
+      box-shadow: 5px 2px 15px ${theme.global.colors[borderColor]};
+    }
+
+    [data-sticky-first-right-td] {
+      box-shadow: -2px 0px 3px ${theme.global.colors[borderColor]};
+    }
+  `}
+`
+
+const TableHeader = styled(Box)`
+  position: sticky;
+  top: 0;
+  z-index: 1;
+`
+
+const TableBody = styled(Box)`
+  position: relative;
+  z-index: 0;
+`
+
+const TableRow = styled(Box)`
+  ${({ theme }) => css`
+    &:last-child div {
+      border-bottom: 0;
+    }
+    &:nth-child(even) {
+      > div {
+        background: ${theme.global.colors[alternateRowBg]};
+      }
+
+      &:hover div {
+        background: ${rowHoverBG};
+      }
+    }
+  `}
+`
+
+const TableCell = styled(Box)`
+  ${({ theme }) => css`
+    background: ${theme.global.colors.white};
+    border-bottom: 1px solid ${theme.global.colors[borderColor]};
+    border-right: 1px solid ${theme.global.colors[borderColor]};
+    overflow: hidden;
+    padding: 8px 16px;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+
+    &:last-child {
+      border-right: 0;
+    }
+
+    span {
+      font-size: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  `}
+
+  ${({ theme, type }) =>
+    type === 'th' &&
+    css`
+      box-shadow: 5px 2px 15px ${theme.global.colors[borderColor]};
+    `}
+`
 
 export const DataTable = ({
   columns,
@@ -20,7 +108,8 @@ export const DataTable = ({
   hiddenColumns = [],
   loading = false,
   manualPagination = false,
-  tableExpanded
+  tableExpanded,
+  tableFixedHight = '54vh' // required for table y-scroll
 }) => {
   const { setResponsive } = useResponsive()
   const tableRef = useRef(null)
@@ -73,33 +162,29 @@ export const DataTable = ({
             }}
             style={{ overflow: 'visible' }}
           >
-            <DataTableSticky>
+            <Box style={{ position: 'relative' }}>
               <HorizontalScrollIndicator
                 isFirstCellVisible={isFirstCellVisible}
                 isLastCellVisible={isLastCellVisible}
                 target={tableRef.current}
               />
-              <Box
-                // eslint-disable-next-line react/jsx-props-no-spreading
-                {...getTableProps()}
-                ref={tableRef}
-                style={{ width: '100%' }}
-              >
-                <Box className="header" style={{ width: '100%' }}>
+              {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+              <Table {...getTableProps()} ref={tableRef}>
+                <TableHeader className="header" style={{ width: '100%' }}>
                   {headerGroups.map((headerGroup) => (
-                    <Box
+                    <TableRow
                       // eslint-disable-next-line react/jsx-props-no-spreading
                       {...headerGroup.getHeaderGroupProps()}
-                      className="tr"
                       direction="row"
                     >
                       {headerGroup.headers.map((column, i, arr) => (
-                        <Box
+                        <TableCell
                           // eslint-disable-next-line react/jsx-props-no-spreading
                           {...column.getHeaderProps(
                             column.getSortByToggleProps()
                           )}
-                          className="th"
+                          type="th"
+                          height={headerHeight}
                           ref={
                             // eslint-disable-next-line no-nested-ternary
                             i === 0
@@ -110,72 +195,53 @@ export const DataTable = ({
                           }
                         >
                           <Box direction="row" justify="between">
-                            <Text>{column.render('Header')}</Text>
+                            <Text weight="bold">{column.render('Header')}</Text>
                             {column.canSort && (
-                              <SortByIcon
+                              <SortBy
                                 isSorted={column.isSorted}
                                 isSortedDesc={column.isSortedDesc}
-                                margin={{ top: '-2px' }}
                               />
                             )}
                           </Box>
                           {column.canResize && (
-                            <Box
+                            <Resizer
                               // eslint-disable-next-line react/jsx-props-no-spreading
                               {...column.getResizerProps()}
-                              className={`resizer ${
-                                column.isResizing ? 'isResizing' : ''
-                              }`}
+                              isResizing={column.isResizing}
                               onClick={(e) => e.stopPropagation()}
                             />
                           )}
-                          <Box
-                            background={
-                              column.isSorted ? 'gray-shade-70' : 'transparent'
-                            }
-                            height="3px"
-                            width="100%"
-                            style={{
-                              position: 'absolute',
-                              left: 0,
-                              bottom: 0
-                            }}
-                          />
-                        </Box>
+                          <SortByBorder isSorted={column.isSorted} />
+                        </TableCell>
                       ))}
-                    </Box>
+                    </TableRow>
                   ))}
-                </Box>
+                </TableHeader>
 
-                <Box
+                <TableBody
                   // eslint-disable-next-line react/jsx-props-no-spreading
                   {...getTableBodyProps()}
                   className="body"
-                  width="100%"
-                  height={{ max: tableExpanded ? '70vh' : '54vh' }}
+                  height={tableExpanded ? '70vh' : tableFixedHight}
                 >
                   {rows.map((row) => {
                     prepareRow(row)
 
                     return (
-                      <Box
-                        // eslint-disable-next-line react/jsx-props-no-spreading
-                        {...row.getRowProps()}
-                        className="tr"
-                        direction="row"
-                      >
+                      // eslint-disable-next-line react/jsx-props-no-spreading
+                      <TableRow {...row.getRowProps()} direction="row">
                         {row.cells.map((cell) => (
                           // eslint-disable-next-line react/jsx-props-no-spreading
-                          <Box {...cell.getCellProps()} className="td">
+                          <TableCell {...cell.getCellProps()}>
                             <Text>{cell.render('Cell')}</Text>
-                          </Box>
+                          </TableCell>
                         ))}
-                      </Box>
+                      </TableRow>
                     )
                   })}
-                </Box>
-              </Box>
-            </DataTableSticky>
+                </TableBody>
+              </Table>
+            </Box>
           </Box>
         </>
       )}
