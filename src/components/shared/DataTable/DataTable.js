@@ -7,7 +7,6 @@ import {
 } from 'react-table'
 import { useSticky } from 'react-table-sticky'
 import { useIntersectObserver } from 'hooks/useIntersectObserver'
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 import {
@@ -28,16 +27,13 @@ const Table = styled(Box)`
   &::-webkit-scrollbar {
     display: none;
   }
-
   [data-sticky-td] {
     position: sticky;
   }
-
   ${({ theme }) => css`
     [data-sticky-last-left-td] {
       box-shadow: 5px 2px 15px ${theme.global.colors[borderColor]};
     }
-
     [data-sticky-first-right-td] {
       box-shadow: -2px 0px 3px ${theme.global.colors[borderColor]};
     }
@@ -64,7 +60,6 @@ const TableRow = styled(Box)`
       > div {
         background: ${theme.global.colors[alternateRowBg]};
       }
-
       &:hover div {
         background: ${rowHoverBG};
       }
@@ -82,11 +77,9 @@ const TableCell = styled(Box)`
     position: relative;
     white-space: nowrap;
     overflow: hidden;
-
     &:last-child {
       border-right: 0;
     }
-
     span {
       font-size: 14px;
       overflow: hidden;
@@ -106,12 +99,11 @@ export const DataTable = ({
   data,
   defaultColumn = {},
   hiddenColumns = [],
-  loading = false,
   manualPagination = false,
   tableExpanded,
-  tableFixedHight = '54vh' // required for table y-scroll
+  tableDefaultHeight, // required for the TableBody y-scroll
+  tableExpandedHeight
 }) => {
-  const { setResponsive } = useResponsive()
   const tableRef = useRef(null)
   const firstCellRef = useRef(null)
   const lastCellRef = useRef(null)
@@ -143,112 +135,98 @@ export const DataTable = ({
     tableInstance
 
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
-      {loading ? null : (
-        <>
-          <Box
-            alignSelf={setResponsive('start', 'end', 'start')}
-            width={setResponsive('100%', 'auto')}
-          />
-
-          <Box
-            border={{
-              color: 'gray-shade-20',
-              side: 'all'
-            }}
-            margin={{
-              horizontal: tableExpanded ? 'basex6' : 'none'
-            }}
-            style={{ overflow: 'visible' }}
-          >
-            <Box style={{ position: 'relative' }}>
-              <HorizontalScrollIndicator
-                isFirstCellVisible={isFirstCellVisible}
-                isLastCellVisible={isLastCellVisible}
-                target={tableRef.current}
-              />
-              <Table
+    <Box
+      border={{
+        color: 'gray-shade-20',
+        side: 'all'
+      }}
+      margin={{
+        horizontal: tableExpanded ? 'basex6' : 'none'
+      }}
+      style={{ overflow: 'visible' }}
+    >
+      <Box style={{ position: 'relative' }}>
+        <HorizontalScrollIndicator
+          isFirstCellVisible={isFirstCellVisible}
+          isLastCellVisible={isLastCellVisible}
+          target={tableRef.current}
+        />
+        <Table
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...getTableProps()}
+          ref={tableRef}
+          style={{ minWidth: 'auto' }}
+        >
+          <TableHeader className="header" style={{ width: '100%' }}>
+            {headerGroups.map((headerGroup) => (
+              <TableRow
                 // eslint-disable-next-line react/jsx-props-no-spreading
-                {...getTableProps()}
-                ref={tableRef}
-                style={{ minWidth: 'auto' }}
+                {...headerGroup.getHeaderGroupProps()}
+                direction="row"
               >
-                <TableHeader className="header" style={{ width: '100%' }}>
-                  {headerGroups.map((headerGroup) => (
-                    <TableRow
-                      // eslint-disable-next-line react/jsx-props-no-spreading
-                      {...headerGroup.getHeaderGroupProps()}
-                      direction="row"
-                    >
-                      {headerGroup.headers.map((column, i, arr) => (
-                        <TableCell
-                          // eslint-disable-next-line react/jsx-props-no-spreading
-                          {...column.getHeaderProps(
-                            column.getSortByToggleProps()
-                          )}
-                          type="th"
-                          height={headerHeight}
-                          ref={
-                            // eslint-disable-next-line no-nested-ternary
-                            i === 0
-                              ? firstCellRef
-                              : i === arr.length - 1
-                              ? lastCellRef
-                              : null
-                          }
-                        >
-                          <Box direction="row" justify="between">
-                            <Text weight="bold">{column.render('Header')}</Text>
-                            {column.canSort && (
-                              <SortBy
-                                isSorted={column.isSorted}
-                                isSortedDesc={column.isSortedDesc}
-                              />
-                            )}
-                          </Box>
-                          {column.canResize && (
-                            <Resizer
-                              // eslint-disable-next-line react/jsx-props-no-spreading
-                              {...column.getResizerProps()}
-                              isResizing={column.isResizing}
-                              onClick={(e) => e.stopPropagation()}
-                            />
-                          )}
-                          <SortByBorder isSorted={column.isSorted} />
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  ))}
-                </TableHeader>
-                <TableBody
-                  // eslint-disable-next-line react/jsx-props-no-spreading
-                  {...getTableBodyProps()}
-                  className="body"
-                  height={tableExpanded ? '70vh' : tableFixedHight}
-                >
-                  {rows.map((row) => {
-                    prepareRow(row)
+                {headerGroup.headers.map((column, i, arr) => (
+                  <TableCell
+                    // eslint-disable-next-line react/jsx-props-no-spreading
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                    type="th"
+                    height={headerHeight}
+                    ref={
+                      // eslint-disable-next-line no-nested-ternary
+                      i === 0
+                        ? firstCellRef
+                        : i === arr.length - 1
+                        ? lastCellRef
+                        : null
+                    }
+                  >
+                    <Box direction="row" justify="between">
+                      <Text weight="bold">{column.render('Header')}</Text>
+                      {column.canSort && (
+                        <SortBy
+                          isSorted={column.isSorted}
+                          isSortedDesc={column.isSortedDesc}
+                        />
+                      )}
+                    </Box>
+                    {column.canResize && (
+                      <Resizer
+                        // eslint-disable-next-line react/jsx-props-no-spreading
+                        {...column.getResizerProps()}
+                        isResizing={column.isResizing}
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                    )}
+                    <SortByBorder isSorted={column.isSorted} />
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...getTableBodyProps()}
+            className="body"
+            height={tableExpanded ? tableExpandedHeight : tableDefaultHeight}
+          >
+            {rows.map((row) => {
+              prepareRow(row)
 
-                    return (
-                      // eslint-disable-next-line react/jsx-props-no-spreading
-                      <TableRow {...row.getRowProps()} direction="row">
-                        {row.cells.map((cell) => (
-                          // eslint-disable-next-line react/jsx-props-no-spreading
-                          <TableCell {...cell.getCellProps()}>
-                            <Text>{cell.render('Cell')}</Text>
-                          </TableCell>
-                        ))}
-                      </TableRow>
-                    )
-                  })}
-                </TableBody>
-              </Table>
-            </Box>
-          </Box>
-        </>
-      )}
-    </>
+              return (
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                <TableRow {...row.getRowProps()} direction="row">
+                  {row.cells.map((cell) => (
+                    // eslint-disable-next-line react/jsx-props-no-spreading
+                    <TableCell {...cell.getCellProps()}>
+                      <Text>{cell.render('Cell')}</Text>
+                    </TableCell>
+                  ))}
+                </TableRow>
+              )
+            })}
+          </TableBody>
+        </Table>
+      </Box>
+    </Box>
   )
 }
 

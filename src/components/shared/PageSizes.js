@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { useResponsive } from 'hooks/useResponsive'
 import { Box, Select, Text } from 'grommet'
 
 export const PageSizes = ({
@@ -8,6 +9,7 @@ export const PageSizes = ({
   totalPages,
   setPageSize
 }) => {
+  const { viewport } = useResponsive()
   const handleChange = (value) => {
     setPageSize(value)
   }
@@ -25,7 +27,7 @@ export const PageSizes = ({
         />
       </Box>
       <Text margin={{ left: 'xsmall' }}>
-        of {totalPages.toLocaleString()} {pageSizeLabel}
+        of {totalPages.toLocaleString()} {viewport !== 'small' && pageSizeLabel}
       </Text>
     </Box>
   )

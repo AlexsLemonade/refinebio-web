@@ -2,7 +2,6 @@ import { memo } from 'react'
 import { Text } from 'grommet'
 import { TextNull } from 'components/shared/TextNull'
 
-// TEMP
 // TODO: modal implementation
 export const CellMetadataAnnotations = ({ row: { original: sample } }) => {
   if (sample.annotations.length === 0) {

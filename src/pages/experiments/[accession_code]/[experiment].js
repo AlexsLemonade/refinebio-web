@@ -1,20 +1,19 @@
 import { memo } from 'react'
 import { useRouter } from 'next/router'
-import { useResponsive } from 'hooks/useResponsive'
-import { Box, Heading } from 'grommet'
+import { Box } from 'grommet'
 import { Button } from 'components/shared/Button'
-import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { Row } from 'components/shared/Row'
-import { SamplesTable, SamplesTableCTA } from 'components/SamplesTable'
-import experimentMock from 'api/mockDataExperiment'
-import samplesTableMock from 'api/mockDataSamplesTable'
+import { SamplesTable } from 'components/SamplesTable'
+import experimentMock from 'api/mockDataExperiment' // TEMPORARY
+import samplesTableMock from 'api/mockDataSamplesTable' // TEMPORARY
 
 // TEMPORARY
+// endpoints:
+// `v1/experiments/${accession_code}/`
+// `v1/samples/experiment_accession_code=${accessionCode}`
 export const getServerSideProps = ({ query }) => {
   const { accession_code: accessionCode } = query
   const isFirst = accessionCode === 'GSE116436'
-  // endpoint: 'v1/experiments/{accession_code}/'
   const experiment = isFirst ? experimentMock[0] : experimentMock[1]
   const samples = isFirst ? samplesTableMock[0][0] : samplesTableMock[1][0]
 
@@ -23,7 +22,6 @@ export const getServerSideProps = ({ query }) => {
 
 export const Experiment = ({ accessionCode, experiment, samples }) => {
   const router = useRouter()
-  const { setResponsive } = useResponsive()
 
   return (
     <Box>
@@ -38,6 +36,7 @@ export const Experiment = ({ accessionCode, experiment, samples }) => {
         />
       </FixedContainer>
       <FixedContainer>
+        {/* TEMPORARY: START */}
         <Box
           align="center"
           elevation="medium"
@@ -48,29 +47,14 @@ export const Experiment = ({ accessionCode, experiment, samples }) => {
         >
           Experiment's Submitter Supplied Information goes here
         </Box>
+        {/* TEMPORARY: END */}
       </FixedContainer>
       <FixedContainer>
-        <Box elevation="medium" pad="large" margin={{ bottom: 'basex6' }}>
-          <Row margin={{ bottom: 'medium' }}>
-            <Column>
-              <Heading
-                level={2}
-                size="h2_small"
-                margin={{ bottom: setResponsive('small', 'none') }}
-              >
-                Samples
-              </Heading>
-            </Column>
-            <Column>
-              <SamplesTableCTA />
-            </Column>
-          </Row>
-          <SamplesTable
-            accessionCode={accessionCode}
-            experiment={experiment}
-            samples={samples}
-          />
-        </Box>
+        <SamplesTable
+          accessionCode={accessionCode}
+          experiment={experiment}
+          samples={samples}
+        />
       </FixedContainer>
     </Box>
   )

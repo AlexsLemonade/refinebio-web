@@ -3,7 +3,6 @@ import moment from 'moment'
 import { Text } from 'grommet'
 import { TextNull } from 'components/shared/TextNull'
 
-// TEMP
 // TODO: modal implementation
 export const CellProcessingInformation = ({ row: { original: sample } }) => {
   if (!sample.is_processed || !sample.results || !sample.results.length) {

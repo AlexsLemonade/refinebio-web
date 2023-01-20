@@ -9,7 +9,7 @@ export const makePagination = (
   minPages = 5
 ) => {
   if (totalPages <= 1 || totalPages === undefined) return [1]
-  // return the pagination without ellipsis
+  // returns the pagination without ellipsis
   if (totalPages <= minPages) return getRange(totalPages)
 
   const range = []
