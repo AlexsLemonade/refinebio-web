@@ -36,7 +36,7 @@ export const IconBadge = ({ name, label, size = 'small', ...props }) => {
       {...props}
     >
       <Box gridArea="left">
-        <SVGIcon role="presentation" aria-hidden="true" focusable="false" />
+        <SVGIcon aria-hidden role="presentation" focusable="false" />
       </Box>
       <Box gridArea="right">
         <Text margin={{ left: 'xxsmall' }} size={size}>

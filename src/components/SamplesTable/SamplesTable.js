@@ -43,7 +43,7 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
   const data = useMemo(() => tableData, [tableData])
 
   useEffect(() => {
-    // TEMPORARY (for UI demo)
+    // TEMPORARY (* only for UI demo)
     setLoading(true)
     // TODO: create helpers for building url query string
     const url = `v1/samples/experiment_accession_code=${accessionCode}&offset=${
@@ -149,7 +149,7 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
           position: tableExpanded ? 'fixed' : 'relative',
           top: 0,
           left: 0,
-          zIndex: tableExpanded ? 100 : 'inherit'
+          zIndex: tableExpanded ? 5 : 'inherit'
         }}
       >
         <Row
@@ -185,7 +185,7 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
               globalFilter={globalFilter}
               setGlobalFilter={setGlobalFilter}
             />
-            {viewport !== 'small' && totalColumns > minColumns && (
+            {viewport === 'large' && totalColumns > minColumns && (
               <ExpandTableButton
                 tableExpanded={tableExpanded}
                 setTableExpanded={setTableExpanded}
@@ -213,6 +213,7 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
             color="info"
             fontSize={setResponsive('small', 'medium')}
             margin={{
+              left: tableExpanded ? 'basex6' : 'none',
               right: 'xsmall',
               bottom: setResponsive('xsmall', 'none')
             }}
@@ -231,7 +232,7 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
           align="center"
           direction="row"
           justify="center"
-          margin={{ top: 'large' }}
+          margin={{ top: 'medium' }}
         >
           <Pagination
             page={page}

@@ -26,7 +26,7 @@ const Table = styled(Box)`
   overflow: scroll;
   scrollbar-width: none;
   &::-webkit-scrollbar {
-    width: 0;
+    display: none;
   }
 
   [data-sticky-td] {
@@ -168,8 +168,12 @@ export const DataTable = ({
                 isLastCellVisible={isLastCellVisible}
                 target={tableRef.current}
               />
-              {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-              <Table {...getTableProps()} ref={tableRef}>
+              <Table
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...getTableProps()}
+                ref={tableRef}
+                style={{ minWidth: 'auto' }}
+              >
                 <TableHeader className="header" style={{ width: '100%' }}>
                   {headerGroups.map((headerGroup) => (
                     <TableRow
@@ -217,7 +221,6 @@ export const DataTable = ({
                     </TableRow>
                   ))}
                 </TableHeader>
-
                 <TableBody
                   // eslint-disable-next-line react/jsx-props-no-spreading
                   {...getTableBodyProps()}

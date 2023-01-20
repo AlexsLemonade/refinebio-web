@@ -73,7 +73,7 @@ export const BackToTopButton = () => {
         display: show ? 'block' : 'none',
         position: 'fixed',
         right: '5vw',
-        zIndex: '1000'
+        zIndex: '4'
       }}
     >
       <Box
