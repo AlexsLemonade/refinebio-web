@@ -25,7 +25,7 @@ const ArrowIcon = styled(Box)`
 
 export const BackToTopButton = () => {
   const { setResponsive } = useResponsive()
-  const offset = 350
+  const offset = 1200
   const [show, setShow] = useState(false)
 
   const handleClick = () =>

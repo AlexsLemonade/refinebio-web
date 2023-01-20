@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
+import { useResponsive } from 'hooks/useResponsive'
 import { makePagination } from 'helpers/makePagination'
 import { nanoid } from 'nanoid'
-import { Box, Text } from 'grommet'
+import { Box, Form, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
 import { InlineMessage } from 'components/shared/InlineMessage'
@@ -27,16 +28,18 @@ const PaginationButton = styled(Button)`
   `}
 `
 
-export const Pagination = ({ page, pageSize, totalPages, setPage }) => {
-  const pageCount = Math.ceil(totalPages / pageSize) // match the react-table usePagination API's property name
-  const pageNumbers = makePagination(page, pageCount)
-  const [currentPage, setCurrentPage] = useState(page)
+export const Pagination = ({ pageSize, totalPages, setPage }) => {
+  const { setResponsive } = useResponsive()
+  const pageCount = Math.ceil(totalPages / pageSize) // name matches the react-table usePagination API's property
+  const [currentPage, setCurrentPage] = useState(1)
+  const pageNumbers = makePagination(currentPage, pageCount)
+
   const [userInput, setUserInput] = useState('')
   const [isInvalid, setIsInvalid] = useState(false)
   const [canPreviousPage, setCanPreviousPage] = useState(false)
   const [canNextPage, setCanNextPage] = useState(true)
 
-  // these names of methods match the react-table usePagination API's method names
+  // these names of the methods and functionalities match the react-table usePagination API
   const nextPage = () => setCurrentPage(currentPage + 1)
   const previousPage = () => setCurrentPage(currentPage - 1)
   const gotoPage = (pageNumber) => {
@@ -44,26 +47,33 @@ export const Pagination = ({ page, pageSize, totalPages, setPage }) => {
     setUserInput('')
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (userInput.trim() === '') return
+
+    gotoPage(Number(userInput))
+  }
+
   const handleChange = (value) => {
-    if (
-      (Number(value) === 0 && value.trim() !== '') ||
-      Number(value) > pageCount
-    ) {
+    if ((value === '0' && value.trim() !== '') || Number(value) > pageCount) {
       setIsInvalid(true)
     } else {
       setIsInvalid(false)
     }
     setUserInput(value)
   }
-  const handleOnKeyPress = (e) => {
+
+  const handleKeyPress = (e) => {
     const code = e.key !== undefined ? e.key : e.keyCode
+    if (e.key === 'Enter' || e.keyCode === 13) return
+
     if (!code.match(/^[0-9]+$/)) {
       e.preventDefault()
     }
   }
 
   useEffect(() => {
-    if (totalPages === currentPage) {
+    if (pageCount === currentPage) {
       setCanNextPage(false)
     } else {
       setCanNextPage(true)
@@ -76,14 +86,14 @@ export const Pagination = ({ page, pageSize, totalPages, setPage }) => {
   }, [totalPages, currentPage])
 
   useEffect(() => {
-    setPage(currentPage)
+    setPage(currentPage - 1)
   }, [currentPage])
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {totalPages > 1 ? (
-        <>
+        <Box direction={setResponsive('column', 'row')}>
           <Box align="center" direction="row" margin={{ right: 'small' }}>
             <PaginationButton
               disabled={!canPreviousPage}
@@ -116,7 +126,12 @@ export const Pagination = ({ page, pageSize, totalPages, setPage }) => {
               clickHandler={nextPage}
             />
           </Box>
-          <Box align="center" direction="row" style={{ position: 'relative' }}>
+          <Box
+            align="center"
+            direction="row"
+            margin={{ top: setResponsive('medium', 'none') }}
+            style={{ position: 'relative' }}
+          >
             {isInvalid && (
               <Box animation={{ type: 'fadeIn', duration: 500 }}>
                 <InlineMessage
@@ -130,25 +145,29 @@ export const Pagination = ({ page, pageSize, totalPages, setPage }) => {
               </Box>
             )}
             <Text margin={{ right: 'xsmall' }}>Jump to page</Text>
-            <Box width="72px">
-              <TextInput
-                min="1"
-                max={pageCount}
-                type="number"
-                value={userInput}
-                onChange={(e) => handleChange(e.target.value)}
-                onKeyPress={handleOnKeyPress}
-              />
-            </Box>
-            <Button
-              disabled={isInvalid}
-              label="Go"
-              margin={{ left: 'xsmall' }}
-              secondary
-              clickHandler={() => gotoPage(Number(userInput))}
-            />
+            <Form onSubmit={handleSubmit}>
+              <Box direction="row">
+                <Box width="72px">
+                  <TextInput
+                    min="1"
+                    max={pageCount}
+                    type="number"
+                    value={userInput}
+                    onChange={(e) => handleChange(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                  />
+                </Box>
+                <Button
+                  disabled={isInvalid}
+                  label="Go"
+                  margin={{ left: 'xsmall' }}
+                  secondary
+                  type="submit"
+                />
+              </Box>
+            </Form>
           </Box>
-        </>
+        </Box>
       ) : null}
     </>
   )

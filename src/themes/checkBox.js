@@ -15,6 +15,10 @@ export default {
     }
   },
   extend: ({ theme }) => `
+   > div {
+    margin-right: 8px;
+  }
+
   input + div {
     box-shadow: none;
     height: ${size};
