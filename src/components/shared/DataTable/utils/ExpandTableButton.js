@@ -9,7 +9,6 @@ export const ExpandTableButton = ({ tableExpanded, setTableExpanded }) => {
           color="brand"
           name={tableExpanded ? 'Collapse' : 'Expand'}
           size="16px"
-          aria-hidden
         />
       }
       gap="xsmall"

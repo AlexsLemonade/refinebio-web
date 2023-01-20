@@ -42,7 +42,7 @@ export const HorizontalScrollIndicator = ({
           <Button
             aria-label="Scroll to left"
             disabled={isFirstCellVisible}
-            icon={<Icon name="ChevronLeft" size="xsmall" aria-hidden />}
+            icon={<Icon name="ChevronLeft" size="xsmall" />}
             primary
             style={{
               cursor: isFirstCellVisible ? 'default' : 'pointer',
@@ -70,14 +70,14 @@ export const HorizontalScrollIndicator = ({
           position: 'absolute',
           right: 0,
           top: 0,
-          zIndex: 200
+          zIndex: 3
         }}
         width="30px"
       >
         <Button
           aria-label="Scroll to right"
           disabled={isLastCellVisible}
-          icon={<Icon name="ChevronRight" size="xsmall" aria-hidden />}
+          icon={<Icon name="ChevronRight" size="xsmall" />}
           primary
           style={{
             cursor: isLastCellVisible ? 'default' : 'pointer',

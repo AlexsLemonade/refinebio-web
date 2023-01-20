@@ -38,6 +38,18 @@ export const Experiment = ({ accessionCode, experiment, samples }) => {
         />
       </FixedContainer>
       <FixedContainer>
+        <Box
+          align="center"
+          elevation="medium"
+          justify="center"
+          pad="large"
+          margin={{ bottom: 'basex6' }}
+          height="800px"
+        >
+          Experiment's Submitter Supplied Information goes here
+        </Box>
+      </FixedContainer>
+      <FixedContainer>
         <Box elevation="medium" pad="large" margin={{ bottom: 'basex6' }}>
           <Row margin={{ bottom: 'medium' }}>
             <Column>
