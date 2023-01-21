@@ -9,7 +9,7 @@ export const Resizer = ({ isResizing, ...props }) => {
       background={isResizing ? 'gray-shade-5' : 'none'}
       style={{
         boxShadow: 'none',
-        cursor: 'move',
+        cursor: 'col-resize',
         display: 'inline-block',
         position: 'absolute',
         right: 0,
