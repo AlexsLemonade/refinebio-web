@@ -95,6 +95,7 @@ export const colors = {
   gradient_right:
     'linear-gradient(90deg,rgba(253, 253, 253, 0) 0%,rgba(204, 204, 204, 0.2) 40%,rgba(204, 204, 204, 1) 100%)',
   // Opaque
+  rgba_4: 'rgba(0, 0, 0, 0.4)',
   rgba_6: 'rgba(0, 0, 0, 0.6)',
   // Social Media
   twitter: '#55acee',

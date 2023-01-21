@@ -1,7 +1,7 @@
 import { Box } from 'grommet'
 
 export const Overlay = ({
-  background = 'rgba_6',
+  background = 'rgba_4',
   duration = 150,
   opacity = 0,
   toggle
