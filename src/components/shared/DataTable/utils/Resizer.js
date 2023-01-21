@@ -4,9 +4,6 @@ import { Box } from 'grommet'
 export const Resizer = ({ isResizing, ...props }) => {
   return (
     <Box
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-      background={isResizing ? 'gray-shade-5' : 'none'}
       style={{
         boxShadow: 'none',
         cursor: 'col-resize',
@@ -18,8 +15,10 @@ export const Resizer = ({ isResizing, ...props }) => {
         transform: ' translateX(50%)',
         zIndex: 0
       }}
-      width="15px"
+      width={isResizing ? '100%' : '16px'}
       height="100%"
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     />
   )
 }
