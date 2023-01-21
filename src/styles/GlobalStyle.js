@@ -47,16 +47,4 @@ export const GlobalStyle = createGlobalStyle`
       width: 100%;
       height: 100%;
     }
-
-    // required by the data table
-    @keyframes zoomIn {
-      from {
-        transform: scale(0.85);
-        opacity: .85;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
 `
