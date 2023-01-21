@@ -29,7 +29,7 @@ import { SamplesTableCTA } from './SamplesTableCTA'
 
 export const SamplesTable = ({ accessionCode, experiment, samples }) => {
   const { viewport, setResponsive } = useResponsive()
-  const tableHeight = { default: '55vh', expanded: '75vh' } // required for a table loading screen
+  const tableHeight = { default: '60vh', expanded: '75vh' } // required for a table loading screen
   const minColumns = 5 // matches the current refine.bio
   const totalColumns = experiment ? 4 + experiment.sample_metadata.length : 0 // matches the current refine.bio
   const stickyColumns = 3
