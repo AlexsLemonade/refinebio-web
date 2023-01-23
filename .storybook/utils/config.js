@@ -12,7 +12,8 @@ export default {
     ],
     'Font Styles': ['Heading'],
     'Inline Messages': ['InlineMessage'],
+    Footer: ['Footer'],
     Header: ['Header'],
-    Footer: ['Footer']
+    Modal: ['Modal']
   }
 }
