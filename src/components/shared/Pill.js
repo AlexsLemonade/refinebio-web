@@ -1,6 +1,6 @@
 import { Box, Paragraph } from 'grommet'
 
-// status: error, info, warning
+// status: error, info, warning, success
 
 export const Pill = ({
   background = '',
