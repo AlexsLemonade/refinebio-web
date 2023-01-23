@@ -4,6 +4,7 @@ import checkBox from 'themes/checkBox'
 import formField from 'themes/formField'
 import global from 'themes/global'
 import heading from 'themes/heading'
+import layer from 'themes/layer'
 import menu from 'themes/menu'
 import paragraph from 'themes/paragraph'
 import radioButton from 'themes/radioButton'
@@ -21,6 +22,7 @@ export const theme = {
   formField,
   global,
   heading,
+  layer,
   menu,
   paragraph,
   radioButton,
