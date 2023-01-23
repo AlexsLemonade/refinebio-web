@@ -7,6 +7,7 @@ import { theme } from 'themes'
 import { BandContextProvider } from 'contexts/BandContext'
 import { RefinebioContextProvider } from 'contexts/RefinebioContext'
 import ErrorPage from 'pages/_error'
+import { ModalContextProvider } from 'contexts/ModalContext'
 
 const Fallback = () => <ErrorPage />
 
@@ -19,8 +20,10 @@ const App = ({ Component, pageProps }) => {
           <BandContextProvider>
             <Layout>
               <Sentry.ErrorBoundary fallback={Fallback} showDialog>
-                {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-                <Component {...pageProps} />
+                <ModalContextProvider>
+                  {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+                  <Component {...pageProps} />
+                </ModalContextProvider>
               </Sentry.ErrorBoundary>
             </Layout>
           </BandContextProvider>
