@@ -8,6 +8,7 @@ import { BandContextProvider } from 'contexts/BandContext'
 import { RefinebioContextProvider } from 'contexts/RefinebioContext'
 import ErrorPage from 'pages/_error'
 import { ModalContextProvider } from 'contexts/ModalContext'
+import { DatasetContextProvider } from 'contexts/DatasetContext'
 
 const Fallback = () => <ErrorPage />
 
@@ -20,10 +21,12 @@ const App = ({ Component, pageProps }) => {
           <BandContextProvider>
             <Layout>
               <Sentry.ErrorBoundary fallback={Fallback} showDialog>
-                <ModalContextProvider>
-                  {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-                  <Component {...pageProps} />
-                </ModalContextProvider>
+                <DatasetContextProvider>
+                  <ModalContextProvider>
+                    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+                    <Component {...pageProps} />
+                  </ModalContextProvider>
+                </DatasetContextProvider>
               </Sentry.ErrorBoundary>
             </Layout>
           </BandContextProvider>

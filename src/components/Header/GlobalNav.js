@@ -148,9 +148,10 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
               viewport={viewport}
             >
               <Button
-                label="My Dataset"
                 aria-label="View My Dataset"
                 badge={{ max: 10000, value: 0 }}
+                href="/download"
+                label="My Dataset"
                 margin={{ left: setResponsive('xlarge', 'none') }}
                 width={viewport === 'small' ? buttonWidth : 'max-content'}
                 light={viewport !== 'small' ? light : false}
