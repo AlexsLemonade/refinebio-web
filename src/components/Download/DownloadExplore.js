@@ -111,7 +111,7 @@ export const DownloadExplore = ({ dataset }) => {
             repeat: 'no-repeat',
             size: 'contain'
           }}
-          // to preserve the height of SVG image
+          // to preserve the dimension of SVG image
           height={setResponsive('250px', '350px', '450px')}
           width={setResponsive('250px', '350px', '400px')}
         />

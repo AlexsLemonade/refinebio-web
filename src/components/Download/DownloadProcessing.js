@@ -12,7 +12,7 @@ export const DownloadProcessing = ({ dataset }) => {
   return (
     <>
       <Box align="center">
-        <Row justify="center" width={setResponsive('80%', '80%', '50%')}>
+        <Row justify="center" width={setResponsive('100%', '80%', '50%')}>
           <Column
             align={setResponsive('center', 'start')}
             flexValue={setResponsive('1 1 auto', 'auto')}
@@ -38,15 +38,15 @@ export const DownloadProcessing = ({ dataset }) => {
               left: setResponsive('none', 'basex13')
             }}
           >
-            <ProcessingGearsIcon dataset={dataset} />
+            <ProcessingGearsIcon />
           </Column>
         </Row>
       </Box>
 
       <Box margin={{ top: setResponsive('xlarge', 'basex7', 'basex13') }}>
-        <DownloadExplore />
+        <DownloadExplore dataset={dataset} />
       </Box>
-      <DownloadFolterCTA />
+      <DownloadFolterCTA dataset={dataset} />
     </>
   )
 }
