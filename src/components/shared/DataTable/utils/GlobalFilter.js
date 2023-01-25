@@ -46,7 +46,7 @@ export const GlobalFilter = ({ globalFilter, setGlobalFilter }) => {
           id="global-filter"
           type="text"
           value={userInput || ''}
-          placeholder="Filter table"
+          placeholder="Filter samples"
           style={{ paddingRight: '28px' }}
           onChange={(e) => {
             handleChange(e.target.value)
