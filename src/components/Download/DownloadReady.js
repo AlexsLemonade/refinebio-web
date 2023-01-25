@@ -17,9 +17,13 @@ export const DownloadReady = ({ dataset }) => {
 
   const [agree, setAgree] = useState(!!token)
 
-  const downloadNow = () => {
-    // TEMP
+  const handleAgreeToTerms = () => {
+    setAgree(true)
     setToken(true)
+  }
+
+  const handleDownloadNow = () => {
+    // TEMP
   }
 
   return (
@@ -56,7 +60,7 @@ export const DownloadReady = ({ dataset }) => {
                       <Anchor href={links.terms} label="Terms of Use  " />
                     </Text>
                   }
-                  onClick={() => setAgree(!agree)}
+                  onClick={handleAgreeToTerms}
                 />
               </Box>
               <Box
@@ -68,10 +72,10 @@ export const DownloadReady = ({ dataset }) => {
               >
                 <Button
                   label="Download Now"
-                  disabled={!agree}
+                  disabled={!agree || !token}
                   primary
                   responsive
-                  clickHandler={downloadNow}
+                  clickHandler={handleDownloadNow}
                 />
               </Box>
             </Row>

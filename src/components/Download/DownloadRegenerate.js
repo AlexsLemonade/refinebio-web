@@ -11,7 +11,8 @@ import { DownloadFolterCTA } from './DownloadFooterCTA'
 // eslint-disable-next-line no-unused-vars
 export const DownloadRegenerate = ({ dataset }) => {
   const { setResponsive } = useResponsive()
-  const regenerateFiles = () => {
+
+  const handleRegenerateFiles = () => {
     // TEMP
   }
 
@@ -43,7 +44,7 @@ export const DownloadRegenerate = ({ dataset }) => {
                 label="Regenerate Files"
                 primary
                 responsive
-                clickHandler={regenerateFiles}
+                clickHandler={handleRegenerateFiles}
               />
               <Box
                 direction={setResponsive('column', 'column', 'row')}

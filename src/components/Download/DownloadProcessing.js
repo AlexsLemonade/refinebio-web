@@ -26,7 +26,7 @@ export const DownloadProcessing = ({ dataset }) => {
             </Heading>
             <Paragraph>
               An email with a download link will be sent to{' '}
-              <strong>{dataset?.email_address || 'johndoe@gmail.com'}</strong>{' '}
+              <strong>{dataset?.email_address || 'jdoe@example.com'}</strong>{' '}
               when the dataset is ready or you can come back to this page later.
             </Paragraph>
           </Column>
