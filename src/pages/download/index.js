@@ -5,7 +5,8 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import {
   DownloadEmpty,
   DownloadProcessing,
-  DownloadReady
+  DownloadReady,
+  DownloadRegenerate
 } from 'components/Download'
 
 export const Download = () => {
@@ -19,7 +20,8 @@ export const Download = () => {
         <Box pad={{ top: 'basex14', bottom: 'large' }}>
           {/* {!isDownloadableDataset && <DownloadEmpty />} */}
           {/* <DownloadProcessing dataset={dataset} /> */}
-          <DownloadReady dataset={dataset} />
+          {/* <DownloadReady dataset={dataset} /> */}
+          <DownloadRegenerate dataset={dataset} />
         </Box>
       </FixedContainer>
     </Box>
