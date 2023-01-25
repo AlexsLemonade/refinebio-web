@@ -1,3 +1,5 @@
+import { useResponsive } from 'hooks/useResponsive'
+import { Box } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Modal } from 'components/shared/Modal'
 import { Row } from 'components/shared/Row'
@@ -15,10 +17,16 @@ const ShareDatasetModal = () => (
 )
 
 export const DownloadFolterCTA = () => {
+  const { setResponsive } = useResponsive()
+
   return (
     <Row>
-      <MoveToDatasetModal />
-      <ShareDatasetModal />
+      <Box>
+        <MoveToDatasetModal />
+      </Box>
+      <Box margin={{ top: setResponsive('medium', 'none') }}>
+        <ShareDatasetModal />
+      </Box>
     </Row>
   )
 }
