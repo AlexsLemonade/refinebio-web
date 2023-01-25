@@ -76,7 +76,10 @@ export const SearchCard = ({ result = {} }) => {
             publicationTitle={result.publication_title}
             sampleMetadataFields={result.sample_metadata_fields}
           />
-          <SearchCardFooter />
+          <SearchCardFooter
+            accessionCode={result.accession_code}
+            title={formatString(result.title)}
+          />
         </>
       )}
     </Box>
