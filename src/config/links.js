@@ -34,6 +34,8 @@ export const links = {
     'https://alexslemonade.github.io/refinebio-examples/03-rnaseq/pathway-analysis_rnaseq_02_gsea.html',
   refinebio_github_pathway_analysis_microarray:
     'https://alexslemonade.github.io/refinebio-examples/02-microarray/pathway-analysis_microarray_02_gsea.html',
+  refinebio_github_repo_new_issue:
+    'https://github.com/AlexsLemonade/refinebio/issues/new',
   salmon: 'https://combine-lab.github.io/salmon/',
   terms: '/terms'
 }

@@ -4,6 +4,7 @@ import { Box } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import {
   DownloadEmpty,
+  DownloadError,
   DownloadProcessing,
   DownloadReady,
   DownloadRegenerate
@@ -21,7 +22,8 @@ export const Download = () => {
           {/* {!isDownloadableDataset && <DownloadEmpty />} */}
           {/* <DownloadProcessing dataset={dataset} /> */}
           {/* <DownloadReady dataset={dataset} /> */}
-          <DownloadRegenerate dataset={dataset} />
+          {/* <DownloadRegenerate dataset={dataset} /> */}
+          <DownloadError dataset={dataset} />
         </Box>
       </FixedContainer>
     </Box>
