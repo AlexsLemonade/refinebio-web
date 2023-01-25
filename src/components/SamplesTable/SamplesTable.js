@@ -162,7 +162,7 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
       </Row>
       {tableExpanded && <Overlay duration={0} toggle={tableExpanded} />}
       <Box
-        animation={tableExpanded ? { type: 'zoomIn', duration: 250 } : {}}
+        animation={tableExpanded ? { type: 'zoomIn', duration: 500 } : {}}
         background="white"
         style={{
           width: tableExpanded ? '100vw' : '100%',
