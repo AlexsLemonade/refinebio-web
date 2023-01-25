@@ -7,7 +7,8 @@ import {
   DownloadError,
   DownloadProcessing,
   DownloadReady,
-  DownloadRegenerate
+  DownloadRegenerate,
+  DownloadStart
 } from 'components/Download'
 
 export const Download = () => {
@@ -23,7 +24,8 @@ export const Download = () => {
           {/* <DownloadProcessing dataset={dataset} /> */}
           {/* <DownloadReady dataset={dataset} /> */}
           {/* <DownloadRegenerate dataset={dataset} /> */}
-          <DownloadError dataset={dataset} />
+          {/* <DownloadError dataset={dataset} /> */}
+          <DownloadStart />
         </Box>
       </FixedContainer>
     </Box>

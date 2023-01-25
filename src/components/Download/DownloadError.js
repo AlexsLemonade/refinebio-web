@@ -9,9 +9,6 @@ import { DownloadFolterCTA } from './DownloadFooterCTA'
 
 export const DownloadError = ({ dataset }) => {
   const { setResponsive } = useResponsive()
-  const regenerateFiles = () => {
-    // TEMP
-  }
 
   return (
     <>
@@ -59,12 +56,6 @@ export const DownloadError = ({ dataset }) => {
               }}
               width={setResponsive('100%', 'auto')}
             >
-              <Button
-                label="Try Again"
-                primary
-                responsive
-                clickHandler={regenerateFiles}
-              />
               <Box
                 direction={setResponsive('column', 'column', 'row')}
                 justify="start"

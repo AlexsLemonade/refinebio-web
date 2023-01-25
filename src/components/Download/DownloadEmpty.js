@@ -21,7 +21,7 @@ export const DownloadEmpty = () => {
         responsive
       />
       <Box
-        margin={{ top: 'basex8', bottom: 'small' }}
+        margin={{ top: 'basex8', bottom: 'xlarge' }}
         aria-hidden
         background={{
           image: "url('download-no-dataset.svg')",
