@@ -16,11 +16,15 @@ const ShareDatasetModal = () => (
   </Modal>
 )
 
-export const DownloadFolterCTA = () => {
+// eslint-disable-next-line no-unused-vars
+export const DownloadFolterCTA = ({ dataset }) => {
   const { setResponsive } = useResponsive()
 
   return (
-    <Row>
+    <Row
+      border={{ side: 'bottom' }}
+      pad={{ bottom: setResponsive('medium', 'small') }}
+    >
       <Box>
         <MoveToDatasetModal />
       </Box>
