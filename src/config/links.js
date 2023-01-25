@@ -18,6 +18,8 @@ export const links = {
     'https://docs.refine.bio/en/latest/main_text.html#rna-seq-sample-compendia',
   refinebio_docs_standard_pipeline:
     'https://docs.refine.bio/en/latest/main_text.html#processing-information',
+  refinebio_docs_why_expression_values_differ:
+    'https://docs.refine.bio/en/latest/faq.html#why-are-the-expression-values-different-if-i-regenerate-a-dataset',
   refinebio_github_differential_expression_rnaseq:
     'https://alexslemonade.github.io/refinebio-examples/03-rnaseq/differential-expression_rnaseq_01.html',
   refinebio_github_differential_expression_microarray:
