@@ -3,13 +3,11 @@ import { Box, Heading, Paragraph } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
-import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
 import { DownloadFolterCTA } from './DownloadFooterCTA'
 
-// eslint-disable-next-line no-unused-vars
-export const DownloadRegenerate = ({ dataset }) => {
+export const DownloadError = ({ dataset }) => {
   const { setResponsive } = useResponsive()
   const regenerateFiles = () => {
     // TEMP
@@ -28,11 +26,33 @@ export const DownloadRegenerate = ({ dataset }) => {
               margin={{ bottom: 'small' }}
               size={setResponsive('h2_small', 'h2_large')}
             >
-              Download Expired!
+              Uh-oh something went wrong!
             </Heading>
+            <Paragraph>Please try downloading again.</Paragraph>
             <Paragraph>
-              The download files for this dataset isn&#39;t available anymore.
+              If the problem persists, please contact{' '}
+              <Anchor
+                label="requests@ccdatalab.org"
+                href={`mailto:${links.email_request}`}
+              />
+              {!dataset?.failure_reason && '.'}
+              {dataset?.failure_reason && (
+                <>
+                  {' '}
+                  ,or{' '}
+                  <Anchor
+                    href={links.refinebio_github_repo_new_issue}
+                    label="file a ticket on Github"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  />{' '}
+                  with the following error message for further assistance.
+                </>
+              )}
             </Paragraph>
+            {dataset?.failure_reason && (
+              <Paragraph color="error">{dataset?.failure_reason}</Paragraph>
+            )}
             <Box
               margin={{
                 top: setResponsive('medium', 'small')
@@ -40,7 +60,7 @@ export const DownloadRegenerate = ({ dataset }) => {
               width={setResponsive('100%', 'auto')}
             >
               <Button
-                label="Regenerate Files"
+                label="Try Again"
                 primary
                 responsive
                 clickHandler={regenerateFiles}
@@ -49,24 +69,7 @@ export const DownloadRegenerate = ({ dataset }) => {
                 direction={setResponsive('column', 'column', 'row')}
                 justify="start"
                 margin={{ top: 'small' }}
-              >
-                <InlineMessage
-                  color="info"
-                  fontSize="medium"
-                  margin={{
-                    right: 'xsmall',
-                    bottom: setResponsive('xsmall', 'xsmall', 'none')
-                  }}
-                  label="Some expression values may differ."
-                  name="Info"
-                />
-                <Anchor
-                  href={links.refinebio_docs_why_expression_values_differ}
-                  label="Learn Why"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                />
-              </Box>
+              />
             </Box>
           </Column>
           <Column
@@ -81,7 +84,7 @@ export const DownloadRegenerate = ({ dataset }) => {
             <Box
               aria-hidden
               background={{
-                image: "url('illustration-dataset.svg')",
+                image: "url('illustration-dataset-error.svg')",
                 position: 'center',
                 repeat: 'no-repeat',
                 size: 'contain'
@@ -100,4 +103,4 @@ export const DownloadRegenerate = ({ dataset }) => {
   )
 }
 
-export default DownloadRegenerate
+export default DownloadError
