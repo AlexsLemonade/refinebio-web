@@ -91,7 +91,7 @@ export const DownloadExplore = ({ dataset }) => {
       justify="center"
       pad={{
         top: setResponsive('xlarge', 'xlarge', 'basex6'),
-        bottom: 'xlarge',
+        bottom: setResponsive('medium', 'xlarge'),
         horizontal: 'medium'
       }}
     >
