@@ -6,10 +6,21 @@ import { SrOnly } from './SrOnly'
 export const Modal = ({ label, children }) => {
   const { show, close, open } = useModal()
 
+  const isString = typeof label === 'string'
+
   return (
     <>
-      <Box role="button" onClick={open} width="fit-content">
-        <Text color="brand" style={{ textDecoration: 'underline' }}>
+      <Box
+        role="button"
+        onClick={open}
+        width={isString ? 'fit-content' : 'auto'}
+      >
+        <Text
+          color="brand"
+          style={{
+            textDecoration: isString ? 'underline' : 'none'
+          }}
+        >
           {label}
         </Text>
         <SrOnly label="Open Modal" />
