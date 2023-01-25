@@ -65,7 +65,8 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
       {
         Header: 'Title',
         accessor: 'title',
-        Cell: CellTitle
+        Cell: CellTitle,
+        width: 180
       },
       {
         id: 'id',

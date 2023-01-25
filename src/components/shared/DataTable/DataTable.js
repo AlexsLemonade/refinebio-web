@@ -74,7 +74,7 @@ const TableCell = styled(Box)`
     overflow: hidden;
     padding: 8px 16px;
     position: relative;
-    white-space: nowrap;
+    white-space: normal;
     overflow: hidden;
     &:last-child {
       border-right: 0;
