@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Grid } from 'grommet'
 import { Button } from 'components/shared/Button'
@@ -101,4 +101,4 @@ export const Search = () => {
   )
 }
 
-export default Search
+export default memo(Search)

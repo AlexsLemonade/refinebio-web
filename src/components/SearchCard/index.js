@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import { formatString } from 'helpers/formatString'
 import { Box, Grid } from 'grommet'
@@ -55,7 +56,11 @@ export const SearchCard = ({ result = {} }) => {
           />
         </Box>
         <Box gridArea="ctas" margin={{ top: setResponsive('none', 'large') }}>
-          <SearchCardCTAs status={result.status} />
+          <SearchCardCTAs
+            accessionCode={result.accession_code}
+            downloadableSamples={result.num_downloadable_samples}
+            status={result.status}
+          />
         </Box>
         <Box gridArea="meta">
           <SearchCardMeta
@@ -83,4 +88,4 @@ export const SearchCard = ({ result = {} }) => {
   )
 }
 
-export default SearchCard
+export default memo(SearchCard)
