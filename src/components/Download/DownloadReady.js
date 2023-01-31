@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useRefinebioContext } from 'hooks/useRefinebioContext'
+import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
 import { formatBytes } from 'helpers/formatBytes'
 import { Box, CheckBox, Heading, Text } from 'grommet'
@@ -12,7 +12,7 @@ import { DownloadExplore } from './DownloadExplore'
 import { DownloadFolterCTA } from './DownloadFooterCTA'
 
 export const DownloadReady = ({ dataset }) => {
-  const { token, setToken } = useRefinebioContext()
+  const { token, setToken } = useRefinebio()
   const { setResponsive } = useResponsive()
 
   const [agree, setAgree] = useState(!!token)
