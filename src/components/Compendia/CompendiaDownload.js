@@ -1,5 +1,5 @@
 import { useEffect, useState, memo } from 'react'
-import { useRefinebioContext } from 'hooks/useRefinebioContext'
+import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor, Box, CheckBox, Heading, Text } from 'grommet'
 import { Icon } from 'components/shared/Icon'
@@ -65,7 +65,7 @@ const ListItem = ({ label, selectedOption, clickHandler }) => {
 }
 
 export const CompendiaDownload = ({ heading, isNormalized }) => {
-  const { token, setToken } = useRefinebioContext()
+  const { token, setToken } = useRefinebio()
   const { setResponsive } = useResponsive()
   const [agree, setAgree] = useState(!!token)
   const [filteredOptions, setFilteredOptions] = useState([])
