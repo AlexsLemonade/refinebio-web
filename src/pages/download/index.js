@@ -1,6 +1,6 @@
 import { useEffect, memo, useState } from 'react'
 import { useDataset } from 'hooks/useDataset'
-import { isDownloadableDataset } from 'helpers/datasets'
+import { isDownloadableDataset } from 'helpers/dataset'
 import { Box } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { DownloadEmpty, DownloadStartProcessing } from 'components/Download'

@@ -1,9 +1,13 @@
+import { memo, useEffect, useState } from 'react'
+import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
+import { isDownloadableDataset } from 'helpers/dataset'
 import { Box } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Anchor } from 'components/shared/Anchor'
 import { Pill } from 'components/shared/Pill'
+
 /* TEMPORARY the following prop is added for demo purpose
 prop name: 'status' 
    - ''(default)
@@ -16,15 +20,40 @@ prop name: 'status'
 */
 
 // display CTAs based on a 'status'
-export const SearchCardCTAs = ({ status }) => {
+export const SearchCardCTAs = ({
+  accessionCode,
+  downloadableSamples,
+  status
+}) => {
+  const { dataset, updateDataset, deleteDataset } = useDataset()
   const { viewport, setResponsive } = useResponsive()
+  const [downloadableDataset, setDownloadableDataset] = useState({
+    isDownloadable: false,
+    accessionCode: ''
+  }) // TEMPORARY
+
+  useEffect(() => {
+    setDownloadableDataset({
+      isDownloadable: isDownloadableDataset(dataset),
+      accessionCode: dataset ? Object.keys(dataset)[0] : ''
+    })
+  }, [dataset])
 
   return (
     <Box align={setResponsive('start', 'end')} width="100%">
       {/* state: default  */}
-      {!status && (
+      {!status && !downloadableDataset.isDownloadable && (
         <>
-          <Button label="Add to Dataset" primary responsive />
+          <Button
+            label="Add to Dataset"
+            primary
+            responsive
+            onClick={() =>
+              updateDataset({
+                [accessionCode]: { all: true, total: downloadableSamples }
+              })
+            }
+          />
           <Button
             label="Download Now"
             margin={{ top: 'small' }}
@@ -35,15 +64,17 @@ export const SearchCardCTAs = ({ status }) => {
       )}
 
       {/* state: added  */}
-      {status === 'added' && (
+      {(status === 'added' ||
+        downloadableDataset.accessionCode === accessionCode) && (
         <>
           <Box direction="row">
-            <InlineMessage label="Added to Datase" color="success" />
+            <InlineMessage label="Added to Dataset" color="success" />
             <Button
               label="Remove"
               link
               linkFontSize={setResponsive('medium', 'small')}
               margin={{ left: 'xsmall' }}
+              onClick={deleteDataset}
             />
           </Box>
           <Button
@@ -141,4 +172,4 @@ export const SearchCardCTAs = ({ status }) => {
   )
 }
 
-export default SearchCardCTAs
+export default memo(SearchCardCTAs)

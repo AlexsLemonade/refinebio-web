@@ -1,5 +1,8 @@
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
+import { getTotalSamples } from 'helpers/dataset'
 import { isMatchPath } from 'helpers/isMatchPath'
 import { Box, Nav, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
@@ -13,6 +16,13 @@ import { NavLink } from './NavLink'
 import { NavIcon } from './NavIcon'
 
 export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
+  // TEMPORARY
+  const { dataset } = useDataset()
+  const [totalSamples, setTotalSamples] = useState()
+  useEffect(() => {
+    setTotalSamples(getTotalSamples(dataset))
+  }, [dataset])
+
   const router = useRouter()
   const { asPath, pathname } = router
   const { viewport, setResponsive } = useResponsive()
@@ -146,7 +156,10 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
             >
               <Button
                 aria-label="View My Dataset"
-                badge={{ max: 10000, value: 0 }}
+                badge={{
+                  max: 10000,
+                  value: totalSamples || 0
+                }} // TEMOORARY
                 href="/download"
                 label="My Dataset"
                 margin={{ left: setResponsive('xlarge', 'none') }}
