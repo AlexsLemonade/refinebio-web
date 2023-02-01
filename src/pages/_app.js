@@ -18,18 +18,18 @@ const App = ({ Component, pageProps }) => {
       <GlobalStyle />
       <Grommet theme={theme}>
         <RefinebioContextProvider>
-          <BandContextProvider>
-            <Layout>
-              <Sentry.ErrorBoundary fallback={Fallback} showDialog>
-                <DatasetContextProvider>
+          <DatasetContextProvider>
+            <BandContextProvider>
+              <Layout>
+                <Sentry.ErrorBoundary fallback={Fallback} showDialog>
                   <ModalContextProvider>
                     {/* eslint-disable-next-line react/jsx-props-no-spreading */}
                     <Component {...pageProps} />
                   </ModalContextProvider>
-                </DatasetContextProvider>
-              </Sentry.ErrorBoundary>
-            </Layout>
-          </BandContextProvider>
+                </Sentry.ErrorBoundary>
+              </Layout>
+            </BandContextProvider>
+          </DatasetContextProvider>
         </RefinebioContextProvider>
       </Grommet>
     </>
