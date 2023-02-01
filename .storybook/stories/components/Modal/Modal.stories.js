@@ -2,49 +2,116 @@ import { getTitle } from 'utils/getTitle'
 import { Box, Heading, Paragraph } from 'grommet'
 import { Modal } from 'components/shared/Modal'
 import { Pill } from 'components/shared/Pill'
+import { Button } from 'components/shared/Button'
+import { useModal } from 'hooks/useModal'
 
-const ModalContent = () => (
-  <Box>
-    <Heading margin={{ bottom: 'small' }} level={1}>
-      Processing Information
-    </Heading>
-    <Box margin={{ bottom: 'small' }}>
-      <Pill label="refine.bio processed" status="success" />
+const ModalOne = ({ id }) => {
+  const { modal, setModal } = useModal()
+
+  const handleClick = () => {
+    setModal({
+      show: true,
+      id: 'ModalOne'
+    })
+  }
+
+  return (
+    <>
+      <Button label="Modal 1" onClick={handleClick} primary />
+
+      {modal.id === id && (
+        <Modal>
+          <Box pad={{ horizontal: 'large', bottom: 'large' }}>
+            <Heading margin={{ bottom: 'small' }} level={1}>
+              Praesent vitae erat nisl
+            </Heading>
+            <Box margin={{ bottom: 'small' }}>
+              <Pill label="refine.bio processed" status="success" />
+            </Box>
+
+            <Heading level={4}>Maecenas</Heading>
+            <Paragraph>
+              Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+              posuere cubilia curae; Class aptent taciti sociosqu ad litora
+              torquent per conubia nostra, per inceptos himenaeos. Sed ac
+              molestie quam, in finibus est. Fusce porta metus sit amet
+              condimentum finibus. Vivamus condimentum massa in orci elementum
+              tempor. Nunc commodo tellus vel elementum congue. Curabitur
+              dignissim venenatis neque et suscipit. Nullam lobortis eros
+              sapien, vitae bibendum risus pretium eget.
+            </Paragraph>
+          </Box>
+        </Modal>
+      )}
+    </>
+  )
+}
+
+const ModalTwo = ({ id }) => {
+  const { modal, setModal } = useModal()
+
+  const handleClick = () => {
+    setModal({
+      show: true,
+      id: 'ModalTwo'
+    })
+  }
+
+  return (
+    <>
+      <Button label=" Modal 2" onClick={handleClick} primary />
+
+      {modal.id === id && (
+        <Modal>
+          <Box pad={{ horizontal: 'large' }}>
+            <Heading margin={{ bottom: 'small' }} level={1}>
+              Lorem ipsum dolor sit amet
+            </Heading>
+            <Box margin={{ bottom: 'small' }}>
+              <Pill label="refine.bio processed" status="success" />
+            </Box>
+
+            <Heading level={4}>Aenean</Heading>
+            <Paragraph>
+              Nunc laoreet maximus massa. Aenean faucibus rhoncus felis quis
+              faucibus. Vivamus ullamcorper nibh risus, a tincidunt tellus
+              tempor at.
+            </Paragraph>
+          </Box>
+          <Box border={{ side: 'bottom' }} margin={{ vertical: 'medium' }} />
+          <Box pad={{ horizontal: 'large', bottom: 'large' }}>
+            <Heading level={4}>Vestibulum</Heading>
+            <Paragraph>
+              Nunc laoreet maximus massa. Aenean faucibus rhoncus felis quis
+              faucibus. Vivamus ullamcorper nibh risus, a tincidunt tellus
+              tempor at.
+            </Paragraph>
+          </Box>
+        </Modal>
+      )}
+    </>
+  )
+}
+
+const ModalContent = ({ id }) => {
+  return (
+    <Box align="center" justify="center" margin={{ top: 'large' }}>
+      <Box>
+        <ModalOne id="ModalOne" />
+      </Box>
+      <Box margin={{ top: 'medium' }}>
+        <ModalTwo id="ModalTwo" />
+      </Box>
     </Box>
-
-    <Heading level={3}>Salmon</Heading>
-    <Paragraph>
-      Salmon is an alignment-free method for estimating transcript abundances
-      from RNA-Seq data. We use it in quasi-mapping mode, which is significantly
-      faster than alignment-based approaches and requires us to build a Salmon
-      transcriptome index. We build a custom reference transcriptome (using RSEM
-      rsem-prepare-reference) by filtering the Ensembl genomic DNA assembly to
-      remove pseudogenes, which we expect could negatively impact the
-      quantification of protein-coding genes. This means we're obtaining
-      abundance estimates for coding as well as non-coding transcripts. We
-      include the flags --seqBias to correct for random hexamer priming and, if
-      this is a paired-end experiment, --gcBias to correct for GC content when
-      running
-    </Paragraph>
-    <Paragraph>
-      All samples available for download will be{' '}
-      <strong>quantile normalized</strong>. For more information regarding how
-      quantile normalization is performed and its limitations, see our
-      documentation.
-    </Paragraph>
-  </Box>
-)
+  )
+}
 
 export default {
   title: getTitle('Modal'),
-  component: Modal,
-  args: {
-    label: 'Open Modal',
-    children: <ModalContent />
-  }
+  component: ModalContent
 }
 
-const Template = (args) => <Modal {...args} />
+const Template = (args) => <ModalContent />
 
 export const Default = Template.bind({})
 Default.storyName = 'Modal'
