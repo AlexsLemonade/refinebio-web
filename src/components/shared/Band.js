@@ -41,7 +41,7 @@ export const Band = ({ bandHeight, light = false, ...props }) => {
             !light
               ? {
                   opacity: '0.1',
-                  image: " url('circus-plot.svg')",
+                  image: "url('/circus-plot.svg')",
                   position: 'center 90%',
                   repeat: 'no-repeat'
                 }

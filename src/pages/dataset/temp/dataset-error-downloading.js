@@ -2,7 +2,11 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { MoveToDatasetButton, ShareDatasetButton } from 'components/Dataset'
+import {
+  DatasetErrorDownloading,
+  MoveToDatasetButton,
+  ShareDatasetButton
+} from 'components/Dataset'
 import { Row } from 'components/shared/Row'
 
 export const Dataset = () => {
@@ -11,7 +15,7 @@ export const Dataset = () => {
   return (
     <FixedContainer>
       <Box pad={{ top: 'basex14', bottom: 'large' }}>
-        My Dataset Download Status Views render here
+        <DatasetErrorDownloading />
       </Box>
       <Row
         border={{ side: 'bottom' }}

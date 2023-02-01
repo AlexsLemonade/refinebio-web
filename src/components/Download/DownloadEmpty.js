@@ -24,7 +24,7 @@ export const DownloadEmpty = () => {
         margin={{ top: 'basex8', bottom: 'xlarge' }}
         aria-hidden
         background={{
-          image: "url('download-no-dataset.svg')",
+          image: "url('/download-no-dataset.svg')",
           position: 'center',
           repeat: 'no-repeat',
           size: 'contain'

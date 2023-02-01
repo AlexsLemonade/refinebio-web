@@ -3,10 +3,12 @@ import { Box, Heading, Paragraph } from 'grommet'
 import { DownloadEmailForm } from './DownloadEmailForm'
 
 // When a download is started the user visits the page /download?start=true
-
 // This component gets rendereded when no email has been assigned
-export const DownloadStart = () => {
+
+export const DownloadStartProcessing = () => {
   const { setResponsive } = useResponsive()
+
+  const handleSubmitEmailForm = () => {}
 
   return (
     <Box align="center" alignSelf="center" width="640px">
@@ -23,13 +25,13 @@ export const DownloadStart = () => {
         download.
       </Paragraph>
       <Box margin={{ top: 'medium' }}>
-        <DownloadEmailForm />
+        <DownloadEmailForm submitHandler={handleSubmitEmailForm} />
       </Box>
       <Box
         margin={{ top: 'basex8', bottom: 'xlarge' }}
         aria-hidden
         background={{
-          image: "url('illustration-download-start.svg')",
+          image: "url('/illustration-download-start.svg')",
           position: 'center',
           repeat: 'no-repeat',
           size: 'contain'
@@ -42,4 +44,4 @@ export const DownloadStart = () => {
   )
 }
 
-export default DownloadStart
+export default DownloadStartProcessing

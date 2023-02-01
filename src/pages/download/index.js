@@ -1,34 +1,24 @@
-import { memo } from 'react'
+import { useEffect, memo, useState } from 'react'
 import { useDataset } from 'hooks/useDataset'
+import { isDownloadableDataset } from 'helpers/datasets'
 import { Box } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import {
-  DownloadEmpty,
-  DownloadError,
-  DownloadProcessing,
-  DownloadReady,
-  DownloadRegenerate,
-  DownloadStart
-} from 'components/Download'
+import { DownloadEmpty, DownloadStartProcessing } from 'components/Download'
 
 export const Download = () => {
   const { dataset } = useDataset()
+  const [isDownloadable, setIsDownloadable] = useState()
 
-  // const isDownloadableDataset = dataset && Object.keys(dataset).length > 0
+  useEffect(() => {
+    setIsDownloadable(isDownloadableDataset(dataset))
+  }, [dataset])
 
   return (
-    <Box>
-      <FixedContainer>
-        <Box pad={{ top: 'basex14', bottom: 'large' }}>
-          {/* {!isDownloadableDataset && <DownloadEmpty />} */}
-          {/* <DownloadProcessing dataset={dataset} /> */}
-          {/* <DownloadReady dataset={dataset} /> */}
-          {/* <DownloadRegenerate dataset={dataset} /> */}
-          {/* <DownloadError dataset={dataset} /> */}
-          <DownloadStart />
-        </Box>
-      </FixedContainer>
-    </Box>
+    <FixedContainer>
+      <Box pad={{ top: 'basex14', bottom: 'large' }}>
+        {isDownloadable ? <DownloadStartProcessing /> : <DownloadEmpty />}
+      </Box>
+    </FixedContainer>
   )
 }
 

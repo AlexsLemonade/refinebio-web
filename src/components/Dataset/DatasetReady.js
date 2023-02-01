@@ -8,10 +8,9 @@ import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
-import { DownloadExplore } from './DownloadExplore'
-import { DownloadFolterCTA } from './DownloadFooterCTA'
+import { DatasetExplore } from './DatasetExplore'
 
-export const DownloadReady = ({ dataset }) => {
+export const DatasetReady = ({ dataset }) => {
   const { token, setToken } = useRefinebio()
   const { setResponsive } = useResponsive()
 
@@ -92,7 +91,7 @@ export const DownloadReady = ({ dataset }) => {
             <Box
               aria-hidden
               background={{
-                image: "url('illustration-dataset.svg')",
+                image: "url('/illustration-dataset.svg')",
                 position: 'center',
                 repeat: 'no-repeat',
                 size: 'contain'
@@ -105,11 +104,10 @@ export const DownloadReady = ({ dataset }) => {
         </Row>
       </Box>
       <Box margin={{ top: setResponsive('xlarge', 'basex7', 'basex13') }}>
-        <DownloadExplore dataset={dataset} />
+        <DatasetExplore dataset={dataset} />
       </Box>
-      <DownloadFolterCTA />
     </>
   )
 }
 
-export default DownloadReady
+export default DatasetReady

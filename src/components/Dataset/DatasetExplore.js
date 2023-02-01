@@ -14,7 +14,7 @@ const ListItem = ({ text, href }) => (
 )
 
 // eslint-disable-next-line no-unused-vars
-export const DownloadExplore = ({ dataset }) => {
+export const DatasetExplore = ({ dataset }) => {
   const { setResponsive } = useResponsive()
 
   // check technology and render links based on it
@@ -91,7 +91,6 @@ export const DownloadExplore = ({ dataset }) => {
       justify="center"
       pad={{
         top: setResponsive('xlarge', 'xlarge', 'basex6'),
-        bottom: setResponsive('medium', 'xlarge'),
         horizontal: 'medium'
       }}
     >
@@ -106,7 +105,7 @@ export const DownloadExplore = ({ dataset }) => {
           margin={{ bottom: 'small' }}
           aria-hidden
           background={{
-            image: "url('tubey-adventure.svg')",
+            image: "url('/tubey-adventure.svg')",
             position: 'center left',
             repeat: 'no-repeat',
             size: 'contain'
@@ -148,4 +147,4 @@ export const DownloadExplore = ({ dataset }) => {
   )
 }
 
-export default DownloadExplore
+export default DatasetExplore
