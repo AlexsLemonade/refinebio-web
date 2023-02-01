@@ -1,8 +1,11 @@
-// (discussion) https://github.com/AlexsLemonade/refinebio-frontend/issues/27
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { MoveToDatasetButton, ShareDatasetButton } from 'components/Dataset'
+import {
+  DatasetProcessing,
+  MoveToDatasetButton,
+  ShareDatasetButton
+} from 'components/Dataset'
 import { Row } from 'components/shared/Row'
 
 export const Dataset = () => {
@@ -11,7 +14,7 @@ export const Dataset = () => {
   return (
     <FixedContainer>
       <Box pad={{ top: 'basex14', bottom: 'large' }}>
-        My Dataset Download Status Views render here
+        <DatasetProcessing />
       </Box>
       <Row
         border={{ side: 'bottom' }}

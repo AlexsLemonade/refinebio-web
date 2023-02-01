@@ -3,10 +3,9 @@ import { Box, Heading, Paragraph } from 'grommet'
 import { Column } from 'components/shared/Column'
 import { ProcessingGearsIcon } from 'components/shared/ProcessingGearsIcon'
 import { Row } from 'components/shared/Row'
-import { DownloadExplore } from './DownloadExplore'
-import { DownloadFolterCTA } from './DownloadFooterCTA'
+import { DatasetExplore } from './DatasetExplore'
 
-export const DownloadProcessing = ({ dataset }) => {
+export const DatasetProcessing = ({ dataset }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -42,13 +41,11 @@ export const DownloadProcessing = ({ dataset }) => {
           </Column>
         </Row>
       </Box>
-
       <Box margin={{ top: setResponsive('xlarge', 'basex7', 'basex13') }}>
-        <DownloadExplore dataset={dataset} />
+        <DatasetExplore dataset={dataset} />
       </Box>
-      <DownloadFolterCTA dataset={dataset} />
     </>
   )
 }
 
-export default DownloadProcessing
+export default DatasetProcessing
