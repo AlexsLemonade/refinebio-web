@@ -7,11 +7,11 @@ import { Row } from 'components/shared/Row'
 import { TextInput } from 'components/shared/TextInput'
 import { links } from 'config'
 
-export const DownloadEmailForm = ({ handleSubmit }) => {
+export const DownloadEmailForm = () => {
   const { setResponsive } = useResponsive()
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form>
       <Row width="500px">
         <Column fill>
           <TextInput placeholder="jdoe@example.com" type="email" />

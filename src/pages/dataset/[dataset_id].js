@@ -1,17 +1,42 @@
-// (discussion) https://github.com/AlexsLemonade/refinebio-frontend/issues/27
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { MoveToDatasetButton, ShareDatasetButton } from 'components/Dataset'
+import {
+  DatasetErrorDownloading,
+  DatasetProcessing,
+  DatasetReady,
+  DatasetRegenerate,
+  MoveToDatasetButton,
+  ShareDatasetButton
+} from 'components/Dataset'
 import { Row } from 'components/shared/Row'
 
-export const Dataset = () => {
+// https://github.com/AlexsLemonade/refinebio-frontend/issues/27
+
+// TEMPORARY
+export const getServerSideProps = ({ query }) => {
+  const { dataset_id: datasetId } = query
+
+  return { props: { datasetId } }
+}
+
+export const Dataset = ({ datasetId }) => {
   const { setResponsive } = useResponsive()
 
   return (
     <FixedContainer>
-      <Box pad={{ top: 'basex14', bottom: 'large' }}>
-        My Dataset Download Status Views render here
+      <Box
+        pad={{
+          top: setResponsive('basex6', 'basex8', 'basex14'),
+          bottom: 'large'
+        }}
+      >
+        {/* TEMPORARY START */}
+        {datasetId === 'error' && <DatasetErrorDownloading />}
+        {datasetId === 'processing' && <DatasetProcessing />}
+        {datasetId === 'ready' && <DatasetReady />}
+        {datasetId === 'regenerate' && <DatasetRegenerate />}
+        {/* TEMPORARY END */}
       </Box>
       <Row
         border={{ side: 'bottom' }}
@@ -19,10 +44,10 @@ export const Dataset = () => {
         pad={{ bottom: setResponsive('medium', 'small') }}
       >
         <Box>
-          <MoveToDatasetButton />
+          <MoveToDatasetButton id="move-to-dataset" />
         </Box>
         <Box margin={{ top: setResponsive('medium', 'none') }}>
-          <ShareDatasetButton />
+          <ShareDatasetButton id="share-dataset" />
         </Box>
       </Row>
     </FixedContainer>

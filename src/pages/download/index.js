@@ -1,4 +1,4 @@
-import { useEffect, memo, useState } from 'react'
+import { useEffect, useState, memo } from 'react'
 import { useDataset } from 'hooks/useDataset'
 import { isDownloadableDataset } from 'helpers/dataset'
 import { Box } from 'grommet'

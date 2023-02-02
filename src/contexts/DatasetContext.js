@@ -14,7 +14,7 @@ export const DatasetContextProvider = ({ children }) => {
   const [datasetId, setDatasetId] = useLocalStorage('refinebio-datasetId', null)
 
   // Necessary methods:
-  // Creates a new dataset and generate its dataset ID
+  // creates a new dataset and generate its dataset ID
   const createDataset = () => {
     const body = { data: {} }
 
@@ -30,7 +30,7 @@ export const DatasetContextProvider = ({ children }) => {
     return response
   }
 
-  // Fetches the dataset with the specified dataset ID
+  // fetches the dataset with the specified dataset ID
   const getDataset = () => {
     if (!datasetId) {
       createDataset()
@@ -52,7 +52,7 @@ export const DatasetContextProvider = ({ children }) => {
     return response
   }
 
-  // Updates the dataset with the specified dataset ID
+  // updates the dataset with the specified dataset ID
   const updateDataset = (datasetSlice) => {
     if (!datasetId) {
       createDataset()
@@ -82,7 +82,7 @@ export const DatasetContextProvider = ({ children }) => {
     return result
   }
 
-  // Deletes the dataset with the specified dataset ID
+  // deletes the dataset with the specified dataset ID
   const deleteDataset = () => {
     // eslint-disable-next-line no-unused-vars
     const body = { data: {} }

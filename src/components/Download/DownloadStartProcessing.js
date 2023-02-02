@@ -2,8 +2,8 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph } from 'grommet'
 import { DownloadEmailForm } from './DownloadEmailForm'
 
-// When a download is started the user visits the page /download?start=true
-// This component gets rendereded when no email has been assigned
+// path: /download?start=true
+// renders this component when no email is assigned
 
 export const DownloadStartProcessing = () => {
   const { setResponsive } = useResponsive()

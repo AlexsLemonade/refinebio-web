@@ -1,7 +1,7 @@
-// Processing gears animation
+// Processing gears Icon animation
 // (resource) http://www.petercollingridge.co.uk/tutorials/svg/animation/rotation/
 
-export const ProcessingGearsIcon = ({
+export const IconProcessingGears = ({
   width = 155,
   height = 152,
   duration = 13
@@ -49,4 +49,4 @@ export const ProcessingGearsIcon = ({
   )
 }
 
-export default ProcessingGearsIcon
+export default IconProcessingGears

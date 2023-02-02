@@ -7,13 +7,8 @@ import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
 
-// eslint-disable-next-line no-unused-vars
-export const DatasetRegenerate = ({ dataset }) => {
+export const DatasetRegenerate = () => {
   const { setResponsive } = useResponsive()
-
-  const handleRegenerateFiles = () => {
-    // TEMP
-  }
 
   return (
     <Box align="center">
@@ -38,12 +33,7 @@ export const DatasetRegenerate = ({ dataset }) => {
             }}
             width={setResponsive('100%', 'auto')}
           >
-            <Button
-              label="Regenerate Files"
-              primary
-              responsive
-              clickHandler={handleRegenerateFiles}
-            />
+            <Button label="Regenerate Files" primary responsive />
             <Box
               direction={setResponsive('column', 'column', 'row')}
               justify="start"
