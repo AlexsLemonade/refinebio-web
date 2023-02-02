@@ -41,16 +41,19 @@ export const DatasetReady = ({ dataset }) => {
               Your Dataset is ready for download!
             </Heading>
             <Text>
-              Download size: {'N/A' || formatBytes(dataset.size_in_bytes)}
+              Download size: {'4.01MB' || formatBytes(dataset.size_in_bytes)}
             </Text>
             <Row
               direction={setResponsive('column', 'column', 'row')}
               width="100%"
             >
-              <Box
+              <Row
+                align={setResponsive('start', 'start', 'center')}
+                direction={setResponsive('column', 'column', 'row')}
                 margin={{
-                  top: setResponsive('medium', 'small', 'none')
+                  top: 'medium'
                 }}
+                fill
               >
                 <CheckBox
                   label={
@@ -66,22 +69,22 @@ export const DatasetReady = ({ dataset }) => {
                   }
                   onClick={handleAgreeToTerms}
                 />
-              </Box>
-              <Box
-                margin={{
-                  top: setResponsive('medium', 'small', 'none'),
-                  left: setResponsive('none', 'none', 'medium')
-                }}
-                width={setResponsive('100%', 'auto')}
-              >
-                <Button
-                  label="Download Now"
-                  disabled={!agree || !token}
-                  primary
-                  responsive
-                  clickHandler={handleDownloadNow}
-                />
-              </Box>
+                <Box
+                  margin={{
+                    top: setResponsive('medium', 'small', 'none'),
+                    left: setResponsive('none', 'none', 'medium')
+                  }}
+                  width={setResponsive('100%', 'auto')}
+                >
+                  <Button
+                    label="Download Now"
+                    disabled={!agree || !token}
+                    primary
+                    responsive
+                    clickHandler={handleDownloadNow}
+                  />
+                </Box>
+              </Row>
             </Row>
           </Column>
           <Column
@@ -108,7 +111,7 @@ export const DatasetReady = ({ dataset }) => {
           </Column>
         </Row>
       </Box>
-      <Box margin={{ top: setResponsive('xlarge', 'basex7', 'basex13') }}>
+      <Box margin={{ top: setResponsive('xlarge', 'basex7', 'basex10') }}>
         <DatasetExplore dataset={dataset} />
       </Box>
     </>
