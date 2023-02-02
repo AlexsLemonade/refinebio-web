@@ -41,7 +41,7 @@ export const DatasetProcessing = ({ dataset }) => {
           </Column>
         </Row>
       </Box>
-      <Box margin={{ top: setResponsive('xlarge', 'basex7', 'basex13') }}>
+      <Box margin={{ top: setResponsive('xlarge', 'basex7', 'basex10') }}>
         <DatasetExplore dataset={dataset} />
       </Box>
     </>
