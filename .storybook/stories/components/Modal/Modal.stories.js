@@ -6,18 +6,13 @@ import { Button } from 'components/shared/Button'
 import { useModal } from 'hooks/useModal'
 
 const ModalOne = ({ id }) => {
-  const { modal, setModal } = useModal()
+  const { modal, openModal } = useModal()
 
-  const handleClick = () => {
-    setModal({
-      show: true,
-      id: 'ModalOne'
-    })
-  }
+  const modalId = 'ModalOne'
 
   return (
     <>
-      <Button label="Modal 1" onClick={handleClick} primary />
+      <Button label="Modal 1" onClick={() => openModal(modalId)} primary />
 
       {modal.id === id && (
         <Modal>
@@ -48,18 +43,13 @@ const ModalOne = ({ id }) => {
 }
 
 const ModalTwo = ({ id }) => {
-  const { modal, setModal } = useModal()
+  const { modal, openModal } = useModal()
 
-  const handleClick = () => {
-    setModal({
-      show: true,
-      id: 'ModalTwo'
-    })
-  }
+  const modalId = 'ModalTwo'
 
   return (
     <>
-      <Button label=" Modal 2" onClick={handleClick} primary />
+      <Button label=" Modal 2" onClick={() => openModal(modalId)} primary />
 
       {modal.id === id && (
         <Modal>
