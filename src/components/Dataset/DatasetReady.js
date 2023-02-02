@@ -50,6 +50,7 @@ export const DatasetReady = ({ dataset }) => {
               <Row
                 align={setResponsive('start', 'start', 'center')}
                 direction={setResponsive('column', 'column', 'row')}
+                justify="start"
                 margin={{
                   top: 'medium'
                 }}
