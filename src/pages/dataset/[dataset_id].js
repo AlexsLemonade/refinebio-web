@@ -44,10 +44,10 @@ export const Dataset = ({ datasetId }) => {
         pad={{ bottom: setResponsive('medium', 'small') }}
       >
         <Box>
-          <MoveToDatasetButton id="move-to-dataset" />
+          <MoveToDatasetButton />
         </Box>
         <Box margin={{ top: setResponsive('medium', 'none') }}>
-          <ShareDatasetButton id="share-dataset" />
+          <ShareDatasetButton />
         </Box>
       </Row>
     </FixedContainer>
