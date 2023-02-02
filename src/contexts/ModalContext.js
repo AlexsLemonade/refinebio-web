@@ -6,11 +6,13 @@ export const ModalContext = createContext()
 export const ModalContextProvider = ({ children }) => {
   const [modal, setModal] = useState({ show: false, id: null })
 
+  const openModal = (id) => setModal({ show: true, id })
+
   const closeModal = () => setModal({ show: false, id: null })
 
   const value = useMemo(
-    () => ({ modal, closeModal, setModal }),
-    [modal, closeModal, setModal]
+    () => ({ modal, closeModal, openModal }),
+    [modal, closeModal, openModal]
   )
 
   return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
