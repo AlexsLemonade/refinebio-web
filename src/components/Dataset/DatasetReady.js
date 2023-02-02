@@ -17,8 +17,8 @@ export const DatasetReady = ({ dataset }) => {
   const [agree, setAgree] = useState(!!token)
 
   const handleAgreeToTerms = () => {
-    setAgree(true)
-    setToken(true)
+    setAgree(!agree)
+    setToken(!token)
   }
 
   const handleDownloadNow = () => {
@@ -41,7 +41,7 @@ export const DatasetReady = ({ dataset }) => {
               Your Dataset is ready for download!
             </Heading>
             <Text>
-              Download size: {'4.01 MB' || formatBytes(dataset.size_in_bytes)}
+              Download size: {'N/A' || formatBytes(dataset.size_in_bytes)}
             </Text>
             <Row
               direction={setResponsive('column', 'column', 'row')}
@@ -56,7 +56,12 @@ export const DatasetReady = ({ dataset }) => {
                   label={
                     <Text>
                       I agree to the{' '}
-                      <Anchor href={links.terms} label="Terms of Use  " />
+                      <Anchor
+                        href={links.terms}
+                        label="Terms of Use"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      />
                     </Text>
                   }
                   onClick={handleAgreeToTerms}

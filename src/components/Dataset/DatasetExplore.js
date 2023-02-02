@@ -13,8 +13,7 @@ const ListItem = ({ text, href }) => (
   </Box>
 )
 
-// eslint-disable-next-line no-unused-vars
-export const DatasetExplore = ({ dataset }) => {
+export const DatasetExplore = () => {
   const { setResponsive } = useResponsive()
 
   // check technology and render links based on it

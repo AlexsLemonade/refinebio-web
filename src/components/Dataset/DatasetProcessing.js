@@ -1,7 +1,7 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph } from 'grommet'
 import { Column } from 'components/shared/Column'
-import { ProcessingGearsIcon } from 'components/shared/ProcessingGearsIcon'
+import { IconProcessingGears } from 'components/shared/IconProcessingGears'
 import { Row } from 'components/shared/Row'
 import { DatasetExplore } from './DatasetExplore'
 
@@ -37,7 +37,7 @@ export const DatasetProcessing = ({ dataset }) => {
               left: setResponsive('none', 'basex13')
             }}
           >
-            <ProcessingGearsIcon />
+            <IconProcessingGears />
           </Column>
         </Row>
       </Box>

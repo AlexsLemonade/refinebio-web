@@ -2,7 +2,6 @@ import { useModal } from 'hooks/useModal'
 import { Button } from 'components/shared/Button'
 import { Modal } from 'components/shared/Modal'
 
-// eslint-disable-next-line no-unused-vars
 export const MoveToDatasetButton = ({ id }) => {
   const { modal, openModal } = useModal()
   const modalId = 'move-to-dataset'
