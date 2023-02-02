@@ -1,13 +1,23 @@
+import { useModal } from 'hooks/useModal'
 import { Button } from 'components/shared/Button'
 import { Modal } from 'components/shared/Modal'
 
-const MoveToDatasetModal = () => (
-  <Modal label={<Button label="Move to Dataset" secondary responsive />} />
-)
-
 // eslint-disable-next-line no-unused-vars
-export const MoveToDatasetButton = ({ dataset }) => {
-  return <MoveToDatasetModal />
+export const MoveToDatasetButton = ({ id }) => {
+  const { modal, openModal } = useModal()
+  const modalId = 'move-to-dataset'
+
+  return (
+    <>
+      <Button
+        label="Move to Dataset"
+        secondary
+        responsive
+        onClick={() => openModal(modalId)}
+      />
+      {modal.id === id && <Modal>Move to Dataset</Modal>}
+    </>
+  )
 }
 
 export default MoveToDatasetButton
