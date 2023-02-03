@@ -9,6 +9,7 @@ import { Collapse } from '../../images/collapse.svg'
 import { Expand } from '../../images/expand.svg'
 import { Filter } from '../../images/filter.svg'
 import { Github } from '../../images/github.svg'
+import { Help } from '../../images/help.svg'
 import { Info } from '../../images/info.svg'
 import { Search } from '../../images/search.svg'
 import { Success } from '../../images/success.svg'
@@ -25,6 +26,7 @@ const SVGs = {
   Expand,
   Filter,
   Github,
+  Help,
   Info,
   Search,
   Success,

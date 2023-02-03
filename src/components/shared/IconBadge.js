@@ -27,7 +27,7 @@ export const IconBadge = ({ name, label, size = 'small', ...props }) => {
         { name: 'left', start: [0, 1], end: [0, 1] },
         { name: 'right', start: [1, 1], end: [1, 1] }
       ]}
-      columns={['24px', 'auto']}
+      columns={['26px', 'auto']}
       rows={['auto', 'auto']}
       gap={{
         column: 'xxsmall'

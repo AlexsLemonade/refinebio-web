@@ -10,6 +10,8 @@ export const links = {
   refinebio: 'https://www.refine.bio',
   refinebio_api_docs: 'https://api.refine.bio/v1/#tag/compendia',
   refinebio_docs: 'https://docs.refine.bio',
+  refinebio_docs_aggregation:
+    'https://docs.refine.bio/en/latest/main_text.html#aggregations',
   refinebio_docs_harmonized_metadata:
     'https://docs.refine.bio/en/latest/main_text.html#refine-bio-harmonized-metadata  ',
   refinebio_docs_normalized_compendia:
@@ -20,6 +22,10 @@ export const links = {
     'https://docs.refine.bio/en/latest/main_text.html#processing-information',
   refinebio_docs_why_expression_values_differ:
     'https://docs.refine.bio/en/latest/faq.html#why-are-the-expression-values-different-if-i-regenerate-a-dataset',
+  refinebio_docs_transformation:
+    'https://docs.refine.bio/en/latest/main_text.html#transformations',
+  refinebio_docs_quantile_normalization_for_rna_seq_samples:
+    'http://docs.refine.bio/en/latest/faq.html#what-does-it-mean-to-skip-quantile-normalization-for-rna-seq-samples',
   refinebio_github_differential_expression_rnaseq:
     'https://alexslemonade.github.io/refinebio-examples/03-rnaseq/differential-expression_rnaseq_01.html',
   refinebio_github_differential_expression_microarray:
