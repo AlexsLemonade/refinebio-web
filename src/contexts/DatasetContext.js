@@ -98,6 +98,7 @@ export const DatasetContextProvider = ({ children }) => {
   const value = useMemo(
     () => ({
       dataset,
+      datasetId,
       createDataset,
       getDataset,
       updateDataset,
