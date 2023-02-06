@@ -6,8 +6,11 @@ import styled, { css } from 'styled-components'
 const Button = styled(SharedButton)`
   ${({ theme }) =>
     css`
-      &:hover {
+      &:hover,
+      &:focus {
         border: 1px solod ${theme.global.colors.brand};
+        box-shadow: none;
+        outline: none;
       }
     `}
 `
@@ -23,7 +26,8 @@ export const AdvancedOptionsButton = ({ toggle, setToggle }) => {
           color="brand"
           gap="none"
           label="Advanced Options"
-          style={{ padding: '2px' }}
+          margin={{ left: '24px', right: '8px' }}
+          style={{ padding: '0' }}
         />
         <Text color="brand">
           {toggle ? (

@@ -1,22 +1,28 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, Heading } from 'grommet'
+import { Box, Heading, Form } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Row } from 'components/shared/Row'
 import { ShareDatasetButton } from 'components/Dataset'
-import { AdvancedOptionsBlock } from './AdvancedOptionsBlock'
-import { AdvancedOptionsButton } from './AdvancedOptionsButton'
-import { AggregateDropDown } from './AggregateDropDown'
-import { TransformDropDown } from './TransformDropDown'
+import { AdvancedOptions, AdvancedOptionsButton } from './AdvancedOptions'
+import { AggregateOptions } from './AggregateOptions'
+import { TransformOptions } from './TransformOptions'
 
 export const DownloadAdvancedOptions = () => {
+  const router = useRouter()
+  const { datasetId } = useDataset()
   const { setResponsive } = useResponsive()
   const [toggle, setToggle] = useState(false)
-  const { datasetId } = useDataset()
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    router.push('/download/?start=true')
+  }
 
   return (
-    <Box>
+    <Form onSubmit={handleSubmit}>
       <Row>
         <Heading
           level={2}
@@ -30,8 +36,8 @@ export const DownloadAdvancedOptions = () => {
       <Row direction={setResponsive('column', 'column', 'row')}>
         <Box>
           <Row align="center" justify="start">
-            <AggregateDropDown />
-            <TransformDropDown />
+            <AggregateOptions />
+            <TransformOptions />
             <Box
               margin={{
                 top: setResponsive('xsmall', 'none'),
@@ -41,16 +47,17 @@ export const DownloadAdvancedOptions = () => {
               <AdvancedOptionsButton toggle={toggle} setToggle={setToggle} />
             </Box>
           </Row>
-          <AdvancedOptionsBlock datasetId={datasetId} toggle={toggle} />
+          <AdvancedOptions datasetId={datasetId} toggle={toggle} />
         </Box>
         <Button
           label="Download"
           primary
           responsive
           margin={{ top: setResponsive('medium', 'medium', 'none') }}
+          type="submit"
         />
       </Row>
-    </Box>
+    </Form>
   )
 }
 

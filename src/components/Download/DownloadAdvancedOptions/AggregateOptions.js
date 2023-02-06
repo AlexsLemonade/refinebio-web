@@ -5,10 +5,9 @@ import { Anchor } from 'components/shared/Anchor'
 import { Icon } from 'components/shared/Icon'
 import { links } from 'config'
 
-export const AggregateDropDown = () => {
+export const AggregateOptions = () => {
   const { setResponsive } = useResponsive()
   const aggirateOptions = ['Experiment', 'Species']
-
   const [optionAggregate, setOptionAggregate] = useState(aggirateOptions[0])
 
   return (
@@ -34,7 +33,7 @@ export const AggregateDropDown = () => {
           top: setResponsive('xsmall', 'none'),
           left: setResponsive('none', 'xsmall')
         }}
-        width="130px"
+        width="140px"
       >
         <Select
           options={aggirateOptions}
@@ -46,4 +45,4 @@ export const AggregateDropDown = () => {
   )
 }
 
-export default AggregateDropDown
+export default AggregateOptions

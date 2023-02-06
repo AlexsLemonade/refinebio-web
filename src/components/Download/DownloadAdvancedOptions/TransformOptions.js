@@ -5,7 +5,7 @@ import { Anchor } from 'components/shared/Anchor'
 import { Icon } from 'components/shared/Icon'
 import { links } from 'config'
 
-export const TransformDropDown = () => {
+export const TransformOptions = () => {
   const { setResponsive } = useResponsive()
   const transformOptions = ['None', 'Zero to One', 'Z-score']
   const [optionTransformation, setOptionTransformation] = useState(
@@ -49,4 +49,4 @@ export const TransformDropDown = () => {
   )
 }
 
-export default TransformDropDown
+export default TransformOptions

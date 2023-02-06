@@ -2,40 +2,24 @@ import { useState } from 'react'
 import { Box, CheckBox, Heading } from 'grommet'
 import { Alert } from 'components/shared/Alert'
 import { Anchor } from 'components/shared/Anchor'
+import { ExpandableBlock } from 'components/shared/ExpandableBlock'
 import { Icon } from 'components/shared/Icon'
 import { links } from 'config'
 
-export const AdvancedOptionsBlock = ({ datasetId, toggle }) => {
+export const AdvancedOptions = ({ datasetId, toggle }) => {
   const [skip, setSkip] = useState(false)
 
   return (
-    <Box
-      margin={{ top: 'small' }}
-      height="auto"
-      style={{
-        overflow: 'hidden',
-        maxHeight: toggle ? '200px' : '0',
-        transition: 'max-height .5s ease-in-out'
-      }}
-    >
+    <ExpandableBlock expand={toggle} height="auto" margin={{ top: 'small' }}>
       <Heading level={5} weight="500" margin={{ bottom: 'xsmall' }}>
         Advanced Options
       </Heading>
-
-      <Box
-        margin={{ bottom: 'xsmall' }}
-        style={{
-          overflow: 'hidden',
-          maxHeight: skip ? '200px' : '0',
-          transition: 'max-height .5s ease-in-out'
-        }}
-      >
+      <ExpandableBlock expand={skip} margin={{ bottom: 'xsmall' }} opacity=".5">
         <Alert
           message="Skipping quantile normalization will make your dataset less comparable to other refine.bio data."
           dismissableKey={`skip_quantile_normalization_${datasetId}`}
         />
-      </Box>
-
+      </ExpandableBlock>
       <Box direction="row">
         <CheckBox
           label="Skip quantile normalization for RNA-seq samples"
@@ -51,8 +35,8 @@ export const AdvancedOptionsBlock = ({ datasetId, toggle }) => {
           <Icon name="Help" size="small" />
         </Anchor>
       </Box>
-    </Box>
+    </ExpandableBlock>
   )
 }
 
-export default AdvancedOptionsBlock
+export default AdvancedOptions
