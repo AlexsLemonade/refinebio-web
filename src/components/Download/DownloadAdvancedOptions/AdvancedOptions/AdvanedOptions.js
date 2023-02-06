@@ -10,8 +10,12 @@ export const AdvancedOptions = ({ datasetId, toggle }) => {
   const [skip, setSkip] = useState(false)
 
   return (
-    <ExpandableBlock expand={toggle} height="auto" margin={{ top: 'small' }}>
-      <Heading level={5} weight="500" margin={{ bottom: 'xsmall' }}>
+    <ExpandableBlock
+      expand={toggle}
+      height="auto"
+      margin={{ vertical: 'small' }}
+    >
+      <Heading level={5} weight="500">
         Advanced Options
       </Heading>
       <ExpandableBlock expand={skip} margin={{ bottom: 'xsmall' }} opacity=".5">
