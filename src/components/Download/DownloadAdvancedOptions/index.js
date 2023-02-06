@@ -27,7 +27,7 @@ export const DownloadAdvancedOptions = () => {
         <Row>
           <Heading
             level={2}
-            margin={{ bottom: 'large' }}
+            margin={{ bottom: setResponsive('none', 'none', 'large') }}
             size={setResponsive('h2_small', 'h2_large')}
           >
             My Dataset
@@ -54,7 +54,9 @@ export const DownloadAdvancedOptions = () => {
             label="Download"
             primary
             responsive
-            margin={{ top: setResponsive('medium', 'medium', 'none') }}
+            margin={{
+              bottom: setResponsive('small', 'small', 'none')
+            }}
             type="submit"
           />
         </Row>

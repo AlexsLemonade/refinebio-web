@@ -28,7 +28,11 @@ export const Download = () => {
         ) : router.query.start ? (
           <DownloadStartProcessing />
         ) : (
-          <Box pad={{ top: 'basex14' }}>
+          <Box
+            pad={{
+              top: 'basex14'
+            }}
+          >
             <DownloadEmpty />
           </Box>
         )}
