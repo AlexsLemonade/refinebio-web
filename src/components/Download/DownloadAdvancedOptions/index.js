@@ -22,42 +22,44 @@ export const DownloadAdvancedOptions = () => {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Row>
-        <Heading
-          level={2}
-          margin={{ bottom: 'small' }}
-          size={setResponsive('h2_small', 'h2_large')}
-        >
-          My Dataset
-        </Heading>
-        <ShareDatasetButton />
-      </Row>
-      <Row direction={setResponsive('column', 'column', 'row')}>
-        <Box>
-          <Row align={setResponsive('start', 'center')} justify="start">
-            <AggregateOptions />
-            <TransformOptions />
-            <Box
-              margin={{
-                top: setResponsive('xsmall', 'none'),
-                left: setResponsive('none', 'xsmall')
-              }}
-            >
-              <AdvancedOptionsButton toggle={toggle} setToggle={setToggle} />
-            </Box>
-          </Row>
-          <AdvancedOptions datasetId={datasetId} toggle={toggle} />
-        </Box>
-        <Button
-          label="Download"
-          primary
-          responsive
-          margin={{ top: setResponsive('medium', 'medium', 'none') }}
-          type="submit"
-        />
-      </Row>
-    </Form>
+    <Box border={{ side: 'bottom' }}>
+      <Form onSubmit={handleSubmit}>
+        <Row>
+          <Heading
+            level={2}
+            margin={{ bottom: 'large' }}
+            size={setResponsive('h2_small', 'h2_large')}
+          >
+            My Dataset
+          </Heading>
+          <ShareDatasetButton />
+        </Row>
+        <Row direction={setResponsive('column', 'column', 'row')}>
+          <Box>
+            <Row align={setResponsive('start', 'center')} justify="start">
+              <AggregateOptions />
+              <TransformOptions />
+              <Box
+                margin={{
+                  top: setResponsive('xsmall', 'none'),
+                  left: setResponsive('none', 'xsmall')
+                }}
+              >
+                <AdvancedOptionsButton toggle={toggle} setToggle={setToggle} />
+              </Box>
+            </Row>
+            <AdvancedOptions datasetId={datasetId} toggle={toggle} />
+          </Box>
+          <Button
+            label="Download"
+            primary
+            responsive
+            margin={{ top: setResponsive('medium', 'medium', 'none') }}
+            type="submit"
+          />
+        </Row>
+      </Form>
+    </Box>
   )
 }
 
