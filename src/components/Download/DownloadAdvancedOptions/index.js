@@ -35,7 +35,7 @@ export const DownloadAdvancedOptions = () => {
       </Row>
       <Row direction={setResponsive('column', 'column', 'row')}>
         <Box>
-          <Row align="center" justify="start">
+          <Row align={setResponsive('start', 'center')} justify="start">
             <AggregateOptions />
             <TransformOptions />
             <Box

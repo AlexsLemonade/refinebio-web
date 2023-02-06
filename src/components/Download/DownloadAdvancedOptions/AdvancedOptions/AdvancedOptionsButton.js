@@ -1,3 +1,4 @@
+import { useResponsive } from 'hooks/useResponsive'
 import { Box, Text } from 'grommet'
 import { Button as SharedButton } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
@@ -16,8 +17,13 @@ const Button = styled(SharedButton)`
 `
 
 export const AdvancedOptionsButton = ({ toggle, setToggle }) => {
+  const { setResponsive } = useResponsive()
+
   return (
-    <Box onClick={() => setToggle(!toggle)}>
+    <Box
+      margin={{ top: setResponsive('small', 'none') }}
+      onClick={() => setToggle(!toggle)}
+    >
       <Box align="center" direction="row">
         <Button
           aria-controls="nav-menu"
@@ -26,7 +32,10 @@ export const AdvancedOptionsButton = ({ toggle, setToggle }) => {
           color="brand"
           gap="none"
           label="Advanced Options"
-          margin={{ left: '24px', right: '8px' }}
+          margin={{
+            left: setResponsive('none', 'medium'),
+            right: 'xsmall'
+          }}
           style={{ padding: '0' }}
         />
         <Text color="brand">
