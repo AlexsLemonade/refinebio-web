@@ -3,6 +3,7 @@ import { Box, CheckBox, Heading, Text } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
 import { SearchBox } from 'components/shared/SearchBox'
 import { formatString } from 'helpers/formatString'
+import { isLastIndex } from 'helpers/isLastIndex'
 import { scrollToId } from 'helpers/scrollToId'
 import styled, { css } from 'styled-components'
 
@@ -65,7 +66,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
         {getOptionsToRender().map((option, i, arr) => (
           <Box
             key={option[0]}
-            margin={{ bottom: i !== arr.length - 1 ? 'xsmall' : '0' }}
+            margin={{ bottom: isLastIndex(arr, i) ? 'xsmall' : '0' }}
           >
             <CheckBox
               label={`${formatString(
