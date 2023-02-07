@@ -1,6 +1,7 @@
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import { Link } from 'components/shared/Link'
 import { formatString } from 'helpers/formatString'
+import { getURLForAccessionCode } from 'helpers/getURLForAccessionCode'
 
 export const SearchCardBody = ({
   alternateAccessionCode = '',
@@ -39,7 +40,12 @@ export const SearchCardBody = ({
           Alternate Accession IDs
         </Heading>
         {alternateAccessionCode ? (
-          <Link href={SearchCardBody.url} label={alternateAccessionCode} />
+          <Link
+            href={getURLForAccessionCode(alternateAccessionCode)}
+            label={alternateAccessionCode}
+            rel="noopener noreferrer"
+            target="_blank"
+          />
         ) : (
           <Text color="gray-shade-40">
             <i>None</i>
