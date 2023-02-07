@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { getHumanReadable } from 'helpers/getHumanReadable'
 import { Box, CheckBox, Select, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
@@ -5,17 +6,24 @@ import { Row } from 'components/shared/Row'
 
 export const SearchBulkActions = ({ results }) => {
   const pageSizes = [10, 20, 50]
+  // the sort by option values for API and client (human-redable text)
+  const sortByOptionValues = {
+    _score: 'Best Match',
+    '-num_downloadable_samples': 'Most No. of samples',
+    num_downloadable_samples: 'Least No. of samples',
+    '-source_first_published': 'Newest Experiment',
+    source_first_published: 'Oldest Experiment'
+  }
 
-  // the order vlaues for API
-  const orders = [
-    '_score',
-    '-num_downloadable_samples',
-    'num_downloadable_samples',
-    '-source_first_published',
-    'source_first_published'
-  ]
+  const sortByOptions = Object.keys(sortByOptionValues).map((order) =>
+    getHumanReadable(order, sortByOptionValues)
+  )
 
-  const sortByOptions = orders.map((order) => getHumanReadable(order))
+  // NOTE: when calling API, use helpers/getAPIReadable to get the API value
+  // e.g.) getAPIReadable(selectedSortByOption, sortByOptionValues)
+  const [selectedSortByOption, setSelectedSortByOption] = useState(
+    sortByOptions[0]
+  )
 
   const { count: totalResults } = results
 
@@ -37,9 +45,10 @@ export const SearchBulkActions = ({ results }) => {
           Sort by
           <Box width="208px">
             <Select
-              defaultValue={sortByOptions[0]}
               options={sortByOptions}
+              value={selectedSortByOption}
               margin={{ horizontal: 'xxsmall' }}
+              onChange={({ option }) => setSelectedSortByOption(option)}
             />
           </Box>
         </Row>
