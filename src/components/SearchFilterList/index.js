@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { isLastIndex } from 'helpers/isLastIndex'
 import { Box, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { SearchFilter } from './SearchFilter'
@@ -32,7 +33,7 @@ export const SearchFilterList = ({ facets = {} }) => {
         <Box
           key={f.type}
           border={
-            i !== arr.length - 1
+            isLastIndex(arr, i)
               ? {
                   color: 'gray-shade-40',
                   side: 'bottom'
