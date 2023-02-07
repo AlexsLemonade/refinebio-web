@@ -27,7 +27,7 @@ export const DownloadAdvancedOptions = () => {
         <Row>
           <Heading
             level={2}
-            margin={{ bottom: setResponsive('none', 'none', 'large') }}
+            margin={{ bottom: setResponsive('small', 'large') }}
             size={setResponsive('h2_small', 'h2_large')}
           >
             My Dataset
