@@ -1,16 +1,22 @@
+import { getHumanReadable } from 'helpers/getHumanReadable'
 import { Box, CheckBox, Select, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Row } from 'components/shared/Row'
 
 export const SearchBulkActions = ({ results }) => {
   const pageSizes = [10, 20, 50]
-  const sortByOptions = [
-    'Best Match',
-    'Most No. of samples',
-    'Least No. of samples',
-    'Newest Experiment',
-    'Oldest Experiment'
+
+  // the order vlaues for API
+  const orders = [
+    '_score',
+    '-num_downloadable_samples',
+    'num_downloadable_samples',
+    '-source_first_published',
+    'source_first_published'
   ]
+
+  const sortByOptions = orders.map((order) => getHumanReadable(order))
+
   const { count: totalResults } = results
 
   return (
