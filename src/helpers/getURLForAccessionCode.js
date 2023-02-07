@@ -1,5 +1,6 @@
 // Returns the external accession code URL based on a given accession code
 export function getURLForAccessionCode(accessionCode) {
+  if (!accessionCode) return ''
   let mainUrl = ''
   if (accessionCode.startsWith('GSE')) {
     mainUrl = 'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc='
