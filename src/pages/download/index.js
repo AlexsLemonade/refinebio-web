@@ -7,7 +7,8 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import {
   DownloadEmpty,
   DownloadAdvancedOptions,
-  DownloadStartProcessing
+  DownloadStartProcessing,
+  DownloadFileSummary
 } from 'components/Download'
 
 export const Download = () => {
@@ -24,7 +25,10 @@ export const Download = () => {
       <Box pad={{ top: 'basex7', bottom: 'large' }}>
         {/* eslint-disable-next-line no-nested-ternary */}
         {isDownloadable && !router.query.start ? (
-          <DownloadAdvancedOptions />
+          <>
+            <DownloadAdvancedOptions />
+            <DownloadFileSummary />
+          </>
         ) : router.query.start ? (
           <DownloadStartProcessing />
         ) : (
