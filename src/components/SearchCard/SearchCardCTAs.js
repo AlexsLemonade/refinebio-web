@@ -34,8 +34,8 @@ export const SearchCardCTAs = ({
 
   useEffect(() => {
     setDownloadableDataset({
-      isDownloadable: isDownloadableDataset(dataset),
-      accessionCode: dataset ? Object.keys(dataset)[0] : ''
+      isDownloadable: isDownloadableDataset(dataset?.data),
+      accessionCode: dataset ? Object.keys(dataset?.data)[0] : ''
     })
   }, [dataset])
 
