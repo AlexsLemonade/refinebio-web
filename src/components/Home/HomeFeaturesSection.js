@@ -57,14 +57,12 @@ export const HomeFeaturesSection = () => {
                 href={links.standard_pipeline}
                 label="standardized pipelines"
                 rel="noopener noreferrer"
-                target="_blank"
               />{' '}
               curated by the{' '}
               <Anchor
                 href={links.ccdl}
                 label="Childhood Cancer Data Lab (CCDL)"
                 rel="noopener noreferrer"
-                target="_blank"
               />
             </>
           }
