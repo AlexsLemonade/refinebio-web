@@ -16,16 +16,16 @@ import { NavLink } from './NavLink'
 import { NavIcon } from './NavIcon'
 
 export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
-  // TEMPORARY
-  const { dataset } = useDataset()
-  const [totalSamples, setTotalSamples] = useState()
-  useEffect(() => {
-    setTotalSamples(getTotalSamples(dataset))
-  }, [dataset])
-
   const router = useRouter()
   const { asPath, pathname } = router
   const { viewport, setResponsive } = useResponsive()
+  // TEMPORARY
+  const { dataset } = useDataset()
+  const [totalSamples, setTotalSamples] = useState()
+
+  useEffect(() => {
+    setTotalSamples(getTotalSamples(dataset?.data))
+  }, [dataset])
 
   const buttonWidth = '80vw' // TEMP until creatre a custom budged button component
 

@@ -47,7 +47,7 @@ export const DatasetContextProvider = ({ children }) => {
     // e.g., (v1/dataset/${datasetId}, params, headers)
     const response = mock[0].getDatasetResonse
 
-    setDataset(response.data)
+    setDataset(response)
 
     return response
   }
@@ -77,7 +77,7 @@ export const DatasetContextProvider = ({ children }) => {
     // e.g., (v1/dataset/${datasetId}, body)
     const response = mock[0].updateDatasetResponse
 
-    setDataset(response.data)
+    setDataset(response)
 
     return result
   }
