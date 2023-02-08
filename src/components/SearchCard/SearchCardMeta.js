@@ -4,7 +4,7 @@ import { Box, Text } from 'grommet'
 import { IconBadge } from 'components/shared/IconBadge'
 
 export const SearchCardMeta = ({
-  metaData: { downloadableSamples, organismNames, platformNames, technology }
+  metadata: { downloadableSamples, organismNames, platformNames, technology }
 }) => {
   return (
     <Box

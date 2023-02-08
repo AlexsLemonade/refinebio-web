@@ -25,7 +25,7 @@ export const SearchCard = ({ result = {} }) => {
         title={formatString(result.title)}
       />
       <SearchCardMeta
-        metaData={{
+        metadata={{
           downloadableSamples: result.num_downloadable_samples,
           organismNames: result.organism_names,
           platformNames: result.platform_names,
