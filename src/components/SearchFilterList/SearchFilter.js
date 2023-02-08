@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { useState, useMemo } from 'react'
 import { Box, CheckBox, Heading, Text } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
@@ -86,7 +87,6 @@ export const SearchFilter = ({ filterGroup, label }) => {
       {filterLength > maxCount && (
         <ToggleButton
           label={
-            // eslint-disable-next-line no-nested-ternary
             open && !userInput.trim()
               ? '- see less'
               : !open && !userInput.trim()
