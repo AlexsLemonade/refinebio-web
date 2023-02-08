@@ -55,7 +55,7 @@ export const DownloadFileSummary = () => {
         margin={{ bottom: 'small' }}
         size={setResponsive('h2_xsmall', 'h2_small')}
       >
-        File Summary
+        Download Files Summary
       </Heading>
       <Row
         direction={setResponsive('column', 'column', 'row')}
