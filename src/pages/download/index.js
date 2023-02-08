@@ -8,7 +8,7 @@ import {
   DownloadEmpty,
   DownloadAdvancedOptions,
   DownloadStartProcessing,
-  DownloadFileSummary
+  DownloadFilesSummary
 } from 'components/Download'
 
 export const Download = () => {
@@ -27,7 +27,7 @@ export const Download = () => {
         {isDownloadable && !router.query.start ? (
           <>
             <DownloadAdvancedOptions />
-            <DownloadFileSummary />
+            <DownloadFilesSummary />
           </>
         ) : router.query.start ? (
           <DownloadStartProcessing />

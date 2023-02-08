@@ -36,7 +36,7 @@ const Card = ({ description, format, index, title, ...props }) => {
   )
 }
 
-export const DownloadFileSummary = () => {
+export const DownloadFilesSummary = () => {
   const { dataset } = useDataset()
   const { setResponsive } = useResponsive()
 
@@ -96,4 +96,4 @@ export const DownloadFileSummary = () => {
   )
 }
 
-export default DownloadFileSummary
+export default DownloadFilesSummary
