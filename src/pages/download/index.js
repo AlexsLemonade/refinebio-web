@@ -27,7 +27,7 @@ export const Download = () => {
         {isDownloadable && !router.query.start ? (
           <>
             <DownloadAdvancedOptions />
-            <DownloadFilesSummary />
+            <DownloadFilesSummary dataset={dataset} />
           </>
         ) : router.query.start ? (
           <DownloadStartProcessing />

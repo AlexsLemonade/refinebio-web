@@ -1,4 +1,3 @@
-import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Text } from 'grommet'
 import { downloadFilesData } from 'helpers/dataset'
@@ -36,8 +35,7 @@ const Card = ({ description, format, index, title, ...props }) => {
   )
 }
 
-export const DownloadFilesSummary = () => {
-  const { dataset } = useDataset()
+export const DownloadFilesSummary = ({ dataset }) => {
   const { setResponsive } = useResponsive()
 
   const samplesBySpecies = dataset.organism_samples
