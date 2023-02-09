@@ -9,10 +9,11 @@ const CustomTabs = styled(GrommetTabs)`
     text &&
     css`
       div {
+        border: none;
         button {
+          border: none;
           > div {
             background: none;
-            border: none;
           }
           span {
             display: block;
