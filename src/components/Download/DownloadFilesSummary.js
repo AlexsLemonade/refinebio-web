@@ -7,7 +7,7 @@ import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
 
-const Card = ({ description, format, index, title, ...props }) => {
+const Card = ({ description, format, index, title }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -21,8 +21,6 @@ const Card = ({ description, format, index, title, ...props }) => {
         left: index ? setResponsive('none', 'none', 'large') : 'none',
         bottom: setResponsive('large', 'large', 'none')
       }}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
     >
       <Heading level={4} margin={{ bottom: 'small' }} size="h4_xsmall">
         {title}
@@ -37,9 +35,7 @@ const Card = ({ description, format, index, title, ...props }) => {
 
 export const DownloadFilesSummary = ({ dataset }) => {
   const { setResponsive } = useResponsive()
-
   const samplesBySpecies = dataset.organism_samples
-
   const fileSummaries = downloadFilesData(
     dataset.data,
     samplesBySpecies,
