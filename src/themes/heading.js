@@ -10,6 +10,10 @@ export default {
         size: '26px', // 1.625rem
         height: 1.2 // (approx)31px
       },
+      h1_xsmall: {
+        size: '22px', // 2rem
+        height: 1.1875 // 38px
+      },
       h1_small: {
         size: '26px', // 2rem
         height: 1.1875 // 38px

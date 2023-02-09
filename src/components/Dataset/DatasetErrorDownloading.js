@@ -10,19 +10,18 @@ export const DatasetErrorDownloading = ({ dataset }) => {
 
   return (
     <Box align="center">
-      <Row justify="center" width={setResponsive('100%', '70%')}>
+      <Row justify="center" width={setResponsive('100%', '60%')}>
         <Column
           align={setResponsive('center', 'start')}
           flexValue={setResponsive('1 1 auto', 'auto')}
         >
           <Heading
-            level={2}
+            level={1}
             margin={{ bottom: 'small' }}
-            size={setResponsive('h2_small', 'h2_large')}
+            size={setResponsive('h1_xsmall', 'h1_small')}
           >
             Uh-oh something went wrong!
           </Heading>
-          <Paragraph>Please try downloading again.</Paragraph>
           <Paragraph>
             If the problem persists, please contact{' '}
             <Anchor
