@@ -4,13 +4,24 @@ import { Box, Select, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Icon } from 'components/shared/Icon'
 import { links } from 'config'
+import { getHumanReadable } from 'helpers/getHumanReadable'
 
-export const TransformOptions = () => {
+export const TransformationOptions = () => {
   const { setResponsive } = useResponsive()
-  const transformOptions = ['None', 'Zero to One', 'Z-score']
-  const [optionTransformation, setOptionTransformation] = useState(
-    transformOptions[0]
+  const transformationOptionValues = {
+    NONE: 'None',
+    MINMAX: 'Zero to One',
+    STANDARD: 'Z-score'
+  }
+  const transformationOptions = Object.keys(transformationOptionValues).map(
+    (option) => getHumanReadable(option, transformationOptionValues)
   )
+  const [selectedTransformation, setSelectedTransformation] = useState(
+    transformationOptions[0]
+  )
+
+  // NOTE: when calling API, use helpers/getAPIReadable to get the API value
+  // e.g.) getAPIReadable(selectedTransformation, transformationOptionValues)
 
   return (
     <>
@@ -24,7 +35,7 @@ export const TransformOptions = () => {
           Transformation{' '}
           <Anchor
             href={links.refinebio_docs_transformation}
-            title="What does transfirmation mean?"
+            title="What does transformation mean?"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -40,13 +51,13 @@ export const TransformOptions = () => {
         width="150px"
       >
         <Select
-          options={transformOptions}
-          value={optionTransformation}
-          onChange={({ option }) => setOptionTransformation(option)}
+          options={transformationOptions}
+          value={selectedTransformation}
+          onChange={({ option }) => setSelectedTransformation(option)}
         />
       </Box>
     </>
   )
 }
 
-export default TransformOptions
+export default TransformationOptions

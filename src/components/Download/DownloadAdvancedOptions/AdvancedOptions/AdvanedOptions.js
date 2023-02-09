@@ -18,7 +18,11 @@ export const AdvancedOptions = ({ datasetId, toggle }) => {
       <Heading level={5} weight="500">
         Advanced Options
       </Heading>
-      <ExpandableBlock expand={skip} margin={{ bottom: 'xsmall' }} opacity=".5">
+      <ExpandableBlock
+        expand={skip}
+        margin={{ bottom: 'xsmall' }}
+        opacity={0.5}
+      >
         <Alert
           message="Skipping quantile normalization will make your dataset less comparable to other refine.bio data."
           dismissableKey={`skip_quantile_normalization_${datasetId}`}

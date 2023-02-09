@@ -9,7 +9,7 @@ const Button = styled(SharedButton)`
     css`
       &:hover,
       &:focus {
-        border: 1px solod ${theme.global.colors.brand};
+        border: 1px solid ${theme.global.colors.brand};
         box-shadow: none;
         outline: none;
       }

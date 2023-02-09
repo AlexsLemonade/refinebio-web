@@ -8,7 +8,7 @@ import { Row } from 'components/shared/Row'
 import { ShareDatasetButton } from 'components/Dataset'
 import { AdvancedOptions, AdvancedOptionsButton } from './AdvancedOptions'
 import { AggregateOptions } from './AggregateOptions'
-import { TransformOptions } from './TransformOptions'
+import { TransformationOptions } from './TransformationOptions'
 
 export const DownloadAdvancedOptions = () => {
   const router = useRouter()
@@ -38,7 +38,7 @@ export const DownloadAdvancedOptions = () => {
           <Box>
             <Row align={setResponsive('start', 'center')} justify="start">
               <AggregateOptions />
-              <TransformOptions />
+              <TransformationOptions />
               <Box
                 margin={{
                   top: setResponsive('xsmall', 'none'),
