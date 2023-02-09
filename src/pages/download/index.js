@@ -5,6 +5,7 @@ import { isDownloadableDataset } from 'helpers/dataset'
 import { Box } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import {
+  DownloadDatasetSummary,
   DownloadEmpty,
   DownloadAdvancedOptions,
   DownloadStartProcessing,
@@ -28,6 +29,7 @@ export const Download = () => {
           <>
             <DownloadAdvancedOptions />
             <DownloadFilesSummary dataset={dataset} />
+            <DownloadDatasetSummary dataset={dataset} />
           </>
         ) : router.query.start ? (
           <DownloadStartProcessing />
