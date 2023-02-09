@@ -3,6 +3,7 @@
 import { createContext, useMemo } from 'react'
 import { useRefinebio } from 'hooks/useRefinebio'
 import { useLocalStorage } from 'hooks/useLocalStorage'
+import { formatExperiments } from 'helpers/dataset'
 import { unionizeArrays } from 'helpers/unionizeArrays'
 import mock from 'api/mockDataDataset'
 
@@ -32,7 +33,6 @@ export const DatasetContextProvider = ({ children }) => {
 
   // fetches the dataset with the specified dataset ID
   // the query 'details' https://github.com/AlexsLemonade/refinebio-frontend/pull/485
-  // eslint-disable-next-line no-unused-vars
   const getDataset = (details = true) => {
     // TEMPORARY details set to true for mockData
     if (!datasetId) {
@@ -50,7 +50,11 @@ export const DatasetContextProvider = ({ children }) => {
     // e.g., (v1/dataset/${datasetId}, params, headers)
     const response = mock[0].getDatasetResonse
 
-    setDataset(response)
+    setDataset(
+      details
+        ? { ...response, experiments: formatExperiments(response.experiments) }
+        : response
+    )
 
     return response
   }

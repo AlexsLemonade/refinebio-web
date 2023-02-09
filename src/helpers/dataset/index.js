@@ -1,10 +1,50 @@
+import { unionizeArrays } from 'helpers/unionizeArrays'
+
 // Checks if there is any downladable dataset added in My Dataset
 export const isDownloadableDataset = (dataset) =>
   dataset ? Object.keys(dataset).length > 0 : false
 
+// Converts the sample and experiment arrays from the API response
+// to objects with experiment accession codes as their keys
+export const formatExperiments = (experiments) => {
+  return experiments.reduce(
+    (acc, experiment) => ({
+      ...acc,
+      [experiment.accession_code]: experiment
+    }),
+    {}
+  )
+}
+
+// Returns the count of expriment by spcecies
+export const getExperimentCountBySpecies = (dataset, experiments) => {
+  if (!dataset || !experiments) return {}
+
+  const species = {}
+
+  for (const accessionCode of Object.keys(dataset)) {
+    const experimentInfo = experiments[accessionCode]
+
+    if (!experimentInfo) return {}
+
+    const { organism_names: organismNames } = experimentInfo
+
+    for (const organism of organismNames) {
+      if (!species[organism]) species[organism] = 0
+      species[organism] += 1
+    }
+  }
+
+  return species
+}
+
+// Returns the total length of experiments added in My Dataset
+export const getTotalExperiments = (dataset) =>
+  dataset ? Object.keys(dataset).length : 0
+
 // Returns the total length of samples added in My Dataset
 export const getTotalSamples = (dataset) =>
-  dataset ? Object.values(dataset)[0].length : 0
+  dataset ? unionizeArrays(Object.values(dataset)[0]).length : 0
 
 // Returns the file size estimates of given dataset and its aggregate_by value (either 'EXPERIMENT' or 'SPECIES')
 // (for Download/DownloadFileSummary)
