@@ -1,4 +1,5 @@
 export { DownloadDatasetSummary } from './DownloadDatasetSummary'
+export { DownloadDatasetDetails } from './DownloadDatasetDetails'
 export { DownloadEmpty } from './DownloadEmpty'
 export { DownloadFilesSummary } from './DownloadFilesSummary'
 export { DownloadStartProcessing } from './DownloadStartProcessing'
