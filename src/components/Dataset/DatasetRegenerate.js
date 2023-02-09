@@ -18,9 +18,9 @@ export const DatasetRegenerate = () => {
           flexValue={setResponsive('1 1 auto', 'auto')}
         >
           <Heading
-            level={2}
+            level={1}
             margin={{ bottom: 'small' }}
-            size={setResponsive('h2_small', 'h2_large')}
+            size={setResponsive('h1_xsmall', 'h1_small')}
           >
             Download Expired!
           </Heading>
@@ -34,11 +34,7 @@ export const DatasetRegenerate = () => {
             width={setResponsive('100%', 'auto')}
           >
             <Button label="Regenerate Files" primary responsive />
-            <Box
-              direction={setResponsive('column', 'column', 'row')}
-              justify="start"
-              margin={{ top: 'small' }}
-            >
+            <Box margin={{ top: 'small' }}>
               <InlineMessage
                 color="info"
                 fontSize="medium"
@@ -46,14 +42,18 @@ export const DatasetRegenerate = () => {
                   right: 'xsmall',
                   bottom: setResponsive('xsmall', 'xsmall', 'none')
                 }}
-                label="Some expression values may differ."
+                label={
+                  <>
+                    Some expression values may differ.{' '}
+                    <Anchor
+                      href={links.refinebio_docs_why_expression_values_differ}
+                      label="Learn Why"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    />
+                  </>
+                }
                 name="Info"
-              />
-              <Anchor
-                href={links.refinebio_docs_why_expression_values_differ}
-                label="Learn Why"
-                rel="noopener noreferrer"
-                target="_blank"
               />
             </Box>
           </Box>
