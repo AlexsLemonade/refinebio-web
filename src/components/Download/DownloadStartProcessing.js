@@ -1,5 +1,5 @@
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, Heading, Paragraph } from 'grommet'
+import { Box, Heading } from 'grommet'
 import { DownloadEmailForm } from './DownloadEmailForm'
 
 // path: /download?start=true
@@ -13,18 +13,18 @@ export const DownloadStartProcessing = () => {
   return (
     <Box align="center" alignSelf="center" width="640px">
       <Heading
-        level={2}
+        level={1}
         margin={{ bottom: 'small' }}
-        size={setResponsive('h2_small', 'h2_large')}
+        size={setResponsive('h1_xsmall', 'h1_small')}
       >
         We&#39;re putting your download files together. It usually takes 15- 20
         minutes.
       </Heading>
-      <Paragraph>
+      <Heading level={2} size={setResponsive('h2_xsmall', 'h2_small')}>
         Enter your email and we will email you when the files are ready for
         download.
-      </Paragraph>
-      <Box margin={{ top: 'medium' }}>
+      </Heading>
+      <Box margin={{ top: 'medium' }} alignSelf="start">
         <DownloadEmailForm submitHandler={handleSubmitEmailForm} />
       </Box>
       <Box
