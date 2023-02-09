@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
+import { getHumanReadable } from 'helpers/getHumanReadable'
 import { Box, Select, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Icon } from 'components/shared/Icon'
@@ -7,8 +8,17 @@ import { links } from 'config'
 
 export const AggregateOptions = () => {
   const { setResponsive } = useResponsive()
-  const aggirateOptions = ['Experiment', 'Species']
-  const [optionAggregate, setOptionAggregate] = useState(aggirateOptions[0])
+  const aggretateOptionValues = {
+    EXPERIMENT: 'Experiment',
+    SPECIES: 'Species'
+  }
+  const aggirateOptions = Object.keys(aggretateOptionValues).map((option) =>
+    getHumanReadable(option, aggretateOptionValues)
+  )
+  const [selectedAggregate, setSelectedAggregate] = useState(aggirateOptions[0])
+
+  // NOTE: when calling API, use helpers/getAPIReadable to get the API value
+  // e.g.) getAPIReadable(selectedSortByOption, aggretateOptionValues)
 
   return (
     <>
@@ -37,8 +47,8 @@ export const AggregateOptions = () => {
       >
         <Select
           options={aggirateOptions}
-          value={optionAggregate}
-          onChange={({ option }) => setOptionAggregate(option)}
+          value={selectedAggregate}
+          onChange={({ option }) => setSelectedAggregate(option)}
         />
       </Box>
     </>
