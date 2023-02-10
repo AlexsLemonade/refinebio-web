@@ -34,6 +34,7 @@ export const DatasetContextProvider = ({ children }) => {
   // fetches the dataset with the specified dataset ID
   // the query 'details' https://github.com/AlexsLemonade/refinebio-frontend/pull/485
   const getDataset = (details = true) => {
+    if (!dataset) return null // TEMPORARY
     // TEMPORARY details set to true for mockData
     if (!datasetId) {
       createDataset()
