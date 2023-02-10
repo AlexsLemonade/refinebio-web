@@ -34,6 +34,7 @@ export const DatasetContextProvider = ({ children }) => {
   // the query 'details' https://github.com/AlexsLemonade/refinebio-frontend/pull/485
   // eslint-disable-next-line no-unused-vars
   const getDataset = (details = true) => {
+    if (!dataset) return null // TEMPORARY
     // TEMPORARY details set to true for mockData
     if (!datasetId) {
       createDataset()
