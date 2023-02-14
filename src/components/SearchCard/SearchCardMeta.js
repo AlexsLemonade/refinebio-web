@@ -1,4 +1,5 @@
 import { useResponsive } from 'hooks/useResponsive'
+import { formatNumbers } from 'helpers/formatNumbers'
 import { formatString } from 'helpers/formatString'
 import { formatPlatformName } from 'helpers/formatPlatformName'
 import { Box } from 'grommet'
@@ -43,7 +44,7 @@ export const SearchCardMeta = ({
       </Box>
       <Box flex="grow">
         <IconBadge
-          label={`${downloadableSamples.toLocaleString()} Downloadable Samples`}
+          label={`${formatNumbers(downloadableSamples)} Downloadable Samples`}
           name="Samples"
         />
       </Box>

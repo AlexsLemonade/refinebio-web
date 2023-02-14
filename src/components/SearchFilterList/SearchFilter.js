@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
+import { formatNumbers } from 'helpers/formatNumbers'
 import { formatString } from 'helpers/formatString'
 import { scrollToId } from 'helpers/scrollToId'
 import { Box, CheckBox, Heading } from 'grommet'
@@ -76,9 +77,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
             margin={{ bottom: i !== arr.length - 1 ? 'xsmall' : '0' }}
           >
             <CheckBox
-              label={`${formatString(
-                option[0]
-              )} (${option[1].toLocaleString()})`}
+              label={`${formatString(option[0])} (${formatNumbers(option[1])})`}
             />
           </Box>
         ))}
