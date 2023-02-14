@@ -31,7 +31,6 @@ const CustomTabs = styled(GrommetTabs)`
             span {
               border-bottom-color: ${theme.global.colors.brand};
               border-bottom-width: 3px;
-              font-weight: bold;
             }
           }
         }

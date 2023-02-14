@@ -65,7 +65,8 @@ export const SearchCardCTAs = ({
 
       {/* state: added  */}
       {(status === 'added' ||
-        downloadableDataset.accessionCode === accessionCode) && (
+        (downloadableDataset.isDownloadable &&
+          downloadableDataset.accessionCode === accessionCode)) && (
         <>
           <Box direction="row">
             <InlineMessage label="Added to Dataset" color="success" />

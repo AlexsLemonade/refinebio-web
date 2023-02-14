@@ -10,6 +10,12 @@ export default {
       > div {
         border-radius: 0;
       }
+      &[aria-selected="true"] {
+        span  {
+          font-weight: bold;
+          color: ${theme.global.colors.brand};
+        }
+      }
     }
     `
   }

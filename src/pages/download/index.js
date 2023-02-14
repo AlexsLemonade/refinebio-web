@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { useEffect, useState, memo } from 'react'
 import { useRouter } from 'next/router'
 import { useDataset } from 'hooks/useDataset'
@@ -19,13 +20,12 @@ export const Download = () => {
   const [isDownloadable, setIsDownloadable] = useState()
 
   useEffect(() => {
-    setIsDownloadable(isDownloadableDataset(dataset))
+    setIsDownloadable(isDownloadableDataset(dataset?.data))
   }, [dataset])
 
   return (
     <FixedContainer>
       <Box pad={{ top: 'basex7', bottom: 'large' }}>
-        {/* eslint-disable-next-line no-nested-ternary */}
         {isDownloadable && !router.query.start ? (
           <>
             <DownloadAdvancedOptions />
