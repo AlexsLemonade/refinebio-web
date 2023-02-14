@@ -1,8 +1,9 @@
+import { isEmptyObject } from 'helpers/isEmptyObject'
 import { unionizeArrays } from 'helpers/unionizeArrays'
 
 // Checks if there is any downladable dataset added in My Dataset
 export const isDownloadableDataset = (dataset) =>
-  dataset ? Object.keys(dataset).length > 0 : false
+  isEmptyObject(dataset) ? false : Object.keys(dataset).length > 0
 
 // Converts the sample and experiment arrays from the API response
 // to objects with experiment accession codes as their keys
@@ -40,11 +41,11 @@ export const getExperimentCountBySpecies = (dataset, experiments) => {
 
 // Returns the total length of experiments added in My Dataset
 export const getTotalExperiments = (dataset) =>
-  dataset ? Object.keys(dataset).length : 0
+  isEmptyObject(dataset) ? 0 : Object.keys(dataset).length
 
 // Returns the total length of samples added in My Dataset
 export const getTotalSamples = (dataset) =>
-  dataset ? unionizeArrays(Object.values(dataset)[0]).length : 0
+  isEmptyObject(dataset) ? 0 : unionizeArrays(...Object.values(dataset)).length
 
 // Returns the file size estimates of given dataset and its aggregate_by value (either 'EXPERIMENT' or 'SPECIES')
 // (for Download/DownloadFileSummary)

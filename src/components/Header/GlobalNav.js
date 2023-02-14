@@ -157,7 +157,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
               <Button
                 aria-label="View My Dataset"
                 badge={{
-                  max: 10000,
+                  max: 1000000,
                   value: totalSamples || 0
                 }} // TEMOORARY
                 href="/download"
