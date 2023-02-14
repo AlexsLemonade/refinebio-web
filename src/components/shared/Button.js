@@ -1,6 +1,7 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Button as GrommetButton } from 'grommet'
 import styled, { css } from 'styled-components'
+import { IconSpinner } from './IconSpinner'
 
 /* NOTE: 
 - Set the prop 'light' to true for the dark background
@@ -8,6 +9,8 @@ import styled, { css } from 'styled-components'
 */
 
 const CustomButton = styled(GrommetButton)`
+  position: relative;
+
   ${({ uppercase }) =>
     uppercase &&
     css`
@@ -47,19 +50,49 @@ const CustomButton = styled(GrommetButton)`
         color: ${theme.global.colors.brand};
       }
     `}
+
+    ${({ theme, isLoading }) =>
+    isLoading &&
+    css`
+      background: ${theme.global.colors.brand};
+      border-color: ${theme.global.colors.brand};
+      color: ${theme.global.colors.brand};
+      &:hover {
+        background: ${theme.global.colors.brand};
+        color: ${theme.global.colors.brand};
+      }
+    `}
+
+    ${({ theme, tertiary, isLoading }) =>
+    tertiary &&
+    css`
+      background: ${isLoading ? theme.global.colors.black : 'none'};
+      border: 1px solid ${theme.global.colors.black};
+      color: ${theme.global.colors.black};
+      &:hover {
+        background: ${theme.global.colors.black};
+        color: ${isLoading
+          ? theme.global.colors.black
+          : theme.global.colors.white};
+      }
+    `}
 `
 
 export const Button = ({
+  isLoading = false,
+  label = '',
   large = false,
   link = false,
   linkFontSize = 'small',
   responsive = false,
+  tertiary = false,
   uppercase = false,
   width,
   clickHandler,
   ...props
 }) => {
   const { viewport } = useResponsive()
+
   return (
     <Box
       responsive={responsive}
@@ -71,6 +104,7 @@ export const Button = ({
       {link ? (
         <GrommetButton
           link={link}
+          label={label}
           style={{
             fontSize: linkFontSize,
             border: 'none',
@@ -83,10 +117,27 @@ export const Button = ({
         />
       ) : (
         <CustomButton
-          width={width}
+          disabled={isLoading}
+          isLoading={isLoading}
+          label={
+            <>
+              {isLoading && (
+                <IconSpinner
+                  style={{
+                    position: 'absolute',
+                    top: '25%', // NOTE: temporary set these values
+                    left: '45%' // since 'translate3d' is ignored (bug)
+                  }}
+                />
+              )}
+              {label}
+            </>
+          }
           large={large}
+          tertiary={tertiary}
           uppercase={uppercase}
           viewport={viewport}
+          width={width}
           onClick={clickHandler}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...props}
