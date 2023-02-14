@@ -1,4 +1,5 @@
 import { useResponsive } from 'hooks/useResponsive'
+import { formatNumbers } from 'helpers/formatNumbers'
 import { Box, Heading, Text } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Hero } from 'components/shared/Hero'
@@ -58,7 +59,7 @@ const HeroBody = () => {
         size={setResponsive('h2_xsmall', 'h2_large')}
         textAlign="center"
       >
-        refine.bio has harmonized over {data.gene_count.toLocaleString()} gene
+        refine.bio has harmonized over {formatNumbers(data.gene_count)} gene
         expression experiments
       </Heading>
 

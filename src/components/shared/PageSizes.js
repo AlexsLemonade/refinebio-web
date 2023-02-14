@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
+import { formatNumbers } from 'helpers/formatNumbers'
 import { Box, Select, Text } from 'grommet'
 
 export const PageSizes = ({
@@ -27,7 +28,7 @@ export const PageSizes = ({
         />
       </Box>
       <Text margin={{ left: 'xsmall' }}>
-        of {totalPages.toLocaleString()} {viewport !== 'small' && pageSizeLabel}
+        of {formatNumbers(totalPages)} {viewport !== 'small' && pageSizeLabel}
       </Text>
     </Box>
   )

@@ -1,5 +1,6 @@
 import { useMatchMedia } from 'hooks/useMatchMedia'
 import { useResponsive } from 'hooks/useResponsive'
+import { formatNumbers } from 'helpers/formatNumbers'
 import { Box, CheckBox, Grid, Select, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 
@@ -103,7 +104,7 @@ export const SearchBulkActions = ({ results }) => {
                 margin={{ horizontal: 'xxsmall' }}
               />
             </Box>
-            <Text>of {totalResults.toLocaleString()} results</Text>
+            <Text>of {formatNumbers(totalResults)} results</Text>
           </Box>
         </Box>
         <Box gridArea="sort-by">
