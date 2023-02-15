@@ -1,0 +1,69 @@
+import { unionizeArrays } from 'helpers/unionizeArrays'
+import { Box } from 'grommet'
+import { ViewBlock } from './ViewBlock'
+
+export const SpeciesView = ({
+  dataset: {
+    data: datasetData,
+    experiments,
+    organism_samples: samplesBySpecies,
+    quantile_normalize: quantileNormalize
+  },
+  isImmutable = false
+}) => {
+  return (
+    <Box elevation="medium" pad="medium">
+      {Object.keys(samplesBySpecies).map((specieName, i) => {
+        // get the accession codes accosiated with the specieName
+        const samplesInSpecie = samplesBySpecies[specieName]
+        // filter the dataset to only include the experiments containing the samplesInSpecie
+        const specieDatasetSlice = Object.entries(datasetData).reduce(
+          (accumulator, [key, value]) => {
+            accumulator[key] = value.filter((accessionCode) =>
+              samplesInSpecie.includes(accessionCode)
+            )
+            return accumulator
+          },
+          {}
+        )
+        // merge all the sample metadata fields of all experiments containing the specieDatasetSlice
+        // in order to display all possible values of these samples
+        const sampleMetadataFields = unionizeArrays(
+          ...Object.keys(specieDatasetSlice)
+            .filter(
+              (accessionCode) => specieDatasetSlice[accessionCode].length > 0
+            )
+            .map((accessionCode) => {
+              return (
+                experiments[accessionCode] &&
+                experiments[accessionCode].sample_metadata
+              )
+            })
+        )
+        // NOTE: if some of the experiments have samples of the same organism and it's also rna seq,
+        // then we can deduce there're rna seq samples for this organism
+        const hasRnaSeqExperiments = Object.values(experiments).some(
+          (experiment) =>
+            experiment.technology === 'RNA-SEQ' &&
+            experiment.organism_names.includes(specieName)
+        )
+
+        return (
+          <ViewBlock
+            key={specieName}
+            hasRnaSeqExperiments={hasRnaSeqExperiments}
+            i={i}
+            isImmutable={isImmutable}
+            sampleMetadataFields={sampleMetadataFields}
+            samplesInSpecie={samplesInSpecie}
+            specieDatasetSlice={specieDatasetSlice}
+            specieName={specieName}
+            quantileNormalize={quantileNormalize}
+          />
+        )
+      })}
+    </Box>
+  )
+}
+
+export default SpeciesView
