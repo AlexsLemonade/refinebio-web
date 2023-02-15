@@ -4,6 +4,7 @@ import { createContext, useMemo } from 'react'
 import { useRefinebio } from 'hooks/useRefinebio'
 import { useLocalStorage } from 'hooks/useLocalStorage'
 import { formatExperiments } from 'helpers/dataset'
+import { getDifferenceOfArrays } from 'helpers/getDifferenceOfArrays'
 import { unionizeArrays } from 'helpers/unionizeArrays'
 import mock from 'api/mockDataDataset'
 
@@ -90,6 +91,32 @@ export const DatasetContextProvider = ({ children }) => {
     return result
   }
 
+  // TEMPORARY
+  // remove selected sample(s) from the dataset
+  const removeSamples = (datasetSlice) => {
+    const data = { ...dataset.data }
+
+    for (const accessionCode of Object.keys(datasetSlice)) {
+      if (!data[accessionCode]) continue
+
+      const samplesStillSelected = getDifferenceOfArrays(
+        data[accessionCode],
+        datasetSlice[accessionCode]
+      )
+      // TEMPORARY: dataset will be updated via API call
+      if (samplesStillSelected.length > 0) {
+        setDataset((prev) => ({
+          ...prev,
+          organism_samples: {},
+          experiments: {},
+          data: { [accessionCode]: samplesStillSelected }
+        }))
+      } else {
+        setDataset((prev) => ({ ...prev, data: {} }))
+      }
+    }
+  }
+
   // deletes the dataset with the specified dataset ID
   const deleteDataset = () => {
     // eslint-disable-next-line no-unused-vars
@@ -108,11 +135,20 @@ export const DatasetContextProvider = ({ children }) => {
       dataset,
       datasetId,
       createDataset,
+      deleteDataset,
+      getDataset,
+      removeSamples,
+      updateDataset
+    }),
+    [
+      dataset,
+      datasetId,
+      createDataset,
+      deleteDataset,
       getDataset,
       updateDataset,
-      deleteDataset
-    }),
-    [dataset, createDataset, getDataset, updateDataset, deleteDataset]
+      removeSamples
+    ]
   )
 
   return (
