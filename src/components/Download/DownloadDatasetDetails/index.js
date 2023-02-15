@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Tabs, Tab } from 'grommet'
+import { Row } from 'components/shared/Row'
 import { ExperimentView, SpeciesView } from './views'
+import { RemoveAllButton } from './RemoveAllButton'
 
 export const DownloadDatasetDetails = ({ dataset }) => {
   const { setResponsive } = useResponsive()
@@ -22,14 +24,16 @@ export const DownloadDatasetDetails = ({ dataset }) => {
 
   return (
     <Box margin={{ top: 'large' }}>
-      <Heading
-        level={2}
-        margin={{ bottom: 'small' }}
-        size={setResponsive('h2_xsmall', 'h2_small')}
-      >
-        Samples
-      </Heading>
-
+      <Row>
+        <Heading
+          level={2}
+          margin={{ bottom: 'small' }}
+          size={setResponsive('h2_xsmall', 'h2_small')}
+        >
+          Samples
+        </Heading>
+        <RemoveAllButton />
+      </Row>
       <Box margin={{ bottom: 'medium' }}>
         <Tabs activeIndex={activeIndex} justify="start" onActive={handleActive}>
           {tabs.map((tab) => (
