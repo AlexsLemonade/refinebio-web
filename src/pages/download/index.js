@@ -20,6 +20,12 @@ export const Download = () => {
   const [isDownloadable, setIsDownloadable] = useState()
 
   useEffect(() => {
+    if (!isDownloadable) {
+      window.scrollTo(0, 0)
+    }
+  }, [isDownloadable])
+
+  useEffect(() => {
     setIsDownloadable(isDownloadableDataset(dataset?.data))
   }, [dataset])
 

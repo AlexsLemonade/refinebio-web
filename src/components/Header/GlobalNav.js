@@ -27,11 +27,17 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
     setTotalSamples(getTotalSamples(dataset?.data))
   }, [dataset])
 
-  const buttonWidth = '80vw' // TEMP until creatre a custom budged button component
+  const buttonWidth = '80vw' // TEMPORARY until creatre a custom budged button component
 
   const handleClick = () => {
     if (viewport !== 'small') return
     setToggle(!toggle)
+  }
+
+  // TEMPORARY for Demo (will be handled with API call)
+  const handleGetDataset = () => {
+    if (!totalSamples) return
+    getDataset(true)
   }
 
   return (
@@ -159,7 +165,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 badge={{
                   max: 1000000,
                   value: totalSamples || 0
-                }} // TEMOORARY
+                }}
                 href="/download"
                 label="My Dataset"
                 margin={{ left: setResponsive('xlarge', 'none') }}
@@ -171,7 +177,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                   padding: setResponsive('12px 0', '4px 24px'),
                   width: '100%'
                 }}
-                onClick={() => getDataset(true)}
+                onClick={handleGetDataset}
               />
             </Box>
           </List>
