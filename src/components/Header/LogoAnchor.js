@@ -17,7 +17,7 @@ const Wrapper = styled(Box)`
   } 
 `
 
-export const Logo = ({ light = false }) => {
+export const LogoAnchor = ({ light = false }) => {
   return (
     <Wrapper light={light}>
       <Anchor href="/" underline={false}>
@@ -28,4 +28,4 @@ export const Logo = ({ light = false }) => {
   )
 }
 
-export default Logo
+export default LogoAnchor

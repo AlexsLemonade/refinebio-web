@@ -5,7 +5,7 @@ import { Button } from 'components/shared/Button'
 import { Layer } from 'components/shared/Layer'
 import { SrOnly } from 'components/shared/SrOnly'
 import styled, { css } from 'styled-components'
-import { Logo } from './Logo'
+import { LogoAnchor } from './LogoAnchor'
 import { ArrowDownIcon } from '../../images/chevron-down.svg'
 
 const NavIcon = styled(Box)`
@@ -197,7 +197,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
           viewport={viewport}
         >
           {viewport === 'small' && (
-            <Logo light={false} margin={{ vertical: 'large' }} />
+            <LogoAnchor light={false} margin={{ vertical: 'large' }} />
           )}
           <List as="ul" light={light} viewport={viewport}>
             <Box as="li">
