@@ -52,7 +52,7 @@ export const Footer = () => {
       <FixedContainer align="center">
         <Box pad={{ horizontal: setResponsive('0', '0', 'xxxxxlarge') }}>
           <Row>
-            {/* fixed svalue to preserve UI layout for wider screens */}
+            {/* fixed value to preserve UI layout for wider screens */}
             <Col margin={{ right: setResponsive('0', 'xxlarge', '148px') }}>
               <Paragraph>
                 {texts.about}{' '}
