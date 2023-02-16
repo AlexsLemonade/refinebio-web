@@ -9,7 +9,7 @@ export const RowSpieces = ({ samplesBySpecies, experimentCountBySpecies }) => (
         <TableCell>{formatString(organism)}</TableCell>
         <TableCell>
           <Text color="brand">
-            {formatNumbers(samplesBySpecies[organism].length)}
+            {formatNumbers(samplesBySpecies[organism]?.length)}
           </Text>
         </TableCell>
         <TableCell>

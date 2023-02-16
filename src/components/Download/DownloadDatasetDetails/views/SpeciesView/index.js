@@ -1,6 +1,6 @@
 import { unionizeArrays } from 'helpers/unionizeArrays'
-import { Box } from 'grommet'
 import { ViewBlock } from './ViewBlock'
+import { ViewBlocks } from '../ViewBlocks'
 
 export const SpeciesView = ({
   dataset: {
@@ -12,8 +12,8 @@ export const SpeciesView = ({
   isImmutable = false
 }) => {
   return (
-    <Box elevation="medium" pad="medium">
-      {Object.keys(samplesBySpecies).map((specieName, i) => {
+    <ViewBlocks elevation="medium" pad="medium">
+      {Object.keys(samplesBySpecies).map((specieName) => {
         // get the accession codes accosiated with the specieName
         const samplesInSpecie = samplesBySpecies[specieName]
         // filter the dataset to only include the experiments containing the samplesInSpecie
@@ -52,7 +52,6 @@ export const SpeciesView = ({
           <ViewBlock
             key={specieName}
             hasRnaSeqExperiments={hasRnaSeqExperiments}
-            i={i}
             isImmutable={isImmutable}
             sampleMetadataFields={sampleMetadataFields}
             samplesInSpecie={samplesInSpecie}
@@ -62,7 +61,7 @@ export const SpeciesView = ({
           />
         )
       })}
-    </Box>
+    </ViewBlocks>
   )
 }
 

@@ -5,7 +5,7 @@ import { formatNumbers } from 'helpers/formatNumbers'
 import { formatString } from 'helpers/formatString'
 import { Box, Heading, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
-import { InlineMessage } from 'components/shared/InlineMessage'
+import { Pill } from 'components/shared/Pill'
 import { Row } from 'components/shared/Row'
 import { TextCapitalized } from 'components/shared/TextCapitalized'
 import { ViewSamplesButton } from '../ViewSamplesButton'
@@ -17,8 +17,7 @@ export const ViewBlock = ({
   quantileNormalize,
   sampleMetadataFields,
   specieDatasetSlice,
-  isImmutable,
-  i
+  isImmutable
 }) => {
   const { removeSamples } = useDataset()
   const { setResponsive } = useResponsive()
@@ -42,20 +41,17 @@ export const ViewBlock = ({
   /* === TEMPORARY for Demo : END === */
 
   return (
-    <Box
-      key={specieName}
-      border={i ? { side: 'top' } : false}
-      margin={{ top: i ? 'small' : 'none' }}
-      pad={{ top: i ? 'small' : 'none' }}
-    >
+    <Box animation={{ type: 'fadeIn', duration: 800 }}>
       <Heading level={2}>
         <TextCapitalized text={<>{formatString(specieName)} Samples</>} />
       </Heading>
       {hasRnaSeqExperiments && !quantileNormalize && (
-        <InlineMessage
-          label="Quantile Normalization will be skipped for RNA-seq samples"
-          margin={{ top: 'small' }}
-        />
+        <Box margin={{ top: 'small' }}>
+          <Pill
+            label="Quantile Normalization will be skipped for RNA-seq samples"
+            status="info"
+          />
+        </Box>
       )}
       <Row margin={{ top: 'small' }}>
         <Box>

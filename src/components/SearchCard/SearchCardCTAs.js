@@ -27,17 +27,18 @@ export const SearchCardCTAs = ({
 }) => {
   const { dataset, updateDataset, deleteDataset } = useDataset()
   const { viewport, setResponsive } = useResponsive()
+  // TEMPORARY
   const [downloadableDataset, setDownloadableDataset] = useState({
     isDownloadable: false,
     accessionCode: ''
-  }) // TEMPORARY
+  })
 
   useEffect(() => {
     setDownloadableDataset({
       isDownloadable: isDownloadableDataset(dataset?.data),
-      accessionCode: dataset ? Object.keys(dataset?.data)[0] : ''
+      accessionCode
     })
-  }, [dataset])
+  }, [dataset, accessionCode])
 
   return (
     <Box align={setResponsive('start', 'end')} width="100%">
@@ -49,9 +50,12 @@ export const SearchCardCTAs = ({
             primary
             responsive
             onClick={() =>
-              updateDataset({
-                [accessionCode]: { all: true, total: downloadableSamples }
-              })
+              updateDataset(
+                {
+                  [accessionCode]: { all: true, total: downloadableSamples }
+                },
+                accessionCode // TEMPORARY for UI testing
+              )
             }
           />
           <Button
@@ -64,28 +68,32 @@ export const SearchCardCTAs = ({
       )}
 
       {/* state: added  */}
-      {(status === 'added' ||
-        (downloadableDataset.isDownloadable &&
-          downloadableDataset.accessionCode === accessionCode)) && (
-        <>
-          <Box direction="row">
-            <InlineMessage label="Added to Dataset" color="success" />
+      {/* TEMPORARY for UI testing */}
+      {status !== 'processing' &&
+        status !== 'add_remaining' &&
+        status !== 'not_supported' &&
+        status !== 'request' &&
+        downloadableDataset.isDownloadable &&
+        downloadableDataset.accessionCode === accessionCode && (
+          <>
+            <Box direction="row">
+              <InlineMessage label="Added to Dataset" color="success" />
+              <Button
+                label="Remove"
+                link
+                linkFontSize={setResponsive('medium', 'small')}
+                margin={{ left: 'xsmall' }}
+                onClick={deleteDataset}
+              />
+            </Box>
             <Button
-              label="Remove"
-              link
-              linkFontSize={setResponsive('medium', 'small')}
-              margin={{ left: 'xsmall' }}
-              onClick={deleteDataset}
+              label="Download Now"
+              margin={{ top: 'small' }}
+              secondary
+              responsive
             />
-          </Box>
-          <Button
-            label="Download Now"
-            margin={{ top: 'small' }}
-            secondary
-            responsive
-          />
-        </>
-      )}
+          </>
+        )}
 
       {/* state: processing  */}
       {status === 'processing' && (

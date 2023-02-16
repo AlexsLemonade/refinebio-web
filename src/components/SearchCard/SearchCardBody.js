@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { formatString } from 'helpers/formatString'
+import { formatSampleMetadata } from 'helpers/dataset'
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import { Icon } from 'components/shared/Icon'
 import { Anchor } from 'components/shared/Anchor'
@@ -95,7 +95,7 @@ export const SearchCardBody = ({
         </Heading>
         <Box direction="row">
           {sampleMetadataFields.length > 0 ? (
-            <Text>{formatString(sampleMetadataFields.join(', '))}</Text>
+            <Text>{formatSampleMetadata(sampleMetadataFields).join(', ')}</Text>
           ) : (
             <TextNull text="No sample metadata fields" />
           )}

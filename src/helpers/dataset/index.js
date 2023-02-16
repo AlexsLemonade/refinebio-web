@@ -1,3 +1,4 @@
+import { formatString } from 'helpers/formatString'
 import { isEmptyObject } from 'helpers/isEmptyObject'
 import { unionizeArrays } from 'helpers/unionizeArrays'
 
@@ -8,6 +9,7 @@ export const isDownloadableDataset = (dataset) =>
 // Converts the sample and experiment arrays from the API response
 // to objects with experiment accession codes as their keys
 export const formatExperiments = (experiments) => {
+  if (!experiments) return null
   return experiments.reduce(
     (acc, experiment) => ({
       ...acc,
@@ -16,6 +18,10 @@ export const formatExperiments = (experiments) => {
     {}
   )
 }
+
+// Formats sample_metadata names for UI (e.g., 'specimen_part' to 'Specimen part')
+export const formatSampleMetadata = (sampleMetadata) =>
+  sampleMetadata.map(formatString)
 
 // Returns the count of expriment by spcecies
 export const getExperimentCountBySpecies = (dataset, experiments) => {

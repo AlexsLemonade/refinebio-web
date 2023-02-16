@@ -24,7 +24,7 @@ export const DownloadDatasetDetails = ({ dataset }) => {
 
   return (
     <Box margin={{ top: 'large' }}>
-      <Row>
+      <Row margin={{ bottom: setResponsive('medium', 'none') }}>
         <Heading
           level={2}
           margin={{ bottom: 'small' }}
@@ -38,7 +38,7 @@ export const DownloadDatasetDetails = ({ dataset }) => {
         <Tabs activeIndex={activeIndex} justify="start" onActive={handleActive}>
           {tabs.map((tab) => (
             <Tab key={tab.label} title={tab.label}>
-              <Box pad={{ top: 'medium' }}>{tab.component}</Box>
+              <Box pad={{ top: 'small' }}>{tab.component}</Box>
             </Tab>
           ))}
         </Tabs>
