@@ -1,31 +1,36 @@
 import { useState } from 'react'
-import { getHumanReadable } from 'helpers/getHumanReadable'
 import { Box, CheckBox, Select, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Row } from 'components/shared/Row'
 
 export const SearchBulkActions = ({ results }) => {
-  const pageSizes = [10, 20, 50]
-  // the sort by option values for API and client (human-redable text)
-  const sortByOptionValues = {
-    _score: 'Best Match',
-    '-num_downloadable_samples': 'Most No. of samples',
-    num_downloadable_samples: 'Least No. of samples',
-    '-source_first_published': 'Newest Experiment',
-    source_first_published: 'Oldest Experiment'
-  }
-
-  const sortByOptions = Object.keys(sortByOptionValues).map((order) =>
-    getHumanReadable(order, sortByOptionValues)
-  )
-
-  // NOTE: when calling API, use helpers/getAPIReadable to get the API value
-  // e.g.) getAPIReadable(selectedSortByOption, sortByOptionValues)
-  const [selectedSortByOption, setSelectedSortByOption] = useState(
-    sortByOptions[0]
-  )
-
   const { count: totalResults } = results
+  const pageSizes = [10, 20, 50]
+  const sortByOptions = [
+    {
+      label: 'Best Match',
+      value: '_score'
+    },
+    {
+      label: 'Most No. of samples',
+      value: '-num_downloadable_samples'
+    },
+    {
+      label: 'Least No. of samples',
+      value: 'num_downloadable_samples'
+    },
+    {
+      label: 'Newest Experiment',
+      value: '-source_first_published'
+    },
+    {
+      label: 'Oldest Experiment',
+      value: 'source_first_published'
+    }
+  ]
+  const [selectedSortByOption, setSelectedSortByOption] = useState(
+    sortByOptions[0].value
+  )
 
   return (
     <Box pad={{ bottom: 'medium' }}>
@@ -45,10 +50,14 @@ export const SearchBulkActions = ({ results }) => {
           Sort by
           <Box width="208px">
             <Select
-              options={sortByOptions}
+              options={Object.values(sortByOptions)}
+              labelKey="label"
               value={selectedSortByOption}
+              valueKey={{ key: 'value', reduce: true }}
               margin={{ horizontal: 'xxsmall' }}
-              onChange={({ option }) => setSelectedSortByOption(option)}
+              onChange={({ value: nextValue }) =>
+                setSelectedSortByOption(nextValue)
+              }
             />
           </Box>
         </Row>
