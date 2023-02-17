@@ -15,10 +15,12 @@ import { ViewSamplesButton } from '../ViewSamplesButton'
 export const ViewBlock = ({
   addedSamples,
   experiment,
+  defaultOrganismFilterOption,
   experimentAccessionCode,
   metadataFields,
   quantileNormalize,
-  isImmutable
+  isImmutable,
+  setOrganism
 }) => {
   const { removeExperiment } = useDataset()
   const { setResponsive } = useResponsive()
@@ -34,6 +36,7 @@ export const ViewBlock = ({
     timer.current = window.setTimeout(() => {
       removeExperiment(datasetSlice)
       setLoading(false)
+      setOrganism(defaultOrganismFilterOption.value)
     }, 1500)
   }
   useEffect(() => {

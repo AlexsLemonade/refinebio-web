@@ -48,11 +48,13 @@ export const ExperimentView = ({
             <ViewBlock
               key={experimentAccessionCode}
               addedSamples={addedSamples}
+              defaultOrganismFilterOption={defaultOrganismFilterOption}
               experiment={experiment}
               experimentAccessionCode={experimentAccessionCode}
               metadataFields={metadataFields}
               quantileNormalize={quantileNormalize}
               isImmutable={isImmutable}
+              setOrganism={setOrganism}
             />
           )
         })}
