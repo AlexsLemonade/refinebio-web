@@ -16,7 +16,7 @@ import { PageSizes } from 'components/shared/PageSizes'
 import { Pagination } from 'components/shared/Pagination'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
-import samplesTableMock from 'api/mockDataSamplesTable'
+import { getSamplesTableData } from 'api/mockHelper'
 import {
   CellAccessionCode,
   CellAddRemove,
@@ -39,7 +39,6 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
   // TEMPORARY
   // for API calls(data, filter, pageSize, limit, offset, order)
   // endpoint: `v1/samples/experiment_accession_code=${accessionCode}`
-  const isFirst = accessionCode === 'GSE116436'
   const [loading, setLoading] = useState(false)
   const [tableData, setTableData] = useState([])
   const [globalFilter, setGlobalFilter] = useState(null) // match the react-table useGlobalFilter API's names
@@ -117,26 +116,7 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
     }&limit=${pageSize}`
     // eslint-disable-next-line no-console
     console.log(url)
-
-    if (pageSize === pageSizes[0]) {
-      setTableData(
-        isFirst
-          ? samplesTableMock[0][0].results
-          : samplesTableMock[1][0].results
-      )
-    } else if (pageSize === pageSizes[1]) {
-      setTableData(
-        isFirst
-          ? samplesTableMock[0][1].results
-          : samplesTableMock[1][1].results
-      )
-    } else if (pageSize === pageSizes[2]) {
-      setTableData(
-        isFirst
-          ? samplesTableMock[0][2].results
-          : samplesTableMock[1][2].results
-      )
-    }
+    getSamplesTableData(accessionCode, pageSize, pageSizes, setTableData)
     setLoading(false)
   }, [globalFilter, page, pageSize])
 

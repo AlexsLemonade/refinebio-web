@@ -4,18 +4,14 @@ import { Box } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { SamplesTable } from 'components/SamplesTable'
-import experimentMock from 'api/mockDataExperiment' // TEMPORARY
-import samplesTableMock from 'api/mockDataSamplesTable' // TEMPORARY
-
+import { getExperimentPageData } from 'api/mockHelper'
 // TEMPORARY
 // endpoints:
 // `v1/experiments/${accession_code}/`
 // `v1/samples/experiment_accession_code=${accessionCode}`
 export const getServerSideProps = ({ query }) => {
   const { accession_code: accessionCode } = query
-  const isFirst = accessionCode === 'GSE116436'
-  const experiment = isFirst ? experimentMock[0] : experimentMock[1]
-  const samples = isFirst ? samplesTableMock[0][0] : samplesTableMock[1][0]
+  const { experiment, samples } = getExperimentPageData(accessionCode)
 
   return { props: { accessionCode, experiment, samples } }
 }
