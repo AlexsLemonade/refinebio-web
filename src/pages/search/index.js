@@ -2,6 +2,7 @@ import { useState, memo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Grid } from 'grommet'
 import { Button } from 'components/shared/Button'
+import { BoxBlock } from 'components/shared/BoxBlock'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { LayerResponsive } from 'components/shared/LayerLayerResponsive'
 import { Icon } from 'components/shared/Icon'
@@ -32,13 +33,12 @@ export const Search = () => {
           column: setResponsive('none', 'none', '5%')
         }}
       >
-        <Box
+        <BoxBlock
           gridArea="top"
           margin={{
             top: 'xlarge',
             bottom: setResponsive('medium', 'medium', 'xlarge')
           }}
-          style={{ display: 'block' }}
           width={setResponsive('100%', searchBoxWidth)}
         >
           <SearchBox
@@ -47,9 +47,9 @@ export const Search = () => {
             size="large"
             responsive
           />
-        </Box>
+        </BoxBlock>
         <LayerResponsive position="left" show={toggleFilterList} tabletMode>
-          <Box
+          <BoxBlock
             background="white"
             gridArea="side"
             pad={{
@@ -59,7 +59,6 @@ export const Search = () => {
             width={setResponsive('100vw', '100vw', sideWidth)}
             height={setResponsive('100vh', '100vh', 'auto')}
             style={{
-              display: 'block',
               overflowY: setResponsive('scroll', 'scroll', 'auto'),
               minHeight: '-webkit-fill-available'
             }}
@@ -77,7 +76,7 @@ export const Search = () => {
               </Box>
             )}
             <SearchFilterList facets={data.facets} />
-          </Box>
+          </BoxBlock>
         </LayerResponsive>
         <Box gridArea="main">
           {viewport !== 'large' && (

@@ -21,7 +21,7 @@ const HeroBody = () => {
       </Heading>
       <SearchBox
         size="large"
-        placeHolder={setResponsive(
+        placeholder={setResponsive(
           'Search accessions, pathways, etc.,',
           'Search accessions, pathways, diseases, etc.,'
         )}

@@ -42,6 +42,7 @@ export const Layout = ({ children }) => {
       <Main role="main">{children}</Main>
       <Footer />
       <BackToTopButton />
+      <Box id="portal" />
     </Box>
   )
 }
