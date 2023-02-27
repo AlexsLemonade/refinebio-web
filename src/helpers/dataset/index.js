@@ -9,7 +9,7 @@ export const isDownloadableDataset = (dataset) =>
 // Converts the sample and experiment arrays from the API response
 // to objects with experiment accession codes as their keys
 export const formatExperiments = (experiments) => {
-  if (!experiments) return null
+  if (!experiments.length) return []
   return experiments.reduce(
     (acc, experiment) => ({
       ...acc,
@@ -18,6 +18,14 @@ export const formatExperiments = (experiments) => {
     {}
   )
 }
+
+// Formats the pipelines' name for UI (e.g., ['Salmon Quant', 'Tximport'] to 'Salmon Quant, and Specimen part')
+export const formatPipelinesText = (names) =>
+  names.length === 1
+    ? names[0]
+    : `${names.slice(0, names.length - 1).join(', ')}, and ${
+        names[names.length - 1]
+      }`
 
 // Formats sample_metadata names for UI (e.g., 'specimen_part' to 'Specimen part')
 export const formatSampleMetadata = (sampleMetadata) =>
