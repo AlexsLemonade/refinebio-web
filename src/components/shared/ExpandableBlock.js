@@ -1,10 +1,10 @@
 import { Box } from 'grommet'
 
 export const ExpandableBlock = ({
-  dureation = '.8s',
+  duration = '.8s',
   expand,
   opacity = 0.75,
-  maxHeight = '200px',
+  maxHeight = '99vh',
   timing = 'cubic-bezier(.61,.36,.24,1.05)',
   children,
   ...props
@@ -16,7 +16,7 @@ export const ExpandableBlock = ({
         opacity: expand ? 1 : opacity,
         overflow: 'hidden',
         maxHeight: expand ? maxHeight : 0,
-        transition: `all ${dureation} ${timing}`
+        transition: `all ${duration} ${timing}`
       }}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}

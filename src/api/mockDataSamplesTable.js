@@ -1654,7 +1654,7 @@ export default [
                   python: {
                     rpy2: '3.4.5',
                     Django: '3.2.7',
-                    '"data-refinery-common"': 'v1.42.64-hotfix'
+                    'data-refinery-common': 'v1.42.64-hotfix'
                   },
                   os_distribution: 'Ubuntu 20.04.3 LTS'
                 }
@@ -5209,10 +5209,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.6-hotfix'
+                    'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5248,7 +5248,7 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.6-hotfix'
+                    'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
                     'salmontools --version': 'Salmon Tools 0.1.0'
@@ -5272,10 +5272,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5309,10 +5309,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5346,10 +5346,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5383,10 +5383,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5420,10 +5420,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5457,10 +5457,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5494,10 +5494,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5531,10 +5531,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5568,10 +5568,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5605,10 +5605,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.13-hotfix'
+                    'data-refinery-common': '=v1.27.13-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5694,10 +5694,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.8-hotfix'
+                    'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5733,7 +5733,7 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.8-hotfix'
+                    'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
                     'salmontools --version': 'Salmon Tools 0.1.0'
@@ -5757,10 +5757,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5794,10 +5794,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5831,10 +5831,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5868,10 +5868,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5905,10 +5905,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -5942,10 +5942,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.16-hotfix'
+                    'data-refinery-common': '=v1.27.16-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6031,10 +6031,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.8-hotfix'
+                    'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6070,7 +6070,7 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.8-hotfix'
+                    'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
                     'salmontools --version': 'Salmon Tools 0.1.0'
@@ -6094,10 +6094,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6131,10 +6131,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6168,10 +6168,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6205,10 +6205,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6242,10 +6242,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.32-hotfix'
+                    'data-refinery-common': '=v1.27.32-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6279,10 +6279,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.32-hotfix'
+                    'data-refinery-common': '=v1.27.32-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6368,10 +6368,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.8-hotfix'
+                    'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6407,7 +6407,7 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.8-hotfix'
+                    'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
                     'salmontools --version': 'Salmon Tools 0.1.0'
@@ -6431,10 +6431,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6468,10 +6468,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6505,10 +6505,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6542,10 +6542,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6579,10 +6579,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6668,10 +6668,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.8-hotfix'
+                    'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6707,7 +6707,7 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.8-hotfix'
+                    'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
                     'salmontools --version': 'Salmon Tools 0.1.0'
@@ -6731,10 +6731,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6768,10 +6768,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6805,10 +6805,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6842,10 +6842,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6879,10 +6879,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6916,10 +6916,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6953,10 +6953,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -6990,10 +6990,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7027,10 +7027,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7064,10 +7064,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7101,10 +7101,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7190,10 +7190,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.8-hotfix'
+                    'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7229,7 +7229,7 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.8-hotfix'
+                    'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
                     'salmontools --version': 'Salmon Tools 0.1.0'
@@ -7253,10 +7253,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7290,10 +7290,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7327,10 +7327,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7418,10 +7418,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.8-hotfix'
+                    'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7457,7 +7457,7 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.8-hotfix'
+                    'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
                     'salmontools --version': 'Salmon Tools 0.1.0'
@@ -7481,10 +7481,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7518,10 +7518,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7555,10 +7555,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7592,10 +7592,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.17-hotfix'
+                    'data-refinery-common': '=v1.27.17-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7681,10 +7681,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.8-hotfix'
+                    'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7720,7 +7720,7 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.8-hotfix'
+                    'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
                     'salmontools --version': 'Salmon Tools 0.1.0'
@@ -7744,10 +7744,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7781,10 +7781,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7818,10 +7818,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7907,10 +7907,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.6-hotfix'
+                    'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -7946,7 +7946,7 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.6-hotfix'
+                    'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
                     'salmontools --version': 'Salmon Tools 0.1.0'
@@ -7970,10 +7970,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8007,10 +8007,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8044,10 +8044,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8081,10 +8081,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8118,10 +8118,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8155,10 +8155,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8192,10 +8192,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8229,10 +8229,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8266,10 +8266,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8303,10 +8303,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8340,10 +8340,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.16-hotfix'
+                    'data-refinery-common': '=v1.27.16-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8377,10 +8377,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.17-hotfix'
+                    'data-refinery-common': '=v1.27.17-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8466,10 +8466,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.6-hotfix'
+                    'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8505,7 +8505,7 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.6-hotfix'
+                    'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
                     'salmontools --version': 'Salmon Tools 0.1.0'
@@ -8529,10 +8529,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8566,10 +8566,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8603,10 +8603,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8640,10 +8640,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8677,10 +8677,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8714,10 +8714,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8751,10 +8751,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8788,10 +8788,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8825,10 +8825,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8921,10 +8921,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.6-hotfix'
+                    'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -8960,7 +8960,7 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.6-hotfix'
+                    'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
                     'salmontools --version': 'Salmon Tools 0.1.0'
@@ -8984,10 +8984,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9021,10 +9021,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9058,10 +9058,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9095,10 +9095,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9132,10 +9132,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9169,10 +9169,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9206,10 +9206,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9243,10 +9243,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9280,10 +9280,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.6-hotfix'
+                    'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9317,10 +9317,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.27.13-hotfix'
+                    'data-refinery-common': '=v1.27.13-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9406,10 +9406,10 @@ export default [
                   },
                   python: {
                     Django: '2.1.8',
-                    '"data-refinery-common"': '=v1.25.8-hotfix'
+                    'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9472,7 +9472,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9509,7 +9509,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9546,7 +9546,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9583,7 +9583,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9620,7 +9620,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9657,7 +9657,7 @@ export default [
                     'data-refinery-common': '=v1.27.16-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9746,7 +9746,7 @@ export default [
                     'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9809,7 +9809,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9846,7 +9846,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9883,7 +9883,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9920,7 +9920,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9957,7 +9957,7 @@ export default [
                     'data-refinery-common': '=v1.27.32-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -9994,7 +9994,7 @@ export default [
                     'data-refinery-common': '=v1.27.32-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10083,7 +10083,7 @@ export default [
                     'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10146,7 +10146,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10183,7 +10183,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10220,7 +10220,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10257,7 +10257,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10294,7 +10294,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10383,7 +10383,7 @@ export default [
                     'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10446,7 +10446,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10483,7 +10483,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10520,7 +10520,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10557,7 +10557,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10594,7 +10594,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10631,7 +10631,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10668,7 +10668,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10705,7 +10705,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10742,7 +10742,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10779,7 +10779,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10816,7 +10816,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10905,7 +10905,7 @@ export default [
                     'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -10968,7 +10968,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11005,7 +11005,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11042,7 +11042,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11133,7 +11133,7 @@ export default [
                     'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11196,7 +11196,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11233,7 +11233,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11270,7 +11270,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11307,7 +11307,7 @@ export default [
                     'data-refinery-common': '=v1.27.17-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11396,7 +11396,7 @@ export default [
                     'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11459,7 +11459,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11496,7 +11496,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11533,7 +11533,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11622,7 +11622,7 @@ export default [
                     'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11685,7 +11685,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11722,7 +11722,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11759,7 +11759,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11796,7 +11796,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11833,7 +11833,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11870,7 +11870,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11907,7 +11907,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11944,7 +11944,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -11981,7 +11981,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12018,7 +12018,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12055,7 +12055,7 @@ export default [
                     'data-refinery-common': '=v1.27.16-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12092,7 +12092,7 @@ export default [
                     'data-refinery-common': '=v1.27.17-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12181,7 +12181,7 @@ export default [
                     'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12244,7 +12244,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12281,7 +12281,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12318,7 +12318,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12355,7 +12355,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12392,7 +12392,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12429,7 +12429,7 @@ export default [
                     'data-refinery-common': '=v1.27.13-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12466,7 +12466,7 @@ export default [
                     'data-refinery-common': '=v1.27.14-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12503,7 +12503,7 @@ export default [
                     'data-refinery-common': '=v1.27.16-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12540,7 +12540,7 @@ export default [
                     'data-refinery-common': '=v1.27.16-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12629,7 +12629,7 @@ export default [
                     'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12692,7 +12692,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12729,7 +12729,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12766,7 +12766,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12803,7 +12803,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12840,7 +12840,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12877,7 +12877,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12914,7 +12914,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12951,7 +12951,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -12988,7 +12988,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13077,7 +13077,7 @@ export default [
                     'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13140,7 +13140,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13177,7 +13177,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13214,7 +13214,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13251,7 +13251,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13288,7 +13288,7 @@ export default [
                     'data-refinery-common': '=v1.27.32-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13325,7 +13325,7 @@ export default [
                     'data-refinery-common': '=v1.27.32-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13362,7 +13362,7 @@ export default [
                     'data-refinery-common': '=v1.27.32-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13451,7 +13451,7 @@ export default [
                     'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13514,7 +13514,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13551,7 +13551,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13588,7 +13588,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13625,7 +13625,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13662,7 +13662,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13699,7 +13699,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13788,7 +13788,7 @@ export default [
                     'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13851,7 +13851,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13888,7 +13888,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13925,7 +13925,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13962,7 +13962,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -13999,7 +13999,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14036,7 +14036,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14073,7 +14073,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14162,7 +14162,7 @@ export default [
                     'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14225,7 +14225,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14262,7 +14262,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14299,7 +14299,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14336,7 +14336,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14373,7 +14373,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14410,7 +14410,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14499,7 +14499,7 @@ export default [
                     'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14562,7 +14562,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14599,7 +14599,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14636,7 +14636,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14673,7 +14673,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14710,7 +14710,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14747,7 +14747,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14784,7 +14784,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14821,7 +14821,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14910,7 +14910,7 @@ export default [
                     'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -14973,7 +14973,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15010,7 +15010,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15047,7 +15047,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15084,7 +15084,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15121,7 +15121,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15158,7 +15158,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15195,7 +15195,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15232,7 +15232,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15321,7 +15321,7 @@ export default [
                     'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15384,7 +15384,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15421,7 +15421,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15458,7 +15458,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15495,7 +15495,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15532,7 +15532,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15621,7 +15621,7 @@ export default [
                     'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15684,7 +15684,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15721,7 +15721,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15758,7 +15758,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15795,7 +15795,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15832,7 +15832,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15869,7 +15869,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15906,7 +15906,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15943,7 +15943,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -15980,7 +15980,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16017,7 +16017,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16106,7 +16106,7 @@ export default [
                     'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16169,7 +16169,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16206,7 +16206,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16243,7 +16243,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16280,7 +16280,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16317,7 +16317,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16354,7 +16354,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16391,7 +16391,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16428,7 +16428,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16465,7 +16465,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16561,7 +16561,7 @@ export default [
                     'data-refinery-common': '=v1.25.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16624,7 +16624,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16661,7 +16661,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16698,7 +16698,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16735,7 +16735,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16772,7 +16772,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16809,7 +16809,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16846,7 +16846,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16883,7 +16883,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16920,7 +16920,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -16957,7 +16957,7 @@ export default [
                     'data-refinery-common': '=v1.27.13-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -17046,7 +17046,7 @@ export default [
                     'data-refinery-common': '=v1.25.8-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -17109,7 +17109,7 @@ export default [
                     'data-refinery-common': '=v1.27.6-hotfix'
                   },
                   cmd_line: {
-                    '"salmon --version"': 'salmon 0.13.1',
+                    'salmon --version': 'salmon 0.13.1',
                     'sra-stat --version': 'sra-stat : 2.9.1'
                   },
                   os_distribution: 'Ubuntu 16.04.6 LTS'
@@ -48681,6 +48681,1945 @@ export default [
           contributed_metadata: {},
           contributed_keywords: {},
           experiment_accession_codes: ['GSE57542']
+        }
+      ]
+    }
+  ],
+  [
+    {
+      count: 32,
+      next: 'http://api.refine.bio/v1/samples/?experiment_accession_code=E-MTAB-1811&limit=10&offset=10',
+      previous: null,
+      results: [
+        {
+          id: 668387,
+          title: 'Sample2 RNA',
+          accession_code: 'E-MTAB-1811-Sample2',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-073_51-11degreesCAP.CEL',
+                    name: '101650-073_51-11degreesCAP.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 2'
+                },
+                source: {
+                  name: 'Sample2'
+                },
+                extract: {
+                  name: 'Sample2 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 11
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'micropylar endosperm'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'micropylar endosperm',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 11,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample2 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:45:44.678041Z',
+              last_modified: '2018-12-19T15:45:44.678041Z'
+            }
+          ],
+          results: [
+            {
+              id: 793900,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'micropylar endosperm',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:45:43.241884Z',
+          last_modified: '2018-12-19T20:12:12.895784Z',
+          original_files: [1091778],
+          computed_files: [909757],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 669107,
+          title: 'Sample3 RNA',
+          accession_code: 'E-MTAB-1811-Sample3',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-074_52-11degreesCAP.CEL',
+                    name: '101650-074_52-11degreesCAP.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 3'
+                },
+                source: {
+                  name: 'Sample3'
+                },
+                extract: {
+                  name: 'Sample3 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 11
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'micropylar endosperm'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'micropylar endosperm',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 11,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample3 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:45:54.001593Z',
+              last_modified: '2018-12-19T15:45:54.001593Z'
+            }
+          ],
+          results: [
+            {
+              id: 794056,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'micropylar endosperm',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:45:51.318361Z',
+          last_modified: '2018-12-19T20:12:33.127522Z',
+          original_files: [1092282],
+          computed_files: [909913],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 669802,
+          title: 'Sample4 RNA',
+          accession_code: 'E-MTAB-1811-Sample4',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-075_53-11degreesCAP.CEL',
+                    name: '101650-075_53-11degreesCAP.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 4'
+                },
+                source: {
+                  name: 'Sample4'
+                },
+                extract: {
+                  name: 'Sample4 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 11
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'micropylar endosperm'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'micropylar endosperm',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 11,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample4 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:46:02.657613Z',
+              last_modified: '2018-12-19T15:46:02.657613Z'
+            }
+          ],
+          results: [
+            {
+              id: 794216,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'micropylar endosperm',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:46:00.884893Z',
+          last_modified: '2018-12-19T20:12:51.155335Z',
+          original_files: [1092745],
+          computed_files: [910073],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 670516,
+          title: 'Sample5 RNA',
+          accession_code: 'E-MTAB-1811-Sample5',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-076_55-11degreesRAD.CEL',
+                    name: '101650-076_55-11degreesRAD.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 5'
+                },
+                source: {
+                  name: 'Sample5'
+                },
+                extract: {
+                  name: 'Sample5 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 11
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'radicle'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'radicle',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 11,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample5 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:46:12.481578Z',
+              last_modified: '2018-12-19T15:46:12.481578Z'
+            }
+          ],
+          results: [
+            {
+              id: 794394,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'radicle',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:46:10.414968Z',
+          last_modified: '2018-12-19T20:13:12.608761Z',
+          original_files: [1093220],
+          computed_files: [910251],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 672445,
+          title: 'Sample8 RNA',
+          accession_code: 'E-MTAB-1811-Sample8',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-105_Repl-11degreesRAD.CEL',
+                    name: '101650-105_Repl-11degreesRAD.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 8'
+                },
+                source: {
+                  name: 'Sample8'
+                },
+                extract: {
+                  name: 'Sample8 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 11
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'radicle'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'radicle',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 11,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample8 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:46:39.105757Z',
+              last_modified: '2018-12-19T15:46:39.105757Z'
+            }
+          ],
+          results: [
+            {
+              id: 794883,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'radicle',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:46:37.050771Z',
+          last_modified: '2018-12-19T20:14:07.933012Z',
+          original_files: [1094492],
+          computed_files: [910740],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 671182,
+          title: 'Sample6 RNA',
+          accession_code: 'E-MTAB-1811-Sample6',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-077_56-11degreesRAD.CEL',
+                    name: '101650-077_56-11degreesRAD.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 6'
+                },
+                source: {
+                  name: 'Sample6'
+                },
+                extract: {
+                  name: 'Sample6 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 11
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'radicle'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'radicle',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 11,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample6 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:46:20.531934Z',
+              last_modified: '2018-12-19T15:46:20.531934Z'
+            }
+          ],
+          results: [
+            {
+              id: 794603,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'radicle',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:46:19.618987Z',
+          last_modified: '2018-12-19T20:13:35.079999Z',
+          original_files: [1093665],
+          computed_files: [910460],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 671811,
+          title: 'Sample7 RNA',
+          accession_code: 'E-MTAB-1811-Sample7',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-079_58-11degreesRAD.CEL',
+                    name: '101650-079_58-11degreesRAD.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 7'
+                },
+                source: {
+                  name: 'Sample7'
+                },
+                extract: {
+                  name: 'Sample7 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 11
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'radicle'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'radicle',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 11,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample7 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:46:29.666313Z',
+              last_modified: '2018-12-19T15:46:29.666313Z'
+            }
+          ],
+          results: [
+            {
+              id: 794710,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'radicle',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:46:27.691285Z',
+          last_modified: '2018-12-19T20:13:49.611952Z',
+          original_files: [1094089],
+          computed_files: [910566],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 673029,
+          title: 'Sample9 RNA',
+          accession_code: 'E-MTAB-1811-Sample9',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-080_59-18degreesCAP.CEL',
+                    name: '101650-080_59-18degreesCAP.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 9'
+                },
+                source: {
+                  name: 'Sample9'
+                },
+                extract: {
+                  name: 'Sample9 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 18
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'micropylar endosperm'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'micropylar endosperm',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 18,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample9 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:46:50.194593Z',
+              last_modified: '2018-12-19T15:46:50.194593Z'
+            }
+          ],
+          results: [
+            {
+              id: 795037,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'micropylar endosperm',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:46:47.663926Z',
+          last_modified: '2018-12-19T20:14:26.480126Z',
+          original_files: [1094881],
+          computed_files: [910894],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 673580,
+          title: 'Sample10 RNA',
+          accession_code: 'E-MTAB-1811-Sample10',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-081_60-18degreesCAP.CEL',
+                    name: '101650-081_60-18degreesCAP.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 10'
+                },
+                source: {
+                  name: 'Sample10'
+                },
+                extract: {
+                  name: 'Sample10 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 18
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'micropylar endosperm'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'micropylar endosperm',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 18,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample10 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:46:59.602260Z',
+              last_modified: '2018-12-19T15:46:59.602260Z'
+            }
+          ],
+          results: [
+            {
+              id: 795170,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'micropylar endosperm',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:46:57.718350Z',
+          last_modified: '2018-12-19T20:14:42.072077Z',
+          original_files: [1095231],
+          computed_files: [911026],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 667549,
+          title: 'Sample1 RNA',
+          accession_code: 'E-MTAB-1811-Sample1',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-072_49-11degreesCAP.CEL',
+                    name: '101650-072_49-11degreesCAP.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 1'
+                },
+                source: {
+                  name: 'Sample1'
+                },
+                extract: {
+                  name: 'Sample1 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 11
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'micropylar endosperm'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'micropylar endosperm',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 11,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample1 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:45:34.765755Z',
+              last_modified: '2018-12-19T15:45:34.765755Z'
+            }
+          ],
+          results: [
+            {
+              id: 793713,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'micropylar endosperm',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:45:33.410406Z',
+          last_modified: '2018-12-19T20:11:46.779759Z',
+          original_files: [1091222],
+          computed_files: [909570],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
         }
       ]
     }

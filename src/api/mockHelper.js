@@ -5,17 +5,21 @@ import mockDataSamplesTable from './mockDataSamplesTable'
 const isFirst = (accessionCode) => accessionCode === 'GSE116436'
 const isSixth = (accessionCode) => accessionCode === 'ERP006132'
 const isTenth = (accessionCode) => accessionCode === 'GSE57542'
+const isArrayExpress = (accessionCode) => accessionCode === 'E-MTAB-1811'
 
 export const getExperimentPageData = (accessionCode) => {
   const first = isFirst(accessionCode)
   const sixth = isSixth(accessionCode)
   const tenth = isTenth(accessionCode)
+  const arrayExpress = isArrayExpress(accessionCode)
   const experiment = first
     ? mockDataExperiment[0]
     : sixth
     ? mockDataExperiment[2]
     : tenth
     ? mockDataExperiment[3]
+    : arrayExpress
+    ? mockDataExperiment[4]
     : mockDataExperiment[1]
 
   const samples = first
@@ -38,6 +42,7 @@ export const getSamplesTableData = (
   const first = isFirst(accessionCode)
   const sixth = isSixth(accessionCode)
   const tenth = isTenth(accessionCode)
+  const arrayExpress = isArrayExpress(accessionCode)
   if (pageSize === pageSizes[0]) {
     setTableData(
       first
@@ -46,6 +51,8 @@ export const getSamplesTableData = (
         ? mockDataSamplesTable[2][0].results
         : tenth
         ? mockDataSamplesTable[3][0].results
+        : arrayExpress
+        ? mockDataSamplesTable[4][0].results
         : mockDataSamplesTable[1][0].results
     )
   } else if (pageSize === pageSizes[1]) {
@@ -56,6 +63,8 @@ export const getSamplesTableData = (
         ? mockDataSamplesTable[2][1].results
         : tenth
         ? mockDataSamplesTable[3][0].results
+        : arrayExpress
+        ? mockDataSamplesTable[4][0].results
         : mockDataSamplesTable[1][1].results
     )
   } else if (pageSize === pageSizes[2]) {
@@ -66,6 +75,8 @@ export const getSamplesTableData = (
         ? mockDataSamplesTable[2][2].results
         : tenth
         ? mockDataSamplesTable[3][0].results
+        : arrayExpress
+        ? mockDataSamplesTable[4][0].results
         : mockDataSamplesTable[1][2].results
     )
   }

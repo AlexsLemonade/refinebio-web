@@ -69,6 +69,7 @@ module.exports = {
     'react/function-component-definition': 0,
     'react/no-multi-comp': 0,
     'react/no-unescaped-entities': 0,
+    'react/no-unstable-nested-components': 0,
     'react/prop-types': 0,
     'react/react-in-jsx-scope': 0,
     // JSX-specific

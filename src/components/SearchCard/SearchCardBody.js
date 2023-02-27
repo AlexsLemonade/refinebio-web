@@ -36,8 +36,12 @@ export const SearchCardBody = ({
                 <Text
                   color="brand"
                   margin={{ left: 'xsmall' }}
-                  style={{ cursor: 'pointer', textDecoration: 'underline' }}
                   role="button"
+                  style={{
+                    boxShadow: 'none',
+                    cursor: 'pointer',
+                    textDecoration: 'underline'
+                  }}
                   onClick={() => setToggleDescription(!toggleDesciption)}
                 >
                   See

@@ -54,8 +54,13 @@ export const GlobalFilter = ({ globalFilter, setGlobalFilter }) => {
         />
         {userInput && (
           <Box
-            style={{ position: 'absolute', right: '8px', top: '8px' }}
             role="button"
+            style={{
+              boxShadow: 'none',
+              position: 'absolute',
+              right: '8px',
+              top: '8px'
+            }}
             onClick={clearInput}
           >
             <Icon name="Close" size="16px" />

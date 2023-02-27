@@ -35,7 +35,11 @@ export const Alert = ({ message, dismissableKey }) => {
             color="brand"
             margin={{ left: 'xsmall' }}
             role="button"
-            style={{ cursor: 'pointer', textDecoration: 'underline' }}
+            style={{
+              boxShadow: 'none',
+              cursor: 'pointer',
+              textDecoration: 'underline'
+            }}
             onClick={() => setDismiss(true)}
           >
             Dismiss

@@ -26,7 +26,6 @@ export const Portal = ({ center, children }) => {
           height="100%"
           width="100%"
           style={{
-            cursor: 'default',
             overflow: 'auto',
             position: 'fixed',
             left: 0,

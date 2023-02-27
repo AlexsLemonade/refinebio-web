@@ -61,9 +61,16 @@ export const Modal = ({ children, center = true, width = 'auto' }) => {
               }
         }
         pad="medium"
+        height={{ min: setResponsive('100%', '100%', 'none') }}
         width={width}
       >
-        <Box role="button" onClick={closeModal} alignSelf="end" height="24px">
+        <Box
+          alignSelf="end"
+          height="24px"
+          role="button"
+          style={{ boxShadow: 'none' }}
+          onClick={closeModal}
+        >
           <Icon color="gray-shade-70" name="Close" />
           <SrOnly label="Close Modal" />
         </Box>

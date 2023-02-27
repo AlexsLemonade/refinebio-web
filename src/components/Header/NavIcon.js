@@ -65,8 +65,9 @@ export const NavIcon = ({ light, toggle, clickHandler }) => {
     <IconToggle
       light={light}
       toggle={toggle}
-      onClick={clickHandler}
       role="button"
+      style={{ boxShadow: 'none' }}
+      onClick={clickHandler}
     >
       <Box as="span" />
       <SrOnly
