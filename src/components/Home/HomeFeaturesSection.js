@@ -13,7 +13,7 @@ const Card = ({ heading, body, svgIcon, ...props }) => {
 
   return (
     <Column
-      flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')}
+      basis={setResponsive('auto', 'full')}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
