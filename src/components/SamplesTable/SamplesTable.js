@@ -20,7 +20,7 @@ import { getSamplesTableData } from 'api/mockHelper'
 import {
   CellAccessionCode,
   CellAddRemove,
-  CellMetadataAnnotations,
+  CellAdditionalMetadata,
   CellProcessingInformation,
   CellSampleMetadata,
   CellTitle
@@ -90,7 +90,7 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
         disableSortBy: true,
         id: 'additional_metadata',
         width: 180,
-        Cell: CellMetadataAnnotations
+        Cell: CellAdditionalMetadata
       }
     ]
     // columns stick to left only for large(enough screen real estate)
