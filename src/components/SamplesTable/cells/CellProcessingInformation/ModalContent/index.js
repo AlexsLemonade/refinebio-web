@@ -28,6 +28,8 @@ export const ModalContent = ({ results, sample }) => {
                 <Anchor
                   href={links.refinebio_docs_processed_badge}
                   label="Submitter processed"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 />
               }
               status="warning"
@@ -42,6 +44,8 @@ export const ModalContent = ({ results, sample }) => {
                     <Anchor
                       href={links.refinebio_docs_processed_badge}
                       label="refine.bio processed"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     />
                   }
                   status="success"
