@@ -12,24 +12,24 @@ export const Hero = ({
   const { setResponsive } = useResponsive()
 
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <Box align={setResponsive('start', 'center')} {...props}>
+    <Box
+      align={setResponsive('start', 'center')}
+      margin={{
+        bottom: setResponsive(marginBottom, 'basex7', 'basex12')
+      }}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    >
       {header}
       <Box
+        align="center"
+        background="white"
+        elevation="xlarge"
+        pad={boxPadding}
+        round="xsmall"
         width={boxWidth}
-        margin={{
-          bottom: setResponsive(marginBottom, 'basex7', 'basex12')
-        }}
       >
-        <Box
-          align="center"
-          background="white"
-          elevation="xlarge"
-          pad={boxPadding}
-          round="xsmall"
-        >
-          {children}
-        </Box>
+        {children}
       </Box>
     </Box>
   )
