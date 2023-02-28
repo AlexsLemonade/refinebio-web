@@ -1,6 +1,6 @@
 export default [
   'Casey S. Greene, Dongbo Hu',
-  ' Richard W. W. Jones',
+  'Richard W. W. Jones',
   'Stephanie Liu',
   'David S. Mejia',
   'Rob Patro',
@@ -10,6 +10,8 @@ export default [
   'Candace L. Savonen',
   'Jaclyn N. Taroni',
   'William E. Vauclain',
-  ' Deepashree Venkatesh Prasad',
-  ' Kurt G. Wheeler'
+  'Deepashree Venkatesh Prasad',
+  'Kurt G. Wheeler',
+  'Arkadii Yakovets',
+  'Nozomi Ichihara'
 ]
