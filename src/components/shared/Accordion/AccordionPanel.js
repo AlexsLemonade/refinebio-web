@@ -36,7 +36,12 @@ export const AccordionPanel = ({ title, children, handleToggle, expand }) => {
       </Box>
 
       {hasChildren && (
-        <ExpandableBlock duration=".5s" opacity={0.3} expand={expand}>
+        <ExpandableBlock
+          expand={expand}
+          duration=".45s"
+          opacity={0.3}
+          timing="linear"
+        >
           {children}
         </ExpandableBlock>
       )}
