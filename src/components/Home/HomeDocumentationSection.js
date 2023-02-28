@@ -34,7 +34,7 @@ const Card = ({ heading, body, footer, img, ...props }) => {
   )
 }
 
-export const HomeDocumentsSection = () => {
+export const HomeDocumentationSection = () => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -65,4 +65,4 @@ export const HomeDocumentsSection = () => {
   )
 }
 
-export default HomeDocumentsSection
+export default HomeDocumentationSection
