@@ -1,4 +1,4 @@
-import { makeEdgeSizes } from 'helpers/makeEdgeSizes'
+import { setEdgeSizes } from 'helpers/setEdgeSizes'
 import { colors } from 'themes/colors'
 
 /* RULE: 
@@ -31,7 +31,7 @@ export default {
         medium: '24px',
         large: '32px',
         xlarge: '40px',
-        ...makeEdgeSizes(base, 6, 7)
+        ...setEdgeSizes(base, 6, 7)
       }
     },
     medium: {
@@ -55,7 +55,7 @@ export default {
     medium: '24px',
     large: '32px',
     xlarge: '40px',
-    ...makeEdgeSizes(base, 6, 18)
+    ...setEdgeSizes(base, 6, 18)
   },
   elevation: {
     light: {
