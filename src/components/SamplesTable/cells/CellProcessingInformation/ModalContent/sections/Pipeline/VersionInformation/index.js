@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { nanoid } from 'nanoid'
 import { pickObjectPropByKey } from 'helpers/pickObjectPropByKey'
 import { Box, Heading } from 'grommet'
 import { Accordion, AccordionPanel } from 'components/shared/Accordion'
@@ -62,27 +62,26 @@ export const VersionInformation = ({ results }) => {
       return null
     }
 
+    const verionItems = [
+      {
+        'genome build': salmonProcessedResult.organism_index.assembly_name
+      },
+      {
+        'database name': salmonProcessedResult.organism_index.database_name
+      },
+      {
+        'release version': salmonProcessedResult.organism_index.release_version
+      }
+    ]
+
     return (
       <Box margin={{ top: 'small' }}>
         <Heading level={5} size="h5_small" weight="500">
           Genome Build
         </Heading>
-        <VersionItem
-          versions={{
-            'genome build': salmonProcessedResult.organism_index.assembly_name
-          }}
-        />
-        <VersionItem
-          versions={{
-            'database name': salmonProcessedResult.organism_index.database_name
-          }}
-        />
-        <VersionItem
-          versions={{
-            'release version':
-              salmonProcessedResult.organism_index.release_version
-          }}
-        />
+        {verionItems.map((versionItem) => (
+          <VersionItem key={nanoid()} versions={versionItem} />
+        ))}
       </Box>
     )
   }

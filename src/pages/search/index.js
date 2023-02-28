@@ -68,6 +68,7 @@ export const Search = () => {
                 <Box
                   aria-label="Close Filters"
                   role="button"
+                  style={{ boxShadow: 'none' }}
                   width="max-content"
                   onClick={() => setToggleFilterList(false)}
                 >
