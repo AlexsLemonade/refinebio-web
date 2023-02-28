@@ -8,14 +8,15 @@ export const HomeHero = () => {
   return (
     <FixedContainer>
       <Hero
-        body={<HeroBody />}
         boxPadding={{
           horizontal: setResponsive('large', 'basex12'),
           vertical: setResponsive('large', 'basex8')
         }}
         // fixed width to preserve UI layout in wider screens
         boxWidth="815px"
-      />
+      >
+        <HeroBody />
+      </Hero>
     </FixedContainer>
   )
 }

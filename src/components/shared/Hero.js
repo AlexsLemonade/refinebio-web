@@ -2,10 +2,10 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
 
 export const Hero = ({
-  header,
-  body,
+  children,
   boxPadding = {},
   boxWidth = '100%',
+  header,
   marginBottom = 'basex7',
   ...props
 }) => {
@@ -28,7 +28,7 @@ export const Hero = ({
           pad={boxPadding}
           round="xsmall"
         >
-          {body}
+          {children}
         </Box>
       </Box>
     </Box>
