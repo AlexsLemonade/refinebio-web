@@ -1,17 +1,8 @@
 import { Box, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Row } from 'components/shared/Row'
-import styled, { css } from 'styled-components'
 
-export const SuppliedProtocolList = styled(Box)`
-  ${({ theme }) => css`
-    > div:nth-of-type(odd) {
-      background: ${theme.global.colors['gray-shade-5']};
-    }
-  `}
-`
-
-export const SuppliedProtocolItem = ({ field, value }) => {
+export const InformationItem = ({ field, value }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -35,8 +26,10 @@ export const SuppliedProtocolItem = ({ field, value }) => {
         </Text>
       </Box>
       <Box>
-        <Text>{value}</Text>
+        <Text style={{ overflowWrap: 'break-word' }}>{value}</Text>
       </Box>
     </Row>
   )
 }
+
+export default InformationItem
