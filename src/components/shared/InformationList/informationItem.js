@@ -9,12 +9,12 @@ export const InformationItem = ({ field, value }) => {
     <Row
       direction={setResponsive('column', 'column', 'row')}
       justify="start"
+      margin={{ left: '-24px' }}
       pad={{
         horizontal: setResponsive('basex7', 'basex7', 'basex12'),
         vertical: 'small'
       }}
-      margin={{ left: '-24px' }}
-      style={{ maxWidth: 'none', width: 'calc(100% + 48px)' }}
+      width={{ min: 'calc(100% + 48px)', max: 'none' }}
     >
       <Box margin={{ right: 'medium' }} width={{ min: '192px' }}>
         <Text

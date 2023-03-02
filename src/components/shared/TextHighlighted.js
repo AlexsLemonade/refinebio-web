@@ -1,11 +1,11 @@
 import { Fragment } from 'react'
 import { nanoid } from 'nanoid'
+import { isArray } from 'helpers/isArray'
 import { useTextHighlight } from 'hooks/useTextHighlight'
 import { Text } from 'grommet'
 
 // Hightlight portions of a text based on a matched value(a string or an array of string)
 // (resource) https://stackoverflow.com/a/43235785/763705
-
 export const TextHighlighted = ({ text }) => {
   const match = useTextHighlight()
 
@@ -13,9 +13,7 @@ export const TextHighlighted = ({ text }) => {
     return text
   }
 
-  const matchText = Array.isArray(match)
-    ? match.filter((x) => x).join('|')
-    : match
+  const matchText = isArray(match) ? match.filter((x) => x).join('|') : match
 
   const matchRegex = new RegExp(`(${matchText})`, 'gi') // ignore case
 
