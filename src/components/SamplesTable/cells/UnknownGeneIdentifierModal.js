@@ -18,7 +18,7 @@ export const UnknownGeneIdentifierModal = ({
         onClick={() => openModal(id)}
       />
       {modal.id === id && (
-        <Modal>
+        <Modal fullHeight={false}>
           <Box
             align="center"
             border={{ side: 'bottom' }}
@@ -30,7 +30,10 @@ export const UnknownGeneIdentifierModal = ({
             <Icon color="coral-shade-20" name="Warning" size="large" />
             <Heading level={1}>Unknown Gene Identifier</Heading>
           </Box>
-          <Box pad={{ horizontal: 'large' }} width={{ max: '760px' }}>
+          <Box
+            pad={{ bottom: 'large', horizontal: 'large' }}
+            width={{ max: '760px' }}
+          >
             <Paragraph>
               We can not process these data because the raw data are unavailable
               and we can not reliably detect what type of gene identifier the

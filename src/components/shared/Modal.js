@@ -22,7 +22,12 @@ const ModalBox = styled(Box)`
   z-index: 1000;
 `
 
-export const Modal = ({ children, center = true, width = 'auto' }) => {
+export const Modal = ({
+  children,
+  center = true,
+  fullHeight = true,
+  width = 'auto'
+}) => {
   const { setResponsive } = useResponsive()
   const { modal, closeModal } = useModal()
   const handleKeyDown = (event) => {
@@ -61,8 +66,18 @@ export const Modal = ({ children, center = true, width = 'auto' }) => {
               }
         }
         pad="medium"
-        height={{ min: setResponsive('100%', '100%', 'none') }}
-        width={width}
+        height={{
+          min: setResponsive(
+            fullHeight ? '100%' : 'none',
+            fullHeight ? '100%' : 'none',
+            'none'
+          )
+        }}
+        width={setResponsive(
+          fullHeight ? '100%' : '95%',
+          fullHeight ? '100%' : '95%',
+          width
+        )}
       >
         <Box
           alignSelf="end"
