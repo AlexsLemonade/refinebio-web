@@ -11,7 +11,7 @@ export const CellProcessingInformation = ({ row: { original: sample } }) => {
   }
 
   const { modal, openModal } = useModal()
-  const { id } = sample
+  const id = `processing-information_${sample.id}`
   const processorBlacklist = ['MultiQC', 'Salmontools']
   // returns the computational results to display in the modal
   const computationalResults = sample.results
