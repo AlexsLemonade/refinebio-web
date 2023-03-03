@@ -69,6 +69,7 @@ const CustomButton = styled(GrommetButton)`
       background: ${isLoading ? theme.global.colors.black : 'none'};
       border: 1px solid ${theme.global.colors.black};
       color: ${theme.global.colors.black};
+      line-height: 22px;
       &:hover {
         background: ${theme.global.colors.black};
         color: ${isLoading

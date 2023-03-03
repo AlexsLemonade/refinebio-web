@@ -36,7 +36,7 @@ export const Download = () => {
   return (
     <FixedContainer>
       <Box pad={{ top: 'basex7', bottom: 'large' }}>
-        {isDownloadable && !router.query.start ? (
+        {dataset && isDownloadable && !router.query.start ? (
           <>
             <Row>
               <Heading
@@ -46,7 +46,7 @@ export const Download = () => {
               >
                 My Dataset
               </Heading>
-              <ShareDatasetButton datasetId={dataset.id} />
+              <ShareDatasetButton datasetId={dataset?.id} />
             </Row>
             <DownloadAdvancedOptions />
             <DownloadFilesSummary dataset={dataset} />

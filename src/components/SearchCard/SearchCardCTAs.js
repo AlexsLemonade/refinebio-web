@@ -25,7 +25,7 @@ export const SearchCardCTAs = ({
   downloadableSamples,
   status
 }) => {
-  const { dataset, updateDataset, deleteDataset } = useDataset()
+  const { dataset, updateDataset, removeAllDataset } = useDataset()
   const { viewport, setResponsive } = useResponsive()
   // TEMPORARY
   const [downloadableDataset, setDownloadableDataset] = useState({
@@ -83,7 +83,7 @@ export const SearchCardCTAs = ({
                 link
                 linkFontSize={setResponsive('medium', 'small')}
                 margin={{ left: 'xsmall' }}
-                onClick={deleteDataset}
+                onClick={removeAllDataset}
               />
             </Box>
             <Button

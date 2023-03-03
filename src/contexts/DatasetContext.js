@@ -151,7 +151,7 @@ export const DatasetContextProvider = ({ children }) => {
   }
 
   // deletes the dataset with the specified dataset ID
-  const deleteDataset = () => {
+  const removeAllDataset = () => {
     // eslint-disable-next-line no-unused-vars
     const body = { data: {} }
     // endpoint: PUT v1/dataset/${datasetId}
@@ -168,7 +168,7 @@ export const DatasetContextProvider = ({ children }) => {
       dataset,
       datasetId,
       createDataset,
-      deleteDataset,
+      removeAllDataset,
       getDataset,
       removeExperiment,
       removeSamples,
@@ -178,7 +178,7 @@ export const DatasetContextProvider = ({ children }) => {
       dataset,
       datasetId,
       createDataset,
-      deleteDataset,
+      removeAllDataset,
       getDataset,
       removeExperiment,
       removeSamples,
