@@ -46,7 +46,7 @@ export const Download = () => {
               >
                 My Dataset
               </Heading>
-              <ShareDatasetButton dataset={dataset} />
+              <ShareDatasetButton datasetId={dataset.id} />
             </Row>
             <DownloadAdvancedOptions />
             <DownloadFilesSummary dataset={dataset} />

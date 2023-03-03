@@ -2,9 +2,9 @@
 import { useState } from 'react'
 
 export const useCopyToClipboard = () => {
-  const [copiedText, setCopiedText] = useState(null)
+  const [value, setValue] = useState(null)
 
-  const copy = async (text) => {
+  const handdleCopy = async (text) => {
     if (!navigator?.clipboard) {
       // eslint-disable-next-line no-console
       console.warn('Clipboard not supported')
@@ -12,20 +12,19 @@ export const useCopyToClipboard = () => {
       return false
     }
 
-    // Try to save to clipboard then save it in the state if worked
     try {
       await navigator.clipboard.writeText(text)
-      setCopiedText(text)
+      setValue(text)
 
       return true
     } catch (error) {
       // eslint-disable-next-line no-console
       console.warn('Copy failed', error)
-      setCopiedText(null)
+      setValue(null)
 
       return false
     }
   }
 
-  return [copiedText, copy]
+  return [value, handdleCopy]
 }
