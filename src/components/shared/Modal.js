@@ -58,7 +58,7 @@ export const Modal = ({
   return (
     <Portal center={center}>
       <Box
-        onClick={closeModal}
+        onClick={handleClose}
         height="100%"
         width="100%"
         style={{ cursor: 'default', position: 'absolute' }}
