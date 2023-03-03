@@ -1,3 +1,4 @@
+import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -21,6 +22,7 @@ export const getServerSideProps = ({ query }) => {
 }
 
 export const Dataset = ({ datasetId }) => {
+  const { dataset } = useDataset()
   const { setResponsive } = useResponsive()
 
   return (
@@ -47,7 +49,7 @@ export const Dataset = ({ datasetId }) => {
           <MoveToDatasetButton />
         </Box>
         <Box margin={{ top: setResponsive('medium', 'none') }}>
-          <ShareDatasetButton />
+          <ShareDatasetButton dataset={dataset} />
         </Box>
       </Row>
     </FixedContainer>

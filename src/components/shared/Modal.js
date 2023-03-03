@@ -26,13 +26,20 @@ export const Modal = ({
   children,
   center = true,
   fullHeight = true,
-  width = 'auto'
+  width = 'auto',
+  cleanUp = () => {}
 }) => {
   const { setResponsive } = useResponsive()
   const { modal, closeModal } = useModal()
+
+  const handleClose = () => {
+    closeModal()
+    cleanUp()
+  }
+
   const handleKeyDown = (event) => {
     if (event.key === 'Escape') {
-      closeModal()
+      handleClose()
     }
   }
 
@@ -84,7 +91,7 @@ export const Modal = ({
           height="24px"
           role="button"
           style={{ boxShadow: 'none' }}
-          onClick={closeModal}
+          onClick={handleClose}
         >
           <Icon color="gray-shade-70" name="Close" />
           <SrOnly label="Close Modal" />
