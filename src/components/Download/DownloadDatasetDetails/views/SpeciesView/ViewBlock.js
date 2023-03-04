@@ -17,7 +17,8 @@ export const ViewBlock = ({
   quantileNormalize,
   sampleMetadataFields,
   specieDatasetSlice,
-  isImmutable
+  isImmutable,
+  shared
 }) => {
   const { removeSamples } = useDataset()
   const { setResponsive } = useResponsive()
@@ -64,7 +65,7 @@ export const ViewBlock = ({
             sampleMetadataFields={sampleMetadataFields}
           />
         </Box>
-        {!isImmutable && (
+        {!shared && !isImmutable && (
           <Button
             isLoading={loading}
             label="Remove"

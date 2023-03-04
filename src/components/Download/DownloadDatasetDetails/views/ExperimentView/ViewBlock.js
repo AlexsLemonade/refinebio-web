@@ -20,6 +20,7 @@ export const ViewBlock = ({
   metadataFields,
   quantileNormalize,
   isImmutable,
+  shared,
   setOrganism
 }) => {
   const { removeExperiment } = useDataset()
@@ -111,7 +112,7 @@ export const ViewBlock = ({
             />
           )}
         </Box>
-        {!isImmutable && (
+        {!shared && !isImmutable && (
           <Button
             isLoading={loading}
             label="Remove"

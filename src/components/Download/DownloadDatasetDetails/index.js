@@ -5,7 +5,7 @@ import { Row } from 'components/shared/Row'
 import { ExperimentView, SpeciesView } from './views'
 import { RemoveAllButton } from './RemoveAllButton'
 
-export const DownloadDatasetDetails = ({ dataset }) => {
+export const DownloadDatasetDetails = ({ dataset, shared = false }) => {
   const { setResponsive } = useResponsive()
   const [activeIndex, setActiveIndex] = useState(0)
   const handleActive = (nextIndex) => setActiveIndex(nextIndex)
@@ -14,11 +14,11 @@ export const DownloadDatasetDetails = ({ dataset }) => {
   const tabs = [
     {
       label: 'Species View',
-      component: <SpeciesView dataset={dataset} />
+      component: <SpeciesView dataset={dataset} shared={shared} />
     },
     {
       label: 'Experiment View',
-      component: <ExperimentView dataset={dataset} />
+      component: <ExperimentView dataset={dataset} shared={shared} />
     }
   ]
 
@@ -32,7 +32,7 @@ export const DownloadDatasetDetails = ({ dataset }) => {
         >
           Samples
         </Heading>
-        <RemoveAllButton />
+        {!shared && <RemoveAllButton />}
       </Row>
       <Box margin={{ bottom: 'medium' }}>
         <Tabs activeIndex={activeIndex} justify="start" onActive={handleActive}>

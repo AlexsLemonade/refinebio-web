@@ -9,7 +9,8 @@ export const SpeciesView = ({
     organism_samples: samplesBySpecies,
     quantile_normalize: quantileNormalize
   },
-  isImmutable = false
+  isImmutable = false,
+  shared = false
 }) => {
   return (
     <ViewBlocks elevation="medium" pad="medium">
@@ -57,6 +58,7 @@ export const SpeciesView = ({
             samplesInSpecie={samplesInSpecie}
             specieDatasetSlice={specieDatasetSlice}
             specieName={specieName}
+            shared={shared}
             quantileNormalize={quantileNormalize}
           />
         )

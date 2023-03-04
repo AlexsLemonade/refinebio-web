@@ -11,7 +11,8 @@ export const ExperimentView = ({
     experiments,
     quantile_normalize: quantileNormalize
   },
-  isImmutable = false
+  isImmutable = false,
+  shared = false
 }) => {
   const defaultOrganismFilterOption = { label: 'All Speciess', value: 'ALL' }
   const [organism, setOrganism] = useState(defaultOrganismFilterOption.value)
@@ -54,6 +55,7 @@ export const ExperimentView = ({
               metadataFields={metadataFields}
               quantileNormalize={quantileNormalize}
               isImmutable={isImmutable}
+              shared={shared}
               setOrganism={setOrganism}
             />
           )
