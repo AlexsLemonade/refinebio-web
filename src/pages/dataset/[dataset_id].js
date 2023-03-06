@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
+import { usePageRendered } from 'hooks/usePageRendered'
 import { Box } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -30,13 +31,10 @@ export const Dataset = ({ query }) => {
   const { dataset_id: datasetId, ref } = query
   const { dataset } = useDataset()
   const isSharedDataset = ref === 'share'
+  const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
-  const [pageRendered, setPagetRendered] = useState(false)
-  const [data, setData] = useState(null)
 
-  useEffect(() => {
-    setPagetRendered(true)
-  }, [])
+  const [data, setData] = useState(null)
 
   useEffect(() => {
     if (pageRendered) {
