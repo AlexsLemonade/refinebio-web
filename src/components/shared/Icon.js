@@ -62,6 +62,7 @@ export const Icon = ({
       margin={margin}
       size={sizes[size] || size}
       style={{ color: (!link && color) || 'inherit' }}
+      height={size}
       width={size}
     >
       <IconContent
