@@ -20,16 +20,21 @@ import {
   DownloadFilesSummary
 } from 'components/Download'
 
-// https://github.com/AlexsLemonade/refinebio-frontend/issues/27
-
 // TEMPORARY
+// endpoint: https://api.refine.bio/v1/dataset/{datasetId}/?details=true
 export const getServerSideProps = ({ query }) => {
   return { props: { query } }
 }
 
+// Dataset page has 3 states which correspond with the backend's states
+// Processing - The download file is being created
+// Processed - The download file is ready
+// Expired - Download files expire after some time
+// https://github.com/AlexsLemonade/refinebio-frontend/issues/27
+
 export const Dataset = ({ query }) => {
-  const { dataset_id: datasetId, ref } = query
   const { dataset } = useDataset()
+  const { dataset_id: datasetId, ref } = query
   const isSharedDataset = ref === 'share'
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
@@ -63,7 +68,7 @@ export const Dataset = ({ query }) => {
         pad={{ bottom: setResponsive('medium', 'small') }}
       >
         <Box>
-          <MoveToDatasetButton />
+          <MoveToDatasetButton dataset={data} />
         </Box>
         <Row
           gap={setResponsive('medium', 'small')}

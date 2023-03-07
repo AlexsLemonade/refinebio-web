@@ -120,6 +120,22 @@ export const DatasetContextProvider = ({ children }) => {
     }))
   }
 
+  // TEMPORARY
+  // takes an array of experiment objects and adds to users dataset via endpoint
+  // endpoint: PUT v1/dataset/${datasetId}
+  // eslint-disable-next-line no-unused-vars
+  const addSamples = (datasetSlice) => {
+    return ''
+  }
+
+  // TEMPORARY
+  // replace the entire dataset with passed dataset
+  // endpoint: PUT v1/dataset/${datasetId}
+  // eslint-disable-next-line no-unused-vars
+  const replaceSamples = (newDataset) => {
+    return ''
+  }
+
   // remove selected sample(s) from the dataset
   const removeSamples = (datasetSlice) => {
     const data = { ...dataset.data }
@@ -167,21 +183,25 @@ export const DatasetContextProvider = ({ children }) => {
     () => ({
       dataset,
       datasetId,
+      addSamples,
       createDataset,
       removeAllDataset,
       getDataset,
       removeExperiment,
       removeSamples,
+      replaceSamples,
       updateDataset
     }),
     [
       dataset,
       datasetId,
+      addSamples,
       createDataset,
       removeAllDataset,
       getDataset,
       removeExperiment,
       removeSamples,
+      replaceSamples,
       updateDataset
     ]
   )
