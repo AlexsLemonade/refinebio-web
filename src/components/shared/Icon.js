@@ -61,9 +61,11 @@ export const Icon = ({
       color={color}
       margin={margin}
       size={sizes[size] || size}
-      style={{ color: (!link && color) || 'inherit' }}
-      height={size}
-      width={size}
+      style={{
+        color: (!link && color) || 'inherit',
+        height: size,
+        width: size
+      }}
     >
       <IconContent
         aria-hidden

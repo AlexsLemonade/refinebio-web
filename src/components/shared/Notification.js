@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { useResponsive } from 'hooks/useResponsive'
 import { Box, Text } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Icon } from 'components/shared/Icon'
@@ -6,6 +7,7 @@ import { SrOnly } from 'components/shared/SrOnly'
 
 export const Notification = () => {
   const router = useRouter()
+  const { setResponsive } = useResponsive()
   const {
     query: { message, status }
   } = router
@@ -36,16 +38,15 @@ export const Notification = () => {
             color="white"
             size="20px"
           />
-          <Text color="white" style={{ lineHeight: 2 }}>
+          <Text
+            size={setResponsive('small', 'medium')}
+            color="white"
+            width={setResponsive('100px', 'auto')}
+          >
             {message}
           </Text>
         </Box>
-        <Box
-          alignSelf="end"
-          role="button"
-          style={{ boxShadow: 'none' }}
-          onClick={handleClose}
-        >
+        <Box role="button" style={{ boxShadow: 'none' }} onClick={handleClose}>
           <Icon color="white" name="Close" size="small" />
           <SrOnly label="Close this notification" />
         </Box>

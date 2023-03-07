@@ -1,5 +1,6 @@
-import { useDataset } from 'hooks/useDataset'
 import { useRouter } from 'next/router'
+import { useDataset } from 'hooks/useDataset'
+import { useResponsive } from 'hooks/useResponsive'
 import { formatNumbers } from 'helpers/formatNumbers'
 import { getTotalSamples } from 'helpers/dataset'
 import { Box, Heading, RadioButtonGroup } from 'grommet'
@@ -17,11 +18,11 @@ export const ModalContent = ({
   setValue
 }) => {
   const { addSamples, replaceSamples } = useDataset()
+  const { setResponsive } = useResponsive()
 
   const router = useRouter()
   const moveToDataSet = async (action = 'append') => {
     if (action === 'append') {
-      console.log(dataset)
       await addSamples(dataset.data)
       router.push(
         {
@@ -62,7 +63,7 @@ export const ModalContent = ({
       align="center"
       margin={{ bottom: 'medium' }}
       pad={{ bottom: 'small', horizontal: 'large' }}
-      width="625px"
+      width={setResponsive('100%', '100%', '500px')}
     >
       <Box direction="row" gap="xsmall" margin={{ bottom: 'medium' }}>
         <Icon color="error" name="Warning" size="medium" />
@@ -71,7 +72,10 @@ export const ModalContent = ({
           <Anchor href="/download" label="My Dataset" target="_blank" />
         </Heading>
       </Box>
-      <Box margin={{ bottom: 'large' }} width={{ max: '260px' }}>
+      <Box
+        margin={{ bottom: 'large' }}
+        width={{ max: setResponsive('100%', '100%', '260px') }}
+      >
         <RadioButtonGroup
           options={radioOptions}
           name="move-to-dataset"
@@ -79,7 +83,7 @@ export const ModalContent = ({
           onChange={(e) => setValue(e.target.value)}
         />
       </Box>
-      <Row justify="start" gap="small">
+      <Row justify="center" gap="small" width="100%">
         <Button label="Cancel" secondary responsive onClick={handleClose} />
         <Button
           label="Move Samples"
