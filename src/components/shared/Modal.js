@@ -3,10 +3,11 @@ import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
 import { isWindow } from 'helpers/isWindow'
 import { Box } from 'grommet'
+import { Button } from 'components/shared/Button'
+import { Icon } from 'components/shared/Icon'
+import { Portal } from 'components/shared//Portal'
+import { SrOnly } from 'components/shared//SrOnly'
 import styled from 'styled-components'
-import { Icon } from './Icon'
-import { Portal } from './Portal'
-import { SrOnly } from './SrOnly'
 
 const ModalBox = styled(Box)`
   @keyframes zoomIn {
@@ -21,19 +22,29 @@ const ModalBox = styled(Box)`
   position: absolute;
   z-index: 1000;
 `
+// e.g.) pass the unique 'id' to openModal method in the 'button' prop
+// <Modal button={<Button label="Open Modal" onClick={()=> openModal(id)}>}>
+//    {children}
+// </Modal>
+// NOTE: nested modals will simply stack on top of one another, and the inner modals
+// will have its '< Back' button
 
 export const Modal = ({
+  button,
   children,
+  id,
   center = true,
   fullHeight = true,
+  height = 'none',
   width = 'auto',
   cleanUp = () => {}
 }) => {
   const { setResponsive } = useResponsive()
   const { modal, closeModal } = useModal()
+  const modalCount = Object.keys(modal).filter((key) => modal[key].show).length
 
   const handleClose = () => {
-    closeModal()
+    closeModal(id)
     cleanUp()
   }
 
@@ -53,52 +64,71 @@ export const Modal = ({
     }
   }, [])
 
-  if (!modal.show) return null
-
   return (
-    <Portal center={center}>
-      <Box
-        onClick={handleClose}
-        height="100%"
-        width="100%"
-        style={{ cursor: 'default', position: 'absolute' }}
-      />
-      <ModalBox
-        background="white"
-        margin={
-          center
-            ? {}
-            : {
-                top: setResponsive('none', 'none', 'large')
-              }
-        }
-        pad="medium"
-        height={{
-          min: setResponsive(
-            fullHeight ? '100%' : 'none',
-            fullHeight ? '100%' : 'none',
-            'none'
-          )
-        }}
-        width={setResponsive(
-          fullHeight ? '100%' : '95%',
-          fullHeight ? '100%' : '95%',
-          width
-        )}
-      >
-        <Box
-          alignSelf="end"
-          height="24px"
-          role="button"
-          style={{ boxShadow: 'none' }}
-          onClick={handleClose}
-        >
-          <Icon color="gray-shade-70" name="Close" />
-          <SrOnly label="Close Modal" />
-        </Box>
-        <Box margin={{ top: 'xsmall' }}>{children}</Box>
-      </ModalBox>
-    </Portal>
+    <>
+      {button}
+      {modal && modal[id] && modal[id].show ? (
+        <Portal center={center}>
+          <Box
+            onClick={handleClose}
+            height="100%"
+            width="100%"
+            style={{ cursor: 'default', position: 'absolute' }}
+          />
+          <ModalBox
+            background="white"
+            margin={
+              center
+                ? {}
+                : {
+                    top: setResponsive('none', 'none', 'large')
+                  }
+            }
+            pad="medium"
+            height={{
+              min: setResponsive(
+                fullHeight ? '100%' : height,
+                fullHeight ? '100%' : height,
+                height
+              )
+            }}
+            width={setResponsive(
+              fullHeight ? '100%' : '95%',
+              fullHeight ? '100%' : '95%',
+              width
+            )}
+          >
+            <Box
+              direction={modalCount > 1 ? 'row' : 'column'}
+              justify="between"
+            >
+              {modalCount > 1 && (
+                <Box align="center" direction="row" gap="2px">
+                  <Icon color="brand" name="ChevronLeft" size="12px" />
+                  <Button
+                    label="Back"
+                    link
+                    linkFontSize="medium"
+                    onClick={() => closeModal(id)}
+                  />
+                </Box>
+              )}
+              <Box
+                alignSelf="end"
+                height="24px"
+                role="button"
+                style={{ boxShadow: 'none' }}
+                onClick={handleClose}
+              >
+                <Icon color="gray-shade-70" name="Close" />
+                <SrOnly label="Close Modal" />
+              </Box>
+            </Box>
+            <Box margin={{ top: 'xsmall' }}>{children}</Box>
+          </ModalBox>
+        </Portal>
+      ) : null}
+    </>
   )
 }
 
