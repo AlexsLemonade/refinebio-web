@@ -5,7 +5,7 @@ import { Modal } from 'components/shared/Modal'
 import { ModalContent } from './ModalContent'
 
 export const MoveToDatasetButton = ({ dataset }) => {
-  const { modal, openModal, closeModal } = useModal()
+  const { openModal, closeModal } = useModal()
   const id = `move-to-dataset-${dataset?.id}`
   const radioOptions = [
     { label: 'Append samples to My Dataset', value: 'append' },
@@ -15,26 +15,29 @@ export const MoveToDatasetButton = ({ dataset }) => {
   const [value, setValue] = useState(defaultValue)
 
   return (
-    <>
-      <Button
-        label="Move to Dataset"
-        secondary
-        responsive
-        onClick={() => openModal(id)}
+    <Modal
+      id={id}
+      button={
+        <Button
+          label="Move to Dataset"
+          secondary
+          responsive
+          onClick={() => openModal(id)}
+        />
+      }
+      fullHeight={false}
+      cleanUp={() => setValue(defaultValue)}
+    >
+      <ModalContent
+        id={id}
+        dataset={dataset}
+        defaultValue={defaultValue}
+        radioOptions={radioOptions}
+        closeModal={closeModal}
+        value={value}
+        setValue={setValue}
       />
-      {modal.id === id && (
-        <Modal fullHeight={false} cleanUp={() => setValue(defaultValue)}>
-          <ModalContent
-            dataset={dataset}
-            defaultValue={defaultValue}
-            radioOptions={radioOptions}
-            closeModal={closeModal}
-            value={value}
-            setValue={setValue}
-          />
-        </Modal>
-      )}
-    </>
+    </Modal>
   )
 }
 

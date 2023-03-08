@@ -51,6 +51,7 @@ export const Modal = ({
   const handleKeyDown = (event) => {
     if (event.key === 'Escape') {
       handleClose()
+      cleanUp()
     }
   }
 

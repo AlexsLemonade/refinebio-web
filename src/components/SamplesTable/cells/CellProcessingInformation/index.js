@@ -1,7 +1,9 @@
 import { memo } from 'react'
 import moment from 'moment'
 import { useModal } from 'hooks/useModal'
+import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
+import { Modal } from 'components/shared/Modal'
 import { TextNull } from 'components/shared/TextNull'
 import { ModalContent } from './ModalContent'
 
@@ -10,7 +12,8 @@ export const CellProcessingInformation = ({ row: { original: sample } }) => {
     return <TextNull text="N/A" />
   }
 
-  const { modal, openModal } = useModal()
+  const { openModal } = useModal()
+  const { setResponsive } = useResponsive()
   const id = `processing-information_${sample.id}`
   const processorBlacklist = ['MultiQC', 'Salmontools']
   // returns the computational results to display in the modal
@@ -30,12 +33,16 @@ export const CellProcessingInformation = ({ row: { original: sample } }) => {
     .join(', ')
 
   return (
-    <>
-      <Button label={pipelinesText} link onClick={() => openModal(id)} />
-      {modal.id === id && (
-        <ModalContent results={computationalResults} sample={sample} />
-      )}
-    </>
+    <Modal
+      id={id}
+      button={
+        <Button label={pipelinesText} link onClick={() => openModal(id)} />
+      }
+      center={false}
+      width={setResponsive('100vw', '100vw', '950px')}
+    >
+      <ModalContent results={computationalResults} sample={sample} />
+    </Modal>
   )
 }
 

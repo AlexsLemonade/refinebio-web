@@ -10,6 +10,7 @@ import { Icon } from 'components/shared/Icon'
 import { Row } from 'components/shared/Row'
 
 export const ModalContent = ({
+  id,
   defaultValue,
   dataset,
   radioOptions,
@@ -36,6 +37,7 @@ export const ModalContent = ({
         },
         '/download'
       )
+      closeModal(id)
     } else {
       await replaceSamples(dataset.data)
       router.push(
@@ -50,12 +52,13 @@ export const ModalContent = ({
         },
         '/download'
       )
+      closeModal(id)
     }
   }
 
   const handleClose = () => {
     setValue(defaultValue)
-    closeModal()
+    closeModal(id)
   }
 
   return (
