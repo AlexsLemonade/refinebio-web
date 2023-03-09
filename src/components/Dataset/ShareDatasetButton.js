@@ -27,7 +27,7 @@ export const ShareDatasetButton = ({ datasetId }) => {
   useEffect(() => {
     timer.current = window.setTimeout(() => {
       setIsCopied(false)
-    }, 5000)
+    }, 3000)
     return () => stopTimer()
   }, [isCopied])
 
@@ -51,13 +51,20 @@ export const ShareDatasetButton = ({ datasetId }) => {
       >
         <Heading level={1}>Shareable Link</Heading>
         <Box height="24px" margin={{ vertical: '2px' }}>
-          {value && isCopied && (
-            <InlineMessage
-              color="success"
-              fontColor="success"
-              iconSize="medium"
-              label="Copied to clipboard"
-            />
+          {value && (
+            <Box
+              animation={{
+                type: isCopied ? 'fadeIn' : 'fadeOut',
+                duration: 300
+              }}
+            >
+              <InlineMessage
+                color="success"
+                fontColor="success"
+                iconSize="medium"
+                label="Copied to clipboard"
+              />
+            </Box>
           )}
         </Box>
         <Box direction={setResponsive('column', 'row')} gap="small">
