@@ -4,10 +4,12 @@ import { useResponsive } from 'hooks/useResponsive'
 import { formatNumbers } from 'helpers/formatNumbers'
 import { formatString } from 'helpers/formatString'
 import { Box, Heading, Text } from 'grommet'
+import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Pill } from 'components/shared/Pill'
 import { Row } from 'components/shared/Row'
 import { TextCapitalized } from 'components/shared/TextCapitalized'
+import { links } from 'config'
 import { ViewSamplesButton } from '../ViewSamplesButton'
 
 export const ViewBlock = ({
@@ -48,7 +50,18 @@ export const ViewBlock = ({
       {hasRnaSeqExperiments && !quantileNormalize && (
         <Box margin={{ top: 'small' }}>
           <Pill
-            label="Quantile Normalization will be skipped for RNA-seq samples"
+            label={
+              <Anchor
+                href={
+                  links.refinebio_docs_quantile_normalization_rna_seq_samples
+                }
+                label="Quantile Normalization will be skipped for RNA-seq samples"
+                linkColor="black"
+                underlineOnHover={false}
+                target="_blank"
+                rel="noopener noreferrer"
+              />
+            }
             status="info"
           />
         </Box>

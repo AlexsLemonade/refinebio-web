@@ -10,6 +10,7 @@ import { IconBadge } from 'components/shared/IconBadge'
 import { Pill } from 'components/shared/Pill'
 import { Row } from 'components/shared/Row'
 import { TextNull } from 'components/shared/TextNull'
+import { links } from 'config'
 import { ViewSamplesButton } from '../ViewSamplesButton'
 
 export const ViewBlock = ({
@@ -59,7 +60,18 @@ export const ViewBlock = ({
         {experiment.technology === 'RNA-SEQ' && !quantileNormalize && (
           <Box margin={{ vertical: 'xsmall' }}>
             <Pill
-              label="Quantile Normalization will be skipped"
+              label={
+                <Anchor
+                  href={
+                    links.refinebio_docs_quantile_normalization_rna_seq_samples
+                  }
+                  label="Quantile Normalization will be skipped"
+                  linkColor="black"
+                  underlineOnHover={false}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              }
               status="info"
             />
           </Box>
