@@ -6,7 +6,7 @@
     "compose": "docker-compose --env-file ./docker-compose.env -f ./docker-compose.yml",
     "start-local": "yarn compose up",
     "start-client": "yarn start-local client",
-    "start-storybook": "yarn start-local storybook -p 6006",
+    "start-storybook": "yarn start-local storybook",
     "stop-local": "yarn compose down",
     "dev": "next dev",
     "build": "next build",
