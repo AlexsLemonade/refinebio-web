@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
 import { usePageRendered } from 'hooks/usePageRendered'
-import { Box } from 'grommet'
+import { Box, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
@@ -46,7 +46,9 @@ export const Dataset = ({ query }) => {
     <FixedContainer>
       <Box
         pad={{
-          top: setResponsive('basex6', 'basex8', 'basex14'),
+          top: isSharedDataset
+            ? 'large'
+            : setResponsive('basex6', 'basex8', 'basex14'),
           bottom: 'large'
         }}
       >
@@ -57,6 +59,15 @@ export const Dataset = ({ query }) => {
         {datasetId === 'regenerate' && <DatasetRegenerate />}
         {/* TEMPORARY END */}
       </Box>
+      {isSharedDataset && (
+        <Heading
+          level={2}
+          margin={{ bottom: setResponsive('small', 'large') }}
+          size={setResponsive('h2_small', 'h2_large')}
+        >
+          Shared Dataset
+        </Heading>
+      )}
       <Row
         border={{ side: 'bottom' }}
         margin={{ bottom: isSharedDataset ? 'none' : 'xlarge' }}
