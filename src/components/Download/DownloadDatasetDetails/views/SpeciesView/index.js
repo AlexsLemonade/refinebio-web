@@ -5,12 +5,12 @@ import { ViewBlocks } from '../ViewBlocks'
 export const SpeciesView = ({
   dataset: {
     data: datasetData,
+    id: datasetId,
     experiments,
     organism_samples: samplesBySpecies,
     quantile_normalize: quantileNormalize
   },
-  isImmutable = false,
-  shared = false
+  isImmutable
 }) => {
   return (
     <ViewBlocks elevation="medium" pad="medium">
@@ -52,14 +52,14 @@ export const SpeciesView = ({
         return (
           <ViewBlock
             key={specieName}
+            datasetId={datasetId}
             hasRnaSeqExperiments={hasRnaSeqExperiments}
-            isImmutable={isImmutable}
             sampleMetadataFields={sampleMetadataFields}
             samplesInSpecie={samplesInSpecie}
             specieDatasetSlice={specieDatasetSlice}
             specieName={specieName}
-            shared={shared}
             quantileNormalize={quantileNormalize}
+            isImmutable={isImmutable}
           />
         )
       })}

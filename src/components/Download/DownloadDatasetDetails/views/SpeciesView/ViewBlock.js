@@ -11,17 +11,18 @@ import { TextCapitalized } from 'components/shared/TextCapitalized'
 import { ViewSamplesButton } from '../ViewSamplesButton'
 
 export const ViewBlock = ({
+  datasetId,
   specieName,
   samplesInSpecie,
   hasRnaSeqExperiments,
   quantileNormalize,
   sampleMetadataFields,
   specieDatasetSlice,
-  isImmutable,
-  shared
+  isImmutable
 }) => {
   const { removeSamples } = useDataset()
   const { setResponsive } = useResponsive()
+  const totalSamples = formatNumbers(samplesInSpecie.length)
 
   /* === TEMPORARY for Demo : START === */
   // This will be replaced and handled with API calls
@@ -57,15 +58,19 @@ export const ViewBlock = ({
       <Row margin={{ top: 'small' }}>
         <Box>
           <Text margin={{ bottom: 'small' }}>
-            {formatNumbers(samplesInSpecie.length)}{' '}
-            {samplesInSpecie.length > 1 ? 'Samples' : 'Sample'}
+            {totalSamples} {samplesInSpecie.length > 1 ? 'Samples' : 'Sample'}
           </Text>
           <ViewSamplesButton
-            id={specieName}
+            dataset={specieDatasetSlice}
+            params={{
+              dataset_id: datasetId,
+              organism__name: specieName
+            }}
             sampleMetadataFields={sampleMetadataFields}
+            isImmutable={isImmutable}
           />
         </Box>
-        {!shared && !isImmutable && (
+        {!isImmutable && (
           <Button
             isLoading={loading}
             label="Remove"
