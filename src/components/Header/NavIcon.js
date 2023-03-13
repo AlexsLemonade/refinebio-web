@@ -11,7 +11,7 @@ const IconToggle = styled(Box)`
     position: absolute;
     right: 24px;
     top: 8px;
-    z-index: 100;
+    z-index: 18;
 
     &::before,
     &::after {
