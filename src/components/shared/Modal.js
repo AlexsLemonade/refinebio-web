@@ -41,12 +41,13 @@ export const Modal = ({
 }) => {
   const { setResponsive } = useResponsive()
   const { modal, closeModal } = useModal()
-  const [current, setCurrent] = useState(Object.keys(modal))
-  const modalCount = current.filter((key) => modal[key].show).length
+  const visibleModals = Object.keys(modal).filter((key) => modal[key].show)
+  const [current, setCurrent] = useState(visibleModals)
 
   const handleClose = () => {
-    closeModal(id)
+    setCurrent((prev) => prev.filter((element) => id !== element))
     cleanUp()
+    closeModal(id)
   }
 
   const handleKeyDown = (event) => {
@@ -67,7 +68,7 @@ export const Modal = ({
   }, [])
 
   useEffect(() => {
-    setCurrent(Object.keys(modal))
+    setCurrent(visibleModals)
   }, [modal])
 
   return (
@@ -106,7 +107,7 @@ export const Modal = ({
           >
             <Box direction="row" justify="between">
               <Box>
-                {modalCount > 1 && current[0] !== id && (
+                {current.length > 1 && current[0] !== id && (
                   <Box
                     align="center"
                     direction="row"

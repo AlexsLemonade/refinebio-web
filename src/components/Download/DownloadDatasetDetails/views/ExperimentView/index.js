@@ -8,11 +8,11 @@ import { ViewBlocks } from '../ViewBlocks'
 export const ExperimentView = ({
   dataset: {
     data: datasetData,
+    id: datasetId,
     experiments,
     quantile_normalize: quantileNormalize
   },
-  isImmutable = false,
-  shared = false
+  isImmutable
 }) => {
   const defaultOrganismFilterOption = { label: 'All Speciess', value: 'ALL' }
   const [organism, setOrganism] = useState(defaultOrganismFilterOption.value)
@@ -49,13 +49,13 @@ export const ExperimentView = ({
             <ViewBlock
               key={experimentAccessionCode}
               addedSamples={addedSamples}
+              datasetId={datasetId}
               defaultOrganismFilterOption={defaultOrganismFilterOption}
               experiment={experiment}
               experimentAccessionCode={experimentAccessionCode}
               metadataFields={metadataFields}
               quantileNormalize={quantileNormalize}
               isImmutable={isImmutable}
-              shared={shared}
               setOrganism={setOrganism}
             />
           )

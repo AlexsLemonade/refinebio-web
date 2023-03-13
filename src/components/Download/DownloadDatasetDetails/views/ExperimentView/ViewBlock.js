@@ -13,6 +13,7 @@ import { TextNull } from 'components/shared/TextNull'
 import { ViewSamplesButton } from '../ViewSamplesButton'
 
 export const ViewBlock = ({
+  datasetId,
   addedSamples,
   experiment,
   defaultOrganismFilterOption,
@@ -20,7 +21,6 @@ export const ViewBlock = ({
   metadataFields,
   quantileNormalize,
   isImmutable,
-  shared,
   setOrganism
 }) => {
   const { removeExperiment } = useDataset()
@@ -107,12 +107,17 @@ export const ViewBlock = ({
           </Box>
           {addedSamples.length > 0 && (
             <ViewSamplesButton
-              id={experiment.accession_code}
+              dataset={{ [experimentAccessionCode]: addedSamples }}
+              params={{
+                dataset_id: datasetId,
+                experiment_accession_code: experimentAccessionCode
+              }}
               sampleMetadataFields={experiment.sample_metadata}
+              isImmutable={isImmutable}
             />
           )}
         </Box>
-        {!shared && !isImmutable && (
+        {!isImmutable && (
           <Button
             isLoading={loading}
             label="Remove"

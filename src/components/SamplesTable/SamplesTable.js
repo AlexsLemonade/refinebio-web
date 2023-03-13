@@ -126,15 +126,29 @@ export const SamplesTable = ({
     const formattedParams = makeURLParams(params)
 
     if (params.dataset_id) {
-      url = `v1/samples/?${formattedParams}&offset=${
-        page * pageSize
-      }&limit=${pageSize}`
-      // eslint-disable-next-line no-console
-      console.log(url)
-      getSamplesByOrganismName(params.organism__name, setTableData)
-    }
+      if (params.organism__name) {
+        url = `v1/samples/?${formattedParams}&offset=${
+          page * pageSize
+        }&limit=${pageSize}`
+        // eslint-disable-next-line no-console
+        console.log(url)
+        getSamplesByOrganismName(params.organism__name, setTableData)
+      }
 
-    if (params.experiment_accession_code) {
+      if (params.experiment_accession_code) {
+        url = `v1/samples/?${formattedParams}&offset=${
+          page * pageSize
+        }&limit=${pageSize}`
+        // eslint-disable-next-line no-console
+        console.log(url)
+        getSamplesTableData(
+          params.experiment_accession_code,
+          pageSize,
+          pageSizes,
+          setTableData
+        )
+      }
+    } else {
       url = `v1/samples/?${formattedParams}&offset=${
         page * pageSize
       }&limit=${pageSize}`
