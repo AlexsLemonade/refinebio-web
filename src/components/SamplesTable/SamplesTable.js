@@ -2,9 +2,9 @@ import { useMemo, memo, useState, useEffect } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import { formatString } from 'helpers/formatString'
-import { Box, CheckBox, Heading, Spinner } from 'grommet'
+import { makeURLParams } from 'helpers/makeURLParams'
+import { Box, CheckBox, Spinner } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
-import { Column } from 'components/shared/Column'
 import {
   DataTable,
   ExpandTableButton,
@@ -16,7 +16,7 @@ import { PageSizes } from 'components/shared/PageSizes'
 import { Pagination } from 'components/shared/Pagination'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
-import { getSamplesTableData } from 'api/mockHelper'
+import { getSamplesTableData, getSamplesByOrganismName } from 'api/mockHelper'
 import {
   CellAccessionCode,
   CellAddRemove,
@@ -25,16 +25,17 @@ import {
   CellSampleMetadata,
   CellTitle
 } from './cells'
-import { SamplesTableCTA } from './SamplesTableCTA'
 
-export const SamplesTable = ({ accessionCode, experiment, samples }) => {
+export const SamplesTable = ({
+  sampleMetadataFields,
+  params,
+  isImmutable = false,
+  modalView = false
+}) => {
   const { viewport, setResponsive } = useResponsive()
   const tableHeight = { default: '60vh', expanded: '75vh' } // required for a table loading screen
   const minColumns = 5 // matches the current refine.bio
-  const totalColumns = experiment ? 4 + experiment.sample_metadata.length : 0 // matches the current refine.bio
-  const stickyColumns = 3
   const pageSizes = [10, 20, 50]
-  const sampleMetadata = experiment.sample_metadata
   const [tableExpanded, setTableExpanded] = useState(false)
   // TEMPORARY
   // for API calls(data, filter, pageSize, limit, offset, order)
@@ -44,8 +45,11 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
   const [globalFilter, setGlobalFilter] = useState(null) // match the react-table useGlobalFilter API's names
   const [page, setPage] = useState(0) // 'page' matches the react-table usePagination API's name
   const [pageSize, setPageSize] = useState(pageSizes[0]) // match the react-table usePagination API's names
+  const totalPages = tableData && tableData.count
+  const totalColumns =
+    tableData && sampleMetadataFields ? 4 + sampleMetadataFields.length : 0 // matches the current refine.bio
 
-  const data = useMemo(() => tableData, [tableData])
+  const data = useMemo(() => tableData.results, [tableData])
   const columns = useMemo(() => {
     const temp = [
       {
@@ -72,7 +76,7 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
         isVisible: false
       },
       // map the available columns in the experiment.sample_metadata
-      ...sampleMetadata.map((column) => ({
+      ...sampleMetadataFields.map((column) => ({
         id: column,
         accessor: column,
         Header: formatString(column),
@@ -93,53 +97,62 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
         Cell: CellAdditionalMetadata
       }
     ]
-    // columns stick to left only for large(enough screen real estate)
+    // columns stick to left only for 'large'(enough screen real estate)
     if (viewport === 'large') {
-      for (let i = 0; i <= stickyColumns; i++) {
+      let stickyColumns = 3
+      let i = 0
+      // if the dataset is immutable, remove the add/remove button
+      if (isImmutable) {
+        temp.shift()
+        stickyColumns = 2
+      }
+      for (i; i <= stickyColumns; i++) {
         temp[i].sticky = 'left'
       }
     }
 
     return temp
-  }, [viewport, experiment])
+  }, [isImmutable, tableData, viewport])
   const defaultColumn = useMemo(
     () => ({ minWidth: 60, width: 160, maxWidth: 250 }),
     []
   )
 
-  // TEMPORARY (* for UI demo)
   useEffect(() => {
+    // TEMPORARY (* for UI demo)
     setLoading(true)
-    // TODO: create helpers for building a url query string
-    const url = `v1/samples/experiment_accession_code=${accessionCode}&offset=${
-      page * pageSize
-    }&limit=${pageSize}`
-    // eslint-disable-next-line no-console
-    console.log(url)
-    getSamplesTableData(accessionCode, pageSize, pageSizes, setTableData)
+
+    let url
+    const formattedParams = makeURLParams(params)
+
+    if (params.dataset_id) {
+      url = `v1/samples/?${formattedParams}&offset=${
+        page * pageSize
+      }&limit=${pageSize}`
+      // eslint-disable-next-line no-console
+      console.log(url)
+      getSamplesByOrganismName(params.organism__name, setTableData)
+    }
+
+    if (params.experiment_accession_code) {
+      url = `v1/samples/?${formattedParams}&offset=${
+        page * pageSize
+      }&limit=${pageSize}`
+      // eslint-disable-next-line no-console
+      console.log(url)
+      getSamplesTableData(
+        params.experiment_accession_code,
+        pageSize,
+        pageSizes,
+        setTableData
+      )
+    }
+
     setLoading(false)
   }, [globalFilter, page, pageSize])
 
   return (
-    <Box
-      elevation="medium"
-      pad={setResponsive('medium', 'large')}
-      margin={{ bottom: 'basex6' }}
-    >
-      <Row margin={{ bottom: 'medium' }}>
-        <Column>
-          <Heading
-            level={2}
-            size="h2_small"
-            margin={{ bottom: setResponsive('small', 'none') }}
-          >
-            Samples
-          </Heading>
-        </Column>
-        <Column>
-          <SamplesTableCTA />
-        </Column>
-      </Row>
+    <>
       {tableExpanded && <Overlay duration={0} toggle={tableExpanded} />}
       <Box
         animation={tableExpanded ? { type: 'zoomIn', duration: 250 } : {}}
@@ -169,7 +182,7 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
               pageSizeLabel="Total Samples"
               pageSize={pageSize}
               pageSizes={pageSizes}
-              totalPages={samples.count}
+              totalPages={totalPages}
               setPageSize={setPageSize}
             />
             <Box
@@ -186,12 +199,14 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
               globalFilter={globalFilter}
               setGlobalFilter={setGlobalFilter}
             />
-            {viewport === 'large' && totalColumns > minColumns && (
-              <ExpandTableButton
-                tableExpanded={tableExpanded}
-                setTableExpanded={setTableExpanded}
-              />
-            )}
+            {!modalView &&
+              viewport === 'large' &&
+              totalColumns > minColumns && (
+                <ExpandTableButton
+                  tableExpanded={tableExpanded}
+                  setTableExpanded={setTableExpanded}
+                />
+              )}
           </Box>
         </Row>
         <Box
@@ -207,19 +222,21 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
             </Box>
           ) : (
             <TextHighlightContextProvider match={globalFilter}>
-              <DataTable
-                columns={columns}
-                data={data}
-                defaultColumn={defaultColumn}
-                hiddenColumns={columns
-                  .filter((column) => column.isVisible === false)
-                  .map((column) => column.accessor)}
-                loading={loading}
-                manualPagination
-                tableDefaultHeight={tableHeight.default}
-                tableExpandedHeight={tableHeight.expanded}
-                tableExpanded={tableExpanded}
-              />
+              {tableData?.results?.length && (
+                <DataTable
+                  columns={columns}
+                  data={data}
+                  defaultColumn={defaultColumn}
+                  hiddenColumns={columns
+                    .filter((column) => column.isVisible === false)
+                    .map((column) => column.accessor)}
+                  loading={loading}
+                  manualPagination
+                  tableDefaultHeight={tableHeight.default}
+                  tableExpandedHeight={tableHeight.expanded}
+                  tableExpanded={tableExpanded}
+                />
+              )}
             </TextHighlightContextProvider>
           )}
         </Box>
@@ -256,11 +273,11 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
             page={page}
             pageSize={pageSize}
             setPage={setPage}
-            totalPages={samples.count}
+            totalPages={totalPages}
           />
         </Box>
       </Box>
-    </Box>
+    </>
   )
 }
 

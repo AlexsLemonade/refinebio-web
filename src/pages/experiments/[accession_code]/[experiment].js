@@ -1,9 +1,12 @@
 import { memo } from 'react'
 import { useRouter } from 'next/router'
-import { Box } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
+import { Box, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
+import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { SamplesTable } from 'components/SamplesTable'
+import { Row } from 'components/shared/Row'
+import { SamplesTable, SamplesTableCTA } from 'components/SamplesTable'
 import { getExperimentPageData } from 'api/mockHelper'
 // TEMPORARY
 // endpoints:
@@ -11,13 +14,14 @@ import { getExperimentPageData } from 'api/mockHelper'
 // `v1/samples/experiment_accession_code=${accessionCode}`
 export const getServerSideProps = ({ query }) => {
   const { accession_code: accessionCode } = query
-  const { experiment, samples } = getExperimentPageData(accessionCode)
+  const { experiment } = getExperimentPageData(accessionCode)
 
-  return { props: { accessionCode, experiment, samples } }
+  return { props: { accessionCode, experiment } }
 }
 
-export const Experiment = ({ accessionCode, experiment, samples }) => {
+export const Experiment = ({ accessionCode, experiment }) => {
   const router = useRouter()
+  const { setResponsive } = useResponsive()
 
   return (
     <Box>
@@ -46,11 +50,32 @@ export const Experiment = ({ accessionCode, experiment, samples }) => {
         {/* TEMPORARY: END */}
       </FixedContainer>
       <FixedContainer>
-        <SamplesTable
-          accessionCode={accessionCode}
-          experiment={experiment}
-          samples={samples}
-        />
+        <Box
+          elevation="medium"
+          pad={setResponsive('medium', 'large')}
+          margin={{ bottom: 'basex6' }}
+        >
+          <Row margin={{ bottom: 'medium' }}>
+            <Column>
+              <Heading
+                level={2}
+                size="h2_small"
+                margin={{ bottom: setResponsive('small', 'none') }}
+              >
+                Samples
+              </Heading>
+            </Column>
+            <Column>
+              <SamplesTableCTA />
+            </Column>
+          </Row>
+          <SamplesTable
+            params={{
+              experiment_accession_code: accessionCode
+            }}
+            sampleMetadataFields={experiment.sample_metadata}
+          />
+        </Box>
       </FixedContainer>
     </Box>
   )

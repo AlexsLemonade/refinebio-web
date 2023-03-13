@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import mockDataExperiment from './mockDataExperiment'
 import mockDataSamplesTable from './mockDataSamplesTable'
+import mockDataSamplesByOrganismName from './mockDataSamplesByOrganismName'
 
 const isFirst = (accessionCode) => accessionCode === 'GSE116436'
 const isSixth = (accessionCode) => accessionCode === 'ERP006132'
@@ -46,38 +47,47 @@ export const getSamplesTableData = (
   if (pageSize === pageSizes[0]) {
     setTableData(
       first
-        ? mockDataSamplesTable[0][0].results
+        ? mockDataSamplesTable[0][0]
         : sixth
-        ? mockDataSamplesTable[2][0].results
+        ? mockDataSamplesTable[2][0]
         : tenth
-        ? mockDataSamplesTable[3][0].results
+        ? mockDataSamplesTable[3][0]
         : arrayExpress
-        ? mockDataSamplesTable[4][0].results
-        : mockDataSamplesTable[1][0].results
+        ? mockDataSamplesTable[4][0]
+        : mockDataSamplesTable[1][0]
     )
   } else if (pageSize === pageSizes[1]) {
     setTableData(
       first
-        ? mockDataSamplesTable[0][1].results
+        ? mockDataSamplesTable[0][1]
         : sixth
-        ? mockDataSamplesTable[2][1].results
+        ? mockDataSamplesTable[2][1]
         : tenth
-        ? mockDataSamplesTable[3][0].results
+        ? mockDataSamplesTable[3][0]
         : arrayExpress
-        ? mockDataSamplesTable[4][0].results
-        : mockDataSamplesTable[1][1].results
+        ? mockDataSamplesTable[4][0]
+        : mockDataSamplesTable[1][1]
     )
   } else if (pageSize === pageSizes[2]) {
     setTableData(
       first
-        ? mockDataSamplesTable[0][2].results
+        ? mockDataSamplesTable[0][2]
         : sixth
-        ? mockDataSamplesTable[2][2].results
+        ? mockDataSamplesTable[2][2]
         : tenth
-        ? mockDataSamplesTable[3][0].results
+        ? mockDataSamplesTable[3][0]
         : arrayExpress
-        ? mockDataSamplesTable[4][0].results
-        : mockDataSamplesTable[1][2].results
+        ? mockDataSamplesTable[4][0]
+        : mockDataSamplesTable[1][2]
     )
   }
+}
+
+export const getSamplesByOrganismName = (organismName, setTableData) => {
+  const isHomoSapiens = organismName === 'HOMO_SAPIENS'
+  const samples = isHomoSapiens
+    ? mockDataSamplesByOrganismName[0]
+    : mockDataSamplesByOrganismName[1]
+
+  setTableData(samples)
 }
