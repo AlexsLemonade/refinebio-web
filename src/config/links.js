@@ -59,7 +59,8 @@ export const links = {
   bioconductor_tximport:
     'http://bioconductor.org/packages/release/bioc/html/tximport.html',
   bioconductor_tutorial:
-    'http://bioconductor.org/packages/release/bioc/vignettes/tximport/inst/doc/tximport.html'
+    'http://bioconductor.org/packages/release/bioc/vignettes/tximport/inst/doc/tximport.html',
+  nih: 'https://www.ncbi.nlm.nih.gov/pubmed/'
 }
 
 export default links

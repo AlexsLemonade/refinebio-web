@@ -1,12 +1,19 @@
 import { memo } from 'react'
 import { useRouter } from 'next/router'
 import { useResponsive } from 'hooks/useResponsive'
+import { getURLForAccessionCode } from 'helpers/getURLForAccessionCode'
 import { unionizeArrays } from 'helpers/unionizeArrays'
 import { Box, Grid, Heading } from 'grommet'
+import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
+import {
+  InformationList,
+  InformationItem
+} from 'components/shared/InformationList'
 import { Row } from 'components/shared/Row'
+import { TextNull } from 'components/shared/TextNull'
 import { SamplesTable, SamplesTableCTA } from 'components/SamplesTable'
 import {
   SearchCardHeader,
@@ -14,6 +21,8 @@ import {
   SearchCardMeta
 } from 'components/SearchCard'
 import { getExperimentPageData } from 'api/mockHelper'
+import { links } from 'config'
+
 // TEMPORARY
 // endpoints:
 // `v1/experiments/${accession_code}/`
@@ -28,6 +37,11 @@ export const getServerSideProps = ({ query }) => {
 export const Experiment = ({ accessionCode, experiment }) => {
   const router = useRouter()
   const { setResponsive } = useResponsive()
+  const databaseNames = {
+    GEO: 'Gene Expression Omnibus (GEO)',
+    SRA: 'Sequence Read Archive (SRA)',
+    ARRAY_EXPRESS: 'ArrayExpress'
+  }
 
   return (
     <Box>
@@ -62,6 +76,7 @@ export const Experiment = ({ accessionCode, experiment }) => {
               row: setResponsive('small', 'medium'),
               column: 'medium'
             }}
+            margin={{ bottom: 'medium' }}
           >
             <Box gridArea="header">
               <SearchCardHeader
@@ -69,7 +84,6 @@ export const Experiment = ({ accessionCode, experiment }) => {
                 title={experiment.title}
               />
             </Box>
-
             <Box
               gridArea="ctas"
               margin={{ top: setResponsive('none', 'large') }}
@@ -94,6 +108,115 @@ export const Experiment = ({ accessionCode, experiment }) => {
               />
             </Box>
           </Grid>
+          <Box margin={{ bottom: 'large' }}>
+            <Heading level={4} size="h4_xsmall">
+              Submitter Supplied Information
+            </Heading>
+          </Box>
+          <InformationList>
+            <InformationItem
+              field="Description"
+              value={experiment.description}
+            />
+            {experiment.pubmed_id ? (
+              <InformationItem
+                field="PubMedID"
+                value={
+                  <Anchor
+                    label={experiment.pubmed_id}
+                    href={`${links.nih}${experiment.pubmed_id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                }
+              />
+            ) : (
+              <TextNull label="No associated PubMed ID" />
+            )}
+            {experiment.publication_title ? (
+              <InformationItem
+                field="Publication Title"
+                value={
+                  <Anchor
+                    label={experiment.publication_title}
+                    href={`${links.nih}${experiment.pubmed_id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                }
+              />
+            ) : (
+              <TextNull label="No associated publication" />
+            )}
+            <InformationItem
+              field="Total Samples"
+              value={experiment.num_total_samples}
+            />
+            {experiment.submitter_institution ? (
+              <InformationItem
+                field="Submitter’s Institution"
+                value={
+                  <Anchor
+                    label={experiment.submitter_institution}
+                    href={{
+                      pathname: '/search',
+                      query: {
+                        q: `submitter_institution:${experiment.submitter_institution}`
+                      }
+                    }}
+                  />
+                }
+              />
+            ) : (
+              <TextNull label="No associated institution" />
+            )}
+            {experiment.publication_authors.length > 0 ? (
+              <InformationItem
+                field="Authors"
+                value={experiment.publication_authors.map((author, i) => (
+                  <>
+                    {i ? ', ' : ''}
+                    <Anchor
+                      key={author}
+                      label={author}
+                      href={{
+                        pathname: '/search',
+                        query: {
+                          q: `publication_authors:${author}`
+                        }
+                      }}
+                    />
+                  </>
+                ))}
+              />
+            ) : (
+              <TextNull label="No associated authors" />
+            )}
+            {experiment.source_database && (
+              <InformationItem
+                field="Source Repositories"
+                value={databaseNames[experiment.source_database]}
+              />
+            )}
+            {experiment.alternate_accession_code ? (
+              <InformationItem
+                field="Alternate Accession IDs"
+                value={
+                  <Anchor
+                    label={experiment.alternate_accession_code}
+                    href={getURLForAccessionCode(
+                      experiment.alternate_accession_code
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link"
+                  />
+                }
+              />
+            ) : (
+              <TextNull label="None" />
+            )}
+          </InformationList>
         </Box>
       </FixedContainer>
       <FixedContainer>
