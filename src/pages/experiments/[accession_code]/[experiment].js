@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import { useRouter } from 'next/router'
 import { useResponsive } from 'hooks/useResponsive'
+import { getExperimentPageData } from 'api/mockHelper'
 import { getURLForAccessionCode } from 'helpers/getURLForAccessionCode'
 import { unionizeArrays } from 'helpers/unionizeArrays'
 import { Box, Grid, Heading } from 'grommet'
@@ -15,12 +16,10 @@ import {
 import { Row } from 'components/shared/Row'
 import { TextNull } from 'components/shared/TextNull'
 import { SamplesTable, SamplesTableCTA } from 'components/SamplesTable'
-import {
-  SearchCardHeader,
-  SearchCardCTAs,
-  SearchCardMeta
-} from 'components/SearchCard'
-import { getExperimentPageData } from 'api/mockHelper'
+import { SearchCardHeader } from 'components/SearchCard/SearchCardHeader'
+import { SearchCardCTAs } from 'components/SearchCard/SearchCardCTAs'
+import { SearchCardMeta } from 'components/SearchCard/SearchCardMeta'
+
 import { links } from 'config'
 
 // TEMPORARY
