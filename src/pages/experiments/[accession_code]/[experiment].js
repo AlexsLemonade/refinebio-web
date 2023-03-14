@@ -1,12 +1,18 @@
 import { memo } from 'react'
 import { useRouter } from 'next/router'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, Heading } from 'grommet'
+import { unionizeArrays } from 'helpers/unionizeArrays'
+import { Box, Grid, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { SamplesTable, SamplesTableCTA } from 'components/SamplesTable'
+import {
+  SearchCardHeader,
+  SearchCardCTAs,
+  SearchCardMeta
+} from 'components/SearchCard'
 import { getExperimentPageData } from 'api/mockHelper'
 // TEMPORARY
 // endpoints:
@@ -36,18 +42,59 @@ export const Experiment = ({ accessionCode, experiment }) => {
         />
       </FixedContainer>
       <FixedContainer>
-        {/* TEMPORARY: START */}
-        <Box
-          align="center"
-          elevation="medium"
-          justify="center"
-          pad="large"
-          margin={{ bottom: 'basex6' }}
-          height="800px"
-        >
-          Experiment's Submitter Supplied Information goes here
+        <Box elevation="medium" pad="large" margin={{ bottom: 'basex6' }}>
+          <Grid
+            areas={setResponsive(
+              [
+                { name: 'header', start: [0, 0], end: [1, 0] },
+                { name: 'meta', start: [0, 1], end: [1, 1] },
+                { name: 'ctas', start: [0, 2], end: [1, 2] }
+              ],
+              [
+                { name: 'header', start: [0, 0], end: [0, 1] },
+                { name: 'ctas', start: [1, 0], end: [1, 1] },
+                { name: 'meta', start: [0, 2], end: [1, 2] }
+              ]
+            )}
+            columns={['1fr', 'auto']}
+            rows={['auto', 'auto', 'auto']}
+            gap={{
+              row: setResponsive('small', 'medium'),
+              column: 'medium'
+            }}
+          >
+            <Box gridArea="header">
+              <SearchCardHeader
+                accessionCode={accessionCode}
+                title={experiment.title}
+              />
+            </Box>
+
+            <Box
+              gridArea="ctas"
+              margin={{ top: setResponsive('none', 'large') }}
+            >
+              <SearchCardCTAs
+                accessionCode={accessionCode}
+                downloadableSamples={experiment.num_downloadable_samples}
+                status=""
+              />
+            </Box>
+            <Box gridArea="meta">
+              <SearchCardMeta
+                downloadableSamples={experiment.num_downloadable_samples}
+                organismNames={experiment.organism_names}
+                platformNames={unionizeArrays(
+                  ...experiment.samples.map((sample) => sample.pretty_platform)
+                )}
+                technology={unionizeArrays(
+                  ...experiment.samples.map((sample) => sample.technology)
+                )}
+                size="medium"
+              />
+            </Box>
+          </Grid>
         </Box>
-        {/* TEMPORARY: END */}
       </FixedContainer>
       <FixedContainer>
         <Box
