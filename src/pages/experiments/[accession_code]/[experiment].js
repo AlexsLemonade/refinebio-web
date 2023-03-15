@@ -1,4 +1,5 @@
-import { memo } from 'react'
+import { memo, Fragment } from 'react'
+import { nanoid } from 'nanoid'
 import { useRouter } from 'next/router'
 import { useResponsive } from 'hooks/useResponsive'
 import { getExperimentPageData } from 'api/mockHelper'
@@ -31,6 +32,12 @@ export const getServerSideProps = ({ query }) => {
   const { experiment } = getExperimentPageData(accessionCode)
 
   return { props: { accessionCode, experiment } }
+}
+
+const InformationItemBlock = ({ condition, field, value, textNull = '' }) => {
+  if (!condition) return textNull ? <TextNull label={textNull} /> : null
+
+  return <InformationItem field={field} value={value} />
 }
 
 export const Experiment = ({ accessionCode, experiment }) => {
@@ -117,104 +124,91 @@ export const Experiment = ({ accessionCode, experiment }) => {
               field="Description"
               value={experiment.description}
             />
-            {experiment.pubmed_id ? (
-              <InformationItem
-                field="PubMedID"
-                value={
-                  <Anchor
-                    label={experiment.pubmed_id}
-                    href={`${links.nih}${experiment.pubmed_id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  />
-                }
-              />
-            ) : (
-              <TextNull label="No associated PubMed ID" />
-            )}
-            {experiment.publication_title ? (
-              <InformationItem
-                field="Publication Title"
-                value={
-                  <Anchor
-                    label={experiment.publication_title}
-                    href={`${links.nih}${experiment.pubmed_id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  />
-                }
-              />
-            ) : (
-              <TextNull label="No associated publication" />
-            )}
+            <InformationItemBlock
+              condition={experiment.pubmed_id}
+              field="PubMedID"
+              value={
+                <Anchor
+                  label={experiment.pubmed_id}
+                  href={`${links.nih}${experiment.pubmed_id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              }
+              textNull="No associated PubMed ID"
+            />
+            <InformationItemBlock
+              condition={experiment.publication_title}
+              field="Publication Title"
+              value={
+                <Anchor
+                  label={experiment.publication_title}
+                  href={`${links.nih}${experiment.pubmed_id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              }
+              textNull="No associated publication"
+            />
             <InformationItem
               field="Total Samples"
               value={experiment.num_total_samples}
             />
-            {experiment.submitter_institution ? (
-              <InformationItem
-                field="Submitter’s Institution"
-                value={
+            <InformationItemBlock
+              condition={experiment.submitter_institution}
+              field="Submitter’s Institution"
+              value={
+                <Anchor
+                  label={experiment.submitter_institution}
+                  href={{
+                    pathname: '/search',
+                    query: {
+                      q: `submitter_institution:${experiment.submitter_institution}`
+                    }
+                  }}
+                />
+              }
+              textNull="No associated institution"
+            />
+            <InformationItemBlock
+              condition={experiment.publication_authors.length > 0}
+              field="Authors"
+              value={experiment.publication_authors.map((author, i) => (
+                <Fragment key={nanoid()}>
+                  {i ? ', ' : ''}
                   <Anchor
-                    label={experiment.submitter_institution}
+                    label={author}
                     href={{
                       pathname: '/search',
                       query: {
-                        q: `submitter_institution:${experiment.submitter_institution}`
+                        q: `publication_authors:${author}`
                       }
                     }}
                   />
-                }
-              />
-            ) : (
-              <TextNull label="No associated institution" />
-            )}
-            {experiment.publication_authors.length > 0 ? (
-              <InformationItem
-                field="Authors"
-                value={experiment.publication_authors.map((author, i) => (
-                  <>
-                    {i ? ', ' : ''}
-                    <Anchor
-                      key={author}
-                      label={author}
-                      href={{
-                        pathname: '/search',
-                        query: {
-                          q: `publication_authors:${author}`
-                        }
-                      }}
-                    />
-                  </>
-                ))}
-              />
-            ) : (
-              <TextNull label="No associated authors" />
-            )}
-            {experiment.source_database && (
-              <InformationItem
-                field="Source Repositories"
-                value={databaseNames[experiment.source_database]}
-              />
-            )}
-            {experiment.alternate_accession_code ? (
-              <InformationItem
-                field="Alternate Accession IDs"
-                value={
-                  <Anchor
-                    label={experiment.alternate_accession_code}
-                    href={getURLForAccessionCode(
-                      experiment.alternate_accession_code
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link"
-                  />
-                }
-              />
-            ) : (
-              <TextNull label="None" />
-            )}
+                </Fragment>
+              ))}
+              textNull="No associated authors"
+            />
+            <InformationItemBlock
+              condition={experiment.source_database}
+              field="Source Repositories"
+              value={databaseNames[experiment.source_database]}
+            />
+            <InformationItemBlock
+              condition={experiment.alternate_accession_code}
+              field="Alternate Accession IDs"
+              value={
+                <Anchor
+                  label={experiment.alternate_accession_code}
+                  href={getURLForAccessionCode(
+                    experiment.alternate_accession_code
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              }
+              textNull="None"
+            />
           </InformationList>
         </Box>
       </FixedContainer>
