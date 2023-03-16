@@ -16,7 +16,6 @@ export const SearchBulkActions = ({
   const { setResponsive } = useResponsive()
   const isMax850 = useMatchMedia('(max-width: 850px)')
   const isMax1100 = useMatchMedia('(max-width: 1100px)')
-
   const { count: totalResults } = results
 
   return (
@@ -83,13 +82,10 @@ export const SearchBulkActions = ({
           ]
         )}
         rows={setResponsive(['auto', 'auto', 'auto', 'auto'], ['auto', 'auto'])}
-        columns={
-          setResponsive(
-            ['auto'],
-            isMax1100 || isMax850 ? ['auto', 'auto'] : ['auto', 'auto', 'auto']
-          )
-          // eslint-disable-next-line no-nested-ternary
-        }
+        columns={setResponsive(
+          ['auto'],
+          isMax1100 || isMax850 ? ['auto', 'auto'] : ['auto', 'auto', 'auto']
+        )}
         gap={{
           row: 'medium',
           column: 'xsmall'

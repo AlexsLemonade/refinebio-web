@@ -8,16 +8,16 @@ const apiVersion = 'v1'
 
 // Returns the fulfilled promise using isomorphic-unfetc with async/await
 export const fetchAsync = async (url, params = false) => {
-  const aprUrl = url.startsWith('http') ? url : `${host}/${apiVersion}/${url}`
+  const apiUrl = url.startsWith('http') ? url : `${host}/${apiVersion}/${url}`
 
   let response
 
   try {
-    response = await (params ? fetch(aprUrl, params) : fetch(aprUrl))
+    response = await (params ? fetch(apiUrl, params) : fetch(apiUrl))
   } catch (e) {
     return {
       ok: false,
-      message: `Network error when fetching ${aprUrl}`,
+      message: `Network error when fetching ${apiUrl}`,
       status: e.status,
       error: e
     }
@@ -32,7 +32,7 @@ export const fetchAsync = async (url, params = false) => {
       !!apiVersion &&
       !sourceRevision.includes(apiVersion)
     ) {
-      throw new Error('Refinebio API version mismtach')
+      throw new Error('Refinebio API version mismatch')
     }
   }
 
@@ -51,7 +51,7 @@ export const fetchAsync = async (url, params = false) => {
   if (!response.ok) {
     return {
       ok: false,
-      message: `Server error`,
+      message: 'Server error',
       status: response.status,
       result
     }

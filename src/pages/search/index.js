@@ -41,16 +41,16 @@ export const Search = () => {
       value: 'source_first_published'
     }
   ]
-  //
-  const [facets, setFacets] = useState([])
+
   const [loading, setLoading] = useState(false)
-  const [searchResults, setSearchResults] = useState([])
+  const [facets, setFacets] = useState([])
+  const [filter, setFilter] = useState({})
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(pageSizes[0])
+  const [searchResults, setSearchResults] = useState([])
   const [selectedSortByOption, setSelectedSortByOption] = useState(
     sortByOptions[0].value
   )
-  const [filter, setFilter] = useState({})
   const [toggleFilterList, setToggleFilterList] = useState(false)
 
   useEffect(() => {
@@ -69,13 +69,12 @@ export const Search = () => {
       ...filter,
       num_downloadable_samples__gt: 0
     }
+
     const getSearchResults = async () => {
       setLoading(true)
       const result = await api.searchResults.get(params)
       setSearchResults(result)
       setFacets(result.facets)
-      // setSearchResults(data)
-      // setFacets(data.facets)
       setLoading(false)
     }
 

@@ -28,31 +28,31 @@ export const SearchFilter = ({
   setFilter
 }) => {
   const { setResponsive } = useResponsive()
+  const maxCount = 5
   const options = useMemo(() => {
     return Object.entries(filterGroup)
   }, [filterGroup])
+  const filterLength = options.length
   const [filteredResult, setfilteredResult] = useState(options)
   const [open, setOpen] = useState(false)
   const [userInput, setUserInput] = useState('')
-  const maxCount = 5
-  const filterLength = options.length
 
-  const onCheck = (event, value) => {
-    if (event.target.checked) {
-      setChecked([...checked, value])
+  const toggleCheckBox = (e, val) => {
+    if (e.target.checked) {
+      setChecked([...checked, val])
     } else {
-      setChecked(checked.filter((item) => item !== value))
+      setChecked(checked.filter((item) => item !== val))
     }
   }
 
-  const toggleFilter = (event, value) => {
-    if (event.target.checked) {
+  const toggleFilter = (e, val) => {
+    if (e.target.checked) {
       setFilter(() => {
         const temp = { ...filter }
         if (temp[filterParam] !== undefined) {
-          temp[filterParam].push(value)
+          temp[filterParam].push(val)
         } else {
-          temp[filterParam] = [value]
+          temp[filterParam] = [val]
         }
 
         return { ...temp }
@@ -62,7 +62,7 @@ export const SearchFilter = ({
         const temp = { ...filter }
 
         if (temp[filterParam].length > 0) {
-          temp[filterParam] = temp[filterParam].filter((item) => item !== value)
+          temp[filterParam] = temp[filterParam].filter((item) => item !== val)
           if (temp[filterParam].length === 0) delete temp[filterParam]
         }
 
@@ -71,9 +71,9 @@ export const SearchFilter = ({
     }
   }
 
-  const handleToggleCheckBox = (e, v) => {
-    onCheck(e, v)
-    toggleFilter(e, v)
+  const handleToggle = (e, val) => {
+    toggleCheckBox(e, val)
+    toggleFilter(e, val)
   }
 
   const filterOptions = (val) => {
@@ -126,7 +126,7 @@ export const SearchFilter = ({
             <CheckBox
               label={`${formatString(option[0])} (${formatNumbers(option[1])})`}
               checked={checked.includes(option[0])}
-              onChange={(e) => handleToggleCheckBox(e, option[0])}
+              onChange={(e) => handleToggle(e, option[0])}
             />
           </Box>
         ))}
