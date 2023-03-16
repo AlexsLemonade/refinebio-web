@@ -87,6 +87,7 @@ export const Button = ({
   linkFontSize = 'small',
   responsive = false,
   tertiary = false,
+  textDecoration = 'underline',
   uppercase = false,
   width,
   clickHandler,
@@ -110,7 +111,7 @@ export const Button = ({
             fontSize: linkFontSize,
             border: 'none',
             padding: 0,
-            textDecoration: 'underline'
+            textDecoration
           }}
           onClick={clickHandler}
           // eslint-disable-next-line react/jsx-props-no-spreading
