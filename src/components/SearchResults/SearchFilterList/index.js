@@ -16,13 +16,13 @@ export const SearchFilterList = ({
   handleClearAll
 }) => {
   const { viewport, setResponsive } = useResponsive()
-  // The order of the filters to render in UI
+  const [filterGroup, setFilterGroup] = useState({})
   const filterIncludePublication = {
     label: 'Includes Publication',
     key: 'has_publication',
     parameter: 'has_publication'
   }
-
+  // The order of the filters to render in UI
   const filterOrder = [
     {
       label: 'Organism',
@@ -37,8 +37,6 @@ export const SearchFilterList = ({
     },
     filterIncludePublication
   ]
-
-  const [filterGroup, setFilterGroup] = useState({})
 
   const toggleCheckBox = (e, param, val) => {
     const item = param === filterIncludePublication.parameter ? param : val
@@ -106,42 +104,40 @@ export const SearchFilterList = ({
       </Box>
       {filterOrder.map((f, i, arr) => (
         <Fragment key={f.key}>
-          {!isEmptyObject(filterGroup[i]) &&
-            f.parameter !== filterIncludePublication.parameter && (
-              <Box
-                border={
-                  !isLastIndex(i, arr)
-                    ? {
-                        color: 'gray-shade-40',
-                        side: 'bottom'
-                      }
-                    : null
-                }
-                margin={{ bottom: 'medium' }}
-                pad={{ bottom: !isLastIndex(i, arr) ? 'medium' : 'none' }}
-              >
-                <SearchFilter
-                  checkedFilter={checkedFilter}
-                  filterGroup={filterGroup[i]}
-                  filterParam={f.parameter}
-                  label={f.label}
-                  handleToggle={handleToggle}
-                />
-              </Box>
-            )}
-
-          {f.parameter === filterIncludePublication.parameter && (
-            <FilterIncludePublication
-              checked={checkedFilter.includes(
-                filterIncludePublication.parameter
-              )}
-              filterParam={filterIncludePublication.parameter}
-              label={filterIncludePublication.label}
-              handleToggle={handleToggle}
-            />
+          {!isEmptyObject(filterGroup[i]) && !isLastIndex(i, arr) && (
+            <Box
+              border={
+                !isLastIndex(i, arr)
+                  ? {
+                      color: 'gray-shade-40',
+                      side: 'bottom'
+                    }
+                  : null
+              }
+              margin={{ bottom: 'medium' }}
+              pad={{ bottom: !isLastIndex(i, arr) ? 'medium' : 'none' }}
+            >
+              <SearchFilter
+                checkedFilter={checkedFilter}
+                filterGroup={filterGroup[i]}
+                filterParam={f.parameter}
+                label={f.label}
+                handleToggle={handleToggle}
+              />
+            </Box>
           )}
         </Fragment>
       ))}
+
+      {!isEmptyObject(filterGroup) && (
+        <FilterIncludePublication
+          checked={checkedFilter.includes(filterIncludePublication.parameter)}
+          filterGroup={filterGroup[filterGroup.length - 1]}
+          filterParam={filterIncludePublication.parameter}
+          label={`${filterIncludePublication.label}`}
+          handleToggle={handleToggle}
+        />
+      )}
 
       {viewport !== 'large' && (
         <Button label="Apply Filters" primary responsive />
