@@ -1,22 +1,38 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, memo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
+import { isEmptyObject } from 'helpers/isEmptyObject'
+import { isLastIndex } from 'helpers/isLastIndex'
 import { Box, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { SearchFilter } from './SearchFilter'
 
-export const SearchFilterList = ({ facets = {} }) => {
+export const SearchFilterList = ({ facets, filter, setFilter }) => {
   const { viewport, setResponsive } = useResponsive()
   // The order of the filters to render in UI
   const filterOrder = [
-    { label: 'Organism', type: 'downloadable_organism_names' },
-    { label: 'Technology', type: 'technology' },
-    { label: 'Platforms', type: 'platform_accession_codes' }
+    {
+      label: 'Organism',
+      key: 'downloadable_organism_names',
+      parameter: 'downloadable_organism'
+    },
+    { label: 'Technology', key: 'technology', parameter: 'technology' },
+    {
+      label: 'Platforms',
+      key: 'platform_accession_codes',
+      parameter: 'platform'
+    }
   ]
   const [filterGroup, setFilterGroup] = useState({})
+  const [checked, setChecked] = useState([])
+
+  const handleClearAll = () => {
+    setFilter({})
+    setChecked([])
+  }
 
   useEffect(() => {
-    setFilterGroup(() => filterOrder.map((f) => facets[f.type]))
-  }, [])
+    setFilterGroup(() => filterOrder.map((f) => facets[f.key]))
+  }, [facets])
 
   return (
     <Box>
@@ -34,13 +50,14 @@ export const SearchFilterList = ({ facets = {} }) => {
           label="Clear All"
           link
           linkFontSize={setResponsive('medlum', 'medlum', 'small')}
+          onClick={handleClearAll}
         />
       </Box>
       {filterOrder.map((f, i, arr) => (
         <Box
-          key={f.type}
+          key={f.key}
           border={
-            i !== arr.length - 1
+            !isLastIndex(i, arr)
               ? {
                   color: 'gray-shade-40',
                   side: 'bottom'
@@ -48,13 +65,17 @@ export const SearchFilterList = ({ facets = {} }) => {
               : null
           }
           margin={{ bottom: 'medium' }}
-          pad={{ bottom: i !== arr.length - 1 ? 'medium' : 'none' }}
+          pad={{ bottom: !isLastIndex(i, arr) ? 'medium' : 'none' }}
         >
-          {filterGroup[i] && (
+          {!isEmptyObject(filterGroup[i]) && (
             <SearchFilter
-              filterOrder={filterOrder}
+              checked={checked}
+              filter={filter}
               filterGroup={filterGroup[i]}
+              filterParam={f.parameter}
               label={f.label}
+              setChecked={setChecked}
+              setFilter={setFilter}
             />
           )}
         </Box>
@@ -66,4 +87,4 @@ export const SearchFilterList = ({ facets = {} }) => {
   )
 }
 
-export default SearchFilterList
+export default memo(SearchFilterList)

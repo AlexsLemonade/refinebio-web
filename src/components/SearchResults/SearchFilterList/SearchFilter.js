@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import { formatNumbers } from 'helpers/formatNumbers'
 import { formatString } from 'helpers/formatString'
+import { isLastIndex } from 'helpers/isLastIndex'
 import { scrollToId } from 'helpers/scrollToId'
 import { Box, CheckBox, Heading } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
@@ -17,8 +18,15 @@ const ToggleButton = styled(sharedButton)`
     }
   `}
 `
-
-export const SearchFilter = ({ filterGroup, label }) => {
+export const SearchFilter = ({
+  checked,
+  filter,
+  filterGroup,
+  filterParam,
+  label,
+  setChecked,
+  setFilter
+}) => {
   const { setResponsive } = useResponsive()
   const options = useMemo(() => {
     return Object.entries(filterGroup)
@@ -28,6 +36,45 @@ export const SearchFilter = ({ filterGroup, label }) => {
   const [userInput, setUserInput] = useState('')
   const maxCount = 5
   const filterLength = options.length
+
+  const onCheck = (event, value) => {
+    if (event.target.checked) {
+      setChecked([...checked, value])
+    } else {
+      setChecked(checked.filter((item) => item !== value))
+    }
+  }
+
+  const toggleFilter = (event, value) => {
+    if (event.target.checked) {
+      setFilter(() => {
+        const temp = { ...filter }
+        if (temp[filterParam] !== undefined) {
+          temp[filterParam].push(value)
+        } else {
+          temp[filterParam] = [value]
+        }
+
+        return { ...temp }
+      })
+    } else {
+      setFilter(() => {
+        const temp = { ...filter }
+
+        if (temp[filterParam].length > 0) {
+          temp[filterParam] = temp[filterParam].filter((item) => item !== value)
+          if (temp[filterParam].length === 0) delete temp[filterParam]
+        }
+
+        return { ...temp }
+      })
+    }
+  }
+
+  const handleToggleCheckBox = (e, v) => {
+    onCheck(e, v)
+    toggleFilter(e, v)
+  }
 
   const filterOptions = (val) => {
     setUserInput(val)
@@ -74,10 +121,12 @@ export const SearchFilter = ({ filterGroup, label }) => {
         {getOptionsToRender().map((option, i, arr) => (
           <Box
             key={option[0]}
-            margin={{ bottom: i !== arr.length - 1 ? 'xsmall' : '0' }}
+            margin={{ bottom: !isLastIndex(i, arr) ? 'xsmall' : '0' }}
           >
             <CheckBox
               label={`${formatString(option[0])} (${formatNumbers(option[1])})`}
+              checked={checked.includes(option[0])}
+              onChange={(e) => handleToggleCheckBox(e, option[0])}
             />
           </Box>
         ))}

@@ -1,22 +1,86 @@
-import { useState, memo } from 'react'
+/* eslint-disable no-nested-ternary */
+import { useEffect, useState, memo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, Grid } from 'grommet'
+import { makeURLParams } from 'helpers/makeURLParams'
+import { Box, Grid, Spinner } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { LayerResponsive } from 'components/shared/LayerLayerResponsive'
 import { Icon } from 'components/shared/Icon'
-import { SearchBulkActions } from 'components/SearchBulkActions'
+import { Pagination } from 'components/shared/Pagination'
+import { SearchBulkActions, SearchFilterList } from 'components/SearchResults'
 import { SearchCard } from 'components/SearchCard'
 import { SearchBox } from 'components/shared/SearchBox'
-import { SearchFilterList } from 'components/SearchFilterList'
-import data from 'api/mockDataSearchResult'
+import { api } from 'api'
 
 export const Search = () => {
   const { viewport, setResponsive } = useResponsive()
-  const [toggleFilterList, setToggleFilterList] = useState(false)
   const sideWidth = '250px'
   const searchBoxWidth = '550px'
+  const pageSizes = [10, 20, 50]
+  const sortByOptions = [
+    {
+      label: 'Best Match',
+      value: '_score'
+    },
+    {
+      label: 'Most No. of samples',
+      value: '-num_downloadable_samples'
+    },
+    {
+      label: 'Least No. of samples',
+      value: 'num_downloadable_samples'
+    },
+    {
+      label: 'Newest Experiment',
+      value: '-source_first_published'
+    },
+    {
+      label: 'Oldest Experiment',
+      value: 'source_first_published'
+    }
+  ]
+  //
+  const [facets, setFacets] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [searchResults, setSearchResults] = useState([])
+  const [page, setPage] = useState(0)
+  const [pageSize, setPageSize] = useState(pageSizes[0])
+  const [selectedSortByOption, setSelectedSortByOption] = useState(
+    sortByOptions[0].value
+  )
+  const [filter, setFilter] = useState({})
+  const [toggleFilterList, setToggleFilterList] = useState(false)
+
+  useEffect(() => {
+    // TEMPORARY (* for UI demo)
+    const formattedParams = makeURLParams(filter)
+    const url = `v1/search/?&offset=${
+      page * pageSize
+    }&limit=${pageSize}&ordering=${selectedSortByOption}${formattedParams}`
+    // eslint-disable-next-line no-console
+    console.log(url)
+
+    const params = {
+      limit: pageSize,
+      offset: page * pageSize,
+      ordering: selectedSortByOption,
+      ...filter,
+      num_downloadable_samples__gt: 0
+    }
+    const getSearchResults = async () => {
+      setLoading(true)
+      const result = await api.searchResults.get(params)
+      setSearchResults(result)
+      setFacets(result.facets)
+      // setSearchResults(data)
+      // setFacets(data.facets)
+      setLoading(false)
+    }
+
+    getSearchResults()
+  }, [filter, page, pageSize, selectedSortByOption])
 
   return (
     <FixedContainer pad="large">
@@ -76,7 +140,12 @@ export const Search = () => {
                 </Box>
               </Box>
             )}
-            <SearchFilterList facets={data.facets} />
+
+            <SearchFilterList
+              facets={facets}
+              filter={filter}
+              setFilter={setFilter}
+            />
           </BoxBlock>
         </LayerResponsive>
         <Box gridArea="main">
@@ -90,11 +159,46 @@ export const Search = () => {
               onClick={() => setToggleFilterList(true)}
             />
           )}
-          <SearchBulkActions results={data} />
+          <SearchBulkActions
+            pageSize={pageSize}
+            pageSizes={pageSizes}
+            results={searchResults}
+            sortByOptions={sortByOptions}
+            selectedSortByOption={selectedSortByOption}
+            setPageSize={setPageSize}
+            setSelectedSortByOption={setSelectedSortByOption}
+          />
 
-          {data.results.map((result) => (
-            <SearchCard key={result.id} result={result} />
-          ))}
+          {loading ? (
+            <Box align="center" fill justify="center">
+              <Spinner
+                color="gray-shade-70"
+                message={{ start: 'Loading data', end: 'Data loaded' }}
+              />
+            </Box>
+          ) : searchResults?.results?.length ? (
+            <Box animation={{ type: 'fadeIn', duration: 300 }}>
+              {searchResults.results.map((result) => (
+                <SearchCard key={result.id} result={result} />
+              ))}
+            </Box>
+          ) : (
+            <Box>No search results</Box>
+          )}
+
+          <Box
+            align="center"
+            direction="row"
+            justify="center"
+            margin={{ top: 'medium' }}
+          >
+            <Pagination
+              page={page}
+              pageSize={pageSize}
+              setPage={setPage}
+              totalPages={searchResults.count}
+            />
+          </Box>
         </Box>
       </Grid>
     </FixedContainer>
