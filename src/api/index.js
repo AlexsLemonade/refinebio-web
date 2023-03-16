@@ -1,7 +1,5 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { searchResults } from './resource/searchResults'
 
-const handler = (req, res) => {
-  res.status(200).json({ name: 'Refinebio-web' })
+export const api = {
+  searchResults
 }
-
-export default handler
