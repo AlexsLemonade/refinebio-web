@@ -3,6 +3,7 @@ import { useEffect, useState, memo } from 'react'
 import { useRouter } from 'next/router'
 import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
+import { scrollToTop } from 'helpers/scrollToTop'
 import { isDownloadableDataset } from 'helpers/dataset'
 import { Box, Heading } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -25,7 +26,7 @@ export const Download = () => {
 
   useEffect(() => {
     if (!isDownloadable) {
-      window.scrollTo(0, 0)
+      scrollToTop()
     }
   }, [isDownloadable])
 

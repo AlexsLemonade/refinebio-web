@@ -1,7 +1,8 @@
 import { memo, Fragment } from 'react'
-import { nanoid } from 'nanoid'
 import { useRouter } from 'next/router'
+import { nanoid } from 'nanoid'
 import { useResponsive } from 'hooks/useResponsive'
+import { formatNumbers } from 'helpers/formatNumbers'
 import { getExperimentPageData } from 'api/mockHelper'
 import { getURLForAccessionCode } from 'helpers/getURLForAccessionCode'
 import { unionizeArrays } from 'helpers/unionizeArrays'
@@ -152,7 +153,7 @@ export const Experiment = ({ accessionCode, experiment }) => {
             />
             <InformationItem
               field="Total Samples"
-              value={experiment.num_total_samples}
+              value={formatNumbers(experiment.num_total_samples)}
             />
             <InformationItemBlock
               condition={experiment.submitter_institution}

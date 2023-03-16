@@ -193,7 +193,6 @@ export const SamplesTable = ({
             margin={{ bottom: setResponsive('medium', 'none') }}
           >
             <PageSizes
-              pageSizeLabel="Total Samples"
               pageSize={pageSize}
               pageSizes={pageSizes}
               totalPages={totalPages}

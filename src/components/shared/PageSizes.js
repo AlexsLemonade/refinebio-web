@@ -4,10 +4,11 @@ import { formatNumbers } from 'helpers/formatNumbers'
 import { Box, Select, Text } from 'grommet'
 
 export const PageSizes = ({
-  pageSize,
-  pageSizeLabel = '',
-  pageSizes,
+  textPrepend = 'Show',
+  textAppended = 'Total Samples',
   totalPages,
+  pageSize,
+  pageSizes,
   setPageSize
 }) => {
   const { viewport } = useResponsive()
@@ -17,7 +18,7 @@ export const PageSizes = ({
 
   return (
     <Box align="center" direction="row">
-      <Text margin={{ right: 'xsmall' }}>Show</Text>
+      <Text margin={{ right: 'xsmall' }}>{textPrepend}</Text>
       <Box width="84px">
         <Select
           id="page-sizes"
@@ -28,7 +29,7 @@ export const PageSizes = ({
         />
       </Box>
       <Text margin={{ left: 'xsmall' }}>
-        of {formatNumbers(totalPages)} {viewport !== 'small' && pageSizeLabel}
+        of {formatNumbers(totalPages)} {viewport !== 'small' && textAppended}
       </Text>
     </Box>
   )
