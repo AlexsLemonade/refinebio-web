@@ -19,13 +19,11 @@ const ToggleButton = styled(sharedButton)`
   `}
 `
 export const SearchFilter = ({
-  checked,
-  filter,
+  checkedFilter,
   filterGroup,
   filterParam,
   label,
-  setChecked,
-  setFilter
+  handleToggle
 }) => {
   const { setResponsive } = useResponsive()
   const maxCount = 5
@@ -36,45 +34,6 @@ export const SearchFilter = ({
   const [filteredResult, setfilteredResult] = useState(options)
   const [open, setOpen] = useState(false)
   const [userInput, setUserInput] = useState('')
-
-  const toggleCheckBox = (e, val) => {
-    if (e.target.checked) {
-      setChecked([...checked, val])
-    } else {
-      setChecked(checked.filter((item) => item !== val))
-    }
-  }
-
-  const toggleFilter = (e, val) => {
-    if (e.target.checked) {
-      setFilter(() => {
-        const temp = { ...filter }
-        if (temp[filterParam] !== undefined) {
-          temp[filterParam].push(val)
-        } else {
-          temp[filterParam] = [val]
-        }
-
-        return { ...temp }
-      })
-    } else {
-      setFilter(() => {
-        const temp = { ...filter }
-
-        if (temp[filterParam].length > 0) {
-          temp[filterParam] = temp[filterParam].filter((item) => item !== val)
-          if (temp[filterParam].length === 0) delete temp[filterParam]
-        }
-
-        return { ...temp }
-      })
-    }
-  }
-
-  const handleToggle = (e, val) => {
-    toggleCheckBox(e, val)
-    toggleFilter(e, val)
-  }
 
   const filterOptions = (val) => {
     setUserInput(val)
@@ -125,8 +84,8 @@ export const SearchFilter = ({
           >
             <CheckBox
               label={`${formatString(option[0])} (${formatNumbers(option[1])})`}
-              checked={checked.includes(option[0])}
-              onChange={(e) => handleToggle(e, option[0])}
+              checked={checkedFilter.includes(option[0])}
+              onChange={(e) => handleToggle(e, filterParam, option[0])}
             />
           </Box>
         ))}

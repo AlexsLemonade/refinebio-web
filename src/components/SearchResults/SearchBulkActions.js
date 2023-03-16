@@ -91,7 +91,7 @@ export const SearchBulkActions = ({
           column: 'xsmall'
         }}
       >
-        <Box gridArea="page-display">
+        <Box gridArea="page-display" justify="center">
           <Box align="center" direction="row">
             <PageSizes
               textPrepend="Showing"

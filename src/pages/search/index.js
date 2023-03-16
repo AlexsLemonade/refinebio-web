@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import { useEffect, useState, memo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
-import { makeURLParams } from 'helpers/makeURLParams'
 import { Box, Grid, Spinner } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -9,7 +8,11 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import { LayerResponsive } from 'components/shared/LayerLayerResponsive'
 import { Icon } from 'components/shared/Icon'
 import { Pagination } from 'components/shared/Pagination'
-import { SearchBulkActions, SearchFilterList } from 'components/SearchResults'
+import {
+  NoMatchingResults,
+  SearchBulkActions,
+  SearchFilterList
+} from 'components/SearchResults'
 import { SearchCard } from 'components/SearchCard'
 import { SearchBox } from 'components/shared/SearchBox'
 import { api } from 'api'
@@ -45,23 +48,24 @@ export const Search = () => {
   const [loading, setLoading] = useState(false)
   const [facets, setFacets] = useState([])
   const [filter, setFilter] = useState({})
+  const [checkedFilter, setCheckedFilter] = useState([])
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(pageSizes[0])
-  const [searchResults, setSearchResults] = useState([])
+  const [searchResults, setSearchResults] = useState(null)
   const [selectedSortByOption, setSelectedSortByOption] = useState(
     sortByOptions[0].value
   )
   const [toggleFilterList, setToggleFilterList] = useState(false)
 
+  const isSearchResults = searchResults && searchResults.results.length > 0
+
+  const handleClearAll = () => {
+    setFilter({})
+    setCheckedFilter([])
+  }
+
   useEffect(() => {
     // TEMPORARY (* for UI demo)
-    const formattedParams = makeURLParams(filter)
-    const url = `v1/search/?&offset=${
-      page * pageSize
-    }&limit=${pageSize}&ordering=${selectedSortByOption}${formattedParams}`
-    // eslint-disable-next-line no-console
-    console.log(url)
-
     const params = {
       limit: pageSize,
       offset: page * pageSize,
@@ -140,11 +144,16 @@ export const Search = () => {
               </Box>
             )}
 
-            <SearchFilterList
-              facets={facets}
-              filter={filter}
-              setFilter={setFilter}
-            />
+            {searchResults && facets && (
+              <SearchFilterList
+                checkedFilter={checkedFilter}
+                facets={facets}
+                filter={filter}
+                setCheckedFilter={setCheckedFilter}
+                setFilter={setFilter}
+                handleClearAll={handleClearAll}
+              />
+            )}
           </BoxBlock>
         </LayerResponsive>
         <Box gridArea="main">
@@ -158,46 +167,51 @@ export const Search = () => {
               onClick={() => setToggleFilterList(true)}
             />
           )}
-          <SearchBulkActions
-            pageSize={pageSize}
-            pageSizes={pageSizes}
-            results={searchResults}
-            sortByOptions={sortByOptions}
-            selectedSortByOption={selectedSortByOption}
-            setPageSize={setPageSize}
-            setSelectedSortByOption={setSelectedSortByOption}
-          />
+
+          {isSearchResults && (
+            <SearchBulkActions
+              pageSize={pageSize}
+              pageSizes={pageSizes}
+              results={searchResults}
+              sortByOptions={sortByOptions}
+              selectedSortByOption={selectedSortByOption}
+              setPageSize={setPageSize}
+              setSelectedSortByOption={setSelectedSortByOption}
+            />
+          )}
 
           {loading ? (
-            <Box align="center" fill justify="center">
+            <Box align="center" fill justify="center" height="10000px">
               <Spinner
                 color="gray-shade-70"
                 message={{ start: 'Loading data', end: 'Data loaded' }}
               />
             </Box>
-          ) : searchResults?.results?.length ? (
+          ) : isSearchResults ? (
             <Box animation={{ type: 'fadeIn', duration: 300 }}>
               {searchResults.results.map((result) => (
                 <SearchCard key={result.id} result={result} />
               ))}
             </Box>
           ) : (
-            <Box>No search results</Box>
+            <NoMatchingResults handleClearFilter={handleClearAll} />
           )}
 
-          <Box
-            align="center"
-            direction="row"
-            justify="center"
-            margin={{ top: 'medium' }}
-          >
-            <Pagination
-              page={page}
-              pageSize={pageSize}
-              setPage={setPage}
-              totalPages={searchResults.count}
-            />
-          </Box>
+          {isSearchResults && (
+            <Box
+              align="center"
+              direction="row"
+              justify="center"
+              margin={{ top: 'medium' }}
+            >
+              <Pagination
+                page={page}
+                pageSize={pageSize}
+                setPage={setPage}
+                totalPages={searchResults.count}
+              />
+            </Box>
+          )}
         </Box>
       </Grid>
     </FixedContainer>
