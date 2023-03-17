@@ -1,5 +1,4 @@
 import { useResponsive } from 'hooks/useResponsive'
-import { scrollToTop } from 'helpers/scrollToTop'
 import {
   Box,
   CheckBox,
@@ -34,11 +33,6 @@ export const MissingResultsForm = ({
     { label: 'Clinical Research', value: 'Clinical Research' },
     { label: 'AI/ML Research', value: 'AI/ML Research' }
   ]
-
-  const handleCancel = () => {
-    scrollToTop()
-    closeMissingFormHandler()
-  }
 
   return (
     <Box
@@ -119,7 +113,12 @@ export const MissingResultsForm = ({
           </Box>
         </FieldBlock>
         <FieldBlock direction="row" gap="xsmall">
-          <Button label="Cancel" secondary responsive onClick={handleCancel} />
+          <Button
+            label="Cancel"
+            secondary
+            responsive
+            onClick={closeMissingFormHandler}
+          />
           <Button label="Submit" primary responsive type="submit" />
         </FieldBlock>
       </Box>

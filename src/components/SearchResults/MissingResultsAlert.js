@@ -1,10 +1,8 @@
-import { scrollToTop } from 'helpers/scrollToTop'
 import { Box, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 
 export const MissingResultsAlert = ({ openMissingFormHandler }) => {
   const handleClick = () => {
-    scrollToTop()
     openMissingFormHandler()
   }
 

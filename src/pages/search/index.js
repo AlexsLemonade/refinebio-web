@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { api } from 'api'
 import { useResponsive } from 'hooks/useResponsive'
 import { getDefaultCheckedFilter, getDefaultFilter } from 'helpers/search'
+import { scrollToTop } from 'helpers/scrollToTop'
 import { Box, Grid, Spinner } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -75,10 +76,12 @@ export const Search = ({ query }) => {
 
   const handleOpenMissingForm = () => {
     setToggleMissingForm(true)
+    scrollToTop()
   }
 
   const handleCloseMissingForm = () => {
     setToggleMissingForm(false)
+    scrollToTop()
   }
 
   useEffect(() => {
