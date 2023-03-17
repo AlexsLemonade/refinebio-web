@@ -237,7 +237,7 @@ export const Search = ({ query }) => {
               </Box>
             ) : (
               <NoMatchingResults
-                clearFilterHanlder={handleClearAll}
+                clearFilterHandler={handleClearAll}
                 openMissingFormHandler={handleOpenMissingForm}
               />
             )}

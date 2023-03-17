@@ -1,4 +1,4 @@
-export { MissingResultsAlert } from './MissingResultAlert'
+export { MissingResultsAlert } from './MissingResultsAlert'
 export { MissingResultsForm } from './MissingResultsForm'
 export { NoMatchingResults } from './NoMatchingResults'
 export { SearchBulkActions } from './SearchBulkActions'
