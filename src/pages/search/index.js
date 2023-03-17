@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import { useEffect, useState, memo } from 'react'
 import { useRouter } from 'next/router'
+import { api } from 'api'
 import { useResponsive } from 'hooks/useResponsive'
 import { getDefaultCheckedFilter, getDefaultFilter } from 'helpers/search'
 import { Box, Grid, Spinner } from 'grommet'
@@ -10,6 +11,8 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import { LayerResponsive } from 'components/shared/LayerLayerResponsive'
 import { Icon } from 'components/shared/Icon'
 import { Pagination } from 'components/shared/Pagination'
+import { SearchBox } from 'components/shared/SearchBox'
+import { SearchCard } from 'components/SearchCard'
 import {
   MissingResultsAlert,
   MissingResultsForm,
@@ -17,9 +20,6 @@ import {
   SearchBulkActions,
   SearchFilterList
 } from 'components/SearchResults'
-import { SearchCard } from 'components/SearchCard'
-import { SearchBox } from 'components/shared/SearchBox'
-import { api } from 'api'
 
 export const getServerSideProps = ({ query }) => {
   return { props: { query } }
@@ -263,7 +263,9 @@ export const Search = ({ query }) => {
         <>
           <Button label="Back" secondary onClick={handleCloseMissingForm} />
           <Box margin={{ top: 'large' }}>
-            <MissingResultsForm />
+            <MissingResultsForm
+              closeMissingFormHandler={handleCloseMissingForm}
+            />
           </Box>
         </>
       )}

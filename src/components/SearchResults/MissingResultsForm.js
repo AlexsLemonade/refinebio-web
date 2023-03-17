@@ -10,15 +10,18 @@ import {
 } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { TextInput } from 'components/shared/TextInput'
-import { TextRequired } from 'components/shared/TextRequired'
 import { TextNull } from 'components/shared/TextNull'
+import { TextRequired } from 'components/shared/TextRequired'
 import styled from 'styled-components'
 
 const FieldBlock = styled(Box)`
   margin-bottom: 24px;
 `
 
-export const MissingResultsForm = ({ queryParam = 'ABC' }) => {
+export const MissingResultsForm = ({
+  closeMissingFormHandler,
+  queryParam = ''
+}) => {
   const { setResponsive } = useResponsive()
   const radioPediatric = [
     { label: 'Yes', value: 'Yes' },
@@ -51,7 +54,13 @@ export const MissingResultsForm = ({ queryParam = 'ABC' }) => {
         <FieldBlock>
           <Paragraph>
             List experiment accessions (separated by commas) you expect for
-            search term ‘<strong>{queryParam}</strong>’ <TextRequired />
+            search term{' '}
+            {queryParam && (
+              <>
+                ‘<strong>{queryParam}</strong>’
+              </>
+            )}{' '}
+            <TextRequired />
           </Paragraph>
           <Text margin={{ vertical: 'xsmall' }}>
             <i>Only accessions from GEO, SRA, and ArrayExpress are accepted.</i>
@@ -100,13 +109,16 @@ export const MissingResultsForm = ({ queryParam = 'ABC' }) => {
           </Text>
           <TextInput name="comments" placeholder="jdoe@example.com" />
           <Box margin={{ vertical: 'xsmall' }}>
-            <CheckBox
-              checked
-              label="I would like to receive occasional updates from the refine.bio team"
-            />
+            <CheckBox label="I would like to receive occasional updates from the refine.bio team" />
           </Box>
         </FieldBlock>
-        <FieldBlock>
+        <FieldBlock direction="row" gap="xsmall">
+          <Button
+            label="Cancel"
+            secondary
+            responsive
+            onClick={closeMissingFormHandler}
+          />
           <Button label="Submit" primary responsive type="submit" />
         </FieldBlock>
       </Box>
