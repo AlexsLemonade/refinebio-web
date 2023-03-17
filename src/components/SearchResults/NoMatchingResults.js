@@ -1,13 +1,19 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph } from 'grommet'
-import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 
-export const NoMatchingResults = ({ handleClearFilter }) => {
+export const NoMatchingResults = ({
+  clearFilterHandler,
+  openMissingFormHandler
+}) => {
   const { setResponsive } = useResponsive()
 
   return (
-    <Box align="center" margin={{ top: 'basex8' }}>
+    <Box
+      align="center"
+      animation={{ type: 'fadeIn', duration: 500 }}
+      margin={{ top: 'basex8' }}
+    >
       <Heading
         level={1}
         margin={{ bottom: 'small' }}
@@ -15,10 +21,17 @@ export const NoMatchingResults = ({ handleClearFilter }) => {
       >
         No Matching Results
       </Heading>
-      <Paragraph size={setResponsive('16x', '22px')}>
-        Expecting a specific experiment?{' '}
-        <Anchor label="Let us know" href="/missing-results" />
-      </Paragraph>
+      <Box direction="row" gap="xsmall" margin={{ top: 'small' }}>
+        <Paragraph size={setResponsive('16x', '22px')}>
+          Expecting a specific experiment?{' '}
+        </Paragraph>
+        <Button
+          label="Let us know"
+          link
+          linkFontSize={setResponsive('16px', '22px')}
+          onClick={openMissingFormHandler}
+        />
+      </Box>
       <Paragraph size={setResponsive('16px', '22px')}>Or</Paragraph>
       <Box direction="row" gap="xsmall" margin={{ top: 'small' }}>
         <Paragraph size={setResponsive('16px', '22px')}>
@@ -26,10 +39,9 @@ export const NoMatchingResults = ({ handleClearFilter }) => {
         </Paragraph>
         <Button
           label="Clear Filters"
-          onClick={handleClearFilter}
           link
           linkFontSize={setResponsive('16px', '22px')}
-          textDecoration="none"
+          onClick={clearFilterHandler}
         />
       </Box>
       <Box

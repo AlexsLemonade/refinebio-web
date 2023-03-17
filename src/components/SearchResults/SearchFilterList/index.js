@@ -96,6 +96,7 @@ export const SearchFilterList = ({
           Filters
         </Heading>
         <Button
+          disabled={checkedFilter.length === 0}
           label="Clear All"
           link
           linkFontSize="medium"
