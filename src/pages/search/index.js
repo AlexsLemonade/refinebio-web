@@ -264,7 +264,12 @@ export const Search = ({ query }) => {
         </Grid>
       ) : (
         <>
-          <Button label="Back" secondary onClick={handleCloseMissingForm} />
+          <Button
+            label="Back"
+            secondary
+            responsive
+            onClick={handleCloseMissingForm}
+          />
           <Box margin={{ top: 'large' }}>
             <MissingResultsForm
               closeMissingFormHandler={handleCloseMissingForm}

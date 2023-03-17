@@ -22,12 +22,12 @@ export const MissingResultsForm = ({
   closeMissingFormHandler,
   queryParam = ''
 }) => {
-  const { setResponsive } = useResponsive()
-  const radioPediatric = [
+  const { viewport, setResponsive } = useResponsive()
+  const radioPediatricCancer = [
     { label: 'Yes', value: 'Yes' },
     { label: 'No', value: 'No' }
   ]
-  const radioPrimary = [
+  const radioPrimaryApproach = [
     { label: 'Bench Research', value: 'Bench Research' },
     { label: 'Computational Research', value: 'Computational Research' },
     { label: 'Clinical Research', value: 'Clinical Research' },
@@ -44,7 +44,7 @@ export const MissingResultsForm = ({
         elevation="medium"
         border={{ color: 'brand-tint-80', side: 'bottom', size: '16px' }}
         pad={{ horizontal: 'large', vertical: 'xlarge' }}
-        width="800px" // to preserve the UI for the desktop view
+        width={setResponsive('100%', '100%', '800px')} // to preserve the UI for the desktop view
       >
         <FieldBlock>
           <Heading level={1} size="h1_small">
@@ -76,7 +76,7 @@ export const MissingResultsForm = ({
             Are you using this for pediatric cancer research? <TextRequired />
           </Paragraph>
           <RadioButtonGroup
-            options={radioPediatric}
+            options={radioPediatricCancer}
             name="pediatric-cancer"
             margin={{ top: 'small' }}
           />
@@ -87,7 +87,7 @@ export const MissingResultsForm = ({
             <TextRequired />
           </Paragraph>
           <RadioButtonGroup
-            options={radioPrimary}
+            options={radioPrimaryApproach}
             name="primary-approach"
             margin={{ top: 'small' }}
           />
@@ -107,12 +107,19 @@ export const MissingResultsForm = ({
               Be notified when your requested experiment(s) become available
             </i>
           </Text>
-          <TextInput name="comments" placeholder="jdoe@example.com" />
+          <TextInput
+            name="comments"
+            placeholder="jdoe@example.com"
+            type="email"
+          />
           <Box margin={{ vertical: 'xsmall' }}>
             <CheckBox label="I would like to receive occasional updates from the refine.bio team" />
           </Box>
         </FieldBlock>
-        <FieldBlock direction="row" gap="xsmall">
+        <FieldBlock
+          direction={setResponsive('column', 'row')}
+          gap={setResponsive('small', 'xsmall')}
+        >
           <Button
             label="Cancel"
             secondary
@@ -122,18 +129,20 @@ export const MissingResultsForm = ({
           <Button label="Submit" primary responsive type="submit" />
         </FieldBlock>
       </Box>
-      <Box
-        aria-hidden
-        background={{
-          image: "url('/lamp-illustration.svg')",
-          position: 'center',
-          repeat: 'no-repeat',
-          size: 'contain'
-        }}
-        margin={{ right: setResponsive('none', 'large') }}
-        // to preserve the width image
-        width={setResponsive('150px', '250px')}
-      />
+      {viewport === 'large' && (
+        <Box
+          aria-hidden
+          background={{
+            image: "url('/lamp-illustration.svg')",
+            position: 'center',
+            repeat: 'no-repeat',
+            size: 'contain'
+          }}
+          margin={{ right: setResponsive('none', 'large') }}
+          // to preserve the width image
+          width={setResponsive('150px', '250px')}
+        />
+      )}
     </Box>
   )
 }
