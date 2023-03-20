@@ -2,8 +2,8 @@ import { useState, useMemo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import { formatNumbers } from 'helpers/formatNumbers'
 import { formatString } from 'helpers/formatString'
+import { isChecked } from 'helpers/search'
 import { isLastIndex } from 'helpers/isLastIndex'
-import { scrollToId } from 'helpers/scrollToId'
 import { Box, CheckBox, Heading } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
 import { SearchBox } from 'components/shared/SearchBox'
@@ -19,11 +19,11 @@ const ToggleButton = styled(sharedButton)`
   `}
 `
 export const SearchFilter = ({
-  checkedFilter,
+  filter,
   filterGroup,
   filterParam,
-  label,
-  handleToggle
+  filterLabel,
+  toggleFilter
 }) => {
   const { setResponsive } = useResponsive()
   const maxCount = 5
@@ -31,75 +31,75 @@ export const SearchFilter = ({
     return Object.entries(filterGroup)
   }, [filterGroup])
   const filterLength = options.length
-  const [filteredResult, setfilteredResult] = useState(options)
-  const [open, setOpen] = useState(false)
   const [userInput, setUserInput] = useState('')
+  const [openOptions, setOpenOptions] = useState(false)
+  const [filteredOptions, setFilteredOptions] = useState(options)
 
-  const filterOptions = (val) => {
+  const handleFilterOptions = (val) => {
     setUserInput(val)
 
     if (val.trim() !== '') {
-      setfilteredResult(() =>
+      setFilteredOptions(() =>
         options.filter((option) =>
           formatString(option[0]).toLowerCase().startsWith(val.toLowerCase())
         )
       )
     } else {
-      setfilteredResult(options)
+      setFilteredOptions(options)
     }
   }
 
-  const getOptionsToRender = () =>
-    open ? filteredResult : filteredResult.slice(0, maxCount)
+  const getOptions = () =>
+    openOptions ? filteredOptions : filteredOptions.slice(0, maxCount)
 
   return (
     <>
       <Heading
         level={4}
         margin={{ bottom: 'xsmall' }}
-        id={label.toLowerCase()}
+        id={filterLabel.toLowerCase()}
         size={setResponsive('h4_xsmall', 'medium')}
       >
-        {label}
+        {filterLabel}
       </Heading>
 
       {filterLength > maxCount && (
         <SearchBox
           pad={{ bottom: 'xsmall' }}
-          placeholder={`Filter ${label}`}
+          placeholder={`Filter ${filterLabel}`}
           value={userInput}
           size="small"
-          changeHandler={(e) => filterOptions(e.target.value)}
+          changeHandler={(e) => handleFilterOptions(e.target.value)}
         />
       )}
 
       <Box
         margin={{ top: 'xsmall' }}
-        animation={open ? { type: 'fadeIn', duration: 1000 } : {}}
+        animation={openOptions ? { type: 'fadeIn', duration: 1000 } : {}}
       >
-        {getOptionsToRender().map((option, i, arr) => (
+        {getOptions().map((option, i, arr) => (
           <Box
             key={option[0]}
             margin={{ bottom: !isLastIndex(i, arr) ? 'xsmall' : '0' }}
           >
             <CheckBox
               label={`${formatString(option[0])} (${formatNumbers(option[1])})`}
-              checked={checkedFilter.includes(option[0])}
-              onChange={(e) => handleToggle(e, filterParam, option[0])}
+              checked={isChecked(filter, filterParam, option[0])}
+              onChange={(e) => toggleFilter(e, filterParam, option[0])}
             />
           </Box>
         ))}
       </Box>
 
-      {filteredResult.length === 0 && <TextNull text="No match found" />}
+      {filteredOptions.length === 0 && <TextNull text="No match found" />}
 
       {filterLength > maxCount && (
         <ToggleButton
           label={
             // eslint-disable-next-line no-nested-ternary
-            open && !userInput.trim()
+            openOptions && !userInput.trim()
               ? '- See Less'
-              : !open && !userInput.trim()
+              : !openOptions && !userInput.trim()
               ? `+ ${filterLength - maxCount} More`
               : ''
           }
@@ -111,8 +111,7 @@ export const SearchFilter = ({
             transition: 'border-bottom 0.15s ease-in'
           }}
           onClick={() => {
-            setOpen(!open)
-            scrollToId(label.toLowerCase())
+            setOpenOptions(!openOptions)
           }}
         />
       )}

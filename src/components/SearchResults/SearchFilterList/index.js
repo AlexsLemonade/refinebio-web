@@ -8,10 +8,8 @@ import { SearchFilter } from './SearchFilter'
 import { FilterIncludePublication } from './FilterIncludePublication'
 
 export const SearchFilterList = ({
-  checkedFilter,
   facets,
   filter,
-  setCheckedFilter,
   setFilter,
   handleClearAll
 }) => {
@@ -37,16 +35,6 @@ export const SearchFilterList = ({
     },
     filterIncludePublication
   ]
-
-  const toggleCheckBox = (e, param, val) => {
-    const item = param === filterIncludePublication.parameter ? param : val
-
-    if (e.target.checked) {
-      setCheckedFilter([...checkedFilter, item])
-    } else {
-      setCheckedFilter(checkedFilter.filter((element) => element !== item))
-    }
-  }
 
   const toggleFilter = (e, param, val) => {
     if (e.target.checked) {
@@ -74,11 +62,6 @@ export const SearchFilterList = ({
     }
   }
 
-  const handleToggle = (e, param, val) => {
-    toggleCheckBox(e, param, val)
-    toggleFilter(e, param, val)
-  }
-
   useEffect(() => {
     setFilterGroup(() => filterOrder.map((f) => facets[f.key]))
   }, [facets])
@@ -96,7 +79,7 @@ export const SearchFilterList = ({
           Filters
         </Heading>
         <Button
-          disabled={checkedFilter.length === 0}
+          disabled={isEmptyObject(filter)}
           label="Clear All"
           link
           linkFontSize="medium"
@@ -119,11 +102,11 @@ export const SearchFilterList = ({
               pad={{ bottom: !isLastIndex(i, arr) ? 'medium' : 'none' }}
             >
               <SearchFilter
-                checkedFilter={checkedFilter}
+                filter={filter}
                 filterGroup={filterGroup[i]}
                 filterParam={f.parameter}
-                label={f.label}
-                handleToggle={handleToggle}
+                filterLabel={f.label}
+                toggleFilter={toggleFilter}
               />
             </Box>
           )}
@@ -132,11 +115,11 @@ export const SearchFilterList = ({
 
       {!isEmptyObject(filterGroup) && (
         <FilterIncludePublication
-          checked={checkedFilter.includes(filterIncludePublication.parameter)}
+          filter={filter}
           filterGroup={filterGroup[filterGroup.length - 1]}
           filterParam={filterIncludePublication.parameter}
-          label={`${filterIncludePublication.label}`}
-          handleToggle={handleToggle}
+          filterLabel={`${filterIncludePublication.label}`}
+          toggleFilter={toggleFilter}
         />
       )}
 

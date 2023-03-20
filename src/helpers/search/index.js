@@ -1,22 +1,5 @@
-import { isArray } from 'helpers/isArray'
-
-// Returns the checked filter list obtained by a url query parameter
-export const getDefaultCheckedFilter = (query) => {
-  const temp = []
-  Object.keys(query).forEach((key) => {
-    if (key === 'has_publication') {
-      temp.push(key)
-    } else if (isArray(query[key])) {
-      temp.push(...query[key])
-    } else {
-      temp.push(query[key])
-    }
-  })
-  return temp
-}
-
 // Returns the filter list obtained by a url query parameter
-export const getDefaultFilter = (query) => {
+export const getQueryParam = (query) => {
   const temp = {}
   Object.keys(query).forEach((key) => {
     if (typeof query[key] === 'string') {
@@ -27,4 +10,12 @@ export const getDefaultFilter = (query) => {
   })
 
   return temp
+}
+
+// Returns true if the filter is selected, otherwise false
+export const isChecked = (filter, param, value) => {
+  if (value) {
+    return filter[param] ? filter[param].includes(value) : false
+  }
+  return param in filter
 }

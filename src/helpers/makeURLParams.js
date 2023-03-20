@@ -1,17 +1,18 @@
 import { isArray } from './isArray'
-
-// TODO: add support or create helper for parameters that may have multiple values .e.g. ) platform=VALUE&platform=VVALUE&platform...
-// Returns the url query parameters for API calls based on the given object 'params'
+// Make the query parameters for API calls based on the given object 'params'
 export const makeURLParams = (params) => {
-  return Object.entries(params)
-    .map(([key, value]) => {
-      if (isArray(value)) {
-        return `${encodeURIComponent(key)}=${value
-          .map(encodeURIComponent)
-          .join('&')}`
+  return Object.keys(params)
+    .filter((key) => params[key] !== undefined)
+    .reduce((accum, key) => {
+      // e.g.) { downloadable_organism: ['HOMO_SAPIENS', 'MUS_MUSCULUS']) }
+      if (isArray(params[key])) {
+        return accum.concat(
+          params[key].map((value) => `${key}=${encodeURI(value)}`)
+        )
       }
-
-      return [key, value].map(encodeURIComponent).join('=')
-    })
+      // e.g.) { has_publication: true }
+      accum.push(`${key}=${encodeURI(params[key])}`)
+      return accum
+    }, [])
     .join('&')
 }

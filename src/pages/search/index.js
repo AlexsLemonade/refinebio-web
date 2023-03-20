@@ -3,7 +3,7 @@ import { useEffect, useState, memo } from 'react'
 import { useRouter } from 'next/router'
 import { api } from 'api'
 import { useResponsive } from 'hooks/useResponsive'
-import { getDefaultCheckedFilter, getDefaultFilter } from 'helpers/search'
+import { getQueryParam } from 'helpers/search'
 import { scrollToTop } from 'helpers/scrollToTop'
 import { Box, Grid, Spinner } from 'grommet'
 import { Button } from 'components/shared/Button'
@@ -58,7 +58,6 @@ export const Search = ({ query }) => {
   const [loading, setLoading] = useState(false)
   const [facets, setFacets] = useState([])
   const [filter, setFilter] = useState(query)
-  const [checkedFilter, setCheckedFilter] = useState([])
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(pageSizes[0])
   const [searchResults, setSearchResults] = useState(null)
@@ -71,7 +70,6 @@ export const Search = ({ query }) => {
 
   const handleClearAll = () => {
     setFilter({})
-    setCheckedFilter([])
   }
 
   const handleOpenMissingForm = () => {
@@ -86,8 +84,7 @@ export const Search = ({ query }) => {
 
   useEffect(() => {
     if (query) {
-      setFilter(getDefaultFilter(query))
-      setCheckedFilter(getDefaultCheckedFilter(query))
+      setFilter(getQueryParam(query))
     }
   }, [])
 
@@ -178,10 +175,8 @@ export const Search = ({ query }) => {
               )}
               {searchResults && facets && (
                 <SearchFilterList
-                  checkedFilter={checkedFilter}
                   facets={facets}
                   filter={filter}
-                  setCheckedFilter={setCheckedFilter}
                   setFilter={setFilter}
                   handleClearAll={handleClearAll}
                 />

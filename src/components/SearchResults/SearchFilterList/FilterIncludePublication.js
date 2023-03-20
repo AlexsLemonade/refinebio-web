@@ -1,21 +1,22 @@
 import { formatNumbers } from 'helpers/formatNumbers'
+import { isChecked } from 'helpers/search'
 import { Box, CheckBox } from 'grommet'
 
 export const FilterIncludePublication = ({
-  checked,
+  filter,
   filterGroup,
   filterParam,
-  label,
-  handleToggle
+  filterLabel,
+  toggleFilter
 }) => {
   const count = filterGroup.true ? `(${formatNumbers(filterGroup.true)})` : ''
 
   return (
     <Box>
       <CheckBox
-        checked={checked}
-        label={`${label} ${count}`}
-        onChange={(e) => handleToggle(e, filterParam, true)}
+        checked={isChecked(filter, filterParam)}
+        label={`${filterLabel} ${count}`}
+        onChange={(e) => toggleFilter(e, filterParam, true)}
       />
     </Box>
   )
