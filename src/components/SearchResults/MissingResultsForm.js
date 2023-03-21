@@ -18,10 +18,7 @@ const FieldBlock = styled(Box)`
   margin-bottom: 24px;
 `
 
-export const MissingResultsForm = ({
-  closeMissingFormHandler,
-  queryParam = ''
-}) => {
+export const MissingResultsForm = ({ closeMissingForm, queryParam = '' }) => {
   const { viewport, setResponsive } = useResponsive()
   const radioPediatricCancer = [
     { label: 'Yes', value: 'Yes' },
@@ -124,7 +121,7 @@ export const MissingResultsForm = ({
             label="Cancel"
             secondary
             responsive
-            onClick={closeMissingFormHandler}
+            onClick={closeMissingForm}
           />
           <Button label="Submit" primary responsive type="submit" />
         </FieldBlock>

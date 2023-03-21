@@ -49,7 +49,9 @@ export const SearchCardMeta = ({
       </Box>
       <Box flex="grow">
         <IconBadge
-          label={`${formatNumbers(downloadableSamples)} Downloadable Samples`}
+          label={`${
+            downloadableSamples > 0 ? formatNumbers(downloadableSamples) : 'No'
+          } Downloadable Samples`}
           name="Samples"
           size={size}
         />

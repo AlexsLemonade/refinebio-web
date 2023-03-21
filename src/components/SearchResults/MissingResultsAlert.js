@@ -1,7 +1,7 @@
 import { Box, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 
-export const MissingResultsAlert = ({ openMissingFormHandler }) => {
+export const MissingResultsAlert = ({ openMissingForm }) => {
   return (
     <Box
       animation={{ type: 'fadeIn', duration: 300 }}
@@ -18,7 +18,7 @@ export const MissingResultsAlert = ({ openMissingFormHandler }) => {
         label="Let us know"
         link
         linkFontSize="16px"
-        onClick={openMissingFormHandler}
+        onClick={openMissingForm}
       />
     </Box>
   )
