@@ -1,11 +1,10 @@
+import { useFilter } from 'hooks/useFilter'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
 
-export const NoMatchingResults = ({
-  clearFilterHandler,
-  openMissingFormHandler
-}) => {
+export const NoMatchingResults = ({ openMissingFormHandler }) => {
+  const { clearAllFilter } = useFilter()
   const { setResponsive } = useResponsive()
 
   return (
@@ -41,7 +40,7 @@ export const NoMatchingResults = ({
           label="Clear Filters"
           link
           linkFontSize={setResponsive('16px', '22px')}
-          onClick={clearFilterHandler}
+          onClick={clearAllFilter}
         />
       </Box>
       <Box

@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import { useEffect, useState, memo } from 'react'
 import { useRouter } from 'next/router'
-import { api } from 'api'
+import { useFilter } from 'hooks/useFilter'
 import { useResponsive } from 'hooks/useResponsive'
 import { getQueryParam } from 'helpers/search'
 import { scrollToTop } from 'helpers/scrollToTop'
@@ -21,6 +21,7 @@ import {
   SearchBulkActions,
   SearchFilterList
 } from 'components/SearchResults'
+import { api } from 'api'
 
 export const getServerSideProps = ({ query }) => {
   return { props: { query } }
@@ -28,6 +29,7 @@ export const getServerSideProps = ({ query }) => {
 
 export const Search = ({ query }) => {
   const router = useRouter()
+  const { filter, setFilter } = useFilter()
   const { viewport, setResponsive } = useResponsive()
   const sideWidth = '250px'
   const searchBoxWidth = '550px'
@@ -57,7 +59,6 @@ export const Search = ({ query }) => {
 
   const [loading, setLoading] = useState(false)
   const [facets, setFacets] = useState([])
-  const [filter, setFilter] = useState(query)
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(pageSizes[0])
   const [searchResults, setSearchResults] = useState(null)
@@ -68,16 +69,12 @@ export const Search = ({ query }) => {
   const [toggleMissingForm, setToggleMissingForm] = useState(false)
   const isSearchResults = searchResults && searchResults.results.length > 0
 
-  const handleClearAll = () => {
-    setFilter({})
-  }
-
-  const handleOpenMissingForm = () => {
+  const openMissingForm = () => {
     setToggleMissingForm(true)
     scrollToTop()
   }
 
-  const handleCloseMissingForm = () => {
+  const closeMissingForm = () => {
     setToggleMissingForm(false)
     scrollToTop()
   }
@@ -99,7 +96,10 @@ export const Search = ({ query }) => {
       offset: page * pageSize,
       ordering: selectedSortByOption,
       ...filter,
-      num_downloadable_samples__gt: 0
+      // the quary pamaeter '?empty=true' used in FE-only to toggle the non-downloadable samples
+      // NOTE: if this is not present, we hide the non-downkoadalbe samples by querying the API
+      // with `num_downloadable_samples__gt: 0`
+      ...(!filter.empty ? { num_downloadable_samples__gt: 0 } : { empty: true })
     }
 
     const getSearchResults = async () => {
@@ -178,7 +178,6 @@ export const Search = ({ query }) => {
                   facets={facets}
                   filter={filter}
                   setFilter={setFilter}
-                  handleClearAll={handleClearAll}
                 />
               )}
             </BoxBlock>
@@ -228,16 +227,13 @@ export const Search = ({ query }) => {
 
                 {searchResults.results.length < 10 && (
                   <MissingResultsAlert
-                    openMissingFormHandler={handleOpenMissingForm}
+                    openMissingForm={openMissingForm}
                     setToggleMissingForm={setToggleMissingForm}
                   />
                 )}
               </Box>
             ) : (
-              <NoMatchingResults
-                clearFilterHandler={handleClearAll}
-                openMissingFormHandler={handleOpenMissingForm}
-              />
+              <NoMatchingResults openMissingForm={openMissingForm} />
             )}
 
             {isSearchResults && (
@@ -263,12 +259,10 @@ export const Search = ({ query }) => {
             label="Back"
             secondary
             responsive
-            onClick={handleCloseMissingForm}
+            onClick={closeMissingForm}
           />
           <Box margin={{ top: 'large' }}>
-            <MissingResultsForm
-              closeMissingFormHandler={handleCloseMissingForm}
-            />
+            <MissingResultsForm closeMissingFormHandler={closeMissingForm} />
           </Box>
         </>
       )}

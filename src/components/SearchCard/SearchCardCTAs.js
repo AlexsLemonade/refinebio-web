@@ -43,7 +43,7 @@ export const SearchCardCTAs = ({
   return (
     <Box align={setResponsive('start', 'end')} width="100%">
       {/* state: default  */}
-      {!status && !downloadableDataset.isDownloadable && (
+      {!status && downloadableSamples ? (
         <>
           <Button
             label="Add to Dataset"
@@ -65,6 +65,8 @@ export const SearchCardCTAs = ({
             responsive
           />
         </>
+      ) : (
+        <Button label="Request Experiment" secondary responsive />
       )}
 
       {/* state: added  */}

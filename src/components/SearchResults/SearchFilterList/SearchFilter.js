@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react'
+import { useFilter } from 'hooks/useFilter'
 import { useResponsive } from 'hooks/useResponsive'
 import { formatNumbers } from 'helpers/formatNumbers'
 import { formatString } from 'helpers/formatString'
@@ -18,13 +19,8 @@ const ToggleButton = styled(sharedButton)`
     }
   `}
 `
-export const SearchFilter = ({
-  filter,
-  filterGroup,
-  filterParam,
-  filterLabel,
-  toggleFilter
-}) => {
+export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
+  const { filter, toggleFilter } = useFilter()
   const { setResponsive } = useResponsive()
   const maxCount = 5
   const options = useMemo(() => {
