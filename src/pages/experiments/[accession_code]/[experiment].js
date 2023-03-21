@@ -1,9 +1,10 @@
-import { memo, Fragment } from 'react'
+import { Fragment, memo } from 'react'
 import { useRouter } from 'next/router'
+import { api } from 'api'
+import { links } from 'config'
 import { nanoid } from 'nanoid'
 import { useResponsive } from 'hooks/useResponsive'
 import { formatNumbers } from 'helpers/formatNumbers'
-import { getExperimentPageData } from 'api/mockHelper'
 import { getURLForAccessionCode } from 'helpers/getURLForAccessionCode'
 import { unionizeArrays } from 'helpers/unionizeArrays'
 import { Box, Grid, Heading } from 'grommet'
@@ -22,15 +23,12 @@ import { SearchCardHeader } from 'components/SearchCard/SearchCardHeader'
 import { SearchCardCTAs } from 'components/SearchCard/SearchCardCTAs'
 import { SearchCardMeta } from 'components/SearchCard/SearchCardMeta'
 
-import { links } from 'config'
-
 // TEMPORARY
 // endpoints:
 // `v1/experiments/${accession_code}/`
-// `v1/samples/experiment_accession_code=${accessionCode}`
-export const getServerSideProps = ({ query }) => {
+export const getServerSideProps = async ({ query }) => {
   const { accession_code: accessionCode } = query
-  const { experiment } = getExperimentPageData(accessionCode)
+  const experiment = await api.experiments.get(query.accession_code)
 
   return { props: { accessionCode, experiment } }
 }
@@ -234,9 +232,12 @@ export const Experiment = ({ accessionCode, experiment }) => {
             </Column>
           </Row>
           <SamplesTable
-            params={{
-              experiment_accession_code: accessionCode
+            experimentSampleAssociations={{
+              [experiment.accession_code]: experiment.samples.map(
+                (sample) => sample.accession_code
+              )
             }}
+            paramsToAdd={{ experiment_accession_code: accessionCode }}
             sampleMetadataFields={experiment.sample_metadata}
           />
         </Box>

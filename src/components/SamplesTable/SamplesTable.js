@@ -17,6 +17,7 @@ import { Pagination } from 'components/shared/Pagination'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
 import { getSamplesTableData, getSamplesByOrganismName } from 'api/mockHelper'
+import { api } from 'api'
 import {
   CellAccessionCode,
   CellAddRemove,
@@ -27,8 +28,9 @@ import {
 } from './cells'
 
 export const SamplesTable = ({
+  experimentSampleAssociations,
+  paramsToAdd,
   sampleMetadataFields,
-  params,
   isImmutable = false,
   modalView = false
 }) => {
@@ -39,25 +41,38 @@ export const SamplesTable = ({
   const [tableExpanded, setTableExpanded] = useState(false)
   // TEMPORARY
   // for API calls(data, filter, pageSize, limit, offset, order)
-  // endpoint: `v1/samples/experiment_accession_code=${accessionCode}`
+  // endpoint: v1/samples/
   const [loading, setLoading] = useState(false)
   const [tableData, setTableData] = useState([])
   const [globalFilter, setGlobalFilter] = useState(null) // match the react-table useGlobalFilter API's names
   const [page, setPage] = useState(0) // 'page' matches the react-table usePagination API's name
   const [pageSize, setPageSize] = useState(pageSizes[0]) // match the react-table usePagination API's names
+  const defaultParams = { offset: page * pageSize, limit: pageSize }
   const totalPages = tableData && tableData.count
   const totalColumns =
     tableData && sampleMetadataFields ? 4 + sampleMetadataFields.length : 0 // matches the current refine.bio
-
   const data = useMemo(() => tableData.results, [tableData])
   const columns = useMemo(() => {
     const temp = [
       {
         Header: 'Add/Remove',
-        Cell: CellAddRemove,
+        // eslint-disable-next-line react/no-unstable-nested-components
+        Cell: ({ row: { original: sample } }) => (
+          <CellAddRemove
+            experimentAccessionCodes={Object.keys(
+              experimentSampleAssociations
+            ).filter((accessionCode) =>
+              experimentSampleAssociations[accessionCode].includes(
+                sample.accession_code
+              )
+            )}
+            sample={sample}
+          />
+        ),
         disableSortBy: true,
         id: 'add_remove',
-        maxWidth: 160
+        width: 200,
+        maxWidth: 200
       },
       {
         Header: 'Accession Code',
@@ -123,46 +138,45 @@ export const SamplesTable = ({
     setLoading(true)
 
     let url
-    const formattedParams = makeURLParams(params)
+    let formattedParams
 
-    if (params.dataset_id) {
-      if (params.organism__name) {
-        url = `v1/samples/?${formattedParams}&offset=${
-          page * pageSize
-        }&limit=${pageSize}`
-        // eslint-disable-next-line no-console
-        console.log(url)
-        getSamplesByOrganismName(params.organism__name, setTableData)
-      }
-
-      if (params.experiment_accession_code) {
-        url = `v1/samples/?${formattedParams}&offset=${
-          page * pageSize
-        }&limit=${pageSize}`
-        // eslint-disable-next-line no-console
-        console.log(url)
-        getSamplesTableData(
-          params.experiment_accession_code,
-          pageSize,
-          pageSizes,
-          setTableData
-        )
-      }
-    } else {
-      url = `v1/samples/?${formattedParams}&offset=${
-        page * pageSize
-      }&limit=${pageSize}`
-      // eslint-disable-next-line no-console
-      console.log(url)
-      getSamplesTableData(
-        params.experiment_accession_code,
-        pageSize,
-        pageSizes,
-        setTableData
-      )
+    const getSamples = async (params) => {
+      setLoading(true)
+      const result = await api.samples.list(params)
+      setTableData(result)
+      setLoading(false)
     }
 
-    setLoading(false)
+    if (paramsToAdd.dataset_id) {
+      formattedParams = makeURLParams(paramsToAdd)
+      if (paramsToAdd.organism__name) {
+        url = `v1/samples/?${formattedParams}&offset=${
+          page * pageSize
+        }&limit=${pageSize}`
+        // eslint-disable-next-line no-console
+        console.log(url)
+        getSamplesByOrganismName(paramsToAdd.organism__name, setTableData)
+      }
+
+      if (paramsToAdd.experiment_accession_code) {
+        if (paramsToAdd.experiment_accession_code) {
+          url = `v1/samples/?${formattedParams}&offset=${
+            page * pageSize
+          }&limit=${pageSize}`
+          // eslint-disable-next-line no-console
+          console.log(url)
+          getSamplesTableData(
+            paramsToAdd.experiment_accession_code,
+            pageSize,
+            pageSizes,
+            setTableData
+          )
+        }
+      }
+      setLoading(false)
+    } else {
+      getSamples({ ...paramsToAdd, ...defaultParams })
+    }
   }, [globalFilter, page, pageSize])
 
   return (

@@ -5,7 +5,6 @@ import { SamplesTable } from 'components/SamplesTable'
 // endpoints:
 // `v1/samples/?dataset_id=${datasetId}&organism__name=${organismName}`
 // e.g.) v1/samples/?dataset_id=1df2e8d0-9d28-4330-97fb-3eff67876755&organism__name=HOMO_SAPIENS&offset=0&limit=10
-
 export const ModalContent = ({ sampleMetadataFields, params, isImmutable }) => {
   const { setResponsive } = useResponsive()
 
@@ -17,8 +16,8 @@ export const ModalContent = ({ sampleMetadataFields, params, isImmutable }) => {
       }}
     >
       <SamplesTable
+        paramsToAdd={params}
         sampleMetadataFields={sampleMetadataFields}
-        params={params}
         isImmutable={isImmutable}
         modalView
       />

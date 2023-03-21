@@ -51,7 +51,7 @@ export const fetchAsync = async (url, params = false) => {
   if (!response.ok) {
     return {
       ok: false,
-      message: 'Server error',
+      message: `${response.status} error`,
       status: response.status,
       result
     }
