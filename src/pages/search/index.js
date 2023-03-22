@@ -93,7 +93,7 @@ export const Search = ({ query }) => {
       // add the timer to prevvent 'Loading initial props cancelled' error on router
       timer.current = window.setTimeout(() => {
         router.push({ pathname: '/search', query: filter })
-      }, 500)
+      }, 2000)
     }
 
     const params = {
