@@ -16,12 +16,11 @@ export const ModalContextProvider = ({ children }) => {
     }))
 
   const closeModal = (id) =>
-    setModal({
-      ...modal,
-      [id]: {
-        id,
-        show: false
-      }
+    setModal(() => {
+      const temp = { ...modal }
+      delete temp[id]
+
+      return temp
     })
 
   const value = useMemo(
