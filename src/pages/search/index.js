@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import { useEffect, useState, memo } from 'react'
+import { useEffect, useRef, useState, memo } from 'react'
 import { useRouter } from 'next/router'
 import { useFilter } from 'hooks/useFilter'
 import { useResponsive } from 'hooks/useResponsive'
@@ -56,7 +56,9 @@ export const Search = ({ query }) => {
       value: 'source_first_published'
     }
   ]
-
+  // TEMPORARY
+  const timer = useRef(null)
+  const stopTimer = () => clearTimeout(timer.current)
   const [loading, setLoading] = useState(false)
   const [facets, setFacets] = useState([])
   const [page, setPage] = useState(0)
@@ -88,7 +90,10 @@ export const Search = ({ query }) => {
   useEffect(() => {
     // TEMPORARY (* for UI demo)
     if (filter) {
-      router.push({ pathname: '/search', query: filter })
+      // add the timer to prevvent 'Loading initial props cancelled' error on router
+      timer.current = window.setTimeout(() => {
+        router.push({ pathname: '/search', query: filter })
+      }, 500)
     }
 
     const params = {
@@ -111,6 +116,8 @@ export const Search = ({ query }) => {
     }
 
     getSearchResults()
+
+    return () => stopTimer()
   }, [filter, page, pageSize, selectedSortByOption])
 
   return (
