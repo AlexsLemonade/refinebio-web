@@ -25,8 +25,8 @@ export const ViewSamplesButton = ({
       }
       modalView
       fullHeight
-      height="100vh"
-      width="100vw"
+      height="98.8vh"
+      width="99.2vw"
     >
       <ModalContent
         dataset={dataset}

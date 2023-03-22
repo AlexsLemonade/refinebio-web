@@ -1,6 +1,8 @@
 import { useResponsive } from 'hooks/useResponsive'
-import { Box } from 'grommet'
+import { formatString } from 'helpers/formatString'
+import { Box, Heading } from 'grommet'
 import { SamplesTable } from 'components/SamplesTable'
+import { TextCapitalized } from 'components/shared/TextCapitalized'
 
 // endpoints:
 // `v1/samples/?dataset_id=${datasetId}&organism__name=${organismName}`
@@ -12,10 +14,15 @@ export const ModalContent = ({ sampleMetadataFields, params, isImmutable }) => {
   return (
     <Box
       pad={{
-        top: setResponsive('medium', 'large', 'basex6'),
         horizontal: setResponsive('small', 'medium', 'large')
       }}
     >
+      <Box margin={{ bottom: 'medium' }}>
+        <Heading level={2} size="h2_small">
+          My Dataset -{' '}
+          <TextCapitalized text={formatString(params.organism__name)} /> Samples
+        </Heading>
+      </Box>
       <SamplesTable
         sampleMetadataFields={sampleMetadataFields}
         params={params}
