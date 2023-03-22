@@ -19,7 +19,7 @@ export const Header = ({ light = false }) => {
       {viewport === 'small' && toggle && (
         <Box
           animation={{ type: toggle ? 'fadeIn' : 'fedeOut', duration: 150 }}
-          background="rgba_3"
+          background="rgba3"
           fill
           toggle={toggle}
           style={{ opacity: 0, position: 'fixed', left: 0, top: 0, zIndex: 1 }}

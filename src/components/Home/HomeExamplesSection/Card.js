@@ -18,7 +18,7 @@ export const Card = ({ heading, body, footer, svgIcon, ...props }) => {
       <Heading
         level={4}
         margin={{ bottom: 'small' }}
-        size="h4_small"
+        size="h4Small"
         weight="500"
       >
         {heading}

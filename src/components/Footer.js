@@ -39,7 +39,7 @@ export const Footer = () => {
 
   return (
     <GrommentFooter
-      background="gradient_light"
+      background="gradientLight"
       elevation="medium"
       justify="center"
       fill

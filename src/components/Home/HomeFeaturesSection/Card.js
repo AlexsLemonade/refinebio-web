@@ -20,7 +20,7 @@ export const Card = ({ heading, body, svgIcon, ...props }) => {
           <Heading
             level={2}
             margin={{ bottom: 'small' }}
-            size={setResponsive('h2_small', 'h2_large')}
+            size={setResponsive('h2Small', 'h2Large')}
           >
             {heading}
           </Heading>
