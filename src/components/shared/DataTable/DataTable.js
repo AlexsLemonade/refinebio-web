@@ -1,4 +1,4 @@
-import { useRef, memo } from 'react'
+import { useEffect, useState, useRef, memo } from 'react'
 import {
   useFlexLayout,
   useResizeColumns,
@@ -75,7 +75,6 @@ const TableCell = styled(Box)`
     overflow: hidden;
     padding: 8px 16px;
     position: relative;
-    white-space: nowrap;
     overflow: hidden;
     &:last-child {
       border-right: 0;
@@ -131,8 +130,24 @@ export const DataTable = ({
     useSticky,
     useSortBy
   )
-  const { getTableProps, headerGroups, getTableBodyProps, rows, prepareRow } =
-    tableInstance
+  const {
+    getTableProps,
+    headerGroups,
+    getTableBodyProps,
+    rows,
+    prepareRow,
+    state: {
+      columnResizing: { columnWidths }
+    }
+  } = tableInstance
+
+  const [cellWidths, setCellWidths] = useState({})
+
+  useEffect(() => {
+    if (columnWidths) {
+      setCellWidths((prev) => ({ ...prev, columnWidths }))
+    }
+  }, [columnWidths])
 
   return (
     <Box
@@ -217,7 +232,17 @@ export const DataTable = ({
                   {row.cells.map((cell) => (
                     // eslint-disable-next-line react/jsx-props-no-spreading
                     <TableCell {...cell.getCellProps()}>
-                      <Text>{cell.render('Cell')}</Text>
+                      <Text
+                        style={{
+                          whiteSpace:
+                            cellWidths &&
+                            cellWidths.columnWidths?.cell?.column?.id < 100
+                              ? 'nowrap'
+                              : 'normal'
+                        }}
+                      >
+                        {cell.render('Cell')}
+                      </Text>
                     </TableCell>
                   ))}
                 </TableRow>

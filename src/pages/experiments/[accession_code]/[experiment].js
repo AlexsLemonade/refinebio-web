@@ -87,6 +87,7 @@ export const Experiment = ({ accessionCode, experiment }) => {
               <SearchCardHeader
                 accessionCode={accessionCode}
                 title={experiment.title}
+                isLinked={false}
               />
             </Box>
             <Box

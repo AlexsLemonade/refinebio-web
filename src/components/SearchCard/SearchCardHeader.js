@@ -4,7 +4,11 @@ import { Box, Heading } from 'grommet'
 import { IconBadge } from 'components/shared/IconBadge'
 import { Anchor } from 'components/shared/Anchor'
 
-export const SearchCardHeader = ({ accessionCode = '', title = '' }) => {
+export const SearchCardHeader = ({
+  accessionCode = '',
+  title = '',
+  isLinked = true
+}) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -17,13 +21,17 @@ export const SearchCardHeader = ({ accessionCode = '', title = '' }) => {
       />
       <Heading
         level={3}
-        weight="600"
+        weight={isLinked ? '600' : '400'}
         style={{ lineHeight: setResponsive('1', '1.5') }}
       >
-        <Anchor
-          href={`experiments/${accessionCode}/${formatURLString(title)}`}
-          label={title}
-        />
+        {isLinked ? (
+          <Anchor
+            href={`experiments/${accessionCode}/${formatURLString(title)}`}
+            label={title}
+          />
+        ) : (
+          title
+        )}
       </Heading>
     </Box>
   )

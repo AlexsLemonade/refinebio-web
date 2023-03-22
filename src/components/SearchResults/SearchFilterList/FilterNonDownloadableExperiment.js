@@ -11,8 +11,6 @@ export const FilterNonDownloadableExperiment = ({ filterParam = 'empty' }) => {
     if (e.target.checked) {
       setFilter(() => {
         const temp = { ...filter }
-
-        temp.num_downloadable_samples__gt = 0
         delete temp[filterParam]
 
         return { ...temp }
@@ -22,7 +20,6 @@ export const FilterNonDownloadableExperiment = ({ filterParam = 'empty' }) => {
         const temp = { ...filter }
 
         temp[filterParam] = true
-        delete temp.num_downloadable_samples__gt
 
         return { ...temp }
       })

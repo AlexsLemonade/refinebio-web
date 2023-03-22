@@ -99,7 +99,7 @@ export const Search = ({ query }) => {
       // the quary pamaeter '?empty=true' used in FE-only to toggle the non-downloadable samples
       // NOTE: if this is not present, we hide the non-downkoadalbe samples by querying the API
       // with `num_downloadable_samples__gt: 0`
-      ...(!filter.empty ? { num_downloadable_samples__gt: 0 } : { empty: true })
+      ...(!filter || !filter.empty ? { num_downloadable_samples__gt: 0 } : {})
     }
 
     const getSearchResults = async () => {
