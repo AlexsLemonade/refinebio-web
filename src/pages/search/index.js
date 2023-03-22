@@ -190,7 +190,7 @@ export const Search = ({ query }) => {
             </BoxBlock>
           </LayerResponsive>
 
-          <Box gridArea="main">
+          <Box gridArea="main" height={{ min: '50%' }}>
             {viewport !== 'large' && (
               <Button
                 aria-label="Open Filters"
