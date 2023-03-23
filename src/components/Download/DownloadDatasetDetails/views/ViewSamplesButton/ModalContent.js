@@ -7,7 +7,12 @@ import { TextCapitalized } from 'components/shared/TextCapitalized'
 // endpoints:
 // `v1/samples/?dataset_id=${datasetId}&organism__name=${organismName}`
 // e.g.) v1/samples/?dataset_id=1df2e8d0-9d28-4330-97fb-3eff67876755&organism__name=HOMO_SAPIENS&offset=0&limit=10
-export const ModalContent = ({ sampleMetadataFields, params, isImmutable }) => {
+export const ModalContent = ({
+  dataset,
+  sampleMetadataFields,
+  params,
+  isImmutable
+}) => {
   const { setResponsive } = useResponsive()
   const isSpeciesView = Object.keys(params)[1] === 'organism__name'
 
@@ -31,6 +36,7 @@ export const ModalContent = ({ sampleMetadataFields, params, isImmutable }) => {
         </Heading>
       </Box>
       <SamplesTable
+        experimentSampleAssociations={dataset}
         paramsToAdd={params}
         sampleMetadataFields={sampleMetadataFields}
         isImmutable={isImmutable}
