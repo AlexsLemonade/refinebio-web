@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import { useFilter } from 'hooks/useFilter'
 import { useResponsive } from 'hooks/useResponsive'
 import { getQueryParam } from 'helpers/search'
-import { scrollToTop } from 'helpers/scrollToTop'
 import { Box, Grid, Spinner } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -16,7 +15,6 @@ import { SearchBox } from 'components/shared/SearchBox'
 import { SearchCard } from 'components/SearchCard'
 import {
   MissingResultsAlert,
-  MissingResultsForm,
   NoMatchingResults,
   SearchBulkActions,
   SearchFilterList
@@ -68,18 +66,7 @@ export const Search = ({ query }) => {
     sortByOptions[0].value
   )
   const [toggleFilterList, setToggleFilterList] = useState(false)
-  const [toggleMissingForm, setToggleMissingForm] = useState(false)
   const isSearchResults = searchResults && searchResults.results.length > 0
-
-  const openMissingForm = () => {
-    setToggleMissingForm(true)
-    scrollToTop()
-  }
-
-  const closeMissingForm = () => {
-    setToggleMissingForm(false)
-    scrollToTop()
-  }
 
   useEffect(() => {
     if (query) {
@@ -122,157 +109,133 @@ export const Search = ({ query }) => {
 
   return (
     <FixedContainer pad="large">
-      {!toggleMissingForm ? (
-        <Grid
-          areas={[
-            { name: 'top', start: [1, 0], end: [1, 0] },
-            { name: 'side', start: [0, 1], end: [0, 1] },
-            { name: 'main', start: [1, 1], end: [1, 1] }
-          ]}
-          columns={setResponsive(['auto'], ['auto'], [sideWidth, 'auto'])}
-          rows={['auto', 'auto']}
-          gap={{
-            row: 'none',
-            column: setResponsive('none', 'none', '5%')
+      <Grid
+        areas={[
+          { name: 'top', start: [1, 0], end: [1, 0] },
+          { name: 'side', start: [0, 1], end: [0, 1] },
+          { name: 'main', start: [1, 1], end: [1, 1] }
+        ]}
+        columns={setResponsive(['auto'], ['auto'], [sideWidth, 'auto'])}
+        rows={['auto', 'auto']}
+        gap={{
+          row: 'none',
+          column: setResponsive('none', 'none', '5%')
+        }}
+      >
+        <BoxBlock
+          gridArea="top"
+          margin={{
+            top: 'xlarge',
+            bottom: setResponsive('medium', 'medium', 'xlarge')
           }}
+          width={setResponsive('100%', searchBoxWidth)}
         >
-          <BoxBlock
-            gridArea="top"
-            margin={{
-              top: 'xlarge',
-              bottom: setResponsive('medium', 'medium', 'xlarge')
-            }}
-            width={setResponsive('100%', searchBoxWidth)}
-          >
-            <SearchBox
-              placeholder="Search accessions, pathways, diseases, etc.,"
-              btnType="primary"
-              size="large"
-              responsive
-            />
-          </BoxBlock>
-
-          <LayerResponsive position="left" show={toggleFilterList} tabletMode>
-            <BoxBlock
-              background="white"
-              gridArea="side"
-              pad={{
-                horizontal: setResponsive('basex7', 'basex7', 'none'),
-                vertical: setResponsive('large', 'large', 'none')
-              }}
-              width={setResponsive('100vw', '100vw', sideWidth)}
-              height={setResponsive('100vh', '100vh', 'auto')}
-              style={{
-                overflowY: setResponsive('scroll', 'scroll', 'auto'),
-                minHeight: '-webkit-fill-available'
-              }}
-            >
-              {viewport !== 'large' && (
-                <Box align="end" margin={{ bottom: 'small' }}>
-                  <Box
-                    aria-label="Close Filters"
-                    role="button"
-                    style={{ boxShadow: 'none' }}
-                    width="max-content"
-                    onClick={() => setToggleFilterList(false)}
-                  >
-                    <Icon name="Close" size="large" />
-                  </Box>
-                </Box>
-              )}
-              {searchResults && facets && (
-                <SearchFilterList
-                  facets={facets}
-                  filter={filter}
-                  setFilter={setFilter}
-                />
-              )}
-            </BoxBlock>
-          </LayerResponsive>
-
-          <Box gridArea="main" height={{ min: '50%' }}>
-            {viewport !== 'large' && (
-              <Button
-                aria-label="Open Filters"
-                label="Filter"
-                icon={<Icon name="Filter" size="small" />}
-                margin={{ bottom: 'medium' }}
-                secondary
-                onClick={() => setToggleFilterList(true)}
-              />
-            )}
-
-            {isSearchResults && (
-              <SearchBulkActions
-                pageSize={pageSize}
-                pageSizes={pageSizes}
-                results={searchResults}
-                sortByOptions={sortByOptions}
-                selectedSortByOption={selectedSortByOption}
-                setPageSize={setPageSize}
-                setSelectedSortByOption={setSelectedSortByOption}
-              />
-            )}
-
-            {loading ? (
-              <Box
-                align="center"
-                fill
-                justify="center"
-                margin={{ top: 'basex15' }}
-              >
-                <Spinner
-                  color="gray-shade-70"
-                  message={{ start: 'Loading data', end: 'Data loaded' }}
-                />
-              </Box>
-            ) : isSearchResults ? (
-              <Box animation={{ type: 'fadeIn', duration: 300 }}>
-                {searchResults.results.map((result) => (
-                  <SearchCard key={result.id} result={result} />
-                ))}
-
-                {searchResults.results.length < 10 && (
-                  <MissingResultsAlert
-                    openMissingForm={openMissingForm}
-                    setToggleMissingForm={setToggleMissingForm}
-                  />
-                )}
-              </Box>
-            ) : (
-              <NoMatchingResults openMissingForm={openMissingForm} />
-            )}
-
-            {isSearchResults && (
-              <Box
-                align="center"
-                direction="row"
-                justify="center"
-                margin={{ top: 'medium' }}
-              >
-                <Pagination
-                  page={page}
-                  pageSize={pageSize}
-                  setPage={setPage}
-                  totalPages={searchResults.count}
-                />
-              </Box>
-            )}
-          </Box>
-        </Grid>
-      ) : (
-        <>
-          <Button
-            label="Back"
-            secondary
+          <SearchBox
+            placeholder="Search accessions, pathways, diseases, etc.,"
+            btnType="primary"
+            size="large"
             responsive
-            onClick={closeMissingForm}
           />
-          <Box margin={{ top: 'large' }}>
-            <MissingResultsForm closeMissingFormHandler={closeMissingForm} />
-          </Box>
-        </>
-      )}
+        </BoxBlock>
+        <LayerResponsive position="left" show={toggleFilterList} tabletMode>
+          <BoxBlock
+            background="white"
+            gridArea="side"
+            pad={{
+              horizontal: setResponsive('basex7', 'basex7', 'none'),
+              vertical: setResponsive('large', 'large', 'none')
+            }}
+            width={setResponsive('100vw', '100vw', sideWidth)}
+            height={setResponsive('100vh', '100vh', 'auto')}
+            style={{
+              overflowY: setResponsive('scroll', 'scroll', 'auto'),
+              minHeight: '-webkit-fill-available'
+            }}
+          >
+            {viewport !== 'large' && (
+              <Box align="end" margin={{ bottom: 'small' }}>
+                <Box
+                  aria-label="Close Filters"
+                  role="button"
+                  style={{ boxShadow: 'none' }}
+                  width="max-content"
+                  onClick={() => setToggleFilterList(false)}
+                >
+                  <Icon name="Close" size="large" />
+                </Box>
+              </Box>
+            )}
+            {searchResults && facets && (
+              <SearchFilterList
+                facets={facets}
+                filter={filter}
+                setFilter={setFilter}
+              />
+            )}
+          </BoxBlock>
+        </LayerResponsive>
+        <Box gridArea="main" height={{ min: '50%' }}>
+          {viewport !== 'large' && (
+            <Button
+              aria-label="Open Filters"
+              label="Filter"
+              icon={<Icon name="Filter" size="small" />}
+              margin={{ bottom: 'medium' }}
+              secondary
+              onClick={() => setToggleFilterList(true)}
+            />
+          )}
+          {isSearchResults && (
+            <SearchBulkActions
+              pageSize={pageSize}
+              pageSizes={pageSizes}
+              results={searchResults}
+              sortByOptions={sortByOptions}
+              selectedSortByOption={selectedSortByOption}
+              setPageSize={setPageSize}
+              setSelectedSortByOption={setSelectedSortByOption}
+            />
+          )}
+          {loading ? (
+            <Box
+              align="center"
+              fill
+              justify="center"
+              margin={{ top: 'basex15' }}
+            >
+              <Spinner
+                color="gray-shade-70"
+                message={{ start: 'Loading data', end: 'Data loaded' }}
+              />
+            </Box>
+          ) : isSearchResults ? (
+            <Box animation={{ type: 'fadeIn', duration: 300 }}>
+              {searchResults.results.map((result) => (
+                <SearchCard key={result.id} result={result} />
+              ))}
+
+              {searchResults.results.length < 10 && <MissingResultsAlert />}
+            </Box>
+          ) : (
+            <NoMatchingResults />
+          )}
+          {isSearchResults && (
+            <Box
+              align="center"
+              direction="row"
+              justify="center"
+              margin={{ top: 'medium' }}
+            >
+              <Pagination
+                page={page}
+                pageSize={pageSize}
+                setPage={setPage}
+                totalPages={searchResults.count}
+              />
+            </Box>
+          )}
+        </Box>
+      </Grid>
     </FixedContainer>
   )
 }

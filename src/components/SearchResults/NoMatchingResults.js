@@ -2,8 +2,9 @@ import { useFilter } from 'hooks/useFilter'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
+import { MissingResultsFormButton } from './MissingResultsFormButton'
 
-export const NoMatchingResults = ({ openMissingFormHandler }) => {
+export const NoMatchingResults = () => {
   const { clearAllFilter } = useFilter()
   const { setResponsive } = useResponsive()
 
@@ -24,12 +25,7 @@ export const NoMatchingResults = ({ openMissingFormHandler }) => {
         <Paragraph size={setResponsive('16x', '22px')}>
           Expecting a specific experiment?{' '}
         </Paragraph>
-        <Button
-          label="Let us know"
-          link
-          linkFontSize={setResponsive('16px', '22px')}
-          onClick={openMissingFormHandler}
-        />
+        <MissingResultsFormButton size={setResponsive('16px', '22px')} />
       </Box>
       <Paragraph size={setResponsive('16px', '22px')}>Or</Paragraph>
       <Box direction="row" gap="xsmall" margin={{ top: 'small' }}>
