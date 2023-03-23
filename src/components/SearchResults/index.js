@@ -1,5 +1,6 @@
 export { MissingResultsAlert } from './MissingResultsAlert'
 export { MissingResultsFormButton } from './MissingResultsFormButton'
 export { NoMatchingResults } from './NoMatchingResults'
+export { RequestExperimentFormButton } from './RequestExperimentFormButton'
 export { SearchBulkActions } from './SearchBulkActions'
 export { SearchFilterList } from './SearchFilterList'

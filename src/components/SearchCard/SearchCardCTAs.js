@@ -7,6 +7,7 @@ import { Button } from 'components/shared/Button'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Anchor } from 'components/shared/Anchor'
 import { Pill } from 'components/shared/Pill'
+import { RequestExperimentFormButton } from 'components/SearchResults'
 
 /* TEMPORARY the following prop is added for demo purpose
 prop name: 'status' 
@@ -66,7 +67,7 @@ export const SearchCardCTAs = ({
           />
         </>
       ) : (
-        <Button label="Request Experiment" secondary responsive />
+        <RequestExperimentFormButton accessionCode={accessionCode} />
       )}
 
       {/* state: added  */}
