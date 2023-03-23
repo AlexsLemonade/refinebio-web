@@ -112,9 +112,11 @@ export const NavDropDown = ({ active, light }) => {
         <Box
           animation={{ type: 'zoomIn', duration: 200 }}
           background="white"
-          elevation="small"
           margin={{ top: '24px', left: '-40px' }}
-          style={{ position: 'absolute' }}
+          style={{
+            boxShadow: ' 0px 3px 20px rgba(0, 0, 0, 0.1)',
+            position: 'absolute'
+          }}
         >
           <List
             alignItems="left"

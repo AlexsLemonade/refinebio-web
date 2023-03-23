@@ -38,10 +38,10 @@ export const RequestForm = ({
       justify="between"
     >
       <Box
-        elevation="medium"
         border={{ color: 'brand-tint-80', side: 'bottom', size: '16px' }}
         pad={{ horizontal: 'large', vertical: 'xlarge' }}
         width={setResponsive('100%', '100%', '800px')} // to preserve the UI for the desktop view
+        style={{ boxShadow: ' 0px 3px 20px rgba(0, 0, 0, 0.1)' }}
       >
         <FieldBlock>
           <Heading level={1} size="h1_small">
