@@ -26,7 +26,14 @@ import { SearchCardMeta } from 'components/SearchCard/SearchCardMeta'
 const InformationItemBlock = ({ condition, field, value, textNull = '' }) => {
   if (!condition) return textNull ? <TextNull label={textNull} /> : null
 
-  return <InformationItem field={field} value={value} />
+  return (
+    <InformationItem
+      field={field}
+      value={value}
+      margin={{ left: 'none' }}
+      width={{ min: 'none' }}
+    />
+  )
 }
 
 export const Experiment = () => {
@@ -146,6 +153,8 @@ export const Experiment = () => {
                   <InformationItem
                     field="Description"
                     value={experiment.description}
+                    margin={{ left: 'none' }}
+                    width={{ min: 'none' }}
                   />
                   <InformationItemBlock
                     condition={experiment.pubmed_id}

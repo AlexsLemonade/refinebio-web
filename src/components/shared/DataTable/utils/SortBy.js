@@ -16,7 +16,7 @@ export const SortByBorder = memo(({ isSorted }) => (
 ))
 
 export const SortBy = ({ isSorted, isSortedDesc }) => {
-  const size = '10px'
+  const size = '12px'
 
   return (
     <Box width="fit-content" justify="center" margin={{ top: '-2px' }}>
