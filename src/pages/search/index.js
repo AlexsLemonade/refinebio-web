@@ -19,6 +19,7 @@ import {
   SearchBulkActions,
   SearchFilterList
 } from 'components/SearchResults'
+import { options } from 'config'
 import { api } from 'api'
 
 export const getServerSideProps = ({ query }) => {
@@ -32,28 +33,6 @@ export const Search = ({ query }) => {
   const sideWidth = '250px'
   const searchBoxWidth = '550px'
   const pageSizes = [10, 20, 50]
-  const sortByOptions = [
-    {
-      label: 'Best Match',
-      value: '_score'
-    },
-    {
-      label: 'Most No. of samples',
-      value: '-num_downloadable_samples'
-    },
-    {
-      label: 'Least No. of samples',
-      value: 'num_downloadable_samples'
-    },
-    {
-      label: 'Newest Experiment',
-      value: '-source_first_published'
-    },
-    {
-      label: 'Oldest Experiment',
-      value: 'source_first_published'
-    }
-  ]
   // TEMPORARY
   const timer = useRef(null)
   const stopTimer = () => clearTimeout(timer.current)
@@ -62,9 +41,7 @@ export const Search = ({ query }) => {
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(pageSizes[0])
   const [searchResults, setSearchResults] = useState(null)
-  const [selectedSortByOption, setSelectedSortByOption] = useState(
-    sortByOptions[0].value
-  )
+  const [sortByOption, setSortByOption] = useState(options.sortby[0].value)
   const [toggleFilterList, setToggleFilterList] = useState(false)
   const isSearchResults = searchResults && searchResults.results.length > 0
 
@@ -86,7 +63,7 @@ export const Search = ({ query }) => {
     const params = {
       limit: pageSize,
       offset: page * pageSize,
-      ordering: selectedSortByOption,
+      ordering: sortByOption,
       ...filter,
       // the quary pamaeter '?empty=true' used in FE-only to toggle the non-downloadable samples
       // NOTE: if this is not present, we hide the non-downkoadalbe samples by querying the API
@@ -105,7 +82,7 @@ export const Search = ({ query }) => {
     getSearchResults()
 
     return () => stopTimer()
-  }, [filter, page, pageSize, selectedSortByOption])
+  }, [filter, page, pageSize, sortByOption])
 
   return (
     <FixedContainer pad="large">
@@ -190,10 +167,10 @@ export const Search = ({ query }) => {
               pageSize={pageSize}
               pageSizes={pageSizes}
               results={searchResults}
-              sortByOptions={sortByOptions}
-              selectedSortByOption={selectedSortByOption}
+              sortByOptions={options.sortby}
+              selectedSortByOption={sortByOption}
               setPageSize={setPageSize}
-              setSelectedSortByOption={setSelectedSortByOption}
+              setSelectedSortByOption={setSortByOption}
             />
           )}
           {loading ? (

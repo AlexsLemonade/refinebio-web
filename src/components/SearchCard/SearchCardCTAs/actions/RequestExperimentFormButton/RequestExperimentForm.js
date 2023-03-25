@@ -1,9 +1,6 @@
 import { RequestForm } from 'components/shared/RequestForm'
 
-export const RequestExperimentForm = ({
-  accessionCode = 'GSE2230',
-  closeForm
-}) => {
+export const RequestExperimentForm = ({ accessionCode, closeForm }) => {
   return (
     <RequestForm
       formTitle={`Request Experiment '${accessionCode}'`}

@@ -5,7 +5,7 @@ import { Box, Grid } from 'grommet'
 import { SearchCardHeader } from './SearchCardHeader'
 import { SearchCardBody } from './SearchCardBody'
 import { SearchCardFooter } from './SearchCardFooter'
-import { SearchCardCTAs } from './SearchCardCTAs'
+import { SearchCardCTAs } from './SearchCardCTAs/SearchCardCTAs'
 import { SearchCardMeta } from './SearchCardMeta'
 
 /* TEMPORARY the following prop is added to the mock data for demo purpose
@@ -79,7 +79,10 @@ export const SearchCard = ({ result = {} }) => {
             publicationTitle={result.publication_title}
             sampleMetadataFields={result.sample_metadata_fields}
           />
-          <SearchCardFooter />
+          <SearchCardFooter
+            accessionCode={result.accession_code}
+            title={formatString(result.title)}
+          />
         </>
       )}
     </Box>

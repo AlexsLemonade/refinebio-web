@@ -20,7 +20,7 @@ import { Row } from 'components/shared/Row'
 import { TextNull } from 'components/shared/TextNull'
 import { SamplesTable, SamplesTableCTA } from 'components/SamplesTable'
 import { SearchCardHeader } from 'components/SearchCard/SearchCardHeader'
-import { SearchCardCTAs } from 'components/SearchCard/SearchCardCTAs'
+import { SearchCardCTAs } from 'components/SearchCard/SearchCardCTAs/SearchCardCTAs'
 import { SearchCardMeta } from 'components/SearchCard/SearchCardMeta'
 
 const InformationItemBlock = ({ condition, field, value, textNull = '' }) => {
