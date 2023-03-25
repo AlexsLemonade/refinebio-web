@@ -7,7 +7,7 @@ import { Icon } from 'components/shared/Icon'
 import { links } from 'config'
 
 export const AdvancedOptions = ({ datasetId, toggle }) => {
-  const [skip, setSkip] = useState(false)
+  const [skipQuantile, setSkipQuantile] = useState(false)
 
   return (
     <ExpandableBlock
@@ -19,7 +19,7 @@ export const AdvancedOptions = ({ datasetId, toggle }) => {
         Advanced Options
       </Heading>
       <ExpandableBlock
-        expand={skip}
+        expand={skipQuantile}
         margin={{ bottom: 'xsmall' }}
         opacity={0.5}
       >
@@ -31,7 +31,7 @@ export const AdvancedOptions = ({ datasetId, toggle }) => {
       <Box direction="row">
         <CheckBox
           label="Skip quantile normalization for RNA-seq samples"
-          onClick={() => setSkip(!skip)}
+          onClick={() => setSkipQuantile(!skipQuantile)}
         />
         <Anchor
           href={links.refinebio_docs_quantile_normalization_rna_seq_samples}
