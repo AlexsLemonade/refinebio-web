@@ -45,7 +45,10 @@ export const SearchCardCTAs = ({ accessionCode, downloadableSamples }) => {
           )}
 
           {!dataset?.is_processing && (
-            <Box margin={{ top: 'small' }}>
+            <Box
+              margin={{ top: 'small' }}
+              width={setResponsive('100%', 'auto')}
+            >
               <DownloadNowButton accessionCode={accessionCode} />
             </Box>
           )}

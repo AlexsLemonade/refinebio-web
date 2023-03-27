@@ -40,6 +40,7 @@ const IconToggle = styled(Box)`
   ${({ theme, toggle }) =>
     toggle &&
     css`
+      z-index: 24;
       &::before,
       &::after,
       span {
