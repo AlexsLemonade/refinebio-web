@@ -1,8 +1,8 @@
 import { http } from 'api/http'
 
-const url = 'samples/'
+const url = 'jobs/downloader/'
 
-export const samples = {
+export const downloader = {
   get: (accessionCode) => {
     const path = `${url}${accessionCode}/`
 

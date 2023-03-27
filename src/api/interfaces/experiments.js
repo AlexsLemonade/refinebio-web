@@ -1,5 +1,4 @@
-// TEMPORARY for testing
-import { http } from '../http'
+import { http } from 'api/http'
 
 const url = 'experiments/'
 
