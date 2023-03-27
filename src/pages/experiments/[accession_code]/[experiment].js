@@ -30,8 +30,8 @@ const InformationItemBlock = ({ condition, field, value, textNull = '' }) => {
     <InformationItem
       field={field}
       value={value}
-      margin={{ left: 'none' }}
-      width={{ min: 'none' }}
+      margin={{ left: '-32px' }}
+      width={{ min: 'calc(100% + 64px)' }}
     />
   )
 }
@@ -144,7 +144,7 @@ export const Experiment = () => {
                     />
                   </Box>
                 </Grid>
-                <Box margin={{ bottom: 'large' }}>
+                <Box margin={{ bottom: 'medium' }}>
                   <Heading level={4} size="h4_xsmall">
                     Submitter Supplied Information
                   </Heading>
@@ -153,8 +153,8 @@ export const Experiment = () => {
                   <InformationItem
                     field="Description"
                     value={experiment.description}
-                    margin={{ left: 'none' }}
-                    width={{ min: 'none' }}
+                    margin={{ left: '-32px' }}
+                    width={{ min: 'calc(100% + 64px)' }}
                   />
                   <InformationItemBlock
                     condition={experiment.pubmed_id}
