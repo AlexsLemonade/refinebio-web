@@ -41,8 +41,8 @@ const InformationItemBlock = ({ condition, field, value, textNull = '' }) => {
     <InformationItem
       field={field}
       value={value}
-      margin={{ left: 'none' }}
-      width={{ min: 'none' }}
+      margin={{ left: '-32px' }}
+      width={{ min: 'calc(100% + 64px)' }}
     />
   )
 }
@@ -130,8 +130,8 @@ export const Experiment = ({ accessionCode, experiment }) => {
             <InformationItem
               field="Description"
               value={experiment.description}
-              margin={{ left: 'none' }}
-              width={{ min: 'none' }}
+              margin={{ left: '-32px' }}
+              width={{ min: 'calc(100% + 64px)' }}
             />
             <InformationItemBlock
               condition={experiment.pubmed_id}
