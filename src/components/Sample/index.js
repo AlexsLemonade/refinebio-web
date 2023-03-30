@@ -1,1 +1,2 @@
-export { SampleMetadataFields } from './SampleMetadataFields'
+export { SampleDebug } from './SampleDebug'
+export { SampleDetails } from './SampleDetails'

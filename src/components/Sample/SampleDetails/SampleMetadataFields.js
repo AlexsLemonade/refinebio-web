@@ -61,14 +61,24 @@ export const SampleMetadataFields = ({ sample }) => {
         )}
         <InformationItemBlock
           field="Processing Information"
-          value={<CellProcessingInformation row={{ original: sample }} />}
+          value={
+            <CellProcessingInformation
+              row={{ original: sample }}
+              linkFontSize="16px"
+            />
+          }
           textNull="NA"
           margin={{ left: '-32px' }}
           width={{ min: 'calc(100% + 64px)' }}
         />
         <InformationItemBlock
           field="Additional Metadata"
-          value={<CellAdditionalMetadata row={{ original: sample }} />}
+          value={
+            <CellAdditionalMetadata
+              row={{ original: sample }}
+              linkFontSize="16px"
+            />
+          }
           textNull="NA"
           margin={{ left: '-32px' }}
           width={{ min: 'calc(100% + 64px)' }}
