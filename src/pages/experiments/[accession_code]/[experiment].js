@@ -7,7 +7,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { formatNumbers } from 'helpers/formatNumbers'
 import { getURLForAccessionCode } from 'helpers/getURLForAccessionCode'
 import { unionizeArrays } from 'helpers/unionizeArrays'
-import { Box, Grid, Heading, Spinner } from 'grommet'
+import { Box, Grid, Heading } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
@@ -17,6 +17,7 @@ import {
   InformationItem
 } from 'components/shared/InformationList'
 import { Row } from 'components/shared/Row'
+import { Spinner } from 'components/shared/Spinner'
 import { TextNull } from 'components/shared/TextNull'
 import { SamplesTable, SamplesTableCTA } from 'components/SamplesTable'
 import { SearchCardHeader } from 'components/SearchCard/SearchCardHeader'
@@ -80,10 +81,7 @@ export const Experiment = () => {
 
       {loading ? (
         <Box align="center" fill justify="center" margin={{ top: 'large' }}>
-          <Spinner
-            color="gray-shade-70"
-            message={{ start: 'Loading data', end: 'Data loaded' }}
-          />
+          <Spinner />
         </Box>
       ) : (
         experiment?.samples?.length && (

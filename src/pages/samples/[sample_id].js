@@ -1,9 +1,10 @@
 import { memo, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { api } from 'api'
-import { Box, Spinner } from 'grommet'
+import { Box } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
+import { Spinner } from 'components/shared/Spinner'
 import { SampleDebug, SampleDetails } from 'components/Sample'
 
 export const Sample = () => {
@@ -42,10 +43,7 @@ export const Sample = () => {
       </Box>
       {loading ? (
         <Box align="center" fill justify="center">
-          <Spinner
-            color="gray-shade-70"
-            message={{ start: 'Loading data', end: 'Data loaded' }}
-          />
+          <Spinner />
         </Box>
       ) : (
         <>
