@@ -4,13 +4,21 @@ import { Box, Text } from 'grommet'
 import { ExpandableBlock } from 'components/shared/ExpandableBlock'
 import { Icon } from 'components/shared/Icon'
 
-export const AccordionPanel = ({ title, children, handleToggle, expand }) => {
+export const AccordionPanel = ({
+  title,
+  children,
+  handleToggle,
+  expand,
+  duration = '.45s',
+  maxHeight = '99vh'
+}) => {
   const hasChildren = Children.count(children) > 0
 
   return (
     <Box
       border={{ side: 'horizontal', color: 'gray-shade-5' }}
-      pad={{ vertical: 'small' }}
+      margin={{ bottom: 'small' }}
+      pad={{ top: 'small' }}
     >
       <Box direction="row" justify="between">
         <Box margin={{ bottom: 'xsmall' }} width={{ min: '160px' }}>
@@ -21,6 +29,7 @@ export const AccordionPanel = ({ title, children, handleToggle, expand }) => {
           <Box
             aria-label="Expand this list"
             role="button"
+            margin={{ right: 'small' }}
             style={{ boxShadow: 'none' }}
             onClick={handleToggle}
           >
@@ -38,9 +47,9 @@ export const AccordionPanel = ({ title, children, handleToggle, expand }) => {
       {hasChildren && (
         <ExpandableBlock
           expand={expand}
-          duration=".45s"
-          opacity={0.3}
+          duration={duration}
           timing="linear"
+          maxHeight={maxHeight}
         >
           {children}
         </ExpandableBlock>

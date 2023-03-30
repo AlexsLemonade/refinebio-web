@@ -4,9 +4,9 @@ const url = 'computed_files/'
 
 export const computedFiles = {
   get: (sampleId) => {
-    const path = `${url}${sampleId}`
+    const param = { samples: sampleId }
 
-    return http.get(path)
+    return http.get(url, param)
   },
   list: (params) => http.get(url, params)
 }

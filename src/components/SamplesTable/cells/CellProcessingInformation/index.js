@@ -7,7 +7,10 @@ import { Modal } from 'components/shared/Modal'
 import { TextNull } from 'components/shared/TextNull'
 import { ModalContent } from './ModalContent'
 
-export const CellProcessingInformation = ({ row: { original: sample } }) => {
+export const CellProcessingInformation = ({
+  row: { original: sample },
+  linkFontSize = '14px'
+}) => {
   if (!sample.is_processed || !sample.results || !sample.results.length) {
     return <TextNull text="N/A" />
   }
@@ -36,7 +39,12 @@ export const CellProcessingInformation = ({ row: { original: sample } }) => {
     <Modal
       id={id}
       button={
-        <Button label={pipelinesText} link onClick={() => openModal(id)} />
+        <Button
+          label={pipelinesText}
+          link
+          linkFontSize={linkFontSize}
+          onClick={() => openModal(id)}
+        />
       }
       center={false}
       width={setResponsive('100vw', '100vw', '950px')}

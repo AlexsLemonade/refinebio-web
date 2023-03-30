@@ -4,9 +4,11 @@ const url = 'jobs/downloader/'
 
 export const downloader = {
   get: (accessionCode) => {
-    const path = `${url}${accessionCode}/`
+    const param = {
+      sample_accession_code: accessionCode
+    }
 
-    return http.get(path)
+    return http.get(url, param)
   },
   list: (params) => http.get(url, params)
 }

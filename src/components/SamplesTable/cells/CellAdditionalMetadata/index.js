@@ -6,7 +6,10 @@ import { Modal } from 'components/shared/Modal'
 import { TextNull } from 'components/shared/TextNull'
 import { ModalContent } from './ModalContent'
 
-export const CellAdditionalMetadata = ({ row: { original: sample } }) => {
+export const CellAdditionalMetadata = ({
+  row: { original: sample },
+  linkFontSize = '14px'
+}) => {
   if (sample.annotations.length === 0) {
     return <TextNull text="N/A" />
   }
@@ -19,7 +22,14 @@ export const CellAdditionalMetadata = ({ row: { original: sample } }) => {
   return (
     <Modal
       id={id}
-      button={<Button label="View" link onClick={() => openModal(id)} />}
+      button={
+        <Button
+          label="View"
+          link
+          linkFontSize={linkFontSize}
+          onClick={() => openModal(id)}
+        />
+      }
       center={false}
       width={setResponsive('100vw', '100vw', '950px')}
     >

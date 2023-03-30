@@ -73,7 +73,7 @@ export const colors = {
   /* Others
   */
   // status
-  error: 'coral-shade-20',
+  error: '#DB3B28',
   info: '#002F6C', // 'alex-navy'
   'info-bg': '#D6E8FF', // 'alex-navy-tint-90'
   success: '#41A36D', // 'pastel-green'
