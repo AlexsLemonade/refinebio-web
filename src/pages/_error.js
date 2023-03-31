@@ -6,7 +6,7 @@ import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 
-const ErrorPage = () => {
+export const ErrorPage = () => {
   const router = useRouter()
   const { setResponsive } = useResponsive()
 
