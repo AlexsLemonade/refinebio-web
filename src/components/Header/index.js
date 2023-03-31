@@ -21,7 +21,6 @@ export const Header = ({ light = false }) => {
   ]
 
   const isStickyHeader = isMatchPath(router.pathname, stickyHeaderPages)
-  console.log(isStickyHeader)
 
   return (
     <GrommetHeader
