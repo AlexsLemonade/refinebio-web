@@ -9,7 +9,7 @@ import { DatasetContextProvider } from 'contexts/DatasetContext'
 import { FilterContextProvider } from 'contexts/FilterContext'
 import { ModalContextProvider } from 'contexts/ModalContext'
 import { RefinebioContextProvider } from 'contexts/RefinebioContext'
-import ErrorPage from 'pages/_error'
+import { ErrorPage } from 'pages/_error'
 
 const Fallback = () => <ErrorPage />
 
