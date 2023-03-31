@@ -21,6 +21,8 @@ export const Header = ({ light = false }) => {
   ]
 
   const isStickyHeader = isMatchPath(router.pathname, stickyHeaderPages)
+  console.log(isStickyHeader)
+
   return (
     <GrommetHeader
       background={isStickyHeader ? 'white' : 'transparent'}
@@ -29,9 +31,9 @@ export const Header = ({ light = false }) => {
       pad={{ top: 'large', bottom: 'medium' }}
       role="banner"
       style={{
-        position: isStickyHeader ? 'sticky' : 'normal',
+        position: isStickyHeader ? 'sticky' : 'relative',
         top: 0,
-        left: '50%',
+        left: isStickyHeader ? '50%' : '0',
         zIndex: 10
       }}
     >
