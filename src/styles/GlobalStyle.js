@@ -28,6 +28,7 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box; 
     }
     body {
+      background: #FDFDFD;
       min-height: 100vh;
       min-height: -webkit-fill-available;
       position: relative;

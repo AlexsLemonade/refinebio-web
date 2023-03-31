@@ -11,7 +11,7 @@ const HeroHeader = () => {
     <Heading
       color="white"
       level={1}
-      margin={{ bottom: 'basex10' }}
+      margin={{ bottom: 'large' }}
       size={setResponsive('h1_small', 'h1_xlarge')}
       style={{ textShadow: '0 3px 19px rgba(0,0,0,.5)' }}
       textAlign="center"
