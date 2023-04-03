@@ -23,7 +23,7 @@ export const ModalContent = ({
       }}
     >
       <Box margin={{ bottom: 'medium' }}>
-        <Heading level={2} size="h2_small">
+        <Heading level={2} size="h2Small">
           My Dataset -{' '}
           {isSpeciesView ? (
             <TextCapitalized

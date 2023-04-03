@@ -40,7 +40,7 @@ export const SampleMetadataFields = ({ sample }) => {
   return (
     <>
       <Box margin={{ bottom: 'medium' }}>
-        <Heading level={4} size="h4_xsmall">
+        <Heading level={4} size="h4XSmall">
           Sample Metadata Fields
         </Heading>
       </Box>

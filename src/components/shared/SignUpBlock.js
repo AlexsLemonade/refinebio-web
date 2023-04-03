@@ -11,7 +11,7 @@ export const SignUpBlock = () => {
 
   return (
     <Box
-      background="gradient_blue_dark"
+      background="gradientBlueDark"
       pad={{ vertical: setResponsive('medium', 'basex7', 'basex18') }}
     >
       <FixedContainer align="center">

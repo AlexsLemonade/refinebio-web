@@ -43,7 +43,7 @@ export const Download = () => {
               <Heading
                 level={2}
                 margin={{ bottom: setResponsive('small', 'large') }}
-                size={setResponsive('h2_small', 'h2_large')}
+                size={setResponsive('h2Small', 'h2Large')}
               >
                 My Dataset
               </Heading>

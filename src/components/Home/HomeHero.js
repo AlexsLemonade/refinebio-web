@@ -14,7 +14,7 @@ const HeroBody = () => {
       <Heading
         level={1}
         margin={{ bottom: setResponsive('medium', 'medium', 'xlarge') }}
-        size={setResponsive('h1_small', 'h1_large')}
+        size={setResponsive('h1Small', 'h1Large')}
         textAlign="center"
       >
         Search for normalized transcriptome data

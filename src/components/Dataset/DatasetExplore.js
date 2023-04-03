@@ -121,7 +121,7 @@ export const DatasetExplore = () => {
         <Heading
           level={2}
           margin={{ bottom: 'small' }}
-          size={setResponsive('h2_xsmall', 'h2_small')}
+          size={setResponsive('h2XSmall', 'h2Small')}
         >
           Explore what you can do with your refine.bio dataset!
         </Heading>

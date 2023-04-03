@@ -17,7 +17,7 @@ export const NoMatchingResults = () => {
       <Heading
         level={1}
         margin={{ bottom: 'small' }}
-        size={setResponsive('h1_xsmall', 'h1_small')}
+        size={setResponsive('h1XSmall', 'h1Small')}
       >
         No Matching Results
       </Heading>

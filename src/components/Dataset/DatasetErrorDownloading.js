@@ -18,7 +18,7 @@ export const DatasetErrorDownloading = ({ dataset }) => {
           <Heading
             level={1}
             margin={{ bottom: 'small' }}
-            size={setResponsive('h1_xsmall', 'h1_small')}
+            size={setResponsive('h1XSmall', 'h1Small')}
           >
             Uh-oh something went wrong!
           </Heading>

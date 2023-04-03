@@ -19,7 +19,7 @@ export const DatasetProcessing = ({ dataset }) => {
             <Heading
               level={1}
               margin={{ bottom: 'small' }}
-              size={setResponsive('h1_xsmall', 'h1_small')}
+              size={setResponsive('h1XSmall', 'h1Small')}
             >
               Your dataset is being processed
             </Heading>

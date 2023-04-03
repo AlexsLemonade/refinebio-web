@@ -49,7 +49,7 @@ export const ViewBlock = ({
     <Box animation={{ type: 'fadeIn', duration: 800 }}>
       {/* max value to preserve UI layout for wider screens */}
       <Box margin={{ bottom: 'xsmall' }} width={{ max: '640px' }}>
-        <Heading level={5} weight="700" size="h5_small">
+        <Heading level={5} weight="700" size="h5Small">
           <Anchor
             href={`experiments/${experimentAccessionCode}/${formatURLString(
               experiment.title
@@ -94,7 +94,7 @@ export const ViewBlock = ({
             />
           </Box>
           <Box margin={{ top: 'large', bottom: 'medium' }}>
-            <Heading level={5} weight="500" size="h5_small">
+            <Heading level={5} weight="500" size="h5Small">
               Sample Metadata Fields
             </Heading>
             <Box direction="row" margin={{ top: 'xsmall' }}>

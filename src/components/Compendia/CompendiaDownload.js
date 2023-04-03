@@ -128,7 +128,7 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
       <Heading
         level={2}
         margin={{ bottom: 'medium' }}
-        size={setResponsive('h2_small', 'h2_large')}
+        size={setResponsive('h2Small', 'h2Large')}
       >
         Download the {heading}
       </Heading>

@@ -22,7 +22,7 @@ const Card = ({ description, format, index, title }) => {
         bottom: setResponsive('large', 'large', 'none')
       }}
     >
-      <Heading level={4} margin={{ bottom: 'small' }} size="h4_xsmall">
+      <Heading level={4} margin={{ bottom: 'small' }} size="h4XSmall">
         {title}
       </Heading>
       <Box direction="row" justify="between" fill>
@@ -47,7 +47,7 @@ export const DownloadFilesSummary = ({ dataset }) => {
       <Heading
         level={2}
         margin={{ bottom: 'small' }}
-        size={setResponsive('h2_xsmall', 'h2_small')}
+        size={setResponsive('h2XSmall', 'h2Small')}
       >
         Download Files Summary
       </Heading>

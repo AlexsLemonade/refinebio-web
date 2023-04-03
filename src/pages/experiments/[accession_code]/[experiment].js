@@ -143,7 +143,7 @@ export const Experiment = () => {
                   </Box>
                 </Grid>
                 <Box margin={{ bottom: 'medium' }}>
-                  <Heading level={4} size="h4_xsmall">
+                  <Heading level={4} size="h4XSmall">
                     Submitter Supplied Information
                   </Heading>
                 </Box>
@@ -252,7 +252,7 @@ export const Experiment = () => {
                   <Column>
                     <Heading
                       level={2}
-                      size="h2_small"
+                      size="h2Small"
                       margin={{ bottom: setResponsive('small', 'none') }}
                     >
                       Samples

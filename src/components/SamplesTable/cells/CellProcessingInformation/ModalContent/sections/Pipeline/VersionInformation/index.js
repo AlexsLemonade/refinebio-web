@@ -76,7 +76,7 @@ export const VersionInformation = ({ results }) => {
 
     return (
       <Box margin={{ top: 'small' }}>
-        <Heading level={5} size="h5_small" weight="500">
+        <Heading level={5} size="h5Small" weight="500">
           Genome Build
         </Heading>
         {verionItems.map((versionItem) => (
@@ -88,7 +88,7 @@ export const VersionInformation = ({ results }) => {
 
   return (
     <>
-      <Heading level={2} size="h2_xsmall">
+      <Heading level={2} size="h2XSmall">
         Version Information
       </Heading>
       <Accordion>

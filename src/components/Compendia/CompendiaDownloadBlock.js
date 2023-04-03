@@ -41,7 +41,7 @@ export const CompendiaDownloadBlock = ({ type }) => {
   return (
     <Box margin={{ top: 'basex12' }}>
       <Box
-        background="gradient_blue_dark"
+        background="gradientBlueDark"
         pad={{
           top: 'basex8',
           bottom: 'xlarge'
@@ -68,7 +68,7 @@ export const CompendiaDownloadBlock = ({ type }) => {
             level={2}
             color="white"
             margin={{ bottom: 'medium' }}
-            size={setResponsive('h2_small', 'h2_large')}
+            size={setResponsive('h2Small', 'h2Large')}
             style={{ textShadow: '0 3px 19px rgba(0,0,0,.5)' }}
             alignSelf="center"
           >

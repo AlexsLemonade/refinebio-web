@@ -70,7 +70,7 @@ export const ModalContent = ({
     >
       <Box direction="row" gap="xsmall" margin={{ bottom: 'medium' }}>
         <Icon color="error" name="Warning" size="medium" />
-        <Heading level={2} size="h2_small">
+        <Heading level={2} size="h2Small">
           There are {formatNumbers(getTotalSamples(dataset.data))} samples in{' '}
           <Anchor href="/download" label="My Dataset" target="_blank" />
         </Heading>

@@ -11,7 +11,7 @@ export const HeroHeader = () => {
       color="alex-navy"
       level={1}
       margin={{ bottom: 'basex7' }}
-      size={setResponsive('h1_small', 'h1_large')}
+      size={setResponsive('h1Small', 'h1Large')}
       textAlign="center"
     >
       refine.bio Compendia packages the data processed by refine.bio pipelines

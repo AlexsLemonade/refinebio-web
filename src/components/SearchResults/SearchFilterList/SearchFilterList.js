@@ -46,7 +46,7 @@ export const SearchFilterList = ({ facets }) => {
         margin={{ bottom: 'medium' }}
         fill
       >
-        <Heading level={3} size={setResponsive('h3_small', 'medium')}>
+        <Heading level={3} size={setResponsive('h3Small', 'medium')}>
           Filters
         </Heading>
         <Button

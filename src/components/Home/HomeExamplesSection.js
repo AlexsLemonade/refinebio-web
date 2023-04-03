@@ -25,7 +25,7 @@ const Card = ({ heading, body, footer, svgIcon, ...props }) => {
       <Heading
         level={4}
         margin={{ bottom: 'small' }}
-        size="h4_small"
+        size="h4Small"
         weight="500"
       >
         {heading}
@@ -43,7 +43,7 @@ export const HomeExamplesSection = () => {
 
   return (
     <Box
-      background="gradient_blue_dark"
+      background="gradientBlueDark"
       pad={{ vertical: setResponsive('medium', 'basex6', 'basex10') }}
     >
       <FixedContainer

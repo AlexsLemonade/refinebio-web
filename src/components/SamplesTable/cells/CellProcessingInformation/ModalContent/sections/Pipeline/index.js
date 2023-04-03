@@ -45,7 +45,7 @@ export const Pipeline = ({
   return (
     <>
       <Box margin={{ bottom: 'medium' }}>
-        <Heading level={2} size="h2_xsmall">
+        <Heading level={2} size="h2XSmall">
           {formatPipelinesText(pipelinesText)}
         </Heading>
         <PipelineSteps results={results} />

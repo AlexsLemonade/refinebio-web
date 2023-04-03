@@ -12,7 +12,7 @@ export const VersionItem = ({ title, version, versions }) => {
   return (
     <Box direction={version ? 'row' : 'column'} pad={{ vertical: 'xsmall' }}>
       <Box width={{ min: '160px' }}>
-        <Heading level={5} size="h5_small" weight="500">
+        <Heading level={5} size="h5Small" weight="500">
           {title}
         </Heading>
       </Box>

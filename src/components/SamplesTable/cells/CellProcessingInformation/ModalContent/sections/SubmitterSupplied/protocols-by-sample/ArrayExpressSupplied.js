@@ -9,7 +9,7 @@ const Title =
   (expand) =>
     (
       <>
-        <Heading level={5} weight="500" size="h5_small">
+        <Heading level={5} weight="500" size="h5Small">
           {formatString(protocol.Type)}
         </Heading>
         <Text>

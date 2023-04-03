@@ -54,7 +54,7 @@ export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
         level={4}
         margin={{ bottom: 'xsmall' }}
         id={filterLabel.toLowerCase()}
-        size={setResponsive('h4_xsmall', 'medium')}
+        size={setResponsive('h4XSmall', 'medium')}
       >
         {filterLabel}
       </Heading>
