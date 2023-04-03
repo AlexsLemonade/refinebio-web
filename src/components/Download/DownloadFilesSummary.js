@@ -1,5 +1,5 @@
 import { useResponsive } from 'hooks/useResponsive'
-import { getHeadingSize } from 'helpers/getHeadingSize'
+import getHeadingSize from 'helpers/getHeadingSize'
 import { Box, Heading, Text } from 'grommet'
 import { downloadFilesData } from 'helpers/dataset'
 import { Anchor } from 'components/shared/Anchor'

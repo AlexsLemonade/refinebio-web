@@ -1,8 +1,8 @@
 import { useMemo, memo, useState, useEffect } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
-import { formatString } from 'helpers/formatString'
-import { makeURLParams } from 'helpers/makeURLParams'
+import formatString from 'helpers/formatString'
+import makeURLParams from 'helpers/makeURLParams'
 import { Box, CheckBox, Spinner } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import {

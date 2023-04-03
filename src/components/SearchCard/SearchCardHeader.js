@@ -1,5 +1,5 @@
 import { useResponsive } from 'hooks/useResponsive'
-import { formatURLString } from 'helpers/formatURLString'
+import formatURLString from 'helpers/formatURLString'
 import { Box, Heading } from 'grommet'
 import { IconBadge } from 'components/shared/IconBadge'
 import { Anchor } from 'components/shared/Anchor'

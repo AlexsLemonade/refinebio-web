@@ -1,10 +1,10 @@
 import { useState, useMemo } from 'react'
 import { useFilter } from 'hooks/useFilter'
 import { useResponsive } from 'hooks/useResponsive'
-import { formatNumbers } from 'helpers/formatNumbers'
-import { formatString } from 'helpers/formatString'
+import formatNumbers from 'helpers/formatNumbers'
+import formatString from 'helpers/formatString'
 import { isChecked } from 'helpers/search'
-import { isLastIndex } from 'helpers/isLastIndex'
+import isLastIndex from 'helpers/isLastIndex'
 import { Box, CheckBox, Heading } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
 import { SearchBox } from 'components/shared/SearchBox'
@@ -53,7 +53,6 @@ export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
       <Heading
         level={4}
         margin={{ bottom: 'xsmall' }}
-        id={filterLabel.toLowerCase()}
         size={setResponsive('h4XSmall', 'medium')}
       >
         {filterLabel}

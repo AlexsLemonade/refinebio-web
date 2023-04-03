@@ -1,5 +1,5 @@
 import { useResponsive } from 'hooks/useResponsive'
-import { getHeadingSize } from 'helpers/getHeadingSize'
+import getHeadingSize from 'helpers/getHeadingSize'
 import { Box, Heading, Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'

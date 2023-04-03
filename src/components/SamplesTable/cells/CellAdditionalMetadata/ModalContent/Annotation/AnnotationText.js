@@ -1,5 +1,5 @@
-import { isString } from 'helpers/isString'
-import { isValidURL } from 'helpers/isValidURL'
+import isString from 'helpers/isString'
+import isValidURL from 'helpers/isValidURL'
 import { Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { TextHighlighted } from 'components/shared/TextHighlighted'

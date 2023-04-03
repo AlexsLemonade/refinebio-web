@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { nanoid } from 'nanoid'
-import { isArray } from 'helpers/isArray'
+import isArray from 'helpers/isArray'
 import { useTextHighlight } from 'hooks/useTextHighlight'
 import { Text } from 'grommet'
 

@@ -1,4 +1,3 @@
-// import { formatString } from 'helpers/formatString'
 import { Box, Heading } from 'grommet'
 import {
   ArrayExpressSupplied,

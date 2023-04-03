@@ -1,5 +1,5 @@
 import { useResponsive } from 'hooks/useResponsive'
-import { formatNumbers } from 'helpers/formatNumbers'
+import formatNumbers from 'helpers/formatNumbers'
 import { Box, Heading, Text } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Hero } from 'components/shared/Hero'

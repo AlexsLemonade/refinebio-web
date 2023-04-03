@@ -1,5 +1,5 @@
 import { useFilter } from 'hooks/useFilter'
-import { formatNumbers } from 'helpers/formatNumbers'
+import formatNumbers from 'helpers/formatNumbers'
 import { isChecked } from 'helpers/search'
 import { Box, CheckBox } from 'grommet'
 

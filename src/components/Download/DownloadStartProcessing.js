@@ -1,5 +1,5 @@
 import { useResponsive } from 'hooks/useResponsive'
-import { getHeadingSize } from 'helpers/getHeadingSize'
+import getHeadingSize from 'helpers/getHeadingSize'
 import { Box, Heading } from 'grommet'
 import { DownloadEmailForm } from './DownloadEmailForm'
 

@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
-import { formatNumbers } from 'helpers/formatNumbers'
+import formatNumbers from 'helpers/formatNumbers'
 import { Box, Select, Text } from 'grommet'
 
 export const PageSizes = ({

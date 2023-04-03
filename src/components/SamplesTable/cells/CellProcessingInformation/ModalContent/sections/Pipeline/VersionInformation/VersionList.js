@@ -1,4 +1,4 @@
-import { getHeadingSize } from 'helpers/getHeadingSize'
+import getHeadingSize from 'helpers/getHeadingSize'
 import { Box, Heading, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 

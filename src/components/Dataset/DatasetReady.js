@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
-import { formatBytes } from 'helpers/formatBytes'
+import formatBytes from 'helpers/formatBytes'
 import { Box, CheckBox, Heading, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'

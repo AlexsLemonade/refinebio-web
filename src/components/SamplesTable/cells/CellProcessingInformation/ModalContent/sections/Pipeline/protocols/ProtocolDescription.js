@@ -1,4 +1,4 @@
-import { getHeadingSize } from 'helpers/getHeadingSize'
+import getHeadingSize from 'helpers/getHeadingSize'
 import { Box, Heading, Paragraph } from 'grommet'
 
 export const ProtocolDescription = ({ name, description }) => (

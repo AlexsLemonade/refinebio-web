@@ -1,6 +1,6 @@
 import { formatPipelinesText } from 'helpers/dataset'
-import { getHeadingSize } from 'helpers/getHeadingSize'
-import { isLastIndex } from 'helpers/isLastIndex'
+import getHeadingSize from 'helpers/getHeadingSize'
+import isLastIndex from 'helpers/isLastIndex'
 import { Box, Heading, Paragraph } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { links } from 'config'

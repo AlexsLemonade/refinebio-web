@@ -1,4 +1,4 @@
-import { formatURLString } from 'helpers/formatURLString'
+import formatURLString from 'helpers/formatURLString'
 import { Box } from 'grommet'
 import { Button } from 'components/shared/Button'
 

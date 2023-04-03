@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid'
-import { getHeadingSize } from 'helpers/getHeadingSize'
-import { pickObjectPropByKey } from 'helpers/pickObjectPropByKey'
+import getHeadingSize from 'helpers/getHeadingSize'
+import pickObjectPropByKey from 'helpers/pickObjectPropByKey'
 import { Box, Heading } from 'grommet'
 import { Accordion, AccordionPanel } from 'components/shared/Accordion'
 import { ProcessorVersion } from './ProcessorVersion'

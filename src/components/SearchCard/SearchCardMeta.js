@@ -1,9 +1,9 @@
 /* eslint-disable no-nested-ternary */
 import { useResponsive } from 'hooks/useResponsive'
-import { formatNumbers } from 'helpers/formatNumbers'
-import { formatString } from 'helpers/formatString'
-import { isArray } from 'helpers/isArray'
-import { formatPlatformName } from 'helpers/formatPlatformName'
+import formatNumbers from 'helpers/formatNumbers'
+import formatString from 'helpers/formatString'
+import isArray from 'helpers/isArray'
+import formatPlatformName from 'helpers/formatPlatformName'
 import { Box } from 'grommet'
 import { IconBadge } from 'components/shared/IconBadge'
 import { Row } from 'components/shared/Row'

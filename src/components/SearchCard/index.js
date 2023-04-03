@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
-import { formatString } from 'helpers/formatString'
+import formatString from 'helpers/formatString'
 import { Box, Grid } from 'grommet'
 import { SearchCardHeader } from './SearchCardHeader'
 import { SearchCardBody } from './SearchCardBody'

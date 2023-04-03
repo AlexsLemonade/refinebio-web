@@ -1,5 +1,5 @@
-import { formatString } from 'helpers/formatString'
-import { getHeadingSize } from 'helpers/getHeadingSize'
+import formatString from 'helpers/formatString'
+import getHeadingSize from 'helpers/getHeadingSize'
 import { Box, Heading } from 'grommet'
 import {
   InformationList,
