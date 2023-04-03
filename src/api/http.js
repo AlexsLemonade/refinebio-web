@@ -1,8 +1,8 @@
-import { makeURLParams } from 'helpers/makeURLParams'
-import { fetchAsync } from 'helpers/fetchAsync'
+import makeURLParams from 'helpers/makeURLParams'
+import fetchAsync from 'helpers/fetchAsync'
 
 // Helper methods for API requests
-export const http = {
+export default {
   get: (url, params = false, headers = false) => {
     const formattedUrl = params ? `${url}?${makeURLParams(params)}` : url
 
