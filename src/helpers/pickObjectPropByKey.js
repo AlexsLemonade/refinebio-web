@@ -1,7 +1,7 @@
-import { isObject } from './isObject'
-// https://lodash.com/docs#pick
+import isObject from './isObject'
+// equivalent to https://lodash.com/docs#pick
 
-export const pickObjectPropByKey = (obj, keys) => {
+export default (obj, keys) => {
   if (!isObject(obj)) return null
 
   const result = {}

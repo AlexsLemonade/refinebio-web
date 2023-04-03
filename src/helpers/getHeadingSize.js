@@ -1,7 +1,7 @@
 // Returns the appropriate custom heading sizes
 // size - xsmall, small, medium, large, xlarge
 // level 1 to 5
-export const getHeadingSize = (size, level) => {
+export default (size, level) => {
   switch (size) {
     case 'xsmall':
       return `h${level}XSmall`
@@ -17,5 +17,3 @@ export const getHeadingSize = (size, level) => {
       return ''
   }
 }
-
-export default getHeadingSize

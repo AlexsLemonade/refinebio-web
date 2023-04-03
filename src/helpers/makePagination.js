@@ -1,4 +1,4 @@
-import { getRange } from 'helpers/getRange'
+import getRange from 'helpers/getRange'
 // Returns the pagination for a data table based on the currently selected page
 // (resource) https://gist.github.com/kottenator/9d936eb3e4e3c3e02598
 
