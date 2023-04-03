@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
+import { useTimeoutInCallback } from 'hooks/useTimeoutInCallback'
 import { useCopyToClipboard } from 'hooks/useCopyToClipboard'
 import { getDomain } from 'helpers/getDomain'
 import { Box, Heading } from 'grommet'
@@ -12,8 +13,9 @@ import { TextInput } from 'components/shared/TextInput'
 export const ShareDatasetButton = ({ datasetId }) => {
   const { openModal } = useModal()
   const { setResponsive } = useResponsive()
-  const timer = useRef(null)
-  const stopTimer = () => clearTimeout(timer.current)
+  const { startTimer, clearTimer } = useTimeoutInCallback(() => {
+    setIsCopied(false)
+  }, 3000)
   const [isCopied, setIsCopied] = useState(false)
   const [value, handdleCopy] = useCopyToClipboard(null)
   const id = `shareable-link_${datasetId}`
@@ -25,10 +27,8 @@ export const ShareDatasetButton = ({ datasetId }) => {
   }
 
   useEffect(() => {
-    timer.current = window.setTimeout(() => {
-      setIsCopied(false)
-    }, 3000)
-    return () => stopTimer()
+    startTimer()
+    return () => clearTimer()
   }, [isCopied])
 
   return (
