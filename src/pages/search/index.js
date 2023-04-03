@@ -13,6 +13,7 @@ import { LayerResponsive } from 'components/shared/LayerLayerResponsive'
 import { Icon } from 'components/shared/Icon'
 import { Pagination } from 'components/shared/Pagination'
 import { SearchBox } from 'components/shared/SearchBox'
+import { SearchInfoBanner } from 'components/SearchResults/SearchInfoBanner'
 import { SearchCard } from 'components/SearchCard'
 import {
   MissingResultsAlert,
@@ -31,6 +32,7 @@ export const Search = ({ query }) => {
   const router = useRouter()
   const { filter, setFilter } = useFilter()
   const { viewport, setResponsive } = useResponsive()
+
   const endRef = useRef(null)
   const isEndVisible = useIntersectObserver(endRef, {
     rootMargin: '0px',
@@ -93,6 +95,7 @@ export const Search = ({ query }) => {
   return (
     <>
       <FixedContainer pad={{ horizontal: 'large', bottom: 'large' }}>
+        <SearchInfoBanner />
         <Grid
           areas={[
             { name: 'top', start: [1, 0], end: [1, 0] },
