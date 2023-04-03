@@ -5,6 +5,7 @@ import { links } from 'config'
 import { nanoid } from 'nanoid'
 import { useResponsive } from 'hooks/useResponsive'
 import { formatNumbers } from 'helpers/formatNumbers'
+import { getHeadingSize } from 'helpers/getHeadingSize'
 import { getURLForAccessionCode } from 'helpers/getURLForAccessionCode'
 import { unionizeArrays } from 'helpers/unionizeArrays'
 import { Box, Grid, Heading } from 'grommet'
@@ -143,7 +144,7 @@ export const Experiment = () => {
                   </Box>
                 </Grid>
                 <Box margin={{ bottom: 'medium' }}>
-                  <Heading level={4} size="h4XSmall">
+                  <Heading level={4} size={getHeadingSize('xsmall', 4)}>
                     Submitter Supplied Information
                   </Heading>
                 </Box>
@@ -252,7 +253,7 @@ export const Experiment = () => {
                   <Column>
                     <Heading
                       level={2}
-                      size="h2Small"
+                      size={getHeadingSize('small', 2)}
                       margin={{ bottom: setResponsive('small', 'none') }}
                     >
                       Samples

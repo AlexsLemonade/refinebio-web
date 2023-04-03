@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useResponsive } from 'hooks/useResponsive'
+import { getHeadingSize } from 'helpers/getHeadingSize'
 import { Box, Heading, Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -33,7 +34,7 @@ export const ErrorPage = () => {
           align={setResponsive('center', 'center', 'start')}
           margin={{ top: 'basex8' }}
         >
-          <Heading level={1} size="h1XSmall">
+          <Heading level={1} size={getHeadingSize('xsmall', 1)}>
             The page you are looking for isn’t expressed.
           </Heading>
           <Paragraph>Please try again later..</Paragraph>

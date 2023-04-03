@@ -1,4 +1,5 @@
 import { useResponsive } from 'hooks/useResponsive'
+import { getHeadingSize } from 'helpers/getHeadingSize'
 import { Box, Heading, Text } from 'grommet'
 import { downloadFilesData } from 'helpers/dataset'
 import { Anchor } from 'components/shared/Anchor'
@@ -22,7 +23,11 @@ const Card = ({ description, format, index, title }) => {
         bottom: setResponsive('large', 'large', 'none')
       }}
     >
-      <Heading level={4} margin={{ bottom: 'small' }} size="h4XSmall">
+      <Heading
+        level={4}
+        margin={{ bottom: 'small' }}
+        size={getHeadingSize('xsmall', 4)}
+      >
         {title}
       </Heading>
       <Box direction="row" justify="between" fill>
@@ -47,7 +52,10 @@ export const DownloadFilesSummary = ({ dataset }) => {
       <Heading
         level={2}
         margin={{ bottom: 'small' }}
-        size={setResponsive('h2XSmall', 'h2Small')}
+        size={setResponsive(
+          getHeadingSize('xsmall', 2),
+          getHeadingSize('small', 2)
+        )}
       >
         Download Files Summary
       </Heading>

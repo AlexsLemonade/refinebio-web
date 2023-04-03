@@ -1,6 +1,7 @@
 import { Fragment, useState, useEffect, memo } from 'react'
 import { useFilter } from 'hooks/useFilter'
 import { useResponsive } from 'hooks/useResponsive'
+import { getHeadingSize } from 'helpers/getHeadingSize'
 import { isEmptyObject } from 'helpers/isEmptyObject'
 import { isLastIndex } from 'helpers/isLastIndex'
 import { Box, Heading } from 'grommet'
@@ -46,7 +47,10 @@ export const SearchFilterList = ({ facets }) => {
         margin={{ bottom: 'medium' }}
         fill
       >
-        <Heading level={3} size={setResponsive('h3Small', 'medium')}>
+        <Heading
+          level={3}
+          size={setResponsive(getHeadingSize('small', 3), 'medium')}
+        >
           Filters
         </Heading>
         <Button
