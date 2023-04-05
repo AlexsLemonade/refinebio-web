@@ -34,7 +34,7 @@ export const Search = ({ query }) => {
   const endRef = useRef(null)
   const isEndVisible = useIntersectObserver(endRef, {
     rootMargin: '0px',
-    threshold: 0.99
+    threshold: 0.1
   }).isIntersecting
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
@@ -123,7 +123,6 @@ export const Search = ({ query }) => {
           </BoxBlock>
           <LayerResponsive position="left" show={toggleFilterList} tabletMode>
             <BoxBlock
-              animation={isEndVisible ? {} : { type: 'fadeIn' }}
               gridArea="side"
               margin={{ top: 'large' }}
               pad={{
@@ -133,12 +132,11 @@ export const Search = ({ query }) => {
                 bottom: '200px'
               }}
               width={setResponsive('100vw', '100vw', sideWidth)}
-              height={{ max: '100vh' }}
+              height={{ max: '85vh' }}
               style={{
-                // overflowY: setResponsive('scroll', 'scroll', 'auto'),
-                minHeight: '-webkit-fill-available',
-                position: isEndVisible ? 'relative' : 'fixed',
-                overflowY: 'auto'
+                bottom: isEndVisible ? '42px' : 'auto',
+                overflowY: 'auto',
+                position: isEndVisible ? 'absolute' : 'fixed'
               }}
             >
               {viewport !== 'large' && (
