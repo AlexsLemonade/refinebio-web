@@ -7,7 +7,7 @@ export const RequestExperimentForm = ({
   return (
     <RequestForm
       formTitle={`Request Experiment '${accessionCode}'`}
-      illustration="lamp-illustration.svg"
+      illustration="form-illustration.svg"
       closeForm={closeForm}
     />
   )
