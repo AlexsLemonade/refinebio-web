@@ -15,12 +15,15 @@ import { links } from 'config'
 import styled, { css } from 'styled-components'
 import data from 'api/mockDataCompendia'
 
+const boxShadow = `0px 3px 4px rgba(0, 0, 0, 0.3)`
+
 const DropDown = styled(Box)`
   > div:nth-child(2) {
     display: none;
   }
   &:focus-within > div:nth-child(2) {
     display: block;
+    box-shadow: ${boxShadow};
   }
 `
 
