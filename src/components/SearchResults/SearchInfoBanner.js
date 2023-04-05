@@ -42,7 +42,7 @@ export const SearchInfoBanner = () => {
         <Box background="gradient_light_reverse" pad="small">
           <Box alignSelf="end">
             <Button
-              icon={<Icon name="Close" size="16px" />}
+              icon={<Icon color="black" name="Close" size="16px" />}
               onClick={handleClose}
               link
             />
