@@ -36,7 +36,6 @@ export const ErrorPage = () => {
           <Heading level={1} size="h1_xsmall">
             The page you are looking for isn’t expressed.
           </Heading>
-          <Paragraph>Please try again later..</Paragraph>
           <Button
             label="Go Back"
             margin={{ top: 'medium' }}
