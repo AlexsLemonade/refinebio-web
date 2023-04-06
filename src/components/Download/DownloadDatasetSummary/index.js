@@ -29,11 +29,7 @@ export const DownloadDatasetSummary = ({ dataset }) => {
 
   return (
     <Box margin={{ top: 'large' }}>
-      <Heading
-        level={2}
-        margin={{ bottom: 'small' }}
-        size={setResponsive('h2XSmall', 'h2Small')}
-      >
+      <Heading level={2} margin={{ bottom: 'small' }}>
         Dataset Summary
       </Heading>
       <Row

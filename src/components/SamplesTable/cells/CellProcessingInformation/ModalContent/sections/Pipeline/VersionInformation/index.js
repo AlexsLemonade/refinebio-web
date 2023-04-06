@@ -1,5 +1,4 @@
 import { nanoid } from 'nanoid'
-import { getHeadingSize } from 'helpers/getHeadingSize'
 import { pickObjectPropByKey } from 'helpers/pickObjectPropByKey'
 import { Box, Heading } from 'grommet'
 import { Accordion, AccordionPanel } from 'components/shared/Accordion'
@@ -77,7 +76,7 @@ export const VersionInformation = ({ results }) => {
 
     return (
       <Box margin={{ top: 'small' }}>
-        <Heading level={5} size={getHeadingSize('small', 5)} weight="500">
+        <Heading level={5} responsive={false} weight="500">
           Genome Build
         </Heading>
         {verionItems.map((versionItem) => (
@@ -89,7 +88,7 @@ export const VersionInformation = ({ results }) => {
 
   return (
     <>
-      <Heading level={2} size={getHeadingSize('xsmall', 2)}>
+      <Heading level={2} size="small">
         Version Information
       </Heading>
       <Accordion>

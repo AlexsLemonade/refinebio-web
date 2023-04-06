@@ -16,11 +16,7 @@ export const DatasetProcessing = ({ dataset }) => {
             align={setResponsive('center', 'start')}
             flexValue={setResponsive('1 1 auto', 'auto')}
           >
-            <Heading
-              level={1}
-              margin={{ bottom: 'small' }}
-              size={setResponsive('h1XSmall', 'h1Small')}
-            >
+            <Heading level={1} margin={{ bottom: 'small' }}>
               Your dataset is being processed
             </Heading>
             <Paragraph>

@@ -15,7 +15,7 @@ export const AdvancedOptions = ({ datasetId, toggle }) => {
       height="auto"
       margin={{ vertical: 'small' }}
     >
-      <Heading level={5} weight="500">
+      <Heading level={5} responsive={false} weight="500">
         Advanced Options
       </Heading>
       <ExpandableBlock

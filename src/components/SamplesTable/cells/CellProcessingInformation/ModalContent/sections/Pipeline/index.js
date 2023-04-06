@@ -1,5 +1,4 @@
 import { formatPipelinesText } from 'helpers/dataset'
-import { getHeadingSize } from 'helpers/getHeadingSize'
 import { isLastIndex } from 'helpers/isLastIndex'
 import { Box, Heading, Paragraph } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
@@ -46,7 +45,7 @@ export const Pipeline = ({
   return (
     <>
       <Box margin={{ bottom: 'medium' }}>
-        <Heading level={2} size={getHeadingSize('xsmall', 2)}>
+        <Heading level={2} size="small">
           {formatPipelinesText(pipelinesText)}
         </Heading>
         <PipelineSteps results={results} />

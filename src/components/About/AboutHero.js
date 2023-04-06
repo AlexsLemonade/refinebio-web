@@ -12,7 +12,7 @@ const HeroHeader = () => {
       color="white"
       level={1}
       margin={{ bottom: 'large' }}
-      size={setResponsive('h1Small', 'h1XLarge')}
+      size={setResponsive('large', 'xlarge')}
       style={{ textShadow: '0 3px 19px rgba(0,0,0,.5)' }}
       textAlign="center"
       weight="500"
@@ -56,7 +56,7 @@ const HeroBody = () => {
       <Heading
         level={2}
         margin={{ bottom: setResponsive('none', 'xlarge') }}
-        size={setResponsive('h2XSmall', 'h2Large')}
+        size={setResponsive('small', 'large')}
         textAlign="center"
       >
         refine.bio has harmonized over {formatNumbers(data.gene_count)} gene

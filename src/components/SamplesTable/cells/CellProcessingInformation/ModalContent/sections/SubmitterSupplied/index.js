@@ -23,7 +23,9 @@ export const SubmitterSupplied = ({ sample, isSubmitterProcessed }) => {
   return (
     <>
       <Box margin={{ bottom: 'small' }} pad={{ horizontal: 'large' }}>
-        <Heading level={3}>Submitter Supplied Protocol</Heading>
+        <Heading level={2} size="small">
+          Submitter Supplied Protocol
+        </Heading>
       </Box>
       <Component
         protocol_info={sample.protocol_info}

@@ -1,4 +1,3 @@
-import { getHeadingSize } from 'helpers/getHeadingSize'
 import { Box, Heading, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 
@@ -13,7 +12,7 @@ export const VersionItem = ({ title, version, versions }) => {
   return (
     <Box direction={version ? 'row' : 'column'} pad={{ vertical: 'xsmall' }}>
       <Box width={{ min: '160px' }}>
-        <Heading level={5} size={getHeadingSize('small', 5)} weight="500">
+        <Heading level={5} responsive={false} weight="500">
           {title}
         </Heading>
       </Box>

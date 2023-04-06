@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react'
 import { useFilter } from 'hooks/useFilter'
-import { useResponsive } from 'hooks/useResponsive'
 import { formatNumbers } from 'helpers/formatNumbers'
 import { formatString } from 'helpers/formatString'
 import { isChecked } from 'helpers/search'
@@ -21,7 +20,6 @@ const ToggleButton = styled(sharedButton)`
 `
 export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
   const { filter, toggleFilter } = useFilter()
-  const { setResponsive } = useResponsive()
   const maxCount = 5
   const options = useMemo(() => {
     return Object.entries(filterGroup)
@@ -50,12 +48,7 @@ export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
 
   return (
     <>
-      <Heading
-        level={4}
-        margin={{ bottom: 'xsmall' }}
-        id={filterLabel.toLowerCase()}
-        size={setResponsive('h4XSmall', 'medium')}
-      >
+      <Heading level={4} margin={{ bottom: 'xsmall' }} responsive={false}>
         {filterLabel}
       </Heading>
 

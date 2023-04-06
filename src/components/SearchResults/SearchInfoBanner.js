@@ -48,12 +48,7 @@ export const SearchInfoBanner = () => {
             />
           </Box>
           <Box align="center">
-            <Heading
-              color="brand-shade-40"
-              level={1}
-              size="h1XSmall"
-              weight={500}
-            >
+            <Heading color="brand-shade-40" level={1} size="small" weight={500}>
               Build and Download Custom Datasets
             </Heading>
             {/* to preserve the UI for desktop view */}

@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
 import { formatNumbers } from 'helpers/formatNumbers'
-import { getHeadingSize } from 'helpers/getHeadingSize'
 import { getTotalSamples } from 'helpers/dataset'
 import { Box, Heading, RadioButtonGroup } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
@@ -71,7 +70,7 @@ export const ModalContent = ({
     >
       <Box direction="row" gap="xsmall" margin={{ bottom: 'medium' }}>
         <Icon color="error" name="Warning" size="medium" />
-        <Heading level={2} size={getHeadingSize('small', 2)}>
+        <Heading level={2} size="small">
           There are {formatNumbers(getTotalSamples(dataset.data))} samples in{' '}
           <Anchor href="/download" label="My Dataset" target="_blank" />
         </Heading>

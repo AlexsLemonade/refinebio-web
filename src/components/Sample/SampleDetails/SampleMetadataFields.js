@@ -1,5 +1,4 @@
 import { formatString } from 'helpers/formatString'
-import { getHeadingSize } from 'helpers/getHeadingSize'
 import { Box, Heading } from 'grommet'
 import {
   InformationList,
@@ -41,7 +40,7 @@ export const SampleMetadataFields = ({ sample }) => {
   return (
     <>
       <Box margin={{ bottom: 'medium' }}>
-        <Heading level={4} size={getHeadingSize('xsmall', 4)}>
+        <Heading level={4} responsive={false}>
           Sample Metadata Fields
         </Heading>
       </Box>
