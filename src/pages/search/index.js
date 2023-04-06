@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState, memo } from 'react'
 import { useRouter } from 'next/router'
 import { useFilter } from 'hooks/useFilter'
-import { useIntersectObserver } from 'hooks/useIntersectObserver'
 import { useResponsive } from 'hooks/useResponsive'
 import { getQueryParam } from 'helpers/search'
 import { Box, Grid, Spinner } from 'grommet'
@@ -31,11 +30,6 @@ export const Search = ({ query }) => {
   const router = useRouter()
   const { filter, setFilter } = useFilter()
   const { viewport, setResponsive } = useResponsive()
-  const endRef = useRef(null)
-  const isEndVisible = useIntersectObserver(endRef, {
-    rootMargin: '0px',
-    threshold: 0.1
-  }).isIntersecting
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
   const pageSizes = [10, 20, 50]
@@ -91,140 +85,136 @@ export const Search = ({ query }) => {
   }, [filter, page, pageSize, sortByOption])
 
   return (
-    <>
-      <FixedContainer pad={{ horizontal: 'large', bottom: 'large' }}>
-        <Grid
-          areas={[
-            { name: 'top', start: [1, 0], end: [1, 0] },
-            { name: 'side', start: [0, 1], end: [0, 1] },
-            { name: 'main', start: [1, 1], end: [1, 1] }
-          ]}
-          columns={setResponsive(['auto'], ['auto'], [sideWidth, 'auto'])}
-          rows={['auto', 'auto']}
-          gap={{
-            row: 'none',
-            column: setResponsive('none', 'none', '2%')
+    <FixedContainer pad={{ horizontal: 'large', bottom: 'large' }}>
+      <Grid
+        areas={[
+          { name: 'top', start: [1, 0], end: [1, 0] },
+          { name: 'side', start: [0, 1], end: [0, 1] },
+          { name: 'main', start: [1, 1], end: [1, 1] }
+        ]}
+        columns={setResponsive(['auto'], ['auto'], [sideWidth, 'auto'])}
+        rows={['auto', 'auto']}
+        gap={{
+          row: 'none',
+          column: setResponsive('none', 'none', '2%')
+        }}
+      >
+        <BoxBlock
+          gridArea="top"
+          margin={{
+            top: 'medium',
+            bottom: setResponsive('medium', 'medium', 'xlarge')
           }}
+          width={setResponsive('100%', searchBoxWidth)}
         >
+          <SearchBox
+            placeholder="Search accessions, pathways, diseases, etc.,"
+            btnType="primary"
+            size="large"
+            responsive
+          />
+        </BoxBlock>
+        <LayerResponsive position="left" show={toggleFilterList} tabletMode>
           <BoxBlock
-            gridArea="top"
-            margin={{
-              top: 'medium',
-              bottom: setResponsive('medium', 'medium', 'xlarge')
+            gridArea="side"
+            // negative margin 'large' is applied here to align with the search box
+            margin={{ top: '-64px' }}
+            pad={{
+              left: setResponsive('basex7', 'basex7', 'none'),
+              right: setResponsive('basex7', 'basex7', 'large'),
+              top: setResponsive('large', 'large', 'none'),
+              bottom: '200px'
             }}
-            width={setResponsive('100%', searchBoxWidth)}
+            width={setResponsive('100vw', '100vw', sideWidth)}
+            height={{ max: '100vh' }}
+            style={{
+              overflowY: 'auto'
+            }}
           >
-            <SearchBox
-              placeholder="Search accessions, pathways, diseases, etc.,"
-              btnType="primary"
-              size="large"
-              responsive
-            />
-          </BoxBlock>
-          <LayerResponsive position="left" show={toggleFilterList} tabletMode>
-            <BoxBlock
-              gridArea="side"
-              margin={{ top: 'large' }}
-              pad={{
-                left: setResponsive('basex7', 'basex7', 'none'),
-                right: setResponsive('basex7', 'basex7', 'large'),
-                top: setResponsive('large', 'large', 'none'),
-                bottom: '200px'
-              }}
-              width={setResponsive('100vw', '100vw', sideWidth)}
-              height={{ max: '85vh' }}
-              style={{
-                bottom: isEndVisible ? '42px' : 'auto',
-                overflowY: 'auto',
-                position: isEndVisible ? 'absolute' : 'fixed'
-              }}
-            >
-              {viewport !== 'large' && (
-                <Box align="end" margin={{ bottom: 'small' }}>
-                  <Box
-                    aria-label="Close Filters"
-                    role="button"
-                    style={{ boxShadow: 'none' }}
-                    width="max-content"
-                    onClick={() => setToggleFilterList(false)}
-                  >
-                    <Icon name="Close" size="large" />
-                  </Box>
-                </Box>
-              )}
-              {searchResults && facets && (
-                <SearchFilterList
-                  facets={facets}
-                  filter={filter}
-                  setFilter={setFilter}
-                />
-              )}
-            </BoxBlock>
-          </LayerResponsive>
-          <Box gridArea="main" height={{ min: '85vh' }}>
             {viewport !== 'large' && (
-              <Button
-                aria-label="Open Filters"
-                label="Filter"
-                icon={<Icon name="Filter" size="small" />}
-                margin={{ bottom: 'medium' }}
-                secondary
-                onClick={() => setToggleFilterList(true)}
+              <Box align="end" margin={{ bottom: 'small' }}>
+                <Box
+                  aria-label="Close Filters"
+                  role="button"
+                  style={{ boxShadow: 'none' }}
+                  width="max-content"
+                  onClick={() => setToggleFilterList(false)}
+                >
+                  <Icon name="Close" size="large" />
+                </Box>
+              </Box>
+            )}
+            {searchResults && facets && (
+              <SearchFilterList
+                facets={facets}
+                filter={filter}
+                setFilter={setFilter}
               />
             )}
-            {isSearchResults && (
-              <SearchBulkActions
+          </BoxBlock>
+        </LayerResponsive>
+        <Box gridArea="main" height={{ min: '500px' }}>
+          {viewport !== 'large' && (
+            <Button
+              aria-label="Open Filters"
+              label="Filter"
+              icon={<Icon name="Filter" size="small" />}
+              margin={{ bottom: 'medium' }}
+              secondary
+              onClick={() => setToggleFilterList(true)}
+            />
+          )}
+          {isSearchResults && (
+            <SearchBulkActions
+              pageSize={pageSize}
+              pageSizes={pageSizes}
+              results={searchResults}
+              sortByOptions={options.sortby}
+              selectedSortByOption={sortByOption}
+              setPageSize={setPageSize}
+              setSelectedSortByOption={setSortByOption}
+            />
+          )}
+          {loading ? (
+            <Box
+              align="center"
+              fill
+              justify="center"
+              margin={{ top: 'basex15' }}
+            >
+              <Spinner
+                color="gray-shade-70"
+                message={{ start: 'Loading data', end: 'Data loaded' }}
+              />
+            </Box>
+          ) : isSearchResults ? (
+            <Box animation={{ type: 'fadeIn', duration: 300 }}>
+              {searchResults.results.map((result) => (
+                <SearchCard key={result.id} result={result} />
+              ))}
+              {searchResults.results.length < 10 && <MissingResultsAlert />}
+            </Box>
+          ) : (
+            <NoMatchingResults />
+          )}
+          {isSearchResults && (
+            <Box
+              align="center"
+              direction="row"
+              justify="center"
+              margin={{ top: 'medium' }}
+            >
+              <Pagination
+                page={page}
                 pageSize={pageSize}
-                pageSizes={pageSizes}
-                results={searchResults}
-                sortByOptions={options.sortby}
-                selectedSortByOption={sortByOption}
-                setPageSize={setPageSize}
-                setSelectedSortByOption={setSortByOption}
+                setPage={setPage}
+                totalPages={searchResults.count}
               />
-            )}
-            {loading ? (
-              <Box
-                align="center"
-                fill
-                justify="center"
-                margin={{ top: 'basex15' }}
-              >
-                <Spinner
-                  color="gray-shade-70"
-                  message={{ start: 'Loading data', end: 'Data loaded' }}
-                />
-              </Box>
-            ) : isSearchResults ? (
-              <Box animation={{ type: 'fadeIn', duration: 300 }}>
-                {searchResults.results.map((result) => (
-                  <SearchCard key={result.id} result={result} />
-                ))}
-                {searchResults.results.length < 10 && <MissingResultsAlert />}
-              </Box>
-            ) : (
-              <NoMatchingResults />
-            )}
-            {isSearchResults && (
-              <Box
-                align="center"
-                direction="row"
-                justify="center"
-                margin={{ top: 'medium' }}
-              >
-                <Pagination
-                  page={page}
-                  pageSize={pageSize}
-                  setPage={setPage}
-                  totalPages={searchResults.count}
-                />
-              </Box>
-            )}
-          </Box>
-        </Grid>
-      </FixedContainer>
-      <Box ref={endRef} />
-    </>
+            </Box>
+          )}
+        </Box>
+      </Grid>
+    </FixedContainer>
   )
 }
 
