@@ -1,4 +1,4 @@
-import unionizeArrays from './unionizeArrays'
+import unionizeArrays from 'helpers/unionizeArrays'
 // equivalent to https://lodash.com/docs#difference
 export default (targetArr, ...arrsToCompare) => {
   const mergedArrays = unionizeArrays(...arrsToCompare)

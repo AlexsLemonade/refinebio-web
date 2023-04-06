@@ -1,6 +1,5 @@
-import isObject from './isObject'
+import isObject from 'helpers/isObject'
 // equivalent to https://lodash.com/docs#pick
-
 export default (obj, keys) => {
   if (!isObject(obj)) return null
 

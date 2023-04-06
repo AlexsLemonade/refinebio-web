@@ -1,5 +1,4 @@
 // Returns the external accession code URL based on a given accession code
-
 export default (accessionCode) => {
   if (!accessionCode) return ''
 
