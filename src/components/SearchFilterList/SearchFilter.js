@@ -14,6 +14,12 @@ const ToggleButton = styled(sharedButton)`
       border-bottom: 1px solid ${theme.global.colors.brand};
     }
   `}
+
+  ${({ hidden }) =>
+    hidden &&
+    css`
+      visibility: hidden;
+    `}
 `
 
 export const SearchFilter = ({ filterGroup, label }) => {
@@ -89,14 +95,8 @@ export const SearchFilter = ({ filterGroup, label }) => {
 
       {filterLength > maxCount && (
         <ToggleButton
-          label={
-            // eslint-disable-next-line no-nested-ternary
-            open && !userInput.trim()
-              ? '- See Less'
-              : !open && !userInput.trim()
-              ? `+ ${filterLength - maxCount} More`
-              : ''
-          }
+          hidden={userInput.trim()}
+          label={open ? '- See Less' : `+ ${filterLength - maxCount} More`}
           margin={{ top: 'xsmall', left: 'medium' }}
           style={{
             borderRadius: '0',
