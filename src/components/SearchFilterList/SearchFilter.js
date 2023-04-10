@@ -47,8 +47,8 @@ export const SearchFilter = ({ filterGroup, label }) => {
     }
   }
 
-  const getOptionsToRender = () =>
-    open ? filteredResult : filteredResult.slice(0, maxCount)
+  const displayCount = open ? filterLength : maxCount
+  const displayFilterOptions = filteredResult.slice(0, displayCount)
 
   return (
     <>
@@ -76,7 +76,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
         animation={open ? { type: 'fadeIn', duration: 1000 } : {}}
         gap={{ row: 'xsmall' }}
       >
-        {getOptionsToRender().map((option) => (
+        {displayFilterOptions.map((option) => (
           <Box key={option[0]}>
             <CheckBox
               label={`${formatString(
