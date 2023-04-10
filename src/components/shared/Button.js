@@ -18,7 +18,6 @@ const CustomButton = styled(GrommetButton)`
     large &&
     css`
       font-size: ${viewport !== 'small' ? '20px' : '16px'};
-      padding: ${viewport !== 'small' ? '16px 32px' : '4px 24px'};
     `}  
   ${({ theme, light, primary }) =>
     primary &&
@@ -59,7 +58,7 @@ export const Button = ({
   width,
   ...props
 }) => {
-  const { viewport } = useResponsive()
+  const { viewport, setResponsive } = useResponsive()
   return (
     <Box
       responsive={responsive}
@@ -84,6 +83,16 @@ export const Button = ({
         <CustomButton
           width={width}
           large={large}
+          pad={setResponsive(
+            {
+              vertical: 'xxsmall',
+              horizontal: 'medium'
+            },
+            {
+              vertical: 'small',
+              horizontal: 'large'
+            }
+          )}
           style={{ fontSize }}
           uppercase={uppercase}
           viewport={viewport}
