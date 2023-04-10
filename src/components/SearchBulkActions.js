@@ -84,7 +84,7 @@ export const SearchBulkActions = ({ results }) => {
         columns={
           setResponsive(
             ['auto'],
-            isMax1100 || isMax850 ? ['auto', 'auto'] : ['auto', 'auto', 'auto']
+            isMax1100 ? ['auto', 'auto'] : ['auto', 'auto', 'auto']
           )
           // eslint-disable-next-line no-nested-ternary
         }
