@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, CheckBox, Heading, Text } from 'grommet'
+import { Box, CheckBox, Grid, Heading, Text } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
 import { SearchBox } from 'components/shared/SearchBox'
 import { formatString } from 'helpers/formatString'
@@ -65,15 +65,13 @@ export const SearchFilter = ({ filterGroup, label }) => {
         />
       )}
 
-      <Box
+      <Grid
         margin={{ top: 'xsmall' }}
         animation={open ? { type: 'fadeIn', duration: 1000 } : {}}
+        gap={{ row: 'xsmall' }}
       >
-        {getOptionsToRender().map((option, i, arr) => (
-          <Box
-            key={option[0]}
-            margin={{ bottom: i !== arr.length - 1 ? 'xsmall' : '0' }}
-          >
+        {getOptionsToRender().map((option) => (
+          <Box key={option[0]}>
             <CheckBox
               label={`${formatString(
                 option[0]
@@ -81,7 +79,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
             />
           </Box>
         ))}
-      </Box>
+      </Grid>
 
       {filteredResult.length === 0 && (
         <Text color="gray-shade-40">
