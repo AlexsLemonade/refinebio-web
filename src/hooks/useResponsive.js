@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react'
 import { ResponsiveContext } from 'grommet'
+import { useMatchMedia } from './useMatchMedia'
 
 /*
   small = a phone <= 500
@@ -12,6 +13,18 @@ export const useResponsive = () => {
 
   useEffect(() => {}, [viewport])
 
+  const getForBreakpoint = (
+    width,
+    smaller,
+    bigger,
+    mediaFeature = 'max-width',
+    unit = 'px'
+  ) => {
+    return useMatchMedia(`(${mediaFeature}: ${width}${unit})`)
+      ? smaller
+      : bigger
+  }
+
   const setResponsive = (small, medium, large) => {
     if (!large) {
       return viewport === 'small' ? small : medium
@@ -23,6 +36,7 @@ export const useResponsive = () => {
 
   return {
     viewport,
+    getForBreakpoint,
     setResponsive
   }
 }

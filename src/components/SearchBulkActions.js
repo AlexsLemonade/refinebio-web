@@ -1,12 +1,9 @@
-import { useMatchMedia } from 'hooks/useMatchMedia'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, CheckBox, Grid, Select, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 
 export const SearchBulkActions = ({ results }) => {
-  const { setResponsive } = useResponsive()
-  const isMax850 = useMatchMedia('(max-width: 850px)')
-  const isMax1100 = useMatchMedia('(max-width: 1100px)')
+  const { getForBreakpoint, setResponsive } = useResponsive()
   const pageSizes = [10, 20, 50]
   const sortByOptions = [
     'Best Match',
@@ -48,17 +45,17 @@ export const SearchBulkActions = ({ results }) => {
             {
               name: 'sort-by',
               start: [1, 0],
-              end: isMax850 ? [2, 0] : [1, 0]
+              end: getForBreakpoint(850, [2, 0], [1, 0])
             },
             {
               name: 'add-page',
-              start: isMax850 ? [1, 1] : [2, 0],
-              end: isMax850 ? [2, 1] : [2, 0]
+              start: getForBreakpoint(850, [1, 1], [2, 0]),
+              end: getForBreakpoint(850, [2, 1], [2, 0])
             },
             {
               name: 'hide-non-downloadble',
-              start: isMax850 ? [0, 1] : [0, 1],
-              end: isMax850 ? [0, 1] : [2, 1]
+              start: getForBreakpoint(850, [0, 1], [0, 1]),
+              end: getForBreakpoint(850, [0, 1], [2, 1])
             }
           ],
           [
@@ -66,17 +63,17 @@ export const SearchBulkActions = ({ results }) => {
             {
               name: 'sort-by',
               start: [1, 0],
-              end: isMax1100 ? [2, 0] : [1, 0]
+              end: getForBreakpoint(1100, [2, 0], [1, 0])
             },
             {
               name: 'add-page',
-              start: isMax1100 ? [1, 1] : [2, 0],
-              end: isMax1100 ? [2, 1] : [2, 0]
+              start: getForBreakpoint(1100, [1, 1], [2, 0]),
+              end: getForBreakpoint(1100, [2, 1], [2, 0])
             },
             {
               name: 'hide-non-downloadble',
-              start: isMax1100 ? [0, 1] : [0, 1],
-              end: isMax1100 ? [0, 1] : [2, 1]
+              start: getForBreakpoint(1100, [0, 1], [0, 1]),
+              end: getForBreakpoint(1100, [0, 1], [2, 1])
             }
           ]
         )}
@@ -84,7 +81,7 @@ export const SearchBulkActions = ({ results }) => {
         columns={
           setResponsive(
             ['auto'],
-            isMax1100 ? ['auto', 'auto'] : ['auto', 'auto', 'auto']
+            getForBreakpoint(1100, ['auto', 'auto'], ['auto', 'auto', 'auto'])
           )
           // eslint-disable-next-line no-nested-ternary
         }
