@@ -26,12 +26,9 @@ export const useResponsive = () => {
   }
 
   const setResponsive = (small, medium, large) => {
-    if (!large) {
-      return viewport === 'small' ? small : medium
-    }
+    const options = { small, medium, large }
 
-    // eslint-disable-next-line no-nested-ternary
-    return viewport === 'small' ? small : viewport === 'medium' ? medium : large
+    return options[viewport] || medium
   }
 
   return {
