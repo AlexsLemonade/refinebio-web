@@ -1,4 +1,4 @@
-import isArray from './isArray'
+import isArray from 'helpers/isArray'
 // Make the query parameters for API calls based on the given object 'params'
 export default (params) => {
   return Object.keys(params)
