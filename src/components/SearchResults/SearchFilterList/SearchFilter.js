@@ -50,11 +50,7 @@ export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
 
   return (
     <>
-      <Heading
-        level={4}
-        margin={{ bottom: 'xsmall' }}
-        size={setResponsive('h4XSmall', 'medium')}
-      >
+      <Heading level={4} margin={{ bottom: 'xsmall' }} responsive={false}>
         {filterLabel}
       </Heading>
 

@@ -1,5 +1,4 @@
 import { useResponsive } from 'hooks/useResponsive'
-import getHeadingSize from 'helpers/getHeadingSize'
 import { Box, Heading, Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
@@ -26,7 +25,7 @@ const Card = ({ heading, body, footer, svgIcon, ...props }) => {
       <Heading
         level={4}
         margin={{ bottom: 'small' }}
-        size={getHeadingSize('small', 4)}
+        responsive={false}
         weight="500"
       >
         {heading}

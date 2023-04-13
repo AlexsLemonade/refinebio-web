@@ -14,11 +14,7 @@ export const NoMatchingResults = () => {
       animation={{ type: 'fadeIn', duration: 500 }}
       margin={{ top: 'basex8' }}
     >
-      <Heading
-        level={1}
-        margin={{ bottom: 'small' }}
-        size={setResponsive('h1XSmall', 'h1Small')}
-      >
+      <Heading level={1} margin={{ bottom: 'small' }}>
         No Matching Results
       </Heading>
       <Box direction="row" gap="xsmall" margin={{ top: 'small' }}>

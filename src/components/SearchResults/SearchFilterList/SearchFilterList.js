@@ -1,7 +1,6 @@
 import { Fragment, useState, useEffect, memo } from 'react'
 import { useSearch } from 'hooks/useSearch'
 import { useResponsive } from 'hooks/useResponsive'
-import getHeadingSize from 'helpers/getHeadingSize'
 import isEmptyObject from 'helpers/isEmptyObject'
 import isLastIndex from 'helpers/isLastIndex'
 import { Box, Heading } from 'grommet'
@@ -11,7 +10,7 @@ import { IncludePublication } from './IncludePublication'
 
 export const SearchFilterList = ({ facets }) => {
   const { filter, clearAllFilter } = useSearch()
-  const { viewport, setResponsive } = useResponsive()
+  const { viewport } = useResponsive()
   const [filterGroup, setFilterGroup] = useState({})
   const filterIncludePublication = {
     label: 'Includes Publication',
@@ -47,10 +46,7 @@ export const SearchFilterList = ({ facets }) => {
         margin={{ bottom: 'medium' }}
         fill
       >
-        <Heading
-          level={3}
-          size={setResponsive(getHeadingSize('small', 3), 'medium')}
-        >
+        <Heading level={2} responsive={false}>
           Filters
         </Heading>
         <Button
