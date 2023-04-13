@@ -25,18 +25,14 @@ import { SearchCardHeader } from 'components/SearchCard/SearchCardHeader'
 import { SearchCardCTAs } from 'components/SearchCard/SearchCardCTAs/SearchCardCTAs'
 import { SearchCardMeta } from 'components/SearchCard/SearchCardMeta'
 
-const InformationItemBlock = ({ condition, field, value, textNull = '' }) => {
-  if (!condition) return textNull ? <TextNull label={textNull} /> : null
-
-  return (
-    <InformationItem
-      field={field}
-      value={value}
-      margin={{ left: '-32px' }}
-      width={{ min: 'calc(100% + 64px)' }}
-    />
-  )
-}
+const InformationItemBlock = ({ condition, field, value, textNull = '' }) => (
+  <InformationItem
+    field={field}
+    value={condition ? value : <TextNull text={textNull} />}
+    margin={{ left: '-32px' }}
+    width={{ min: 'calc(100% + 64px)' }}
+  />
+)
 
 export const Experiment = () => {
   const router = useRouter()
@@ -194,7 +190,7 @@ export const Experiment = () => {
                         href={{
                           pathname: '/search',
                           query: {
-                            q: `submitter_institution:${experiment.submitter_institution}`
+                            search: `submitter_institution: ${experiment.submitter_institution}`
                           }
                         }}
                       />
@@ -212,7 +208,7 @@ export const Experiment = () => {
                           href={{
                             pathname: '/search',
                             query: {
-                              q: `publication_authors:${author}`
+                              search: `publication_authors:${author}`
                             }
                           }}
                         />
@@ -223,7 +219,14 @@ export const Experiment = () => {
                   <InformationItemBlock
                     condition={experiment.source_database}
                     field="Source Repositories"
-                    value={databaseNames[experiment.source_database]}
+                    value={
+                      <Anchor
+                        label={databaseNames[experiment.source_database]}
+                        href={databaseNames[experiment.source_database]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      />
+                    }
                   />
                   <InformationItemBlock
                     condition={experiment.alternate_accession_code}

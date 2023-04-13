@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
-import { useEffect, useRef, useState, memo } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
-import { useFilter } from 'hooks/useFilter'
+import { useSearch } from 'hooks/useSearch'
 import { useIntersectObserver } from 'hooks/useIntersectObserver'
 import { useResponsive } from 'hooks/useResponsive'
 import { getQueryParam } from 'helpers/search'
@@ -22,17 +22,13 @@ import {
   SearchFilterList
 } from 'components/SearchResults'
 import { options } from 'config'
-import { api } from 'api'
 
-export const getServerSideProps = ({ query }) => {
-  return { props: { query } }
-}
-
-export const Search = ({ query }) => {
+export const Search = (props) => {
+  const { pathname, query } = props
   const router = useRouter()
-  const { filter, setFilter } = useFilter()
+  const { filter, setFilter, searchTerm, setSearchTerm, getSearchResults } =
+    useSearch()
   const { viewport, setResponsive } = useResponsive()
-
   const endRef = useRef(null)
   const isEndVisible = useIntersectObserver(endRef, {
     rootMargin: '0px',
@@ -40,22 +36,45 @@ export const Search = ({ query }) => {
   }).isIntersecting
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
+  // All the below search related states will be moved to the context for search
   const pageSizes = [10, 20, 50]
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [facets, setFacets] = useState([])
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(pageSizes[0])
-  const [searchResults, setSearchResults] = useState(null)
   const [sortByOption, setSortByOption] = useState(options.sortby[0].value)
+
+  const [results, setResults] = useState(null)
+  const isSearchResults = results && results.results.length > 0
   const [toggleFilterList, setToggleFilterList] = useState(false)
-  const isSearchResults = searchResults && searchResults.results.length > 0
-  // TEMPORARY
+  // TEMPORARY (* for UI demo)
   const timer = useRef(null)
   const stopTimer = () => clearTimeout(timer.current)
+  const getResults = async (params) => {
+    const response = await getSearchResults(params)
+    setResults(response)
+    setFacets(response.facets)
+    setLoading(false)
+  }
+
+  const params = {
+    limit: pageSize,
+    offset: page * pageSize,
+    ordering: sortByOption,
+    ...filter,
+    // the quary pamaeter '?empty=true' used in FE-only to toggle the non-downloadable samples
+    // NOTE: if this is not present, we hide the non-downkoadalbe samples by querying the API
+    // with `num_downloadable_samples__gt: 0`
+    ...(searchTerm ? { search: searchTerm } : ''),
+    ...(!filter || !filter.empty ? { num_downloadable_samples__gt: 0 } : '')
+  }
 
   useEffect(() => {
     if (query) {
       setFilter(getQueryParam(query))
+      setSearchTerm(query.search)
+
+      getResults({ ...params, ...getQueryParam(query) })
     }
   }, [])
 
@@ -63,32 +82,11 @@ export const Search = ({ query }) => {
     // TEMPORARY (* for UI demo)
     if (filter) {
       // add the delay to prevent 'Loading initial props cancelled' error on router
-      timer.current = window.setTimeout(() => {
-        router.push({ pathname: '/search', query: filter })
-      }, 2000)
+      timer.current = window.setTimeout(
+        () => router.push({ pathname, query: filter }),
+        1000
+      )
     }
-
-    const params = {
-      limit: pageSize,
-      offset: page * pageSize,
-      ordering: sortByOption,
-      ...filter,
-      // the quary pamaeter '?empty=true' used in FE-only to toggle the non-downloadable samples
-      // NOTE: if this is not present, we hide the non-downkoadalbe samples by querying the API
-      // with `num_downloadable_samples__gt: 0`
-      ...(!filter || !filter.empty ? { num_downloadable_samples__gt: 0 } : {})
-    }
-
-    const getSearchResults = async () => {
-      setLoading(true)
-      const result = await api.searchResults.get(params)
-      setSearchResults(result)
-      setFacets(result.facets)
-      setLoading(false)
-    }
-
-    getSearchResults()
-
     return () => stopTimer()
   }, [filter, page, pageSize, sortByOption])
 
@@ -121,7 +119,9 @@ export const Search = ({ query }) => {
               placeholder="Search accessions, pathways, diseases, etc.,"
               btnType="primary"
               size="large"
+              value={searchTerm}
               responsive
+              changeHandler={(e) => setSearchTerm(e.target.value)}
             />
           </BoxBlock>
           <LayerResponsive position="left" show={toggleFilterList} tabletMode>
@@ -157,13 +157,7 @@ export const Search = ({ query }) => {
                   </Box>
                 </Box>
               )}
-              {searchResults && facets && (
-                <SearchFilterList
-                  facets={facets}
-                  filter={filter}
-                  setFilter={setFilter}
-                />
-              )}
+              {results && facets && <SearchFilterList facets={facets} />}
             </BoxBlock>
           </LayerResponsive>
           <Box gridArea="main" height={{ min: '85vh' }}>
@@ -181,7 +175,7 @@ export const Search = ({ query }) => {
               <SearchBulkActions
                 pageSize={pageSize}
                 pageSizes={pageSizes}
-                results={searchResults}
+                results={results}
                 sortByOptions={options.sortby}
                 selectedSortByOption={sortByOption}
                 setPageSize={setPageSize}
@@ -202,10 +196,10 @@ export const Search = ({ query }) => {
               </Box>
             ) : isSearchResults ? (
               <Box animation={{ type: 'fadeIn', duration: 300 }}>
-                {searchResults.results.map((result) => (
+                {results.results.map((result) => (
                   <SearchCard key={result.id} result={result} />
                 ))}
-                {searchResults.results.length < 10 && <MissingResultsAlert />}
+                {results.results.length < 10 && <MissingResultsAlert />}
               </Box>
             ) : (
               <NoMatchingResults />
@@ -221,7 +215,7 @@ export const Search = ({ query }) => {
                   page={page}
                   pageSize={pageSize}
                   setPage={setPage}
-                  totalPages={searchResults.count}
+                  totalPages={results.count}
                 />
               </Box>
             )}
@@ -233,4 +227,13 @@ export const Search = ({ query }) => {
   )
 }
 
-export default memo(Search)
+Search.getInitialProps = async ({ pathname, query }) => {
+  const searchQuery = { ...query }
+  const props = { pathname, query: searchQuery }
+
+  return {
+    ...props
+  }
+}
+
+export default Search
