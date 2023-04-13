@@ -45,7 +45,7 @@ const HeroBody = () => {
           >
             <Anchor
               label={query}
-              href={{ pathname: '/search', query: { query } }}
+              href={{ pathname: '/search', query: { search: query } }}
               size="xlarge"
               underline
             />
