@@ -1,11 +1,11 @@
-import { useFilter } from 'hooks/useFilter'
+import { useSearch } from 'hooks/useSearch'
 import { CheckBox } from 'grommet'
 
 // the quary pamaeter '?empty=true' used in FE-only to toggle the non-downloadable samples
 // NOTE: if this is not present, we hide the non-downkoadalbe samples by querying the API
 // with `num_downloadable_samples__gt: 0`
-export const FilterNonDownloadableExperiment = ({ filterParam = 'empty' }) => {
-  const { filter, setFilter } = useFilter()
+export const NonDownloadableExperiment = ({ filterParam = 'empty' }) => {
+  const { filter, setFilter } = useSearch()
 
   const toggleFilter = (e) => {
     if (e.target.checked) {
@@ -35,4 +35,4 @@ export const FilterNonDownloadableExperiment = ({ filterParam = 'empty' }) => {
   )
 }
 
-export default FilterNonDownloadableExperiment
+export default NonDownloadableExperiment

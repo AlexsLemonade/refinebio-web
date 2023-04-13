@@ -1,11 +1,11 @@
-import { useFilter } from 'hooks/useFilter'
+import { useSearch } from 'hooks/useSearch'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { MissingResultsFormButton } from './MissingResultsFormButton'
 
 export const NoMatchingResults = () => {
-  const { clearAllFilter } = useFilter()
+  const { clearAllFilter } = useSearch()
   const { setResponsive } = useResponsive()
 
   return (

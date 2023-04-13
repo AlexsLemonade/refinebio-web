@@ -3,7 +3,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Box, Grid, Select } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { PageSizes } from 'components/shared/PageSizes'
-import { FilterNonDownloadableExperiment } from './SearchFilterList'
+import { NonDownloadableExperiment } from './SearchFilterList'
 
 export const SearchBulkActions = ({
   pageSize,
@@ -132,7 +132,7 @@ export const SearchBulkActions = ({
           </Box>
         </Box>
         <Box gridArea="hide-non-downloadble">
-          <FilterNonDownloadableExperiment />
+          <NonDownloadableExperiment />
         </Box>
       </Grid>
     </Box>
