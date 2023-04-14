@@ -1,5 +1,5 @@
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, FormField } from 'grommet'
+import { Box, Form } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
 import { TextInput } from 'components/shared/TextInput'
@@ -15,7 +15,8 @@ export const SearchBox = ({
   value = '',
   blurHandler,
   changeHandler,
-  focusHandler
+  focusHandler,
+  submitHandler
 }) => {
   const { viewport, setResponsive } = useResponsive()
   return (
@@ -27,61 +28,66 @@ export const SearchBox = ({
       viewport={viewport}
       width="100%"
     >
-      <FormField
-        a11yTitle="Search"
+      <Form
         htmlFor="search"
         role="search"
-        width={
-          size !== 'small' && viewport !== 'small'
-            ? 'calc(100% - 96px)'
-            : '100%'
-        }
+        style={{ width: '100%' }}
+        onSubmit={submitHandler}
       >
-        <Box style={{ position: 'relative' }}>
-          {size === 'small' ? (
-            <TextInput
-              id="search"
-              icon={<Icon name="Search" size="small" />}
-              placeholder={placeholder}
-              style={{ padding }}
-              type="search"
-              reverse={reverse}
-              value={value}
-              onBlur={blurHandler}
-              onChange={changeHandler}
-              onFocus={focusHandler}
-            />
-          ) : (
-            <TextInput
-              id="search"
-              placeholder={placeholder}
-              type="search"
-              style={{
-                fontSize: size === 'large' ? '22px' : '16px',
-                padding: size === 'large' ? '22px' : '16px'
+        <Box direction="row" width="100%">
+          <Box
+            style={{ position: 'relative' }}
+            width={
+              size !== 'small' && viewport !== 'small'
+                ? 'calc(100% - 96px)'
+                : '100%'
+            }
+          >
+            {size === 'small' ? (
+              <TextInput
+                id="search"
+                icon={<Icon name="Search" size="small" />}
+                placeholder={placeholder}
+                style={{ padding }}
+                type="search"
+                reverse={reverse}
+                value={value}
+                onBlur={blurHandler}
+                onChange={changeHandler}
+                onFocus={focusHandler}
+              />
+            ) : (
+              <TextInput
+                id="search"
+                placeholder={placeholder}
+                type="search"
+                style={{
+                  fontSize: size === 'large' ? '22px' : '16px',
+                  padding: size === 'large' ? '22px' : '16px'
+                }}
+                value={value}
+                onBlur={blurHandler}
+                onChange={changeHandler}
+                onFocus={focusHandler}
+              />
+            )}
+          </Box>
+          {size !== 'small' && (
+            <Button
+              label="Search"
+              margin={{
+                left: setResponsive('none', 'small'),
+                top: viewport === 'small' && responsive ? 'small' : 'none'
               }}
-              value={value}
-              onBlur={blurHandler}
-              onChange={changeHandler}
-              onFocus={focusHandler}
+              primary={btnType === 'primary'}
+              secondary={btnType === 'secondary'}
+              style={{ padding: size === 'large' ? '10px 20px' : '4px 16px' }}
+              type="submit"
+              width={responsive && viewport === 'small' ? '100%' : btnWidth}
             />
           )}
         </Box>
-      </FormField>
-      {size !== 'small' && (
-        <Button
-          label="Search"
-          margin={{
-            left: setResponsive('none', 'small'),
-            top: viewport === 'small' && responsive ? 'small' : 'none'
-          }}
-          primary={btnType === 'primary'}
-          secondary={btnType === 'secondary'}
-          style={{ padding: size === 'large' ? '10px 20px' : '4px 16px' }}
-          type="submit"
-          width={responsive && viewport === 'small' ? '100%' : btnWidth}
-        />
-      )}
+      </Form>
     </Box>
   )
 }
