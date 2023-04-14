@@ -1,11 +1,11 @@
 import { memo } from 'react'
 import { Anchor } from 'components/shared/Anchor'
-import { TextHighlighted } from 'components/shared/TextHighlighted'
+import { TextHighlight } from 'components/shared/TextHighlight'
 
 export const CellAccessionCode = ({ value }) => {
   return (
     <Anchor href={`/samples/${value}`} underline>
-      <TextHighlighted text={value} />
+      <TextHighlight>{value}</TextHighlight>
     </Anchor>
   )
 }
