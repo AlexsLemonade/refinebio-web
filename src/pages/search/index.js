@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearch } from 'hooks/useSearch'
-import { useIntersectObserver } from 'hooks/useIntersectObserver'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import { getFilterParam } from 'helpers/search'
@@ -38,11 +37,6 @@ export const Search = (props) => {
   } = useSearch(newResponse)
 
   const { viewport, setResponsive } = useResponsive()
-  const endRef = useRef(null)
-  const isEndVisible = useIntersectObserver(endRef, {
-    rootMargin: '0px',
-    threshold: 0.99
-  }).isIntersecting
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
   // TEMPORARY (* for UI demo)
@@ -106,22 +100,16 @@ export const Search = (props) => {
           </BoxBlock>
           <LayerResponsive position="left" show={toggleFilterList} tabletMode>
             <BoxBlock
-              animation={isEndVisible ? {} : { type: 'fadeIn' }}
               gridArea="side"
               margin={{ top: 'large' }}
               pad={{
                 left: setResponsive('basex7', 'basex7', 'none'),
                 right: setResponsive('basex7', 'basex7', 'large'),
-                top: setResponsive('large', 'large', 'none'),
-                bottom: '200px'
+                top: setResponsive('large', 'large', 'none')
               }}
+              // TODO: dynamically set the max height for laptop / desktop devices based on vh and page sizes
               width={setResponsive('100vw', '100vw', sideWidth)}
-              height={{ max: '100vh' }}
-              style={{
-                minHeight: '-webkit-fill-available',
-                position: isEndVisible ? 'relative' : 'fixed',
-                overflowY: 'auto'
-              }}
+              style={{ overflowY: 'auto' }}
             >
               {viewport !== 'large' && (
                 <Box align="end" margin={{ bottom: 'small' }}>
@@ -191,7 +179,6 @@ export const Search = (props) => {
           </Box>
         </Grid>
       </FixedContainer>
-      <Box ref={endRef} />
     </TextHighlightContextProvider>
   )
 }
