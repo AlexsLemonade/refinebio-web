@@ -16,7 +16,6 @@ export const Header = ({ light = false }) => {
     '/dataset/[dataset_id]',
     '/download',
     '/experiments/[accession_code]/[experiment]',
-    '/samples/[sample_id]',
     '/search'
   ]
 
