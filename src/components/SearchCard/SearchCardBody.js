@@ -3,6 +3,7 @@ import { formatSampleMetadata } from 'helpers/dataset'
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import { Icon } from 'components/shared/Icon'
 import { Anchor } from 'components/shared/Anchor'
+import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
 
 export const SearchCardBody = ({
@@ -29,9 +30,11 @@ export const SearchCardBody = ({
             }
           >
             <Paragraph>
-              {toggleDesciption
-                ? `${description.slice(0, maxLength)} ...`
-                : description}
+              <TextHighlight>
+                {toggleDesciption
+                  ? `${description.slice(0, maxLength)} ...`
+                  : description}
+              </TextHighlight>
               {description.length > maxLength && (
                 <Text
                   color="brand"
@@ -77,18 +80,23 @@ export const SearchCardBody = ({
         <Heading level={5} responsive={false} weight="500">
           Publication Title
         </Heading>
-        {publicationTitle ? (
-          <Text>{publicationTitle}</Text>
-        ) : (
-          <TextNull text="No associated publication" />
-        )}
+        <Paragraph>
+          {publicationTitle ? (
+            <TextHighlight>{publicationTitle}</TextHighlight>
+          ) : (
+            <TextNull text="No associated publication" />
+          )}
+        </Paragraph>
       </Box>
       <Box margin={{ top: 'small' }}>
         <Heading level={5} responsive={false} weight="500">
           Alternate Accession IDs
         </Heading>
         {alternateAccessionCode ? (
-          <Anchor href={SearchCardBody.url} label={alternateAccessionCode} />
+          <Anchor
+            href={SearchCardBody.url}
+            label={<TextHighlight>{alternateAccessionCode}</TextHighlight>}
+          />
         ) : (
           <TextNull text="None" />
         )}
@@ -98,11 +106,15 @@ export const SearchCardBody = ({
           Sample Metadata Fields
         </Heading>
         <Box direction="row">
-          {sampleMetadataFields.length > 0 ? (
-            <Text>{formatSampleMetadata(sampleMetadataFields).join(', ')}</Text>
-          ) : (
-            <TextNull text="No sample metadata fields" />
-          )}
+          <Paragraph>
+            {sampleMetadataFields.length > 0 ? (
+              <TextHighlight>
+                {formatSampleMetadata(sampleMetadataFields).join(', ')}
+              </TextHighlight>
+            ) : (
+              <TextNull text="No sample metadata fields" />
+            )}
+          </Paragraph>
         </Box>
       </Box>
     </Box>

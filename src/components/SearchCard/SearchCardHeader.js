@@ -3,11 +3,12 @@ import formatURLString from 'helpers/formatURLString'
 import { Box, Heading } from 'grommet'
 import { IconBadge } from 'components/shared/IconBadge'
 import { Anchor } from 'components/shared/Anchor'
+import { TextHighlight } from 'components/shared/TextHighlight'
 
 export const SearchCardHeader = ({
   accessionCode = '',
-  title = '',
-  isLinked = true
+  isLinked = true,
+  title = ''
 }) => {
   const { setResponsive } = useResponsive()
 
@@ -26,11 +27,18 @@ export const SearchCardHeader = ({
       >
         {isLinked ? (
           <Anchor
-            href={`experiments/${accessionCode}/${formatURLString(title)}`}
-            label={title}
+            href={{
+              pathname: `experiments/${accessionCode}/${formatURLString(
+                title
+              )}`,
+              query: {
+                ref: 'search'
+              }
+            }}
+            label={<TextHighlight>{title}</TextHighlight>}
           />
         ) : (
-          title
+          <TextHighlight>{title}</TextHighlight>
         )}
       </Heading>
     </Box>

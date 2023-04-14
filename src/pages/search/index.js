@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { useSearch } from 'hooks/useSearch'
 import { useIntersectObserver } from 'hooks/useIntersectObserver'
 import { useResponsive } from 'hooks/useResponsive'
+import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import { getQueryParam } from 'helpers/search'
 import { Box, Grid, Spinner } from 'grommet'
 import { Button } from 'components/shared/Button'
@@ -36,18 +37,18 @@ export const Search = (props) => {
   }).isIntersecting
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
-  // All the below search related states will be moved to the context for search
+  // TEMPORARY (* for UI demo)
+  // All the search related states will be moved to the context for search
   const pageSizes = [10, 20, 50]
   const [loading, setLoading] = useState(true)
   const [facets, setFacets] = useState([])
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(pageSizes[0])
   const [sortByOption, setSortByOption] = useState(options.sortby[0].value)
-
   const [results, setResults] = useState(null)
-  const isSearchResults = results && results.results.length > 0
+  const isResults = results && results.results.length > 0
   const [toggleFilterList, setToggleFilterList] = useState(false)
-  // TEMPORARY (* for UI demo)
+  const [userInput, setUserInput] = useState('')
   const timer = useRef(null)
   const stopTimer = () => clearTimeout(timer.current)
   const getResults = async (params) => {
@@ -56,7 +57,10 @@ export const Search = (props) => {
     setFacets(response.facets)
     setLoading(false)
   }
-
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setSearchTerm(userInput)
+  }
   const params = {
     limit: pageSize,
     offset: page * pageSize,
@@ -73,7 +77,7 @@ export const Search = (props) => {
     if (query) {
       setFilter(getQueryParam(query))
       setSearchTerm(query.search)
-
+      setUserInput(query.search)
       getResults({ ...params, ...getQueryParam(query) })
     }
   }, [])
@@ -91,7 +95,7 @@ export const Search = (props) => {
   }, [filter, page, pageSize, sortByOption])
 
   return (
-    <>
+    <TextHighlightContextProvider match={searchTerm}>
       <FixedContainer pad={{ horizontal: 'large', bottom: 'large' }}>
         <SearchInfoBanner />
         <Grid
@@ -119,9 +123,10 @@ export const Search = (props) => {
               placeholder="Search accessions, pathways, diseases, etc.,"
               btnType="primary"
               size="large"
-              value={searchTerm}
+              value={userInput}
               responsive
-              changeHandler={(e) => setSearchTerm(e.target.value)}
+              changeHandler={(e) => setUserInput(e.target.value)}
+              submitHandler={handleSubmit}
             />
           </BoxBlock>
           <LayerResponsive position="left" show={toggleFilterList} tabletMode>
@@ -138,7 +143,6 @@ export const Search = (props) => {
               width={setResponsive('100vw', '100vw', sideWidth)}
               height={{ max: '100vh' }}
               style={{
-                // overflowY: setResponsive('scroll', 'scroll', 'auto'),
                 minHeight: '-webkit-fill-available',
                 position: isEndVisible ? 'relative' : 'fixed',
                 overflowY: 'auto'
@@ -171,7 +175,7 @@ export const Search = (props) => {
                 onClick={() => setToggleFilterList(true)}
               />
             )}
-            {isSearchResults && (
+            {isResults && (
               <SearchBulkActions
                 pageSize={pageSize}
                 pageSizes={pageSizes}
@@ -194,7 +198,7 @@ export const Search = (props) => {
                   message={{ start: 'Loading data', end: 'Data loaded' }}
                 />
               </Box>
-            ) : isSearchResults ? (
+            ) : isResults ? (
               <Box animation={{ type: 'fadeIn', duration: 300 }}>
                 {results.results.map((result) => (
                   <SearchCard key={result.id} result={result} />
@@ -204,7 +208,7 @@ export const Search = (props) => {
             ) : (
               <NoMatchingResults />
             )}
-            {isSearchResults && (
+            {isResults && (
               <Box
                 align="center"
                 direction="row"
@@ -223,7 +227,7 @@ export const Search = (props) => {
         </Grid>
       </FixedContainer>
       <Box ref={endRef} />
-    </>
+    </TextHighlightContextProvider>
   )
 }
 
