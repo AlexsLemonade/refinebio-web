@@ -1,19 +1,21 @@
 import { useMatchMedia } from 'hooks/useMatchMedia'
+import { useSearch } from 'hooks/useSearch'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Grid, Select } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { PageSizes } from 'components/shared/PageSizes'
+import { options } from 'config'
 import { NonDownloadableExperiment } from './SearchFilterList'
 
-export const SearchBulkActions = ({
-  pageSize,
-  pageSizes,
-  results,
-  sortByOptions,
-  selectedSortByOption,
-  setSelectedSortByOption,
-  setPageSize
-}) => {
+export const SearchBulkActions = () => {
+  const {
+    pageSize,
+    pageSizes,
+    results,
+    setPageSize,
+    sortByOption,
+    setSortByOption
+  } = useSearch()
   const { setResponsive } = useResponsive()
   const isMax850 = useMatchMedia('(max-width: 850px)')
   const isMax1100 = useMatchMedia('(max-width: 1100px)')
@@ -110,14 +112,12 @@ export const SearchBulkActions = ({
             Sort by
             <Box width="208px">
               <Select
-                options={Object.values(sortByOptions)}
+                options={Object.values(options.sortby)}
                 labelKey="label"
-                value={selectedSortByOption}
+                value={sortByOption}
                 valueKey={{ key: 'value', reduce: true }}
                 margin={{ horizontal: 'xxsmall' }}
-                onChange={({ value: nextValue }) =>
-                  setSelectedSortByOption(nextValue)
-                }
+                onChange={({ value: nextValue }) => setSortByOption(nextValue)}
               />
             </Box>
           </Box>

@@ -1,11 +1,10 @@
 /* eslint-disable no-nested-ternary */
 import { useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/router'
 import { useSearch } from 'hooks/useSearch'
 import { useIntersectObserver } from 'hooks/useIntersectObserver'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
-import { getQueryParam } from 'helpers/search'
+import { getFilterParam } from 'helpers/search'
 import { Box, Grid, Spinner } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -22,13 +21,22 @@ import {
   SearchBulkActions,
   SearchFilterList
 } from 'components/SearchResults'
-import { options } from 'config'
+import { api } from 'api'
 
 export const Search = (props) => {
-  const { pathname, query } = props
-  const router = useRouter()
-  const { filter, setFilter, searchTerm, setSearchTerm, getSearchResults } =
-    useSearch()
+  const { query, response: newResponse } = props
+  const {
+    page,
+    setPage,
+    pageSize,
+    pushSearchTerm,
+    setFilter,
+    searchTerm,
+    setSearchTerm,
+    results,
+    setResults
+  } = useSearch(newResponse)
+
   const { viewport, setResponsive } = useResponsive()
   const endRef = useRef(null)
   const isEndVisible = useIntersectObserver(endRef, {
@@ -38,61 +46,28 @@ export const Search = (props) => {
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
   // TEMPORARY (* for UI demo)
-  // All the search related states will be moved to the context for search
-  const pageSizes = [10, 20, 50]
   const [loading, setLoading] = useState(true)
   const [facets, setFacets] = useState([])
-  const [page, setPage] = useState(0)
-  const [pageSize, setPageSize] = useState(pageSizes[0])
-  const [sortByOption, setSortByOption] = useState(options.sortby[0].value)
-  const [results, setResults] = useState(null)
-  const isResults = results && results.results.length > 0
+  const isResults = results && results.results?.length > 0
   const [toggleFilterList, setToggleFilterList] = useState(false)
   const [userInput, setUserInput] = useState('')
-  const timer = useRef(null)
-  const stopTimer = () => clearTimeout(timer.current)
-  const getResults = async (params) => {
-    const response = await getSearchResults(params)
-    setResults(response)
-    setFacets(response.facets)
-    setLoading(false)
-  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     setSearchTerm(userInput)
-  }
-  const params = {
-    limit: pageSize,
-    offset: page * pageSize,
-    ordering: sortByOption,
-    ...filter,
-    // the quary pamaeter '?empty=true' used in FE-only to toggle the non-downloadable samples
-    // NOTE: if this is not present, we hide the non-downkoadalbe samples by querying the API
-    // with `num_downloadable_samples__gt: 0`
-    ...(searchTerm ? { search: searchTerm } : ''),
-    ...(!filter || !filter.empty ? { num_downloadable_samples__gt: 0 } : '')
+    pushSearchTerm(userInput)
   }
 
   useEffect(() => {
-    if (query) {
-      setFilter(getQueryParam(query))
+    if (props) {
+      setFilter(getFilterParam(query))
       setSearchTerm(query.search)
       setUserInput(query.search)
-      getResults({ ...params, ...getQueryParam(query) })
+      setResults(newResponse)
+      setFacets(newResponse.facets)
+      setLoading(false)
     }
   }, [])
-
-  useEffect(() => {
-    // TEMPORARY (* for UI demo)
-    if (filter) {
-      // add the delay to prevent 'Loading initial props cancelled' error on router
-      timer.current = window.setTimeout(
-        () => router.push({ pathname, query: filter }),
-        1000
-      )
-    }
-    return () => stopTimer()
-  }, [filter, page, pageSize, sortByOption])
 
   return (
     <TextHighlightContextProvider match={searchTerm}>
@@ -175,17 +150,7 @@ export const Search = (props) => {
                 onClick={() => setToggleFilterList(true)}
               />
             )}
-            {isResults && (
-              <SearchBulkActions
-                pageSize={pageSize}
-                pageSizes={pageSizes}
-                results={results}
-                sortByOptions={options.sortby}
-                selectedSortByOption={sortByOption}
-                setPageSize={setPageSize}
-                setSelectedSortByOption={setSortByOption}
-              />
-            )}
+            {isResults && <SearchBulkActions />}
             {loading ? (
               <Box
                 align="center"
@@ -232,11 +197,20 @@ export const Search = (props) => {
 }
 
 Search.getInitialProps = async ({ pathname, query }) => {
-  const searchQuery = { ...query }
+  const searchQuery = {
+    ...query,
+    limit: query.limit || 10,
+    offset: query.offset || 0,
+    ordering: query.ordering || '_score',
+    num_downloadable_samples__gt: query.empty ? '' : 0
+  }
+
   const props = { pathname, query: searchQuery }
+  const response = await api.search.get(searchQuery)
 
   return {
-    ...props
+    ...props,
+    response
   }
 }
 

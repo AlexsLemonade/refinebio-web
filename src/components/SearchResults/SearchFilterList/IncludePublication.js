@@ -9,7 +9,10 @@ export const IncludePublication = ({
   filterLabel
 }) => {
   const { filter, toggleFilter } = useSearch()
-  const count = filterGroup.true ? `(${formatNumbers(filterGroup.true)})` : ''
+  const count =
+    filterGroup && filterGroup.true
+      ? `(${formatNumbers(filterGroup.true)})`
+      : ''
 
   return (
     <Box>
