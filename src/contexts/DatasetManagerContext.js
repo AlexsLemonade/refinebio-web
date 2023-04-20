@@ -4,11 +4,16 @@ import { useLocalStorage } from 'hooks/useLocalStorage'
 export const DatasetManagerContext = createContext({})
 
 export const DatasetManagerContextProvider = ({ children }) => {
-  const [datasetId, setDatasetId] = useLocalStorage('refinebio-datasetId', null)
+  const [currentDatasetId, setCurrentDatasetId] = useLocalStorage(
+    'refinebio-currentDatasetId',
+    null
+  )
 
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <DatasetManagerContext.Provider value={{ datasetId, setDatasetId }}>
+    <DatasetManagerContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
+      value={{ currentDatasetId, setCurrentDatasetId }}
+    >
       {children}
     </DatasetManagerContext.Provider>
   )
