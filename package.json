@@ -2,6 +2,9 @@
   "name": "refinebio-web",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "packages/refinebio-js"
+  ],
   "scripts": {
     "compose": "docker-compose --env-file ./docker-compose.env -f ./docker-compose.yml",
     "start-local": "yarn compose up",
@@ -17,6 +20,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@ccdl/refinebio": "0.0.1",
     "@sentry/nextjs": "^7.12.1",
     "grommet": "^2.25.3",
     "grommet-icons": "^4.8.0",

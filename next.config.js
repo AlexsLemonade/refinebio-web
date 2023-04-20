@@ -39,7 +39,14 @@ const moduleExports = () => {
       // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/#use-hidden-source-map
       hideSourceMaps: true
     },
-    swcMinify: true
+    swcMinify: true,
+    // TEMPORARY For correctly resolving paths for the workspace packages (module imports)
+    webpack: (baseConfig) => {
+      const config = { ...baseConfig }
+      config.resolve.preferRelative = true
+
+      return config
+    }
   }
 }
 
