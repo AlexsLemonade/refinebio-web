@@ -5,6 +5,7 @@ import { useLocalStorage } from 'hooks/useLocalStorage'
 import unionizeArrays from 'helpers/unionizeArrays'
 import Refinebio from '@ccdl/refinebio/src'
 
+// TODO: update/improve refinebio-js based on the below implementation
 export const useDatasetManager = () => {
   const { email, token, setToken } = useRefinebioContext()
   const api = useMemo(() => Refinebio(), [])
@@ -71,7 +72,7 @@ export const useDatasetManager = () => {
   const saveDataset = async (dataset) => {
     try {
       await dataset.save()
-      refreshCurrentDataset()
+      updateCurrentDataset(dataset)
 
       return dataset
     } catch (e) {
@@ -86,13 +87,10 @@ export const useDatasetManager = () => {
   const updateCurrentDataset = (newDataset) =>
     setCurrentDataset({ ...newDataset })
 
-  // Copy currentDataset to a new reference
-  const refreshCurrentDataset = () => setCurrentDataset({ ...currentDataset })
-
   // Empty the data object in the dataset
   const clearDataset = async () => {
     const dataset = await currentDataset.emptyData()
-    await currentDataset.save()
+    await dataset.save()
     updateCurrentDataset(dataset)
 
     return dataset
@@ -101,57 +99,51 @@ export const useDatasetManager = () => {
   /* --- Common methods for UI --- */
   // Experiment
   const getTotalExperiments = () =>
-    Object.keys(currentDataset.get('data') || {}).length
+    Object.keys(currentDataset.getData() || {}).length
 
-  const hasExperiment = (data, experimentAccessionCode) =>
-    Object.keys(currentDataset.get('data')).includes(experimentAccessionCode)
+  const hasExperiment = (experimentAccessionCode) =>
+    Object.keys(currentDataset.getData()).includes(experimentAccessionCode)
 
   const addExperiment = async (experimentAccessionCode) => {
-    const dataset = currentDataset.addExperiment(experimentAccessionCode)
-    await dataset.save()
+    if (!currentDatasetId) {
+      await createDataset()
+    }
 
-    return dataset
+    currentDataset.addExperiment(experimentAccessionCode)
+    const dataset = await currentDataset.save()
+    updateCurrentDataset(dataset)
   }
 
   const removeExperiment = async (experimentAccessionCode) => {
-    const dataset = currentDataset.removeExperiment(experimentAccessionCode)
-    await dataset.save()
-
-    return dataset
+    currentDataset.removeExperiment(experimentAccessionCode)
+    const dataset = await dataset.save()
+    updateCurrentDataset(dataset)
   }
 
   // Sample
   const getTotalSamples = () => {
-    const data = currentDataset.get('data') || {}
+    const data = currentDataset.getData() || {}
 
     return unionizeArrays(Object.values(data)).length
   }
 
   const hasSample = (experimentAccessionCode, sampleAccessionCode) => {
-    const data = currentDataset.get('data') || {}
+    const data = currentDataset.getData() || {}
     const experiment = data[experimentAccessionCode] || []
 
     return experiment.includes(sampleAccessionCode)
   }
 
   const addSample = async (experimentAccessionCode, sampleAccessionCode) => {
-    const dataset = currentDataset.addSample(
-      experimentAccessionCode,
-      sampleAccessionCode
-    )
-    await dataset.save()
-
-    return dataset
+    currentDataset.addSample(experimentAccessionCode, sampleAccessionCode)
+    const dataset = await currentDataset.save()
+    updateCurrentDataset(dataset)
   }
 
   const removeSample = async (experimentAccessionCode, sampleAccessionCode) => {
-    const dataset = currentDataset.removeSample(
-      experimentAccessionCode,
-      sampleAccessionCode
-    )
-    await dataset.save()
-
-    return dataset
+    currentDataset.removeSample(experimentAccessionCode, sampleAccessionCode)
+    const dataset = await currentDataset.save()
+    updateCurrentDataset(dataset)
   }
 
   // For One-off Experiment Downloads
@@ -161,7 +153,7 @@ export const useDatasetManager = () => {
     dataset.setEmail(email)
     await processDataset(dataset)
     // Stores the newly created dataset id to downloads
-    setDownloads((prev) => unionizeArrays(prev, currentDataset.get('id')))
+    setDownloads((prev) => unionizeArrays(prev, dataset.get('id')))
 
     return dataset
   }
