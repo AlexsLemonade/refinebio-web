@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 import { useSearch } from 'hooks/useSearch'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
-import { getFilterParam } from 'helpers/search'
-import { Box, Grid, Spinner } from 'grommet'
+import { getAccessionCodesParam, getFilterParam } from 'helpers/search'
+import { Box, Grid, Heading, Spinner } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -23,7 +23,7 @@ import {
 import { api } from 'api'
 
 export const Search = (props) => {
-  const { query, response: newResponse } = props
+  const { query, accessionCodesResponse, response: newResponse } = props
   const {
     page,
     setPage,
@@ -64,7 +64,9 @@ export const Search = (props) => {
   }, [])
 
   return (
-    <TextHighlightContextProvider match={searchTerm}>
+    <TextHighlightContextProvider
+      match={[searchTerm, ...getAccessionCodesParam(searchTerm)]}
+    >
       <FixedContainer pad={{ horizontal: 'large', bottom: 'large' }}>
         <SearchInfoBanner />
         <Grid
@@ -152,12 +154,37 @@ export const Search = (props) => {
                 />
               </Box>
             ) : isResults ? (
-              <Box animation={{ type: 'fadeIn', duration: 300 }}>
-                {results.results.map((result) => (
-                  <SearchCard key={result.id} result={result} />
-                ))}
-                {results.results.length < 10 && <MissingResultsAlert />}
-              </Box>
+              <>
+                {/* START: TEMPORARY for UI Demo */}
+                {accessionCodesResponse && (
+                  <>
+                    {accessionCodesResponse.map((data) =>
+                      data.results.map((result) => (
+                        <SearchCard key={result.id} result={result} />
+                      ))
+                    )}
+                    <Box
+                      border={{ color: 'gray-shade-5', side: 'top' }}
+                      margin={{ vertical: 'large' }}
+                      style={{ position: 'relative' }}
+                    >
+                      <Heading
+                        level={3}
+                        style={{ position: 'absolute', top: '-12px' }}
+                      >
+                        Related Results for '{query.search}'
+                      </Heading>
+                    </Box>
+                  </>
+                )}
+                {/* END: TEMPORARY for UI Demo */}
+                <Box animation={{ type: 'fadeIn', duration: 300 }}>
+                  {results.results.map((result) => (
+                    <SearchCard key={result.id} result={result} />
+                  ))}
+                  {results.results.length < 10 && <MissingResultsAlert />}
+                </Box>
+              </>
             ) : (
               <NoMatchingResults />
             )}
@@ -184,6 +211,8 @@ export const Search = (props) => {
 }
 
 Search.getInitialProps = async ({ pathname, query }) => {
+  let accessionCodesResponse
+
   const searchQuery = {
     ...query,
     limit: query.limit || 10,
@@ -192,12 +221,31 @@ Search.getInitialProps = async ({ pathname, query }) => {
     num_downloadable_samples__gt: query.empty ? '' : 0
   }
 
-  const props = { pathname, query: searchQuery }
   const response = await api.search.get(searchQuery)
+
+  // TEMPORARY for UI Demo
+  const accessionCodes = getAccessionCodesParam(query.search)
+
+  if (accessionCodes) {
+    accessionCodesResponse =
+      (await Promise.all(
+        accessionCodes.map((code) =>
+          api.search.get({
+            search: [
+              `accession_code:${code}`,
+              `alternate_accession_code:${code}`
+            ]
+          })
+        )
+      )) || []
+  }
+
+  const props = { pathname, query: searchQuery }
 
   return {
     ...props,
-    response
+    response,
+    accessionCodesResponse // TEMPORARY passing for UI Demo
   }
 }
 

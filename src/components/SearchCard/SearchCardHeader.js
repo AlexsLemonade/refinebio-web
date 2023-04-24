@@ -16,7 +16,7 @@ export const SearchCardHeader = ({
     <Box width="100%">
       <IconBadge
         name="Accession"
-        label={accessionCode}
+        label={<TextHighlight>{accessionCode}</TextHighlight>}
         pad={{ bottom: 'small' }}
         size="medium"
       />
