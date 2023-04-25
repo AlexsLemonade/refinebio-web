@@ -156,7 +156,7 @@ export const Search = (props) => {
             ) : isResults ? (
               <>
                 {/* START: TEMPORARY for UI Demo */}
-                {accessionCodesResponse && (
+                {accessionCodesResponse.length > 0 && (
                   <>
                     {accessionCodesResponse.map((data) =>
                       data.results.map((result) => (
