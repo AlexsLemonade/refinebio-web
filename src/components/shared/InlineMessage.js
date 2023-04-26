@@ -8,7 +8,6 @@ export const InlineMessage = ({
   height = '24px',
   label = '',
   labelOnly = false,
-
   ...props
 }) => {
   const SVG =

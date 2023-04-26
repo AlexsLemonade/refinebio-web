@@ -8,7 +8,7 @@ import { List } from 'components/shared/List'
 import { Icon } from 'components/shared/Icon'
 import { SrOnly } from 'components/shared/SrOnly'
 import styled, { css } from 'styled-components'
-import { Logo } from './Logo'
+import { LogoAnchor } from './LogoAnchor'
 
 const Anchor = styled(SharedAnchor)`
   ${({ theme, light, viewport }) => css`
@@ -208,7 +208,10 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
           width={setResponsive('100vw', 'auto')}
         >
           {viewport === 'small' && (
-            <Logo margin={{ vertical: 'large' }} clickHandler={handleClick} />
+            <LogoAnchor
+              margin={{ vertical: 'large' }}
+              clickHandler={handleClick}
+            />
           )}
           <List
             alignItems={setResponsive('start', 'center')}

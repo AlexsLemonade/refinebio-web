@@ -8,6 +8,18 @@ import styled, { css } from 'styled-components'
 */
 
 const CustomButton = styled(GrommetButton)`
+  ${({ uppercase }) =>
+    uppercase &&
+    css`
+      text-transform: uppercase;
+    `}
+
+  ${({ large, viewport }) =>
+    large &&
+    css`
+      font-size: ${viewport !== 'small' ? '20px' : '16px'};
+      padding: ${viewport !== 'small' ? '16px 32px' : '4px 24px'};
+    `}  
   ${({ theme, light, primary }) =>
     primary &&
     light &&
@@ -37,7 +49,14 @@ const CustomButton = styled(GrommetButton)`
     `}
 `
 
-export const Button = ({ responsive = false, width, ...props }) => {
+export const Button = ({
+  large = false,
+  link = false,
+  responsive = false,
+  uppercase = false,
+  width,
+  ...props
+}) => {
   const { viewport } = useResponsive()
   return (
     <Box
@@ -47,8 +66,28 @@ export const Button = ({ responsive = false, width, ...props }) => {
       }
       viewport={viewport}
     >
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <CustomButton width={width} {...props} />
+      {link ? (
+        <GrommetButton
+          link={link}
+          style={{
+            fontSize: '14px',
+            border: 'none',
+            padding: 0,
+            textDecoration: 'underline'
+          }}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...props}
+        />
+      ) : (
+        <CustomButton
+          width={width}
+          large={large}
+          uppercase={uppercase}
+          viewport={viewport}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...props}
+        />
+      )}
     </Box>
   )
 }

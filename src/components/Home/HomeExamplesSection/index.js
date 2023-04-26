@@ -13,7 +13,7 @@ export const HomeExamplesSection = () => {
 
   return (
     <Box
-      background="gradient_blue_dark"
+      background="gradientBlueDark"
       pad={{ vertical: setResponsive('medium', 'basex6', 'basex10') }}
     >
       <FixedContainer
