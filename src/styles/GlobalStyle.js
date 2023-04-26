@@ -35,4 +35,9 @@ export const GlobalStyle = createGlobalStyle`
     html {
       height: -webkit-fill-available;
     }
+    input {
+      &::-webkit-search-cancel-button {
+        display: none;
+      }
+    }
 `
