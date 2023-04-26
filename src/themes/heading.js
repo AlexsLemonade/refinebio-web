@@ -10,15 +10,15 @@ export default {
         size: '26px', // 1.625rem
         height: 1.2 // (approx)31px
       },
-      h1_small: {
+      h1Small: {
         size: '26px', // 2rem
         height: 1.1875 // 38px
       },
-      h1_large: {
+      h1Large: {
         size: '32px', // 2rem
         height: 1.1875 // 38px
       },
-      h1_xlarge: {
+      h1Xlarge: {
         size: '46px', // 2rem
         height: 1.1875 // 38px
       }
@@ -28,13 +28,10 @@ export default {
         size: '22px', // 1.375rem
         height: 1.18 // (approx)26px
       },
-      h2_xsmall: {
-        size: '20px'
-      },
-      h2_small: {
+      h2Small: {
         size: '22px'
       },
-      h2_large: {
+      h2Large: {
         size: '26px', // 1.75rem
         height: 1.178 // (approx)33px
       }
@@ -50,7 +47,7 @@ export default {
         size: '18px', // 1.125rem
         height: 1.5 // 27px
       },
-      h4_small: {
+      h4Small: {
         size: '22px'
       }
     },

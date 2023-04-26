@@ -4,7 +4,7 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 export const Band = ({ bandHeight, ...props }) => {
   return (
     <Box
-      background="gradient_blue"
+      background="gradientBlue"
       elevation="large"
       height={bandHeight}
       width="100%"

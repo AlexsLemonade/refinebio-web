@@ -50,10 +50,11 @@ const CustomButton = styled(GrommetButton)`
 `
 
 export const Button = ({
-  width,
   large = false,
+  link = false,
   responsive = false,
   uppercase = false,
+  width,
   ...props
 }) => {
   const { viewport } = useResponsive()
@@ -65,14 +66,28 @@ export const Button = ({
       }
       viewport={viewport}
     >
-      <CustomButton
-        width={width}
-        large={large}
-        uppercase={uppercase}
-        viewport={viewport}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...props}
-      />
+      {link ? (
+        <GrommetButton
+          link={link}
+          style={{
+            fontSize: '14px',
+            border: 'none',
+            padding: 0,
+            textDecoration: 'underline'
+          }}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...props}
+        />
+      ) : (
+        <CustomButton
+          width={width}
+          large={large}
+          uppercase={uppercase}
+          viewport={viewport}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...props}
+        />
+      )}
     </Box>
   )
 }

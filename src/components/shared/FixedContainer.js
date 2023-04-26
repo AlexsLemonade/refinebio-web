@@ -7,11 +7,7 @@ export const FixedContainer = ({ children, width = '1250px', ...props }) => {
   return (
     <Box
       margin={{ horizontal: 'auto' }}
-      pad={setResponsive(
-        { horizontal: 'large' },
-        { horizontal: 'small' },
-        { horizontal: 'large' }
-      )}
+      pad={{ horizontal: setResponsive('large', 'small', 'large') }}
       width={width}
       style={{ position: 'relative' }}
       // eslint-disable-next-line react/jsx-props-no-spreading

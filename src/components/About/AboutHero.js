@@ -10,8 +10,8 @@ const HeroHeader = () => {
     <Heading
       color="white"
       level={1}
-      margin={{ bottom: 'basex10' }}
-      size={setResponsive('h1_small', 'h1_xlarge')}
+      margin={{ bottom: 'large' }}
+      size={setResponsive('h1Small', 'h1Xlarge')}
       style={{ textShadow: '0 3px 19px rgba(0,0,0,.5)' }}
       textAlign="center"
       weight="500"
@@ -55,7 +55,7 @@ const HeroBody = () => {
       <Heading
         level={2}
         margin={{ bottom: setResponsive('none', 'xlarge') }}
-        size={setResponsive('h2_xsmall', 'h2_large')}
+        size={setResponsive('h2Xsmall', 'h2Large')}
         textAlign="center"
       >
         refine.bio has harmonized over {data.gene_count.toLocaleString()} gene
@@ -91,13 +91,14 @@ export const AboutHero = () => {
     <FixedContainer>
       <Hero
         header={<HeroHeader />}
-        body={<HeroBody />}
         boxPadding={{
           horizontal: setResponsive('small', 'xlarge'),
           vertical: setResponsive('small', 'large')
         }}
         marginBottom="xlarge"
-      />
+      >
+        <HeroBody />
+      </Hero>
     </FixedContainer>
   )
 }

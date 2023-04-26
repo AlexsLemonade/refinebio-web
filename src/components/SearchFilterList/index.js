@@ -1,0 +1,60 @@
+import { useState, useEffect } from 'react'
+import { isLastIndex } from 'helpers/isLastIndex'
+import { Box, Heading } from 'grommet'
+import { Button } from 'components/shared/Button'
+import { SearchFilter } from './SearchFilter'
+
+export const SearchFilterList = ({ facets = {} }) => {
+  // The order of the filters to render in UI
+  const filterOrder = [
+    { label: 'Organism', type: 'downloadable_organism_names' },
+    { label: 'Technology', type: 'technology' },
+    { label: 'Platforms', type: 'platform_accession_codes' }
+  ]
+
+  const [filterGroup, setFilterGroup] = useState({})
+  useEffect(() => {
+    setFilterGroup(() => filterOrder.map((f) => facets[f.type]))
+  }, [])
+
+  return (
+    <Box>
+      <Box
+        align="center"
+        direction="row"
+        justify="between"
+        margin={{ bottom: 'medium' }}
+        fill
+      >
+        <Heading level={3}>Filters</Heading>
+        <Button label="clear all" link />
+      </Box>
+      {filterOrder.map((f, i, arr) => (
+        <Box
+          key={f.type}
+          border={
+            isLastIndex(arr, i)
+              ? {
+                  color: 'gray-shade-40',
+                  side: 'bottom'
+                }
+              : null
+          }
+          margin={{ bottom: 'medium' }}
+          pad={{ bottom: 'medium' }}
+        >
+          {filterGroup[i] && (
+            <SearchFilter
+              filterOrder={filterOrder}
+              filterGroup={filterGroup[i]}
+              label={f.label}
+            />
+          )}
+        </Box>
+      ))}
+      <Box />
+    </Box>
+  )
+}
+
+export default SearchFilterList

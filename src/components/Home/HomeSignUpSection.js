@@ -10,7 +10,7 @@ export const HomeSignUpSection = () => {
   const { setResponsive } = useResponsive()
   return (
     <Box
-      background="gradient_blue_dark"
+      background="gradientBlueDark"
       pad={{ vertical: setResponsive('medium', 'basex7', 'basex18') }}
     >
       <FixedContainer align="center">
@@ -28,8 +28,8 @@ export const HomeSignUpSection = () => {
         </Paragraph>
         {/* fixed width to preserve UI layout in wider screens */}
         <Row width="500px">
-          <Column>
-            <TextInput placeholder="jdoe@example.com" responsive secondary />
+          <Column fill>
+            <TextInput placeholder="jdoe@example.com" />
           </Column>
           <Button
             label="Sign up"
@@ -37,7 +37,8 @@ export const HomeSignUpSection = () => {
               left: setResponsive('none', 'small'),
               top: setResponsive('small', 'none')
             }}
-            secondary
+            primary
+            light
             responsive
           />
         </Row>
