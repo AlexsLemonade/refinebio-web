@@ -1,10 +1,29 @@
-import { Heading } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
+import { Box } from 'grommet'
+import { HomeDocumentationSection } from 'components/Home/HomeDocumentationSection'
+import { HomeExamplesSection } from 'components/Home/HomeExamplesSection'
+import { HomeFeaturesSection } from 'components/Home/HomeFeaturesSection'
+import { HomeHero } from 'components/Home/HomeHero'
+import { HomeSignUpSection } from 'components/Home/HomeSignUpSection'
 
 const Home = () => {
+  const { setResponsive } = useResponsive()
+
   return (
-    <Heading level="1" size="large">
-      Home
-    </Heading>
+    <>
+      <Box
+        pad={{
+          top: setResponsive('basex7', 'basex7', 'basex10'),
+          bottom: setResponsive('xlarge', 'xlarge', 'basex12')
+        }}
+      >
+        <HomeHero />
+        <HomeFeaturesSection />
+      </Box>
+      <HomeExamplesSection />
+      <HomeDocumentationSection />
+      <HomeSignUpSection />
+    </>
   )
 }
 

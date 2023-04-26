@@ -1,3 +1,4 @@
 export default {
-  fontWeight: 'inherit'
+  fontWeight: 'inherit',
+  extend: () => `padding: 0;`
 }

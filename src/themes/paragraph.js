@@ -8,10 +8,19 @@ export default {
   medium: {
     size: '16px' // 1rem
   },
+  large: {
+    size: '18px' // 1.25rem
+  },
+  xlarge: {
+    size: '22px' // 1.375rem
+  },
+  xxlarge: {
+    size: '26px' // 1.625rem
+  },
   extend: () => `
      max-width: none;
      + p {
-        margin-top:16px;
+        margin-top: 16px;
      }
   `
 }

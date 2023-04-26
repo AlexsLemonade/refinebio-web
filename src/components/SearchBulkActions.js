@@ -1,18 +1,37 @@
+import { useState } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, CheckBox, Grid, Select, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 
 export const SearchBulkActions = ({ results }) => {
   const { getForBreakpoint, setResponsive } = useResponsive()
+  const { count: totalResults } = results
   const pageSizes = [10, 20, 50]
   const sortByOptions = [
-    'Best Match',
-    'Most No. of samples',
-    'Least No. of samples',
-    'Newest Experiment',
-    'Oldest Experiment'
+    {
+      label: 'Best Match',
+      value: '_score'
+    },
+    {
+      label: 'Most No. of samples',
+      value: '-num_downloadable_samples'
+    },
+    {
+      label: 'Least No. of samples',
+      value: 'num_downloadable_samples'
+    },
+    {
+      label: 'Newest Experiment',
+      value: '-source_first_published'
+    },
+    {
+      label: 'Oldest Experiment',
+      value: 'source_first_published'
+    }
   ]
-  const { count: totalResults } = results
+  const [selectedSortByOption, setSelectedSortByOption] = useState(
+    sortByOptions[0].value
+  )
 
   return (
     <Box pad={{ bottom: 'medium' }}>
@@ -108,9 +127,14 @@ export const SearchBulkActions = ({ results }) => {
             Sort by
             <Box width="208px">
               <Select
-                defaultValue={sortByOptions[0]}
-                options={sortByOptions}
+                options={Object.values(sortByOptions)}
+                labelKey="label"
+                value={selectedSortByOption}
+                valueKey={{ key: 'value', reduce: true }}
                 margin={{ horizontal: 'xxsmall' }}
+                onChange={({ value: nextValue }) =>
+                  setSelectedSortByOption(nextValue)
+                }
               />
             </Box>
           </Box>

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { useState, useMemo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, CheckBox, Grid, Heading, Text } from 'grommet'

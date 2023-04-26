@@ -11,6 +11,8 @@ export default {
       'Select'
     ],
     'Font Styles': ['Heading'],
-    'Inline Messages': ['InlineMessage']
+    'Inline Messages': ['InlineMessage'],
+    Header: ['Header'],
+    Footer: ['Footer']
   }
 }
