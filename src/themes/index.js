@@ -1,6 +1,7 @@
 import anchor from 'themes/anchor'
 import button from 'themes/button'
 import checkBox from 'themes/checkBox'
+import formField from 'themes/formField'
 import global from 'themes/global'
 import heading from 'themes/heading'
 import menu from 'themes/menu'
@@ -16,6 +17,7 @@ export const theme = {
   anchor,
   button,
   checkBox,
+  formField,
   global,
   heading,
   menu,

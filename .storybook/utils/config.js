@@ -5,7 +5,7 @@ export default {
     Buttons: ['Button'],
     'Form Elements': [
       'Checkbox',
-      'Input',
+      'TextInput',
       'RadioButton',
       'RadioButtonGroup',
       'Select'
