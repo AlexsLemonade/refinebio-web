@@ -26,7 +26,7 @@ export const Layout = ({ children }) => {
           bandHeight={
             path === '/'
               ? setResponsive('500px', '368px')
-              : setResponsive('650px', '520px')
+              : setResponsive('500px', '520px')
           }
         />
       )}

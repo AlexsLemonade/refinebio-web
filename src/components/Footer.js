@@ -35,7 +35,7 @@ const GithubLink = styled(Anchor)`
 
 export const Footer = () => {
   const { setResponsive } = useResponsive()
-  const { links, contributors } = config
+  const { contributors, links } = config
 
   return (
     <GrommentFooter

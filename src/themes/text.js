@@ -13,5 +13,16 @@ export default {
   },
   xlarge: {
     size: '22px' // 1.375rem
+  },
+  xxlarge: {
+    size: '26px' // 1.625rem
+  },
+  xxxlarge: {
+    size: '32px', // 2rem
+    height: 1
+  },
+  xxxxlarge: {
+    size: '36px', // 2.25rem
+    height: 1
   }
 }

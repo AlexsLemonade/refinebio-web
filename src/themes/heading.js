@@ -17,6 +17,10 @@ export default {
       h1Large: {
         size: '32px', // 2rem
         height: 1.1875 // 38px
+      },
+      h1Xlarge: {
+        size: '46px', // 2rem
+        height: 1.1875 // 38px
       }
     },
     2: {

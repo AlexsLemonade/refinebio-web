@@ -38,9 +38,9 @@ export const SearchBox = ({
             <TextInput
               id="search"
               icon={<Icon name="Search" size="small" />}
-              placeholder={placeholder}
               type="search"
               reverse
+              placeholder={placeholder}
               value={value}
               onChange={changeHandler}
             />
