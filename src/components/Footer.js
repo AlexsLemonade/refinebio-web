@@ -1,5 +1,4 @@
 import { Fragment } from 'react'
-import config from 'components/Footer/config'
 import { useResponsive } from 'hooks/useResponsive'
 import {
   Box,
@@ -10,14 +9,13 @@ import {
 } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
-import { Col } from 'components/shared/Col'
+import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
+import { Icon } from 'components/shared/Icon'
 import { Row } from 'components/shared/Row'
-import { SrOnly } from 'components/shared/SrOnly'
 import styled, { css } from 'styled-components'
-import { CoinIcon } from '../../images/coin.svg'
-import { TwitterIcon } from '../../images/twitter.svg'
-import { GithubIcon } from '../../images/github.svg'
+import config from 'config'
+import { CoinIcon } from '../images/coin.svg'
 
 const TwitterLink = styled(Anchor)`
   ${({ theme }) => css`
@@ -37,29 +35,35 @@ const GithubLink = styled(Anchor)`
 
 export const Footer = () => {
   const { setResponsive } = useResponsive()
-  const { links, contributors, texts } = config
+  const { links, contributors } = config
 
   return (
     <GrommentFooter
-      background="gradient_light"
+      background="gradientLight"
       elevation="medium"
       justify="center"
       fill
-      gap="0"
-      pad={{ vertical: setResponsive('large', 'xlarge') }}
+      gap="none"
+      pad={{ vertical: 'xlarge' }}
       role="contentinfo"
     >
       <FixedContainer align="center">
-        <Box pad={{ horizontal: setResponsive('0', '0', 'xxxxxlarge') }}>
+        <Box pad={{ horizontal: setResponsive('none', 'none', 'basex9') }}>
           <Row>
-            {/* fixed value to preserve UI layout for wider screens */}
-            <Col margin={{ right: setResponsive('0', 'xxlarge', '148px') }}>
+            {/* fixed svalue to preserve UI layout for wider screens */}
+            <Column
+              margin={{
+                bottom: setResponsive('medium', 'small'),
+                right: setResponsive('none', 'basex6', '148px')
+              }}
+            >
               <Paragraph>
-                {texts.about}{' '}
+                refine.bio is a repository of harmonized, ready-to-use
+                transcriptome data from publicly available sources. refine.bio
+                is a project of the{' '}
                 <Anchor
                   label="Childhood Cancer Data Lab (CCDL)"
                   href={links.ccdl}
-                  target="_blank"
                   rel="noopener noreferrer"
                 />
               </Paragraph>
@@ -67,8 +71,8 @@ export const Footer = () => {
                 direction="row"
                 justify="between"
                 margin={{
-                  top: setResponsive('large', 'xxlarge'),
-                  bottom: setResponsive('medium', 'small')
+                  top: setResponsive('medium', 'basex6'),
+                  bottom: 'small'
                 }}
               >
                 <Button
@@ -77,29 +81,24 @@ export const Footer = () => {
                   label="Fund the CCDL"
                   icon={<CoinIcon aria-hidden />}
                   primary
-                  target="_blank"
                   rel="noopener noreferrer"
                 />
                 <Box align="center" direction="row" gap="medium">
                   <TwitterLink
                     color="gray-shade-40"
                     href={links.ccdlTwitter}
-                    margin={{ horizontal: setResponsive('medium', '0') }}
-                    target="_blank"
+                    icon={<Icon link name="Twitter" />}
+                    margin={{ horizontal: setResponsive('xsmall', 'none') }}
+                    pad="0"
                     rel="noopener noreferrer"
-                  >
-                    <TwitterIcon aria-hidden />
-                    <SrOnly label="Follow us on Twitter" />
-                  </TwitterLink>
+                  />
                   <GithubLink
                     color="gray-shade-40"
                     href={links.ccdlGithub}
-                    target="_blank"
+                    icon={<Icon link name="Github" />}
+                    pad="0"
                     rel="noopener noreferrer"
-                  >
-                    <GithubIcon aria-hidden />
-                    <SrOnly label="View our refine.bio Github repository" />
-                  </GithubLink>
+                  />
                 </Box>
               </Box>
               <Box>
@@ -108,7 +107,6 @@ export const Footer = () => {
                   <Anchor
                     label="Childhood Cancer Data Lab"
                     href={links.ccdl}
-                    target="_blank"
                     rel="noopener noreferrer"
                   />
                 </Text>
@@ -117,13 +115,12 @@ export const Footer = () => {
                   <Anchor
                     label="Alex’s Lemonade Stand Foundation"
                     href={links.alsf}
-                    target="_blank"
                     rel="noopener noreferrer"
                   />
                 </Text>
               </Box>
-            </Col>
-            <Col>
+            </Column>
+            <Column>
               <Heading
                 level={5}
                 style={{ fontFamily: `'Lato', sans-serif`, fontWeight: '700' }}
@@ -136,7 +133,11 @@ export const Footer = () => {
                     {i ? ', ' : ''} {name}
                   </Fragment>
                 ))}
-                . <strong>{texts.refinebio}</strong>
+                .{' '}
+                <strong>
+                  refine.bio: a resource of uniformly processed publicly
+                  available gene expression datasets.
+                </strong>
               </Text>
               <Text>
                 URL:{' '}
@@ -147,18 +148,21 @@ export const Footer = () => {
                 />
               </Text>
               <Paragraph margin={{ top: 'small' }}>
-                <i>{texts.note}</i>
+                <i>
+                  Note that the contributor list is in alphabetical order as we
+                  prepare a manuscript for submission
+                </i>
               </Paragraph>
-            </Col>
+            </Column>
           </Row>
         </Box>
 
         <Row
           align={setResponsive('start', 'center')}
           fill
-          margin={{ top: setResponsive('large', 'large', 'xxxxlarge') }}
+          margin={{ top: setResponsive('medium', 'large', 'basex8') }}
           pad={{
-            horizontal: setResponsive('0', 'xxxxlarge', 'xxxxxlarge')
+            horizontal: setResponsive('none', 'basex8', 'basex9')
           }}
         >
           <Row gap="medium">
@@ -171,7 +175,7 @@ export const Footer = () => {
             <Anchor color="gray-shade-40" label="Terms of Use" href="#url" />
             <Anchor color="gray-shade-40" label="Contact" href={links.mailTo} />
           </Row>
-          <Box margin={{ top: setResponsive('medium', '0') }}>
+          <Box margin={{ top: setResponsive('small', 'none') }}>
             <Text color="gray-shade-40" size="xsmall">
               Version 24354-23111
             </Text>

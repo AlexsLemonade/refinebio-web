@@ -1,12 +1,66 @@
+import { useRouter } from 'next/router'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, Menu, Nav as GrommentNav, Text } from 'grommet'
-import { Anchor } from 'components/shared/Anchor'
+import { Box, Menu, Nav, Text } from 'grommet'
+import { Anchor as SharedAnchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Layer } from 'components/shared/Layer'
+import { List } from 'components/shared/List'
+import { Icon } from 'components/shared/Icon'
 import { SrOnly } from 'components/shared/SrOnly'
 import styled, { css } from 'styled-components'
 import { LogoAnchor } from './LogoAnchor'
-import { ArrowDownIcon } from '../../images/chevron-down.svg'
+
+const Anchor = styled(SharedAnchor)`
+  ${({ theme, light, viewport }) => css`
+    border-bottom: 2px solid transparent;
+    color: ${light && viewport !== 'small'
+      ? theme.global.colors.white
+      : theme.global.colors.black};
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      border-bottom: 2px solid
+        ${light ? theme.global.colors.white : theme.global.colors.brand};
+      color: ${light ? theme.global.colors.white : theme.global.colors.brand};
+    }
+  `}
+
+  ${({ theme, viewport }) =>
+    viewport === 'small' &&
+    css`
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      height: 56px;
+      width: 100%;
+      margin: 0;
+      padding: 40px 0 40px 40px;
+      border: none;
+      &:hover,
+      &:focus {
+        color: ${theme.global.colors.brand};
+        background: ${theme.global.colors['gray-shade-5']};
+        border: none;
+      }
+    `}
+
+    ${({ theme, active, light, viewport }) =>
+    active &&
+    css`
+      border-bottom: 2px solid
+        ${light ? theme.global.colors.white : theme.global.colors.black};
+      border-bottom: ${viewport === 'small' && 'none'};
+      text-decoration: ${viewport === 'small' ? 'underline' : 'none'};
+      &:hover,
+      &:focus {
+        color: ${light && viewport !== 'small'
+          ? theme.global.colors.white
+          : theme.global.colors.black};
+        background: ${viewport === 'small' && 'none'};
+        text-decoration: ${viewport === 'small' ? 'underline' : 'none'};
+      }
+    `}
+`
 
 const NavIcon = styled(Box)`
   ${({ theme, light }) => css`
@@ -43,9 +97,15 @@ const NavIcon = styled(Box)`
     }
   `}
 
-  ${({ toggle }) =>
+  ${({ theme, toggle }) =>
     toggle &&
     css`
+      &::before,
+      &::after,
+      span {
+        background: ${theme.global.colors.black};
+      }
+
       &::before {
         transform: translateY(10px) rotate(-45deg);
       }
@@ -60,114 +120,59 @@ const NavIcon = styled(Box)`
     `}
 `
 
-const List = styled(Box)`
-  display: flex;
-  align-items: center;
-
+const NavItem = styled(Box)`
   ${({ theme, light }) => css`
-    li {
-      margin-left: 16px;
-
-      a {
-        color: ${light ? theme.global.colors.white : theme.global.colors.black};
-        &:hover,
-        &:focus {
-          border-bottom: 1px solid
-            ${light ? theme.global.colors.white : theme.global.colors.brand};
-          color: ${light
-            ? theme.global.colors.white
-            : theme.global.colors.brand};
-        }
+    margin-left: 16px;
+    button[aria-label='Open Menu'] {
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+      color: ${light ? theme.global.colors.white : theme.global.colors.black};
+      padding: 0;
+      svg {
+        fill: ${light ? theme.global.colors.white : theme.global.colors.black};
+        stroke: ${light
+          ? theme.global.colors.white
+          : theme.global.colors.black};
       }
-
-      button[aria-label='Open Menu'] {
-        border-radius: 0;
-        color: ${light ? theme.global.colors.white : theme.global.colors.black};
-        padding: 0;
+      &:hover,
+      &[aria-expanded='true'] {
+        border-bottom: 2px solid
+          ${light ? theme.global.colors.white : theme.global.colors.brand};
+        color: ${light ? theme.global.colors.white : theme.global.colors.brand};
         svg {
           fill: ${light
             ? theme.global.colors.white
-            : theme.global.colors.black};
+            : theme.global.colors.brand};
           stroke: ${light
             ? theme.global.colors.white
-            : theme.global.colors.black};
-        }
-
-        &:hover,
-        &[aria-expanded='true'] {
-          border-bottom: 1px solid
-            ${light ? theme.global.colors.white : theme.global.colors.brand};
-          color: ${light
-            ? theme.global.colors.white
             : theme.global.colors.brand};
-          svg {
-            fill: ${light
-              ? theme.global.colors.white
-              : theme.global.colors.brand};
-            stroke: ${light
-              ? theme.global.colors.white
-              : theme.global.colors.brand};
-          }
         }
       }
     }
   `}
-
-  ${({ theme, viewport }) =>
+  ${({ viewport }) =>
     viewport === 'small' &&
     css`
-      align-items: start;
-      flex-direction: column;
-
-      li {
-        margin-left: 0;
-        width: 100%;
-
-        a {
-          display: flex;
-          align-items: center;
-          font-size: 20px;
-          height: 56px;
-          width: 100%;
-          margin: 0;
-          padding: 40px 0 40px 40px;
-          &:hover,
-          &:focus {
-            background: ${theme.global.colors['gray-shade-5']};
-            border: none;
-          }
-        }
-
-        button {
-          font-size: 18px;
-          margin-left: 40px;
-          padding: 12px 0;
-          width: 80vw;
-        }
-
-        &:last-child {
-          margin-top: 24px;
-        }
+      width: 100%;
+      button {
+        font-size: 18px;
+        margin-left: 40px;
+        padding: 12px 0;
+        width: calc(100% - 40px);
       }
     `}
 `
 
-const CustomNav = styled(GrommentNav)`
-  font-family: 'Rubik', sans-serif;
-
-  ${({ theme, viewport }) =>
-    viewport === 'small' &&
-    css`
-      background: ${theme.global.colors.white};
-      height: 100vh;
-      width: 100vw;
-      padding: 40px 0;
-      position: fixed;
-      z-index: 2;
-    `}
-`
 export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
-  const { viewport } = useResponsive()
+  const router = useRouter()
+  const isActive = (path) => router.pathname === path
+  const { viewport, setResponsive } = useResponsive()
+  const buttonWidth = '80vw'
+
+  const handleClick = () => {
+    if (viewport !== 'small') return
+    setToggle(!toggle)
+  }
 
   return (
     <>
@@ -175,7 +180,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
         <NavIcon
           light={light}
           toggle={toggle}
-          onClick={() => setToggle(!toggle)}
+          onClick={handleClick}
           role="button"
         >
           <Box as="span" />
@@ -186,50 +191,73 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
           />
         </NavIcon>
       )}
-
       <Layer position="right" show={toggle}>
-        <CustomNav
+        <Nav
           align="center"
-          gap="0"
-          light={light}
+          background={setResponsive('white', 'transparent')}
+          gap="none"
+          height={setResponsive('100vh', 'auto')}
+          pad={{ vertical: setResponsive('xlarge', 'none') }}
           role="navigation"
+          style={{
+            fontFamily: "'Rubik', sans-serif",
+            position: setResponsive('fixed', 'relative'),
+            zIndex: '2'
+          }}
           toggle={toggle}
-          viewport={viewport}
+          width={setResponsive('100vw', 'auto')}
         >
           {viewport === 'small' && (
-            <LogoAnchor light={false} margin={{ vertical: 'large' }} />
+            <LogoAnchor
+              margin={{ vertical: 'large' }}
+              clickHandler={handleClick}
+            />
           )}
-          <List as="ul" light={light} viewport={viewport}>
-            <Box as="li">
-              <Anchor label="Search " href="/search" underline={false} />
-            </Box>
-            <Box as="li">
+          <List
+            alignItems={setResponsive('start', 'center')}
+            flexDirection={setResponsive('column', 'row')}
+          >
+            <NavItem viewport={viewport}>
+              <Anchor
+                active={isActive('/search')}
+                label="Search"
+                light={light}
+                href="/search"
+                viewport={viewport}
+                onClick={handleClick}
+              />
+            </NavItem>
+            <NavItem light={light} viewport={viewport}>
               {viewport === 'small' ? (
                 <>
                   <Box
                     alignSelf="start"
                     pad={{ vertical: 'medium' }}
-                    margin={{ horizontal: '40px' }}
-                    width="80vw"
+                    margin={{ horizontal: 'xlarge' }}
+                    width={buttonWidth}
                   >
-                    <Text size="18px">
-                      Compendia <ArrowDownIcon />
+                    <Text size="large">
+                      Compendia <Icon name="ChevronDown" size="xsmall" />
                     </Text>
                   </Box>
                   <Anchor
                     label="Normalized Compendia"
+                    light={light}
                     href="/"
-                    underline={false}
+                    viewport={viewport}
+                    onClick={handleClick}
                   />
                   <Anchor
                     label="RNA-seq Sample Compendia"
+                    light={light}
                     href="/"
-                    underline={false}
+                    viewport={viewport}
+                    onClick={handleClick}
                   />
                 </>
               ) : (
                 <Menu
-                  gap="0"
+                  gap="none"
                   label="Compendia"
                   items={[
                     { label: 'Normalized Compendia', onClick: () => {} },
@@ -237,33 +265,46 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                   ]}
                 />
               )}
-            </Box>
-            <Box as="li">
+            </NavItem>
+            <NavItem viewport={viewport}>
               <Anchor
-                label="Docs "
+                label="Docs"
+                light={light}
                 href="https://docs.refine.bio"
-                target="_blank"
                 rel="noopener noreferrer"
-                underline={false}
+                viewport={viewport}
+                onClick={handleClick}
               />
-            </Box>
-            <Box as="li">
-              <Anchor label="About " href="/about" underline={false} />
-            </Box>
-            <Box as="li">
+            </NavItem>
+            <NavItem viewport={viewport}>
+              <Anchor
+                active={isActive('/about')}
+                light={light}
+                label="About"
+                href="/about"
+                viewport={viewport}
+                onClick={() => handleClick()}
+              />
+            </NavItem>
+            <NavItem
+              margin={{
+                left: setResponsive('none', 'small'),
+                top: setResponsive('medium', 'none')
+              }}
+              viewport={viewport}
+            >
               <Button
                 label="My Dataset"
                 aria-label="View My Dataset"
                 badge={{ max: 10000, value: 0 }}
-                light={light}
+                width={viewport === 'small' ? buttonWidth : 'max-content'}
+                light={viewport !== 'small' ? light : false}
                 secondary
               />
-            </Box>
+            </NavItem>
           </List>
-        </CustomNav>
+        </Nav>
       </Layer>
     </>
   )
 }
-
-export default GlobalNav

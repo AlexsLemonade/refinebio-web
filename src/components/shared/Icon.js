@@ -1,14 +1,20 @@
 import { Text } from 'grommet'
 import { SrOnly } from 'components/shared/SrOnly'
+import { ChevronDown } from '../../images/chevron-down.svg'
+import { Github } from '../../images/github.svg'
 import { Info } from '../../images/info.svg'
 import { Search } from '../../images/search.svg'
 import { Success } from '../../images/success.svg'
+import { Twitter } from '../../images/twitter.svg'
 import { Warning } from '../../images/warning.svg'
 
 const SVGs = {
+  ChevronDown,
+  Github,
   Info,
   Search,
   Success,
+  Twitter,
   Warning
 }
 

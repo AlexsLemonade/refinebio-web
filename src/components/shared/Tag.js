@@ -1,26 +1,32 @@
 import { Box, Text } from 'grommet'
 import { Close } from '../../images/close.svg'
 
-export const Tag = ({ background = 'alex-navy-tint-90', label }) => {
+export const Tag = ({
+  background = 'alex-navy-tint-90',
+  label,
+  height = '24px'
+}) => {
+  const borderRadius = '20px'
+
   return (
     <Box
       color="gray-shade-70"
       direction="row"
-      height="24px"
+      height={height}
       width="max-content"
     >
       <Box
         background={background}
-        pad={{ horizontal: '8px' }}
-        margin={{ right: '4px' }}
-        style={{ borderRadius: '20px 0px 0px 20px' }}
+        pad={{ horizontal: 'xsmall' }}
+        margin={{ right: 'xxsmall' }}
+        style={{ borderRadius: `${borderRadius} 0px 0px ${borderRadius}` }}
       >
         <Text>{label}</Text>
       </Box>
       <Box
         background={background}
         justify="center"
-        pad={{ horizontal: '4px' }}
+        pad={{ horizontal: 'xxsmall' }}
         style={{ boxShadow: 'none' }}
         onClick={() => {}}
       >

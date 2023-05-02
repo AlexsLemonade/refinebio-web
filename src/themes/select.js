@@ -1,5 +1,7 @@
 import { normalizeColor } from 'grommet/utils'
-import { form } from 'themes/variables'
+
+const backgroundDisabled = 'gray-shade-5'
+const gray = 'gray-shade-40'
 
 export default {
   background: {
@@ -14,12 +16,12 @@ export default {
             }
         }
         &:disabled * {
-            background: ${form.DISABLED_BG(theme)}; 
-            color: ${normalizeColor(form.GRAY, theme)};
+            background: ${normalizeColor(backgroundDisabled, theme)}; 
+            color: ${normalizeColor(gray, theme)};
             cursor: not-allowed;
             svg {
-                  fill: ${normalizeColor(form.GRAY, theme)}; 
-                  stroke: ${normalizeColor(form.GRAY, theme)}; 
+                  fill: ${normalizeColor(gray, theme)}; 
+                  stroke: ${normalizeColor(gray, theme)}; 
                 }
             }
         }

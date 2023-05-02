@@ -1,5 +1,5 @@
-const FONT_SIZE = '16px'
-const HEIGHT = '36px'
+const fontSize = '16px'
+const height = '36px'
 
 export default {
   active: {
@@ -18,14 +18,14 @@ export default {
       color: 'transparent'
     }
   },
-  margin: '0',
+  margin: 'none',
   pad: { horizontal: 'medium', vertical: 'xsmall' },
   extend: ({ theme }) => `
     border-right: 1px solid ${theme.global.colors['gray-shade-40']};
-    height: ${HEIGHT};
+    height: ${height};
     span {
         color: ${theme.global.colors.black};
-        font-size: ${FONT_SIZE};
+        font-size: ${fontSize};
     }
   `
 }

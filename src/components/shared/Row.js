@@ -1,16 +1,10 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
 
-export const Row = ({
-  align = 'start',
-  justify = 'between',
-  children,
-  ...props
-}) => {
+export const Row = ({ justify = 'between', children, ...props }) => {
   const { setResponsive } = useResponsive()
   return (
     <Box
-      align={align}
       direction={setResponsive('column', 'row')}
       justify={justify}
       // eslint-disable-next-line react/jsx-props-no-spreading
