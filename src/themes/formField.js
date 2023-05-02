@@ -3,7 +3,6 @@ export default {
     color: 'transparent'
   },
   extend: () => `
-    margin:0;   
-    padding:0;
+     margin-bottom:0;
   `
 }
