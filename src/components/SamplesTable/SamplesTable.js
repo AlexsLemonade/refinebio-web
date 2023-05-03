@@ -151,7 +151,7 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
         <Column>
           <Heading
             level={2}
-            size="h2_small"
+            size="h2Small"
             margin={{ bottom: setResponsive('small', 'none') }}
           >
             Samples
@@ -264,7 +264,6 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
             href={links.refinebio_docs_harmonized_metadata}
             label="Learn More"
             rel="noopener noreferrer"
-            target="_blank"
           />
         </Box>
         <Box

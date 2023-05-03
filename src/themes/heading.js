@@ -41,10 +41,10 @@ export default {
         size: '20px', // 1.25rem
         height: 1.2 // 24px
       },
-      h3_small: {
+      h3Small: {
         size: '20px'
       },
-      h3_large: {
+      h3Large: {
         size: '24px'
       }
     },

@@ -120,7 +120,6 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 label="Docs"
                 light={light}
                 href={links.refinebio_docs}
-                target="_blank"
                 rel="noopener noreferrer"
                 viewport={viewport}
                 clickHandler={handleClick}
