@@ -8,7 +8,7 @@ const Card = ({
   direction = 'row',
   heading,
   body,
-  img: { url, position, width },
+  img: { url, position },
   ...props
 }) => {
   const { setResponsive } = useResponsive()
@@ -45,7 +45,7 @@ const Card = ({
         // to preserve the height of SVG image
         height={setResponsive('195px', '100%', '300px')}
         margin={{ bottom: 'small' }}
-        width={width}
+        width="100%"
       />
     </Row>
   )

@@ -34,6 +34,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     html {
       height: -webkit-fill-available;
+      scroll-behavior: smooth;
     }
     input {
       &::-webkit-search-cancel-button {

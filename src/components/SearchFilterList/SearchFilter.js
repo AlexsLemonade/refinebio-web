@@ -1,10 +1,10 @@
 /* eslint-disable no-nested-ternary */
 import { useState, useMemo } from 'react'
-import { Box, CheckBox, Heading, Text } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
+import { Box, CheckBox, Grid, Heading, Text } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
 import { SearchBox } from 'components/shared/SearchBox'
 import { formatString } from 'helpers/formatString'
-import { isLastIndex } from 'helpers/isLastIndex'
 import { scrollToId } from 'helpers/scrollToId'
 import styled, { css } from 'styled-components'
 
@@ -15,9 +15,16 @@ const ToggleButton = styled(sharedButton)`
       border-bottom: 1px solid ${theme.global.colors.brand};
     }
   `}
+
+  ${({ hidden }) =>
+    hidden &&
+    css`
+      visibility: hidden;
+    `}
 `
 
 export const SearchFilter = ({ filterGroup, label }) => {
+  const { setResponsive } = useResponsive()
   const options = useMemo(() => {
     return Object.entries(filterGroup)
   }, [filterGroup])
@@ -41,12 +48,17 @@ export const SearchFilter = ({ filterGroup, label }) => {
     }
   }
 
-  const getOptionsToRender = () =>
-    open ? filteredResult : filteredResult.slice(0, maxCount)
+  const displayCount = open ? filterLength : maxCount
+  const displayFilterOptions = filteredResult.slice(0, displayCount)
 
   return (
     <>
-      <Heading level={4} margin={{ bottom: 'xsmall' }} id={label.toLowerCase()}>
+      <Heading
+        level={4}
+        margin={{ bottom: 'xsmall' }}
+        id={label.toLowerCase()}
+        size={setResponsive('h4_xsmall', 'medium')}
+      >
         {label}
       </Heading>
 
@@ -60,15 +72,13 @@ export const SearchFilter = ({ filterGroup, label }) => {
         />
       )}
 
-      <Box
+      <Grid
         margin={{ top: 'xsmall' }}
         animation={open ? { type: 'fadeIn', duration: 1000 } : {}}
+        gap={{ row: 'xsmall' }}
       >
-        {getOptionsToRender().map((option, i, arr) => (
-          <Box
-            key={option[0]}
-            margin={{ bottom: isLastIndex(arr, i) ? 'xsmall' : '0' }}
-          >
+        {displayFilterOptions.map((option) => (
+          <Box key={option[0]}>
             <CheckBox
               label={`${formatString(
                 option[0]
@@ -76,7 +86,7 @@ export const SearchFilter = ({ filterGroup, label }) => {
             />
           </Box>
         ))}
-      </Box>
+      </Grid>
 
       {filteredResult.length === 0 && (
         <Text color="gray-shade-40">
@@ -86,13 +96,8 @@ export const SearchFilter = ({ filterGroup, label }) => {
 
       {filterLength > maxCount && (
         <ToggleButton
-          label={
-            open && !userInput.trim()
-              ? '- see less'
-              : !open && !userInput.trim()
-              ? `+ ${filterLength - maxCount} more`
-              : ''
-          }
+          hidden={userInput.trim()}
+          label={open ? '- See Less' : `+ ${filterLength - maxCount} More`}
           margin={{ top: 'xsmall', left: 'medium' }}
           style={{
             borderRadius: '0',
