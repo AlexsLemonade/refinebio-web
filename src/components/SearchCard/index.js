@@ -59,7 +59,7 @@ export const SearchCard = ({ result = {} }) => {
         </Box>
         <Box gridArea="meta">
           <SearchCardMeta
-            metaData={{
+            metadata={{
               downloadableSamples: result.num_downloadable_samples,
               organismNames: result.organism_names,
               platformNames: result.platform_names,

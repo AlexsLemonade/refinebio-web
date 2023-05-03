@@ -6,7 +6,7 @@ import { IconBadge } from 'components/shared/IconBadge'
 import { Row } from 'components/shared/Row'
 
 export const SearchCardMeta = ({
-  metaData: { downloadableSamples, organismNames, platformNames, technology }
+  metadata: { downloadableSamples, organismNames, platformNames, technology }
 }) => {
   const { setResponsive } = useResponsive()
 

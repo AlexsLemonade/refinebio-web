@@ -38,9 +38,9 @@ export const SearchBox = ({
             <TextInput
               id="search"
               icon={<Icon name="Search" size="small" />}
-              placeholder={placeholder}
               type="search"
               reverse
+              placeholder={placeholder}
               value={value}
               onChange={changeHandler}
             />
@@ -66,6 +66,7 @@ export const SearchBox = ({
             left: setResponsive('none', 'small'),
             top: viewport === 'small' && responsive ? 'small' : 'none'
           }}
+          large
           primary={btnType === 'primary'}
           secondary={btnType === 'secondary'}
           style={{ padding: size === 'large' ? '10px 20px' : '4px 16px' }}
