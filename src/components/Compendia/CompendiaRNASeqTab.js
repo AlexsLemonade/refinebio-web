@@ -13,7 +13,6 @@ const Card = ({ heading, pad, children }) => {
 
   return (
     <Column
-      flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')}
       margin={{
         top: setResponsive('xlarge', 'basex6')
       }}
@@ -23,7 +22,7 @@ const Card = ({ heading, pad, children }) => {
       <Heading
         level={2}
         margin={{ bottom: setResponsive('small', 'small', 'medium') }}
-        size="h2_small"
+        size="h2Small"
       >
         {heading}
       </Heading>

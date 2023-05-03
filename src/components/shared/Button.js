@@ -90,7 +90,7 @@ export const Button = ({
           pad={setResponsive(
             {
               vertical: 'xxsmall',
-              horizontal: 'medium'
+              horizontal: 'large'
             },
             {
               vertical: 'small',

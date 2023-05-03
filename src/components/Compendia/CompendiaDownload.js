@@ -123,7 +123,7 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
       <Heading
         level={2}
         margin={{ bottom: 'medium' }}
-        size={setResponsive('h2_small', 'h2_large')}
+        size={setResponsive('h2Small', 'h2Large')}
       >
         Download the {heading}
       </Heading>
@@ -204,10 +204,7 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
         />
       </Box>
       <Row>
-        <Column
-          flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')}
-          margin={{ bottom: setResponsive('small', 'small', 'none') }}
-        >
+        <Column margin={{ bottom: setResponsive('small', 'small', 'none') }}>
           {selectedOption && (
             <Box animation={{ type: 'fadeIn', duration: 800 }}>
               <Text>
@@ -217,10 +214,7 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
             </Box>
           )}
         </Column>
-        <Column
-          flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')}
-          align={setResponsive('start', 'end')}
-        >
+        <Column align={setResponsive('start', 'end')}>
           <Button
             label="Download Now"
             disabled={!agree || !selectedOption}
