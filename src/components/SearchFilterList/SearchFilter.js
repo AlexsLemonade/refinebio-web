@@ -5,7 +5,6 @@ import { Box, CheckBox, Grid, Heading, Text } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
 import { SearchBox } from 'components/shared/SearchBox'
 import { formatString } from 'helpers/formatString'
-import { isLastIndex } from 'helpers/isLastIndex'
 import { scrollToId } from 'helpers/scrollToId'
 import styled, { css } from 'styled-components'
 
