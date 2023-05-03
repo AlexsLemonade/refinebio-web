@@ -41,7 +41,7 @@ export const SearchFilterList = ({ facets = {} }) => {
         <Box
           key={f.type}
           border={
-            !isLastIndex(arr, i)
+            !isLastIndex(i, arr)
               ? {
                   color: 'gray-shade-40',
                   side: 'bottom'
@@ -49,7 +49,7 @@ export const SearchFilterList = ({ facets = {} }) => {
               : null
           }
           margin={{ bottom: 'medium' }}
-          pad={{ bottom: !isLastIndex(arr, i) ? 'medium' : 'none' }}
+          pad={{ bottom: !isLastIndex(i, arr) ? 'medium' : 'none' }}
         >
           {filterGroup[i] && (
             <SearchFilter
