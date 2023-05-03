@@ -1,10 +1,11 @@
+/* eslint-disable no-nested-ternary */
 import { useState, useMemo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
-import { formatString } from 'helpers/formatString'
-import { scrollToId } from 'helpers/scrollToId'
-import { Box, CheckBox, Heading } from 'grommet'
+import { Box, CheckBox, Grid, Heading } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
 import { SearchBox } from 'components/shared/SearchBox'
+import { formatString } from 'helpers/formatString'
+import { scrollToId } from 'helpers/scrollToId'
 import { TextNull } from 'components/shared/TextNull'
 import styled, { css } from 'styled-components'
 
@@ -15,6 +16,12 @@ const ToggleButton = styled(sharedButton)`
       border-bottom: 1px solid ${theme.global.colors.brand};
     }
   `}
+
+  ${({ hidden }) =>
+    hidden &&
+    css`
+      visibility: hidden;
+    `}
 `
 
 export const SearchFilter = ({ filterGroup, label }) => {
@@ -42,8 +49,8 @@ export const SearchFilter = ({ filterGroup, label }) => {
     }
   }
 
-  const getOptionsToRender = () =>
-    open ? filteredResult : filteredResult.slice(0, maxCount)
+  const displayCount = open ? filterLength : maxCount
+  const displayFilterOptions = filteredResult.slice(0, displayCount)
 
   return (
     <>
@@ -66,15 +73,13 @@ export const SearchFilter = ({ filterGroup, label }) => {
         />
       )}
 
-      <Box
+      <Grid
         margin={{ top: 'xsmall' }}
         animation={open ? { type: 'fadeIn', duration: 1000 } : {}}
+        gap={{ row: 'xsmall' }}
       >
-        {getOptionsToRender().map((option, i, arr) => (
-          <Box
-            key={option[0]}
-            margin={{ bottom: i !== arr.length - 1 ? 'xsmall' : '0' }}
-          >
+        {displayFilterOptions.map((option) => (
+          <Box key={option[0]}>
             <CheckBox
               label={`${formatString(
                 option[0]
@@ -82,20 +87,14 @@ export const SearchFilter = ({ filterGroup, label }) => {
             />
           </Box>
         ))}
-      </Box>
+      </Grid>
 
       {filteredResult.length === 0 && <TextNull text="No match found" />}
 
       {filterLength > maxCount && (
         <ToggleButton
-          label={
-            // eslint-disable-next-line no-nested-ternary
-            open && !userInput.trim()
-              ? '- See Less'
-              : !open && !userInput.trim()
-              ? `+ ${filterLength - maxCount} More`
-              : ''
-          }
+          hidden={userInput.trim()}
+          label={open ? '- See Less' : `+ ${filterLength - maxCount} More`}
           margin={{ top: 'xsmall', left: 'medium' }}
           style={{
             borderRadius: '0',

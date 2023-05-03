@@ -4,7 +4,7 @@ import { GlobalStyle } from 'styles/GlobalStyle'
 import { Grommet } from 'grommet'
 import { Layout } from 'components/Layout'
 import { theme } from 'themes'
-import { BandContextvProvider } from 'contexts/BandContext'
+import { BandContextProvider } from 'contexts/BandContext'
 import { RefinebioContextProvider } from 'contexts/RefinebioContext'
 import ErrorPage from 'pages/_error'
 
@@ -16,14 +16,14 @@ const App = ({ Component, pageProps }) => {
       <GlobalStyle />
       <Grommet theme={theme}>
         <RefinebioContextProvider>
-          <BandContextvProvider>
+          <BandContextProvider>
             <Layout>
               <Sentry.ErrorBoundary fallback={Fallback} showDialog>
                 {/* eslint-disable-next-line react/jsx-props-no-spreading */}
                 <Component {...pageProps} />
               </Sentry.ErrorBoundary>
             </Layout>
-          </BandContextvProvider>
+          </BandContextProvider>
         </RefinebioContextProvider>
       </Grommet>
     </>

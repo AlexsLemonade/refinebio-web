@@ -9,11 +9,11 @@ export const SearchCardBody = ({
   alternateAccessionCode = '',
   description = '',
   publicationTitle = '',
-  sampleMetadataFields = []
+  sampleMetadataFields = [],
+  charLimit = 300
 }) => {
-  const maxLength = 300
   const [toggleDesciption, setToggleDescription] = useState(
-    description.length > maxLength
+    description.length > charLimit
   )
 
   return (
@@ -30,9 +30,9 @@ export const SearchCardBody = ({
           >
             <Paragraph>
               {toggleDesciption
-                ? `${description.slice(0, maxLength)} ...`
+                ? `${description.slice(0, charLimit)} ...`
                 : description}
-              {description.length > maxLength && (
+              {description.length > charLimit && (
                 <Text
                   color="brand"
                   margin={{ left: 'xsmall' }}

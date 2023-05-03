@@ -38,7 +38,7 @@ export const Footer = () => {
 
   return (
     <GrommentFooter
-      background="gradient_light"
+      background="gradientLight"
       elevation="medium"
       justify="center"
       fill
@@ -64,7 +64,6 @@ export const Footer = () => {
                   label="Childhood Cancer Data Lab (CCDL)"
                   href={links.ccdl}
                   rel="noopener noreferrer"
-                  target="_blank"
                 />
               </Paragraph>
               <Box
@@ -82,7 +81,6 @@ export const Footer = () => {
                   icon={<CoinIcon aria-hidden />}
                   primary
                   rel="noopener noreferrer"
-                  target="_blank"
                 />
                 <Box align="center" direction="row" gap="medium">
                   <TwitterLink
@@ -92,7 +90,6 @@ export const Footer = () => {
                     margin={{ horizontal: setResponsive('xsmall', 'none') }}
                     pad="0"
                     rel="noopener noreferrer"
-                    target="_blank"
                   />
                   <GithubLink
                     color="gray-shade-40"
@@ -100,7 +97,6 @@ export const Footer = () => {
                     icon={<Icon link name="Github" />}
                     pad="0"
                     rel="noopener noreferrer"
-                    target="_blank"
                   />
                 </Box>
               </Box>
@@ -111,7 +107,6 @@ export const Footer = () => {
                     label="Childhood Cancer Data Lab"
                     href={links.ccdl}
                     rel="noopener noreferrer"
-                    target="_blank"
                   />
                 </Text>
                 <Text>
@@ -120,7 +115,6 @@ export const Footer = () => {
                     label="Alex’s Lemonade Stand Foundation"
                     href={links.alsf}
                     rel="noopener noreferrer"
-                    target="_blank"
                   />
                 </Text>
               </Box>

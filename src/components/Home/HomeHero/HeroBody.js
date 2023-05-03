@@ -1,11 +1,9 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
-import { FixedContainer } from 'components/shared/FixedContainer'
-import { Hero } from 'components/shared/Hero'
 import { SearchBox } from 'components/shared/SearchBox'
 
-const HeroBody = () => {
+export const HeroBody = () => {
   const { setResponsive } = useResponsive()
   const queries = ['Notch', 'medulloblastoma', 'GSE24528']
 
@@ -14,14 +12,14 @@ const HeroBody = () => {
       <Heading
         level={1}
         margin={{ bottom: setResponsive('medium', 'medium', 'xlarge') }}
-        size={setResponsive('h1_small', 'h1_large')}
+        size={setResponsive('h1Small', 'h1Large')}
         textAlign="center"
       >
         Search for normalized transcriptome data
       </Heading>
       <SearchBox
         size="large"
-        placeHolder={setResponsive(
+        placeholder={setResponsive(
           'Search accessions, pathways, etc.,',
           'Search accessions, pathways, diseases, etc.,'
         )}
@@ -56,21 +54,4 @@ const HeroBody = () => {
   )
 }
 
-export const HomeHero = () => {
-  const { setResponsive } = useResponsive()
-  return (
-    <FixedContainer>
-      <Hero
-        body={<HeroBody />}
-        boxPadding={{
-          horizontal: setResponsive('large', 'basex12'),
-          vertical: setResponsive('large', 'basex8')
-        }}
-        // fixed width to preserve UI layout in wider screens
-        boxWidth="815px"
-      />
-    </FixedContainer>
-  )
-}
-
-export default HomeHero
+export default HeroBody

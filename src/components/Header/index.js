@@ -3,8 +3,8 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Box, Header as GrommetHeader } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Overlay } from 'components/shared/Ovevrlay'
-import { Logo } from './Logo'
 import { GlobalNav } from './GlobalNav'
+import { LogoAnchor } from './LogoAnchor'
 
 export const Header = ({ light = false }) => {
   const { viewport } = useResponsive()
@@ -19,7 +19,7 @@ export const Header = ({ light = false }) => {
     >
       {viewport === 'small' && <Overlay toggle={toggle} />}
       <FixedContainer direction="row" justify="between">
-        <Logo light={light} />
+        <LogoAnchor light={light} />
         <Box align="center" direction="row">
           <GlobalNav light={light} toggle={toggle} setToggle={setToggle} />
         </Box>

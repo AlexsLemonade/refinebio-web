@@ -7,7 +7,7 @@ import { Row } from 'components/shared/Row'
 import { TextNull } from 'components/shared/TextNull'
 
 export const SearchCardMeta = ({
-  metaData: { downloadableSamples, organismNames, platformNames, technology }
+  metadata: { downloadableSamples, organismNames, platformNames, technology }
 }) => {
   const { setResponsive } = useResponsive()
 
