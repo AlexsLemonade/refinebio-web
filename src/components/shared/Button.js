@@ -55,6 +55,7 @@ export const Button = ({
   responsive = false,
   uppercase = false,
   width,
+  clickHandler,
   ...props
 }) => {
   const { viewport, setResponsive } = useResponsive()
@@ -75,25 +76,27 @@ export const Button = ({
             padding: 0,
             textDecoration: 'underline'
           }}
+          onClick={clickHandler}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...props}
         />
       ) : (
         <CustomButton
-          large={large}
           width={width}
+          large={large}
+          uppercase={uppercase}
+          viewport={viewport}
+          onClick={clickHandler}
           pad={setResponsive(
             {
               vertical: 'xxsmall',
-              horizontal: 'medium'
+              horizontal: 'large'
             },
             {
               vertical: 'small',
               horizontal: 'large'
             }
           )}
-          uppercase={uppercase}
-          viewport={viewport}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...props}
         />

@@ -7,12 +7,13 @@ export const Column = ({
   children,
   ...props
 }) => {
-  const { viewport } = useResponsive()
+  const { viewport, setResponsive } = useResponsive()
   return (
     <Box
       flex={flex}
       basis={basis}
       viewport={viewport}
+      width={setResponsive('100%', 'auto')}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >

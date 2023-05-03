@@ -7,11 +7,15 @@ import { TextInput } from 'components/shared/TextInput'
 export const SearchBox = ({
   btnType = 'primary',
   btnWidth = '',
+  padding,
   placeholder = '',
   responsive = false,
+  reverse = true,
   size = 'medium',
   value = '',
-  changeHandler
+  blurHandler,
+  changeHandler,
+  focusHandler
 }) => {
   const { viewport, setResponsive } = useResponsive()
   return (
@@ -38,11 +42,14 @@ export const SearchBox = ({
             <TextInput
               id="search"
               icon={<Icon name="Search" size="small" />}
-              type="search"
-              reverse
               placeholder={placeholder}
+              style={{ padding }}
+              type="search"
+              reverse={reverse}
               value={value}
+              onBlur={blurHandler}
               onChange={changeHandler}
+              onFocus={focusHandler}
             />
           ) : (
             <TextInput
@@ -54,7 +61,9 @@ export const SearchBox = ({
                 padding: size === 'large' ? '22px' : '16px'
               }}
               value={value}
+              onBlur={blurHandler}
               onChange={changeHandler}
+              onFocus={focusHandler}
             />
           )}
         </Box>

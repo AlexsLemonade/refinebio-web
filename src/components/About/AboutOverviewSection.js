@@ -43,7 +43,7 @@ const Card = ({
           size: 'contain'
         }}
         // to preserve the height of SVG image
-        height={setResponsive('195px', '100%', '300px')}
+        height={setResponsive('195px', '240px', '300px')}
         margin={{ bottom: 'small' }}
         width="100%"
       />

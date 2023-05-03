@@ -3,6 +3,7 @@ import { Box, Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
+import { links } from 'config'
 import { HeadMapIcon } from '../../../images/graphic-heatmap.svg'
 import { PathwayIcon } from '../../../images/graphic-pathway.svg'
 import { WaySignsIcon } from '../../../images/graphic-way-signs.svg'
@@ -39,7 +40,16 @@ export const HomeExamplesSection = () => {
             heading="Get Started using refine.bio data"
             body="Explore the different ways you can use refine.bio data to help
       with your scientific questions."
-            footer={<Button label="Get Started" secondary responsive />}
+            footer={
+              <Button
+                href={links.refinebio_example}
+                label="Get Started"
+                secondary
+                responsive
+                rel="noopener noreferrer"
+                target="_blank"
+              />
+            }
             svgIcon={<WaySignsIcon />}
             margin={{ bottom: setResponsive('large', 'none') }}
           />
@@ -48,12 +58,24 @@ export const HomeExamplesSection = () => {
             body="Learn how you can do differential expression analysis with refine.bio datasets."
             footer={
               <>
-                <Button label="RNA-seq Example" secondary responsive />
                 <Button
+                  href={links.refinebio_docs_differential_expression_rnaseq}
+                  label="RNA-seq Example"
+                  secondary
+                  responsive
+                  rel="noopener noreferrer"
+                  target="_blank"
+                />
+                <Button
+                  href={
+                    links.refinebio_docs__differential_expression_microarray
+                  }
                   label="Microarray Example"
                   margin={{ top: setResponsive('small', 'medium') }}
                   secondary
                   responsive
+                  rel="noopener noreferrer"
+                  target="_blank"
                 />
               </>
             }
@@ -68,12 +90,22 @@ export const HomeExamplesSection = () => {
             body="Learn how you can use refine.bio data to identify pathways that are active in your biological condition of interest."
             footer={
               <>
-                <Button label="RNA-seq Example" secondary responsive />
                 <Button
+                  href={links.refinebio_docs_pathway_analysis_rnaseq}
+                  label="RNA-seq Example"
+                  secondary
+                  responsive
+                  rel="noopener noreferrer"
+                  target="_blank"
+                />
+                <Button
+                  href={links.refinebio_docs_pathway_analysis_microarray}
                   label="Microarray Example"
                   margin={{ top: setResponsive('small', 'medium') }}
                   secondary
                   responsive
+                  rel="noopener noreferrer"
+                  target="_blank"
                 />
               </>
             }

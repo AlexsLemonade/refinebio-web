@@ -6,8 +6,9 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { TextInput } from 'components/shared/TextInput'
 
-export const HomeSignUpSection = () => {
+export const SignUpBlock = () => {
   const { setResponsive } = useResponsive()
+
   return (
     <Box
       background="gradientBlueDark"
@@ -28,7 +29,7 @@ export const HomeSignUpSection = () => {
         </Paragraph>
         {/* fixed width to preserve UI layout in wider screens */}
         <Row width="500px">
-          <Column fill>
+          <Column fill basis="1">
             <TextInput placeholder="jdoe@example.com" />
           </Column>
           <Button
@@ -47,4 +48,4 @@ export const HomeSignUpSection = () => {
   )
 }
 
-export default HomeSignUpSection
+export default SignUpBlock

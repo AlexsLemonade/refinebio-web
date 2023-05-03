@@ -1,9 +1,2 @@
-import contributors from './contributors'
-import links from './links'
-
-const config = {
-  contributors,
-  links
-}
-
-export default config
+export { contributors } from './contributors'
+export { links } from './links'

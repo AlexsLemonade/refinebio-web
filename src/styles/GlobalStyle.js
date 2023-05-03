@@ -41,4 +41,10 @@ export const GlobalStyle = createGlobalStyle`
         display: none;
       }
     }
+    // required by tsParticle 
+    #tsparticles {
+      width: 100%;
+      height: 100%;
+    }
+
 `

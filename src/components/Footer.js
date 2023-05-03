@@ -14,7 +14,7 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import { Icon } from 'components/shared/Icon'
 import { Row } from 'components/shared/Row'
 import styled, { css } from 'styled-components'
-import config from 'config'
+import { contributors, links } from 'config'
 import { CoinIcon } from '../images/coin.svg'
 
 const TwitterLink = styled(Anchor)`
@@ -35,7 +35,6 @@ const GithubLink = styled(Anchor)`
 
 export const Footer = () => {
   const { setResponsive } = useResponsive()
-  const { contributors, links } = config
 
   return (
     <GrommentFooter
@@ -169,11 +168,23 @@ export const Footer = () => {
             <Anchor
               color="gray-shade-40"
               label="BDS 3-Clause License"
-              href="#url"
+              href={links.license}
             />
-            <Anchor color="gray-shade-40" label="Privacy" href="#url" />
-            <Anchor color="gray-shade-40" label="Terms of Use" href="#url" />
-            <Anchor color="gray-shade-40" label="Contact" href={links.mailTo} />
+            <Anchor
+              color="gray-shade-40"
+              label="Privacy"
+              href={links.privacy}
+            />
+            <Anchor
+              color="gray-shade-40"
+              label="Terms of Use"
+              href={links.terms}
+            />
+            <Anchor
+              color="gray-shade-40"
+              label="Contact"
+              href={`mailto:${links.email_request}`}
+            />
           </Row>
           <Box margin={{ top: setResponsive('small', 'none') }}>
             <Text color="gray-shade-40" size="xsmall">

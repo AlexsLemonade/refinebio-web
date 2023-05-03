@@ -2,11 +2,12 @@ import { normalizeColor } from 'grommet/utils'
 
 const boxShadow = 'gray-shade-20'
 const height = '32px'
+const radius = '3px'
 
 export const textInput = {
   extend: ({ theme }) => `
     background-color: ${theme.global.colors.white};
-    border-radius: 1px;
+    border-radius: ${radius};
     height: ${height};
     padding: 4px 8px;
     &:hover {

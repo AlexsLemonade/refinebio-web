@@ -1,10 +1,10 @@
-import config from 'config'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { SrOnly } from 'components/shared/SrOnly'
+import { links } from 'config'
 import styled from 'styled-components'
 
 const PRubik = styled(Paragraph)`
@@ -12,13 +12,12 @@ const PRubik = styled(Paragraph)`
 `
 export const AboutCCDLSection = () => {
   const { viewport, setResponsive } = useResponsive()
-  const { links } = config
 
   return (
     <FixedContainer
       border={{ color: 'gray-shade-5', side: 'top', size: 'large' }}
       pad={{
-        horizontal: setResponsive('large', 'medium', 'basex15'),
+        horizontal: setResponsive('none', 'medium', 'large'),
         top: setResponsive('basex7', 'basex7', 'basex9'),
         bottom: setResponsive('basex7', 'basex7', 'basex12')
       }}
@@ -49,11 +48,12 @@ export const AboutCCDLSection = () => {
         </Box>
       </Row>
       <Row
+        align="center"
         justify={setResponsive('start', 'around')}
         elevation="xlarge"
         pad={{
           // fixed padding to preserve UI layout
-          horizontal: setResponsive('medium', 'medium', '122px'),
+          horizontal: setResponsive('medium', 'medium', 'large'),
           vertical: setResponsive('medium', 'xlarge')
         }}
         round="8px"
@@ -66,16 +66,20 @@ export const AboutCCDLSection = () => {
             fighting cancer and beyond.
           </PRubik>
         </Box>
-        <Box justify="center" margin={{ top: setResponsive('medium', 'none') }}>
+        <Box
+          justify="center"
+          margin={{ top: setResponsive('medium', 'none') }}
+          width={setResponsive('100%', 'auto')}
+        >
           <Button
+            href={links.donate}
             label="Donate Now"
             large
-            href={links.donate}
-            rel="noopener noreferrer"
-            target="_blank"
             primary
             responsive
             uppercase
+            rel="noopener noreferrer"
+            target="_blank"
           />
         </Box>
       </Row>

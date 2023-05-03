@@ -2,7 +2,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
 
 export const Row = ({
-  align = 'start',
+  align = 'inherit',
   direction = '',
   justify = 'between',
   children,
