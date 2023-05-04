@@ -14,7 +14,7 @@ export const Band = ({ bandHeight, light = false, ...props }) => {
 
   return (
     <Box
-      background={light ? 'gradient_light_reverse' : 'gradient_blue'}
+      background={light ? 'gradientLightReverse' : 'gradientBlue'}
       elevation="large"
       height={bandHeight}
       width="100%"

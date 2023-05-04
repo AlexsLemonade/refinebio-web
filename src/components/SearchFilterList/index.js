@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
+import { isLastIndex } from 'helpers/isLastIndex'
 import { Box, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { SearchFilter } from './SearchFilter'
@@ -40,7 +41,7 @@ export const SearchFilterList = ({ facets = {} }) => {
         <Box
           key={f.type}
           border={
-            i !== arr.length - 1
+            !isLastIndex(i, arr)
               ? {
                   color: 'gray-shade-40',
                   side: 'bottom'
@@ -48,7 +49,7 @@ export const SearchFilterList = ({ facets = {} }) => {
               : null
           }
           margin={{ bottom: 'medium' }}
-          pad={{ bottom: i !== arr.length - 1 ? 'medium' : 'none' }}
+          pad={{ bottom: !isLastIndex(i, arr) ? 'medium' : 'none' }}
         >
           {filterGroup[i] && (
             <SearchFilter

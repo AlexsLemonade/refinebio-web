@@ -14,6 +14,7 @@ export const Anchor = ({ href = '', icon, underline = false, ...props }) => {
       href={href}
       icon={icon}
       underline={underline}
+      target="_blank"
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />

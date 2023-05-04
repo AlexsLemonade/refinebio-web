@@ -1,21 +1,37 @@
-import { useMatchMedia } from 'hooks/useMatchMedia'
+import { useState } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, CheckBox, Grid, Select, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 
 export const SearchBulkActions = ({ results }) => {
-  const { setResponsive } = useResponsive()
-  const isMax850 = useMatchMedia('(max-width: 850px)')
-  const isMax1100 = useMatchMedia('(max-width: 1100px)')
+  const { getForBreakpoint, setResponsive } = useResponsive()
+  const { count: totalResults } = results
   const pageSizes = [10, 20, 50]
   const sortByOptions = [
-    'Best Match',
-    'Most No. of samples',
-    'Least No. of samples',
-    'Newest Experiment',
-    'Oldest Experiment'
+    {
+      label: 'Best Match',
+      value: '_score'
+    },
+    {
+      label: 'Most No. of samples',
+      value: '-num_downloadable_samples'
+    },
+    {
+      label: 'Least No. of samples',
+      value: 'num_downloadable_samples'
+    },
+    {
+      label: 'Newest Experiment',
+      value: '-source_first_published'
+    },
+    {
+      label: 'Oldest Experiment',
+      value: 'source_first_published'
+    }
   ]
-  const { count: totalResults } = results
+  const [selectedSortByOption, setSelectedSortByOption] = useState(
+    sortByOptions[0].value
+  )
 
   return (
     <Box pad={{ bottom: 'medium' }}>
@@ -48,17 +64,17 @@ export const SearchBulkActions = ({ results }) => {
             {
               name: 'sort-by',
               start: [1, 0],
-              end: isMax850 ? [2, 0] : [1, 0]
+              end: getForBreakpoint(850, [2, 0], [1, 0])
             },
             {
               name: 'add-page',
-              start: isMax850 ? [1, 1] : [2, 0],
-              end: isMax850 ? [2, 1] : [2, 0]
+              start: getForBreakpoint(850, [1, 1], [2, 0]),
+              end: getForBreakpoint(850, [2, 1], [2, 0])
             },
             {
               name: 'hide-non-downloadble',
-              start: isMax850 ? [0, 1] : [0, 1],
-              end: isMax850 ? [0, 1] : [2, 1]
+              start: getForBreakpoint(850, [0, 1], [0, 1]),
+              end: getForBreakpoint(850, [0, 1], [2, 1])
             }
           ],
           [
@@ -66,17 +82,17 @@ export const SearchBulkActions = ({ results }) => {
             {
               name: 'sort-by',
               start: [1, 0],
-              end: isMax1100 ? [2, 0] : [1, 0]
+              end: getForBreakpoint(1100, [2, 0], [1, 0])
             },
             {
               name: 'add-page',
-              start: isMax1100 ? [1, 1] : [2, 0],
-              end: isMax1100 ? [2, 1] : [2, 0]
+              start: getForBreakpoint(1100, [1, 1], [2, 0]),
+              end: getForBreakpoint(1100, [2, 1], [2, 0])
             },
             {
               name: 'hide-non-downloadble',
-              start: isMax1100 ? [0, 1] : [0, 1],
-              end: isMax1100 ? [0, 1] : [2, 1]
+              start: getForBreakpoint(1100, [0, 1], [0, 1]),
+              end: getForBreakpoint(1100, [0, 1], [2, 1])
             }
           ]
         )}
@@ -84,7 +100,7 @@ export const SearchBulkActions = ({ results }) => {
         columns={
           setResponsive(
             ['auto'],
-            isMax1100 || isMax850 ? ['auto', 'auto'] : ['auto', 'auto', 'auto']
+            getForBreakpoint(1100, ['auto', 'auto'], ['auto', 'auto', 'auto'])
           )
           // eslint-disable-next-line no-nested-ternary
         }
@@ -111,9 +127,14 @@ export const SearchBulkActions = ({ results }) => {
             Sort by
             <Box width="208px">
               <Select
-                defaultValue={sortByOptions[0]}
-                options={sortByOptions}
+                options={Object.values(sortByOptions)}
+                labelKey="label"
+                value={selectedSortByOption}
+                valueKey={{ key: 'value', reduce: true }}
                 margin={{ horizontal: 'xxsmall' }}
+                onChange={({ value: nextValue }) =>
+                  setSelectedSortByOption(nextValue)
+                }
               />
             </Box>
           </Box>
