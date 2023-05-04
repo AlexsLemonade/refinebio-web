@@ -11,14 +11,11 @@ export const DatasetErrorDownloading = ({ dataset }) => {
   return (
     <Box align="center">
       <Row justify="center" width={setResponsive('100%', '60%')}>
-        <Column
-          align={setResponsive('center', 'start')}
-          flexValue={setResponsive('1 1 auto', 'auto')}
-        >
+        <Column align={setResponsive('center', 'start')}>
           <Heading
             level={1}
             margin={{ bottom: 'small' }}
-            size={setResponsive('h1_xsmall', 'h1_small')}
+            size={setResponsive('h1Xsmall', 'h1Small')}
           >
             Uh-oh something went wrong!
           </Heading>
@@ -37,7 +34,6 @@ export const DatasetErrorDownloading = ({ dataset }) => {
                   href={links.refinebio_github_repo_new_issue}
                   label="file a ticket on Github"
                   rel="noopener noreferrer"
-                  target="_blank"
                 />{' '}
                 with the following error message for further assistance.
               </>
@@ -61,7 +57,6 @@ export const DatasetErrorDownloading = ({ dataset }) => {
         </Column>
         <Column
           align="center"
-          flexValue={setResponsive('1 1 auto', 'auto')}
           margin={{
             top: setResponsive('large', 'none'),
             bottom: setResponsive('large', 'none'),

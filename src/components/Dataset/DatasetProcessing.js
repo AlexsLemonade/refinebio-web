@@ -11,15 +11,12 @@ export const DatasetProcessing = ({ dataset }) => {
   return (
     <>
       <Box align="center">
-        <Row justify="center" width={setResponsive('100%', '80%', '50%')}>
-          <Column
-            align={setResponsive('center', 'start')}
-            flexValue={setResponsive('1 1 auto', 'auto')}
-          >
+        <Row justify="center" width={setResponsive('100%', '80%', '60%')}>
+          <Column align={setResponsive('center', 'start')}>
             <Heading
               level={1}
               margin={{ bottom: 'small' }}
-              size={setResponsive('h1_xsmall', 'h1_small')}
+              size={setResponsive('h1Xsmall', 'h1Small')}
             >
               Your dataset is being processed
             </Heading>
@@ -31,7 +28,6 @@ export const DatasetProcessing = ({ dataset }) => {
           </Column>
           <Column
             align="center"
-            flexValue={setResponsive('1 1 auto', 'auto')}
             margin={{
               top: setResponsive('xlarge', 'none'),
               left: setResponsive('none', 'basex13')

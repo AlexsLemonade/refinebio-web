@@ -263,7 +263,6 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
             href={links.refinebio_docs_harmonized_metadata}
             label="Learn More"
             rel="noopener noreferrer"
-            target="_blank"
           />
         </Box>
         <Box

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
 import { formatBytes } from 'helpers/formatBytes'
 import { Box, CheckBox, Heading, Text } from 'grommet'
@@ -11,32 +10,19 @@ import { links } from 'config'
 import { DatasetExplore } from './DatasetExplore'
 
 export const DatasetReady = ({ dataset }) => {
-  const { token, setToken } = useRefinebio()
   const { setResponsive } = useResponsive()
-
-  const [agree, setAgree] = useState(!!token)
-
-  const handleAgreeToTerms = () => {
-    setAgree(!agree)
-    setToken(!token)
-  }
-
-  const handleDownloadNow = () => {
-    // TEMP
-  }
+  const [agree, setAgree] = useState(false)
+  const handleDownloadNow = () => {}
 
   return (
     <>
       <Box align="center">
-        <Row justify="center" width={setResponsive('100%', '70%')}>
-          <Column
-            align={setResponsive('center', 'start')}
-            flexValue={setResponsive('1 1 auto', 'auto')}
-          >
+        <Row justify="center" width={setResponsive('100%', '80%')}>
+          <Column align={setResponsive('center', 'start')}>
             <Heading
               level={1}
               margin={{ bottom: 'small' }}
-              size={setResponsive('h1_xsmall', 'h1_small')}
+              size={setResponsive('h1Xsmall', 'h1Small')}
             >
               Your Dataset is ready for download!
             </Heading>
@@ -63,12 +49,11 @@ export const DatasetReady = ({ dataset }) => {
                       <Anchor
                         href={links.terms}
                         label="Terms of Use"
-                        target="_blank"
                         rel="noopener noreferrer"
                       />
                     </Text>
                   }
-                  onClick={handleAgreeToTerms}
+                  onClick={() => setAgree(!agree)}
                 />
                 <Box
                   margin={{
@@ -79,7 +64,7 @@ export const DatasetReady = ({ dataset }) => {
                 >
                   <Button
                     label="Download Now"
-                    disabled={!agree || !token}
+                    disabled={!agree}
                     primary
                     responsive
                     clickHandler={handleDownloadNow}
@@ -90,7 +75,6 @@ export const DatasetReady = ({ dataset }) => {
           </Column>
           <Column
             align="center"
-            flexValue={setResponsive('1 1 auto', 'auto')}
             margin={{
               top: setResponsive('large', 'none'),
               bottom: setResponsive('large', 'none'),

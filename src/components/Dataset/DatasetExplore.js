@@ -95,7 +95,6 @@ export const DatasetExplore = () => {
     >
       <Column
         align="center"
-        flexValue={setResponsive('1 1 auto', 'auto')}
         margin={{
           right: setResponsive('none', 'xlarge', 'none')
         }}
@@ -114,14 +113,11 @@ export const DatasetExplore = () => {
           width={setResponsive('250px', '350px', '400px')}
         />
       </Column>
-      <Column
-        flexValue={setResponsive('1 1 auto', 'auto')}
-        pad={{ top: setResponsive('none', 'basex7', 'basex9') }}
-      >
+      <Column pad={{ top: setResponsive('none', 'basex7', 'basex9') }}>
         <Heading
           level={2}
           margin={{ bottom: 'small' }}
-          size={setResponsive('h2_xsmall', 'h2_small')}
+          size={setResponsive('h2Xsmall', 'h2Small')}
         >
           Explore what you can do with your refine.bio dataset!
         </Heading>

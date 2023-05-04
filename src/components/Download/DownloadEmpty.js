@@ -10,7 +10,7 @@ export const DownloadEmpty = () => {
       <Heading
         level={1}
         margin={{ bottom: 'small' }}
-        size={setResponsive('h1_xsmall', 'h1_small')}
+        size={setResponsive('h1Xsmall', 'h1Small')}
       >
         Your dataset is empty
       </Heading>

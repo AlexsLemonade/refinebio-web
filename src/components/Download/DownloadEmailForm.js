@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, CheckBox, Form, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
@@ -9,11 +10,12 @@ import { links } from 'config'
 
 export const DownloadEmailForm = () => {
   const { setResponsive } = useResponsive()
+  const [subscribe, setSubscribe] = useState(true)
 
   return (
     <Form>
       <Row width="500px">
-        <Column fill>
+        <Column fill basis="1">
           <TextInput placeholder="jdoe@example.com" type="email" />
         </Column>
         <Button
@@ -36,14 +38,14 @@ export const DownloadEmailForm = () => {
                 href={links.terms}
                 label="Terms of Use"
                 rel="noopener noreferrer"
-                target="_blank"
               />
             </Text>
           }
         />
         <CheckBox
-          checked
+          checked={subscribe}
           label="I would like to receive occasional updates from the refine.bio team"
+          onClick={() => setSubscribe(!subscribe)}
         />
       </Box>
     </Form>

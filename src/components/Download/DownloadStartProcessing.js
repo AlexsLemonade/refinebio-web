@@ -15,12 +15,12 @@ export const DownloadStartProcessing = () => {
       <Heading
         level={1}
         margin={{ bottom: 'small' }}
-        size={setResponsive('h1_xsmall', 'h1_small')}
+        size={setResponsive('h1Xsmall', 'h1Small')}
       >
         We&#39;re putting your download files together. It usually takes 15- 20
         minutes.
       </Heading>
-      <Heading level={2} size={setResponsive('h2_xsmall', 'h2_small')}>
+      <Heading level={2} size={setResponsive('h2Xsmall', 'h2Small')}>
         Enter your email and we will email you when the files are ready for
         download.
       </Heading>
