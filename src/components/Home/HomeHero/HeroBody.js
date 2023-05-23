@@ -7,6 +7,7 @@ import { Anchor } from 'components/shared/Anchor'
 import { SearchBox } from 'components/shared/SearchBox'
 
 export const HeroBody = () => {
+  const router = useRouter()
   const { setResponsive } = useResponsive()
   const { setSearchTerm } = useSearch()
   const [userInput, setUserInput] = useState()
