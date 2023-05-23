@@ -16,12 +16,12 @@ export default {
   },
   primary: {
     background: 'brand',
-    border: { color: 'brand', width: '1px' },
+    border: { color: 'brand', radius, width: '1px' },
     color: 'white'
   },
   secondary: {
     background: { color: 'transparent' },
-    border: { color: 'brand', width: '1px' },
+    border: { color: 'brand', radius, width: '1px' },
     color: 'brand'
   },
   disabled: {
@@ -29,12 +29,12 @@ export default {
     color: gray,
     primary: {
       background: gray,
-      border: { color: gray, width: '1px' },
+      border: { color: gray, radius, width: '1px' },
       color: 'white'
     },
     secondary: {
       background: 'white',
-      border: { color: gray, width: '1px' },
+      border: { color: gray, radius, width: '1px' },
       color: gray
     },
     extend: () => `
