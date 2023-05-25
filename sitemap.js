@@ -5,31 +5,30 @@ const { createGzip } = require('zlib')
 const { createWriteStream } = require('fs')
 const { resolve } = require('path')
 const { SitemapAndIndexStream, SitemapStream } = require('sitemap')
-const generateSitemapUrls = require('./src/helpers/generateSitemapUrls')
-const sitemap = require('./sitemap.config')
+const { config, generateSitemapUrls } = require('./sitemap.config')
 
 const generateSitemap = async () => {
   const sitemapUrls = await generateSitemapUrls() // the array of all urls for the sitemap (static path + resources)
   const sms = new SitemapAndIndexStream({
-    ...sitemap.baseConfig,
+    ...config.baseConfig,
     getSitemapStream: (i) => {
       const index = i + 1
       const sitemapStream = new SitemapStream({
-        hostname: sitemap.hostname
+        hostname: config.hostname
       })
       // emit generate files to the public folter
-      const path = `${sitemap.filePrefix}-${index}.xml`
+      const path = `${config.filePrefix}-${index}.xml`
       // compress the output of the sitemap
       const gzip = sitemapStream
         .pipe(createGzip())
-        .pipe(createWriteStream(resolve(`${sitemap.outDir}/${path}.gz`))) // generate sitemap-${index}.xml.gz
+        .pipe(createWriteStream(resolve(`${config.outDir}/${path}.gz`))) // generate sitemap-${index}.xml.gz
 
       const ws = sitemapStream.pipe(
-        createWriteStream(resolve(`${sitemap.outDir}/${path}`))
+        createWriteStream(resolve(`${config.outDir}/${path}`))
       ) // generate sitemap-${index}.xml
 
       return [
-        new URL(path, `${sitemap.hostname}`).toString(),
+        new URL(path, `${config.hostname}`).toString(),
         sitemapStream,
         ws,
         gzip
@@ -37,7 +36,7 @@ const generateSitemap = async () => {
     }
   })
 
-  sms.pipe(createWriteStream(resolve(`${sitemap.outDir}/sitemap-index.xml`))) // generate sitemap-index.xml
+  sms.pipe(createWriteStream(resolve(`${config.outDir}/sitemap-index.xml`))) // generate sitemap-index.xml
   sitemapUrls.forEach((item) => sms.write(item))
   sms.end() // end the stream
 }
