@@ -21,6 +21,7 @@
     "@sentry/nextjs": "^7.12.1",
     "grommet": "^2.25.3",
     "grommet-icons": "^4.8.0",
+    "isomorphic-unfetch": "^4.0.2",
     "next": "12.2.5",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
