@@ -9,6 +9,7 @@
     "start-storybook": "yarn start-local storybook",
     "stop-local": "yarn compose down",
     "dev": "next dev",
+    "prebuild": "node sitemap.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -25,6 +26,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-tsparticles": "^2.6.0",
+    "sitemap": "^7.1.1",
     "styled-components": "^5.3.5",
     "tsparticles": "^2.6.0"
   },
