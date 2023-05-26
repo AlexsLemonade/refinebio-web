@@ -6,30 +6,28 @@ const formatURLString = require('./src/helpers/formatURLString')
 const apiVersion = process.env.API_VERSION || 'v1'
 const apiPath = process.env.API_PATH || `https://api.refine.bio/${apiVersion}`
 const hostname = process.env.HOST_NAME || 'https://www.refine.bio'
-const limit = 3 // TEMPORARY for development purpose
-
+const limit = 1 // TEMPORARY for development
 const config = {
   apiVersion,
   apiPath,
   endpoints: {
     experiments: `${apiPath}/search/?limit=${limit}&ordering=id`
   },
+  filePrefix: 'sitemap',
   hostname,
   outDir: `${__dirname}/public`,
-  resourceNames: ['experiments'],
+  sitemapInfoFile: 'sitemap-info.json',
   staticPaths: ['/', '/about', '/license', '/privacy', '/terms'],
-  filePrefix: 'sitemap',
   baseConfig: {
-    limit: 50000 // defaults to 45k
+    limit: 50000
   }
 }
 
-// Returns a sitemap url for the given resource
+// returns a sitemap url for the given resource
 const getSitemapUrlForResource = (resource) => {
   return (result) => {
     const resourceUrl = {}
-
-    // add a custom url setting for each given resource
+    // adds a custom url setting for each given resource
     switch (resource) {
       case 'experiments':
         resourceUrl.url = `/${resource}/${
@@ -45,25 +43,30 @@ const getSitemapUrlForResource = (resource) => {
   }
 }
 
-// Returns an array of sitemap urls for all resources
+// returns an array of the sitemap urls for all resources
 const getSitemapUrlsForResources = async (...resources) => {
-  const urls = []
+  const resourceUrls = []
+  const resourceInfo = {}
+  let i = 0 // TEMPORARY use i for development
 
   for (const resource of resources) {
-    let current = config.endpoints[resource]
-    let i = 0 // TEMPORARY uese i variable for development
-    while (current && i < 2) {
+    let current = `${config.endpoints[resource]}`
+
+    while (current && i < 3) {
       try {
         console.log(`Fetching ${resource} from ${current}`)
         const readableStream = await fetch(current)
         const response = await readableStream.json()
+        current = response.next
 
-        if (response.next) {
-          // TEMPORARY replaces protocol to prevent error while fetching
-          current = response.next.replace('http', 'https')
+        if (!resourceInfo.count) {
+          resourceInfo.count = response.count
+          resourceInfo.runAt = new Date()
         }
 
-        urls.push(...response.results.map(getSitemapUrlForResource(resource)))
+        resourceUrls.push(
+          ...response.results.map(getSitemapUrlForResource(resource))
+        )
         i += 1
       } catch (e) {
         console.log(`Encountered error ${e}`)
@@ -72,9 +75,10 @@ const getSitemapUrlsForResources = async (...resources) => {
     }
   }
 
-  return urls
+  return { resourceUrls, resourceInfo }
 }
 
+// returns an array of all sitemap urls (static paths + resources)
 const generateSitemapUrls = async () => {
   console.log('Building Site Sitemap...')
   const staticUrls = config.staticPaths.map((path) => ({
@@ -82,11 +86,13 @@ const generateSitemapUrls = async () => {
     lastmod: `${new Date().toISOString()}`,
     priority: 0.5
   }))
-  const resourceUrls = await getSitemapUrlsForResources(
+  const { resourceUrls, resourceInfo } = await getSitemapUrlsForResources(
     ...Object.keys(config.endpoints)
   )
 
-  return [...staticUrls, ...resourceUrls]
+  const sitemapUrls = [...staticUrls, ...resourceUrls]
+
+  return { sitemapUrls, resourceInfo }
 }
 // supports CommonJS exports (used in sitemap.js)
 module.exports = { config, generateSitemapUrls }
