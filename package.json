@@ -22,6 +22,7 @@
     "grommet": "^2.25.3",
     "grommet-icons": "^4.8.0",
     "isomorphic-unfetch": "^4.0.2",
+    "moment": "^2.29.4",
     "next": "12.2.5",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
