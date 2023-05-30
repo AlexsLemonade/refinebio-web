@@ -48,8 +48,6 @@ const verifySitemap = async () => {
       } else {
         isValid = true
       }
-    } else {
-      isValid = false
     }
   }
 
