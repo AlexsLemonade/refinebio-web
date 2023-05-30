@@ -42,10 +42,8 @@ const verifySitemap = async () => {
     )
     // checks if the localy copy of the resource count matches the API
     if (JSON.parse(resourceInfo).count === response.count) {
-      // checks if the run date is more than 30 days old
-      if (moment().diff(JSON.parse(resourceInfo).runAt, 'day') > 30) {
-        isValid = false
-      } else {
+      // checks if the run date is less than 30 days old
+      if (moment().diff(JSON.parse(resourceInfo).runAt, 'day') < 30) {
         isValid = true
       }
     }
@@ -69,11 +67,13 @@ const generateSitemap = async () => {
       // compresses the output of the sitemap
       const gzip = sitemapStream
         .pipe(createGzip())
-        .pipe(createWriteStream(resolve(`${config.outDir}/${path}.gz`))) // generates sitemap-${index}.xml.gz
+        // generates sitemap-${index}.xml.gz
+        .pipe(createWriteStream(resolve(`${config.outDir}/${path}.gz`)))
 
+      // generates sitemap-${index}.xml
       const ws = sitemapStream.pipe(
         createWriteStream(resolve(`${config.outDir}/${path}`))
-      ) // generates sitemap-${index}.xml
+      )
 
       return [
         new URL(path, `${config.hostname}`).toString(),
@@ -83,8 +83,12 @@ const generateSitemap = async () => {
       ]
     }
   })
-
-  sms.pipe(createWriteStream(resolve(`${config.outDir}/sitemap-index.xml`))) // generates sitemap-index.xml
+  // generates sitemap-index.xml
+  sms.pipe(
+    createWriteStream(
+      resolve(`${config.outDir}/${config.filePrefix}-index.xml`)
+    )
+  )
   sitemapUrls.forEach((item) => sms.write(item))
   sms.end() // ends the stream
 
@@ -92,8 +96,8 @@ const generateSitemap = async () => {
   writeFile(
     `${config.outDir}/${config.sitemapInfoFile}`,
     JSON.stringify(resourceInfo),
-    (err) => {
-      console.log(err)
+    (e) => {
+      console.log(e)
     }
   )
 }
