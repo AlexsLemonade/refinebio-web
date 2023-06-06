@@ -29,7 +29,7 @@ export const Search = (props) => {
     setPage,
     pageSize,
     pushSearchTerm,
-    setFilter,
+    setFilters,
     searchTerm,
     setSearchTerm,
     results,
@@ -54,7 +54,7 @@ export const Search = (props) => {
 
   useEffect(() => {
     if (props) {
-      setFilter(getFilterParam(query))
+      setFilters(getFilterParam(query))
       setSearchTerm(query.search)
       setUserInput(query.search)
       setResults(newResponse)

@@ -13,7 +13,7 @@ export const SearchContextProvider = ({ children }) => {
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(pageSizes[0])
   const [sortByOption, setSortByOption] = useState(sortby[0].value)
-  const [filter, setFilter] = useState({})
+  const [filters, setFilters] = useState({})
   const [searchTerm, setSearchTerm] = useState('')
   const [results, setResults] = useState([])
 
@@ -21,12 +21,12 @@ export const SearchContextProvider = ({ children }) => {
     limit: pageSize,
     offset: page * pageSize,
     ordering: sortByOption,
-    ...(filter && filter),
+    ...(filters && filters),
     // the quary pamaeter '?empty=true' used in FE-only to toggle the non-downloadable samples
     // NOTE: if this is not present, we hide the non-downkoadalbe samples by querying the API
     // with `num_downloadable_samples__gt: 0`
     ...(searchTerm ? { search: searchTerm } : ''),
-    ...(!filter || !filter.empty ? { num_downloadable_samples__gt: 0 } : '')
+    ...(!filters || !filters.empty ? { num_downloadable_samples__gt: 0 } : '')
   }
 
   // TEMPORARY
@@ -44,19 +44,19 @@ export const SearchContextProvider = ({ children }) => {
     router.push({
       pathname,
       query: {
-        ...filter,
+        ...filters,
         ...(newSearchTerm ? { search: newSearchTerm } : '')
       }
     })
   }
 
-  const clearAllFilter = () => {
-    setFilter(() => {
+  const clearAllFilters = () => {
+    setFilters(() => {
       const temp = {}
 
       // exclude the non-downloadable filter
-      if (filter.empty) {
-        temp.empty = filter.empty
+      if (filters.empty) {
+        temp.empty = filters.empty
       }
 
       pushFilter(temp)
@@ -72,8 +72,8 @@ export const SearchContextProvider = ({ children }) => {
   // toggle each filter(checkbox) in SearchFilterList
   const toggleFilter = (e, param, val) => {
     if (e.target.checked) {
-      setFilter(() => {
-        const temp = { ...filter }
+      setFilters(() => {
+        const temp = { ...filters }
         if (temp[param] !== undefined) {
           temp[param].push(val)
         } else {
@@ -83,8 +83,8 @@ export const SearchContextProvider = ({ children }) => {
         return { ...temp }
       })
     } else {
-      setFilter(() => {
-        const temp = { ...filter }
+      setFilters(() => {
+        const temp = { ...filters }
 
         if (temp[param].length > 0) {
           temp[param] = temp[param].filter((item) => item !== val)
@@ -106,17 +106,17 @@ export const SearchContextProvider = ({ children }) => {
         pageSize,
         setPageSize,
         params,
-        filter,
+        filters,
         results,
         pushFilter,
         pushSearchTerm,
         setResults,
-        setFilter,
+        setFilters,
         searchTerm,
         setSearchTerm,
         sortByOption,
         setSortByOption,
-        clearAllFilter,
+        clearAllFilters,
         getSearchResults,
         toggleFilter
       }}

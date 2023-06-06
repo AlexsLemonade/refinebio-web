@@ -5,19 +5,19 @@ import { CheckBox } from 'grommet'
 // NOTE: if this is not present, we hide the non-downkoadalbe samples by querying the API
 // with `num_downloadable_samples__gt: 0`
 export const NonDownloadableExperiment = ({ filterParam = 'empty' }) => {
-  const { filter, setFilter, pushFilter } = useSearch()
+  const { filters, setFilters, pushFilter } = useSearch()
 
   const toggleFilter = (e) => {
     if (e.target.checked) {
-      setFilter(() => {
-        const temp = { ...filter }
+      setFilters(() => {
+        const temp = { ...filters }
         delete temp[filterParam]
         pushFilter(temp)
         return { ...temp }
       })
     } else {
-      setFilter(() => {
-        const temp = { ...filter }
+      setFilters(() => {
+        const temp = { ...filters }
 
         temp[filterParam] = true
         pushFilter(temp)
@@ -29,7 +29,7 @@ export const NonDownloadableExperiment = ({ filterParam = 'empty' }) => {
   return (
     <CheckBox
       label="Hide non-downloadable experiments"
-      checked={!filter[filterParam]}
+      checked={!filters[filterParam]}
       onChange={(e) => toggleFilter(e)}
     />
   )

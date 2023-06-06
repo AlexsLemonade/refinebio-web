@@ -19,7 +19,7 @@ const ToggleButton = styled(sharedButton)`
   `}
 `
 export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
-  const { filter, toggleFilter } = useSearch()
+  const { filters, toggleFilter } = useSearch()
   const maxCount = 5
   const options = useMemo(() => {
     return Object.entries(filterGroup)
@@ -73,7 +73,7 @@ export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
           >
             <CheckBox
               label={`${formatString(option[0])} (${formatNumbers(option[1])})`}
-              checked={isChecked(filter, filterParam, option[0])}
+              checked={isChecked(filters, filterParam, option[0])}
               onChange={(e) => toggleFilter(e, filterParam, option[0])}
             />
           </Box>

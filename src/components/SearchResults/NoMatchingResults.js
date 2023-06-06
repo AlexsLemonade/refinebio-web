@@ -5,7 +5,7 @@ import { Button } from 'components/shared/Button'
 import { MissingResultsFormButton } from './MissingResultsFormButton'
 
 export const NoMatchingResults = () => {
-  const { clearAllFilter } = useSearch()
+  const { clearAllFilters } = useSearch()
   const { setResponsive } = useResponsive()
 
   return (
@@ -32,7 +32,7 @@ export const NoMatchingResults = () => {
           label="Clear Filters"
           link
           linkFontSize={setResponsive('16px', '22px')}
-          onClick={clearAllFilter}
+          onClick={clearAllFilters}
         />
       </Box>
       <Box

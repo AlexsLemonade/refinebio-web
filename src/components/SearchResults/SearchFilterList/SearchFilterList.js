@@ -9,7 +9,7 @@ import { SearchFilter } from './SearchFilter'
 import { IncludePublication } from './IncludePublication'
 
 export const SearchFilterList = ({ facets }) => {
-  const { filter, clearAllFilter } = useSearch()
+  const { filters, clearAllFilters } = useSearch()
   const { viewport } = useResponsive()
   const [filterGroup, setFilterGroup] = useState({})
   const filterIncludePublication = {
@@ -50,11 +50,11 @@ export const SearchFilterList = ({ facets }) => {
           Filters
         </Heading>
         <Button
-          disabled={isEmptyObject(filter)}
+          disabled={isEmptyObject(filters)}
           label="Clear All"
           link
           linkFontSize="medium"
-          onClick={clearAllFilter}
+          onClick={clearAllFilters}
         />
       </Box>
       {filterOrder.map((f, i, arr) => (

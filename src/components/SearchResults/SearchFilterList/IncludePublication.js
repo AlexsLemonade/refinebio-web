@@ -8,7 +8,7 @@ export const IncludePublication = ({
   filterParam,
   filterLabel
 }) => {
-  const { filter, toggleFilter } = useSearch()
+  const { filters, toggleFilter } = useSearch()
   const count =
     filterGroup && filterGroup.true
       ? `(${formatNumbers(filterGroup.true)})`
@@ -17,7 +17,7 @@ export const IncludePublication = ({
   return (
     <Box>
       <CheckBox
-        checked={isChecked(filter, filterParam)}
+        checked={isChecked(filters, filterParam)}
         label={`${filterLabel} ${count}`}
         onChange={(e) => toggleFilter(e, filterParam, true)}
       />
