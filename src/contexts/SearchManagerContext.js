@@ -4,9 +4,9 @@ import isEmptyObject from 'helpers/isEmptyObject'
 import { api } from 'api'
 import { options } from 'config'
 
-export const SearchContext = createContext({})
+export const SearchManagerContext = createContext({})
 
-export const SearchContextProvider = ({ children }) => {
+export const SearchManagerContextProvider = ({ children }) => {
   const { pageSizes, sortby } = options
   const router = useRouter()
   const pathname = 'search'
@@ -98,7 +98,7 @@ export const SearchContextProvider = ({ children }) => {
   }
 
   return (
-    <SearchContext.Provider
+    <SearchManagerContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         page,
@@ -122,6 +122,6 @@ export const SearchContextProvider = ({ children }) => {
       }}
     >
       {children}
-    </SearchContext.Provider>
+    </SearchManagerContext.Provider>
   )
 }

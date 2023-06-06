@@ -1,4 +1,4 @@
-import { useSearch } from 'hooks/useSearch'
+import { useSearchManager } from 'hooks/useSearchManager'
 import formatNumbers from 'helpers/formatNumbers'
 import { isChecked } from 'helpers/search'
 import { Box, CheckBox } from 'grommet'
@@ -8,7 +8,7 @@ export const IncludePublication = ({
   filterParam,
   filterLabel
 }) => {
-  const { filters, toggleFilter } = useSearch()
+  const { filters, toggleFilter } = useSearchManager()
   const count =
     filterGroup && filterGroup.true
       ? `(${formatNumbers(filterGroup.true)})`

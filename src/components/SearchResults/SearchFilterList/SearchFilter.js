@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { useSearch } from 'hooks/useSearch'
+import { useSearchManager } from 'hooks/useSearchManager'
 import formatNumbers from 'helpers/formatNumbers'
 import formatString from 'helpers/formatString'
 import { isChecked } from 'helpers/search'
@@ -19,7 +19,7 @@ const ToggleButton = styled(sharedButton)`
   `}
 `
 export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
-  const { filters, toggleFilter } = useSearch()
+  const { filters, toggleFilter } = useSearchManager()
   const maxCount = 5
   const options = useMemo(() => {
     return Object.entries(filterGroup)

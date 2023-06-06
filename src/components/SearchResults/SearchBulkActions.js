@@ -1,5 +1,5 @@
 import { useMatchMedia } from 'hooks/useMatchMedia'
-import { useSearch } from 'hooks/useSearch'
+import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Grid, Select } from 'grommet'
 import { Button } from 'components/shared/Button'
@@ -9,7 +9,7 @@ import { NonDownloadableExperiment } from './SearchFilterList'
 
 export const SearchBulkActions = () => {
   const { pageSize, results, setPageSize, sortByOption, setSortByOption } =
-    useSearch()
+    useSearchManager()
   const { sortby } = options
   const { setResponsive } = useResponsive()
   const isMax850 = useMatchMedia('(max-width: 850px)')

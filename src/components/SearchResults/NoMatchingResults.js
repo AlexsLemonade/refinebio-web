@@ -1,11 +1,11 @@
-import { useSearch } from 'hooks/useSearch'
+import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { MissingResultsFormButton } from './MissingResultsFormButton'
 
 export const NoMatchingResults = () => {
-  const { clearAllFilters } = useSearch()
+  const { clearAllFilters } = useSearchManager()
   const { setResponsive } = useResponsive()
 
   return (

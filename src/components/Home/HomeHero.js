@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useSearch } from 'hooks/useSearch'
+import { useSearchManager } from 'hooks/useSearchManager'
 import { useRouter } from 'next/router'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Text } from 'grommet'
@@ -11,7 +11,7 @@ import { SearchBox } from 'components/shared/SearchBox'
 const HeroBody = () => {
   const router = useRouter()
   const { setResponsive } = useResponsive()
-  const { setSearchTerm } = useSearch()
+  const { setSearchTerm } = useSearchManager()
   const [userInput, setUserInput] = useState()
   const queries = ['Notch', 'medulloblastoma', 'GSE24528']
   const pathname = 'search'

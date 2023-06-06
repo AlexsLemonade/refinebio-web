@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import { useEffect, useState } from 'react'
-import { useSearch } from 'hooks/useSearch'
+import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import { getAccessionCodesParam, getFilterParam } from 'helpers/search'
@@ -34,7 +34,7 @@ export const Search = (props) => {
     setSearchTerm,
     results,
     setResults
-  } = useSearch(newResponse)
+  } = useSearchManager(newResponse)
 
   const { viewport, setResponsive } = useResponsive()
   const sideWidth = '300px'

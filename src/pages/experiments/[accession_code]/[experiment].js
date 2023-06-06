@@ -1,6 +1,6 @@
 import { Fragment, memo, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { useSearch } from 'hooks/useSearch'
+import { useSearchManager } from 'hooks/useSearchManager'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import { api } from 'api'
 import { links } from 'config'
@@ -40,7 +40,7 @@ export const Experiment = () => {
   const router = useRouter()
   // check for the parameter `ref=search` to ensure that the previous page was the search results
   const { accession_code: accessionCode, ref } = router.query
-  const { searchTerm } = useSearch()
+  const { searchTerm } = useSearchManager()
   const { setResponsive } = useResponsive()
   const databaseNames = {
     GEO: 'Gene Expression Omnibus (GEO)',

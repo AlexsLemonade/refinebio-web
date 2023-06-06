@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect, memo } from 'react'
-import { useSearch } from 'hooks/useSearch'
+import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import isEmptyObject from 'helpers/isEmptyObject'
 import isLastIndex from 'helpers/isLastIndex'
@@ -9,7 +9,7 @@ import { SearchFilter } from './SearchFilter'
 import { IncludePublication } from './IncludePublication'
 
 export const SearchFilterList = ({ facets }) => {
-  const { filters, clearAllFilters } = useSearch()
+  const { filters, clearAllFilters } = useSearchManager()
   const { viewport } = useResponsive()
   const [filterGroup, setFilterGroup] = useState({})
   const filterIncludePublication = {

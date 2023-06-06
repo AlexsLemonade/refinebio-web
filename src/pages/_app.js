@@ -6,7 +6,7 @@ import { Layout } from 'components/Layout'
 import { theme } from 'themes'
 import { BandContextvProvider } from 'contexts/BandContext'
 import { DatasetContextProvider } from 'contexts/DatasetContext'
-import { SearchContextProvider } from 'contexts/SearchContext'
+import { SearchManagerContextProvider } from 'contexts/SearchManagerContext'
 import { ModalContextProvider } from 'contexts/ModalContext'
 import { RefinebioContextProvider } from 'contexts/RefinebioContext'
 import { ErrorPage } from 'pages/_error'
@@ -19,20 +19,20 @@ const App = ({ Component, pageProps }) => {
       <GlobalStyle />
       <Grommet theme={theme}>
         <RefinebioContextProvider>
-          <DatasetContextProvider>
-            <BandContextvProvider>
-              <Layout>
-                <Sentry.ErrorBoundary fallback={Fallback} showDialog>
-                  <ModalContextProvider>
-                    <SearchContextProvider>
+          <SearchManagerContextProvider>
+            <DatasetContextProvider>
+              <BandContextvProvider>
+                <Layout>
+                  <Sentry.ErrorBoundary fallback={Fallback} showDialog>
+                    <ModalContextProvider>
                       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
                       <Component {...pageProps} />
-                    </SearchContextProvider>
-                  </ModalContextProvider>
-                </Sentry.ErrorBoundary>
-              </Layout>
-            </BandContextvProvider>
-          </DatasetContextProvider>
+                    </ModalContextProvider>
+                  </Sentry.ErrorBoundary>
+                </Layout>
+              </BandContextvProvider>
+            </DatasetContextProvider>
+          </SearchManagerContextProvider>
         </RefinebioContextProvider>
       </Grommet>
     </>
