@@ -21,14 +21,12 @@ import {
   SearchBulkActions,
   SearchFilterList
 } from 'components/SearchResults'
+import { options } from 'config'
 import { api } from 'api'
 
 export const Search = (props) => {
   const { query, accessionCodesResponse, response: newResponse } = props
   const {
-    page,
-    setPage,
-    pageSize,
     pushSearchTerm,
     setFilters,
     searchTerm,
@@ -36,7 +34,7 @@ export const Search = (props) => {
     results,
     setResults
   } = useSearchManager(newResponse)
-
+  const { pageSizes, sortby } = options
   const { viewport, setResponsive } = useResponsive()
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
@@ -46,6 +44,10 @@ export const Search = (props) => {
   const isResults = results && results.results?.length > 0
   const [toggleFilterList, setToggleFilterList] = useState(false)
   const [userInput, setUserInput] = useState('')
+
+  const [page, setPage] = useState(0)
+  const [pageSize, setPageSize] = useState(pageSizes[0])
+  const [sortBy, setSortBy] = useState(sortby[0].value)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -141,7 +143,15 @@ export const Search = (props) => {
                 onClick={() => setToggleFilterList(true)}
               />
             )}
-            {isResults && <SearchBulkActions />}
+            {isResults && (
+              <SearchBulkActions
+                pageSize={pageSize}
+                setPageSize={setPageSize}
+                sortBy={sortBy}
+                setSortBy={setSortBy}
+                totalResults={results.count}
+              />
+            )}
             {loading ? (
               <Box
                 align="center"

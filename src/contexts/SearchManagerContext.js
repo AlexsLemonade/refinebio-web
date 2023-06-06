@@ -2,25 +2,18 @@ import { createContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import isEmptyObject from 'helpers/isEmptyObject'
 import { api } from 'api'
-import { options } from 'config'
 
 export const SearchManagerContext = createContext({})
 
 export const SearchManagerContextProvider = ({ children }) => {
-  const { pageSizes, sortby } = options
   const router = useRouter()
   const pathname = 'search'
-  const [page, setPage] = useState(0)
-  const [pageSize, setPageSize] = useState(pageSizes[0])
-  const [sortByOption, setSortByOption] = useState(sortby[0].value)
+
   const [filters, setFilters] = useState({})
   const [searchTerm, setSearchTerm] = useState('')
   const [results, setResults] = useState([])
 
   const params = {
-    limit: pageSize,
-    offset: page * pageSize,
-    ordering: sortByOption,
     ...(filters && filters),
     // the quary pamaeter '?empty=true' used in FE-only to toggle the non-downloadable samples
     // NOTE: if this is not present, we hide the non-downkoadalbe samples by querying the API
@@ -101,10 +94,6 @@ export const SearchManagerContextProvider = ({ children }) => {
     <SearchManagerContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
-        page,
-        setPage,
-        pageSize,
-        setPageSize,
         params,
         filters,
         results,
@@ -114,8 +103,6 @@ export const SearchManagerContextProvider = ({ children }) => {
         setFilters,
         searchTerm,
         setSearchTerm,
-        sortByOption,
-        setSortByOption,
         clearAllFilters,
         getSearchResults,
         toggleFilter
