@@ -1,36 +1,17 @@
 import { useSearchManager } from 'hooks/useSearchManager'
 import { CheckBox } from 'grommet'
 
-// the quary pamaeter '?empty=true' used in FE-only to toggle the non-downloadable samples
-// NOTE: if this is not present, we hide the non-downkoadalbe samples by querying the API
-// with `num_downloadable_samples__gt: 0`
-export const NonDownloadableExperiment = ({ filterParam = 'empty' }) => {
-  const { filters, setFilters, pushFilter } = useSearchManager()
-
-  const toggleFilter = (e) => {
-    if (e.target.checked) {
-      setFilters(() => {
-        const temp = { ...filters }
-        delete temp[filterParam]
-        pushFilter(temp)
-        return { ...temp }
-      })
-    } else {
-      setFilters(() => {
-        const temp = { ...filters }
-
-        temp[filterParam] = true
-        pushFilter(temp)
-        return { ...temp }
-      })
-    }
-  }
+// the special quary string '?empty=true' is used in FE-only to toggle the non-downloadable samples filter
+// - by default, non-doownloadable samples are excluded in API response by sending `num_downloadable_samples__gt: 0`
+// - by appending this query string, it removes `num_downloadable_samples__gt: 0` to include non-doownloadable samples
+export const NonDownloadableExperiment = ({ param = 'empty' }) => {
+  const { filters, toggleNonDownloadableFilter } = useSearchManager()
 
   return (
     <CheckBox
       label="Hide non-downloadable experiments"
-      checked={!filters[filterParam]}
-      onChange={(e) => toggleFilter(e)}
+      checked={!filters[param]}
+      onChange={(e) => toggleNonDownloadableFilter(e, param)}
     />
   )
 }
