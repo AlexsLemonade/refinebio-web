@@ -113,6 +113,18 @@ export const useSearchManager = () => {
     updateSearchQuery()
   }
 
+  /* Search Term */
+  const updateSearchTerm = (newSearchTerm) => {
+    if (newSearchTerm === '') {
+      delete search.search
+    } else {
+      search.search = newSearchTerm
+    }
+
+    setSearch({ ...search })
+    updateSearchQuery()
+  }
+
   /* Other */
   // update URL query string to keep it in sync with user-requesed query
   const updateSearchQuery = () => {}
@@ -128,6 +140,7 @@ export const useSearchManager = () => {
     toggleNonDownloadableFilter,
     updatePage,
     updatePageSize,
+    updateSearchTerm,
     updateSortBy
   }
 }
