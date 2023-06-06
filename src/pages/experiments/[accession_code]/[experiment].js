@@ -40,7 +40,7 @@ export const Experiment = () => {
   const router = useRouter()
   // check for the parameter `ref=search` to ensure that the previous page was the search results
   const { accession_code: accessionCode, ref } = router.query
-  const { searchTerm } = useSearchManager()
+  const { search } = useSearchManager()
   const { setResponsive } = useResponsive()
   const databaseNames = {
     GEO: 'Gene Expression Omnibus (GEO)',
@@ -66,7 +66,7 @@ export const Experiment = () => {
   }, [router.isReady])
 
   return (
-    <TextHighlightContextProvider match={ref === 'search' && searchTerm}>
+    <TextHighlightContextProvider match={ref === 'search' && search.search}>
       <Box height={{ min: '50%' }}>
         <FixedContainer pad="large">
           <Button
