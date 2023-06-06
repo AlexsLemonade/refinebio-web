@@ -68,23 +68,6 @@ export const useSearchManager = () => {
     updateSearchQuery()
   }
 
-  // toggle a filter option in facets
-  const toggleFilter = (e, param, val) => {
-    if (e.target.checked) {
-      if (filters[param] !== undefined) {
-        filters[param].push(val)
-      } else {
-        filters[param] = [val]
-      }
-    } else if (filters[param].length > 0) {
-      filters[param] = filters[param].filter((item) => item !== val)
-      if (filters[param].length === 0) delete filters[param]
-    }
-
-    setFilters({ ...filters })
-    updateSearchQuery()
-  }
-
   // returns filters-only query parameters from url
   const getFilterQueryParam = (query) => {
     const queryParam = getQueryParam(query)
@@ -103,6 +86,33 @@ export const useSearchManager = () => {
     })
 
     return temp
+  }
+
+  const isFilterChecked = (filter, param, value) => {
+    if (!filter) return null
+
+    if (value) {
+      return filter[param] ? filter[param].includes(value) : false
+    }
+
+    return param in filter
+  }
+
+  // toggle a filter option in facets
+  const toggleFilter = (e, param, val) => {
+    if (e.target.checked) {
+      if (filters[param] !== undefined) {
+        filters[param].push(val)
+      } else {
+        filters[param] = [val]
+      }
+    } else if (filters[param].length > 0) {
+      filters[param] = filters[param].filter((item) => item !== val)
+      if (filters[param].length === 0) delete filters[param]
+    }
+
+    setFilters({ ...filters })
+    updateSearchQuery()
   }
 
   const toggleNonDownloadableFilter = (e, param) => {
@@ -149,6 +159,7 @@ export const useSearchManager = () => {
     setSearch,
     clearAllFilters,
     getFilterQueryParam,
+    isFilterChecked,
     toggleFilter,
     toggleNonDownloadableFilter,
     updatePage,

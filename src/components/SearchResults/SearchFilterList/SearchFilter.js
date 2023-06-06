@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react'
 import { useSearchManager } from 'hooks/useSearchManager'
 import formatNumbers from 'helpers/formatNumbers'
 import formatString from 'helpers/formatString'
-import isFilterChecked from 'helpers/isFilterChecked'
 import isLastIndex from 'helpers/isLastIndex'
 import { Box, CheckBox, Heading } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
@@ -19,7 +18,7 @@ const ToggleButton = styled(sharedButton)`
   `}
 `
 export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
-  const { filters, toggleFilter } = useSearchManager()
+  const { filters, isFilterChecked, toggleFilter } = useSearchManager()
   const maxCount = 5
   const options = useMemo(() => {
     return Object.entries(filterGroup)
