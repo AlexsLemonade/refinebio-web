@@ -7,16 +7,26 @@ import { options } from 'config'
 export const PageSizes = ({
   textPrepend = 'Show',
   textAppended = 'Total Samples',
-  totalPages,
   pageSize,
-  setPageSize
+  setPageSize,
+  totalPages,
+  updatePageSize
 }) => {
   const { pageSizes } = options
   const { viewport } = useResponsive()
-  const handleChange = (value) => {
-    setPageSize(value)
-  }
   const isSinglePage = totalPages < pageSizes[0]
+
+  // syncs the search page url with selected page size
+  const updateQueryForPageSize = (newPageSize) => {
+    if (updatePageSize) {
+      updatePageSize(newPageSize)
+    }
+  }
+
+  const handleChange = (newPageSize) => {
+    setPageSize(newPageSize)
+    updateQueryForPageSize(newPageSize)
+  }
 
   return (
     <Box align="center" direction="row">
