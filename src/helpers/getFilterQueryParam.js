@@ -1,4 +1,4 @@
-import getQueryParam from 'helpers/search/getQueryParam'
+import getQueryParam from 'helpers/getQueryParam'
 // Returns the filter list obtained by a url query parameter
 export default (query) => {
   const queryParams = getQueryParam(query)

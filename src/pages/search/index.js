@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
-import { getAccessionCodesParam, getFilterParam } from 'helpers/search'
+import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
+import getFilterQueryParam from 'helpers/getFilterQueryParam'
 import { Box, Grid, Heading, Spinner } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -54,7 +55,7 @@ export const Search = (props) => {
 
   useEffect(() => {
     if (props) {
-      setFilters(getFilterParam(query))
+      setFilters(getFilterQueryParam(query))
       setSearchTerm(query.search)
       setUserInput(query.search)
       setResults(newResponse)
@@ -65,7 +66,7 @@ export const Search = (props) => {
 
   return (
     <TextHighlightContextProvider
-      match={[searchTerm, ...getAccessionCodesParam(searchTerm)]}
+      match={[searchTerm, ...getAccessionCodesQueryParam(searchTerm)]}
     >
       <FixedContainer pad={{ horizontal: 'large', bottom: 'large' }}>
         <SearchInfoBanner />
@@ -224,7 +225,7 @@ Search.getInitialProps = async ({ pathname, query }) => {
   const response = await api.search.get(searchQuery)
 
   // TEMPORARY for UI Demo
-  const accessionCodes = getAccessionCodesParam(query.search)
+  const accessionCodes = getAccessionCodesQueryParam(query.search)
 
   if (accessionCodes) {
     accessionCodesResponse =

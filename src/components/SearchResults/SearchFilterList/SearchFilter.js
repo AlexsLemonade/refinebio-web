@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react'
 import { useSearchManager } from 'hooks/useSearchManager'
 import formatNumbers from 'helpers/formatNumbers'
 import formatString from 'helpers/formatString'
-import { isChecked } from 'helpers/search'
+import isFilterChecked from 'helpers/isFilterChecked'
 import isLastIndex from 'helpers/isLastIndex'
 import { Box, CheckBox, Heading } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
@@ -73,7 +73,7 @@ export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
           >
             <CheckBox
               label={`${formatString(option[0])} (${formatNumbers(option[1])})`}
-              checked={isChecked(filters, filterParam, option[0])}
+              checked={isFilterChecked(filters, filterParam, option[0])}
               onChange={(e) => toggleFilter(e, filterParam, option[0])}
             />
           </Box>

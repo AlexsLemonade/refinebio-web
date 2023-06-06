@@ -1,6 +1,6 @@
 import { useSearchManager } from 'hooks/useSearchManager'
 import formatNumbers from 'helpers/formatNumbers'
-import { isChecked } from 'helpers/search'
+import isFilterChecked from 'helpers/isFilterChecked'
 import { Box, CheckBox } from 'grommet'
 
 export const IncludePublication = ({
@@ -17,7 +17,7 @@ export const IncludePublication = ({
   return (
     <Box>
       <CheckBox
-        checked={isChecked(filters, filterParam)}
+        checked={isFilterChecked(filters, filterParam)}
         label={`${filterLabel} ${count}`}
         onChange={(e) => toggleFilter(e, filterParam, true)}
       />
