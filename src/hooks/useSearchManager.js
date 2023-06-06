@@ -1,20 +1,53 @@
 import { useContext } from 'react'
 import { SearchManagerContext } from 'contexts/SearchManagerContext'
+import { options } from 'config'
 
 export const useSearchManager = () => {
   const {
     search: searchState,
     setSearch: setSearchState,
     filters: filtersState,
-    setFilters: setFiltersState,
-    searchTerm,
-    setSearchTerm
+    setFilters: setFiltersState
   } = useContext(SearchManagerContext)
-
   const search = searchState
   const setSearch = setSearchState
   const filters = filtersState
   const setFilters = setFiltersState
+  const { pageSizes, sortby } = options
+
+  /* Common */
+  const updatePage = (newPage) => {
+    if (newPage === 1) {
+      delete search.p
+    } else {
+      search.p = newPage
+    }
+
+    setSearch({ ...search })
+    updateSearchQuery()
+  }
+
+  const updatePageSize = (newPageSize) => {
+    if (newPageSize === pageSizes[0]) {
+      delete search.size
+    } else {
+      search.size = newPageSize
+    }
+
+    setSearch({ ...search })
+    updateSearchQuery()
+  }
+
+  const updateSortBy = (newSortOrder) => {
+    if (newSortOrder === sortby[0].value) {
+      delete search.ordering
+    } else {
+      search.ordering = newSortOrder
+    }
+
+    setSearch({ ...search })
+    updateSearchQuery()
+  }
 
   /* Filters */
   const clearAllFilters = () => {
@@ -68,10 +101,11 @@ export const useSearchManager = () => {
     setFilters,
     search,
     setSearch,
-    searchTerm,
-    setSearchTerm,
     clearAllFilters,
     toggleFilter,
-    toggleNonDownloadableFilter
+    toggleNonDownloadableFilter,
+    updatePage,
+    updatePageSize,
+    updateSortBy
   }
 }
