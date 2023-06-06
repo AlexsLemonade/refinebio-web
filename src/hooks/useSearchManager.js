@@ -1,6 +1,8 @@
 import { useContext } from 'react'
+import { useRouter } from 'next/router'
 import { SearchManagerContext } from 'contexts/SearchManagerContext'
 import getQueryParam from 'helpers/getQueryParam'
+import isEmptyObject from 'helpers/isEmptyObject'
 import { options } from 'config'
 
 export const useSearchManager = () => {
@@ -10,6 +12,7 @@ export const useSearchManager = () => {
     filters: filtersState,
     setFilters: setFiltersState
   } = useContext(SearchManagerContext)
+  const router = useRouter()
   const search = searchState
   const setSearch = setSearchState
   const filters = filtersState
@@ -126,8 +129,18 @@ export const useSearchManager = () => {
   }
 
   /* Other */
-  // update URL query string to keep it in sync with user-requesed query
-  const updateSearchQuery = () => {}
+  // update URL query string
+  const updateSearchQuery = () => {
+    router.push({
+      query: {
+        ...(!isEmptyObject(filters) ? filters : {}),
+        ...(search.search ? { search: search.search } : {}),
+        ...(search.ordering ? { ordering: search.ordering } : {}),
+        ...(search.p ? { p: search.p } : {}),
+        ...(search.size ? { size: search.size } : {})
+      }
+    })
+  }
 
   return {
     filters,
@@ -140,6 +153,7 @@ export const useSearchManager = () => {
     toggleNonDownloadableFilter,
     updatePage,
     updatePageSize,
+    updateSearchQuery,
     updateSearchTerm,
     updateSortBy
   }
