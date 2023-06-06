@@ -15,7 +15,7 @@ import { Overlay } from 'components/shared/Ovevrlay'
 import { PageSizes } from 'components/shared/PageSizes'
 import { Pagination } from 'components/shared/Pagination'
 import { Row } from 'components/shared/Row'
-import { links } from 'config'
+import { links, options } from 'config'
 import { getSamplesTableData, getSamplesByOrganismName } from 'api/mockHelper'
 import { api } from 'api'
 import {
@@ -34,10 +34,10 @@ export const SamplesTable = ({
   isImmutable = false,
   modalView = false
 }) => {
+  const { pageSizes } = options
   const { viewport, setResponsive } = useResponsive()
   const tableHeight = { default: '60vh', expanded: '75vh' } // required for a table loading screen
   const minColumns = 5 // matches the current refine.bio
-  const pageSizes = [10, 20, 50]
   const [tableExpanded, setTableExpanded] = useState(false)
   // TEMPORARY
   // for API calls(data, filter, pageSize, limit, offset, order)
@@ -168,7 +168,6 @@ export const SamplesTable = ({
           getSamplesTableData(
             paramsToAdd.experiment_accession_code,
             pageSize,
-            pageSizes,
             setTableData
           )
         }
@@ -208,7 +207,6 @@ export const SamplesTable = ({
           >
             <PageSizes
               pageSize={pageSize}
-              pageSizes={pageSizes}
               totalPages={totalPages}
               setPageSize={setPageSize}
             />

@@ -8,14 +8,9 @@ import { options } from 'config'
 import { NonDownloadableExperiment } from './SearchFilterList'
 
 export const SearchBulkActions = () => {
-  const {
-    pageSize,
-    pageSizes,
-    results,
-    setPageSize,
-    sortByOption,
-    setSortByOption
-  } = useSearch()
+  const { pageSize, results, setPageSize, sortByOption, setSortByOption } =
+    useSearch()
+  const { sortby } = options
   const { setResponsive } = useResponsive()
   const isMax850 = useMatchMedia('(max-width: 850px)')
   const isMax1100 = useMatchMedia('(max-width: 1100px)')
@@ -101,9 +96,8 @@ export const SearchBulkActions = () => {
               textAppended="results"
               pageSizeLabel="Total Samples"
               pageSize={pageSize}
-              pageSizes={pageSizes}
-              totalPages={totalResults}
               setPageSize={setPageSize}
+              totalPages={totalResults}
             />
           </Box>
         </Box>
@@ -112,7 +106,7 @@ export const SearchBulkActions = () => {
             Sort by
             <Box width="208px">
               <Select
-                options={Object.values(options.sortby)}
+                options={Object.values(sortby)}
                 labelKey="label"
                 value={sortByOption}
                 valueKey={{ key: 'value', reduce: true }}

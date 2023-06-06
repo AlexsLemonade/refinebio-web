@@ -7,12 +7,12 @@ import { options } from 'config'
 export const SearchContext = createContext({})
 
 export const SearchContextProvider = ({ children }) => {
+  const { pageSizes, sortby } = options
   const router = useRouter()
   const pathname = 'search'
-  const pageSizes = [10, 20, 50]
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(pageSizes[0])
-  const [sortByOption, setSortByOption] = useState(options.sortby[0].value)
+  const [sortByOption, setSortByOption] = useState(sortby[0].value)
   const [filter, setFilter] = useState({})
   const [searchTerm, setSearchTerm] = useState('')
   const [results, setResults] = useState([])
@@ -105,7 +105,6 @@ export const SearchContextProvider = ({ children }) => {
         setPage,
         pageSize,
         setPageSize,
-        pageSizes,
         params,
         filter,
         results,

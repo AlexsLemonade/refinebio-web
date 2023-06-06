@@ -2,15 +2,16 @@ import { memo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
 import { Box, Select, Text } from 'grommet'
+import { options } from 'config'
 
 export const PageSizes = ({
   textPrepend = 'Show',
   textAppended = 'Total Samples',
   totalPages,
   pageSize,
-  pageSizes,
   setPageSize
 }) => {
+  const { pageSizes } = options
   const { viewport } = useResponsive()
   const handleChange = (value) => {
     setPageSize(value)
