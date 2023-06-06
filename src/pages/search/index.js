@@ -25,26 +25,14 @@ import { options } from 'config'
 import { api } from 'api'
 
 export const Search = (props) => {
-  const { query, accessionCodesResponse, response: newResponse } = props
-  const {
-    pushSearchTerm,
-    setFilters,
-    searchTerm,
-    setSearchTerm,
-    results,
-    setResults
-  } = useSearchManager(newResponse)
+  const { query, accessionCodesResponse, results } = props
+  const { setFilters, searchTerm, setSearchTerm } = useSearchManager()
   const { pageSizes, sortby } = options
   const { viewport, setResponsive } = useResponsive()
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
-  // TEMPORARY (* for UI demo)
-  const [loading, setLoading] = useState(true)
-  const [facets, setFacets] = useState([])
-  const isResults = results && results.results?.length > 0
   const [toggleFilterList, setToggleFilterList] = useState(false)
   const [userInput, setUserInput] = useState('')
-
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(pageSizes[0])
   const [sortBy, setSortBy] = useState(sortby[0].value)
@@ -52,17 +40,15 @@ export const Search = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     setSearchTerm(userInput)
-    pushSearchTerm(userInput)
   }
 
   useEffect(() => {
     if (props) {
-      setFilters(getFilterQueryParam(query))
-      setSearchTerm(query.search)
-      setUserInput(query.search)
-      setResults(newResponse)
-      setFacets(newResponse.facets)
-      setLoading(false)
+      if (query) {
+        setFilters(getFilterQueryParam(query))
+        setSearchTerm(query.search)
+        setUserInput(query.search)
+      }
     }
   }, [])
 
@@ -129,7 +115,7 @@ export const Search = (props) => {
                   </Box>
                 </Box>
               )}
-              {results && facets && <SearchFilterList facets={facets} />}
+              {results && <SearchFilterList facets={results.facets} />}
             </BoxBlock>
           </LayerResponsive>
           <Box gridArea="main" height={{ min: '85vh' }}>
@@ -143,7 +129,7 @@ export const Search = (props) => {
                 onClick={() => setToggleFilterList(true)}
               />
             )}
-            {isResults && (
+            {results && (
               <SearchBulkActions
                 pageSize={pageSize}
                 setPageSize={setPageSize}
@@ -152,7 +138,7 @@ export const Search = (props) => {
                 totalResults={results.count}
               />
             )}
-            {loading ? (
+            {results?.length > 0 ? (
               <Box
                 align="center"
                 fill
@@ -164,7 +150,7 @@ export const Search = (props) => {
                   message={{ start: 'Loading data', end: 'Data loaded' }}
                 />
               </Box>
-            ) : isResults ? (
+            ) : results ? (
               <>
                 {/* START: TEMPORARY for UI Demo */}
                 {accessionCodesResponse.length > 0 && (
@@ -199,7 +185,7 @@ export const Search = (props) => {
             ) : (
               <NoMatchingResults />
             )}
-            {isResults && (
+            {results && (
               <Box
                 align="center"
                 direction="row"
@@ -221,19 +207,18 @@ export const Search = (props) => {
   )
 }
 
-Search.getInitialProps = async ({ pathname, query }) => {
+Search.getInitialProps = async (ctx) => {
   let accessionCodesResponse
-
+  const { pathname, query } = ctx
   const searchQuery = {
     ...query,
     limit: query.limit || 10,
     offset: query.offset || 0,
     ordering: query.ordering || '_score',
-    num_downloadable_samples__gt: query.empty ? '' : 0
+    ...(query.search ? { search: query.search } : {}),
+    ...(!query.empty ? { num_downloadable_samples__gt: 0 } : null)
   }
-
   const response = await api.search.get(searchQuery)
-
   // TEMPORARY for UI Demo
   const accessionCodes = getAccessionCodesQueryParam(query.search)
 
@@ -251,11 +236,10 @@ Search.getInitialProps = async ({ pathname, query }) => {
       )) || []
   }
 
-  const props = { pathname, query: searchQuery }
+  const props = { pathname, query: searchQuery, results: response }
 
   return {
     ...props,
-    response,
     accessionCodesResponse // TEMPORARY passing for UI Demo
   }
 }
