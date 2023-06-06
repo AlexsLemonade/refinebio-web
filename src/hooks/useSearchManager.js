@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { SearchManagerContext } from 'contexts/SearchManagerContext'
+import getQueryParam from 'helpers/getQueryParam'
 import { options } from 'config'
 
 export const useSearchManager = () => {
@@ -81,6 +82,26 @@ export const useSearchManager = () => {
     updateSearchQuery()
   }
 
+  // returns filters-only query parameters from url
+  const getFilterQueryParam = (query) => {
+    const queryParam = getQueryParam(query)
+    const list = [
+      'downloadable_organism',
+      'technology',
+      'platform',
+      'empty',
+      'has_publication'
+    ]
+    const temp = {}
+    Object.keys(queryParam).forEach((key) => {
+      if (list.includes(key)) {
+        temp[key] = queryParam[key]
+      }
+    })
+
+    return temp
+  }
+
   const toggleNonDownloadableFilter = (e, param) => {
     if (e.target.checked) {
       delete filters[param]
@@ -102,6 +123,7 @@ export const useSearchManager = () => {
     search,
     setSearch,
     clearAllFilters,
+    getFilterQueryParam,
     toggleFilter,
     toggleNonDownloadableFilter,
     updatePage,
