@@ -4,7 +4,6 @@ import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
-import getFilterQueryParam from 'helpers/getFilterQueryParam'
 import { Box, Grid, Heading, Spinner } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -21,40 +20,46 @@ import {
   SearchBulkActions,
   SearchFilterList
 } from 'components/SearchResults'
-import { options } from 'config'
 import { api } from 'api'
+import { options } from 'config'
 
 export const Search = (props) => {
   const { query, accessionCodesResponse, results } = props
-  const { setFilters, searchTerm, setSearchTerm } = useSearchManager()
+  const {
+    getFilterQueryParam,
+    setFilters,
+    setSearch,
+    updateSearchTerm,
+    updatePage
+  } = useSearchManager()
   const { pageSizes, sortby } = options
   const { viewport, setResponsive } = useResponsive()
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
+  // TEMPORARY (* for UI demo)
   const [toggleFilterList, setToggleFilterList] = useState(false)
-  const [userInput, setUserInput] = useState('')
-  const [page, setPage] = useState(0)
-  const [pageSize, setPageSize] = useState(pageSizes[0])
+  const [userSearchTerm, setUserSearchTerm] = useState(query.search || '')
+  const [page, setPage] = useState(Number(query.p) || 1)
+  const [pageSize, setPageSize] = useState(Number(query.size || pageSizes[0]))
   const [sortBy, setSortBy] = useState(sortby[0].value)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setSearchTerm(userInput)
+    updateSearchTerm(userSearchTerm)
   }
 
   useEffect(() => {
     if (props) {
       if (query) {
         setFilters(getFilterQueryParam(query))
-        setSearchTerm(query.search)
-        setUserInput(query.search)
+        setSearch({ ...(query.search ? { search: query.search } : {}) })
       }
     }
   }, [])
 
   return (
     <TextHighlightContextProvider
-      match={[searchTerm, ...getAccessionCodesQueryParam(searchTerm)]}
+      match={[userSearchTerm, ...getAccessionCodesQueryParam(userSearchTerm)]}
     >
       <FixedContainer pad={{ horizontal: 'large', bottom: 'large' }}>
         <SearchInfoBanner />
@@ -83,9 +88,9 @@ export const Search = (props) => {
               placeholder="Search accessions, pathways, diseases, etc.,"
               btnType="primary"
               size="large"
-              value={userInput}
+              value={userSearchTerm}
               responsive
-              changeHandler={(e) => setUserInput(e.target.value)}
+              changeHandler={(e) => setUserSearchTerm(e.target.value)}
               submitHandler={handleSubmit}
             />
           </BoxBlock>
@@ -197,6 +202,7 @@ export const Search = (props) => {
                   pageSize={pageSize}
                   setPage={setPage}
                   totalPages={results.count}
+                  updatePage={updatePage}
                 />
               </Box>
             )}
@@ -212,8 +218,8 @@ Search.getInitialProps = async (ctx) => {
   const { pathname, query } = ctx
   const searchQuery = {
     ...query,
-    limit: query.limit || 10,
-    offset: query.offset || 0,
+    limit: query.size || 10,
+    offset: (query.p - 1) * 10 || 0,
     ordering: query.ordering || '_score',
     ...(query.search ? { search: query.search } : {}),
     ...(!query.empty ? { num_downloadable_samples__gt: 0 } : null)
