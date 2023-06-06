@@ -11,14 +11,14 @@ import { SearchBox } from 'components/shared/SearchBox'
 const HeroBody = () => {
   const router = useRouter()
   const { setResponsive } = useResponsive()
-  const { setSearchTerm } = useSearchManager()
+  const { updateSearchTerm } = useSearchManager()
   const [userInput, setUserInput] = useState()
   const queries = ['Notch', 'medulloblastoma', 'GSE24528']
   const pathname = 'search'
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setSearchTerm(userInput)
+    updateSearchTerm(userInput)
     router.push({
       pathname,
       query: userInput && {
