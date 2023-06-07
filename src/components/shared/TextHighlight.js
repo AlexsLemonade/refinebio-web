@@ -24,7 +24,11 @@ const Highlighter = ({ text, highlight }) => {
       <Text
         key={id}
         size="inherit"
-        style={{ background: '#FFFBC9', verticalAlign: 'unset' }}
+        style={{
+          background: '#FFFBC9',
+          lineHeight: 'inherit',
+          verticalAlign: 'unset'
+        }}
       >
         {part}
       </Text>

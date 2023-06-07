@@ -1,11 +1,13 @@
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useSearchManager } from 'hooks/useSearchManager'
+import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import formatNumbers from 'helpers/formatNumbers'
 import formatString from 'helpers/formatString'
 import isLastIndex from 'helpers/isLastIndex'
 import { Box, CheckBox, Heading } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
 import { SearchBox } from 'components/shared/SearchBox'
+import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
 import styled, { css } from 'styled-components'
 
@@ -20,30 +22,16 @@ const ToggleButton = styled(sharedButton)`
 export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
   const { filters, isFilterChecked, toggleFilter } = useSearchManager()
   const maxCount = 5
-  const options = useMemo(() => {
-    return Object.entries(filterGroup)
-  }, [filterGroup])
-  const filterLength = options.length
+  const filterList = Object.entries(filterGroup)
+  const filterLength = filterList.length
   const [userInput, setUserInput] = useState('')
-  const [openOptions, setOpenOptions] = useState(false)
-  const [filteredOptions, setFilteredOptions] = useState(options)
-
-  const handleFilterOptions = (val) => {
-    setUserInput(val)
-
-    if (val.trim() !== '') {
-      setFilteredOptions(() =>
-        options.filter((option) =>
-          formatString(option[0]).toLowerCase().startsWith(val.toLowerCase())
-        )
-      )
-    } else {
-      setFilteredOptions(options)
-    }
-  }
-
-  const getOptions = () =>
-    openOptions ? filteredOptions : filteredOptions.slice(0, maxCount)
+  const [open, setOpen] = useState(false)
+  const filterOptions = filterList
+    .filter((option) =>
+      formatString(option[0]).toLowerCase().startsWith(userInput.toLowerCase())
+    )
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, open && !userInput ? filterList.length : maxCount)
 
   return (
     <>
@@ -52,46 +40,52 @@ export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
       </Heading>
 
       {filterLength > maxCount && (
-        <SearchBox
-          pad={{ bottom: 'xsmall' }}
-          placeholder={`Filter ${filterLabel}`}
-          value={userInput}
-          size="small"
-          changeHandler={(e) => handleFilterOptions(e.target.value)}
-        />
+        <Box margin={{ bottom: 'small' }}>
+          <SearchBox
+            pad={{ bottom: 'xsmall' }}
+            placeholder={`Filter ${filterLabel}`}
+            value={userInput}
+            size="small"
+            changeHandler={(e) => setUserInput(e.target.value)}
+          />
+        </Box>
       )}
 
-      <Box
-        margin={{ top: 'xsmall' }}
-        animation={openOptions ? { type: 'fadeIn', duration: 1000 } : {}}
-      >
-        {getOptions().map((option, i, arr) => (
-          <Box
-            key={option[0]}
-            margin={{ bottom: !isLastIndex(i, arr) ? 'xsmall' : '0' }}
-          >
-            <CheckBox
-              label={`${formatString(option[0])} (${formatNumbers(option[1])})`}
-              checked={isFilterChecked(filters, filterParam, option[0])}
-              onChange={(e) => toggleFilter(e, filterParam, option[0])}
-            />
-          </Box>
-        ))}
-      </Box>
+      <TextHighlightContextProvider match={userInput}>
+        <Box animation={open ? { type: 'fadeIn', duration: 1000 } : {}}>
+          {filterOptions.map((option, i, arr) => (
+            <Box
+              key={option[0]}
+              margin={{ bottom: !isLastIndex(i, arr) ? 'xsmall' : '0' }}
+            >
+              <CheckBox
+                label={
+                  <>
+                    <TextHighlight>{formatString(option[0])}</TextHighlight> (
+                    {formatNumbers(option[1])})
+                  </>
+                }
+                checked={isFilterChecked(filters, filterParam, option[0])}
+                onChange={(e) => toggleFilter(e, filterParam, option[0])}
+              />
+            </Box>
+          ))}
+        </Box>
+      </TextHighlightContextProvider>
 
-      {filteredOptions.length === 0 && <TextNull text="No match found" />}
+      {filterOptions.length === 0 && <TextNull text="No match found" />}
 
       {filterLength > maxCount && (
         <ToggleButton
           label={
             // eslint-disable-next-line no-nested-ternary
-            openOptions && !userInput.trim()
+            open && !userInput.trim()
               ? '- See Less'
-              : !openOptions && !userInput.trim()
+              : !open && !userInput.trim()
               ? `+ ${filterLength - maxCount} More`
               : ''
           }
-          margin={{ top: 'xsmall', left: 'medium' }}
+          margin={{ top: 'xxsmall', left: 'medium' }}
           style={{
             borderRadius: '0',
             boxShadow: 'none',
@@ -99,7 +93,7 @@ export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
             transition: 'border-bottom 0.15s ease-in'
           }}
           onClick={() => {
-            setOpenOptions(!openOptions)
+            setOpen(!open)
           }}
         />
       )}
