@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect, memo } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import isEmptyObject from 'helpers/isEmptyObject'
@@ -12,6 +12,8 @@ export const SearchFilterList = ({ facets }) => {
   const { filters, clearAllFilters } = useSearchManager()
   const { viewport } = useResponsive()
   const [filterGroup, setFilterGroup] = useState({})
+  const isFilterSelected =
+    Object.keys(filters).filter((key) => key !== 'empty').length > 0
   const filterIncludePublication = {
     label: 'Includes Publication',
     key: 'has_publication',
@@ -50,7 +52,7 @@ export const SearchFilterList = ({ facets }) => {
           Filters
         </Heading>
         <Button
-          disabled={isEmptyObject(filters)}
+          disabled={!isFilterSelected}
           label="Clear All"
           link
           linkFontSize="medium"
@@ -97,4 +99,4 @@ export const SearchFilterList = ({ facets }) => {
   )
 }
 
-export default memo(SearchFilterList)
+export default SearchFilterList
