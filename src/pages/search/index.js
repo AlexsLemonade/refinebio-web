@@ -24,13 +24,13 @@ import { api } from 'api'
 import { options } from 'config'
 
 export const Search = (props) => {
-  const { query, accessionCodesResponse, results } = props
+  const { accessionCodesResponse, query, results } = props
   const {
     getFilterQueryParam,
     setFilters,
     setSearch,
-    updateSearchTerm,
-    updatePage
+    updatePage,
+    updateSearchTerm
   } = useSearchManager()
   const { pageSizes, sortby } = options
   const { viewport, setResponsive } = useResponsive()
@@ -59,7 +59,7 @@ export const Search = (props) => {
 
   return (
     <TextHighlightContextProvider
-      match={[userSearchTerm, ...getAccessionCodesQueryParam(userSearchTerm)]}
+      match={[query.search, ...getAccessionCodesQueryParam(query.search)]}
     >
       <FixedContainer pad={{ horizontal: 'large', bottom: 'large' }}>
         <SearchInfoBanner />
@@ -219,7 +219,7 @@ Search.getInitialProps = async (ctx) => {
   const searchQuery = {
     ...query,
     limit: query.size || 10,
-    offset: (query.p - 1) * 10 || 0,
+    offset: (query.p - 1) * (query.size || 10) || 0,
     ordering: query.ordering || '_score',
     ...(query.search ? { search: query.search } : {}),
     ...(!query.empty ? { num_downloadable_samples__gt: 0 } : null)
