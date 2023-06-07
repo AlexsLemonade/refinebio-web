@@ -52,7 +52,7 @@ export const SearchCard = ({ result = {} }) => {
         <Box gridArea="header">
           <SearchCardHeader
             accessionCode={result.accession_code}
-            title={formatString(result.title)}
+            title={result.title}
           />
         </Box>
         <Box gridArea="ctas" margin={{ top: setResponsive('none', 'large') }}>
