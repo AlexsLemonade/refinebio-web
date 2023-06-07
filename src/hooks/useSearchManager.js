@@ -17,9 +17,14 @@ export const useSearchManager = () => {
   const setSearch = setSearchState
   const filters = filtersState
   const setFilters = setFiltersState
-  const { pageSizes, sortby } = options
+  const { filterList, pageSizes, sortby } = options
 
   /* Common */
+  const resetPage = () => {
+    delete search.p
+    setSearch({ ...search })
+  }
+
   const updatePage = (newPage) => {
     if (newPage === 1) {
       delete search.p
@@ -56,7 +61,7 @@ export const useSearchManager = () => {
   /* Filters */
   const clearAllFilters = () => {
     Object.keys(filters).forEach((key) => {
-      // exclude the non-downloadable filter option to be removed
+      // excludes the non-downloadable filter option to be removed
       if (key === 'empty') {
         filters.empty = filters[key]
       } else {
@@ -65,22 +70,16 @@ export const useSearchManager = () => {
     })
 
     setFilters({ ...filters })
-    updateSearchQuery()
+    updateSearchQuery(true)
   }
 
   // returns filters-only query parameters from url
   const getFilterQueryParam = (query) => {
     const queryParam = getQueryParam(query)
-    const list = [
-      'downloadable_organism',
-      'technology',
-      'platform',
-      'empty',
-      'has_publication'
-    ]
     const temp = {}
+
     Object.keys(queryParam).forEach((key) => {
-      if (list.includes(key)) {
+      if (filterList.includes(key)) {
         temp[key] = queryParam[key]
       }
     })
@@ -98,7 +97,7 @@ export const useSearchManager = () => {
     return param in filter
   }
 
-  // toggle a filter option in facets
+  // toggles a filter option in facets
   const toggleFilter = (e, param, val) => {
     if (e.target.checked) {
       if (filters[param] !== undefined) {
@@ -112,7 +111,7 @@ export const useSearchManager = () => {
     }
 
     setFilters({ ...filters })
-    updateSearchQuery()
+    updateSearchQuery(true)
   }
 
   const toggleNonDownloadableFilter = (e, param) => {
@@ -123,7 +122,7 @@ export const useSearchManager = () => {
     }
 
     setFilters({ ...filters })
-    updateSearchQuery()
+    updateSearchQuery(true)
   }
 
   /* Search Term */
@@ -135,12 +134,16 @@ export const useSearchManager = () => {
     }
 
     setSearch({ ...search })
-    updateSearchQuery()
+    updateSearchQuery(true)
   }
 
   /* Other */
-  // update URL query string
-  const updateSearchQuery = () => {
+  // updates URL query string
+  const updateSearchQuery = (reset = false) => {
+    if (reset) {
+      resetPage()
+    }
+
     router.push({
       query: {
         ...(!isEmptyObject(filters) ? filters : {}),
@@ -164,7 +167,6 @@ export const useSearchManager = () => {
     toggleNonDownloadableFilter,
     updatePage,
     updatePageSize,
-    updateSearchQuery,
     updateSearchTerm,
     updateSortBy
   }

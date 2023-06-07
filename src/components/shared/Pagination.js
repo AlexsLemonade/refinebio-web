@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { useResponsive } from 'hooks/useResponsive'
 import { makePagination } from 'helpers/makePagination'
 import { nanoid } from 'nanoid'
@@ -35,9 +36,10 @@ export const Pagination = ({
   updatePage,
   page = 1
 }) => {
+  const { query, isReady } = useRouter()
   const { setResponsive } = useResponsive()
   const pageCount = Math.ceil(totalPages / pageSize)
-  const [currentPage, setCurrentPage] = useState(page)
+  const [currentPage, setCurrentPage] = useState(page || 1)
   const pageNumbers = makePagination(currentPage, pageCount)
   const [userInput, setUserInput] = useState('')
   const [isInvalid, setIsInvalid] = useState(false)
@@ -46,7 +48,13 @@ export const Pagination = ({
   const nextPage = () => setCurrentPage(currentPage + 1)
   const previousPage = () => setCurrentPage(currentPage - 1)
 
-  // syncs the search page url with selected page number
+  useEffect(() => {
+    if (!isReady) return
+
+    setCurrentPage(query.p ? Number(query.p) : 1)
+  }, [isReady, query])
+
+  // updates the search page url with selected page number
   const updateQueryForPage = (newPage) => {
     if (updatePage) {
       updatePage(newPage)

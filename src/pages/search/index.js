@@ -4,7 +4,7 @@ import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
-import { Box, Grid, Heading, Spinner } from 'grommet'
+import { Box, Grid, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -25,6 +25,7 @@ import { options } from 'config'
 
 export const Search = (props) => {
   const { accessionCodesResponse, query, results } = props
+  // const results = mock
   const {
     getFilterQueryParam,
     setFilters,
@@ -40,8 +41,8 @@ export const Search = (props) => {
   const [toggleFilterList, setToggleFilterList] = useState(false)
   const [userSearchTerm, setUserSearchTerm] = useState(query.search || '')
   const [page, setPage] = useState(Number(query.p) || 1)
-  const [pageSize, setPageSize] = useState(Number(query.size || pageSizes[0]))
-  const [sortBy, setSortBy] = useState(sortby[0].value)
+  const [pageSize, setPageSize] = useState(Number(query.size) || pageSizes[0])
+  const [sortBy, setSortBy] = useState(query.ordering || sortby[0].value)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -143,19 +144,7 @@ export const Search = (props) => {
                 totalResults={results.count}
               />
             )}
-            {results?.length > 0 ? (
-              <Box
-                align="center"
-                fill
-                justify="center"
-                margin={{ top: 'basex15' }}
-              >
-                <Spinner
-                  color="gray-shade-70"
-                  message={{ start: 'Loading data', end: 'Data loaded' }}
-                />
-              </Box>
-            ) : results ? (
+            {results && results.results.length > 0 ? (
               <>
                 {/* START: TEMPORARY for UI Demo */}
                 {accessionCodesResponse.length > 0 && (

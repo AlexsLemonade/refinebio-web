@@ -3,6 +3,13 @@ export const options = {
     { label: 'Experiment', value: 'EXPERIMENT' },
     { label: 'Species', value: 'SPECIES' }
   ],
+  filterList: [
+    'downloadable_organism',
+    'technology',
+    'platform',
+    'empty',
+    'has_publication'
+  ],
   pageSizes: [10, 20, 50],
   sortby: [
     {
