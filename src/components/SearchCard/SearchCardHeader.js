@@ -23,7 +23,10 @@ export const SearchCardHeader = ({
       <Heading
         level={3}
         weight={isLinked ? '600' : '400'}
-        style={{ lineHeight: setResponsive('1', '1.5') }}
+        style={{
+          wordBreak: 'break-word',
+          lineHeight: setResponsive('1', '1.5')
+        }}
       >
         {isLinked ? (
           <Anchor
