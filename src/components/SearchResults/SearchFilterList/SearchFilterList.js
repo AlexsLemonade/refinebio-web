@@ -93,7 +93,9 @@ export const SearchFilterList = ({ facets }) => {
       )}
 
       {viewport !== 'large' && (
-        <Button label="Apply Filters" primary responsive />
+        <Box margin={{ top: 'small', bottom: 'large' }} width="100%">
+          <Button label="Apply Filters" primary responsive />
+        </Box>
       )}
     </Box>
   )

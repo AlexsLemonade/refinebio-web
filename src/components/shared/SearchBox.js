@@ -34,7 +34,10 @@ export const SearchBox = ({
         style={{ width: '100%' }}
         onSubmit={submitHandler}
       >
-        <Box direction="row" width="100%">
+        <Box
+          direction={responsive && viewport === 'small' ? 'column' : 'row'}
+          width="100%"
+        >
           <Box
             style={{ position: 'relative' }}
             width={
