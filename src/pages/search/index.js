@@ -1,8 +1,8 @@
-/* eslint-disable no-nested-ternary */
 import { useEffect, useState } from 'react'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
+import fetchSearch from 'helpers/fetchSearch'
 import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
 import { Box, Grid, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
@@ -20,12 +20,10 @@ import {
   SearchBulkActions,
   SearchFilterList
 } from 'components/SearchResults'
-import { api } from 'api'
 import { options } from 'config'
 
 export const Search = (props) => {
-  const { accessionCodesResponse, query, results } = props
-  // const results = mock
+  const { query, results, accessionCodesResult } = props
   const {
     getFilterQueryParam,
     setFilters,
@@ -37,7 +35,6 @@ export const Search = (props) => {
   const { viewport, setResponsive } = useResponsive()
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
-  // TEMPORARY (* for UI demo)
   const [toggleFilterList, setToggleFilterList] = useState(false)
   const [userSearchTerm, setUserSearchTerm] = useState(query.search || '')
   const [page, setPage] = useState(Number(query.p) || 1)
@@ -146,10 +143,9 @@ export const Search = (props) => {
             )}
             {results && results.results.length > 0 ? (
               <>
-                {/* START: TEMPORARY for UI Demo */}
-                {accessionCodesResponse.length > 0 && (
+                {accessionCodesResult.length > 0 && (
                   <>
-                    {accessionCodesResponse.map((data) =>
+                    {accessionCodesResult.map((data) =>
                       data.results.map((result) => (
                         <SearchCard key={result.id} result={result} />
                       ))
@@ -168,7 +164,6 @@ export const Search = (props) => {
                     </Box>
                   </>
                 )}
-                {/* END: TEMPORARY for UI Demo */}
                 <Box animation={{ type: 'fadeIn', duration: 300 }}>
                   {results.results.map((result) => (
                     <SearchCard key={result.id} result={result} />
@@ -203,9 +198,8 @@ export const Search = (props) => {
 }
 
 Search.getInitialProps = async (ctx) => {
-  let accessionCodesResponse
   const { pathname, query } = ctx
-  const searchQuery = {
+  const queryString = {
     ...query,
     limit: query.size || 10,
     offset: (query.p - 1) * (query.size || 10) || 0,
@@ -213,29 +207,16 @@ Search.getInitialProps = async (ctx) => {
     ...(query.search ? { search: query.search } : {}),
     ...(!query.empty ? { num_downloadable_samples__gt: 0 } : null)
   }
-  const response = await api.search.get(searchQuery)
-  // TEMPORARY for UI Demo
-  const accessionCodes = getAccessionCodesQueryParam(query.search)
-
-  if (accessionCodes) {
-    accessionCodesResponse =
-      (await Promise.all(
-        accessionCodes.map((code) =>
-          api.search.get({
-            search: [
-              `accession_code:${code}`,
-              `alternate_accession_code:${code}`
-            ]
-          })
-        )
-      )) || []
-  }
-
-  const props = { pathname, query: searchQuery, results: response }
+  const { response, accessionCodesResponse } = await fetchSearch(
+    queryString,
+    query.search
+  )
 
   return {
-    ...props,
-    accessionCodesResponse // TEMPORARY passing for UI Demo
+    pathname,
+    query: queryString,
+    results: response,
+    accessionCodesResult: accessionCodesResponse
   }
 }
 
