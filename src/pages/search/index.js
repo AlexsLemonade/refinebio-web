@@ -8,7 +8,7 @@ import { Box, Grid, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { LayerResponsive } from 'components/shared/LayerLayerResponsive'
+import { LayerResponsive } from 'components/shared/LayerResponsive'
 import { Icon } from 'components/shared/Icon'
 import { Pagination } from 'components/shared/Pagination'
 import { SearchBox } from 'components/shared/SearchBox'
@@ -95,6 +95,7 @@ export const Search = (props) => {
           <LayerResponsive position="left" show={toggleFilterList} tabletMode>
             <BoxBlock
               gridArea="side"
+              height={setResponsive('100vh', '100vh', 'auto')}
               margin={{ top: 'large' }}
               pad={{
                 left: setResponsive('basex7', 'basex7', 'none'),
@@ -118,7 +119,12 @@ export const Search = (props) => {
                   </Box>
                 </Box>
               )}
-              {results && <SearchFilterList facets={results.facets} />}
+              {results && (
+                <SearchFilterList
+                  facets={results.facets}
+                  setToggle={setToggleFilterList}
+                />
+              )}
             </BoxBlock>
           </LayerResponsive>
           <Box gridArea="main" height={{ min: '85vh' }}>
@@ -205,7 +211,7 @@ Search.getInitialProps = async (ctx) => {
     offset: (query.p - 1) * (query.size || 10) || 0,
     ordering: query.ordering || '_score',
     ...(query.search ? { search: query.search } : {}),
-    ...(!query.empty ? { num_downloadable_samples__gt: 0 } : null)
+    num_downloadable_samples__gt: !query.empty ? 0 : -1
   }
   const { response, accessionCodesResponse } = await fetchSearch(
     queryString,

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useResponsive } from 'hooks/useResponsive'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import formatNumbers from 'helpers/formatNumbers'
@@ -20,6 +21,7 @@ const ToggleButton = styled(sharedButton)`
   `}
 `
 export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
+  const { viewport } = useResponsive()
   const { filters, isFilterChecked, toggleFilter } = useSearchManager()
   const maxCount = 5
   const filterList = Object.entries(filterGroup)
@@ -66,7 +68,9 @@ export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
                   </>
                 }
                 checked={isFilterChecked(filters, filterParam, option[0])}
-                onChange={(e) => toggleFilter(e, filterParam, option[0])}
+                onChange={(e) =>
+                  toggleFilter(e, filterParam, option[0], viewport)
+                }
               />
             </Box>
           ))}

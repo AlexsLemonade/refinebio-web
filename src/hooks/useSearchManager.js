@@ -98,7 +98,7 @@ export const useSearchManager = () => {
   }
 
   // toggles a filter option in facets
-  const toggleFilter = (e, param, val) => {
+  const toggleFilter = (e, param, val, viewport) => {
     if (e.target.checked) {
       if (filters[param] !== undefined) {
         filters[param].push(val)
@@ -111,7 +111,10 @@ export const useSearchManager = () => {
     }
 
     setFilters({ ...filters })
-    updateSearchQuery(true)
+    // makes API call on toggle only on larger devices
+    if (viewport === 'large') {
+      updateSearchQuery(true)
+    }
   }
 
   const toggleNonDownloadableFilter = (e, param) => {
@@ -177,6 +180,7 @@ export const useSearchManager = () => {
     toggleNonDownloadableFilter,
     updatePage,
     updatePageSize,
+    updateSearchQuery,
     updateSearchTerm,
     updateSortBy
   }

@@ -8,8 +8,8 @@ import { Button } from 'components/shared/Button'
 import { SearchFilter } from './SearchFilter'
 import { IncludePublication } from './IncludePublication'
 
-export const SearchFilterList = ({ facets }) => {
-  const { filters, clearAllFilters } = useSearchManager()
+export const SearchFilterList = ({ facets, setToggle }) => {
+  const { filters, clearAllFilters, updateSearchQuery } = useSearchManager()
   const { viewport } = useResponsive()
   const [filterGroup, setFilterGroup] = useState({})
   const isFilterSelected =
@@ -34,6 +34,11 @@ export const SearchFilterList = ({ facets }) => {
     },
     filterIncludePublication
   ]
+
+  const handleApplyFilters = () => {
+    setToggle(false)
+    updateSearchQuery(true, filters)
+  }
 
   useEffect(() => {
     setFilterGroup(() => filterOrder.map((f) => facets[f.key]))
@@ -94,7 +99,12 @@ export const SearchFilterList = ({ facets }) => {
 
       {viewport !== 'large' && (
         <Box margin={{ top: 'small', bottom: 'large' }} width="100%">
-          <Button label="Apply Filters" primary responsive />
+          <Button
+            label="Apply Filters"
+            primary
+            responsive
+            onClick={handleApplyFilters}
+          />
         </Box>
       )}
     </Box>
