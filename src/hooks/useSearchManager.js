@@ -138,6 +138,15 @@ export const useSearchManager = () => {
   }
 
   /* Other */
+  // handles search requests from non-search page and
+  // navigates a user to the search page
+  const navigateToSearch = (newQuery) => {
+    router.push({
+      pathname: 'search',
+      query: newQuery && newQuery
+    })
+  }
+
   // updates URL query string
   const updateSearchQuery = (reset = false) => {
     if (reset) {
@@ -163,6 +172,7 @@ export const useSearchManager = () => {
     clearAllFilters,
     getFilterQueryParam,
     isFilterChecked,
+    navigateToSearch,
     toggleFilter,
     toggleNonDownloadableFilter,
     updatePage,
