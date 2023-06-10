@@ -6,7 +6,7 @@ import { getTotalSamples } from 'helpers/dataset'
 import { isMatchPath } from 'helpers/isMatchPath'
 import { Box, Nav, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
-import { LayerResponsive } from 'components/shared/LayerLayerResponsive'
+import { LayerResponsive } from 'components/shared/LayerResponsive'
 import { List } from 'components/shared/List'
 import { Icon } from 'components/shared/Icon'
 import { links } from 'config'
@@ -46,6 +46,9 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
         <NavIcon light={light} toggle={toggle} clickHandler={handleClick} />
       )}
       <LayerResponsive position="right" show={toggle}>
+        {viewport === 'small' && (
+          <NavIcon light={light} toggle={toggle} clickHandler={handleClick} />
+        )}
         <Nav
           align="center"
           background={setResponsive('white', 'transparent')}

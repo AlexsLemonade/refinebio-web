@@ -12,10 +12,9 @@ export const LayerResponsive = ({
     return children
   }
 
-  return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>{show && <GrommetLayer position={position}>{children}</GrommetLayer>}</>
-  )
+  if (!show) return null
+
+  return <GrommetLayer position={position}>{children}</GrommetLayer>
 }
 
 export default LayerResponsive
