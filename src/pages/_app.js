@@ -10,7 +10,9 @@ import { SearchManagerContextProvider } from 'contexts/SearchManagerContext'
 import { ModalContextProvider } from 'contexts/ModalContext'
 import { RefinebioContextProvider } from 'contexts/RefinebioContext'
 import { ErrorPage } from 'pages/_error'
+import getPageLoader from 'helpers/getPageLoader'
 
+getPageLoader()
 const Fallback = () => <ErrorPage />
 
 const App = ({ Component, pageProps }) => {
