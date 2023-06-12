@@ -1,14 +1,13 @@
-import { Fragment, memo, useEffect, useState } from 'react'
+import { Fragment, memo, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { useExperiments } from 'hooks/useExperiments'
 import { useSearchManager } from 'hooks/useSearchManager'
+import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
-import { api } from 'api'
 import { links } from 'config'
 import { nanoid } from 'nanoid'
-import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
 import getURLForAccessionCode from 'helpers/getURLForAccessionCode'
-import unionizeArrays from 'helpers/unionizeArrays'
 import { Box, Grid, Heading } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
@@ -37,57 +36,43 @@ const InformationItemBlock = ({ condition, field, value, textNull = '' }) => (
 )
 
 export const Experiment = () => {
-  const router = useRouter()
-  const { accession_code: accessionCode } = router.query
+  const {
+    back,
+    isReady,
+    query: { accession_code: accessionCode }
+  } = useRouter()
+  const {
+    databaseNames,
+    experiment,
+    loading,
+    getExperiment,
+    getPlatformNames,
+    getTechnologyNames,
+    hasSamples
+  } = useExperiments()
   const { search, navigateToSearch } = useSearchManager()
-  // check if the previous page was the search results
-  const fromSearch = search.ref === 'search'
   const { setResponsive } = useResponsive()
-  const databaseNames = {
-    GEO: 'Gene Expression Omnibus (GEO)',
-    SRA: 'Sequence Read Archive (SRA)',
-    ARRAY_EXPRESS: 'ArrayExpress'
-  }
-  const [experiment, setExperiment] = useState([])
-  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    setLoading(true)
-    // endpoints:
-    // `v1/experiments/${accession_code}/`
-    const getExperiment = async (param) => {
-      const result = await api.experiments.get(param)
-      setExperiment(result)
-      setLoading(false)
-    }
+    if (!isReady) return
 
-    if (router.isReady) {
+    if (isReady) {
       getExperiment(accessionCode)
     }
-  }, [router.isReady])
+  }, [isReady])
 
   return (
-    <TextHighlightContextProvider match={fromSearch && search.search}>
+    <TextHighlightContextProvider match={search.search}>
       <Box height={{ min: '50%' }}>
         <FixedContainer pad="large">
-          {fromSearch && (
-            <Button
-              label="Back to Results"
-              secondary
-              responsive
-              onClick={() => {
-                router.back()
-              }}
-            />
-          )}
+          <Button label="Back to Results" secondary responsive onClick={back} />
         </FixedContainer>
-
         {loading ? (
           <Box align="center" fill justify="center" margin={{ top: 'large' }}>
             <Spinner />
           </Box>
         ) : (
-          experiment?.samples?.length && (
+          hasSamples() && (
             <Box>
               <FixedContainer>
                 <Box
@@ -140,16 +125,8 @@ export const Experiment = () => {
                           experiment.num_downloadable_samples
                         }
                         organismNames={experiment.organism_names}
-                        platformNames={unionizeArrays(
-                          ...experiment.samples.map(
-                            (sample) => sample.pretty_platform
-                          )
-                        )}
-                        technology={unionizeArrays(
-                          ...experiment.samples.map(
-                            (sample) => sample.technology
-                          )
-                        )}
+                        platformNames={getPlatformNames()}
+                        technology={getTechnologyNames()}
                         size="medium"
                       />
                     </Box>
@@ -207,7 +184,10 @@ export const Experiment = () => {
                       value={formatNumbers(experiment.num_total_samples)}
                     />
                     <InformationItemBlock
-                      condition={experiment.submitter_institution}
+                      condition={
+                        experiment.submitter_institution &&
+                        experiment.submitter_institution !== 'N/A'
+                      }
                       field="Submitter’s Institution"
                       value={
                         <Button
@@ -249,6 +229,7 @@ export const Experiment = () => {
                         </Fragment>
                       ))}
                       textNull="No associated authors"
+                      direction="row"
                     />
                     <InformationItemBlock
                       condition={experiment.source_database}
@@ -260,7 +241,7 @@ export const Experiment = () => {
                               {databaseNames[experiment.source_database]}
                             </TextHighlight>
                           }
-                          href={databaseNames[experiment.source_database]}
+                          href={experiment.source_url}
                           target="_blank"
                           rel="noopener noreferrer"
                         />
