@@ -145,7 +145,7 @@ export const useSearchManager = () => {
   // navigates a user to the search page
   const navigateToSearch = (newQuery) => {
     router.push({
-      pathname: 'search',
+      pathname: '/search',
       query: newQuery && newQuery
     })
   }

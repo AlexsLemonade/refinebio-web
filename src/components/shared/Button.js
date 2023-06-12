@@ -8,8 +8,30 @@ import { IconSpinner } from './IconSpinner'
 - Set the prop 'badge' to true for the badged button
 */
 
+const CustomLinkButton = styled(GrommetButton)`
+  position: relative;
+
+  ${({ underlineOnHover }) =>
+    underlineOnHover &&
+    css`
+      text-decoration: none !important;
+      &:hover {
+        text-decoration: underline !important;
+      }
+    `}
+`
+
 const CustomButton = styled(GrommetButton)`
   position: relative;
+
+  ${({ underlineOnHover }) =>
+    underlineOnHover &&
+    css`
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline !important;
+      }
+    `}
 
   ${({ uppercase }) =>
     uppercase &&
@@ -80,6 +102,7 @@ const CustomButton = styled(GrommetButton)`
 `
 
 export const Button = ({
+  display = 'flex',
   isLoading = false,
   label = '',
   large = false,
@@ -88,6 +111,7 @@ export const Button = ({
   responsive = false,
   tertiary = false,
   textDecoration = 'underline',
+  underlineOnHover = false,
   uppercase = false,
   width,
   clickHandler,
@@ -102,17 +126,19 @@ export const Button = ({
         width || (responsive && viewport === 'small' ? '100%' : 'max-content')
       }
       viewport={viewport}
+      style={{ display }}
     >
       {link ? (
-        <GrommetButton
+        <CustomLinkButton
           link={link}
           label={label}
           style={{
-            fontSize: linkFontSize,
             border: 'none',
+            fontSize: linkFontSize,
             padding: 0,
             textDecoration
           }}
+          underlineOnHover={underlineOnHover}
           onClick={clickHandler}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...props}

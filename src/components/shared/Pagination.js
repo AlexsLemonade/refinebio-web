@@ -170,7 +170,7 @@ export const Pagination = ({
             <Box width="72px">
               <TextInput
                 min="1"
-                max={pageCount}
+                max={pageCount.toString()}
                 type="number"
                 value={userInput}
                 onChange={(e) => handleChangeUserInput(e.target.value)}

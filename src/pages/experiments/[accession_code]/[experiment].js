@@ -38,9 +38,10 @@ const InformationItemBlock = ({ condition, field, value, textNull = '' }) => (
 
 export const Experiment = () => {
   const router = useRouter()
-  // check for the parameter `ref=search` to ensure that the previous page was the search results
-  const { accession_code: accessionCode, ref } = router.query
-  const { search } = useSearchManager()
+  const { accession_code: accessionCode } = router.query
+  const { search, navigateToSearch } = useSearchManager()
+  // check if the previous page was the search results
+  const fromSearch = search.ref === 'search'
   const { setResponsive } = useResponsive()
   const databaseNames = {
     GEO: 'Gene Expression Omnibus (GEO)',
@@ -66,18 +67,21 @@ export const Experiment = () => {
   }, [router.isReady])
 
   return (
-    <TextHighlightContextProvider match={ref === 'search' && search.search}>
+    <TextHighlightContextProvider match={fromSearch && search.search}>
       <Box height={{ min: '50%' }}>
         <FixedContainer pad="large">
-          <Button
-            label="Back to Results"
-            secondary
-            responsive
-            onClick={() => {
-              router.back()
-            }}
-          />
+          {fromSearch && (
+            <Button
+              label="Back to Results"
+              secondary
+              responsive
+              onClick={() => {
+                router.back()
+              }}
+            />
+          )}
         </FixedContainer>
+
         {loading ? (
           <Box align="center" fill justify="center" margin={{ top: 'large' }}>
             <Spinner />
@@ -128,7 +132,6 @@ export const Experiment = () => {
                         downloadableSamples={
                           experiment.num_downloadable_samples
                         }
-                        status=""
                       />
                     </Box>
                     <Box gridArea="meta">
@@ -207,18 +210,20 @@ export const Experiment = () => {
                       condition={experiment.submitter_institution}
                       field="Submitter’s Institution"
                       value={
-                        <Anchor
+                        <Button
                           label={
                             <TextHighlight>
                               {experiment.submitter_institution}
                             </TextHighlight>
                           }
-                          href={{
-                            pathname: '/search',
-                            query: {
+                          link
+                          linkFontSize="medium"
+                          underlineOnHover
+                          onClick={() =>
+                            navigateToSearch({
                               search: `submitter_institution: ${experiment.submitter_institution}`
-                            }
-                          }}
+                            })
+                          }
                         />
                       }
                       textNull="No associated institution"
@@ -229,14 +234,17 @@ export const Experiment = () => {
                       value={experiment.publication_authors.map((author, i) => (
                         <Fragment key={nanoid()}>
                           {i ? ', ' : ''}
-                          <Anchor
+                          <Button
+                            display="inline-block"
                             label={<TextHighlight>{author}</TextHighlight>}
-                            href={{
-                              pathname: '/search',
-                              query: {
+                            link
+                            linkFontSize="medium"
+                            underlineOnHover
+                            onClick={() =>
+                              navigateToSearch({
                                 search: `publication_authors:${author}`
-                              }
-                            }}
+                              })
+                            }
                           />
                         </Fragment>
                       ))}

@@ -1,3 +1,4 @@
+import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatURLString from 'helpers/formatURLString'
 import { Box, Heading } from 'grommet'
@@ -10,6 +11,7 @@ export const SearchCardHeader = ({
   isLinked = true,
   title = ''
 }) => {
+  const { search, setSearch } = useSearchManager()
   const { setResponsive } = useResponsive()
 
   return (
@@ -31,14 +33,10 @@ export const SearchCardHeader = ({
         {isLinked ? (
           <Anchor
             href={{
-              pathname: `experiments/${accessionCode}/${formatURLString(
-                title
-              )}`,
-              query: {
-                ref: 'search'
-              }
+              pathname: `experiments/${accessionCode}/${formatURLString(title)}`
             }}
             label={<TextHighlight>{title}</TextHighlight>}
+            onClick={() => setSearch({ ...search, ref: 'search' })}
           />
         ) : (
           <TextHighlight>{title}</TextHighlight>
