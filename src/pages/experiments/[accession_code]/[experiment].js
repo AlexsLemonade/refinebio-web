@@ -51,6 +51,7 @@ export const Experiment = () => {
     getTechnologyNames
   } = useExperiments()
   const { search, navigateToSearch } = useSearchManager()
+  const fromSearch = search.ref === 'search'
   const { setResponsive } = useResponsive()
 
   useEffect(() => {
@@ -62,10 +63,17 @@ export const Experiment = () => {
   }, [isReady])
 
   return (
-    <TextHighlightContextProvider match={search.search}>
+    <TextHighlightContextProvider match={fromSearch && search.search}>
       <Box height={{ min: '50%' }}>
         <FixedContainer pad="large">
-          <Button label="Back to Results" secondary responsive onClick={back} />
+          {fromSearch && (
+            <Button
+              label="Back to Results"
+              secondary
+              responsive
+              onClick={back}
+            />
+          )}
         </FixedContainer>
         {loading ? (
           <Box align="center" fill justify="center" margin={{ top: 'large' }}>
