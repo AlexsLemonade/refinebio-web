@@ -45,10 +45,10 @@ export const Experiment = () => {
     databaseNames,
     experiment,
     loading,
+    hasSamples,
     getExperiment,
     getPlatformNames,
-    getTechnologyNames,
-    hasSamples
+    getTechnologyNames
   } = useExperiments()
   const { search, navigateToSearch } = useSearchManager()
   const { setResponsive } = useResponsive()
@@ -72,7 +72,7 @@ export const Experiment = () => {
             <Spinner />
           </Box>
         ) : (
-          hasSamples() && (
+          hasSamples && (
             <Box>
               <FixedContainer>
                 <Box

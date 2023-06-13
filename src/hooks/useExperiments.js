@@ -8,8 +8,10 @@ export const useExperiments = () => {
     SRA: 'Sequence Read Archive (SRA)',
     ARRAY_EXPRESS: 'ArrayExpress'
   }
+
   const [experiment, setExperiment] = useState()
   const [loading, setLoading] = useState(false)
+  const hasSamples = experiment?.samples?.length > 0
 
   const getExperiment = async (param) => {
     setLoading(true)
@@ -30,17 +32,13 @@ export const useExperiments = () => {
     )
   }
 
-  const hasSamples = () => {
-    return experiment?.samples?.length > 0
-  }
-
   return {
     databaseNames,
     experiment,
     loading,
+    hasSamples,
     getExperiment,
     getPlatformNames,
-    getTechnologyNames,
-    hasSamples
+    getTechnologyNames
   }
 }
