@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { formatSampleMetadata } from 'helpers/dataset'
+import getURLForAccessionCode from 'helpers/getURLForAccessionCode'
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import { Icon } from 'components/shared/Icon'
 import { Anchor } from 'components/shared/Anchor'
@@ -94,7 +95,7 @@ export const SearchCardBody = ({
         </Heading>
         {alternateAccessionCode ? (
           <Anchor
-            href={SearchCardBody.url}
+            href={getURLForAccessionCode(alternateAccessionCode)}
             label={<TextHighlight>{alternateAccessionCode}</TextHighlight>}
           />
         ) : (
