@@ -96,6 +96,7 @@ export const SearchCardBody = ({
         {alternateAccessionCode ? (
           <Anchor
             href={getURLForAccessionCode(alternateAccessionCode)}
+            target="_blank"
             label={<TextHighlight>{alternateAccessionCode}</TextHighlight>}
           />
         ) : (
