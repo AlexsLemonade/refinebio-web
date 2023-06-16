@@ -65,14 +65,10 @@ export const useSearchManager = () => {
   }
 
   /* Filters */
+  // removes all the applied filtes except for the 'empty'
   const clearAllFilters = () => {
-    Object.keys(filters).forEach((key) => {
-      // excludes the non-downloadable filter option to be removed
-      if (key === 'empty') {
-        filters.empty = filters[key]
-      } else {
-        delete filters[key]
-      }
+    config.filterOptions.forEach((key) => {
+      if (key in filters) delete filters[key]
     })
 
     setFilters({ ...filters })
@@ -91,6 +87,16 @@ export const useSearchManager = () => {
     })
 
     return temp
+  }
+
+  // returns true if any filters are applied, otherwise false
+  const hasAppliedFilters = () => {
+    if (!filters) return false
+
+    return (
+      config.filterOptions.filter((filterOption) => filterOption in filters)
+        .length > 0
+    )
   }
 
   const isFilterChecked = (key, val) => {
@@ -145,7 +151,7 @@ export const useSearchManager = () => {
   }
 
   /* Other */
-  // returns the API supported facets names
+  // converts the facets to API supported format
   const formatFacetNames = (facetNames) => {
     const formattedNames = []
 
@@ -198,6 +204,7 @@ export const useSearchManager = () => {
     clearAllFilters,
     formatFacetNames,
     getFilterQueryParam,
+    hasAppliedFilters,
     isFilterChecked,
     navigateToSearch,
     toggleFilter,

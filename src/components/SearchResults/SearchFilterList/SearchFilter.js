@@ -30,7 +30,7 @@ export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
   const filterLength = filterList.length
   const [userInput, setUserInput] = useState('')
   const [open, setOpen] = useState(false)
-  const filterOptions = filterList
+  const formattedFilterList = filterList
     .filter((option) =>
       formatString(option[0]).toLowerCase().startsWith(userInput.toLowerCase())
     )
@@ -57,7 +57,7 @@ export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
 
       <TextHighlightContextProvider match={userInput}>
         <Box animation={open ? { type: 'fadeIn', duration: 1000 } : {}}>
-          {filterOptions.map((option, i, arr) => (
+          {formattedFilterList.map((option, i, arr) => (
             <Box
               key={option[0]}
               margin={{ bottom: !isLastIndex(i, arr) ? 'xsmall' : '0' }}
@@ -88,7 +88,7 @@ export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
         </Box>
       </TextHighlightContextProvider>
 
-      {filterOptions.length === 0 && <TextNull text="No match found" />}
+      {formattedFilterList.length === 0 && <TextNull text="No match found" />}
 
       {filterLength > maxCount && (
         <ToggleButton

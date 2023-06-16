@@ -29,13 +29,14 @@ const {
 export const Search = (props) => {
   const { query, results, accessionCodesResult } = props
   const {
+    formatFacetNames,
     getFilterQueryParam,
+    setConfig,
     setFilters,
     setSearch,
     updatePage,
     updateSearchTerm
   } = useSearchManager()
-
   const { viewport, setResponsive } = useResponsive()
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
@@ -55,6 +56,11 @@ export const Search = (props) => {
       if (query) {
         setFilters(getFilterQueryParam(query))
         setSearch({ ...(query.search ? { search: query.search } : {}) })
+      }
+      if (results) {
+        setConfig({
+          filterOptions: formatFacetNames(Object.keys(results.facets))
+        })
       }
     }
   }, [])

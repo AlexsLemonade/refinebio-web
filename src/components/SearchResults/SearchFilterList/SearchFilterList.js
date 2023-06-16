@@ -9,14 +9,11 @@ import { SearchFilter } from './SearchFilter'
 import { IncludePublication } from './IncludePublication'
 
 export const SearchFilterList = ({ facets, setToggle }) => {
-  const { filters, clearAllFilters, formatFacetNames, updateSearchQuery } =
+  const { filters, clearAllFilters, hasAppliedFilters, updateSearchQuery } =
     useSearchManager()
   const { viewport } = useResponsive()
   const [filterGroup, setFilterGroup] = useState({})
-  const isFilterSelected =
-    formatFacetNames(Object.keys(facets)).filter((facet) =>
-      Object.keys(filters).includes(facet)
-    ).length > 0
+
   const filterIncludePublication = {
     label: 'Includes Publication',
     key: 'has_publication',
@@ -60,7 +57,7 @@ export const SearchFilterList = ({ facets, setToggle }) => {
           Filters
         </Heading>
         <Button
-          disabled={!isFilterSelected}
+          disabled={!hasAppliedFilters()}
           label="Clear All"
           link
           linkFontSize="medium"
