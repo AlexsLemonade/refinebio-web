@@ -3,6 +3,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import formatNumbers from 'helpers/formatNumbers'
+import formatPlatformName from 'helpers/formatPlatformName'
 import formatString from 'helpers/formatString'
 import isLastIndex from 'helpers/isLastIndex'
 import { Box, CheckBox, Heading } from 'grommet'
@@ -11,6 +12,7 @@ import { SearchBox } from 'components/shared/SearchBox'
 import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
 import styled, { css } from 'styled-components'
+import cache from 'api/api_data.json'
 
 const ToggleButton = styled(sharedButton)`
   border-bottom: 1px solid transparent;
@@ -63,8 +65,12 @@ export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
               <CheckBox
                 label={
                   <>
-                    <TextHighlight>{formatString(option[0])}</TextHighlight> (
-                    {formatNumbers(option[1])})
+                    <TextHighlight>
+                      {filterOption === 'platform'
+                        ? formatPlatformName(cache.platforms[option[0]])
+                        : formatString(option[0])}
+                    </TextHighlight>{' '}
+                    ({formatNumbers(option[1])})
                   </>
                 }
                 checked={isFilterChecked(filterOption, option[0])}
