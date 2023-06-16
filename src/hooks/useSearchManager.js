@@ -87,45 +87,43 @@ export const useSearchManager = () => {
     return temp
   }
 
-  const isFilterChecked = (filter, param, value) => {
-    if (!filter) return null
+  const isFilterChecked = (key, value) => {
+    if (!(key in filters)) return false
 
     if (value) {
-      return filter[param] ? filter[param].includes(value) : false
+      return filters[key].includes(value)
     }
 
-    return param in filter
+    return key in filters
   }
 
   // toggles a filter option in facets
-  const toggleFilter = (e, param, val, viewport) => {
-    if (e.target.checked) {
-      if (filters[param] !== undefined) {
-        filters[param].push(val)
+  const toggleFilter = (checked, key, val, updateQuery = true) => {
+    if (key === 'empty') {
+      if (checked) {
+        delete filters[key]
       } else {
-        filters[param] = [val]
+        filters[key] = true
       }
-    } else if (filters[param].length > 0) {
-      filters[param] = filters[param].filter((item) => item !== val)
-      if (filters[param].length === 0) delete filters[param]
+    }
+    if (key !== 'empty') {
+      if (checked) {
+        if (filters[key] !== undefined) {
+          filters[key].push(val)
+        } else {
+          filters[key] = [val]
+        }
+      } else if (filters[key].length > 0) {
+        filters[key] = filters[key].filter((item) => item !== val)
+        if (filters[key].length === 0) delete filters[key]
+      }
     }
 
     setFilters({ ...filters })
-    // makes API call on toggle only on larger devices
-    if (viewport === 'large') {
+    // skips the query update on mobile/table devices
+    if (!updateQuery) {
       updateSearchQuery(true)
     }
-  }
-
-  const toggleNonDownloadableFilter = (e, param) => {
-    if (e.target.checked) {
-      delete filters[param]
-    } else {
-      filters[param] = true
-    }
-
-    setFilters({ ...filters })
-    updateSearchQuery(true)
   }
 
   /* Search Term */
@@ -141,6 +139,23 @@ export const useSearchManager = () => {
   }
 
   /* Other */
+  // returns the API supported facets names
+  const formatFacetNames = (facetNames) => {
+    const formattedNames = []
+
+    for (const name of facetNames) {
+      if (name === 'downloadable_organism_names') {
+        formattedNames.push('downloadable_organism')
+      } else if (name === 'platform_accession_codes') {
+        formattedNames.push('platform')
+      } else {
+        formattedNames.push(name)
+      }
+    }
+
+    return formattedNames
+  }
+
   // handles search requests from non-search page and
   // navigates a user to the search page
   const navigateToSearch = (newQuery) => {
@@ -173,11 +188,11 @@ export const useSearchManager = () => {
     search,
     setSearch,
     clearAllFilters,
+    formatFacetNames,
     getFilterQueryParam,
     isFilterChecked,
     navigateToSearch,
     toggleFilter,
-    toggleNonDownloadableFilter,
     updatePage,
     updatePageSize,
     updateSearchQuery,
