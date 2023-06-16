@@ -1,18 +1,23 @@
-import { createContext, useState } from 'react'
+import { createContext, useMemo, useState } from 'react'
 
 export const SearchManagerContext = createContext({})
 
 export const SearchManagerContextProvider = ({ children }) => {
+  const [config, setConfig] = useState({})
   const [filters, setFilters] = useState({})
   const [search, setSearch] = useState({})
 
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
-  const value = {
-    filters,
-    setFilters,
-    search,
-    setSearch
-  }
+  const value = useMemo(
+    () => ({
+      config,
+      setConfig,
+      filters,
+      setFilters,
+      search,
+      setSearch
+    }),
+    [config, setConfig, filters, setFilters, search, setSearch]
+  )
 
   return (
     <SearchManagerContext.Provider value={value}>

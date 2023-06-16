@@ -22,6 +22,10 @@ import {
 } from 'components/SearchResults'
 import { options } from 'config'
 
+const {
+  search: { empty, pageSizes, sortby }
+} = options
+
 export const Search = (props) => {
   const { query, results, accessionCodesResult } = props
   const {
@@ -31,7 +35,7 @@ export const Search = (props) => {
     updatePage,
     updateSearchTerm
   } = useSearchManager()
-  const { pageSizes, sortby } = options
+
   const { viewport, setResponsive } = useResponsive()
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
@@ -207,11 +211,11 @@ Search.getInitialProps = async (ctx) => {
   const { pathname, query } = ctx
   const queryString = {
     ...query,
-    limit: query.size || 10,
-    offset: (query.p - 1) * (query.size || 10) || 0,
-    ordering: query.ordering || '_score',
+    limit: query.size || pageSizes[0],
+    offset: (query.p - 1) * (query.size || pageSizes[0]) || 0,
+    ordering: query.ordering || sortby[0].value,
     ...(query.search ? { search: query.search } : {}),
-    num_downloadable_samples__gt: !query.empty ? 0 : -1
+    num_downloadable_samples__gt: !query.empty ? empty.hide : empty.show
   }
   const { response, accessionCodesResponse } = await fetchSearch(
     queryString,

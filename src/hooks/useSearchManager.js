@@ -10,14 +10,20 @@ export const useSearchManager = () => {
     search: searchState,
     setSearch: setSearchState,
     filters: filtersState,
-    setFilters: setFiltersState
+    setFilters: setFiltersState,
+    config: configState,
+    setConfig: setConfigState
   } = useContext(SearchManagerContext)
+  const {
+    search: { filterList, pageSizes, sortby }
+  } = options
   const router = useRouter()
   const search = searchState
   const setSearch = setSearchState
   const filters = filtersState
   const setFilters = setFiltersState
-  const { filterList, pageSizes, sortby } = options
+  const config = configState
+  const setConfig = setConfigState
 
   /* Common */
   const resetPage = () => {
@@ -44,7 +50,7 @@ export const useSearchManager = () => {
     }
 
     setSearch({ ...search })
-    updateSearchQuery()
+    updateSearchQuery(true)
   }
 
   const updateSortBy = (newSortOrder) => {
@@ -87,11 +93,11 @@ export const useSearchManager = () => {
     return temp
   }
 
-  const isFilterChecked = (key, value) => {
+  const isFilterChecked = (key, val) => {
     if (!(key in filters)) return false
 
-    if (value) {
-      return filters[key].includes(value)
+    if (val) {
+      return filters[key].includes(val)
     }
 
     return key in filters
@@ -121,7 +127,7 @@ export const useSearchManager = () => {
 
     setFilters({ ...filters })
     // skips the query update on mobile/table devices
-    if (!updateQuery) {
+    if (updateQuery) {
       updateSearchQuery(true)
     }
   }
@@ -187,6 +193,8 @@ export const useSearchManager = () => {
     setFilters,
     search,
     setSearch,
+    config,
+    setConfig,
     clearAllFilters,
     formatFacetNames,
     getFilterQueryParam,

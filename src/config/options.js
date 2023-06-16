@@ -3,13 +3,43 @@ export const options = {
     { label: 'Experiment', value: 'EXPERIMENT' },
     { label: 'Species', value: 'SPECIES' }
   ],
-  filterList: [
-    'downloadable_organism',
-    'technology',
-    'platform',
-    'empty',
-    'has_publication'
-  ],
+  // default setting for the search manager
+  search: {
+    filterList: [
+      'downloadable_organism',
+      'technology',
+      'platform',
+      'empty',
+      'has_publication'
+    ],
+    empty: {
+      hide: 0,
+      show: -1
+    },
+    pageSizes: [10, 20, 50],
+    sortby: [
+      {
+        label: 'Best Match',
+        value: '_score'
+      },
+      {
+        label: 'Most No. of samples',
+        value: '-num_downloadable_samples'
+      },
+      {
+        label: 'Least No. of samples',
+        value: 'num_downloadable_samples'
+      },
+      {
+        label: 'Newest Experiment',
+        value: '-source_first_published'
+      },
+      {
+        label: 'Oldest Experiment',
+        value: 'source_first_published'
+      }
+    ]
+  },
   pageSizes: [10, 20, 50],
   sortby: [
     {
