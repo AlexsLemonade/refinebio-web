@@ -4,7 +4,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
 import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
-import getSeatchQueryForAPI from 'helpers/getSearchQueryForAPI'
+import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
 import { Box, Grid, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -24,15 +24,14 @@ import {
 } from 'components/SearchResults'
 import { options } from 'config'
 
-const {
-  search: { empty, pageSizes, sortby }
-} = options
-
 export const Search = (props) => {
+  const {
+    search: { pageSizes, sortby }
+  } = options
   const { query, results, accessionCodesResult } = props
   const {
     formatFacetNames,
-    getFilterQueryParam,
+    getSearchQueryParam,
     hasAppliedFilters,
     setConfig,
     setSearch,
@@ -46,9 +45,17 @@ export const Search = (props) => {
   const [userSearchTerm, setUserSearchTerm] = useState(query.search || '')
   const [page, setPage] = useState(Number(query.p) || 1)
   const [pageSize, setPageSize] = useState(Number(query.size) || pageSizes[0])
-  const [sortBy, setSortBy] = useState(query.ordering || sortby[0].value)
+  const [sortBy, setSortBy] = useState(query.sortby || sortby[0].value)
 
   const isResults = results.results.length > 0
+
+  const handleClearSearchTerm = () => {
+    if (query.search) {
+      updateSearchTerm('')
+    }
+
+    setUserSearchTerm('')
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -66,8 +73,7 @@ export const Search = (props) => {
 
         if (query) {
           setSearch({
-            ...(query.search ? { search: query.search } : {}),
-            filters: getFilterQueryParam(query, facetNames)
+            ...getSearchQueryParam(query)
           })
         }
       }
@@ -87,6 +93,7 @@ export const Search = (props) => {
             bottom: setResponsive('medium', 'medium', 'xlarge')
           }}
           width={setResponsive('100%', searchBoxWidth)}
+          style={{ position: 'relative' }}
         >
           <SearchBox
             placeholder="Search accessions, pathways, diseases, etc.,"
@@ -94,6 +101,7 @@ export const Search = (props) => {
             size="large"
             value={userSearchTerm}
             responsive
+            clickHandler={handleClearSearchTerm}
             changeHandler={(e) => setUserSearchTerm(e.target.value)}
             submitHandler={handleSubmit}
           />
@@ -232,19 +240,32 @@ export const Search = (props) => {
 
 Search.getInitialProps = async (ctx) => {
   const { pathname, query } = ctx
+  const {
+    search: {
+      commonQueries: {
+        limit,
+        offset,
+        ordering,
+        num_downloadable_samples__gt: numDownloadableSamples
+      }
+    }
+  } = options
+
   const queryString = {
-    ...getSeatchQueryForAPI(query),
-    limit: query.size || pageSizes[0],
-    offset: (query.p - 1) * (query.size || pageSizes[0]) || 0,
-    ordering: query.ordering || sortby[0].value,
+    ...getSearchQueryForAPI(query),
+    limit: query.size || Number(limit),
+    offset: (query.p - 1) * (query.size || Number(offset)) || Number(offset),
+    ordering: query.sortby || ordering,
     ...(query.search ? { search: query.search } : {}),
-    num_downloadable_samples__gt: !query.empty ? empty.hide : empty.show
+    num_downloadable_samples__gt: !query.empty
+      ? Number(numDownloadableSamples.hide)
+      : Number(numDownloadableSamples.show)
   }
   const { response, accessionCodesResponse } = await fetchSearch(queryString)
 
   return {
     pathname,
-    query: queryString,
+    query,
     results: response,
     accessionCodesResult: accessionCodesResponse
   }

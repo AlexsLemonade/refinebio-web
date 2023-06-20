@@ -3,14 +3,22 @@ export const options = {
     { label: 'Experiment', value: 'EXPERIMENT' },
     { label: 'Species', value: 'SPECIES' }
   ],
-  // default setting for the search manager
+  // setting for the search manager
   search: {
-    clientOnlyQuery: ['empty', 'p', 'size'],
-    clientOnlyFilterQuery: ['empty'],
-    empty: {
-      hide: 0,
-      show: -1
+    // default values for common queries
+    commonQueries: {
+      offset: 0,
+      ordering: '_score',
+      limit: 10,
+      num_downloadable_samples__gt: {
+        hide: 0,
+        show: -1
+      }
     },
+    // client-only queries
+    clientOnlyQueries: ['empty', 'p', 'size', 'sortby'],
+    // client-only filter queries
+    clientOnlyFilterQueries: ['empty'],
     pageSizes: [10, 20, 50],
     sortby: [
       {

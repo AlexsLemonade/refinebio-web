@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import { SearchManagerContext } from 'contexts/SearchManagerContext'
-import getQueryParam from 'helpers/getQueryParam'
 import { options } from 'config'
 
 export const useSearchManager = () => {
@@ -12,7 +11,7 @@ export const useSearchManager = () => {
     setConfig: setConfigState
   } = useContext(SearchManagerContext)
   const {
-    search: { clientOnlyFilterQuery, pageSizes, sortby }
+    search: { clientOnlyFilterQueries, commonQueries, pageSizes, sortby }
   } = options
   const router = useRouter()
   const search = searchState
@@ -50,9 +49,9 @@ export const useSearchManager = () => {
 
   const updateSortBy = (newSortOrder) => {
     if (newSortOrder === sortby[0].value) {
-      delete search.ordering
+      delete search.sortby
     } else {
-      search.ordering = newSortOrder
+      search.sortby = newSortOrder
     }
 
     setSearch({ ...search })
@@ -63,67 +62,53 @@ export const useSearchManager = () => {
   // removes all the applied filtes except for the 'empty'
   const clearAllFilters = () => {
     ;(config.filterOptions || []).forEach((key) => {
-      if (key in search.filters) delete search.filters[key]
+      if (key in search) delete search[key]
     })
 
     setSearch({ ...search })
     updateSearchQuery(true)
   }
 
-  // returns filters-only query parameters from url
-  const getFilterQueryParam = (query, facets) => {
-    const queryParam = getQueryParam(query)
-    const temp = {}
-
-    Object.keys(queryParam).forEach((key) => {
-      if ([...facets, ...clientOnlyFilterQuery].includes(key)) {
-        temp[key] = queryParam[key]
-      }
-    })
-
-    return temp
-  }
-
-  // returns true if any filters are applied, otherwise false
+  // returns true if any filters that are applied, otherwise false
   const hasAppliedFilters = () => {
-    if (!search.filters) return false
+    if (!search) return false
 
     return (
       (config.filterOptions || []).filter(
-        (filterOption) => filterOption in search.filters
+        (filterOption) => filterOption in search
       ).length > 0
     )
   }
 
   const isFilterChecked = (key, val) => {
-    if (!(key in search.filters)) return false
+    if (!(key in search)) return false
 
     if (val) {
-      return search.filters[key].includes(val)
+      return search[key].includes(val)
     }
 
-    return key in search.filters
+    return key in search
   }
 
   // toggles a filter option in facets
   const toggleFilter = (checked, key, val, updateQuery = true) => {
-    if (clientOnlyFilterQuery.includes(key)) {
+    if (clientOnlyFilterQueries.includes(key)) {
       if (checked) {
-        delete search.filters[key]
+        delete search[key]
       } else {
-        search.filters[key] = true
+        search[key] = true
       }
-    }
-    if (!clientOnlyFilterQuery.includes(key)) {
+    } else {
+      // eslint-disable-next-line no-lonely-if
       if (checked) {
-        if (search.filters[key] !== undefined) {
-          search.filters[key].push(val)
+        if (search[key] !== undefined) {
+          search[key].push(val)
         } else {
-          search.filters[key] = [val]
+          search[key] = [val]
         }
-      } else if (search.filters[key].length > 0) {
-        search.filters[key] = search.filters[key].filter((item) => item !== val)
-        if (search.filters[key].length === 0) delete search.filters[key]
+      } else if (search[key].length > 0) {
+        search[key] = search[key].filter((item) => item !== val)
+        if (search[key].length === 0) delete search[key]
       }
     }
 
@@ -164,6 +149,18 @@ export const useSearchManager = () => {
     return formattedNames
   }
 
+  // returns client-only query parameter from url
+  const getSearchQueryParam = (queryParams) => {
+    const temp = {}
+    Object.keys(queryParams).forEach((key) => {
+      if (!Object.keys(commonQueries).includes(key)) {
+        temp[key] = queryParams[key]
+      }
+    })
+
+    return temp
+  }
+
   // handles search requests from non-search page and
   // navigates a user to the search page
   const navigateToSearch = (newQuery) => {
@@ -181,11 +178,7 @@ export const useSearchManager = () => {
 
     router.push({
       query: {
-        ...(search.filters ? search.filters : {}),
-        ...(search.search ? { search: search.search } : {}),
-        ...(search.ordering ? { ordering: search.ordering } : {}),
-        ...(search.p ? { p: search.p } : {}),
-        ...(search.size ? { size: search.size } : {})
+        ...search
       }
     })
   }
@@ -197,7 +190,7 @@ export const useSearchManager = () => {
     setConfig,
     clearAllFilters,
     formatFacetNames,
-    getFilterQueryParam,
+    getSearchQueryParam,
     hasAppliedFilters,
     isFilterChecked,
     navigateToSearch,

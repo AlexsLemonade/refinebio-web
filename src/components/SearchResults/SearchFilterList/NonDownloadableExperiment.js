@@ -10,7 +10,7 @@ export const NonDownloadableExperiment = ({ key = 'empty' }) => {
   return (
     <CheckBox
       label="Hide non-downloadable experiments"
-      checked={!search.filters[key]}
+      checked={!search[key]}
       onChange={(e) => toggleFilter(e.target.checked, key)}
     />
   )

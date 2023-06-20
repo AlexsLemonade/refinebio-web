@@ -2,6 +2,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Box, Form } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
+import { SrOnly } from 'components/shared/SrOnly'
 import { TextInput } from 'components/shared/TextInput'
 
 export const SearchBox = ({
@@ -15,6 +16,7 @@ export const SearchBox = ({
   value = '',
   blurHandler,
   changeHandler,
+  clickHandler,
   focusHandler,
   submitHandler
 }) => {
@@ -73,6 +75,21 @@ export const SearchBox = ({
                 onChange={changeHandler}
                 onFocus={focusHandler}
               />
+            )}
+            {value && size === 'large' && (
+              <Box
+                role="button"
+                style={{
+                  boxShadow: 'none',
+                  position: 'absolute',
+                  right: setResponsive('16px', '16px'),
+                  top: '16px'
+                }}
+                onClick={clickHandler}
+              >
+                <Icon name="Close" size="16px" />
+                <SrOnly>Clear text</SrOnly>
+              </Box>
             )}
           </Box>
           {size !== 'small' && (
