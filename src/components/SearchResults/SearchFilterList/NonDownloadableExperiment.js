@@ -5,12 +5,12 @@ import { CheckBox } from 'grommet'
 // - its value is 0 by default which excludes non-doownloadable samples from API results
 // - when it sets to -1, it includes non-doownloadable samples
 export const NonDownloadableExperiment = ({ key = 'empty' }) => {
-  const { filters, toggleFilter } = useSearchManager()
+  const { search, toggleFilter } = useSearchManager()
 
   return (
     <CheckBox
       label="Hide non-downloadable experiments"
-      checked={!filters[key]}
+      checked={!search.filters[key]}
       onChange={(e) => toggleFilter(e.target.checked, key)}
     />
   )

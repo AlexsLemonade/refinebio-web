@@ -9,7 +9,7 @@ import { SearchFilter } from './SearchFilter'
 import { IncludePublication } from './IncludePublication'
 
 export const SearchFilterList = ({ facets, setToggle }) => {
-  const { filters, clearAllFilters, hasAppliedFilters, updateSearchQuery } =
+  const { search, clearAllFilters, hasAppliedFilters, updateSearchQuery } =
     useSearchManager()
   const { viewport } = useResponsive()
   const [filterGroup, setFilterGroup] = useState({})
@@ -37,7 +37,7 @@ export const SearchFilterList = ({ facets, setToggle }) => {
 
   const handleApplyFilters = () => {
     setToggle(false)
-    updateSearchQuery(true, filters)
+    updateSearchQuery(true, search.filters)
   }
 
   useEffect(() => {

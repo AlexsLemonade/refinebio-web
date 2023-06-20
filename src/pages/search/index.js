@@ -34,7 +34,6 @@ export const Search = (props) => {
     getFilterQueryParam,
     hasAppliedFilters,
     setConfig,
-    setFilters,
     setSearch,
     updatePage,
     updateSearchTerm
@@ -65,8 +64,10 @@ export const Search = (props) => {
         })
 
         if (query) {
-          setFilters(getFilterQueryParam(query, facetNames))
-          setSearch({ ...(query.search ? { search: query.search } : {}) })
+          setSearch({
+            ...(query.search ? { search: query.search } : {}),
+            filters: getFilterQueryParam(query, facetNames)
+          })
         }
       }
     }

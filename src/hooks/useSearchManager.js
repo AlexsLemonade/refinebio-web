@@ -2,15 +2,12 @@ import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import { SearchManagerContext } from 'contexts/SearchManagerContext'
 import getQueryParam from 'helpers/getQueryParam'
-import isEmptyObject from 'helpers/isEmptyObject'
 import { options } from 'config'
 
 export const useSearchManager = () => {
   const {
     search: searchState,
     setSearch: setSearchState,
-    filters: filtersState,
-    setFilters: setFiltersState,
     config: configState,
     setConfig: setConfigState
   } = useContext(SearchManagerContext)
@@ -20,8 +17,6 @@ export const useSearchManager = () => {
   const router = useRouter()
   const search = searchState
   const setSearch = setSearchState
-  const filters = filtersState
-  const setFilters = setFiltersState
   const config = configState
   const setConfig = setConfigState
 
@@ -68,10 +63,10 @@ export const useSearchManager = () => {
   // removes all the applied filtes except for the 'empty'
   const clearAllFilters = () => {
     ;(config.filterOptions || []).forEach((key) => {
-      if (key in filters) delete filters[key]
+      if (key in search.filters) delete search.filters[key]
     })
 
-    setFilters({ ...filters })
+    setSearch({ ...search })
     updateSearchQuery(true)
   }
 
@@ -91,48 +86,48 @@ export const useSearchManager = () => {
 
   // returns true if any filters are applied, otherwise false
   const hasAppliedFilters = () => {
-    if (!filters) return false
+    if (!search.filters) return false
 
     return (
       (config.filterOptions || []).filter(
-        (filterOption) => filterOption in filters
+        (filterOption) => filterOption in search.filters
       ).length > 0
     )
   }
 
   const isFilterChecked = (key, val) => {
-    if (!(key in filters)) return false
+    if (!(key in search.filters)) return false
 
     if (val) {
-      return filters[key].includes(val)
+      return search.filters[key].includes(val)
     }
 
-    return key in filters
+    return key in search.filters
   }
 
   // toggles a filter option in facets
   const toggleFilter = (checked, key, val, updateQuery = true) => {
     if (clientOnlyQuery.includes(key)) {
       if (checked) {
-        delete filters[key]
+        delete search.filters[key]
       } else {
-        filters[key] = true
+        search.filters[key] = true
       }
     }
     if (!clientOnlyQuery.includes(key)) {
       if (checked) {
-        if (filters[key] !== undefined) {
-          filters[key].push(val)
+        if (search.filters[key] !== undefined) {
+          search.filters[key].push(val)
         } else {
-          filters[key] = [val]
+          search.filters[key] = [val]
         }
-      } else if (filters[key].length > 0) {
-        filters[key] = filters[key].filter((item) => item !== val)
-        if (filters[key].length === 0) delete filters[key]
+      } else if (search.filters[key].length > 0) {
+        search.filters[key] = search.filters[key].filter((item) => item !== val)
+        if (search.filters[key].length === 0) delete search.filters[key]
       }
     }
 
-    setFilters({ ...filters })
+    setSearch({ ...search })
     // skips the query update on mobile/table devices
     if (updateQuery) {
       updateSearchQuery(true)
@@ -186,7 +181,7 @@ export const useSearchManager = () => {
 
     router.push({
       query: {
-        ...(!isEmptyObject(filters) ? filters : {}),
+        ...(search.filters ? search.filters : {}),
         ...(search.search ? { search: search.search } : {}),
         ...(search.ordering ? { ordering: search.ordering } : {}),
         ...(search.p ? { p: search.p } : {}),
@@ -196,8 +191,6 @@ export const useSearchManager = () => {
   }
 
   return {
-    filters,
-    setFilters,
     search,
     setSearch,
     config,
