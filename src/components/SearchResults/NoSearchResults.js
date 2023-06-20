@@ -1,39 +1,53 @@
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, Heading, Paragraph } from 'grommet'
+import { Box, Heading, Paragraph, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { MissingResultsFormButton } from './MissingResultsFormButton'
 
-export const NoMatchingResults = () => {
-  const { clearAllFilters } = useSearchManager()
+export const NoSearchResults = ({ setUserSearchTerm }) => {
+  const { updateSearchTerm } = useSearchManager()
   const { setResponsive } = useResponsive()
+  const queries = ['Notch', 'medulloblastoma', 'GSE24528']
+
+  const handleClick = (newTerm) => {
+    setUserSearchTerm(newTerm)
+    updateSearchTerm(newTerm)
+  }
 
   return (
     <Box
       align="center"
       animation={{ type: 'fadeIn', duration: 500 }}
-      margin={{ top: 'basex8' }}
+      margin={{ top: setResponsive('large', 'basex8') }}
     >
       <Heading level={1} margin={{ bottom: 'small' }}>
         No Matching Results
+        <Box margin={{ top: 'small' }} align="center">
+          Try another term
+        </Box>
       </Heading>
+      <Box
+        align={setResponsive('center', 'start')}
+        direction={setResponsive('column', 'row')}
+        gap={setResponsive('none', 'medium')}
+      >
+        {queries.map((query) => (
+          <Button
+            key={query}
+            label={<Text size="xlarge">{query}</Text>}
+            link
+            linkFontSize={setResponsive('16px', '20px')}
+            underlineOnHover
+            margin={{ top: setResponsive('small') }}
+            onClick={() => handleClick(query)}
+          />
+        ))}
+      </Box>
       <Box direction="row" gap="xsmall" margin={{ top: 'small' }}>
         <Paragraph size={setResponsive('16x', '22px')}>
           Expecting a specific experiment?{' '}
         </Paragraph>
         <MissingResultsFormButton size={setResponsive('16px', '22px')} />
-      </Box>
-      <Paragraph size={setResponsive('16px', '22px')}>Or</Paragraph>
-      <Box direction="row" gap="xsmall" margin={{ top: 'small' }}>
-        <Paragraph size={setResponsive('16px', '22px')}>
-          Try another term or
-        </Paragraph>
-        <Button
-          label="Clear Filters"
-          link
-          linkFontSize={setResponsive('16px', '22px')}
-          onClick={clearAllFilters}
-        />
       </Box>
       <Box
         margin={{
@@ -55,4 +69,4 @@ export const NoMatchingResults = () => {
   )
 }
 
-export default NoMatchingResults
+export default NoSearchResults

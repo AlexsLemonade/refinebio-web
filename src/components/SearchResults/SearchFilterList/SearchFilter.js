@@ -67,7 +67,8 @@ export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
                   <>
                     <TextHighlight>
                       {filterOption === 'platform'
-                        ? formatPlatformName(cache.platforms[option[0]])
+                        ? formatPlatformName(cache.platforms[option[0]]) ||
+                          option[0]
                         : formatString(option[0])}
                     </TextHighlight>{' '}
                     ({formatNumbers(option[1])})

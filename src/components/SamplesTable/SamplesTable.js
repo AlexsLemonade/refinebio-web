@@ -207,6 +207,7 @@ export const SamplesTable = ({
           >
             <PageSizes
               pageSize={pageSize}
+              pageSizes={pageSizes}
               totalPages={totalPages}
               setPageSize={setPageSize}
             />

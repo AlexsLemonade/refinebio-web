@@ -5,13 +5,7 @@ export const options = {
   ],
   // default setting for the search manager
   search: {
-    filterList: [
-      'downloadable_organism',
-      'technology',
-      'platform',
-      'empty',
-      'has_publication'
-    ],
+    clientOnlyQuery: ['empty'],
     empty: {
       hide: 0,
       show: -1

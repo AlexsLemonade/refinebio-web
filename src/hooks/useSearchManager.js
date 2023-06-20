@@ -15,7 +15,7 @@ export const useSearchManager = () => {
     setConfig: setConfigState
   } = useContext(SearchManagerContext)
   const {
-    search: { filterList, pageSizes, sortby }
+    search: { clientOnlyQuery, pageSizes, sortby }
   } = options
   const router = useRouter()
   const search = searchState
@@ -67,7 +67,7 @@ export const useSearchManager = () => {
   /* Filters */
   // removes all the applied filtes except for the 'empty'
   const clearAllFilters = () => {
-    config.filterOptions.forEach((key) => {
+    ;(config.filterOptions || []).forEach((key) => {
       if (key in filters) delete filters[key]
     })
 
@@ -76,12 +76,12 @@ export const useSearchManager = () => {
   }
 
   // returns filters-only query parameters from url
-  const getFilterQueryParam = (query) => {
+  const getFilterQueryParam = (query, facets) => {
     const queryParam = getQueryParam(query)
     const temp = {}
 
     Object.keys(queryParam).forEach((key) => {
-      if (filterList.includes(key)) {
+      if ([...facets, ...clientOnlyQuery].includes(key)) {
         temp[key] = queryParam[key]
       }
     })
@@ -94,8 +94,9 @@ export const useSearchManager = () => {
     if (!filters) return false
 
     return (
-      config.filterOptions.filter((filterOption) => filterOption in filters)
-        .length > 0
+      (config.filterOptions || []).filter(
+        (filterOption) => filterOption in filters
+      ).length > 0
     )
   }
 
@@ -111,14 +112,14 @@ export const useSearchManager = () => {
 
   // toggles a filter option in facets
   const toggleFilter = (checked, key, val, updateQuery = true) => {
-    if (key === 'empty') {
+    if (clientOnlyQuery.includes(key)) {
       if (checked) {
         delete filters[key]
       } else {
         filters[key] = true
       }
     }
-    if (key !== 'empty') {
+    if (!clientOnlyQuery.includes(key)) {
       if (checked) {
         if (filters[key] !== undefined) {
           filters[key].push(val)

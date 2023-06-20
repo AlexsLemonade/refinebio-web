@@ -50,8 +50,8 @@ export const SearchFilterList = ({ facets, setToggle }) => {
         align="center"
         direction="row"
         justify="between"
+        height={{ max: '100%' }}
         margin={{ bottom: 'medium' }}
-        fill
       >
         <Heading level={2} responsive={false}>
           Filters
