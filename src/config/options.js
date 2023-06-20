@@ -5,7 +5,8 @@ export const options = {
   ],
   // default setting for the search manager
   search: {
-    clientOnlyQuery: ['empty'],
+    clientOnlyQuery: ['empty', 'p', 'size'],
+    clientOnlyFilterQuery: ['empty'],
     empty: {
       hide: 0,
       show: -1

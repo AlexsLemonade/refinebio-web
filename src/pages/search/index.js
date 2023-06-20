@@ -4,6 +4,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
 import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
+import getSeatchQueryForAPI from 'helpers/getSearchQueryForAPI'
 import { Box, Grid, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -232,17 +233,14 @@ export const Search = (props) => {
 Search.getInitialProps = async (ctx) => {
   const { pathname, query } = ctx
   const queryString = {
-    ...query,
+    ...getSeatchQueryForAPI(query),
     limit: query.size || pageSizes[0],
     offset: (query.p - 1) * (query.size || pageSizes[0]) || 0,
     ordering: query.ordering || sortby[0].value,
     ...(query.search ? { search: query.search } : {}),
     num_downloadable_samples__gt: !query.empty ? empty.hide : empty.show
   }
-  const { response, accessionCodesResponse } = await fetchSearch(
-    queryString,
-    query.search
-  )
+  const { response, accessionCodesResponse } = await fetchSearch(queryString)
 
   return {
     pathname,

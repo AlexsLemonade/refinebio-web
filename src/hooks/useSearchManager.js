@@ -12,7 +12,7 @@ export const useSearchManager = () => {
     setConfig: setConfigState
   } = useContext(SearchManagerContext)
   const {
-    search: { clientOnlyQuery, pageSizes, sortby }
+    search: { clientOnlyFilterQuery, pageSizes, sortby }
   } = options
   const router = useRouter()
   const search = searchState
@@ -76,7 +76,7 @@ export const useSearchManager = () => {
     const temp = {}
 
     Object.keys(queryParam).forEach((key) => {
-      if ([...facets, ...clientOnlyQuery].includes(key)) {
+      if ([...facets, ...clientOnlyFilterQuery].includes(key)) {
         temp[key] = queryParam[key]
       }
     })
@@ -107,14 +107,14 @@ export const useSearchManager = () => {
 
   // toggles a filter option in facets
   const toggleFilter = (checked, key, val, updateQuery = true) => {
-    if (clientOnlyQuery.includes(key)) {
+    if (clientOnlyFilterQuery.includes(key)) {
       if (checked) {
         delete search.filters[key]
       } else {
         search.filters[key] = true
       }
     }
-    if (!clientOnlyQuery.includes(key)) {
+    if (!clientOnlyFilterQuery.includes(key)) {
       if (checked) {
         if (search.filters[key] !== undefined) {
           search.filters[key].push(val)
