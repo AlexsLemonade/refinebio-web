@@ -1,10 +1,12 @@
-import { useMemo, memo, useState, useEffect } from 'react'
+/* eslint-disable no-nested-ternary */
+import { memo, useEffect, useMemo, useState } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import { useSamplesTableManager } from 'hooks/useSamplesTableManager'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import formatString from 'helpers/formatString'
-import { Box, CheckBox, Spinner } from 'grommet'
+import { Box, CheckBox, Spinner, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
+import { BoxBlock } from 'components/shared/BoxBlock'
 import {
   DataTable,
   ExpandTableButton,
@@ -15,7 +17,9 @@ import { Overlay } from 'components/shared/Ovevrlay'
 import { PageSizes } from 'components/shared/PageSizes'
 import { Pagination } from 'components/shared/Pagination'
 import { Row } from 'components/shared/Row'
+import { TextNull } from 'components/shared/TextNull'
 import { links, options } from 'config'
+import styled, { css } from 'styled-components'
 import {
   CellAccessionCode,
   CellAddRemove,
@@ -24,6 +28,22 @@ import {
   CellSampleMetadata,
   CellTitle
 } from './cells'
+
+const PlaceHolderBox = styled(Box)`
+  align-items: center;
+  justify-content: center;
+  padding-top: 32px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+
+  ${({ background }) =>
+    css`
+      background: ${background || 'rgba(255, 255, 255, 0.8)'};
+    `};
+`
 
 export const SamplesTable = ({
   experimentSampleAssociations,
@@ -173,7 +193,10 @@ export const SamplesTable = ({
                 top: setResponsive('small', 'xsmall', 'none')
               }}
             >
-              <CheckBox label="Show only samples in current dataset" />
+              <CheckBox
+                disabled={!hasSamples}
+                label="Show only samples in current dataset"
+              />
             </Box>
           </Box>
           <Box direction="row">
@@ -191,69 +214,95 @@ export const SamplesTable = ({
               )}
           </Box>
         </Row>
-        <Box height={tableHeight} style={{ position: 'relative' }}>
-          {loading ? (
-            <Box align="center" fill justify="center">
+        <BoxBlock>
+          <TextHighlightContextProvider match={samplesTable.filterBy}>
+            <DataTable
+              columns={columns}
+              data={data || []}
+              defaultColumn={defaultColumn}
+              hiddenColumns={columns
+                .filter((column) => column.isVisible === false)
+                .map((column) => column.accessor)}
+              loading={loading}
+              manualPagination
+              tableHeight={tableHeight}
+              tableExpanded={tableExpanded}
+            />
+            {!hasSamples && samplesTable.filterBy && (
+              <PlaceHolderBox background="none">
+                <TextNull
+                  text={
+                    <>
+                      No rows found matching
+                      <Text
+                        color="black"
+                        style={{ fontStyle: 'normal' }}
+                        margin={{ left: 'xsmall' }}
+                      >
+                        <strong>"{samplesTable.filterBy}"</strong>
+                      </Text>
+                    </>
+                  }
+                />
+              </PlaceHolderBox>
+            )}
+            {!loading && !hasSamples && !samplesTable.filterBy && (
+              <PlaceHolderBox background="none">
+                <TextNull text="No rows found" />
+              </PlaceHolderBox>
+            )}
+          </TextHighlightContextProvider>
+          {loading && (
+            <PlaceHolderBox>
               <Spinner
                 color="gray-shade-70"
-                message={{ start: 'Loading data', end: 'Data loaded' }}
+                message={{
+                  start: 'Loading data',
+                  end: 'Data loaded'
+                }}
+              />
+            </PlaceHolderBox>
+          )}
+        </BoxBlock>
+        {hasSamples && (
+          <Box>
+            <Box
+              direction={setResponsive('column', 'row')}
+              justify="start"
+              margin={{ top: 'small' }}
+            >
+              <InlineMessage
+                color="info"
+                fontSize="medium"
+                margin={{
+                  left: tableExpanded ? 'basex6' : 'none',
+                  right: 'xsmall',
+                  bottom: setResponsive('xsmall', 'none')
+                }}
+                label="Some fields may be harmonized."
+                name="Info"
+              />
+              <Anchor
+                href={links.refinebio_docs_harmonized_metadata}
+                label="Learn More"
+                rel="noopener noreferrer"
               />
             </Box>
-          ) : (
-            <TextHighlightContextProvider match={samplesTable.filterBy}>
-              {hasSamples && (
-                <DataTable
-                  columns={columns}
-                  data={data}
-                  defaultColumn={defaultColumn}
-                  hiddenColumns={columns
-                    .filter((column) => column.isVisible === false)
-                    .map((column) => column.accessor)}
-                  loading={loading}
-                  manualPagination
-                  tableExpanded={tableExpanded}
-                  tableHeight={tableHeight}
-                />
-              )}
-            </TextHighlightContextProvider>
-          )}
-        </Box>
-        <Box
-          direction={setResponsive('column', 'row')}
-          justify="start"
-          margin={{ top: 'small' }}
-        >
-          <InlineMessage
-            color="info"
-            fontSize="medium"
-            margin={{
-              left: tableExpanded ? 'basex6' : 'none',
-              right: 'xsmall',
-              bottom: setResponsive('xsmall', 'none')
-            }}
-            label="Some fields may be harmonized."
-            name="Info"
-          />
-          <Anchor
-            href={links.refinebio_docs_harmonized_metadata}
-            label="Learn More"
-            rel="noopener noreferrer"
-            target="_blank"
-          />
-        </Box>
-        <Box
-          align="center"
-          direction="row"
-          justify="center"
-          margin={{ top: 'medium' }}
-        >
-          <Pagination
-            page={samplesTable.page}
-            pageSize={samplesTable.pageSize}
-            totalPages={totalPages}
-            setPage={updatePage}
-          />
-        </Box>
+            <Box
+              align="center"
+              direction="row"
+              justify="center"
+              margin={{ top: 'medium' }}
+            >
+              <Pagination
+                page={samplesTable.page}
+                pageSize={samplesTable.pageSize}
+                totalPages={totalPages}
+                setPage={updatePage}
+              />
+            </Box>
+          </Box>
+        )}
       </Box>
     </>
   )
