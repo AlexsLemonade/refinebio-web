@@ -29,7 +29,7 @@ import {
 
 export const SamplesTable = ({
   experimentSampleAssociations,
-  paramsToAdd,
+  queryToAdd,
   sampleMetadataFields,
   isImmutable = false,
   modalView = false
@@ -147,26 +147,26 @@ export const SamplesTable = ({
       setLoading(false)
     }
 
-    if (paramsToAdd.dataset_id) {
-      formattedParams = makeURLParams(paramsToAdd)
-      if (paramsToAdd.organism__name) {
+    if (queryToAdd.dataset_id) {
+      formattedParams = makeURLParams(queryToAdd)
+      if (queryToAdd.organism__name) {
         url = `v1/samples/?${formattedParams}&offset=${
           page * pageSize
         }&limit=${pageSize}`
         // eslint-disable-next-line no-console
         console.log(url)
-        getSamplesByOrganismName(paramsToAdd.organism__name, setTableData)
+        getSamplesByOrganismName(queryToAdd.organism__name, setTableData)
       }
 
-      if (paramsToAdd.experiment_accession_code) {
-        if (paramsToAdd.experiment_accession_code) {
+      if (queryToAdd.experiment_accession_code) {
+        if (queryToAdd.experiment_accession_code) {
           url = `v1/samples/?${formattedParams}&offset=${
             page * pageSize
           }&limit=${pageSize}`
           // eslint-disable-next-line no-console
           console.log(url)
           getSamplesTableData(
-            paramsToAdd.experiment_accession_code,
+            queryToAdd.experiment_accession_code,
             pageSize,
             setTableData
           )
@@ -174,7 +174,7 @@ export const SamplesTable = ({
       }
       setLoading(false)
     } else {
-      getSamples({ ...paramsToAdd, ...defaultParams })
+      getSamples({ ...queryToAdd, ...defaultParams })
     }
   }, [globalFilter, page, pageSize])
 

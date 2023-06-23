@@ -302,7 +302,7 @@ export const Experiment = () => {
                         (sample) => sample.accession_code
                       )
                     }}
-                    paramsToAdd={{ experiment_accession_code: accessionCode }}
+                    queryToAdd={{ experiment_accession_code: accessionCode }}
                     sampleMetadataFields={experiment.sample_metadata}
                   />
                 </Box>
