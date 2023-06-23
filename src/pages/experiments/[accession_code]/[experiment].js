@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { useExperiments } from 'hooks/useExperiments'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
+import { SamplesTableManagerContextProvider } from 'contexts/SamplesTableManagerContext'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import { links } from 'config'
 import { nanoid } from 'nanoid'
@@ -296,15 +297,17 @@ export const Experiment = () => {
                       <SamplesTableCTA />
                     </Column>
                   </Row>
-                  <SamplesTable
-                    experimentSampleAssociations={{
-                      [experiment.accession_code]: experiment.samples.map(
-                        (sample) => sample.accession_code
-                      )
-                    }}
-                    queryToAdd={{ experiment_accession_code: accessionCode }}
-                    sampleMetadataFields={experiment.sample_metadata}
-                  />
+                  <SamplesTableManagerContextProvider>
+                    <SamplesTable
+                      experimentSampleAssociations={{
+                        [experiment.accession_code]: experiment.samples.map(
+                          (sample) => sample.accession_code
+                        )
+                      }}
+                      queryToAdd={{ experiment_accession_code: accessionCode }}
+                      sampleMetadataFields={experiment.sample_metadata}
+                    />
+                  </SamplesTableManagerContextProvider>
                 </Box>
               </FixedContainer>
             </Box>
