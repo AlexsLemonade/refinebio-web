@@ -43,29 +43,16 @@ export const options = {
       }
     ]
   },
-  pageSizes: [10, 20, 50],
-  sortby: [
-    {
-      label: 'Best Match',
-      value: '_score'
+  // setting for the samples table
+  samplesTable: {
+    // default values for common queries
+    commonQueries: {
+      offset: 0,
+      limit: 10
     },
-    {
-      label: 'Most No. of samples',
-      value: '-num_downloadable_samples'
-    },
-    {
-      label: 'Least No. of samples',
-      value: 'num_downloadable_samples'
-    },
-    {
-      label: 'Newest Experiment',
-      value: '-source_first_published'
-    },
-    {
-      label: 'Oldest Experiment',
-      value: 'source_first_published'
-    }
-  ],
+    page: 1,
+    pageSizes: [10, 20, 50]
+  },
   transformation: [
     {
       label: 'None',

@@ -34,7 +34,9 @@ export const SamplesTable = ({
   isImmutable = false,
   modalView = false
 }) => {
-  const { pageSizes } = options
+  const {
+    samplesTable: { pageSizes }
+  } = options
   const { viewport, setResponsive } = useResponsive()
   const tableHeight = tableExpanded ? '75vh' : '800px' // required for the table height on expanded view
   const minColumns = 5 // matches the current refine.bio
