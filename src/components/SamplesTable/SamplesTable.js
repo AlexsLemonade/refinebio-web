@@ -1,8 +1,8 @@
 import { useMemo, memo, useState, useEffect } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
+import { useSamplesTableManager } from 'hooks/useSamplesTableManager'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import formatString from 'helpers/formatString'
-import makeURLParams from 'helpers/makeURLParams'
 import { Box, CheckBox, Spinner } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import {
@@ -16,8 +16,6 @@ import { PageSizes } from 'components/shared/PageSizes'
 import { Pagination } from 'components/shared/Pagination'
 import { Row } from 'components/shared/Row'
 import { links, options } from 'config'
-import { getSamplesTableData, getSamplesByOrganismName } from 'api/mockHelper'
-import { api } from 'api'
 import {
   CellAccessionCode,
   CellAddRemove,
@@ -37,22 +35,21 @@ export const SamplesTable = ({
   const {
     samplesTable: { pageSizes }
   } = options
+  const {
+    config: { defaultColumn, minColumns },
+    hasSamples,
+    loading,
+    samplesTable,
+    totalPages,
+    tableData,
+    getSamplesTableData,
+    updateFilterBy,
+    updatePage,
+    updatePageSize
+  } = useSamplesTableManager(queryToAdd)
   const { viewport, setResponsive } = useResponsive()
-  const tableHeight = tableExpanded ? '75vh' : '800px' // required for the table height on expanded view
-  const minColumns = 5 // matches the current refine.bio
   const [tableExpanded, setTableExpanded] = useState(false)
-  // TEMPORARY
-  // for API calls(data, filter, pageSize, limit, offset, order)
-  // endpoint: v1/samples/
-  const [loading, setLoading] = useState(false)
-  const [tableData, setTableData] = useState([])
-  const [globalFilter, setGlobalFilter] = useState(null) // match the react-table useGlobalFilter API's names
-  const [page, setPage] = useState(0) // 'page' matches the react-table usePagination API's name
-  const [pageSize, setPageSize] = useState(pageSizes[0]) // match the react-table usePagination API's names
-  const defaultParams = { offset: page * pageSize, limit: pageSize }
-  const totalPages = tableData && tableData.count
-  const totalColumns =
-    tableData && sampleMetadataFields ? 4 + sampleMetadataFields.length : 0 // matches the current refine.bio
+  const tableHeight = tableExpanded ? '75vh' : '800px' // required for the table height on expanded view
   const data = useMemo(() => tableData.results, [tableData])
   const columns = useMemo(() => {
     const temp = [
@@ -130,55 +127,12 @@ export const SamplesTable = ({
 
     return temp
   }, [isImmutable, viewport])
-  const defaultColumn = useMemo(
-    () => ({ minWidth: 60, width: 160, maxWidth: 250 }),
-    []
-  )
+  const totalColumns =
+    tableData && sampleMetadataFields ? columns.length - 2 : 0 // excludes add/remove and hidden cells
 
   useEffect(() => {
-    // TEMPORARY (* for UI demo)
-    setLoading(true)
-
-    let url
-    let formattedParams
-
-    const getSamples = async (params) => {
-      setLoading(true)
-      const result = await api.samples.list(params)
-      setTableData(result)
-      setLoading(false)
-    }
-
-    if (queryToAdd.dataset_id) {
-      formattedParams = makeURLParams(queryToAdd)
-      if (queryToAdd.organism__name) {
-        url = `v1/samples/?${formattedParams}&offset=${
-          page * pageSize
-        }&limit=${pageSize}`
-        // eslint-disable-next-line no-console
-        console.log(url)
-        getSamplesByOrganismName(queryToAdd.organism__name, setTableData)
-      }
-
-      if (queryToAdd.experiment_accession_code) {
-        if (queryToAdd.experiment_accession_code) {
-          url = `v1/samples/?${formattedParams}&offset=${
-            page * pageSize
-          }&limit=${pageSize}`
-          // eslint-disable-next-line no-console
-          console.log(url)
-          getSamplesTableData(
-            queryToAdd.experiment_accession_code,
-            pageSize,
-            setTableData
-          )
-        }
-      }
-      setLoading(false)
-    } else {
-      getSamples({ ...queryToAdd, ...defaultParams })
-    }
-  }, [globalFilter, page, pageSize])
+    getSamplesTableData()
+  }, [])
 
   return (
     <>
@@ -208,10 +162,10 @@ export const SamplesTable = ({
             margin={{ bottom: setResponsive('medium', 'none') }}
           >
             <PageSizes
-              pageSize={pageSize}
+              pageSize={samplesTable.pageSize}
               pageSizes={pageSizes}
               totalPages={totalPages}
-              setPageSize={setPageSize}
+              setPageSize={updatePageSize}
             />
             <Box
               margin={{
@@ -224,8 +178,8 @@ export const SamplesTable = ({
           </Box>
           <Box direction="row">
             <GlobalFilter
-              globalFilter={globalFilter}
-              setGlobalFilter={setGlobalFilter}
+              globalFilter={samplesTable.filterBy}
+              setGlobalFilter={updateFilterBy}
             />
             {!modalView &&
               viewport === 'large' &&
@@ -246,8 +200,8 @@ export const SamplesTable = ({
               />
             </Box>
           ) : (
-            <TextHighlightContextProvider match={globalFilter}>
-              {tableData?.results?.length && (
+            <TextHighlightContextProvider match={samplesTable.filterBy}>
+              {hasSamples && (
                 <DataTable
                   columns={columns}
                   data={data}
@@ -294,10 +248,10 @@ export const SamplesTable = ({
           margin={{ top: 'medium' }}
         >
           <Pagination
-            page={page}
-            pageSize={pageSize}
-            setPage={setPage}
+            page={samplesTable.page}
+            pageSize={samplesTable.pageSize}
             totalPages={totalPages}
+            setPage={updatePage}
           />
         </Box>
       </Box>
