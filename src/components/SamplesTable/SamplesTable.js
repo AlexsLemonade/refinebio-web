@@ -36,7 +36,7 @@ export const SamplesTable = ({
 }) => {
   const { pageSizes } = options
   const { viewport, setResponsive } = useResponsive()
-  const tableHeight = { default: '60vh', expanded: '75vh' } // required for a table loading screen
+  const tableHeight = tableExpanded ? '75vh' : '800px' // required for the table height on expanded view
   const minColumns = 5 // matches the current refine.bio
   const [tableExpanded, setTableExpanded] = useState(false)
   // TEMPORARY
@@ -90,7 +90,7 @@ export const SamplesTable = ({
         accessor: 'id',
         isVisible: false
       },
-      // map the available columns in the experiment.sample_metadata
+      // maps the available columns in the experiment.sample_metadata
       ...sampleMetadataFields.map((column) => ({
         id: column,
         accessor: column,
@@ -112,11 +112,11 @@ export const SamplesTable = ({
         Cell: CellAdditionalMetadata
       }
     ]
-    // columns stick to left only for 'large'(enough screen real estate)
+    // makes columns stick to left only for 'large' (enough screen real estate)
     if (viewport === 'large') {
       let stickyColumns = 3
       let i = 0
-      // if the dataset is immutable, remove the add/remove button
+      // removes the add/remove button if the dataset is immutable
       if (isImmutable) {
         temp.shift()
         stickyColumns = 2
@@ -127,7 +127,7 @@ export const SamplesTable = ({
     }
 
     return temp
-  }, [isImmutable, tableData, viewport])
+  }, [isImmutable, viewport])
   const defaultColumn = useMemo(
     () => ({ minWidth: 60, width: 160, maxWidth: 250 }),
     []
@@ -190,7 +190,7 @@ export const SamplesTable = ({
           position: tableExpanded ? 'fixed' : 'relative',
           top: 0,
           left: 0,
-          zIndex: tableExpanded ? 5 : 'inherit'
+          zIndex: tableExpanded ? 10 : 'inherit'
         }}
       >
         <Row
@@ -235,10 +235,7 @@ export const SamplesTable = ({
               )}
           </Box>
         </Row>
-        <Box
-          height={tableExpanded ? tableHeight.expanded : tableHeight.default}
-          style={{ position: 'relative' }}
-        >
+        <Box height={tableHeight} style={{ position: 'relative' }}>
           {loading ? (
             <Box align="center" fill justify="center">
               <Spinner
@@ -258,9 +255,8 @@ export const SamplesTable = ({
                     .map((column) => column.accessor)}
                   loading={loading}
                   manualPagination
-                  tableDefaultHeight={tableHeight.default}
-                  tableExpandedHeight={tableHeight.expanded}
                   tableExpanded={tableExpanded}
+                  tableHeight={tableHeight}
                 />
               )}
             </TextHighlightContextProvider>
