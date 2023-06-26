@@ -26,7 +26,11 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
     updateSamplesTableQuery()
   }
 
-  const updatePageSize = () => {}
+  const updatePageSize = (newPageSize) => {
+    samplesTable.pageSize = newPageSize
+
+    updateSamplesTableQuery(true)
+  }
 
   /* Filter Term */
   const updateFilterBy = () => {}
