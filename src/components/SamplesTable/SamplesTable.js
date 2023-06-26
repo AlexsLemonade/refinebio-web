@@ -19,7 +19,7 @@ import { Pagination } from 'components/shared/Pagination'
 import { Row } from 'components/shared/Row'
 import { TextNull } from 'components/shared/TextNull'
 import { links, options } from 'config'
-import styled, { css } from 'styled-components'
+import { SamplesTableEmpty } from './SamplesTableEmpty'
 import {
   CellAccessionCode,
   CellAddRemove,
@@ -28,22 +28,6 @@ import {
   CellSampleMetadata,
   CellTitle
 } from './cells'
-
-const PlaceHolderBox = styled(Box)`
-  align-items: center;
-  justify-content: center;
-  padding-top: 32px;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-
-  ${({ background }) =>
-    css`
-      background: ${background || 'rgba(255, 255, 255, 0.8)'};
-    `};
-`
 
 export const SamplesTable = ({
   experimentSampleAssociations,
@@ -161,9 +145,9 @@ export const SamplesTable = ({
       <Box
         animation={tableExpanded ? { type: 'zoomIn', duration: 250 } : {}}
         background="white"
+        height={tableExpanded ? '100vh' : '100%'}
+        width={tableExpanded ? '100vw' : '100%'}
         style={{
-          width: tableExpanded ? '100vw' : '100%',
-          height: tableExpanded ? '100vh' : '100%',
           position: tableExpanded ? 'fixed' : 'relative',
           top: 0,
           left: 0,
@@ -221,6 +205,7 @@ export const SamplesTable = ({
               columns={columns}
               data={data || []}
               defaultColumn={defaultColumn}
+              hasTableData={hasSamples}
               hiddenColumns={columns
                 .filter((column) => column.isVisible === false)
                 .map((column) => column.accessor)}
@@ -230,7 +215,7 @@ export const SamplesTable = ({
               tableExpanded={tableExpanded}
             />
             {!hasSamples && samplesTable.filterBy && (
-              <PlaceHolderBox background="none">
+              <SamplesTableEmpty>
                 <TextNull
                   text={
                     <>
@@ -245,16 +230,16 @@ export const SamplesTable = ({
                     </>
                   }
                 />
-              </PlaceHolderBox>
+              </SamplesTableEmpty>
             )}
             {!loading && !hasSamples && !samplesTable.filterBy && (
-              <PlaceHolderBox background="none">
+              <SamplesTableEmpty>
                 <TextNull text="No rows found" />
-              </PlaceHolderBox>
+              </SamplesTableEmpty>
             )}
           </TextHighlightContextProvider>
           {loading && (
-            <PlaceHolderBox>
+            <SamplesTableEmpty background="rgbaLight7">
               <Spinner
                 color="gray-shade-70"
                 message={{
@@ -262,7 +247,7 @@ export const SamplesTable = ({
                   end: 'Data loaded'
                 }}
               />
-            </PlaceHolderBox>
+            </SamplesTableEmpty>
           )}
         </BoxBlock>
         {hasSamples && (

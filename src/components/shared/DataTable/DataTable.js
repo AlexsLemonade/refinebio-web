@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-props-no-spreading */
-import { useEffect, useState, useRef, memo } from 'react'
+import { memo, useEffect, useMemo, useRef, useState } from 'react'
 import {
   useFlexLayout,
   useResizeColumns,
@@ -23,9 +23,10 @@ import {
 } from './utils'
 
 export const DataTable = ({
-  columns,
-  data,
+  columns: tableColumns,
+  data: tableData,
   defaultColumn = {},
+  hasTableData,
   hiddenColumns = [],
   manualPagination = false,
   tableExpanded,
@@ -44,7 +45,8 @@ export const DataTable = ({
     rootMargin: '0px',
     threshold: 0.8
   }).isIntersecting
-
+  const columns = useMemo(() => tableColumns, [tableColumns])
+  const data = useMemo(() => tableData, [tableData])
   const tableInstance = useTable(
     {
       columns,
@@ -82,7 +84,7 @@ export const DataTable = ({
         color: 'gray-shade-20',
         side: 'all'
       }}
-      height={{ min: '160px' }}
+      height={{ min: hasTableData ? 'auto' : '160px' }}
       margin={{
         horizontal: tableExpanded ? 'basex6' : 'none'
       }}
