@@ -16,7 +16,8 @@ export const SamplesTableManagerContextProvider = ({ children }) => {
     ),
     // the default number of columns to display
     minColumns: 5,
-    page
+    page,
+    pageSize: pageSizes[0]
   })
   const [samplesTable, setSamplesTable] = useState({
     page,

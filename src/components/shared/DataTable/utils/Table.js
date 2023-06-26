@@ -78,6 +78,7 @@ const TableCell = styled(Box)`
   ${({ theme, type }) =>
     type === 'th' &&
     css`
+      border-bottom: 1px solid ${theme.global.colors[borderColor]}!important;
       box-shadow: 5px 2px 15px ${theme.global.colors[borderColor]};
       height: 44px;
     `}

@@ -20,10 +20,20 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
   const totalPages = (tableData && tableData.count) || 0
 
   /* Common */
+  const resetPage = () => {
+    samplesTable.page = config.page
+    setSamplesTable({ ...samplesTable })
+  }
+
   const updatePage = (newPage) => {
     samplesTable.page = newPage
 
     updateSamplesTableQuery()
+  }
+
+  const restPageSize = () => {
+    samplesTable.pageSize = config.pageSize
+    setSamplesTable({ ...samplesTable })
   }
 
   const updatePageSize = (newPageSize) => {
@@ -32,8 +42,21 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
     updateSamplesTableQuery(true)
   }
 
+  const resetCommonQueries = () => {
+    resetPage()
+    restPageSize()
+  }
+
   /* Filter Term */
-  const updateFilterBy = () => {}
+  const updateFilterBy = (newFilterTerm) => {
+    if (newFilterTerm === '') {
+      delete samplesTable.filterBy
+    } else {
+      samplesTable.filterBy = newFilterTerm
+    }
+
+    updateSamplesTableQuery(true)
+  }
 
   /* Sort Order */
   const updateSortBy = () => {}
@@ -60,11 +83,13 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
     const response = await api.samples.get(samplesTableQuery)
     setTableData(response)
     setLoading(false)
+
+    if (!hasSamplesInDataset) resetCommonQueries()
   }
 
   const updateSamplesTableQuery = (reset = false) => {
     if (reset) {
-      samplesTable.page = config.page
+      resetPage()
     }
 
     samplesTable.reset = reset
