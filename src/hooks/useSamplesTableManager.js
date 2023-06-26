@@ -16,7 +16,25 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
   const [loading, setLoading] = useState(false)
   const [tableData, setTableData] = useState([])
   const hasSamples = tableData?.results?.length > 0
+  const hasSamplesInDataset = tableData?.results?.length > 0 // TEMP
   const totalPages = (tableData && tableData.count) || 0
+
+  /* Common */
+  const updatePage = () => {}
+
+  const updatePageSize = () => {}
+
+  /* Filter Term */
+  const updateFilterBy = () => {}
+
+  /* Sort Order */
+  const updateSortBy = () => {}
+
+  /* Other */
+  // TEMP
+  const addSample = (id) => id
+
+  const removeSample = (id) => id
 
   const getSamplesTableData = async () => {
     const {
@@ -38,23 +56,18 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
 
   const updateSamplesTableQuery = () => {}
 
-  const updateFilterBy = () => {}
-
-  const updatePage = () => {}
-
-  const updatePageSize = () => {}
-
-  const updateSortBy = () => {}
-
   return {
     config,
     setConfig,
     samplesTable,
     setSamplesTable,
     hasSamples,
+    hasSamplesInDataset,
     loading,
     tableData,
     totalPages,
+    addSample,
+    removeSample,
     getSamplesTableData,
     updateFilterBy,
     updatePage,

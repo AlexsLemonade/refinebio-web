@@ -58,6 +58,7 @@ export const SamplesTable = ({
   const {
     config: { defaultColumn, minColumns },
     hasSamples,
+    hasSamplesInDataset,
     loading,
     samplesTable,
     totalPages,
@@ -194,7 +195,7 @@ export const SamplesTable = ({
               }}
             >
               <CheckBox
-                disabled={!hasSamples}
+                disabled={!hasSamplesInDataset} // TEMP
                 label="Show only samples in current dataset"
               />
             </Box>
