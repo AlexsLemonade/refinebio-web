@@ -20,7 +20,11 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
   const totalPages = (tableData && tableData.count) || 0
 
   /* Common */
-  const updatePage = () => {}
+  const updatePage = (newPage) => {
+    samplesTable.page = newPage
+
+    updateSamplesTableQuery()
+  }
 
   const updatePageSize = () => {}
 
@@ -54,7 +58,16 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
     setLoading(false)
   }
 
-  const updateSamplesTableQuery = () => {}
+  const updateSamplesTableQuery = (reset = false) => {
+    if (reset) {
+      samplesTable.page = config.page
+    }
+
+    samplesTable.reset = reset
+
+    setSamplesTable({ ...samplesTable })
+    getSamplesTableData()
+  }
 
   return {
     config,
