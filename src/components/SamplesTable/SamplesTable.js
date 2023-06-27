@@ -50,7 +50,8 @@ export const SamplesTable = ({
     getSamplesTableData,
     updateFilterBy,
     updatePage,
-    updatePageSize
+    updatePageSize,
+    updateSortBy
   } = useSamplesTableManager(queryToAdd)
   const { viewport, setResponsive } = useResponsive()
   const [tableExpanded, setTableExpanded] = useState(false)
@@ -213,6 +214,7 @@ export const SamplesTable = ({
               manualPagination
               tableHeight={tableHeight}
               tableExpanded={tableExpanded}
+              updateSortBy={updateSortBy}
             />
             {!hasSamples && samplesTable.filterBy && (
               <SamplesTableEmpty>

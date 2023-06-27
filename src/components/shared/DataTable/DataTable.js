@@ -30,7 +30,8 @@ export const DataTable = ({
   hiddenColumns = [],
   manualPagination = false,
   tableExpanded,
-  tableHeight // required for the expanded table view
+  tableHeight, // required for the expanded table view
+  updateSortBy
 }) => {
   const tableRef = useRef(null)
   const firstCellRef = useRef(null)
@@ -53,7 +54,8 @@ export const DataTable = ({
       data,
       defaultColumn,
       initialState: { hiddenColumns },
-      manualPagination
+      manualPagination,
+      autoResetSortBy: false
     },
     useResizeColumns,
     useFlexLayout,
@@ -67,7 +69,8 @@ export const DataTable = ({
     rows,
     prepareRow,
     state: {
-      columnResizing: { columnWidths }
+      columnResizing: { columnWidths },
+      sortBy
     }
   } = tableInstance
   const [cellWidths, setCellWidths] = useState({})
@@ -77,6 +80,18 @@ export const DataTable = ({
       setCellWidths((prev) => ({ ...prev, columnWidths }))
     }
   }, [columnWidths])
+
+  useEffect(() => {
+    if (updateSortBy) {
+      updateSortBy(
+        sortBy.length > 0
+          ? sortBy[0].desc
+            ? `-${sortBy[0].id}`
+            : sortBy[0].id
+          : ''
+      )
+    }
+  }, [sortBy])
 
   return (
     <Box

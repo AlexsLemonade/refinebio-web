@@ -59,7 +59,15 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
   }
 
   /* Sort Order */
-  const updateSortBy = () => {}
+  const updateSortBy = (newSortBy) => {
+    if (newSortBy === '') {
+      delete samplesTable.sortBy
+    } else {
+      samplesTable.sortBy = newSortBy
+    }
+
+    updateSamplesTableQuery(true)
+  }
 
   /* Other */
   // TEMP
