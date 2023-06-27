@@ -6,7 +6,7 @@ import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
 
-// TODO: add/remove implementation once complete the dataset implementation
+// TODO: finalize the implementation once the dataset manager (addSample/removeSample) is completed
 export const CellAddRemove = ({ experimentAccessionCodes, sample }) => {
   // creates a dataset slice with all of the experiments that are referring this sample
   // in order to update all of the experiments when it's added or removed

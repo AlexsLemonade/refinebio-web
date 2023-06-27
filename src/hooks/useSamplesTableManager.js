@@ -1,8 +1,10 @@
 import { useContext, useState } from 'react'
+import { DatasetContext } from 'contexts/DatasetContext'
 import { SamplesTableManagerContext } from 'contexts/SamplesTableManagerContext'
 import { api } from 'api'
 
 export const useSamplesTableManager = (queryToAdd = {}) => {
+  const { datasetId } = useContext(DatasetContext) // TEMP
   const {
     config: configState,
     setConfig: setConfigState,
@@ -16,7 +18,7 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
   const [loading, setLoading] = useState(false)
   const [tableData, setTableData] = useState([])
   const hasSamples = tableData?.results?.length > 0
-  const hasSamplesInDataset = tableData?.results?.length > 0 // TEMP
+  const hasSamplesInDataset = datasetId !== null // TODO: this should checks any proessed samples in the dataset
   const totalPages = (tableData && tableData.count) || 0
 
   /* Common */
@@ -70,10 +72,10 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
   }
 
   /* Other */
-  // TEMP
-  const addSample = (id) => id
+  // TODO: finalize the implementation once the dataset manager (addSample/removeSample) is completed
+  const addSample = (id) => id // TEMP
 
-  const removeSample = (id) => id
+  const removeSample = (id) => id // TEMP
 
   const getSamplesTableData = async () => {
     const {
@@ -92,7 +94,7 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
     setTableData(response)
     setLoading(false)
 
-    if (!hasSamplesInDataset) resetCommonQueries()
+    if (!hasSamples) resetCommonQueries()
   }
 
   const updateSamplesTableQuery = (reset = false) => {
