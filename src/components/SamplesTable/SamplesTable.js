@@ -8,11 +8,8 @@ import { Box, CheckBox, Spinner, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { BoxBlock } from 'components/shared/BoxBlock'
 import { Button } from 'components/shared/Button'
-import {
-  DataTable,
-  ExpandTableButton,
-  GlobalFilter
-} from 'components/shared/DataTable'
+import { DataTable, ExpandTableButton } from 'components/shared/DataTable'
+import { FilterTextInput } from 'components/shared/FilterTextInput'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Overlay } from 'components/shared/Ovevrlay'
 import { PageSizes } from 'components/shared/PageSizes'
@@ -188,10 +185,17 @@ export const SamplesTable = ({
             </Box>
           </Box>
           <Box direction="row">
-            <GlobalFilter
-              globalFilter={samplesTable.filterBy}
-              setGlobalFilter={updateFilterBy}
-            />
+            <Box
+              direction="row"
+              justify="start"
+              align={setResponsive('start', 'center')}
+            >
+              <FilterTextInput
+                filter={samplesTable.filterBy}
+                setFilter={updateFilterBy}
+                placeholder="Filter samples"
+              />
+            </Box>
             {!modalView &&
               viewport === 'large' &&
               totalColumns > minColumns && (

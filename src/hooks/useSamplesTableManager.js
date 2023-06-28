@@ -19,7 +19,7 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
   const [hasError, setHasError] = useState(false)
   const [tableData, setTableData] = useState([])
   const hasSamples = tableData?.results?.length > 0
-  const hasSamplesInDataset = datasetId !== null // TODO: this should checks any proessed samples in the dataset
+  const hasSamplesInDataset = datasetId !== null // TODO: this should check any processed samples in the dataset
   const totalPages = (tableData && tableData.count) || 0
 
   /* Common */

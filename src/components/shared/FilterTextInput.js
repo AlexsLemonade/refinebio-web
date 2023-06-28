@@ -25,12 +25,8 @@ export const FilterTextInput = ({ filter, setFilter, placeholder = '' }) => {
   }
 
   return (
-    <>
-      <Text
-        margin={{ right: 'small', bottom: setResponsive('xsmall', 'none') }}
-      >
-        Filter
-      </Text>
+    <Box direction="row" align="center" gap="small">
+      <Text>Filter</Text>
       <FormField
         htmlFor="filter-text-input"
         a11yTitle="Filter Text Input Field"
@@ -64,7 +60,7 @@ export const FilterTextInput = ({ filter, setFilter, placeholder = '' }) => {
           </Box>
         )}
       </FormField>
-    </>
+    </Box>
   )
 }
 
