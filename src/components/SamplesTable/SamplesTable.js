@@ -7,6 +7,7 @@ import formatString from 'helpers/formatString'
 import { Box, CheckBox, Spinner, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { BoxBlock } from 'components/shared/BoxBlock'
+import { Button } from 'components/shared/Button'
 import {
   DataTable,
   ExpandTableButton,
@@ -41,6 +42,7 @@ export const SamplesTable = ({
   } = options
   const {
     config: { defaultColumn, minColumns },
+    hasError,
     hasSamples,
     hasSamplesInDataset,
     loading,
@@ -234,13 +236,8 @@ export const SamplesTable = ({
                 />
               </SamplesTableEmpty>
             )}
-            {!loading && !hasSamples && !samplesTable.filterBy && (
-              <SamplesTableEmpty>
-                <TextNull text="No rows found" />
-              </SamplesTableEmpty>
-            )}
           </TextHighlightContextProvider>
-          {loading && (
+          {loading ? (
             <SamplesTableEmpty background="rgbaLight7">
               <Spinner
                 color="gray-shade-70"
@@ -250,6 +247,25 @@ export const SamplesTable = ({
                 }}
               />
             </SamplesTableEmpty>
+          ) : (
+            hasError && (
+              <SamplesTableEmpty background="rgbaLight7">
+                <Box direction="row" gap="xxsmall">
+                  <Text color="error">
+                    Temporarily under heavy traffic load. Please
+                  </Text>
+                  <Button
+                    label="try again"
+                    link
+                    linkColor="error"
+                    linkFontSize="medium"
+                    onClick={getSamplesTableData}
+                    className="color-error"
+                  />
+                  <Text color="error">later.</Text>
+                </Box>
+              </SamplesTableEmpty>
+            )
           )}
         </BoxBlock>
         {hasSamples && (

@@ -16,6 +16,7 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
   const samplesTable = samplesTableState
   const setSamplesTable = setSamplesTableState
   const [loading, setLoading] = useState(false)
+  const [hasError, setHasError] = useState(false)
   const [tableData, setTableData] = useState([])
   const hasSamples = tableData?.results?.length > 0
   const hasSamplesInDataset = datasetId !== null // TODO: this should checks any proessed samples in the dataset
@@ -91,10 +92,12 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
 
     setLoading(true)
     const response = await api.samples.get(samplesTableQuery)
-    setTableData(response)
-    setLoading(false)
 
     if (!hasSamples) resetCommonQueries()
+
+    setHasError((response.ok && response.ok === false) || false)
+    setTableData(response)
+    setLoading(false)
   }
 
   const updateSamplesTableQuery = (reset = false) => {
@@ -113,6 +116,7 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
     setConfig,
     samplesTable,
     setSamplesTable,
+    hasError,
     hasSamples,
     hasSamplesInDataset,
     loading,
