@@ -6,7 +6,6 @@ import { Row } from 'components/shared/Row'
 const Card = ({
   align = 'end',
   direction = 'row',
-  flexValue,
   heading,
   body,
   img: { url, position },
@@ -21,7 +20,6 @@ const Card = ({
       {...props}
     >
       <Column
-        flexValue={flexValue}
         align={setResponsive('center', 'start')}
         justify={setResponsive('start', 'center')}
       >
@@ -36,9 +34,8 @@ const Card = ({
       </Column>
       <Column
         align={setResponsive('center', align)}
-        flexValue={flexValue}
-        margin={{ bottom: 'small' }}
         aria-hidden
+        basis={setResponsive('auto', 'full')}
         background={{
           image: `url('${url}')`,
           position: setResponsive('center', position),
@@ -47,6 +44,7 @@ const Card = ({
         }}
         // to preserve the height of SVG image
         height={setResponsive('195px', '240px', '300px')}
+        margin={{ bottom: 'small' }}
         width="100%"
       />
     </Row>
@@ -98,7 +96,6 @@ export const AboutOverviewSection = () => {
       sample. In turn researchers will be able to better classify patients and identify what types 
       of treatments might be most effective on a case-by-case basis, further enhancing the 
       burgeoning field of precision medicine."
-          flexValue={setResponsive('1 1 auto', 'auto')}
           img={{
             url: 'illustration-network-bottle.svg',
             position: 'center right'

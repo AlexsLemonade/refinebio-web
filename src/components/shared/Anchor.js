@@ -27,6 +27,7 @@ export const Anchor = ({
       color={linkColor}
       underline={underline}
       underlineOnHover={underlineOnHover}
+      target="_blank"
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />
