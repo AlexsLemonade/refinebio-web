@@ -4,7 +4,7 @@ import { GlobalStyle } from 'styles/GlobalStyle'
 import { Grommet } from 'grommet'
 import { Layout } from 'components/Layout'
 import { theme } from 'themes'
-import { BandContextvProvider } from 'contexts/BandContext'
+import { BandContextProvider } from 'contexts/BandContext'
 import { DatasetContextProvider } from 'contexts/DatasetContext'
 import { SearchManagerContextProvider } from 'contexts/SearchManagerContext'
 import { ModalContextProvider } from 'contexts/ModalContext'
@@ -23,7 +23,7 @@ const App = ({ Component, pageProps }) => {
         <RefinebioContextProvider>
           <SearchManagerContextProvider>
             <DatasetContextProvider>
-              <BandContextvProvider>
+              <BandContextProvider>
                 <Layout>
                   <Sentry.ErrorBoundary fallback={Fallback} showDialog>
                     <ModalContextProvider>
@@ -32,7 +32,7 @@ const App = ({ Component, pageProps }) => {
                     </ModalContextProvider>
                   </Sentry.ErrorBoundary>
                 </Layout>
-              </BandContextvProvider>
+              </BandContextProvider>
             </DatasetContextProvider>
           </SearchManagerContextProvider>
         </RefinebioContextProvider>
