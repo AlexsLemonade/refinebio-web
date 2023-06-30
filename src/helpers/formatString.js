@@ -1,9 +1,7 @@
-import { isEmptyStr } from 'helpers/isEmptyStr'
 // Returns a formatted string
 // e.g) 'HOMO_SAPIENS' to 'Homo sapiens'
-
-export function formatString(str) {
-  const temp = str.toLowerCase().replace(/_/g, ' ')
-
-  return !isEmptyStr(str) ? temp.charAt(0).toUpperCase() + temp.slice(1) : null
+export function formatString([first = '', ...rest]) {
+  return [first.toUpperCase(), ...rest.join('').toLowerCase()]
+    .join('')
+    .replace(/_/g, ' ')
 }

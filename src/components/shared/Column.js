@@ -1,13 +1,18 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
 
-export const Column = ({ flexValue = '1 1 0', children, ...props }) => {
+export const Column = ({
+  basis = 'full',
+  flex = { grow: 1, shrink: 1 },
+  children,
+  ...props
+}) => {
   const { viewport, setResponsive } = useResponsive()
   return (
     <Box
-      flexValue={flexValue}
+      flex={flex}
+      basis={basis}
       viewport={viewport}
-      style={{ flex: setResponsive('1 1 auto', flexValue) }}
       width={setResponsive('100%', 'auto')}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}

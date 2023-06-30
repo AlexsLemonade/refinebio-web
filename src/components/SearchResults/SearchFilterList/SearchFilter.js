@@ -1,10 +1,11 @@
+/* eslint-disable no-nested-ternary */
 import { useState, useMemo } from 'react'
 import { useFilter } from 'hooks/useFilter'
 import { formatNumbers } from 'helpers/formatNumbers'
 import { formatString } from 'helpers/formatString'
 import { isChecked } from 'helpers/search'
 import { isLastIndex } from 'helpers/isLastIndex'
-import { Box, CheckBox, Heading } from 'grommet'
+import { Box, CheckBox, Grid, Heading } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
 import { SearchBox } from 'components/shared/SearchBox'
 import { TextNull } from 'components/shared/TextNull'
@@ -17,6 +18,12 @@ const ToggleButton = styled(sharedButton)`
       border-bottom: 1px solid ${theme.global.colors.brand};
     }
   `}
+
+  ${({ hidden }) =>
+    hidden &&
+    css`
+      visibility: hidden;
+    `}
 `
 export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
   const { filter, toggleFilter } = useFilter()
@@ -62,7 +69,7 @@ export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
         />
       )}
 
-      <Box
+      <Grid
         margin={{ top: 'xsmall' }}
         animation={openOptions ? { type: 'fadeIn', duration: 1000 } : {}}
       >
@@ -78,7 +85,7 @@ export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
             />
           </Box>
         ))}
-      </Box>
+      </Grid>
 
       {filteredOptions.length === 0 && <TextNull text="No match found" />}
 

@@ -21,7 +21,6 @@ const CustomButton = styled(GrommetButton)`
     large &&
     css`
       font-size: ${viewport !== 'small' ? '20px' : '16px'};
-      padding: ${viewport !== 'small' ? '16px 32px' : '4px 24px'};
     `}  
   ${({ theme, light, primary }) =>
     primary &&
@@ -93,8 +92,7 @@ export const Button = ({
   clickHandler,
   ...props
 }) => {
-  const { viewport } = useResponsive()
-
+  const { viewport, setResponsive } = useResponsive()
   return (
     <Box
       responsive={responsive}
@@ -141,6 +139,16 @@ export const Button = ({
           viewport={viewport}
           width={width}
           onClick={clickHandler}
+          pad={setResponsive(
+            {
+              vertical: 'xxsmall',
+              horizontal: 'large'
+            },
+            {
+              vertical: 'small',
+              horizontal: 'large'
+            }
+          )}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...props}
         />

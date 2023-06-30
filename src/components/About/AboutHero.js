@@ -92,13 +92,14 @@ export const AboutHero = () => {
     <FixedContainer>
       <Hero
         header={<HeroHeader />}
-        body={<HeroBody />}
         boxPadding={{
           horizontal: setResponsive('small', 'xlarge'),
           vertical: setResponsive('small', 'large')
         }}
         marginBottom="xlarge"
-      />
+      >
+        <HeroBody />
+      </Hero>
     </FixedContainer>
   )
 }
