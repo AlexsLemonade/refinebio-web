@@ -9,16 +9,13 @@ import { CompendiaDownload } from './CompendiaDownload'
 export const CompendiaDownloadBlock = ({ type }) => {
   const { setResponsive } = useResponsive()
   const isNormalized = type === 'normalized'
-
   const svgImage = isNormalized
     ? 'normalizaed-curve.svg'
     : 'gene-expression-matrix.svg'
-
   const heading = isNormalized
     ? 'Normalized Compendia'
     : 'RNA-seq Sample Compendia'
-
-  const TextContent = (
+  const paragraph = (
     <Paragraph color="white" size="xlarge">
       {isNormalized ? (
         'Normalized Compendia are the collection of all the samples available on refine.bio, aggregated and normalized by species.'
@@ -75,14 +72,10 @@ export const CompendiaDownloadBlock = ({ type }) => {
             {heading}
           </Heading>
           <Row direction={setResponsive('column', 'column', 'row')}>
-            <Column
-              flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')}
-              margin={{ right: setResponsive('none', 'none', 'xlarge') }}
-            >
-              {TextContent}
+            <Column margin={{ right: setResponsive('none', 'none', 'xlarge') }}>
+              {paragraph}
             </Column>
             <Column
-              flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')}
               margin={{
                 top: setResponsive('medium', 'medium', 'none'),
                 left: setResponsive('none', 'none', 'xlarge')

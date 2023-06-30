@@ -5,7 +5,7 @@ import { LogoSvg } from '../../images/logo.svg'
 
 // NOTE: Set the prop 'light' to true for the dark background
 
-export const Logo = ({ clickHandler, light = false }) => {
+export const LogoAnchor = ({ clickHandler, light = false }) => {
   return (
     <Box light={light}>
       <Anchor
@@ -22,4 +22,4 @@ export const Logo = ({ clickHandler, light = false }) => {
   )
 }
 
-export default Logo
+export default LogoAnchor

@@ -3,11 +3,9 @@ import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
-import { FixedContainer } from 'components/shared/FixedContainer'
-import { Hero } from 'components/shared/Hero'
 import { SearchBox } from 'components/shared/SearchBox'
 
-const HeroBody = () => {
+export const HeroBody = () => {
   const { setResponsive } = useResponsive()
   const { navigateToSearch } = useSearchManager()
   const [userInput, setUserInput] = useState()
@@ -63,21 +61,4 @@ const HeroBody = () => {
   )
 }
 
-export const HomeHero = () => {
-  const { setResponsive } = useResponsive()
-  return (
-    <FixedContainer>
-      <Hero
-        body={<HeroBody />}
-        boxPadding={{
-          horizontal: setResponsive('large', 'basex12'),
-          vertical: setResponsive('large', 'basex8')
-        }}
-        // fixed width to preserve UI layout in wider screens
-        boxWidth="815px"
-      />
-    </FixedContainer>
-  )
-}
-
-export default HomeHero
+export default HeroBody

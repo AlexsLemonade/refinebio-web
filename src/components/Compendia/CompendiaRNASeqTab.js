@@ -13,7 +13,6 @@ const Card = ({ heading, pad, children }) => {
 
   return (
     <Column
-      flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')}
       margin={{
         top: setResponsive('xlarge', 'basex6')
       }}
@@ -31,7 +30,7 @@ const Card = ({ heading, pad, children }) => {
   )
 }
 
-export const CompendiaRNASeqTab = ({ type }) => {
+export const CompendiaRNASeqTab = ({ type = 'rna-seq' }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -77,7 +76,7 @@ export const CompendiaRNASeqTab = ({ type }) => {
               Note: This compendia is not normalized or aggregated.
             </Paragraph>
             <Button
-              aria-label="Go to refinebio docs - RNA-seq Sample Compendia"
+              aria-label="Go to the refinebio docs - RNA-seq Sample Compendia"
               href={links.refinebio_docs_rna_seq_sample_compendia}
               label="Learn More"
               margin={{ top: 'small' }}
@@ -99,7 +98,7 @@ export const CompendiaRNASeqTab = ({ type }) => {
               files by experiment or samples using our API.
             </Paragraph>
             <Button
-              aria-label="Go to refinebio API docs"
+              aria-label="Go to the refinebio API docs"
               href={links.refinebio_api_docs}
               label="Read the Docs"
               margin={{ top: 'small' }}
