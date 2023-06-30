@@ -10,7 +10,7 @@ import { LayerResponsive } from 'components/shared/LayerLayerResponsive'
 import { List } from 'components/shared/List'
 import { Icon } from 'components/shared/Icon'
 import { links } from 'config'
-import { Logo } from './Logo'
+import { LogoAnchor } from './LogoAnchor'
 import { NavDropDown } from './NavDropDown'
 import { NavLink } from './NavLink'
 import { NavIcon } from './NavIcon'
@@ -62,7 +62,10 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
           width={setResponsive('100vw', 'auto')}
         >
           {viewport === 'small' && (
-            <Logo margin={{ vertical: 'large' }} clickHandler={handleClick} />
+            <LogoAnchor
+              margin={{ vertical: 'large' }}
+              clickHandler={handleClick}
+            />
           )}
           <List
             alignItems={setResponsive('start', 'center')}
@@ -186,5 +189,3 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
     </>
   )
 }
-
-export default GlobalNav

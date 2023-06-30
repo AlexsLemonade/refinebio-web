@@ -25,11 +25,7 @@ export const DownloadDatasetDetails = ({ dataset, isImmutable }) => {
   return (
     <Box margin={{ top: 'large' }}>
       <Row margin={{ bottom: setResponsive('medium', 'none') }}>
-        <Heading
-          level={2}
-          margin={{ bottom: 'small' }}
-          size={setResponsive('h2XSmall', 'h2Small')}
-        >
+        <Heading level={2} margin={{ bottom: 'small' }}>
           Samples
         </Heading>
         {!isImmutable && <RemoveAllButton />}

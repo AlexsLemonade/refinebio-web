@@ -1,6 +1,5 @@
 import { useResponsive } from 'hooks/useResponsive'
 import formatString from 'helpers/formatString'
-import getHeadingSize from 'helpers/getHeadingSize'
 import { Box, Heading } from 'grommet'
 import { SamplesTable } from 'components/SamplesTable'
 import { TextCapitalized } from 'components/shared/TextCapitalized'
@@ -24,7 +23,7 @@ export const ModalContent = ({
       }}
     >
       <Box margin={{ bottom: 'medium' }}>
-        <Heading level={2} size={getHeadingSize('small', 2)}>
+        <Heading level={2} size="small">
           My Dataset -{' '}
           {isSpeciesView ? (
             <TextCapitalized

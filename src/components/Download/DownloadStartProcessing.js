@@ -1,5 +1,3 @@
-import { useResponsive } from 'hooks/useResponsive'
-import getHeadingSize from 'helpers/getHeadingSize'
 import { Box, Heading } from 'grommet'
 import { DownloadEmailForm } from './DownloadEmailForm'
 
@@ -7,30 +5,15 @@ import { DownloadEmailForm } from './DownloadEmailForm'
 // renders this component when no email is assigned
 
 export const DownloadStartProcessing = () => {
-  const { setResponsive } = useResponsive()
-
   const handleSubmitEmailForm = () => {}
 
   return (
     <Box align="center" alignSelf="center" width="640px">
-      <Heading
-        level={1}
-        margin={{ bottom: 'small' }}
-        size={setResponsive(
-          getHeadingSize('xsmall', 1),
-          getHeadingSize('small', 1)
-        )}
-      >
+      <Heading level={1} margin={{ bottom: 'small' }}>
         We&#39;re putting your download files together. It usually takes 15- 20
         minutes.
       </Heading>
-      <Heading
-        level={2}
-        size={setResponsive(
-          getHeadingSize('xsmall', 2),
-          getHeadingSize('small', 2)
-        )}
-      >
+      <Heading level={2}>
         Enter your email and we will email you when the files are ready for
         download.
       </Heading>

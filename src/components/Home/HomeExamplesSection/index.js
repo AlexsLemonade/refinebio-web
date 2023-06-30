@@ -1,43 +1,13 @@
 import { useResponsive } from 'hooks/useResponsive'
-import getHeadingSize from 'helpers/getHeadingSize'
-import { Box, Heading, Paragraph } from 'grommet'
+import { Box, Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
-import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
-import { HeadMapIcon } from '../../images/graphic-heatmap.svg'
-import { PathwayIcon } from '../../images/graphic-pathway.svg'
-import { WaySignsIcon } from '../../images/graphic-way-signs.svg'
-
-const Card = ({ heading, body, footer, svgIcon, ...props }) => {
-  const { setResponsive } = useResponsive()
-
-  return (
-    <Column
-      background="white"
-      pad={setResponsive('large', 'medium')}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-    >
-      <Box height="xxxlarge" margin={{ bottom: 'medium' }} aria-hidden>
-        {svgIcon}
-      </Box>
-      <Heading
-        level={4}
-        margin={{ bottom: 'small' }}
-        size={getHeadingSize('small', 4)}
-        weight="500"
-      >
-        {heading}
-      </Heading>
-      <Paragraph>{body}</Paragraph>
-      <Box align="center" margin={{ top: setResponsive('large', 'medium') }}>
-        {footer}
-      </Box>
-    </Column>
-  )
-}
+import { HeadMapIcon } from '../../../images/graphic-heatmap.svg'
+import { PathwayIcon } from '../../../images/graphic-pathway.svg'
+import { WaySignsIcon } from '../../../images/graphic-way-signs.svg'
+import { Card } from './Card'
 
 export const HomeExamplesSection = () => {
   const { setResponsive } = useResponsive()

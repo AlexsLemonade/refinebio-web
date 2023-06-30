@@ -1,5 +1,4 @@
 import formatString from 'helpers/formatString'
-import getHeadingSize from 'helpers/getHeadingSize'
 import truncateOnWord from 'helpers/truncateOnWord'
 import { Box, Heading, Text } from 'grommet'
 import { Accordion, AccordionPanel } from 'components/shared/Accordion'
@@ -10,7 +9,7 @@ const Title =
   (expand) =>
     (
       <>
-        <Heading level={5} weight="500" size={getHeadingSize('small', 5)}>
+        <Heading level={5} responsive={false} weight="500">
           {formatString(protocol.Type)}
         </Heading>
         <Text>

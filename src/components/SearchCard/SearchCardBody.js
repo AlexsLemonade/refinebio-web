@@ -9,17 +9,17 @@ export const SearchCardBody = ({
   alternateAccessionCode = '',
   description = '',
   publicationTitle = '',
-  sampleMetadataFields = []
+  sampleMetadataFields = [],
+  charLimit = 300
 }) => {
-  const maxLength = 300
   const [toggleDesciption, setToggleDescription] = useState(
-    description.length > maxLength
+    description.length > charLimit
   )
 
   return (
     <Box pad={{ top: 'medium', bottom: 'small' }}>
       <Box>
-        <Heading level={5} weight="500">
+        <Heading level={5} responsive={false} weight="500">
           Description
         </Heading>
         {description ? (
@@ -30,9 +30,9 @@ export const SearchCardBody = ({
           >
             <Paragraph>
               {toggleDesciption
-                ? `${description.slice(0, maxLength)} ...`
+                ? `${description.slice(0, charLimit)} ...`
                 : description}
-              {description.length > maxLength && (
+              {description.length > charLimit && (
                 <Text
                   color="brand"
                   margin={{ left: 'xsmall' }}
@@ -74,7 +74,7 @@ export const SearchCardBody = ({
         )}
       </Box>
       <Box margin={{ top: 'small' }}>
-        <Heading level={5} weight="500">
+        <Heading level={5} responsive={false} weight="500">
           Publication Title
         </Heading>
         {publicationTitle ? (
@@ -84,7 +84,7 @@ export const SearchCardBody = ({
         )}
       </Box>
       <Box margin={{ top: 'small' }}>
-        <Heading level={5} weight="500">
+        <Heading level={5} responsive={false} weight="500">
           Alternate Accession IDs
         </Heading>
         {alternateAccessionCode ? (
@@ -94,7 +94,7 @@ export const SearchCardBody = ({
         )}
       </Box>
       <Box margin={{ top: 'small' }}>
-        <Heading level={5} weight="500">
+        <Heading level={5} responsive={false} weight="500">
           Sample Metadata Fields
         </Heading>
         <Box direction="row">

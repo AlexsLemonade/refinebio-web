@@ -73,7 +73,7 @@ export const colors = {
   /* Others
   */
   // status
-  error: '#DB3B28',
+  error: '#E56E60',
   info: '#002F6C', // 'alex-navy'
   'info-bg': '#D6E8FF', // 'alex-navy-tint-90'
   success: '#41A36D', // 'pastel-green'
@@ -98,6 +98,7 @@ export const colors = {
   rgbaLight2: 'rgba(255, 255, 255, 0.2)',
   rgba4: 'rgba(0, 0, 0, 0.4)',
   rgba6: 'rgba(0, 0, 0, 0.6)',
+  rgba3: 'rgba(0, 0, 0, 0.3)',
   // Social Media
   twitter: '#55acee',
   // default font color

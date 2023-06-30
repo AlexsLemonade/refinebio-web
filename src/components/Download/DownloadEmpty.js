@@ -7,11 +7,7 @@ export const DownloadEmpty = () => {
 
   return (
     <Box align="center">
-      <Heading
-        level={1}
-        margin={{ bottom: 'small' }}
-        size={setResponsive('h1XSmall', 'h1Small')}
-      >
+      <Heading level={1} margin={{ bottom: 'small' }}>
         Your dataset is empty
       </Heading>
       <Button
