@@ -20,7 +20,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const { asPath, pathname, push } = router
   const { viewport, setResponsive } = useResponsive()
   // TEMPORARY
-  const { dataset, getDataset } = useDataset()
+  const { dataset } = useDataset()
   const [totalSamples, setTotalSamples] = useState()
 
   useEffect(() => {
