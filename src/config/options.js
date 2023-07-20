@@ -3,6 +3,11 @@ export const options = {
     { label: 'Experiment', value: 'EXPERIMENT' },
     { label: 'Species', value: 'SPECIES' }
   ],
+  databaseNames: {
+    GEO: 'Gene Expression Omnibus (GEO)',
+    SRA: 'Sequence Read Archive (SRA)',
+    ARRAY_EXPRESS: 'ArrayExpress'
+  },
   filterList: [
     'downloadable_organism',
     'technology',
