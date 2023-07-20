@@ -1,3 +1,5 @@
+// Returns the API supported parameters and filters out the client-side-only parameters (e.g., empty, sortby) for the API requests
+
 import { options } from 'config'
 import getQueryParam from 'helpers/getQueryParam'
 
