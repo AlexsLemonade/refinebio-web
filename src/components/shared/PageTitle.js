@@ -27,7 +27,7 @@ export const PageTitle = ({ title = '', noSuffix = false }) => {
       pageTitle = `Dataset -`
       break
     case /\/download/.test(path):
-      pageTitle = `Download -`
+      pageTitle = `Download Dataset -`
       break
     case /\/license$/.test(path):
       pageTitle = `License -`
