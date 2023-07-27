@@ -81,6 +81,7 @@ export const Footer = () => {
                   icon={<CoinIcon aria-hidden />}
                   primary
                   rel="noopener noreferrer"
+                  target="_blank"
                 />
                 <Box align="center" direction="row" gap="medium">
                   <TwitterLink
