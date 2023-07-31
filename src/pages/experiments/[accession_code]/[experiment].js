@@ -66,7 +66,11 @@ export const Experiment = () => {
 
   return (
     <>
-      <PageTitle title={`${experiment ? experiment.title : 'Loading'} -`} />
+      <PageTitle
+        title={`${
+          experiment ? `${accessionCode} - ${experiment.title}` : 'Loading'
+        } -`}
+      />
       <TextHighlightContextProvider match={fromSearch && search.search}>
         <Box height={{ min: '50%' }}>
           <FixedContainer pad="large">
