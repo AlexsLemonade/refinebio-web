@@ -11,7 +11,7 @@ export const PageTitle = ({ title = '' }) => {
     setPath(router.asPath)
   }, [router, path])
 
-  const suffix = 'refine.bio'
+  const appName = 'refine.bio'
   let pageTitle = ''
 
   switch (true) {
@@ -19,7 +19,7 @@ export const PageTitle = ({ title = '' }) => {
       pageTitle = `${title}`
       break
     case home:
-      pageTitle = `${suffix} - Search for harmonized transcriptome data`
+      pageTitle = `${appName} - Search for harmonized transcriptome data`
       break
     case /\/about$/.test(path):
       pageTitle = `About`
@@ -46,7 +46,7 @@ export const PageTitle = ({ title = '' }) => {
   return (
     <Head>
       <title>
-        {pageTitle} {!home ? suffix : ''}
+        {pageTitle} {!home ? appName : ''}
       </title>
     </Head>
   )
