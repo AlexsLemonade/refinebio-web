@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-export const PageTitle = ({ title = '', noSuffix = false }) => {
+export const PageTitle = ({ title = '' }) => {
   const router = useRouter()
   const [path, setPath] = useState('')
+  const home = /\/$/.test(path)
 
   useEffect(() => {
     setPath(router.asPath)
@@ -17,8 +18,8 @@ export const PageTitle = ({ title = '', noSuffix = false }) => {
     case title.length > 0:
       pageTitle = `${title}`
       break
-    case /\/$/.test(path):
-      pageTitle = `Search for harmonized transcriptome data -`
+    case home:
+      pageTitle = `${suffix} - Search for harmonized transcriptome data`
       break
     case /\/about$/.test(path):
       pageTitle = `About`
@@ -45,8 +46,7 @@ export const PageTitle = ({ title = '', noSuffix = false }) => {
   return (
     <Head>
       <title>
-        {pageTitle}
-        {noSuffix ? '' : ` ${suffix}`}
+        {pageTitle} {!home ? suffix : ''}
       </title>
     </Head>
   )
