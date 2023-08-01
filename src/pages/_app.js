@@ -1,32 +1,44 @@
 import * as Sentry from '@sentry/nextjs'
+import 'regenerator-runtime'
 import { GlobalStyle } from 'styles/GlobalStyle'
 import { Grommet } from 'grommet'
 import { Layout } from 'components/Layout'
 import { theme } from 'themes'
 import { BandContextProvider } from 'contexts/BandContext'
+import { DatasetContextProvider } from 'contexts/DatasetContext'
+import { SearchManagerContextProvider } from 'contexts/SearchManagerContext'
+import { ModalContextProvider } from 'contexts/ModalContext'
 import { RefinebioContextProvider } from 'contexts/RefinebioContext'
-import ErrorPage from 'pages/_error'
+import { ErrorPage } from 'pages/_error'
+import getPageLoader from 'helpers/getPageLoader'
 
+getPageLoader()
 const Fallback = () => <ErrorPage />
 
-const Portal = ({ Component, pageProps }) => {
+const App = ({ Component, pageProps }) => {
   return (
     <>
       <GlobalStyle />
       <Grommet theme={theme}>
         <RefinebioContextProvider>
-          <BandContextProvider>
-            <Layout>
-              <Sentry.ErrorBoundary fallback={Fallback} showDialog>
-                {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-                <Component {...pageProps} />
-              </Sentry.ErrorBoundary>
-            </Layout>
-          </BandContextProvider>
+          <SearchManagerContextProvider>
+            <DatasetContextProvider>
+              <BandContextProvider>
+                <Layout>
+                  <Sentry.ErrorBoundary fallback={Fallback} showDialog>
+                    <ModalContextProvider>
+                      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+                      <Component {...pageProps} />
+                    </ModalContextProvider>
+                  </Sentry.ErrorBoundary>
+                </Layout>
+              </BandContextProvider>
+            </DatasetContextProvider>
+          </SearchManagerContextProvider>
         </RefinebioContextProvider>
       </Grommet>
     </>
   )
 }
 
-export default Portal
+export default App

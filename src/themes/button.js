@@ -26,6 +26,7 @@ export default {
   },
   disabled: {
     opacity: 1,
+    color: gray,
     primary: {
       background: gray,
       border: { color: gray, radius, width: '1px' },
@@ -86,6 +87,11 @@ export default {
   extend: () => `
     > div {
       border-radius: ${radius};
+      //  to center an icon
+      > span {
+        display: inline-flex;
+        align-self: center;
+      }
     }
     white-space: nowrap;
     &:active:not([disabled]) {

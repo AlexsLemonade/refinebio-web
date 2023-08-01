@@ -1,25 +1,46 @@
+import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
+import formatURLString from 'helpers/formatURLString'
 import { Box, Heading } from 'grommet'
 import { IconBadge } from 'components/shared/IconBadge'
-import { Link } from 'components/shared/Link'
+import { Anchor } from 'components/shared/Anchor'
+import { TextHighlight } from 'components/shared/TextHighlight'
 
-export const SearchCardHeader = ({ accessionCode = '', title = '' }) => {
+export const SearchCardHeader = ({
+  accessionCode = '',
+  isLinked = true,
+  title = ''
+}) => {
+  const { search, setSearch } = useSearchManager()
   const { setResponsive } = useResponsive()
 
   return (
     <Box width="100%">
       <IconBadge
         name="Accession"
-        label={accessionCode}
+        label={<TextHighlight>{accessionCode}</TextHighlight>}
         pad={{ bottom: 'small' }}
         size="medium"
       />
       <Heading
         level={3}
-        weight="600"
-        style={{ lineHeight: setResponsive('1', '1.5') }}
+        weight={isLinked ? '600' : '400'}
+        style={{
+          wordBreak: 'break-word',
+          lineHeight: setResponsive('1', '1.5')
+        }}
       >
-        <Link href="#url" label={title} />
+        {isLinked ? (
+          <Anchor
+            href={{
+              pathname: `experiments/${accessionCode}/${formatURLString(title)}`
+            }}
+            label={<TextHighlight>{title}</TextHighlight>}
+            onClick={() => setSearch({ ...search, ref: 'search' })}
+          />
+        ) : (
+          <TextHighlight>{title}</TextHighlight>
+        )}
       </Heading>
     </Box>
   )

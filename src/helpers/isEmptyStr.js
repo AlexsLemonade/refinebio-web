@@ -1,2 +1,3 @@
 // Returns true if a string is empty
-export const isEmptyStr = (str) => str.trim().length === 0
+// If the argumemnt is not a string, it returns undefined
+export default (str) => str.trim().length === 0

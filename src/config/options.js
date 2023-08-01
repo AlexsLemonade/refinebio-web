@@ -1,0 +1,85 @@
+export const options = {
+  aggregation: [
+    { label: 'Experiment', value: 'EXPERIMENT' },
+    { label: 'Species', value: 'SPECIES' }
+  ],
+  // setting for the search manager
+  search: {
+    // default values for common queries
+    commonQueries: {
+      offset: 0,
+      ordering: '_score',
+      limit: 10,
+      num_downloadable_samples__gt: {
+        hide: 0,
+        show: -1
+      }
+    },
+    // client-only queries
+    clientOnlyQueries: ['empty', 'p', 'size', 'sortby'],
+    // client-only filter queries
+    clientOnlyFilterQueries: ['empty'],
+    pageSizes: [10, 20, 50],
+    sortby: [
+      {
+        label: 'Best Match',
+        value: '_score'
+      },
+      {
+        label: 'Most No. of samples',
+        value: '-num_downloadable_samples'
+      },
+      {
+        label: 'Least No. of samples',
+        value: 'num_downloadable_samples'
+      },
+      {
+        label: 'Newest Experiment',
+        value: '-source_first_published'
+      },
+      {
+        label: 'Oldest Experiment',
+        value: 'source_first_published'
+      }
+    ]
+  },
+  pageSizes: [10, 20, 50],
+  sortby: [
+    {
+      label: 'Best Match',
+      value: '_score'
+    },
+    {
+      label: 'Most No. of samples',
+      value: '-num_downloadable_samples'
+    },
+    {
+      label: 'Least No. of samples',
+      value: 'num_downloadable_samples'
+    },
+    {
+      label: 'Newest Experiment',
+      value: '-source_first_published'
+    },
+    {
+      label: 'Oldest Experiment',
+      value: 'source_first_published'
+    }
+  ],
+  transformation: [
+    {
+      label: 'None',
+      value: 'NONE'
+    },
+    {
+      label: 'Zero to One',
+      value: 'MINMAX'
+    },
+    {
+      label: 'Z-score',
+      value: 'STANDARD'
+    }
+  ]
+}
+
+export default options
