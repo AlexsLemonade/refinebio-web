@@ -19,9 +19,6 @@ export const SearchCardMeta = ({
 }) => {
   const { setResponsive } = useResponsive()
   const technologyName = isArray(technology) ? technology.join('') : technology
-  const downloadableSamplesText = `${
-    downloadableSamples > 0 ? formatNumbers(downloadableSamples) : 'No'
-  } Downloadable Sample${downloadableSamples > 1 ? 's' : ''}`
 
   return (
     <Row
@@ -56,9 +53,19 @@ export const SearchCardMeta = ({
           <TextNull text="No species" />
         )}
       </Box>
-      <Box flex="grow">
-        <IconBadge label={downloadableSamplesText} name="Samples" size={size} />
-      </Box>
+      {downloadableSamples && (
+        <Box flex="grow">
+          <IconBadge
+            label={`${
+              downloadableSamples > 0
+                ? formatNumbers(downloadableSamples)
+                : 'No'
+            } Downloadable Samples`}
+            name="Samples"
+            size={size}
+          />
+        </Box>
+      )}
       <Box flex="grow" width={setResponsive('100%', '100%', { max: '40%' })}>
         {platformNames.length > 0 ? (
           <IconBadge

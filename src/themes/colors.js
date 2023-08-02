@@ -96,6 +96,7 @@ export const colors = {
     'linear-gradient(90deg,rgba(253, 253, 253, 0) 0%,rgba(204, 204, 204, 0.2) 40%,rgba(204, 204, 204, 1) 100%)',
   // Opaque
   rgbaLight2: 'rgba(255, 255, 255, 0.2)',
+  rgbaLight7: 'rgba(255, 255, 255, 0.7)',
   rgba4: 'rgba(0, 0, 0, 0.4)',
   rgba6: 'rgba(0, 0, 0, 0.6)',
   rgba3: 'rgba(0, 0, 0, 0.3)',

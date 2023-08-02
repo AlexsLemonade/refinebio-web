@@ -1,5 +1,6 @@
 const boxShadow = `0px 3px 4px rgba(0, 0, 0, 0.3)`
 const gray = 'gray-shade-40'
+const grayLinkButton = '#999'
 const radius = '3px'
 
 export default {
@@ -87,10 +88,17 @@ export default {
   extend: () => `
     > div {
       border-radius: ${radius};
-      //  to center an icon
+      // to center an icon
       > span {
         display: inline-flex;
         align-self: center;
+      }
+    }
+    // for link buttons
+    &:disabled {
+      color: ${grayLinkButton};
+      &:hover {
+        color:${grayLinkButton};
       }
     }
     white-space: nowrap;

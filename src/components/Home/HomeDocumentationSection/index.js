@@ -25,8 +25,6 @@ export const HomeDocumentationSection = () => {
                 label="Learn More"
                 secondary
                 responsive
-                rel="noopener noreferrer"
-                target="_blank"
               />
             }
             img="network.svg"

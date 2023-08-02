@@ -1,13 +1,8 @@
 import { memo } from 'react'
-import { Anchor } from 'components/shared/Anchor'
 import { TextHighlight } from 'components/shared/TextHighlight'
 
 export const CellAccessionCode = ({ value }) => {
-  return (
-    <Anchor href={`/samples/${value}`} underline>
-      <TextHighlight>{value}</TextHighlight>
-    </Anchor>
-  )
+  return <TextHighlight>{value}</TextHighlight>
 }
 
 export default memo(CellAccessionCode)
