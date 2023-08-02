@@ -19,6 +19,11 @@ export const options = {
     clientOnlyQueries: ['empty', 'p', 'size', 'sortby'],
     // client-only filter queries
     clientOnlyFilterQueries: ['empty'],
+    formattedFacetNames: {
+      downloadable_organism_names: 'downloadable_organism',
+      platform_accession_codes: 'platform',
+      technology: 'technology'
+    },
     pageSizes: [10, 20, 50],
     sortby: [
       {
