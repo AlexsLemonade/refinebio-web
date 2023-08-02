@@ -133,7 +133,7 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
       <Box
         as="label"
         margin={{ bottom: 'medium' }}
-        style={{ font: "22px 'Rubik', sans-serif" }}
+        style={{ font: `${setResponsive('18px', '22px')} 'Rubik', sans-serif` }}
       >
         Choose Organism
       </Box>
