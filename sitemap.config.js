@@ -6,7 +6,7 @@ const formatURLString = require('./src/helpers/formatURLString')
 const apiVersion = process.env.API_VERSION || 'v1'
 const apiPath = process.env.API_PATH || `https://api.refine.bio/${apiVersion}`
 const hostname = process.env.HOST_NAME || 'https://www.refine.bio'
-const limit = 1 // TEMPORARY for development
+const limit = 1 // TEMPORARY set to 1 for development but it should be 10000
 const config = {
   apiVersion,
   apiPath,
