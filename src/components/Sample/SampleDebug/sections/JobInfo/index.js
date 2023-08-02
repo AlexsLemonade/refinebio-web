@@ -1,1 +1,0 @@
-export { JobInfo } from './JobInfo'
