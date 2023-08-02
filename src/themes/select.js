@@ -36,11 +36,15 @@ export default {
   },
   options: {
     container: {
+      align: 'start',
       pad: 'xsmall'
     }
   },
   container: {
     extend: ({ theme }) => `
+      div > span {
+        align-self: start;
+      }
        button {
             &[aria-selected="true"] {
                 &:hover, &:focus-visible {
