@@ -1,8 +1,10 @@
+import { useRouter } from 'next/router'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
 
 export const DownloadEmpty = () => {
+  const router = useRouter()
   const { setResponsive } = useResponsive()
 
   return (
@@ -12,9 +14,9 @@ export const DownloadEmpty = () => {
       </Heading>
       <Button
         label="Search and Add Samples"
-        href="/search"
         primary
         responsive
+        onClick={() => router.push('/search')}
       />
       <Box
         margin={{ top: 'basex8', bottom: 'xlarge' }}

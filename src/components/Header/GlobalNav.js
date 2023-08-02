@@ -17,10 +17,10 @@ import { NavIcon } from './NavIcon'
 
 export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const router = useRouter()
-  const { asPath, pathname } = router
+  const { asPath, pathname, push } = router
   const { viewport, setResponsive } = useResponsive()
   // TEMPORARY
-  const { dataset, getDataset } = useDataset()
+  const { dataset } = useDataset()
   const [totalSamples, setTotalSamples] = useState()
 
   useEffect(() => {
@@ -32,12 +32,6 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const handleClick = () => {
     if (viewport !== 'small') return
     setToggle(!toggle)
-  }
-
-  // TEMPORARY for Demo (will be handled with API call)
-  const handleGetDataset = () => {
-    if (!totalSamples) return
-    getDataset(true)
   }
 
   return (
@@ -172,7 +166,6 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                   max: 1000000,
                   value: totalSamples || 0
                 }}
-                href="/download"
                 label="My Dataset"
                 margin={{ left: setResponsive('xlarge', 'none') }}
                 width={viewport === 'small' ? buttonWidth : 'max-content'}
@@ -183,7 +176,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                   padding: setResponsive('12px 0', '4px 24px'),
                   width: '100%'
                 }}
-                onClick={handleGetDataset}
+                onClick={() => push('/download')}
               />
             </Box>
           </List>

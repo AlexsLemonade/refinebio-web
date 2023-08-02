@@ -11,6 +11,7 @@ import { BoxBlock } from 'components/shared/BoxBlock'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { LayerResponsive } from 'components/shared/LayerResponsive'
 import { Icon } from 'components/shared/Icon'
+import { PageTitle } from 'components/shared/PageTitle'
 import { Pagination } from 'components/shared/Pagination'
 import { SearchBox } from 'components/shared/SearchBox'
 import { SearchInfoBanner } from 'components/SearchResults/SearchInfoBanner'
@@ -81,160 +82,167 @@ export const Search = (props) => {
   }, [])
 
   return (
-    <TextHighlightContextProvider
-      match={[query.search, ...getAccessionCodesQueryParam(query.search)]}
-    >
-      <FixedContainer pad={{ horizontal: 'large', bottom: 'large' }}>
-        <SearchInfoBanner />
-        <Box
-          alignSelf="center"
-          margin={{
-            top: 'medium',
-            bottom: setResponsive('medium', 'medium', 'xlarge')
-          }}
-          width={setResponsive('100%', searchBoxWidth)}
-          style={{ position: 'relative' }}
-        >
-          <SearchBox
-            placeholder="Search accessions, pathways, diseases, etc.,"
-            btnType="primary"
-            size="large"
-            value={userSearchTerm}
-            responsive
-            clickHandler={handleClearSearchTerm}
-            changeHandler={(e) => setUserSearchTerm(e.target.value)}
-            submitHandler={handleSubmit}
-          />
-        </Box>
-
-        {results && isResults && (
-          <Grid
-            areas={[
-              { name: 'side', start: [0, 1], end: [0, 1] },
-              { name: 'main', start: [1, 1], end: [1, 1] }
-            ]}
-            columns={setResponsive(['auto'], ['auto'], [sideWidth, 'auto'])}
-            rows={['auto', 'auto']}
-            gap={{
-              row: 'none',
-              column: setResponsive('none', 'none', '2%')
+    <>
+      <PageTitle title={`${query.search ? query.search : ''} Results -`} />
+      <TextHighlightContextProvider
+        match={[query.search, ...getAccessionCodesQueryParam(query.search)]}
+      >
+        <FixedContainer pad={{ horizontal: 'large', bottom: 'large' }}>
+          <SearchInfoBanner />
+          <Box
+            alignSelf="center"
+            margin={{
+              top: 'medium',
+              bottom: setResponsive('medium', 'medium', 'xlarge')
             }}
+            width={setResponsive('100%', searchBoxWidth)}
+            style={{ position: 'relative' }}
           >
-            <LayerResponsive position="left" show={toggleFilterList} tabletMode>
-              <BoxBlock
-                gridArea="side"
-                height={setResponsive('100vh', '100vh', 'auto')}
-                margin={{ top: 'large' }}
-                pad={{
-                  left: setResponsive('basex7', 'basex7', 'none'),
-                  right: setResponsive('basex7', 'basex7', 'large'),
-                  top: setResponsive('large', 'large', 'none')
-                }}
-                // TODO: dynamically set the max height for laptop / desktop devices based on vh and page sizes
-                width={setResponsive('100vw', '100vw', sideWidth)}
-                style={{ overflowY: 'auto' }}
-              >
-                {viewport !== 'large' && (
-                  <Box align="end" margin={{ bottom: 'small' }}>
-                    <Box
-                      aria-label="Close Filters"
-                      role="button"
-                      style={{ boxShadow: 'none' }}
-                      width="max-content"
-                      onClick={() => setToggleFilterList(false)}
-                    >
-                      <Icon name="Close" size="large" />
-                    </Box>
-                  </Box>
-                )}
-                <SearchFilterList
-                  facets={results.facets}
-                  setToggle={setToggleFilterList}
-                />
-              </BoxBlock>
-            </LayerResponsive>
-            <Box gridArea="main" height={{ min: '85vh' }}>
-              {viewport !== 'large' && (
-                <Button
-                  aria-label="Open Filters"
-                  label="Filter"
-                  icon={<Icon name="Filter" size="small" />}
-                  margin={{ bottom: 'medium' }}
-                  secondary
-                  onClick={() => setToggleFilterList(true)}
-                />
-              )}
-              <SearchBulkActions
-                pageSize={pageSize}
-                setPageSize={setPageSize}
-                sortBy={sortBy}
-                setSortBy={setSortBy}
-                totalResults={results.count}
-              />
-
-              {accessionCodesResult.length > 0 && (
-                <>
-                  {accessionCodesResult.map((data) =>
-                    data.results.map((result) => (
-                      <SearchCard key={result.id} result={result} />
-                    ))
-                  )}
-                  <Box
-                    border={{ color: 'gray-shade-5', side: 'top' }}
-                    margin={{ vertical: 'large' }}
-                    style={{ position: 'relative' }}
-                  >
-                    <Heading
-                      level={3}
-                      style={{ position: 'absolute', top: '-12px' }}
-                    >
-                      Related Results for '{query.search}'
-                    </Heading>
-                  </Box>
-                </>
-              )}
-              <Box animation={{ type: 'fadeIn', duration: 300 }}>
-                {results.results.map((result) => (
-                  <SearchCard key={result.id} result={result} />
-                ))}
-                {results.results.length < 10 && <MissingResultsAlert />}
-              </Box>
-              <Box
-                align="center"
-                direction="row"
-                justify="center"
-                margin={{ top: 'medium' }}
-              >
-                <Pagination
-                  page={page}
-                  pageSize={pageSize}
-                  setPage={setPage}
-                  totalPages={results.count}
-                  updatePage={updatePage}
-                />
-              </Box>
-            </Box>
-          </Grid>
-        )}
-
-        {results && !isResults && hasAppliedFilters() && (
-          <Box direction="row">
-            <SearchFilterList
-              facets={results.facets}
-              setToggle={setToggleFilterList}
-              style={{ height: 'auto' }}
+            <SearchBox
+              placeholder="Search accessions, pathways, diseases, etc.,"
+              btnType="primary"
+              size="large"
+              value={userSearchTerm}
+              responsive
+              clickHandler={handleClearSearchTerm}
+              changeHandler={(e) => setUserSearchTerm(e.target.value)}
+              submitHandler={handleSubmit}
             />
-            <Box width="80%">
-              <NoFilteringResults />
-            </Box>
           </Box>
-        )}
 
-        {results && !isResults && !hasAppliedFilters() && query.search && (
-          <NoSearchResults setUserSearchTerm={setUserSearchTerm} />
-        )}
-      </FixedContainer>
-    </TextHighlightContextProvider>
+          {results && isResults && (
+            <Grid
+              areas={[
+                { name: 'side', start: [0, 1], end: [0, 1] },
+                { name: 'main', start: [1, 1], end: [1, 1] }
+              ]}
+              columns={setResponsive(['auto'], ['auto'], [sideWidth, 'auto'])}
+              rows={['auto', 'auto']}
+              gap={{
+                row: 'none',
+                column: setResponsive('none', 'none', '2%')
+              }}
+            >
+              <LayerResponsive
+                position="left"
+                show={toggleFilterList}
+                tabletMode
+              >
+                <BoxBlock
+                  gridArea="side"
+                  height={setResponsive('100vh', '100vh', 'auto')}
+                  margin={{ top: 'large' }}
+                  pad={{
+                    left: setResponsive('basex7', 'basex7', 'none'),
+                    right: setResponsive('basex7', 'basex7', 'large'),
+                    top: setResponsive('large', 'large', 'none')
+                  }}
+                  // TODO: dynamically set the max height for laptop / desktop devices based on vh and page sizes
+                  width={setResponsive('100vw', '100vw', sideWidth)}
+                  style={{ overflowY: 'auto' }}
+                >
+                  {viewport !== 'large' && (
+                    <Box align="end" margin={{ bottom: 'small' }}>
+                      <Box
+                        aria-label="Close Filters"
+                        role="button"
+                        style={{ boxShadow: 'none' }}
+                        width="max-content"
+                        onClick={() => setToggleFilterList(false)}
+                      >
+                        <Icon name="Close" size="large" />
+                      </Box>
+                    </Box>
+                  )}
+                  <SearchFilterList
+                    facets={results.facets}
+                    setToggle={setToggleFilterList}
+                  />
+                </BoxBlock>
+              </LayerResponsive>
+              <Box gridArea="main" height={{ min: '85vh' }}>
+                {viewport !== 'large' && (
+                  <Button
+                    aria-label="Open Filters"
+                    label="Filter"
+                    icon={<Icon name="Filter" size="small" />}
+                    margin={{ bottom: 'medium' }}
+                    secondary
+                    onClick={() => setToggleFilterList(true)}
+                  />
+                )}
+                <SearchBulkActions
+                  pageSize={pageSize}
+                  setPageSize={setPageSize}
+                  sortBy={sortBy}
+                  setSortBy={setSortBy}
+                  totalResults={results.count}
+                />
+
+                {accessionCodesResult.length > 0 && (
+                  <>
+                    {accessionCodesResult.map((data) =>
+                      data.results.map((result) => (
+                        <SearchCard key={result.id} result={result} />
+                      ))
+                    )}
+                    <Box
+                      border={{ color: 'gray-shade-5', side: 'top' }}
+                      margin={{ vertical: 'large' }}
+                      style={{ position: 'relative' }}
+                    >
+                      <Heading
+                        level={3}
+                        style={{ position: 'absolute', top: '-12px' }}
+                      >
+                        Related Results for '{query.search}'
+                      </Heading>
+                    </Box>
+                  </>
+                )}
+                <Box animation={{ type: 'fadeIn', duration: 300 }}>
+                  {results.results.map((result) => (
+                    <SearchCard key={result.id} result={result} />
+                  ))}
+                  {results.results.length < 10 && <MissingResultsAlert />}
+                </Box>
+                <Box
+                  align="center"
+                  direction="row"
+                  justify="center"
+                  margin={{ top: 'medium' }}
+                >
+                  <Pagination
+                    page={page}
+                    pageSize={pageSize}
+                    setPage={setPage}
+                    totalPages={results.count}
+                    updatePage={updatePage}
+                  />
+                </Box>
+              </Box>
+            </Grid>
+          )}
+
+          {results && !isResults && hasAppliedFilters() && (
+            <Box direction="row">
+              <SearchFilterList
+                facets={results.facets}
+                setToggle={setToggleFilterList}
+                style={{ height: 'auto' }}
+              />
+              <Box width="80%">
+                <NoFilteringResults />
+              </Box>
+            </Box>
+          )}
+
+          {results && !isResults && !hasAppliedFilters() && query.search && (
+            <NoSearchResults setUserSearchTerm={setUserSearchTerm} />
+          )}
+        </FixedContainer>
+      </TextHighlightContextProvider>
+    </>
   )
 }
 
