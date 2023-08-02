@@ -11,7 +11,13 @@ export const useSearchManager = () => {
     setConfig: setConfigState
   } = useContext(SearchManagerContext)
   const {
-    search: { clientOnlyFilterQueries, commonQueries, pageSizes, sortby }
+    search: {
+      clientOnlyFilterQueries,
+      commonQueries,
+      formattedFacetNames,
+      pageSizes,
+      sortby
+    }
   } = options
   const router = useRouter()
   const search = searchState
@@ -137,10 +143,8 @@ export const useSearchManager = () => {
     const formattedNames = []
 
     for (const name of facetNames) {
-      if (name === 'downloadable_organism_names') {
-        formattedNames.push('downloadable_organism')
-      } else if (name === 'platform_accession_codes') {
-        formattedNames.push('platform')
+      if (Object.keys(formattedFacetNames).includes(name)) {
+        formattedNames.push(formattedFacetNames[name])
       } else {
         formattedNames.push(name)
       }
@@ -154,7 +158,13 @@ export const useSearchManager = () => {
     const temp = {}
     Object.keys(queryParams).forEach((key) => {
       if (!Object.keys(commonQueries).includes(key)) {
-        temp[key] = queryParams[key]
+        if (Object.values(formattedFacetNames).includes(key)) {
+          if (typeof queryParams[key] === 'string') {
+            temp[key] = [queryParams[key]]
+          } else {
+            temp[key] = queryParams[key]
+          }
+        }
       }
     })
 
