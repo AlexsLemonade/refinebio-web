@@ -15,7 +15,6 @@ export default {
     }
   },
   extend: ({ theme }) => `
-    margin-right: 8px;
     height: ${size};
     width: ${size};
     input:not([disabled]) + div:hover {

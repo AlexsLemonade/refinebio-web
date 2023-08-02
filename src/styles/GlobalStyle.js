@@ -23,15 +23,14 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         border: 0;
         font-size: 100%;
+        vertical-align: baseline;
     }
     *, ::before, ::after { 
         box-sizing: border-box; 
     }
     body {
-      background: #FDFDFD;
       min-height: 100vh;
       min-height: -webkit-fill-available;
-      position: relative;
     }
     html {
       height: -webkit-fill-available;
@@ -46,13 +45,6 @@ export const GlobalStyle = createGlobalStyle`
     #tsparticles {
       width: 100%;
       height: 100%;
-    }
-    // For Ngprogress bar, set background color
-    #nprogress .bar {
-      height: 3px;
-    }
-    #nprogress .peg {
-      box-shadow: none;
     }
 
 `

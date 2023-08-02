@@ -9,11 +9,10 @@ const CustomTabs = styled(GrommetTabs)`
     text &&
     css`
       div {
-        border: none;
         button {
-          border: none;
           > div {
             background: none;
+            border: none;
           }
           span {
             display: block;
@@ -31,6 +30,7 @@ const CustomTabs = styled(GrommetTabs)`
             span {
               border-bottom-color: ${theme.global.colors.brand};
               border-bottom-width: 3px;
+              font-weight: bold;
             }
           }
         }

@@ -7,7 +7,6 @@ import { Box, Main } from 'grommet'
 import { isMatchPath } from 'helpers/isMatchPath'
 import { BackToTopButton } from 'components/shared/BackToTopButton'
 import { Band } from 'components/shared/Band'
-import { Notification } from 'components/shared/Notification'
 import { Footer } from 'components/Footer'
 import { Header } from 'components/Header'
 
@@ -26,7 +25,6 @@ export const Layout = ({ children }) => {
 
   return (
     <Box height={{ min: '100vh' }}>
-      <Notification />
       {band && (
         <Band
           bandHeight={
@@ -44,7 +42,6 @@ export const Layout = ({ children }) => {
       <Main role="main">{children}</Main>
       <Footer />
       <BackToTopButton />
-      <Box id="portal" />
     </Box>
   )
 }

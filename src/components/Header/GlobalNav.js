@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
-import { getTotalSamples } from 'helpers/dataset'
 import { isMatchPath } from 'helpers/isMatchPath'
 import { Box, Nav, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
-import { LayerResponsive } from 'components/shared/LayerResponsive'
+import { Layer } from 'components/shared/Layer'
 import { List } from 'components/shared/List'
 import { Icon } from 'components/shared/Icon'
 import { links } from 'config'
@@ -19,25 +16,12 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const router = useRouter()
   const { asPath, pathname } = router
   const { viewport, setResponsive } = useResponsive()
-  // TEMPORARY
-  const { dataset, getDataset } = useDataset()
-  const [totalSamples, setTotalSamples] = useState()
 
-  useEffect(() => {
-    setTotalSamples(getTotalSamples(dataset?.data))
-  }, [dataset])
-
-  const buttonWidth = '80vw' // TEMPORARY until creatre a custom budged button component
+  const buttonWidth = '80vw' // TEMP until creatre a custom budged button component
 
   const handleClick = () => {
     if (viewport !== 'small') return
     setToggle(!toggle)
-  }
-
-  // TEMPORARY for Demo (will be handled with API call)
-  const handleGetDataset = () => {
-    if (!totalSamples) return
-    getDataset(true)
   }
 
   return (
@@ -45,10 +29,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
       {viewport === 'small' && (
         <NavIcon light={light} toggle={toggle} clickHandler={handleClick} />
       )}
-      <LayerResponsive position="right" show={toggle}>
-        {viewport === 'small' && (
-          <NavIcon light={light} toggle={toggle} clickHandler={handleClick} />
-        )}
+      <Layer position="right" show={toggle}>
         <Nav
           align="center"
           background={setResponsive('white', 'transparent')}
@@ -167,13 +148,9 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
               viewport={viewport}
             >
               <Button
-                aria-label="View My Dataset"
-                badge={{
-                  max: 1000000,
-                  value: totalSamples || 0
-                }}
-                href="/download"
                 label="My Dataset"
+                aria-label="View My Dataset"
+                badge={{ max: 10000, value: 0 }}
                 margin={{ left: setResponsive('xlarge', 'none') }}
                 width={viewport === 'small' ? buttonWidth : 'max-content'}
                 light={viewport !== 'small' ? light : false}
@@ -183,12 +160,11 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                   padding: setResponsive('12px 0', '4px 24px'),
                   width: '100%'
                 }}
-                onClick={handleGetDataset}
               />
             </Box>
           </List>
         </Nav>
-      </LayerResponsive>
+      </Layer>
     </>
   )
 }

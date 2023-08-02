@@ -1,4 +1,4 @@
-import makeEdgeSizes from 'helpers/makeEdgeSizes'
+import { makeEdgeSizes } from 'helpers/makeEdgeSizes'
 import { colors } from 'themes/colors'
 
 /* RULE: 
@@ -62,8 +62,7 @@ export default {
       small: '0px 2px 2px rgba(0, 0, 0, 0.2)',
       medium: '0px 3px 20px rgba(0, 0, 0, 0.1)',
       large: '0px 3px 20px rgba(0, 0, 0, 0.2)',
-      xlarge: '0px 2px 4px rgba(0, 0, 0, 0.5)',
-      alert: '0px 1px 5px rgba(0, 0, 0, 0.15)'
+      xlarge: '0px 2px 4px rgba(0, 0, 0, 0.5)'
     }
   },
   font: {

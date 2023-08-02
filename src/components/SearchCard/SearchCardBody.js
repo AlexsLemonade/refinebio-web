@@ -1,11 +1,8 @@
 import { useState } from 'react'
-import { formatSampleMetadata } from 'helpers/dataset'
-import getURLForAccessionCode from 'helpers/getURLForAccessionCode'
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import { Icon } from 'components/shared/Icon'
-import { Anchor } from 'components/shared/Anchor'
-import { TextHighlight } from 'components/shared/TextHighlight'
-import { TextNull } from 'components/shared/TextNull'
+import { Link } from 'components/shared/Link'
+import { formatString } from 'helpers/formatString'
 
 export const SearchCardBody = ({
   alternateAccessionCode = '',
@@ -21,7 +18,7 @@ export const SearchCardBody = ({
   return (
     <Box pad={{ top: 'medium', bottom: 'small' }}>
       <Box>
-        <Heading level={5} responsive={false} weight="500">
+        <Heading level={5} weight="500">
           Description
         </Heading>
         {description ? (
@@ -38,12 +35,8 @@ export const SearchCardBody = ({
                 <Text
                   color="brand"
                   margin={{ left: 'xsmall' }}
+                  style={{ cursor: 'pointer', textDecoration: 'underline' }}
                   role="button"
-                  style={{
-                    boxShadow: 'none',
-                    cursor: 'pointer',
-                    textDecoration: 'underline'
-                  }}
                   onClick={() => setToggleDescription(!toggleDesciption)}
                 >
                   See
@@ -60,7 +53,7 @@ export const SearchCardBody = ({
                   ) : (
                     <>
                       {' '}
-                      Less
+                      Less{' '}
                       <Icon
                         margin={{ left: 'xxsmall' }}
                         name="ChevronUp"
@@ -73,49 +66,47 @@ export const SearchCardBody = ({
             </Paragraph>
           </Box>
         ) : (
-          <TextNull text="No description" />
+          <Text color="gray-shade-40">
+            <i>No description</i>
+          </Text>
         )}
       </Box>
       <Box margin={{ top: 'small' }}>
-        <Heading level={5} responsive={false} weight="500">
+        <Heading level={5} weight="500">
           Publication Title
         </Heading>
-        <Paragraph>
-          {publicationTitle ? (
-            <TextHighlight>{publicationTitle}</TextHighlight>
-          ) : (
-            <TextNull text="No associated publication" />
-          )}
-        </Paragraph>
+        {publicationTitle ? (
+          <Text>{publicationTitle}</Text>
+        ) : (
+          <Text color="gray-shade-40">
+            <i>No associated publication</i>
+          </Text>
+        )}
       </Box>
       <Box margin={{ top: 'small' }}>
-        <Heading level={5} responsive={false} weight="500">
+        <Heading level={5} weight="500">
           Alternate Accession IDs
         </Heading>
         {alternateAccessionCode ? (
-          <Anchor
-            href={getURLForAccessionCode(alternateAccessionCode)}
-            target="_blank"
-            label={<TextHighlight>{alternateAccessionCode}</TextHighlight>}
-          />
+          <Link href={SearchCardBody.url} label={alternateAccessionCode} />
         ) : (
-          <TextNull text="None" />
+          <Text color="gray-shade-40">
+            <i>None</i>
+          </Text>
         )}
       </Box>
       <Box margin={{ top: 'small' }}>
-        <Heading level={5} responsive={false} weight="500">
+        <Heading level={5} weight="500">
           Sample Metadata Fields
         </Heading>
         <Box direction="row">
-          <Paragraph>
-            {sampleMetadataFields.length > 0 ? (
-              <TextHighlight>
-                {formatSampleMetadata(sampleMetadataFields).join(', ')}
-              </TextHighlight>
-            ) : (
-              <TextNull text="No sample metadata fields" />
-            )}
-          </Paragraph>
+          {sampleMetadataFields.length > 0 ? (
+            <Text>{formatString(sampleMetadataFields.join(', '))}</Text>
+          ) : (
+            <Text color="gray-shade-40">
+              <i>No sample metadata fields</i>
+            </Text>
+          )}
         </Box>
       </Box>
     </Box>

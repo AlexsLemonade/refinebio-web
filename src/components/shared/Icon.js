@@ -2,36 +2,24 @@ import { Text } from 'grommet'
 import { SrOnly } from 'components/shared/SrOnly'
 import { ChevronDown } from '../../images/chevron-down.svg'
 import { ChevronUp } from '../../images/chevron-up.svg'
-import { ChevronLeft } from '../../images/chevron-left.svg'
-import { ChevronRight } from '../../images/chevron-right.svg'
 import { Close } from '../../images/close.svg'
-import { Collapse } from '../../images/collapse.svg'
-import { Expand } from '../../images/expand.svg'
 import { Filter } from '../../images/filter.svg'
 import { Github } from '../../images/github.svg'
-import { Help } from '../../images/help.svg'
 import { Info } from '../../images/info.svg'
 import { Search } from '../../images/search.svg'
 import { Success } from '../../images/success.svg'
-import { Sync } from '../../images/sync.svg'
 import { Twitter } from '../../images/twitter.svg'
 import { Warning } from '../../images/warning.svg'
 
 const SVGs = {
   ChevronDown,
   ChevronUp,
-  ChevronLeft,
-  ChevronRight,
   Close,
-  Collapse,
-  Expand,
   Filter,
   Github,
-  Help,
   Info,
   Search,
   Success,
-  Sync,
   Twitter,
   Warning
 }
@@ -63,11 +51,7 @@ export const Icon = ({
       color={color}
       margin={margin}
       size={sizes[size] || size}
-      style={{
-        color: (!link && color) || 'inherit',
-        height: size,
-        width: size
-      }}
+      style={{ color: (!link && color) || 'inherit' }}
     >
       <IconContent
         aria-hidden

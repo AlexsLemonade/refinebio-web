@@ -1,17 +1,13 @@
 import { Box, Paragraph } from 'grommet'
 import { Icon } from 'components/shared/Icon'
 
-// the color prop must be one of ['error', 'info', 'success']
+// status: error, info, success
 
 export const InlineMessage = ({
-  align = 'center',
   color = 'info',
-  fontColor = 'black',
-  fontSize = 'small',
   height = '24px',
   label = '',
   labelOnly = false,
-  iconSize = 'medium',
   ...props
 }) => {
   const SVG =
@@ -21,7 +17,7 @@ export const InlineMessage = ({
 
   return (
     <Box
-      align={align}
+      align="center"
       direction="row"
       height={height}
       width="max-content"
@@ -33,18 +29,12 @@ export const InlineMessage = ({
           <Icon
             color={color === 'error' ? 'coral-shade-20' : color}
             name={SVG}
-            size={iconSize}
           />
         </Box>
       )}
-      <Paragraph
-        color={color === 'error' ? 'coral-shade-20' : fontColor}
-        size={fontSize}
-      >
+      <Paragraph color={color} size="small">
         {label}
       </Paragraph>
     </Box>
   )
 }
-
-export default InlineMessage

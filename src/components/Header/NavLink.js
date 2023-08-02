@@ -39,17 +39,14 @@ const Anchor = styled(SharedAnchor)`
     active &&
     css`
       border-bottom: 2px solid
-        ${light ? theme.global.colors.white : theme.global.colors.brand};
+        ${light ? theme.global.colors.white : theme.global.colors.black};
       border-bottom: ${viewport === 'small' && 'none'};
-      color: ${light && viewport !== 'small'
-        ? theme.global.colors.white
-        : theme.global.colors.brand};
       text-decoration: ${viewport === 'small' ? 'underline' : 'none'};
       &:hover,
       &:focus {
         color: ${light && viewport !== 'small'
           ? theme.global.colors.white
-          : theme.global.colors.brand};
+          : theme.global.colors.black};
         background: ${viewport === 'small' && 'none'};
         text-decoration: ${viewport === 'small' ? 'underline' : 'none'};
       }

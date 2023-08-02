@@ -1,5 +1,5 @@
 import { useEffect, useState, memo } from 'react'
-import { useRefinebio } from 'hooks/useRefinebio'
+import { useRefinebioContext } from 'hooks/useRefinebioContext'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor, Box, CheckBox, Heading, Text } from 'grommet'
 import { Icon } from 'components/shared/Icon'
@@ -9,13 +9,11 @@ import { List } from 'components/shared/List'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
 import { SearchBox } from 'components/shared/SearchBox'
-import formatBytes from 'helpers/formatBytes'
-import formatString from 'helpers/formatString'
+import { formatBytes } from 'helpers/formatBytes'
+import { formatString } from 'helpers/formatString'
 import { links } from 'config'
 import styled, { css } from 'styled-components'
 import data from 'api/mockDataCompendia'
-
-const boxShadow = `0px 3px 4px rgba(0, 0, 0, 0.3)`
 
 const DropDown = styled(Box)`
   > div:nth-child(2) {
@@ -23,7 +21,6 @@ const DropDown = styled(Box)`
   }
   &:focus-within > div:nth-child(2) {
     display: block;
-    box-shadow: ${boxShadow};
   }
 `
 
@@ -68,7 +65,7 @@ const ListItem = ({ label, selectedOption, clickHandler }) => {
 }
 
 export const CompendiaDownload = ({ heading, isNormalized }) => {
-  const { token, setToken } = useRefinebio()
+  const { token, setToken } = useRefinebioContext()
   const { setResponsive } = useResponsive()
   const [agree, setAgree] = useState(!!token)
   const [filteredOptions, setFilteredOptions] = useState([])
@@ -126,14 +123,14 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
       <Heading
         level={2}
         margin={{ bottom: 'medium' }}
-        size={setResponsive('small', 'large')}
+        size={setResponsive('h2Small', 'h2Large')}
       >
         Download the {heading}
       </Heading>
       <Box
         as="label"
         margin={{ bottom: 'medium' }}
-        style={{ font: `${setResponsive('18px', '22px')} 'Rubik', sans-serif` }}
+        style={{ font: "22px 'Rubik', sans-serif" }}
       >
         Choose Organism
       </Box>
