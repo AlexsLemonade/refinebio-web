@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
-import { isWindow } from 'helpers/isWindow'
+import scrollToTop from 'helpers/scrollToTop'
+import isWindow from 'helpers/isWindow'
 import { Box, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 
@@ -25,14 +26,10 @@ const ArrowIcon = styled(Box)`
 
 export const BackToTopButton = () => {
   const { setResponsive } = useResponsive()
-  const offset = 350
+  const offset = 1200
   const [show, setShow] = useState(false)
 
-  const handleClick = () =>
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    })
+  const handleClick = () => scrollToTop()
 
   const handleKeyDown = (event) => {
     event.preventDefault()
@@ -73,7 +70,7 @@ export const BackToTopButton = () => {
         display: show ? 'block' : 'none',
         position: 'fixed',
         right: '5vw',
-        zIndex: '1000'
+        zIndex: '4'
       }}
     >
       <Box

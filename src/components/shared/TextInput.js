@@ -18,7 +18,7 @@ const CustomInput = styled(GrommetTextInput)`
 
 export const TextInput = ({ error = false, ...props }) => {
   return (
-    <Box style={{ position: 'relative' }}>
+    <Box style={{ position: 'relative' }} width="100%">
       {error && (
         <Text
           focusable="false"

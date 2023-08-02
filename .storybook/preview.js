@@ -1,6 +1,7 @@
 import { Grommet, Box } from 'grommet'
 import { theme } from 'themes'
 import { GlobalStyle } from 'styles/GlobalStyle'
+import { ModalContextProvider } from 'contexts/ModalContext'
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -23,11 +24,14 @@ export const decorators = [
     <>
       <GlobalStyle />
       <Grommet theme={theme}>
-        <Box align="center">
-          <Box>
-            <Story />
+        <ModalContextProvider>
+          <Box align="center">
+            <Box>
+              <Story />
+            </Box>
           </Box>
-        </Box>
+          <div id="portal"></div>
+        </ModalContextProvider>
       </Grommet>
     </>
   )

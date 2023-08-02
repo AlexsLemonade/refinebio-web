@@ -1,10 +1,11 @@
+import { memo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
-import { formatString } from 'helpers/formatString'
+import formatString from 'helpers/formatString'
 import { Box, Grid } from 'grommet'
 import { SearchCardHeader } from './SearchCardHeader'
 import { SearchCardBody } from './SearchCardBody'
-import { SearchCardCTAs } from './SearchCardCTAs'
 import { SearchCardFooter } from './SearchCardFooter'
+import { SearchCardCTAs } from './SearchCardCTAs/SearchCardCTAs'
 import { SearchCardMeta } from './SearchCardMeta'
 
 /* TEMPORARY the following prop is added to the mock data for demo purpose
@@ -51,20 +52,22 @@ export const SearchCard = ({ result = {} }) => {
         <Box gridArea="header">
           <SearchCardHeader
             accessionCode={result.accession_code}
-            title={formatString(result.title)}
+            title={result.title}
           />
         </Box>
         <Box gridArea="ctas" margin={{ top: setResponsive('none', 'large') }}>
-          <SearchCardCTAs status={result.status} />
+          <SearchCardCTAs
+            accessionCode={result.accession_code}
+            downloadableSamples={result.num_downloadable_samples}
+            status={result.status}
+          />
         </Box>
         <Box gridArea="meta">
           <SearchCardMeta
-            metadata={{
-              downloadableSamples: result.num_downloadable_samples,
-              organismNames: result.organism_names,
-              platformNames: result.platform_names,
-              technology: result.technology
-            }}
+            downloadableSamples={result.num_downloadable_samples}
+            organismNames={result.organism_names}
+            platformNames={result.platform_names}
+            technology={result.technology}
           />
         </Box>
       </Grid>
@@ -76,11 +79,14 @@ export const SearchCard = ({ result = {} }) => {
             publicationTitle={result.publication_title}
             sampleMetadataFields={result.sample_metadata_fields}
           />
-          <SearchCardFooter />
+          <SearchCardFooter
+            accessionCode={result.accession_code}
+            title={formatString(result.title)}
+          />
         </>
       )}
     </Box>
   )
 }
 
-export default SearchCard
+export default memo(SearchCard)

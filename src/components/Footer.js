@@ -81,6 +81,7 @@ export const Footer = () => {
                   icon={<CoinIcon aria-hidden />}
                   primary
                   rel="noopener noreferrer"
+                  target="_blank"
                 />
                 <Box align="center" direction="row" gap="medium">
                   <TwitterLink
@@ -122,7 +123,9 @@ export const Footer = () => {
             <Column>
               <Heading
                 level={5}
-                style={{ fontFamily: `'Lato', sans-serif`, fontWeight: '700' }}
+                style={{ fontFamily: `'Lato', sans-serif` }}
+                responsive={false}
+                weight="bold"
               >
                 Cite refine.bio
               </Heading>

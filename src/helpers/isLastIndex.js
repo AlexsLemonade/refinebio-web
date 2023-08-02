@@ -1,2 +1,2 @@
-// Checks if the given index is the last element of an array.
-export const isLastIndex = (index, arr) => index === arr.length - 1
+// Checks if a given index is the last element in an array.
+export default (index, arr) => index === arr.length - 1
