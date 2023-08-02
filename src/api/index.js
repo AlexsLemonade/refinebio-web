@@ -1,16 +1,7 @@
-import computedFiles from './interfaces/computedFiles'
-import { downloader, processor } from './interfaces/jobs'
-import experiments from './interfaces/experiments'
-import originalFiles from './interfaces/originalFiles'
-import samples from './interfaces/samples'
-import search from './interfaces/search'
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-export const api = {
-  computedFiles,
-  downloader,
-  experiments,
-  originalFiles,
-  processor,
-  samples,
-  search
+const handler = (req, res) => {
+  res.status(200).json({ name: 'Refinebio-web' })
 }
+
+export default handler

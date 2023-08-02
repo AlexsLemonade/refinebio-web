@@ -11,7 +11,8 @@ const IconToggle = styled(Box)`
     position: absolute;
     right: 24px;
     top: 8px;
-    z-index: 18;
+    z-index: 100;
+
     &::before,
     &::after {
       content: '';
@@ -39,7 +40,6 @@ const IconToggle = styled(Box)`
   ${({ theme, toggle }) =>
     toggle &&
     css`
-      top: 40px;
       &::before,
       &::after,
       span {
@@ -65,9 +65,8 @@ export const NavIcon = ({ light, toggle, clickHandler }) => {
     <IconToggle
       light={light}
       toggle={toggle}
-      role="button"
-      style={{ boxShadow: 'none' }}
       onClick={clickHandler}
+      role="button"
     >
       <Box as="span" />
       <SrOnly

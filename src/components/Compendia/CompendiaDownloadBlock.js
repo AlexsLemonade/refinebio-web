@@ -65,7 +65,7 @@ export const CompendiaDownloadBlock = ({ type }) => {
             level={2}
             color="white"
             margin={{ bottom: 'medium' }}
-            size={setResponsive('small', 'large')}
+            size={setResponsive('h2Small', 'h2Large')}
             style={{ textShadow: '0 3px 19px rgba(0,0,0,.5)' }}
             alignSelf="center"
           >

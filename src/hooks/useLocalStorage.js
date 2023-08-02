@@ -1,5 +1,3 @@
-// (resource) https://usehooks-ts.com/react-hook/use-local-storage
-
 import { useState } from 'react'
 
 export const useLocalStorage = (key, initialValue) => {

@@ -90,14 +90,7 @@ export const colors = {
     'linear-gradient(179.93deg, rgba(12, 52, 131, 0.937981) -11.89%, rgba(25, 64, 142, 0.946665) 21.67%, #6b8cce 75.91%, #a2b6df 129.12%, #a2b6df 192.17%)',
   gradientBlueDark:
     'linear-gradient(180deg, rgba(12, 52, 131, 0.937981) 0%, #6B8CCE 131.35%, #A2B6DF 190.36%, #A1B6DF 190.36%, #A2B6DF 190.36%)',
-  gradientLeft:
-    'linear-gradient(270deg,rgba(253, 253, 253, 0) 0%,rgba(204, 204, 204, 0.2) 40%,rgba(204, 204, 204, 1) 100%)',
-  gradientRight:
-    'linear-gradient(90deg,rgba(253, 253, 253, 0) 0%,rgba(204, 204, 204, 0.2) 40%,rgba(204, 204, 204, 1) 100%)',
   // Opaque
-  rgbaLight2: 'rgba(255, 255, 255, 0.2)',
-  rgba4: 'rgba(0, 0, 0, 0.4)',
-  rgba6: 'rgba(0, 0, 0, 0.6)',
   rgba3: 'rgba(0, 0, 0, 0.3)',
   // Social Media
   twitter: '#55acee',

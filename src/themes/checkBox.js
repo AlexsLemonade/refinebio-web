@@ -15,16 +15,7 @@ export default {
     }
   },
   extend: ({ theme }) => `
-   align-items: flex-start;  
-   word-break: break-word;
-   
-   > div {
-    margin-top: 5px;
-    margin-right: 8px;
-  }
-
   input + div {
-    border: 1px solid ${normalizeColor(borderColor, theme)};
     box-shadow: none;
     height: ${size};
     width: ${size};

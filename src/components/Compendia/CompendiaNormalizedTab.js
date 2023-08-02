@@ -28,7 +28,7 @@ export const CompendiaNormalizedTab = ({ type = 'normalized' }) => {
           <Heading
             level={2}
             margin={{ bottom: setResponsive('medium', 'large') }}
-            size={setResponsive('small', 'large')}
+            size={setResponsive('h2Small', 'h2Large')}
             textAlign="center"
           >
             The normalized compendia is created by aggregating all samples from
@@ -50,7 +50,7 @@ export const CompendiaNormalizedTab = ({ type = 'normalized' }) => {
           <Heading
             level={2}
             margin={{ bottom: setResponsive('medium', 'large') }}
-            size={setResponsive('small', 'large')}
+            size={setResponsive('h2Small', 'h2Large')}
             textAlign="center"
           >
             Data scientists and computational biologists can use the normalized

@@ -4,7 +4,6 @@ export const List = ({
   alignItems = 'center',
   display = 'flex',
   flexDirection = 'row',
-  listStyle = 'none',
   listType = 'ul',
   children,
   ...props
@@ -12,7 +11,7 @@ export const List = ({
   return (
     <Box
       as={listType}
-      style={{ alignItems, display, flexDirection, listStyle }}
+      style={{ alignItems, display, flexDirection }}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >

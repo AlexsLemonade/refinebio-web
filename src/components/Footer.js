@@ -122,9 +122,7 @@ export const Footer = () => {
             <Column>
               <Heading
                 level={5}
-                style={{ fontFamily: `'Lato', sans-serif` }}
-                responsive={false}
-                weight="bold"
+                style={{ fontFamily: `'Lato', sans-serif`, fontWeight: '700' }}
               >
                 Cite refine.bio
               </Heading>

@@ -1,5 +1,5 @@
 // Returns the external accession code URL based on a given accession code
-export default (accessionCode) => {
+export function getURLForAccessionCode(accessionCode) {
   if (!accessionCode) return ''
 
   if (accessionCode.startsWith('GSE')) {

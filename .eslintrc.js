@@ -19,7 +19,6 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    // General https://eslint.org/docs/latest/rules/
     /*
     "off"/0 - turn the rule off
     "warn"/1 - turn the rule on as a warning
@@ -40,10 +39,10 @@ module.exports = {
         ignoreRegExpLiterals: true
       }
     ],
+    // General https://eslint.org/docs/latest/rules/
     'class-methods-use-this': 0,
     'import/prefer-default-export': 0,
     'import/no-mutable-exports': 0,
-    'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
     // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md#options
     'import/no-extraneous-dependencies': [
       'error',

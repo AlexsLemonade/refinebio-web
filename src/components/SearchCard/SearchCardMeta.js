@@ -1,27 +1,14 @@
-/* eslint-disable no-nested-ternary */
 import { useResponsive } from 'hooks/useResponsive'
-import formatNumbers from 'helpers/formatNumbers'
-import formatString from 'helpers/formatString'
-import isArray from 'helpers/isArray'
-import formatPlatformName from 'helpers/formatPlatformName'
-import { Box } from 'grommet'
+import { formatString } from 'helpers/formatString'
+import { formatPlatformName } from 'helpers/formatPlatformName'
+import { Box, Text } from 'grommet'
 import { IconBadge } from 'components/shared/IconBadge'
 import { Row } from 'components/shared/Row'
-import { TextHighlight } from 'components/shared/TextHighlight'
-import { TextNull } from 'components/shared/TextNull'
 
 export const SearchCardMeta = ({
-  downloadableSamples,
-  organismNames,
-  platformNames,
-  technology,
-  size = 'small'
+  metadata: { downloadableSamples, organismNames, platformNames, technology }
 }) => {
   const { setResponsive } = useResponsive()
-  const technologyName = isArray(technology) ? technology.join('') : technology
-  const downloadableSamplesText = `${
-    downloadableSamples > 0 ? formatNumbers(downloadableSamples) : 'No'
-  } Downloadable Sample${downloadableSamples > 1 ? 's' : ''}`
 
   return (
     <Row
@@ -37,47 +24,43 @@ export const SearchCardMeta = ({
         }
       ]}
       direction={setResponsive('column', 'column', 'row')}
-      justify="start"
       gap="small"
       pad={{ vertical: 'xsmall' }}
     >
       <Box flex="grow" width={setResponsive('100%', '100%', { max: '30%' })}>
         {organismNames.length > 0 ? (
           <IconBadge
-            label={
-              <TextHighlight>
-                {organismNames.map(formatString).join(', ')}
-              </TextHighlight>
-            }
+            label={organismNames.map(
+              (organismName, i) =>
+                `${i > 0 ? ', ' : ''}${formatString(organismName)}`
+            )}
             name="Organism"
-            size={size}
           />
         ) : (
-          <TextNull text="No species" />
+          <Text color="gray-shade-40">
+            <i>No species</i>
+          </Text>
         )}
       </Box>
       <Box flex="grow">
-        <IconBadge label={downloadableSamplesText} name="Samples" size={size} />
+        <IconBadge
+          label={`${downloadableSamples.toLocaleString()} Downloadable Samples`}
+          name="Samples"
+        />
       </Box>
       <Box flex="grow" width={setResponsive('100%', '100%', { max: '40%' })}>
         {platformNames.length > 0 ? (
           <IconBadge
-            label={
-              <TextHighlight>
-                {platformNames.map(formatPlatformName).join(', ')}
-              </TextHighlight>
-            }
-            name={
-              technologyName === 'MICROARRAY'
-                ? 'MicroArray'
-                : technologyName === 'RNA-SEQ'
-                ? 'RnaSeq'
-                : 'MixedPlatform'
-            }
-            size={size}
+            label={platformNames.map(
+              (platformName, i) =>
+                `${i > 0 ? ', ' : ''}${formatPlatformName(platformName)}`
+            )}
+            name={technology === 'MICROARRAY' ? 'MicroArray' : 'Rna'}
           />
         ) : (
-          <TextNull text="No platform available" />
+          <Text color="gray-shade-40">
+            <i>No platform available</i>
+          </Text>
         )}
       </Box>
     </Row>
