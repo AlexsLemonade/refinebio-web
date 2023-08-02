@@ -17,7 +17,7 @@ export const VersionInformation = ({ results }) => {
           'Brainarray'
         ])
       case 'Salmon Quant':
-        // remove the text 'salmon'
+        // removes the text 'salmon'
         return {
           salmon: processor.environment.cmd_line['salmon --version']?.replace(
             'salmon ',

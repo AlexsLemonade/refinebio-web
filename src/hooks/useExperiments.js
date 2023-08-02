@@ -1,10 +1,14 @@
 import { useState } from 'react'
 import unionizeArrays from 'helpers/unionizeArrays'
-import { options } from 'config'
 import { api } from 'api'
 
 export const useExperiments = () => {
-  const { databaseNames } = options
+  const databaseNames = {
+    GEO: 'Gene Expression Omnibus (GEO)',
+    SRA: 'Sequence Read Archive (SRA)',
+    ARRAY_EXPRESS: 'ArrayExpress'
+  }
+
   const [experiment, setExperiment] = useState()
   const [loading, setLoading] = useState(false)
   const hasSamples = experiment?.samples?.length > 0

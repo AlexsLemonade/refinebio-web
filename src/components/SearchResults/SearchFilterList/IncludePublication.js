@@ -1,24 +1,33 @@
 import { useSearchManager } from 'hooks/useSearchManager'
+import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
 import { Box, CheckBox } from 'grommet'
 
 export const IncludePublication = ({
   filterGroup,
-  filterParam,
+  filterOption,
   filterLabel
 }) => {
-  const { filters, isFilterChecked, toggleFilter } = useSearchManager()
-  const count =
-    filterGroup && filterGroup.true
-      ? `(${formatNumbers(filterGroup.true)})`
-      : ''
+  const { isFilterChecked, toggleFilter } = useSearchManager()
+  const { viewport } = useResponsive()
+  const count = `(${
+    filterGroup && filterGroup.true ? formatNumbers(filterGroup.true) : 0
+  })`
 
   return (
     <Box>
       <CheckBox
-        checked={isFilterChecked(filters, filterParam)}
+        checked={isFilterChecked(filterOption)}
+        disabled={!filterGroup.true}
         label={`${filterLabel} ${count}`}
-        onChange={(e) => toggleFilter(e, filterParam, true)}
+        onChange={(e) =>
+          toggleFilter(
+            e.target.checked,
+            filterOption,
+            true,
+            viewport === 'large'
+          )
+        }
       />
     </Box>
   )

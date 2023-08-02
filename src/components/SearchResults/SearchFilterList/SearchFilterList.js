@@ -9,35 +9,35 @@ import { SearchFilter } from './SearchFilter'
 import { IncludePublication } from './IncludePublication'
 
 export const SearchFilterList = ({ facets, setToggle }) => {
-  const { filters, clearAllFilters, updateSearchQuery } = useSearchManager()
+  const { clearAllFilters, hasAppliedFilters, updateSearchQuery } =
+    useSearchManager()
   const { viewport } = useResponsive()
   const [filterGroup, setFilterGroup] = useState({})
-  const isFilterSelected =
-    Object.keys(filters).filter((key) => key !== 'empty').length > 0
+
   const filterIncludePublication = {
     label: 'Includes Publication',
     key: 'has_publication',
-    parameter: 'has_publication'
+    option: 'has_publication'
   }
   // The order of the filters to render in UI
   const filterOrder = [
     {
       label: 'Organism',
       key: 'downloadable_organism_names',
-      parameter: 'downloadable_organism'
+      option: 'downloadable_organism'
     },
-    { label: 'Technology', key: 'technology', parameter: 'technology' },
+    { label: 'Technology', key: 'technology', option: 'technology' },
     {
       label: 'Platforms',
       key: 'platform_accession_codes',
-      parameter: 'platform'
+      option: 'platform'
     },
     filterIncludePublication
   ]
 
   const handleApplyFilters = () => {
     setToggle(false)
-    updateSearchQuery(true, filters)
+    updateSearchQuery(true)
   }
 
   useEffect(() => {
@@ -50,14 +50,14 @@ export const SearchFilterList = ({ facets, setToggle }) => {
         align="center"
         direction="row"
         justify="between"
+        height={{ max: '100%' }}
         margin={{ bottom: 'medium' }}
-        fill
       >
         <Heading level={2} responsive={false}>
           Filters
         </Heading>
         <Button
-          disabled={!isFilterSelected}
+          disabled={!hasAppliedFilters()}
           label="Clear All"
           link
           linkFontSize="medium"
@@ -81,7 +81,7 @@ export const SearchFilterList = ({ facets, setToggle }) => {
             >
               <SearchFilter
                 filterGroup={filterGroup[i]}
-                filterParam={f.parameter}
+                filterOption={f.option}
                 filterLabel={f.label}
               />
             </Box>
@@ -92,7 +92,7 @@ export const SearchFilterList = ({ facets, setToggle }) => {
       {!isEmptyObject(filterGroup) && (
         <IncludePublication
           filterGroup={filterGroup[filterGroup.length - 1]}
-          filterParam={filterIncludePublication.parameter}
+          filterOption={filterIncludePublication.option}
           filterLabel={`${filterIncludePublication.label}`}
         />
       )}

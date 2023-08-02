@@ -4,34 +4,41 @@ import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
 import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
+import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
 import { Box, Grid, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { LayerResponsive } from 'components/shared/LayerResponsive'
 import { Icon } from 'components/shared/Icon'
+import { PageTitle } from 'components/shared/PageTitle'
 import { Pagination } from 'components/shared/Pagination'
 import { SearchBox } from 'components/shared/SearchBox'
 import { SearchInfoBanner } from 'components/SearchResults/SearchInfoBanner'
 import { SearchCard } from 'components/SearchCard'
 import {
   MissingResultsAlert,
-  NoMatchingResults,
+  NoFilteringResults,
+  NoSearchResults,
   SearchBulkActions,
   SearchFilterList
 } from 'components/SearchResults'
 import { options } from 'config'
 
 export const Search = (props) => {
+  const {
+    search: { pageSizes, sortby }
+  } = options
   const { query, results, accessionCodesResult } = props
   const {
-    getFilterQueryParam,
-    setFilters,
+    formatFacetNames,
+    getSearchQueryParam,
+    hasAppliedFilters,
+    setConfig,
     setSearch,
     updatePage,
     updateSearchTerm
   } = useSearchManager()
-  const { pageSizes, sortby } = options
   const { viewport, setResponsive } = useResponsive()
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
@@ -39,7 +46,16 @@ export const Search = (props) => {
   const [userSearchTerm, setUserSearchTerm] = useState(query.search || '')
   const [page, setPage] = useState(Number(query.p) || 1)
   const [pageSize, setPageSize] = useState(Number(query.size) || pageSizes[0])
-  const [sortBy, setSortBy] = useState(query.ordering || sortby[0].value)
+  const [sortBy, setSortBy] = useState(query.sortby || sortby[0].value)
+  const isResults = results.results.length > 0
+
+  const handleClearSearchTerm = () => {
+    if (query.search) {
+      updateSearchTerm('')
+    }
+
+    setUserSearchTerm('')
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -48,39 +64,38 @@ export const Search = (props) => {
 
   useEffect(() => {
     if (props) {
-      if (query) {
-        setFilters(getFilterQueryParam(query))
-        setSearch({ ...(query.search ? { search: query.search } : {}) })
+      if (results) {
+        const facetNames = formatFacetNames(Object.keys(results.facets))
+
+        setConfig({
+          filterOptions: facetNames
+        })
+
+        if (query) {
+          setSearch({
+            ...getSearchQueryParam(query)
+          })
+        }
       }
     }
   }, [])
 
   return (
-    <TextHighlightContextProvider
-      match={[query.search, ...getAccessionCodesQueryParam(query.search)]}
-    >
-      <FixedContainer pad={{ horizontal: 'large', bottom: 'large' }}>
-        <SearchInfoBanner />
-        <Grid
-          areas={[
-            { name: 'top', start: [1, 0], end: [1, 0] },
-            { name: 'side', start: [0, 1], end: [0, 1] },
-            { name: 'main', start: [1, 1], end: [1, 1] }
-          ]}
-          columns={setResponsive(['auto'], ['auto'], [sideWidth, 'auto'])}
-          rows={['auto', 'auto']}
-          gap={{
-            row: 'none',
-            column: setResponsive('none', 'none', '2%')
-          }}
-        >
-          <BoxBlock
-            gridArea="top"
+    <>
+      <PageTitle title={`${query.search ? query.search : ''} Results -`} />
+      <TextHighlightContextProvider
+        match={[query.search, ...getAccessionCodesQueryParam(query.search)]}
+      >
+        <FixedContainer pad={{ horizontal: 'large', bottom: 'large' }}>
+          <SearchInfoBanner />
+          <Box
+            alignSelf="center"
             margin={{
               top: 'medium',
               bottom: setResponsive('medium', 'medium', 'xlarge')
             }}
             width={setResponsive('100%', searchBoxWidth)}
+            style={{ position: 'relative' }}
           >
             <SearchBox
               placeholder="Search accessions, pathways, diseases, etc.,"
@@ -88,67 +103,81 @@ export const Search = (props) => {
               size="large"
               value={userSearchTerm}
               responsive
+              clickHandler={handleClearSearchTerm}
               changeHandler={(e) => setUserSearchTerm(e.target.value)}
               submitHandler={handleSubmit}
             />
-          </BoxBlock>
-          <LayerResponsive position="left" show={toggleFilterList} tabletMode>
-            <BoxBlock
-              gridArea="side"
-              height={setResponsive('100vh', '100vh', 'auto')}
-              margin={{ top: 'large' }}
-              pad={{
-                left: setResponsive('basex7', 'basex7', 'none'),
-                right: setResponsive('basex7', 'basex7', 'large'),
-                top: setResponsive('large', 'large', 'none')
+          </Box>
+
+          {results && isResults && (
+            <Grid
+              areas={[
+                { name: 'side', start: [0, 1], end: [0, 1] },
+                { name: 'main', start: [1, 1], end: [1, 1] }
+              ]}
+              columns={setResponsive(['auto'], ['auto'], [sideWidth, 'auto'])}
+              rows={['auto', 'auto']}
+              gap={{
+                row: 'none',
+                column: setResponsive('none', 'none', '2%')
               }}
-              // TODO: dynamically set the max height for laptop / desktop devices based on vh and page sizes
-              width={setResponsive('100vw', '100vw', sideWidth)}
-              style={{ overflowY: 'auto' }}
             >
-              {viewport !== 'large' && (
-                <Box align="end" margin={{ bottom: 'small' }}>
-                  <Box
-                    aria-label="Close Filters"
-                    role="button"
-                    style={{ boxShadow: 'none' }}
-                    width="max-content"
-                    onClick={() => setToggleFilterList(false)}
-                  >
-                    <Icon name="Close" size="large" />
-                  </Box>
-                </Box>
-              )}
-              {results && (
-                <SearchFilterList
-                  facets={results.facets}
-                  setToggle={setToggleFilterList}
+              <LayerResponsive
+                position="left"
+                show={toggleFilterList}
+                tabletMode
+              >
+                <BoxBlock
+                  gridArea="side"
+                  height={setResponsive('100vh', '100vh', 'auto')}
+                  margin={{ top: 'large' }}
+                  pad={{
+                    left: setResponsive('basex7', 'basex7', 'none'),
+                    right: setResponsive('basex7', 'basex7', 'large'),
+                    top: setResponsive('large', 'large', 'none')
+                  }}
+                  // TODO: dynamically set the max height for laptop / desktop devices based on vh and page sizes
+                  width={setResponsive('100vw', '100vw', sideWidth)}
+                  style={{ overflowY: 'auto' }}
+                >
+                  {viewport !== 'large' && (
+                    <Box align="end" margin={{ bottom: 'small' }}>
+                      <Box
+                        aria-label="Close Filters"
+                        role="button"
+                        style={{ boxShadow: 'none' }}
+                        width="max-content"
+                        onClick={() => setToggleFilterList(false)}
+                      >
+                        <Icon name="Close" size="large" />
+                      </Box>
+                    </Box>
+                  )}
+                  <SearchFilterList
+                    facets={results.facets}
+                    setToggle={setToggleFilterList}
+                  />
+                </BoxBlock>
+              </LayerResponsive>
+              <Box gridArea="main" height={{ min: '85vh' }}>
+                {viewport !== 'large' && (
+                  <Button
+                    aria-label="Open Filters"
+                    label="Filter"
+                    icon={<Icon name="Filter" size="small" />}
+                    margin={{ bottom: 'medium' }}
+                    secondary
+                    onClick={() => setToggleFilterList(true)}
+                  />
+                )}
+                <SearchBulkActions
+                  pageSize={pageSize}
+                  setPageSize={setPageSize}
+                  sortBy={sortBy}
+                  setSortBy={setSortBy}
+                  totalResults={results.count}
                 />
-              )}
-            </BoxBlock>
-          </LayerResponsive>
-          <Box gridArea="main" height={{ min: '85vh' }}>
-            {viewport !== 'large' && (
-              <Button
-                aria-label="Open Filters"
-                label="Filter"
-                icon={<Icon name="Filter" size="small" />}
-                margin={{ bottom: 'medium' }}
-                secondary
-                onClick={() => setToggleFilterList(true)}
-              />
-            )}
-            {results && (
-              <SearchBulkActions
-                pageSize={pageSize}
-                setPageSize={setPageSize}
-                sortBy={sortBy}
-                setSortBy={setSortBy}
-                totalResults={results.count}
-              />
-            )}
-            {results && results.results.length > 0 ? (
-              <>
+
                 {accessionCodesResult.length > 0 && (
                   <>
                     {accessionCodesResult.map((data) =>
@@ -176,51 +205,74 @@ export const Search = (props) => {
                   ))}
                   {results.results.length < 10 && <MissingResultsAlert />}
                 </Box>
-              </>
-            ) : (
-              <NoMatchingResults />
-            )}
-            {results && (
-              <Box
-                align="center"
-                direction="row"
-                justify="center"
-                margin={{ top: 'medium' }}
-              >
-                <Pagination
-                  page={page}
-                  pageSize={pageSize}
-                  setPage={setPage}
-                  totalPages={results.count}
-                  updatePage={updatePage}
-                />
+                <Box
+                  align="center"
+                  direction="row"
+                  justify="center"
+                  margin={{ top: 'medium' }}
+                >
+                  <Pagination
+                    page={page}
+                    pageSize={pageSize}
+                    setPage={setPage}
+                    totalPages={results.count}
+                    updatePage={updatePage}
+                  />
+                </Box>
               </Box>
-            )}
-          </Box>
-        </Grid>
-      </FixedContainer>
-    </TextHighlightContextProvider>
+            </Grid>
+          )}
+
+          {results && !isResults && hasAppliedFilters() && (
+            <Box direction="row">
+              <SearchFilterList
+                facets={results.facets}
+                setToggle={setToggleFilterList}
+                style={{ height: 'auto' }}
+              />
+              <Box width="80%">
+                <NoFilteringResults />
+              </Box>
+            </Box>
+          )}
+
+          {results && !isResults && !hasAppliedFilters() && query.search && (
+            <NoSearchResults setUserSearchTerm={setUserSearchTerm} />
+          )}
+        </FixedContainer>
+      </TextHighlightContextProvider>
+    </>
   )
 }
 
 Search.getInitialProps = async (ctx) => {
   const { pathname, query } = ctx
+  const {
+    search: {
+      commonQueries: {
+        limit,
+        offset,
+        ordering,
+        num_downloadable_samples__gt: numDownloadableSamples
+      }
+    }
+  } = options
+
   const queryString = {
-    ...query,
-    limit: query.size || 10,
-    offset: (query.p - 1) * (query.size || 10) || 0,
-    ordering: query.ordering || '_score',
+    ...getSearchQueryForAPI(query),
+    limit: query.size || Number(limit),
+    offset: (query.p - 1) * (query.size || Number(offset)) || Number(offset),
+    ordering: query.sortby || ordering,
     ...(query.search ? { search: query.search } : {}),
-    num_downloadable_samples__gt: !query.empty ? 0 : -1
+    num_downloadable_samples__gt: !query.empty
+      ? Number(numDownloadableSamples.hide)
+      : Number(numDownloadableSamples.show)
   }
-  const { response, accessionCodesResponse } = await fetchSearch(
-    queryString,
-    query.search
-  )
+  const { response, accessionCodesResponse } = await fetchSearch(queryString)
 
   return {
     pathname,
-    query: queryString,
+    query,
     results: response,
     accessionCodesResult: accessionCodesResponse
   }

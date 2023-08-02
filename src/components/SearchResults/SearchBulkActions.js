@@ -13,9 +13,11 @@ export const SearchBulkActions = ({
   setSortBy,
   totalResults
 }) => {
+  const {
+    search: { pageSizes, sortby }
+  } = options
   const { updatePageSize, updateSortBy } = useSearchManager()
   const { getForBreakpoint, setResponsive } = useResponsive()
-  const { sortby } = options
 
   const handleChageSort = (newOrder) => {
     setSortBy(newOrder)
@@ -105,8 +107,9 @@ export const SearchBulkActions = ({
               textAppended="results"
               pageSizeLabel="Total Samples"
               pageSize={pageSize}
-              totalPages={totalResults}
               setPageSize={setPageSize}
+              pageSizes={pageSizes}
+              totalPages={totalResults}
               updatePageSize={updatePageSize}
             />
           </Box>

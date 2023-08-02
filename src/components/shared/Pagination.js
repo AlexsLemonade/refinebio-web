@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useResponsive } from 'hooks/useResponsive'
-import { makePagination } from 'helpers/makePagination'
 import { nanoid } from 'nanoid'
+import { useResponsive } from 'hooks/useResponsive'
+import makePagination from 'helpers/makePagination'
 import { Box, Form, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
@@ -30,16 +30,17 @@ const PaginationButton = styled(Button)`
 `
 
 export const Pagination = ({
+  page = 1,
   pageSize,
-  setPage,
   totalPages,
+  setPage,
   updatePage,
-  page = 1
+  reset = false
 }) => {
   const { query, isReady } = useRouter()
   const { setResponsive } = useResponsive()
   const pageCount = Math.ceil(totalPages / pageSize)
-  const [currentPage, setCurrentPage] = useState(page || 1)
+  const [currentPage, setCurrentPage] = useState(page)
   const pageNumbers = makePagination(currentPage, pageCount)
   const [userInput, setUserInput] = useState('')
   const [isInvalid, setIsInvalid] = useState(false)
@@ -47,12 +48,6 @@ export const Pagination = ({
   const [canNextPage, setCanNextPage] = useState(true)
   const nextPage = () => setCurrentPage(currentPage + 1)
   const previousPage = () => setCurrentPage(currentPage - 1)
-
-  useEffect(() => {
-    if (!isReady) return
-
-    setCurrentPage(query.p ? Number(query.p) : 1)
-  }, [isReady, query])
 
   // updates the search page url with selected page number
   const updateQueryForPage = (newPage) => {
@@ -93,6 +88,25 @@ export const Pagination = ({
     }
   }
 
+  // resets the current page to match the moest recent search request
+  useEffect(() => {
+    if (!isReady) return
+
+    setCurrentPage(query.p ? Number(query.p) : 1)
+  }, [isReady, query])
+
+  // resets the current page to match the newly updated page number
+  // in the samlles table
+  useEffect(() => {
+    if (!reset) return
+
+    setCurrentPage(page)
+  }, [reset])
+
+  useEffect(() => {
+    setPage(currentPage)
+  }, [currentPage])
+
   useEffect(() => {
     if (pageCount === currentPage) {
       setCanNextPage(false)
@@ -105,10 +119,6 @@ export const Pagination = ({
       setCanPreviousPage(true)
     }
   }, [totalPages, currentPage])
-
-  useEffect(() => {
-    setPage(currentPage - 1)
-  }, [currentPage])
 
   if (totalPages < 1) return null
 

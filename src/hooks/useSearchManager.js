@@ -1,24 +1,31 @@
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import { SearchManagerContext } from 'contexts/SearchManagerContext'
-import getQueryParam from 'helpers/getQueryParam'
-import isEmptyObject from 'helpers/isEmptyObject'
 import { options } from 'config'
 
 export const useSearchManager = () => {
   const {
     search: searchState,
     setSearch: setSearchState,
-    filters: filtersState,
-    setFilters: setFiltersState
+    config: configState,
+    setConfig: setConfigState
   } = useContext(SearchManagerContext)
+  const {
+    search: {
+      clientOnlyFilterQueries,
+      commonQueries,
+      formattedFacetNames,
+      pageSizes,
+      sortby
+    }
+  } = options
   const router = useRouter()
   const search = searchState
   const setSearch = setSearchState
-  const filters = filtersState
-  const setFilters = setFiltersState
-  const { filterList, pageSizes, sortby } = options
+  const config = configState
+  const setConfig = setConfigState
 
+  console.log('==========================>>>>>>>>>', search)
   /* Common */
   const resetPage = () => {
     delete search.p
@@ -44,14 +51,14 @@ export const useSearchManager = () => {
     }
 
     setSearch({ ...search })
-    updateSearchQuery()
+    updateSearchQuery(true)
   }
 
   const updateSortBy = (newSortOrder) => {
     if (newSortOrder === sortby[0].value) {
-      delete search.ordering
+      delete search.sortby
     } else {
-      search.ordering = newSortOrder
+      search.sortby = newSortOrder
     }
 
     setSearch({ ...search })
@@ -59,73 +66,64 @@ export const useSearchManager = () => {
   }
 
   /* Filters */
+  // removes all the applied filtes except for the 'empty'
   const clearAllFilters = () => {
-    Object.keys(filters).forEach((key) => {
-      // excludes the non-downloadable filter option to be removed
-      if (key === 'empty') {
-        filters.empty = filters[key]
-      } else {
-        delete filters[key]
-      }
+    ;(config.filterOptions || []).forEach((key) => {
+      if (key in search) delete search[key]
     })
 
-    setFilters({ ...filters })
+    setSearch({ ...search })
     updateSearchQuery(true)
   }
 
-  // returns filters-only query parameters from url
-  const getFilterQueryParam = (query) => {
-    const queryParam = getQueryParam(query)
-    const temp = {}
+  // returns true if any filters that are applied, otherwise false
+  const hasAppliedFilters = () => {
+    if (!search) return false
 
-    Object.keys(queryParam).forEach((key) => {
-      if (filterList.includes(key)) {
-        temp[key] = queryParam[key]
-      }
-    })
-
-    return temp
+    return (
+      (config.filterOptions || []).filter(
+        (filterOption) => filterOption in search
+      ).length > 0
+    )
   }
 
-  const isFilterChecked = (filter, param, value) => {
-    if (!filter) return null
+  const isFilterChecked = (key, val) => {
+    if (!(key in search)) return false
 
-    if (value) {
-      return filter[param] ? filter[param].includes(value) : false
+    if (val) {
+      return search[key].includes(val)
     }
 
-    return param in filter
+    return key in search
   }
 
   // toggles a filter option in facets
-  const toggleFilter = (e, param, val, viewport) => {
-    if (e.target.checked) {
-      if (filters[param] !== undefined) {
-        filters[param].push(val)
+  const toggleFilter = (checked, key, val, updateQuery = true) => {
+    if (clientOnlyFilterQueries.includes(key)) {
+      if (checked) {
+        delete search[key]
       } else {
-        filters[param] = [val]
+        search[key] = true
       }
-    } else if (filters[param].length > 0) {
-      filters[param] = filters[param].filter((item) => item !== val)
-      if (filters[param].length === 0) delete filters[param]
+    } else {
+      // eslint-disable-next-line no-lonely-if
+      if (checked) {
+        if (search[key] !== undefined) {
+          search[key].push(val)
+        } else {
+          search[key] = [val]
+        }
+      } else if (search[key].length > 0) {
+        search[key] = search[key].filter((item) => item !== val)
+        if (search[key].length === 0) delete search[key]
+      }
     }
 
-    setFilters({ ...filters })
-    // makes API call on toggle only on larger devices
-    if (viewport === 'large') {
+    setSearch({ ...search })
+    // skips the query update on mobile/table devices
+    if (updateQuery) {
       updateSearchQuery(true)
     }
-  }
-
-  const toggleNonDownloadableFilter = (e, param) => {
-    if (e.target.checked) {
-      delete filters[param]
-    } else {
-      filters[param] = true
-    }
-
-    setFilters({ ...filters })
-    updateSearchQuery(true)
   }
 
   /* Search Term */
@@ -141,6 +139,41 @@ export const useSearchManager = () => {
   }
 
   /* Other */
+  // converts the facets to API supported format
+  const formatFacetNames = (facetNames) => {
+    const formattedNames = []
+
+    for (const name of facetNames) {
+      if (Object.keys(formattedFacetNames).includes(name)) {
+        formattedNames.push(formattedFacetNames[name])
+      } else {
+        formattedNames.push(name)
+      }
+    }
+
+    return formattedNames
+  }
+
+  // returns client-only query parameter from url
+  const getSearchQueryParam = (queryParams) => {
+    const temp = {}
+    Object.keys(queryParams).forEach((key) => {
+      if (!Object.keys(commonQueries).includes(key)) {
+        if (Object.values(formattedFacetNames).includes(key)) {
+          if (typeof queryParams[key] === 'string') {
+            temp[key] = [queryParams[key]]
+          } else {
+            temp[key] = queryParams[key]
+          }
+        } else {
+          temp[key] = queryParams[key]
+        }
+      }
+    })
+
+    return temp
+  }
+
   // handles search requests from non-search page and
   // navigates a user to the search page
   const navigateToSearch = (newQuery) => {
@@ -158,26 +191,23 @@ export const useSearchManager = () => {
 
     router.push({
       query: {
-        ...(!isEmptyObject(filters) ? filters : {}),
-        ...(search.search ? { search: search.search } : {}),
-        ...(search.ordering ? { ordering: search.ordering } : {}),
-        ...(search.p ? { p: search.p } : {}),
-        ...(search.size ? { size: search.size } : {})
+        ...search
       }
     })
   }
 
   return {
-    filters,
-    setFilters,
     search,
     setSearch,
+    config,
+    setConfig,
     clearAllFilters,
-    getFilterQueryParam,
+    formatFacetNames,
+    getSearchQueryParam,
+    hasAppliedFilters,
     isFilterChecked,
     navigateToSearch,
     toggleFilter,
-    toggleNonDownloadableFilter,
     updatePage,
     updatePageSize,
     updateSearchQuery,

@@ -35,6 +35,7 @@ export const HeroBody = () => {
         size="large"
         primary
         responsive
+        clickHandler={() => setUserInput('')}
         changeHandler={(e) => setUserInput(e.target.value)}
         submitHandler={handleSubmit}
       />

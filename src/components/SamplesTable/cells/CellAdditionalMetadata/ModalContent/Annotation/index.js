@@ -13,8 +13,7 @@ export const Annotation = ({ value }) => {
   }
 
   const valueIsObject = isArray(value) || !isObject(value)
-
-  // check if it's an array with objects(key/values) with only two keys
+  // checks if it's an array with objects(key/values) with only two keys
   // and one of them is 'value'
   if (
     isArray(value) &&

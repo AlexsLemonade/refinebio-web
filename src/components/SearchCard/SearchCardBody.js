@@ -59,7 +59,8 @@ export const SearchCardBody = ({
                     </>
                   ) : (
                     <>
-                      Less{' '}
+                      {' '}
+                      Less
                       <Icon
                         margin={{ left: 'xxsmall' }}
                         name="ChevronUp"

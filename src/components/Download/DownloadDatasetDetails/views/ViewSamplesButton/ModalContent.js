@@ -37,7 +37,7 @@ export const ModalContent = ({
       </Box>
       <SamplesTable
         experimentSampleAssociations={dataset}
-        paramsToAdd={params}
+        queryToAdd={params}
         sampleMetadataFields={sampleMetadataFields}
         isImmutable={isImmutable}
         modalView

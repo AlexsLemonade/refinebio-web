@@ -3,6 +3,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import formatNumbers from 'helpers/formatNumbers'
+import formatPlatformName from 'helpers/formatPlatformName'
 import formatString from 'helpers/formatString'
 import isLastIndex from 'helpers/isLastIndex'
 import { Box, CheckBox, Heading } from 'grommet'
@@ -11,6 +12,7 @@ import { SearchBox } from 'components/shared/SearchBox'
 import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
 import styled, { css } from 'styled-components'
+import cache from 'api/api_data.json'
 
 const ToggleButton = styled(sharedButton)`
   border-bottom: 1px solid transparent;
@@ -20,15 +22,15 @@ const ToggleButton = styled(sharedButton)`
     }
   `}
 `
-export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
+export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
   const { viewport } = useResponsive()
-  const { filters, isFilterChecked, toggleFilter } = useSearchManager()
+  const { isFilterChecked, toggleFilter } = useSearchManager()
   const maxCount = 5
   const filterList = Object.entries(filterGroup)
   const filterLength = filterList.length
   const [userInput, setUserInput] = useState('')
   const [open, setOpen] = useState(false)
-  const filterOptions = filterList
+  const formattedFilterList = filterList
     .filter((option) =>
       formatString(option[0]).toLowerCase().startsWith(userInput.toLowerCase())
     )
@@ -55,7 +57,7 @@ export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
 
       <TextHighlightContextProvider match={userInput}>
         <Box animation={open ? { type: 'fadeIn', duration: 1000 } : {}}>
-          {filterOptions.map((option, i, arr) => (
+          {formattedFilterList.map((option, i, arr) => (
             <Box
               key={option[0]}
               margin={{ bottom: !isLastIndex(i, arr) ? 'xsmall' : '0' }}
@@ -63,13 +65,23 @@ export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
               <CheckBox
                 label={
                   <>
-                    <TextHighlight>{formatString(option[0])}</TextHighlight> (
-                    {formatNumbers(option[1])})
+                    <TextHighlight>
+                      {filterOption === 'platform'
+                        ? formatPlatformName(cache.platforms[option[0]]) ||
+                          option[0]
+                        : formatString(option[0])}
+                    </TextHighlight>{' '}
+                    ({formatNumbers(option[1])})
                   </>
                 }
-                checked={isFilterChecked(filters, filterParam, option[0])}
+                checked={isFilterChecked(filterOption, option[0])}
                 onChange={(e) =>
-                  toggleFilter(e, filterParam, option[0], viewport)
+                  toggleFilter(
+                    e.target.checked,
+                    filterOption,
+                    option[0],
+                    viewport === 'large'
+                  )
                 }
               />
             </Box>
@@ -77,7 +89,7 @@ export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
         </Box>
       </TextHighlightContextProvider>
 
-      {filterOptions.length === 0 && <TextNull text="No match found" />}
+      {formattedFilterList.length === 0 && <TextNull text="No match found" />}
 
       {filterLength > maxCount && (
         <ToggleButton
