@@ -1,8 +1,8 @@
-import { http } from 'api/http'
+import http from 'api/http'
 
 const url = 'jobs/processor/'
 
-export const processor = {
+export default {
   get: (accessionCode) => {
     const param = {
       sample_accession_code: accessionCode

@@ -39,21 +39,16 @@ export const SearchInfoBanner = () => {
   return (
     <ExpandableBlock duration=".48s" expand={bannerExpand}>
       {viewport !== 'small' ? (
-        <Box background="gradient_light_reverse" pad="small">
+        <Box background="gradientLightReverse" pad="small">
           <Box alignSelf="end">
             <Button
-              icon={<Icon color="black" name="Close" size="16px" />}
+              icon={<Icon name="Close" size="16px" />}
               onClick={handleClose}
               link
             />
           </Box>
           <Box align="center">
-            <Heading
-              color="brand-shade-40"
-              level={1}
-              size="h1_xsmall"
-              weight={500}
-            >
+            <Heading color="brand-shade-40" level={1} size="small" weight={500}>
               Build and Download Custom Datasets
             </Heading>
             {/* to preserve the UI for desktop view */}

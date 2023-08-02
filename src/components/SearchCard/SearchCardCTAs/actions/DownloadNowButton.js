@@ -53,7 +53,7 @@ export const DownloadNowButton = ({ accessionCode }) => {
           <Heading level={1}>Download All Samples Now</Heading>
         </Box>
         <Box margin={{ bottom: 'medium' }}>
-          <Heading level={5} size="h5_small" weight="600">
+          <Heading level={5} responsive={false} weight="600">
             Download Options
           </Heading>
         </Box>

@@ -33,7 +33,7 @@ export const ErrorPage = () => {
           align={setResponsive('center', 'center', 'start')}
           margin={{ top: 'basex8' }}
         >
-          <Heading level={1} size="h1_xsmall">
+          <Heading level={1} size="small">
             The page you are looking for isn’t expressed.
           </Heading>
           <Paragraph>Please try again later..</Paragraph>

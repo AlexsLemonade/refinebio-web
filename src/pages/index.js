@@ -1,7 +1,7 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
 import { SignUpBlock } from 'components/shared/SignUpBlock'
-import { HomeDocumentsSection } from 'components/Home/HomeDocumentsSection'
+import { HomeDocumentationSection } from 'components/Home/HomeDocumentationSection'
 import { HomeExamplesSection } from 'components/Home/HomeExamplesSection'
 import { HomeFeaturesSection } from 'components/Home/HomeFeaturesSection'
 import { HomeHero } from 'components/Home/HomeHero'
@@ -21,7 +21,7 @@ const Home = () => {
         <HomeFeaturesSection />
       </Box>
       <HomeExamplesSection />
-      <HomeDocumentsSection />
+      <HomeDocumentationSection />
       <SignUpBlock />
     </>
   )

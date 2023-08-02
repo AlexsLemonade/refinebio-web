@@ -1,8 +1,8 @@
-import { http } from 'api/http'
+import http from 'api/http'
 
 const url = 'jobs/downloader/'
 
-export const downloader = {
+export default {
   get: (accessionCode) => {
     const param = {
       sample_accession_code: accessionCode

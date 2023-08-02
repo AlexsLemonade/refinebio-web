@@ -1,4 +1,4 @@
-import { useState, memo } from 'react'
+import { useState } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
 import { useAsyncDebounce } from 'react-table'
 import { Box, FormField, Text } from 'grommet'
@@ -6,12 +6,12 @@ import { Icon } from 'components/shared/Icon'
 import { TextInput } from 'components/shared/TextInput'
 import { SrOnly } from 'components/shared/SrOnly'
 
-export const GlobalFilter = ({ globalFilter, setGlobalFilter }) => {
+export const FilterTextInput = ({ filter, setFilter, placeholder = '' }) => {
   const { setResponsive } = useResponsive()
-  const [userInput, setUserInput] = useState(globalFilter)
+  const [userInput, setUserInput] = useState(filter)
 
   const debounceInput = useAsyncDebounce((value) => {
-    setGlobalFilter(value || '')
+    setFilter(value || '')
   }, 500)
 
   const handleChange = (value) => {
@@ -21,32 +21,24 @@ export const GlobalFilter = ({ globalFilter, setGlobalFilter }) => {
 
   const clearInput = () => {
     setUserInput('')
-    setGlobalFilter('')
+    setFilter('')
   }
 
   return (
-    <Box
-      direction="row"
-      justify="start"
-      align={setResponsive('start', 'center')}
-    >
-      <Text
-        margin={{ right: 'small', bottom: setResponsive('xsmall', 'none') }}
-      >
-        Filter
-      </Text>
+    <Box direction="row" align="center" gap="small">
+      <Text>Filter</Text>
       <FormField
-        htmlFor="global-filter"
-        a11yTitle="Global Filter"
+        htmlFor="filter-text-input"
+        a11yTitle="Filter Text Input Field"
         role="search"
         width={setResponsive('100%', 'auto')}
         style={{ position: 'relative' }}
       >
         <TextInput
-          id="global-filter"
+          id="filter-text-input"
           type="text"
           value={userInput || ''}
-          placeholder="Filter table"
+          placeholder={placeholder}
           style={{ paddingRight: '28px' }}
           onChange={(e) => {
             handleChange(e.target.value)
@@ -72,4 +64,4 @@ export const GlobalFilter = ({ globalFilter, setGlobalFilter }) => {
   )
 }
 
-export default memo(GlobalFilter)
+export default FilterTextInput
