@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { useResponsive } from 'hooks/useResponsive'
-import { isMatchPath } from 'helpers/isMatchPath'
+import isMatchPath from 'helpers/isMatchPath'
 import { Box, Header as GrommetHeader } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { GlobalNav } from './GlobalNav'

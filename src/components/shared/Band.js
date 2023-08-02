@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { isMatchPath } from 'helpers/isMatchPath'
+import isMatchPath from 'helpers/isMatchPath'
 import { Box } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
 

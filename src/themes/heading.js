@@ -55,6 +55,11 @@ export default {
       medium: {
         size: '16px', // 1rem
         height: 1.5 // 24px
+      },
+      h5_small: {
+        // for small screen
+        size: '16px', // 1rem
+        height: 1.5 // 24px
       }
     }
   },

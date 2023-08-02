@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { isMatchPath } from 'helpers/isMatchPath'
+import isMatchPath from 'helpers/isMatchPath'
 import { Box, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Button as SharedButton } from 'components/shared/Button'

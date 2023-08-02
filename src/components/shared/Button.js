@@ -11,6 +11,15 @@ import { IconSpinner } from './IconSpinner'
 const CustomLinkButton = styled(GrommetButton)`
   position: relative;
 
+  ${({ theme }) => css`
+    &:disabled {
+      color: ${theme.global.colors['gray-shade-40']};
+      &:hover {
+        color: ${theme.global.colors['gray-shade-40']};
+      }
+    }
+  `}
+
   ${({ theme, linkColor }) => css`
     color: ${theme.global.colors[linkColor]};
     &:hover {
