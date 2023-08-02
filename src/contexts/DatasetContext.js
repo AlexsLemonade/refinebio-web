@@ -4,8 +4,8 @@ import { createContext, useMemo } from 'react'
 import { useRefinebio } from 'hooks/useRefinebio'
 import { useLocalStorage } from 'hooks/useLocalStorage'
 import { formatExperiments } from 'helpers/dataset'
-import { getDifferenceOfArrays } from 'helpers/getDifferenceOfArrays'
-import { unionizeArrays } from 'helpers/unionizeArrays'
+import getDifferenceOfArrays from 'helpers/getDifferenceOfArrays'
+import unionizeArrays from 'helpers/unionizeArrays'
 import mock from 'api/mockDataDataset'
 
 export const DatasetContext = createContext({})

@@ -1,8 +1,8 @@
-import { http } from 'api/http'
+import http from 'api/http'
 
 const url = 'computed_files/'
 
-export const computedFiles = {
+export default {
   get: (sampleId) => {
     const param = { samples: sampleId }
 

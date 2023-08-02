@@ -1,5 +1,5 @@
 import { Children } from 'react'
-import { isFunction } from 'helpers/isFunction'
+import isFunction from 'helpers/isFunction'
 import { Box, Text } from 'grommet'
 import { ExpandableBlock } from 'components/shared/ExpandableBlock'
 import { Icon } from 'components/shared/Icon'

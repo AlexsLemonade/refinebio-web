@@ -1,8 +1,8 @@
-import { http } from 'api/http'
+import http from 'api/http'
 
 const url = 'experiments/'
 
-export const experiments = {
+export default {
   get: (accessionCode) => {
     const path = `${url}${accessionCode}/`
 

@@ -10,12 +10,13 @@ export const CellAdditionalMetadata = ({
   row: { original: sample },
   linkFontSize = '14px'
 }) => {
+  const { openModal } = useModal()
+  const { setResponsive } = useResponsive()
+
   if (sample.annotations.length === 0) {
     return <TextNull text="N/A" />
   }
 
-  const { openModal } = useModal()
-  const { setResponsive } = useResponsive()
   const id = `metadata_${sample.id}`
   const annotations = sample.annotations.map((annotation) => annotation.data)
 

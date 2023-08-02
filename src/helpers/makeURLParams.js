@@ -1,6 +1,6 @@
-import { isArray } from './isArray'
+import isArray from 'helpers/isArray'
 // Make the query parameters for API calls based on the given object 'params'
-export const makeURLParams = (params) => {
+export default (params) => {
   return Object.keys(params)
     .filter((key) => params[key] !== undefined)
     .reduce((accum, key) => {

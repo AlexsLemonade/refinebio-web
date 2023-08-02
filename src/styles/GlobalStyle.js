@@ -47,4 +47,12 @@ export const GlobalStyle = createGlobalStyle`
       width: 100%;
       height: 100%;
     }
+    // For Ngprogress bar, set background color
+    #nprogress .bar {
+      height: 3px;
+    }
+    #nprogress .peg {
+      box-shadow: none;
+    }
+
 `

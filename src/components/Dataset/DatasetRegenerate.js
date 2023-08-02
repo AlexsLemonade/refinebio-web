@@ -17,11 +17,7 @@ export const DatasetRegenerate = () => {
           align={setResponsive('center', 'start')}
           flexValue={setResponsive('1 1 auto', 'auto')}
         >
-          <Heading
-            level={1}
-            margin={{ bottom: 'small' }}
-            size={setResponsive('h1_xsmall', 'h1_small')}
-          >
+          <Heading level={1} margin={{ bottom: 'small' }}>
             Download Expired!
           </Heading>
           <Paragraph>
