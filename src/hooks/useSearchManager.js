@@ -25,6 +25,7 @@ export const useSearchManager = () => {
   const config = configState
   const setConfig = setConfigState
 
+  console.log('==========================>>>>>>>>>', search)
   /* Common */
   const resetPage = () => {
     delete search.p
@@ -164,6 +165,8 @@ export const useSearchManager = () => {
           } else {
             temp[key] = queryParams[key]
           }
+        } else {
+          temp[key] = queryParams[key]
         }
       }
     })
