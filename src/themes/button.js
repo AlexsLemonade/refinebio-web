@@ -87,7 +87,11 @@ export default {
   extend: () => `
     > div {
       border-radius: ${radius};
+<<<<<<< HEAD
+      //  to center an icon
+=======
       // to center an icon
+>>>>>>> dev
       > span {
         display: inline-flex;
         align-self: center;
