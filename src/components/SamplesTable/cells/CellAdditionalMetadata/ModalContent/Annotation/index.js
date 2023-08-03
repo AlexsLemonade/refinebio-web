@@ -1,9 +1,9 @@
 import { Fragment } from 'react'
 import { nanoid } from 'nanoid'
-import { fromPairs } from 'helpers/fromPairs'
-import { isArray } from 'helpers/isArray'
-import { isObject } from 'helpers/isObject'
 import { Box } from 'grommet'
+import fromPairs from 'helpers/fromPairs'
+import isArray from 'helpers/isArray'
+import isObject from 'helpers/isObject'
 import { AnnotationText } from './AnnotationText'
 import { AnnotationValue } from './AnnotationValue'
 
@@ -13,8 +13,7 @@ export const Annotation = ({ value }) => {
   }
 
   const valueIsObject = isArray(value) || !isObject(value)
-
-  // check if it's an array with objects(key/values) with only two keys
+  // checks if it's an array with objects(key/values) with only two keys
   // and one of them is 'value'
   if (
     isArray(value) &&

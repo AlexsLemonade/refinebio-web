@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
+import { Box } from 'grommet'
+import styled from 'styled-components'
 import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
-import { isWindow } from 'helpers/isWindow'
-import { Box } from 'grommet'
+import isWindow from 'helpers/isWindow'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
 import { Portal } from 'components/shared//Portal'
 import { SrOnly } from 'components/shared//SrOnly'
-import styled from 'styled-components'
 
 const ModalBox = styled(Box)`
   @keyframes zoomIn {
@@ -18,7 +18,7 @@ const ModalBox = styled(Box)`
       transform: scale(1);
     }
   }
-  animation: zoomIn cubic-bezier(0.17, 0.67, 0.17, 1) 0.38s forwards;
+  animation: zoomIn cubic-bezier(0.17, 0.67, 0.17, 1) 0.3s forwards;
   position: absolute;
   z-index: 1000;
 `
@@ -26,22 +26,23 @@ const ModalBox = styled(Box)`
 // <Modal button={<Button label="Open Modal" onClick={()=> openModal(id)}>}>
 //    {children}
 // </Modal>
-// NOTE: nested modals will simply stack on top of one another, and the inner modals
-// will have its '< Back' button
+// NOTE: nested modals will simply stack on top of one another, and they
+// will have its '< Back' button if the prop 'nested' is set to true (by default it's false)
 
 export const Modal = ({
-  button,
+  id, // must be unique
+  button, // the button whicn opens a modal
   children,
-  id,
   center = true,
-  fullHeight = true,
+  fullHeight = true, // for responsive views (mobole/tablet)
   height = 'none',
   width = 'auto',
+  nested = false, // if true, show '< Back' button in a modal
   cleanUp = () => {}
 }) => {
   const { setResponsive } = useResponsive()
   const { modal, closeModal } = useModal()
-  const modalCount = Object.keys(modal).filter((key) => modal[key].show).length
+  const modalCount = Object.keys(modal).length
 
   const handleClose = () => {
     closeModal(id)
@@ -99,24 +100,28 @@ export const Modal = ({
               width
             )}
           >
-            <Box
-              direction={modalCount > 1 ? 'row' : 'column'}
-              justify="between"
-            >
-              {modalCount > 1 && (
-                <Box align="center" direction="row" gap="2px">
-                  <Icon color="brand" name="ChevronLeft" size="12px" />
-                  <Button
-                    label="Back"
-                    link
-                    linkFontSize="medium"
-                    onClick={() => closeModal(id)}
-                  />
-                </Box>
-              )}
+            <Box direction="row" justify="between">
+              <Box>
+                {modalCount > 1 && nested && Object.keys(modal)[0] !== id && (
+                  <Box
+                    align="center"
+                    direction="row"
+                    gap="2px"
+                    margin={{ bottom: 'small' }}
+                  >
+                    <Icon color="brand" name="ChevronLeft" size="12px" />
+                    <Button
+                      label="Back"
+                      link
+                      linkFontSize="medium"
+                      onClick={() => closeModal(id)}
+                    />
+                  </Box>
+                )}
+              </Box>
               <Box
-                alignSelf="end"
                 height="24px"
+                width="24px"
                 role="button"
                 style={{ boxShadow: 'none' }}
                 onClick={handleClose}

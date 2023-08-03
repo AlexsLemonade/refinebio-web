@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
+import { Box, Heading, RadioButtonGroup } from 'grommet'
 import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
-import { formatNumbers } from 'helpers/formatNumbers'
+import formatNumbers from 'helpers/formatNumbers'
 import { getTotalSamples } from 'helpers/dataset'
-import { Box, Heading, RadioButtonGroup } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
@@ -70,7 +70,7 @@ export const ModalContent = ({
     >
       <Box direction="row" gap="xsmall" margin={{ bottom: 'medium' }}>
         <Icon color="error" name="Warning" size="medium" />
-        <Heading level={2} size="h2_small">
+        <Heading level={2} size="small">
           There are {formatNumbers(getTotalSamples(dataset.data))} samples in{' '}
           <Anchor href="/download" label="My Dataset" target="_blank" />
         </Heading>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
+import { Box, Heading } from 'grommet'
 import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
 import { usePageRendered } from 'hooks/usePageRendered'
-import { Box } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
@@ -20,6 +20,7 @@ import {
   DownloadFilesSummary
 } from 'components/Download'
 
+// NOTE: Add the Spinner component for loading after replacing the mock with the API response
 // TEMPORARY
 // endpoint: https://api.refine.bio/v1/dataset/{datasetId}/?details=true
 export const getServerSideProps = ({ query }) => {
@@ -51,7 +52,9 @@ export const Dataset = ({ query }) => {
     <FixedContainer>
       <Box
         pad={{
-          top: setResponsive('basex6', 'basex8', 'basex14'),
+          top: isSharedDataset
+            ? 'large'
+            : setResponsive('basex6', 'basex8', 'basex14'),
           bottom: 'large'
         }}
       >
@@ -62,6 +65,15 @@ export const Dataset = ({ query }) => {
         {datasetId === 'regenerate' && <DatasetRegenerate />}
         {/* TEMPORARY END */}
       </Box>
+      {isSharedDataset && (
+        <Heading
+          level={2}
+          margin={{ bottom: setResponsive('small', 'large') }}
+          size={setResponsive('small', 'large')}
+        >
+          Shared Dataset
+        </Heading>
+      )}
       <Row
         border={{ side: 'bottom' }}
         margin={{ bottom: isSharedDataset ? 'none' : 'xlarge' }}
@@ -84,7 +96,7 @@ export const Dataset = ({ query }) => {
         <>
           <DownloadFilesSummary dataset={data} />
           <DownloadDatasetSummary dataset={data} />
-          <DownloadDatasetDetails dataset={data} shared={isSharedDataset} />
+          <DownloadDatasetDetails dataset={data} isImmutable />
         </>
       )}
     </FixedContainer>

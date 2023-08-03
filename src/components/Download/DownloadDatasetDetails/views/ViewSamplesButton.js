@@ -1,5 +1,5 @@
-import { useModal } from 'hooks/useModal'
 import { Box } from 'grommet'
+import { useModal } from 'hooks/useModal'
 import { Button } from 'components/shared/Button'
 import { Modal } from 'components/shared/Modal'
 

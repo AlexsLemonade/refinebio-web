@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Text } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Icon } from 'components/shared/Icon'
 import { SrOnly } from 'components/shared/SrOnly'
