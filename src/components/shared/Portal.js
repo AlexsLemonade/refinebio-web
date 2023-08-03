@@ -23,7 +23,7 @@ export const Portal = ({ center, children, zIndex = 19 }) => {
         <Box
           align="center"
           justify={center ? 'center' : 'start'}
-          background="rgba_6"
+          background="rgba6"
           height="100%"
           width="100%"
           style={{

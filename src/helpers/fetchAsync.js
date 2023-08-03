@@ -7,7 +7,7 @@ const host = 'https://api.refine.bio'
 const apiVersion = 'v1'
 
 // Returns the fulfilled promise using isomorphic-unfetc with async/await
-export const fetchAsync = async (url, params = false) => {
+export default async (url, params = false) => {
   const apiUrl = url.startsWith('http') ? url : `${host}/${apiVersion}/${url}`
 
   let response
@@ -51,7 +51,7 @@ export const fetchAsync = async (url, params = false) => {
   if (!response.ok) {
     return {
       ok: false,
-      message: 'Server error',
+      message: `${response.status} error`,
       status: response.status,
       result
     }

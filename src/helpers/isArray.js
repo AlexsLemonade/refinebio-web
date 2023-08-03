@@ -1,5 +1,5 @@
 // Returns true if 'value' is an array
-export const isArray = (value) => {
+export default (value) => {
   if (value === null || value === undefined) return false
 
   return Array.isArray(value)

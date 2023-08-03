@@ -1,5 +1,16 @@
-import { searchResults } from './interfaces/searchResults'
+import computedFiles from './interfaces/computedFiles'
+import { downloader, processor } from './interfaces/jobs'
+import experiments from './interfaces/experiments'
+import originalFiles from './interfaces/originalFiles'
+import samples from './interfaces/samples'
+import search from './interfaces/search'
 
 export const api = {
-  searchResults
+  computedFiles,
+  downloader,
+  experiments,
+  originalFiles,
+  processor,
+  samples,
+  search
 }

@@ -26,8 +26,12 @@ export const links = {
     'https://docs.refine.bio/en/latest/main_text.html#refine-bio-processed-refinebio-processedibadge',
   refinebio_docs_quantile_normalization_rna_seq_samples:
     'http://docs.refine.bio/en/latest/faq.html#what-does-it-mean-to-skip-quantile-normalization-for-rna-seq-samples',
+  refinebio_docs_gene_transformation:
+    'https://docs.refine.bio/en/latest/main_text.html#gene-transformations',
   refinebio_docs_transformation:
     'https://docs.refine.bio/en/latest/main_text.html#transformations',
+  refinebio_docs_why_can_I_add_certain_samples_to_my_dataset:
+    'https://docs.refine.bio/en/latest/faq.html#why-can-t-i-add-certain-samples-to-my-dataset',
   refinebio_github_differential_expression_rnaseq:
     'https://alexslemonade.github.io/refinebio-examples/03-rnaseq/differential-expression_rnaseq_01.html',
   refinebio_github_differential_expression_microarray:

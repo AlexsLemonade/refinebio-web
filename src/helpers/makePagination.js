@@ -1,13 +1,7 @@
-import { getRange } from 'helpers/getRange'
+import getRange from 'helpers/getRange'
 // Returns the pagination for a data table based on the currently selected page
 // (resource) https://gist.github.com/kottenator/9d936eb3e4e3c3e02598
-
-export const makePagination = (
-  currentPage,
-  totalPages,
-  offset = 2,
-  minPages = 5
-) => {
+export default (currentPage, totalPages, offset = 2, minPages = 5) => {
   if (totalPages <= 1 || totalPages === undefined) return [1]
   // returns the pagination without ellipsis
   if (totalPages <= minPages) return getRange(totalPages)

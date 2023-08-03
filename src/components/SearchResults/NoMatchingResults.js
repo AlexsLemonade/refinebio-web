@@ -1,11 +1,11 @@
+import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
+import { MissingResultsFormButton } from './MissingResultsFormButton'
 
-export const NoMatchingResults = ({
-  clearFilterHandler,
-  openMissingFormHandler
-}) => {
+export const NoMatchingResults = () => {
+  const { clearAllFilters } = useSearchManager()
   const { setResponsive } = useResponsive()
 
   return (
@@ -14,23 +14,14 @@ export const NoMatchingResults = ({
       animation={{ type: 'fadeIn', duration: 500 }}
       margin={{ top: 'basex8' }}
     >
-      <Heading
-        level={1}
-        margin={{ bottom: 'small' }}
-        size={setResponsive('h1_xsmall', 'h1_small')}
-      >
+      <Heading level={1} margin={{ bottom: 'small' }}>
         No Matching Results
       </Heading>
       <Box direction="row" gap="xsmall" margin={{ top: 'small' }}>
         <Paragraph size={setResponsive('16x', '22px')}>
           Expecting a specific experiment?{' '}
         </Paragraph>
-        <Button
-          label="Let us know"
-          link
-          linkFontSize={setResponsive('16px', '22px')}
-          onClick={openMissingFormHandler}
-        />
+        <MissingResultsFormButton size={setResponsive('16px', '22px')} />
       </Box>
       <Paragraph size={setResponsive('16px', '22px')}>Or</Paragraph>
       <Box direction="row" gap="xsmall" margin={{ top: 'small' }}>
@@ -41,7 +32,7 @@ export const NoMatchingResults = ({
           label="Clear Filters"
           link
           linkFontSize={setResponsive('16px', '22px')}
-          onClick={clearFilterHandler}
+          onClick={clearAllFilters}
         />
       </Box>
       <Box
