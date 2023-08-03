@@ -1,11 +1,11 @@
 /* eslint-disable no-nested-ternary */
 import { useEffect, useState, memo } from 'react'
+import { Box, Heading } from 'grommet'
 import { useRouter } from 'next/router'
 import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
 import scrollToTop from 'helpers/scrollToTop'
 import { isDownloadableDataset } from 'helpers/dataset'
-import { Box, Heading } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { ShareDatasetButton } from 'components/Dataset'

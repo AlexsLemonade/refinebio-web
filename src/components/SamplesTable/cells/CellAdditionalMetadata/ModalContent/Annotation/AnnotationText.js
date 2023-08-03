@@ -1,6 +1,6 @@
+import { Text } from 'grommet'
 import isString from 'helpers/isString'
 import isValidURL from 'helpers/isValidURL'
-import { Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { TextHighlight } from 'components/shared/TextHighlight'
 

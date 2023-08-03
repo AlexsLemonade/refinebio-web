@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 
 export const DownloadEmpty = () => {

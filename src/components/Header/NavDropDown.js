@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import isMatchPath from 'helpers/isMatchPath'
 import { Box, Text } from 'grommet'
+import styled, { css } from 'styled-components'
+import isMatchPath from 'helpers/isMatchPath'
 import { Anchor } from 'components/shared/Anchor'
 import { Button as SharedButton } from 'components/shared/Button'
 import { List } from 'components/shared/List'
 import { Icon } from 'components/shared/Icon'
-import styled, { css } from 'styled-components'
 
 const Button = styled(SharedButton)`
   ${({ theme, light }) =>

@@ -1,6 +1,6 @@
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Button as GrommetButton } from 'grommet'
 import styled, { css } from 'styled-components'
+import { useResponsive } from 'hooks/useResponsive'
 import { IconSpinner } from './IconSpinner'
 
 /* NOTE: 

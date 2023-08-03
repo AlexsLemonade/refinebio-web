@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Tabs, Tab } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Row } from 'components/shared/Row'
 import { ExperimentView, SpeciesView } from './views'
 import { RemoveAllButton } from './RemoveAllButton'

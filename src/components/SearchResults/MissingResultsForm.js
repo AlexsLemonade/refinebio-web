@@ -1,4 +1,3 @@
-import { useResponsive } from 'hooks/useResponsive'
 import {
   Box,
   CheckBox,
@@ -8,11 +7,12 @@ import {
   Text,
   TextArea
 } from 'grommet'
+import styled from 'styled-components'
+import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { TextInput } from 'components/shared/TextInput'
 import { TextNull } from 'components/shared/TextNull'
 import { TextRequired } from 'components/shared/TextRequired'
-import styled from 'styled-components'
 
 const FieldBlock = styled(Box)`
   margin-bottom: 24px;

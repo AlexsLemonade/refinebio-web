@@ -1,8 +1,8 @@
 import { memo, useState } from 'react'
 import { nanoid } from 'nanoid'
+import { Box, Heading, Text } from 'grommet'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, Heading, Text } from 'grommet'
 import { FilterTextInput } from 'components/shared/FilterTextInput'
 import {
   InformationList,

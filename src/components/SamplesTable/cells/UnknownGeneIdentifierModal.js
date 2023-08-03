@@ -1,5 +1,5 @@
-import { useModal } from 'hooks/useModal'
 import { Box, Heading, Paragraph } from 'grommet'
+import { useModal } from 'hooks/useModal'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
 import { Modal } from 'components/shared/Modal'

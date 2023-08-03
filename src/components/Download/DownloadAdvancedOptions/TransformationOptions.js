@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Select, Text } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { Icon } from 'components/shared/Icon'
 import { links, options } from 'config'

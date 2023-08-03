@@ -1,9 +1,9 @@
 import { Fragment } from 'react'
 import { nanoid } from 'nanoid'
+import { Box } from 'grommet'
 import fromPairs from 'helpers/fromPairs'
 import isArray from 'helpers/isArray'
 import isObject from 'helpers/isObject'
-import { Box } from 'grommet'
 import { AnnotationText } from './AnnotationText'
 import { AnnotationValue } from './AnnotationValue'
 

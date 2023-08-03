@@ -1,6 +1,6 @@
+import { Box, Heading } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import formatString from 'helpers/formatString'
-import { Box, Heading } from 'grommet'
 import { SamplesTable } from 'components/SamplesTable'
 import { TextCapitalized } from 'components/shared/TextCapitalized'
 

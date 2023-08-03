@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { CompendiaHero, CompendiaTabs } from 'components/Compendia'
 import { PageTitle } from 'components/shared/PageTitle'
 import { SignUpBlock } from 'components/shared/SignUpBlock'

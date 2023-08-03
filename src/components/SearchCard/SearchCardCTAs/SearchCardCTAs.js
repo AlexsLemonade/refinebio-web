@@ -1,8 +1,8 @@
 import { memo } from 'react'
+import { Box } from 'grommet'
 import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
-import { Box } from 'grommet'
 import {
   AddRemainingButton,
   AddToDatasetButton,

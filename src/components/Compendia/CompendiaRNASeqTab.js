@@ -1,6 +1,6 @@
 import { memo } from 'react'
-import { useResponsive } from 'hooks/useResponsive'
 import { Anchor, Box, Heading, Paragraph, Text } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'

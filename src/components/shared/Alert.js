@@ -1,5 +1,5 @@
-import { useLocalStorage } from 'hooks/useLocalStorage'
 import { Box, Paragraph, Text } from 'grommet'
+import { useLocalStorage } from 'hooks/useLocalStorage'
 
 export const Alert = ({ message, dismissableKey }) => {
   const [dismiss, setDismiss] = useLocalStorage(`alert/${dismissableKey}`, null)

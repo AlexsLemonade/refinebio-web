@@ -1,7 +1,7 @@
+import { Box, CheckBox } from 'grommet'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
-import { Box, CheckBox } from 'grommet'
 
 export const IncludePublication = ({
   filterGroup,
