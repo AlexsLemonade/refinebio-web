@@ -27,7 +27,7 @@ export const HorizontalScrollIndicator = ({
             type: isFirstCellVisible ? 'fadeOut' : 'fadeIn',
             duration: isFirstCellVisible ? 500 : 800
           }}
-          background="gradient_left"
+          background="gradientLeft"
           justify="center"
           height="100%"
           style={{
@@ -63,7 +63,7 @@ export const HorizontalScrollIndicator = ({
           type: isLastCellVisible ? 'fadeOut' : 'fadeIn',
           duration: isLastCellVisible ? 500 : 800
         }}
-        background="gradient_right"
+        background="gradientRight"
         justify="center"
         height="100%"
         style={{

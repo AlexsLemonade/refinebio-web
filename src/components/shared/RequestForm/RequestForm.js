@@ -44,13 +44,11 @@ export const RequestForm = ({
         style={{ boxShadow: ' 0px 3px 20px rgba(0, 0, 0, 0.1)' }}
       >
         <FieldBlock>
-          <Heading level={1} size="h1_small">
-            {formTitle}
-          </Heading>
+          <Heading level={1}>{formTitle}</Heading>
         </FieldBlock>
         {children}
         <FieldBlock>
-          <Heading level={2} size="h2_xsmall" margin={{ bottom: 'xsmall' }}>
+          <Heading level={2} margin={{ bottom: 'xsmall' }}>
             Help us priortize your request by answering these questions
           </Heading>
           <Paragraph>

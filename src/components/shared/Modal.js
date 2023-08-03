@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
-import { isWindow } from 'helpers/isWindow'
+import isWindow from 'helpers/isWindow'
 import { Box } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'

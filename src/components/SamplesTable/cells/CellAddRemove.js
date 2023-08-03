@@ -6,9 +6,9 @@ import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
 
-// TODO: add/remove implementation
+// TODO: finalize the implementation once the dataset manager (addSample/removeSample) is completed
 export const CellAddRemove = ({ experimentAccessionCodes, sample }) => {
-  // create a dataset slice with all of the experiments that are referring this sample
+  // creates a dataset slice with all of the experiments that are referring this sample
   // in order to update all of the experiments when it's added or removed
   // eslint-disable-next-line no-unused-vars
   const datasetSlice = experimentAccessionCodes.reduce(

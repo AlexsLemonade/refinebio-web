@@ -3,7 +3,7 @@ import { Box, Heading, Paragraph } from 'grommet'
 export const ProtocolDescription = ({ name, description }) => (
   <>
     <Box margin={{ bottom: 'xsmall' }}>
-      <Heading level={3} size="h3_small">
+      <Heading level={2} size="small">
         {name}
       </Heading>
     </Box>

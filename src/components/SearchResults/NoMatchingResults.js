@@ -1,11 +1,11 @@
-import { useFilter } from 'hooks/useFilter'
+import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { MissingResultsFormButton } from './MissingResultsFormButton'
 
 export const NoMatchingResults = () => {
-  const { clearAllFilter } = useFilter()
+  const { clearAllFilters } = useSearchManager()
   const { setResponsive } = useResponsive()
 
   return (
@@ -14,11 +14,7 @@ export const NoMatchingResults = () => {
       animation={{ type: 'fadeIn', duration: 500 }}
       margin={{ top: 'basex8' }}
     >
-      <Heading
-        level={1}
-        margin={{ bottom: 'small' }}
-        size={setResponsive('h1_xsmall', 'h1_small')}
-      >
+      <Heading level={1} margin={{ bottom: 'small' }}>
         No Matching Results
       </Heading>
       <Box direction="row" gap="xsmall" margin={{ top: 'small' }}>
@@ -36,7 +32,7 @@ export const NoMatchingResults = () => {
           label="Clear Filters"
           link
           linkFontSize={setResponsive('16px', '22px')}
-          onClick={clearAllFilter}
+          onClick={clearAllFilters}
         />
       </Box>
       <Box

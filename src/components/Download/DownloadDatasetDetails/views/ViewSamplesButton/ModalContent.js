@@ -1,5 +1,5 @@
 import { useResponsive } from 'hooks/useResponsive'
-import { formatString } from 'helpers/formatString'
+import formatString from 'helpers/formatString'
 import { Box, Heading } from 'grommet'
 import { SamplesTable } from 'components/SamplesTable'
 import { TextCapitalized } from 'components/shared/TextCapitalized'
@@ -23,7 +23,7 @@ export const ModalContent = ({
       }}
     >
       <Box margin={{ bottom: 'medium' }}>
-        <Heading level={2} size="h2_small">
+        <Heading level={2} size="small">
           My Dataset -{' '}
           {isSpeciesView ? (
             <TextCapitalized
@@ -37,7 +37,7 @@ export const ModalContent = ({
       </Box>
       <SamplesTable
         experimentSampleAssociations={dataset}
-        paramsToAdd={params}
+        queryToAdd={params}
         sampleMetadataFields={sampleMetadataFields}
         isImmutable={isImmutable}
         modalView

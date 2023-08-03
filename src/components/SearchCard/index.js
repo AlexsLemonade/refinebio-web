@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
-import { formatString } from 'helpers/formatString'
+import formatString from 'helpers/formatString'
 import { Box, Grid } from 'grommet'
 import { SearchCardHeader } from './SearchCardHeader'
 import { SearchCardBody } from './SearchCardBody'
@@ -52,7 +52,7 @@ export const SearchCard = ({ result = {} }) => {
         <Box gridArea="header">
           <SearchCardHeader
             accessionCode={result.accession_code}
-            title={formatString(result.title)}
+            title={result.title}
           />
         </Box>
         <Box gridArea="ctas" margin={{ top: setResponsive('none', 'large') }}>
