@@ -12,7 +12,6 @@ const IconToggle = styled(Box)`
     right: 24px;
     top: 8px;
     z-index: 18;
-
     &::before,
     &::after {
       content: '';
@@ -40,6 +39,7 @@ const IconToggle = styled(Box)`
   ${({ theme, toggle }) =>
     toggle &&
     css`
+      top: 40px;
       &::before,
       &::after,
       span {

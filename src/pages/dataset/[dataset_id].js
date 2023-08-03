@@ -20,6 +20,7 @@ import {
   DownloadFilesSummary
 } from 'components/Download'
 
+// NOTE: Add the Spinner component for loading after replacing the mock with the API response
 // TEMPORARY
 // endpoint: https://api.refine.bio/v1/dataset/{datasetId}/?details=true
 export const getServerSideProps = ({ query }) => {
@@ -68,7 +69,7 @@ export const Dataset = ({ query }) => {
         <Heading
           level={2}
           margin={{ bottom: setResponsive('small', 'large') }}
-          size={setResponsive('h2_small', 'h2_large')}
+          size={setResponsive('small', 'large')}
         >
           Shared Dataset
         </Heading>
