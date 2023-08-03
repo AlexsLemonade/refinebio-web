@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
-import { formatNumbers } from 'helpers/formatNumbers'
+import formatNumbers from 'helpers/formatNumbers'
 import { TableCell, TableRow, Text } from 'grommet'
 
 export const RowTotal = ({ totals = [] }) => {

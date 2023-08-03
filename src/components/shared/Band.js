@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { isMatchPath } from 'helpers/isMatchPath'
+import isMatchPath from 'helpers/isMatchPath'
 import { Box } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
 
@@ -14,7 +14,7 @@ export const Band = ({ bandHeight, light = false, ...props }) => {
 
   return (
     <Box
-      background={light ? 'gradient_light_reverse' : 'gradient_blue'}
+      background={light ? 'gradientLightReverse' : 'gradientBlue'}
       elevation="large"
       height={bandHeight}
       width="100%"

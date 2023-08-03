@@ -1,5 +1,5 @@
-import { formatString } from 'helpers/formatString'
-import { truncateOnWord } from 'helpers/truncateOnWord'
+import formatString from 'helpers/formatString'
+import truncateOnWord from 'helpers/truncateOnWord'
 import { Box, Heading, Text } from 'grommet'
 import { Accordion, AccordionPanel } from 'components/shared/Accordion'
 import { Anchor } from 'components/shared/Anchor'
@@ -9,7 +9,7 @@ const Title =
   (expand) =>
     (
       <>
-        <Heading level={5} weight="500" size="h5_small">
+        <Heading level={5} responsive={false} weight="500">
           {formatString(protocol.Type)}
         </Heading>
         <Text>

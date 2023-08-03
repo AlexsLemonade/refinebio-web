@@ -3,24 +3,24 @@ import { useRouter } from 'next/router'
 import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
 import { getTotalSamples } from 'helpers/dataset'
-import { isMatchPath } from 'helpers/isMatchPath'
+import isMatchPath from 'helpers/isMatchPath'
 import { Box, Nav, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
-import { LayerResponsive } from 'components/shared/LayerLayerResponsive'
+import { LayerResponsive } from 'components/shared/LayerResponsive'
 import { List } from 'components/shared/List'
 import { Icon } from 'components/shared/Icon'
 import { links } from 'config'
-import { Logo } from './Logo'
+import { LogoAnchor } from './LogoAnchor'
 import { NavDropDown } from './NavDropDown'
 import { NavLink } from './NavLink'
 import { NavIcon } from './NavIcon'
 
 export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const router = useRouter()
-  const { asPath, pathname } = router
+  const { asPath, pathname, push } = router
   const { viewport, setResponsive } = useResponsive()
   // TEMPORARY
-  const { dataset, getDataset } = useDataset()
+  const { dataset } = useDataset()
   const [totalSamples, setTotalSamples] = useState()
 
   useEffect(() => {
@@ -34,18 +34,15 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
     setToggle(!toggle)
   }
 
-  // TEMPORARY for Demo (will be handled with API call)
-  const handleGetDataset = () => {
-    if (!totalSamples) return
-    getDataset(true)
-  }
-
   return (
     <>
       {viewport === 'small' && (
         <NavIcon light={light} toggle={toggle} clickHandler={handleClick} />
       )}
       <LayerResponsive position="right" show={toggle}>
+        {viewport === 'small' && (
+          <NavIcon light={light} toggle={toggle} clickHandler={handleClick} />
+        )}
         <Nav
           align="center"
           background={setResponsive('white', 'transparent')}
@@ -62,7 +59,10 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
           width={setResponsive('100vw', 'auto')}
         >
           {viewport === 'small' && (
-            <Logo margin={{ vertical: 'large' }} clickHandler={handleClick} />
+            <LogoAnchor
+              margin={{ vertical: 'large' }}
+              clickHandler={handleClick}
+            />
           )}
           <List
             alignItems={setResponsive('start', 'center')}
@@ -166,7 +166,6 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                   max: 1000000,
                   value: totalSamples || 0
                 }}
-                href="/download"
                 label="My Dataset"
                 margin={{ left: setResponsive('xlarge', 'none') }}
                 width={viewport === 'small' ? buttonWidth : 'max-content'}
@@ -177,7 +176,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                   padding: setResponsive('12px 0', '4px 24px'),
                   width: '100%'
                 }}
-                onClick={handleGetDataset}
+                onClick={() => push('/download')}
               />
             </Box>
           </List>
@@ -186,5 +185,3 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
     </>
   )
 }
-
-export default GlobalNav

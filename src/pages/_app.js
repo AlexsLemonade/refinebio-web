@@ -2,16 +2,18 @@ import * as Sentry from '@sentry/nextjs'
 import 'regenerator-runtime'
 import { GlobalStyle } from 'styles/GlobalStyle'
 import { Grommet } from 'grommet'
-import { Layout } from 'components/Layout'
 import { theme } from 'themes'
-import { BandContextvProvider } from 'contexts/BandContext'
+import { BandContextProvider } from 'contexts/BandContext'
 import { DatasetContextProvider } from 'contexts/DatasetContext'
-import { FilterContextProvider } from 'contexts/FilterContext'
 import { ModalContextProvider } from 'contexts/ModalContext'
 import { RefinebioContextProvider } from 'contexts/RefinebioContext'
+import { SearchManagerContextProvider } from 'contexts/SearchManagerContext'
+import { ErrorPage } from 'pages/_error'
+import getPageLoader from 'helpers/getPageLoader'
+import { Layout } from 'components/Layout'
+import { PageTitle } from 'components/shared/PageTitle'
 
-import ErrorPage from 'pages/_error'
-
+getPageLoader()
 const Fallback = () => <ErrorPage />
 
 const App = ({ Component, pageProps }) => {
@@ -20,9 +22,10 @@ const App = ({ Component, pageProps }) => {
       <GlobalStyle />
       <Grommet theme={theme}>
         <RefinebioContextProvider>
-          <DatasetContextProvider>
-            <BandContextvProvider>
-              <FilterContextProvider>
+          <SearchManagerContextProvider>
+            <DatasetContextProvider>
+              <BandContextProvider>
+                <PageTitle />
                 <Layout>
                   <Sentry.ErrorBoundary fallback={Fallback} showDialog>
                     <ModalContextProvider>
@@ -31,9 +34,9 @@ const App = ({ Component, pageProps }) => {
                     </ModalContextProvider>
                   </Sentry.ErrorBoundary>
                 </Layout>
-              </FilterContextProvider>
-            </BandContextvProvider>
-          </DatasetContextProvider>
+              </BandContextProvider>
+            </DatasetContextProvider>
+          </SearchManagerContextProvider>
         </RefinebioContextProvider>
       </Grommet>
     </>
