@@ -7,8 +7,8 @@ import { CompendiaRNASeqTab } from './CompendiaRNASeqTab'
 
 export const CompendiaTabs = () => {
   const router = useRouter()
-  const [type, setType] = useState('')
   const [activeIndex, setActiveIndex] = useState(0)
+  const [type, setType] = useState('')
   const handleActive = (nextIndex) => setActiveIndex(nextIndex)
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export const CompendiaTabs = () => {
   }, [router, type])
 
   const clickHandle = (tabType) => {
-    setType(tabType, router)
+    setType(tabType)
     router.replace(
       { pathname: router.pathname, query: { type: tabType } },
       `/compendia/${tabType}`,

@@ -1,5 +1,5 @@
-import { useLocalStorage } from 'hooks/useLocalStorage'
 import { Box, Paragraph, Text } from 'grommet'
+import { useLocalStorage } from 'hooks/useLocalStorage'
 
 export const Alert = ({ message, dismissableKey }) => {
   const [dismiss, setDismiss] = useLocalStorage(`alert/${dismissableKey}`, null)
@@ -35,7 +35,11 @@ export const Alert = ({ message, dismissableKey }) => {
             color="brand"
             margin={{ left: 'xsmall' }}
             role="button"
-            style={{ cursor: 'pointer', textDecoration: 'underline' }}
+            style={{
+              boxShadow: 'none',
+              cursor: 'pointer',
+              textDecoration: 'underline'
+            }}
             onClick={() => setDismiss(true)}
           >
             Dismiss

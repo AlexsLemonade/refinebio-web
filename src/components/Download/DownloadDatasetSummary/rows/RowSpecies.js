@@ -1,6 +1,6 @@
-import { formatNumbers } from 'helpers/formatNumbers'
-import { formatString } from 'helpers/formatString'
 import { TableCell, TableRow, Text } from 'grommet'
+import formatNumbers from 'helpers/formatNumbers'
+import formatString from 'helpers/formatString'
 
 export const RowSpieces = ({ samplesBySpecies, experimentCountBySpecies }) => (
   <>
@@ -9,7 +9,7 @@ export const RowSpieces = ({ samplesBySpecies, experimentCountBySpecies }) => (
         <TableCell>{formatString(organism)}</TableCell>
         <TableCell>
           <Text color="brand">
-            {formatNumbers(samplesBySpecies[organism].length)}
+            {formatNumbers(samplesBySpecies[organism]?.length)}
           </Text>
         </TableCell>
         <TableCell>

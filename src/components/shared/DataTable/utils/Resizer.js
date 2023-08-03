@@ -15,10 +15,11 @@ export const Resizer = ({ isResizing, ...props }) => {
         top: 0,
         touchAction: 'none',
         transform: ' translateX(50%)',
-        zIndex: 0
+        zIndex: 1
       }}
-      width={isResizing ? '100%' : '16px'}
+      width={isResizing ? '100%' : '24px'}
       height="100%"
+      onClick={(e) => e.stopPropagation()}
     />
   )
 }

@@ -1,19 +1,20 @@
-import { unionizeArrays } from 'helpers/unionizeArrays'
-import { Box } from 'grommet'
+import unionizeArrays from 'helpers/unionizeArrays'
 import { ViewBlock } from './ViewBlock'
+import { ViewBlocks } from '../ViewBlocks'
 
 export const SpeciesView = ({
   dataset: {
     data: datasetData,
+    id: datasetId,
     experiments,
     organism_samples: samplesBySpecies,
     quantile_normalize: quantileNormalize
   },
-  isImmutable = false
+  isImmutable
 }) => {
   return (
-    <Box elevation="medium" pad="medium">
-      {Object.keys(samplesBySpecies).map((specieName, i) => {
+    <ViewBlocks elevation="medium" pad="medium">
+      {Object.keys(samplesBySpecies).map((specieName) => {
         // get the accession codes accosiated with the specieName
         const samplesInSpecie = samplesBySpecies[specieName]
         // filter the dataset to only include the experiments containing the samplesInSpecie
@@ -51,18 +52,18 @@ export const SpeciesView = ({
         return (
           <ViewBlock
             key={specieName}
+            datasetId={datasetId}
             hasRnaSeqExperiments={hasRnaSeqExperiments}
-            i={i}
-            isImmutable={isImmutable}
             sampleMetadataFields={sampleMetadataFields}
             samplesInSpecie={samplesInSpecie}
             specieDatasetSlice={specieDatasetSlice}
             specieName={specieName}
             quantileNormalize={quantileNormalize}
+            isImmutable={isImmutable}
           />
         )
       })}
-    </Box>
+    </ViewBlocks>
   )
 }
 

@@ -1,6 +1,6 @@
-import { unionizeArrays } from './unionizeArrays'
-// https://lodash.com/docs#difference
-export const getDifferenceOfArrays = (targetArr, ...arrsToCompare) => {
+import unionizeArrays from 'helpers/unionizeArrays'
+// equivalent to https://lodash.com/docs#difference
+export default (targetArr, ...arrsToCompare) => {
   const mergedArrays = unionizeArrays(...arrsToCompare)
 
   return targetArr.filter((element) => !mergedArrays.includes(element))

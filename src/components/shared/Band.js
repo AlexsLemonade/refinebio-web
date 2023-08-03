@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { isMatchPath } from 'helpers/isMatchPath'
 import { Box } from 'grommet'
+import isMatchPath from 'helpers/isMatchPath'
 import { FixedContainer } from 'components/shared/FixedContainer'
 
 // render <ParticlesBg /> only in client
@@ -14,7 +14,7 @@ export const Band = ({ bandHeight, light = false, ...props }) => {
 
   return (
     <Box
-      background={light ? 'gradient_light_reverse' : 'gradient_blue'}
+      background={light ? 'gradientLightReverse' : 'gradientBlue'}
       elevation="large"
       height={bandHeight}
       width="100%"
