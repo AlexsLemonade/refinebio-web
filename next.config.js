@@ -29,8 +29,8 @@ const moduleExports = () => {
       styledComponents: true
     },
     env,
+    experimental: { scrollRestoration: true },
     output: 'standalone',
-    reactStrictMode: true,
     // https://nextjs.org/docs/advanced-features/output-file-tracing#automatically-copying-traced-files
     sentry: {
       // Sentry SDK creates sourcemaps and uploads them to its server to deminify errors

@@ -1,12 +1,13 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { Box, Main } from 'grommet'
 import { useBand } from 'hooks/useBand'
 import { useResponsive } from 'hooks/useResponsive'
 import { useMatchMedia } from 'hooks/useMatchMedia'
-import { Box, Main } from 'grommet'
-import { isMatchPath } from 'helpers/isMatchPath'
+import isMatchPath from 'helpers/isMatchPath'
 import { BackToTopButton } from 'components/shared/BackToTopButton'
 import { Band } from 'components/shared/Band'
+import { Notification } from 'components/shared/Notification'
 import { Footer } from 'components/Footer'
 import { Header } from 'components/Header'
 
@@ -25,6 +26,7 @@ export const Layout = ({ children }) => {
 
   return (
     <Box height={{ min: '100vh' }}>
+      <Notification />
       {band && (
         <Band
           bandHeight={

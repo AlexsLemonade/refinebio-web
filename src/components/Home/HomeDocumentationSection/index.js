@@ -1,41 +1,12 @@
+import { Box } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, Heading, Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
-import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
+import { Card } from './Card'
 
-const Card = ({ heading, body, footer, img, ...props }) => {
-  const { setResponsive } = useResponsive()
-
-  return (
-    <Column
-      background={{
-        image: `url('${img}')`,
-        position: 'bottom right',
-        repeat: 'no-repeat',
-        size: '100%'
-      }}
-      elevation="medium"
-      pad={{
-        horizontal: setResponsive('large', 'basex6', 'basex7'),
-        top: setResponsive('large', 'xlarge'),
-        bottom: setResponsive('large', 'xlarge', 'basex8')
-      }}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-    >
-      <Heading level={1} margin={{ bottom: setResponsive('medium', 'small') }}>
-        {heading}
-      </Heading>
-      <Paragraph>{body}</Paragraph>
-      <Box margin={{ top: setResponsive('large', 'medium') }}>{footer}</Box>
-    </Column>
-  )
-}
-
-export const HomeDocumentsSection = () => {
+export const HomeDocumentationSection = () => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -54,8 +25,6 @@ export const HomeDocumentsSection = () => {
                 label="Learn More"
                 secondary
                 responsive
-                rel="noopener noreferrer"
-                target="_blank"
               />
             }
             img="network.svg"
@@ -84,4 +53,4 @@ export const HomeDocumentsSection = () => {
   )
 }
 
-export default HomeDocumentsSection
+export default HomeDocumentationSection

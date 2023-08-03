@@ -1,6 +1,6 @@
 import { Box, Text, TextInput as GrommetTextInput } from 'grommet'
-import { Icon } from 'components/shared/Icon'
 import styled, { css } from 'styled-components'
+import { Icon } from 'components/shared/Icon'
 
 const CustomInput = styled(GrommetTextInput)`
   ${({ theme, error }) =>

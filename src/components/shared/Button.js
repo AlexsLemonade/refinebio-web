@@ -1,6 +1,6 @@
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Button as GrommetButton } from 'grommet'
 import styled, { css } from 'styled-components'
+import { useResponsive } from 'hooks/useResponsive'
 import { IconSpinner } from './IconSpinner'
 
 /* NOTE: 
@@ -8,8 +8,46 @@ import { IconSpinner } from './IconSpinner'
 - Set the prop 'badge' to true for the badged button
 */
 
+const CustomLinkButton = styled(GrommetButton)`
+  position: relative;
+
+  ${({ theme }) => css`
+    &:disabled {
+      color: ${theme.global.colors['gray-shade-40']};
+      &:hover {
+        color: ${theme.global.colors['gray-shade-40']};
+      }
+    }
+  `}
+
+  ${({ theme, linkColor }) => css`
+    color: ${theme.global.colors[linkColor]};
+    &:hover {
+      color: ${theme.global.colors[linkColor]};
+    }
+  `}
+
+  ${({ underlineOnHover }) =>
+    underlineOnHover &&
+    css`
+      text-decoration: none !important;
+      &:hover {
+        text-decoration: underline !important;
+      }
+    `}
+`
+
 const CustomButton = styled(GrommetButton)`
   position: relative;
+
+  ${({ underlineOnHover }) =>
+    underlineOnHover &&
+    css`
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline !important;
+      }
+    `}
 
   ${({ uppercase }) =>
     uppercase &&
@@ -21,7 +59,6 @@ const CustomButton = styled(GrommetButton)`
     large &&
     css`
       font-size: ${viewport !== 'small' ? '20px' : '16px'};
-      padding: ${viewport !== 'small' ? '16px 32px' : '4px 24px'};
     `}  
   ${({ theme, light, primary }) =>
     primary &&
@@ -69,6 +106,7 @@ const CustomButton = styled(GrommetButton)`
       background: ${isLoading ? theme.global.colors.black : 'none'};
       border: 1px solid ${theme.global.colors.black};
       color: ${theme.global.colors.black};
+      line-height: 22px;
       &:hover {
         background: ${theme.global.colors.black};
         color: ${isLoading
@@ -79,6 +117,8 @@ const CustomButton = styled(GrommetButton)`
 `
 
 export const Button = ({
+  linkColor = 'brand',
+  display = 'flex',
   isLoading = false,
   label = '',
   large = false,
@@ -86,13 +126,14 @@ export const Button = ({
   linkFontSize = 'small',
   responsive = false,
   tertiary = false,
+  textDecoration = 'underline',
+  underlineOnHover = false,
   uppercase = false,
   width,
   clickHandler,
   ...props
 }) => {
-  const { viewport } = useResponsive()
-
+  const { viewport, setResponsive } = useResponsive()
   return (
     <Box
       responsive={responsive}
@@ -100,17 +141,20 @@ export const Button = ({
         width || (responsive && viewport === 'small' ? '100%' : 'max-content')
       }
       viewport={viewport}
+      style={{ display }}
     >
       {link ? (
-        <GrommetButton
+        <CustomLinkButton
           link={link}
+          linkColor={linkColor}
           label={label}
           style={{
-            fontSize: linkFontSize,
             border: 'none',
+            fontSize: linkFontSize,
             padding: 0,
-            textDecoration: 'underline'
+            textDecoration
           }}
+          underlineOnHover={underlineOnHover}
           onClick={clickHandler}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...props}
@@ -139,6 +183,16 @@ export const Button = ({
           viewport={viewport}
           width={width}
           onClick={clickHandler}
+          pad={setResponsive(
+            {
+              vertical: 'xxsmall',
+              horizontal: 'large'
+            },
+            {
+              vertical: 'xxsmall',
+              horizontal: 'medium'
+            }
+          )}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...props}
         />
