@@ -1,42 +1,12 @@
+import { Box } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, Heading, Paragraph } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
-import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
-import { FolderIcon } from '../../images/graphic-folder.svg'
-import { SearchIcon } from '../../images/graphic-search.svg'
-
-const Card = ({ heading, body, svgIcon, ...props }) => {
-  const { setResponsive } = useResponsive()
-
-  return (
-    <Column
-      flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-    >
-      <Row>
-        <Box margin={{ bottom: 'small', right: 'large' }} aria-hidden>
-          {svgIcon}
-        </Box>
-        <Column>
-          <Heading
-            level={2}
-            margin={{ bottom: 'small' }}
-            size={setResponsive('h2_small', 'h2_large')}
-          >
-            {heading}
-          </Heading>
-          <Paragraph size={setResponsive('medium', 'large', 'large')}>
-            {body}
-          </Paragraph>
-        </Column>
-      </Row>
-    </Column>
-  )
-}
+import { FolderIcon } from '../../../images/graphic-folder.svg'
+import { SearchIcon } from '../../../images/graphic-search.svg'
+import { Card } from './Card'
 
 export const HomeFeaturesSection = () => {
   const { viewport, setResponsive } = useResponsive()
@@ -45,7 +15,7 @@ export const HomeFeaturesSection = () => {
     <FixedContainer>
       <Row direction={setResponsive('column', 'column', 'row')}>
         <Card
-          heading=" Find the data you need"
+          heading="Find the data you need"
           body={
             <>
               Search the multi-organism collection of genome wide gene
@@ -56,14 +26,12 @@ export const HomeFeaturesSection = () => {
                 href={links.refinebio_docs_standard_pipeline}
                 label="standardized pipelines"
                 rel="noopener noreferrer"
-                target="_blank"
               />{' '}
               curated by the{' '}
               <Anchor
                 href={links.ccdl}
                 label="Childhood Cancer Data Lab (CCDL)"
                 rel="noopener noreferrer"
-                target="_blank"
               />
             </>
           }

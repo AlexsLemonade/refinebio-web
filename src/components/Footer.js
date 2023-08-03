@@ -1,5 +1,4 @@
 import { Fragment } from 'react'
-import { useResponsive } from 'hooks/useResponsive'
 import {
   Box,
   Footer as GrommentFooter,
@@ -7,13 +6,14 @@ import {
   Paragraph,
   Text
 } from 'grommet'
+import styled, { css } from 'styled-components'
+import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Icon } from 'components/shared/Icon'
 import { Row } from 'components/shared/Row'
-import styled, { css } from 'styled-components'
 import { contributors, links } from 'config'
 import { CoinIcon } from '../images/coin.svg'
 
@@ -38,7 +38,7 @@ export const Footer = () => {
 
   return (
     <GrommentFooter
-      background="gradient_light"
+      background="gradientLight"
       elevation="medium"
       justify="center"
       fill
@@ -64,7 +64,6 @@ export const Footer = () => {
                   label="Childhood Cancer Data Lab (CCDL)"
                   href={links.ccdl}
                   rel="noopener noreferrer"
-                  target="_blank"
                 />
               </Paragraph>
               <Box
@@ -92,7 +91,6 @@ export const Footer = () => {
                     margin={{ horizontal: setResponsive('xsmall', 'none') }}
                     pad="0"
                     rel="noopener noreferrer"
-                    target="_blank"
                   />
                   <GithubLink
                     color="gray-shade-40"
@@ -100,7 +98,6 @@ export const Footer = () => {
                     icon={<Icon link name="Github" />}
                     pad="0"
                     rel="noopener noreferrer"
-                    target="_blank"
                   />
                 </Box>
               </Box>
@@ -111,7 +108,6 @@ export const Footer = () => {
                     label="Childhood Cancer Data Lab"
                     href={links.ccdl}
                     rel="noopener noreferrer"
-                    target="_blank"
                   />
                 </Text>
                 <Text>
@@ -120,7 +116,6 @@ export const Footer = () => {
                     label="Alex’s Lemonade Stand Foundation"
                     href={links.alsf}
                     rel="noopener noreferrer"
-                    target="_blank"
                   />
                 </Text>
               </Box>
@@ -128,7 +123,9 @@ export const Footer = () => {
             <Column>
               <Heading
                 level={5}
-                style={{ fontFamily: `'Lato', sans-serif`, fontWeight: '700' }}
+                style={{ fontFamily: `'Lato', sans-serif` }}
+                responsive={false}
+                weight="bold"
               >
                 Cite refine.bio
               </Heading>
