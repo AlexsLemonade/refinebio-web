@@ -1,15 +1,18 @@
-import { useState, useMemo } from 'react'
-import { useFilter } from 'hooks/useFilter'
+import { useState } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
-import { formatNumbers } from 'helpers/formatNumbers'
-import { formatString } from 'helpers/formatString'
-import { isChecked } from 'helpers/search'
-import { isLastIndex } from 'helpers/isLastIndex'
+import { useSearchManager } from 'hooks/useSearchManager'
+import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
+import formatNumbers from 'helpers/formatNumbers'
+import formatPlatformName from 'helpers/formatPlatformName'
+import formatString from 'helpers/formatString'
+import isLastIndex from 'helpers/isLastIndex'
 import { Box, CheckBox, Heading } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
 import { SearchBox } from 'components/shared/SearchBox'
+import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
 import styled, { css } from 'styled-components'
+import cache from 'api/api_data.json'
 
 const ToggleButton = styled(sharedButton)`
   border-bottom: 1px solid transparent;
@@ -19,87 +22,86 @@ const ToggleButton = styled(sharedButton)`
     }
   `}
 `
-export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
-  const { filter, toggleFilter } = useFilter()
-  const { setResponsive } = useResponsive()
+export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
+  const { viewport } = useResponsive()
+  const { isFilterChecked, toggleFilter } = useSearchManager()
   const maxCount = 5
-  const options = useMemo(() => {
-    return Object.entries(filterGroup)
-  }, [filterGroup])
-  const filterLength = options.length
+  const filterList = Object.entries(filterGroup)
+  const filterLength = filterList.length
   const [userInput, setUserInput] = useState('')
-  const [openOptions, setOpenOptions] = useState(false)
-  const [filteredOptions, setFilteredOptions] = useState(options)
-
-  const handleFilterOptions = (val) => {
-    setUserInput(val)
-
-    if (val.trim() !== '') {
-      setFilteredOptions(() =>
-        options.filter((option) =>
-          formatString(option[0]).toLowerCase().startsWith(val.toLowerCase())
-        )
-      )
-    } else {
-      setFilteredOptions(options)
-    }
-  }
-
-  const getOptions = () =>
-    openOptions ? filteredOptions : filteredOptions.slice(0, maxCount)
+  const [open, setOpen] = useState(false)
+  const formattedFilterList = filterList
+    .filter((option) =>
+      formatString(option[0]).toLowerCase().startsWith(userInput.toLowerCase())
+    )
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, open && !userInput ? filterList.length : maxCount)
 
   return (
     <>
-      <Heading
-        level={4}
-        margin={{ bottom: 'xsmall' }}
-        id={filterLabel.toLowerCase()}
-        size={setResponsive('h4_xsmall', 'medium')}
-      >
+      <Heading level={4} margin={{ bottom: 'xsmall' }} responsive={false}>
         {filterLabel}
       </Heading>
 
       {filterLength > maxCount && (
-        <SearchBox
-          pad={{ bottom: 'xsmall' }}
-          placeholder={`Filter ${filterLabel}`}
-          value={userInput}
-          size="small"
-          changeHandler={(e) => handleFilterOptions(e.target.value)}
-        />
+        <Box margin={{ bottom: 'small' }}>
+          <SearchBox
+            pad={{ bottom: 'xsmall' }}
+            placeholder={`Filter ${filterLabel}`}
+            value={userInput}
+            size="small"
+            changeHandler={(e) => setUserInput(e.target.value)}
+          />
+        </Box>
       )}
 
-      <Box
-        margin={{ top: 'xsmall' }}
-        animation={openOptions ? { type: 'fadeIn', duration: 1000 } : {}}
-      >
-        {getOptions().map((option, i, arr) => (
-          <Box
-            key={option[0]}
-            margin={{ bottom: !isLastIndex(i, arr) ? 'xsmall' : '0' }}
-          >
-            <CheckBox
-              label={`${formatString(option[0])} (${formatNumbers(option[1])})`}
-              checked={isChecked(filter, filterParam, option[0])}
-              onChange={(e) => toggleFilter(e, filterParam, option[0])}
-            />
-          </Box>
-        ))}
-      </Box>
+      <TextHighlightContextProvider match={userInput}>
+        <Box animation={open ? { type: 'fadeIn', duration: 1000 } : {}}>
+          {formattedFilterList.map((option, i, arr) => (
+            <Box
+              key={option[0]}
+              margin={{ bottom: !isLastIndex(i, arr) ? 'xsmall' : '0' }}
+            >
+              <CheckBox
+                label={
+                  <>
+                    <TextHighlight>
+                      {filterOption === 'platform'
+                        ? formatPlatformName(cache.platforms[option[0]]) ||
+                          option[0]
+                        : formatString(option[0])}
+                    </TextHighlight>{' '}
+                    ({formatNumbers(option[1])})
+                  </>
+                }
+                checked={isFilterChecked(filterOption, option[0])}
+                onChange={(e) =>
+                  toggleFilter(
+                    e.target.checked,
+                    filterOption,
+                    option[0],
+                    viewport === 'large'
+                  )
+                }
+              />
+            </Box>
+          ))}
+        </Box>
+      </TextHighlightContextProvider>
 
-      {filteredOptions.length === 0 && <TextNull text="No match found" />}
+      {formattedFilterList.length === 0 && <TextNull text="No match found" />}
 
       {filterLength > maxCount && (
         <ToggleButton
           label={
             // eslint-disable-next-line no-nested-ternary
-            openOptions && !userInput.trim()
+            open && !userInput.trim()
               ? '- See Less'
-              : !openOptions && !userInput.trim()
+              : !open && !userInput.trim()
               ? `+ ${filterLength - maxCount} More`
               : ''
           }
-          margin={{ top: 'xsmall', left: 'medium' }}
+          margin={{ top: 'xxsmall', left: 'medium' }}
           style={{
             borderRadius: '0',
             boxShadow: 'none',
@@ -107,7 +109,7 @@ export const SearchFilter = ({ filterGroup, filterParam, filterLabel }) => {
             transition: 'border-bottom 0.15s ease-in'
           }}
           onClick={() => {
-            setOpenOptions(!openOptions)
+            setOpen(!open)
           }}
         />
       )}

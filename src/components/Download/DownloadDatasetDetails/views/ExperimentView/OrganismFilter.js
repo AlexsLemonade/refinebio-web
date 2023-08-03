@@ -1,7 +1,7 @@
 import { useResponsive } from 'hooks/useResponsive'
 import { Box, RadioButtonGroup, Text } from 'grommet'
-import { formatString } from 'helpers/formatString'
-import { unionizeArrays } from 'helpers/unionizeArrays'
+import formatString from 'helpers/formatString'
+import unionizeArrays from 'helpers/unionizeArrays'
 
 export const OrganismFilter = ({
   datasetData,

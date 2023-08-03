@@ -11,19 +11,20 @@ export const CellProcessingInformation = ({
   row: { original: sample },
   linkFontSize = '14px'
 }) => {
+  const { openModal } = useModal()
+  const { setResponsive } = useResponsive()
+
   if (!sample.is_processed || !sample.results || !sample.results.length) {
     return <TextNull text="N/A" />
   }
 
-  const { openModal } = useModal()
-  const { setResponsive } = useResponsive()
   const id = `processing-information_${sample.id}`
   const processorBlacklist = ['MultiQC', 'Salmontools']
   // returns the computational results to display in the modal
   const computationalResults = sample.results
     .filter((result) => !processorBlacklist.includes(result.processor.name))
     .filter(
-      // current API returns the duplicated computational results
+      // currently API returns the duplicated computational results
       // that needs to be filtered out
       (result, i, arr) =>
         arr.findIndex((r2) => r2.processor.name === result.processor.name) === i

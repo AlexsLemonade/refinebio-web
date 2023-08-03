@@ -11,7 +11,7 @@ export const SignUpBlock = () => {
 
   return (
     <Box
-      background="gradient_blue_dark"
+      background="gradientBlueDark"
       pad={{ vertical: setResponsive('medium', 'basex7', 'basex18') }}
     >
       <FixedContainer align="center">
@@ -29,7 +29,7 @@ export const SignUpBlock = () => {
         </Paragraph>
         {/* fixed width to preserve UI layout in wider screens */}
         <Row width="500px">
-          <Column fill>
+          <Column fill basis="1">
             <TextInput placeholder="jdoe@example.com" />
           </Column>
           <Button

@@ -1,23 +1,28 @@
-import { useMatchMedia } from 'hooks/useMatchMedia'
 import { useResponsive } from 'hooks/useResponsive'
+import { useSearchManager } from 'hooks/useSearchManager'
 import { Box, Grid, Select } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { PageSizes } from 'components/shared/PageSizes'
-import { FilterNonDownloadableExperiment } from './SearchFilterList'
+import { options } from 'config'
+import { NonDownloadableExperiment } from './SearchFilterList'
 
 export const SearchBulkActions = ({
   pageSize,
-  pageSizes,
-  results,
-  sortByOptions,
-  selectedSortByOption,
-  setSelectedSortByOption,
-  setPageSize
+  setPageSize,
+  sortBy,
+  setSortBy,
+  totalResults
 }) => {
-  const { setResponsive } = useResponsive()
-  const isMax850 = useMatchMedia('(max-width: 850px)')
-  const isMax1100 = useMatchMedia('(max-width: 1100px)')
-  const { count: totalResults } = results
+  const {
+    search: { pageSizes, sortby }
+  } = options
+  const { updatePageSize, updateSortBy } = useSearchManager()
+  const { getForBreakpoint, setResponsive } = useResponsive()
+
+  const handleChageSort = (newOrder) => {
+    setSortBy(newOrder)
+    updateSortBy(newOrder)
+  }
 
   return (
     <Box pad={{ bottom: 'medium' }}>
@@ -50,17 +55,17 @@ export const SearchBulkActions = ({
             {
               name: 'sort-by',
               start: [1, 0],
-              end: isMax850 ? [2, 0] : [1, 0]
+              end: getForBreakpoint(850, [2, 0], [1, 0])
             },
             {
               name: 'add-page',
-              start: isMax850 ? [1, 1] : [2, 0],
-              end: isMax850 ? [2, 1] : [2, 0]
+              start: getForBreakpoint(850, [1, 1], [2, 0]),
+              end: getForBreakpoint(850, [2, 1], [2, 0])
             },
             {
               name: 'hide-non-downloadble',
-              start: isMax850 ? [0, 1] : [0, 1],
-              end: isMax850 ? [0, 1] : [2, 1]
+              start: getForBreakpoint(850, [0, 1], [0, 1]),
+              end: getForBreakpoint(850, [0, 1], [2, 1])
             }
           ],
           [
@@ -68,25 +73,28 @@ export const SearchBulkActions = ({
             {
               name: 'sort-by',
               start: [1, 0],
-              end: isMax1100 ? [2, 0] : [1, 0]
+              end: getForBreakpoint(1100, [2, 0], [1, 0])
             },
             {
               name: 'add-page',
-              start: isMax1100 ? [1, 1] : [2, 0],
-              end: isMax1100 ? [2, 1] : [2, 0]
+              start: getForBreakpoint(1100, [1, 1], [2, 0]),
+              end: getForBreakpoint(1100, [2, 1], [2, 0])
             },
             {
               name: 'hide-non-downloadble',
-              start: isMax1100 ? [0, 1] : [0, 1],
-              end: isMax1100 ? [0, 1] : [2, 1]
+              start: getForBreakpoint(1100, [0, 1], [0, 1]),
+              end: getForBreakpoint(1100, [0, 1], [2, 1])
             }
           ]
         )}
         rows={setResponsive(['auto', 'auto', 'auto', 'auto'], ['auto', 'auto'])}
-        columns={setResponsive(
-          ['auto'],
-          isMax1100 || isMax850 ? ['auto', 'auto'] : ['auto', 'auto', 'auto']
-        )}
+        columns={
+          setResponsive(
+            ['auto'],
+            getForBreakpoint(1100, ['auto', 'auto'], ['auto', 'auto', 'auto'])
+          )
+          // eslint-disable-next-line no-nested-ternary
+        }
         gap={{
           row: 'medium',
           column: 'xsmall'
@@ -99,9 +107,10 @@ export const SearchBulkActions = ({
               textAppended="results"
               pageSizeLabel="Total Samples"
               pageSize={pageSize}
+              setPageSize={setPageSize}
               pageSizes={pageSizes}
               totalPages={totalResults}
-              setPageSize={setPageSize}
+              updatePageSize={updatePageSize}
             />
           </Box>
         </Box>
@@ -110,14 +119,12 @@ export const SearchBulkActions = ({
             Sort by
             <Box width="208px">
               <Select
-                options={Object.values(sortByOptions)}
+                options={Object.values(sortby)}
                 labelKey="label"
-                value={selectedSortByOption}
+                value={sortBy}
                 valueKey={{ key: 'value', reduce: true }}
                 margin={{ horizontal: 'xxsmall' }}
-                onChange={({ value: nextValue }) =>
-                  setSelectedSortByOption(nextValue)
-                }
+                onChange={({ value: nextValue }) => handleChageSort(nextValue)}
               />
             </Box>
           </Box>
@@ -132,7 +139,7 @@ export const SearchBulkActions = ({
           </Box>
         </Box>
         <Box gridArea="hide-non-downloadble">
-          <FilterNonDownloadableExperiment />
+          <NonDownloadableExperiment />
         </Box>
       </Grid>
     </Box>
