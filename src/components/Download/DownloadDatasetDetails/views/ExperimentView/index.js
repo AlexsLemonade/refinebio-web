@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { formatSampleMetadata } from 'helpers/dataset'
 import { Paragraph } from 'grommet'
+import { formatSampleMetadata } from 'helpers/dataset'
 import { OrganismFilter } from './OrganismFilter'
 import { ViewBlock } from './ViewBlock'
 import { ViewBlocks } from '../ViewBlocks'
@@ -8,10 +8,11 @@ import { ViewBlocks } from '../ViewBlocks'
 export const ExperimentView = ({
   dataset: {
     data: datasetData,
+    id: datasetId,
     experiments,
     quantile_normalize: quantileNormalize
   },
-  isImmutable = false
+  isImmutable
 }) => {
   const defaultOrganismFilterOption = { label: 'All Speciess', value: 'ALL' }
   const [organism, setOrganism] = useState(defaultOrganismFilterOption.value)
@@ -48,6 +49,7 @@ export const ExperimentView = ({
             <ViewBlock
               key={experimentAccessionCode}
               addedSamples={addedSamples}
+              datasetId={datasetId}
               defaultOrganismFilterOption={defaultOrganismFilterOption}
               experiment={experiment}
               experimentAccessionCode={experimentAccessionCode}

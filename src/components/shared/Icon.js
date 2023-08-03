@@ -13,6 +13,7 @@ import { Help } from '../../images/help.svg'
 import { Info } from '../../images/info.svg'
 import { Search } from '../../images/search.svg'
 import { Success } from '../../images/success.svg'
+import { Sync } from '../../images/sync.svg'
 import { Twitter } from '../../images/twitter.svg'
 import { Warning } from '../../images/warning.svg'
 
@@ -30,6 +31,7 @@ const SVGs = {
   Info,
   Search,
   Success,
+  Sync,
   Twitter,
   Warning
 }
@@ -61,8 +63,11 @@ export const Icon = ({
       color={color}
       margin={margin}
       size={sizes[size] || size}
-      style={{ color: (!link && color) || 'inherit' }}
-      width={size}
+      style={{
+        color: (!link && color) || 'inherit',
+        height: size,
+        width: size
+      }}
     >
       <IconContent
         aria-hidden

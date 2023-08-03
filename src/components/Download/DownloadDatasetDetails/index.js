@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Tabs, Tab } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Row } from 'components/shared/Row'
 import { ExperimentView, SpeciesView } from './views'
 import { RemoveAllButton } from './RemoveAllButton'
 
-export const DownloadDatasetDetails = ({ dataset }) => {
+export const DownloadDatasetDetails = ({ dataset, isImmutable }) => {
   const { setResponsive } = useResponsive()
   const [activeIndex, setActiveIndex] = useState(0)
   const handleActive = (nextIndex) => setActiveIndex(nextIndex)
@@ -14,25 +14,21 @@ export const DownloadDatasetDetails = ({ dataset }) => {
   const tabs = [
     {
       label: 'Species View',
-      component: <SpeciesView dataset={dataset} />
+      component: <SpeciesView dataset={dataset} isImmutable={isImmutable} />
     },
     {
       label: 'Experiment View',
-      component: <ExperimentView dataset={dataset} />
+      component: <ExperimentView dataset={dataset} isImmutable={isImmutable} />
     }
   ]
 
   return (
     <Box margin={{ top: 'large' }}>
       <Row margin={{ bottom: setResponsive('medium', 'none') }}>
-        <Heading
-          level={2}
-          margin={{ bottom: 'small' }}
-          size={setResponsive('h2_xsmall', 'h2_small')}
-        >
+        <Heading level={2} margin={{ bottom: 'small' }}>
           Samples
         </Heading>
-        <RemoveAllButton />
+        {!isImmutable && <RemoveAllButton />}
       </Row>
       <Box margin={{ bottom: 'medium' }}>
         <Tabs activeIndex={activeIndex} justify="start" onActive={handleActive}>
