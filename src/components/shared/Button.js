@@ -189,8 +189,8 @@ export const Button = ({
               horizontal: 'large'
             },
             {
-              vertical: 'small',
-              horizontal: 'large'
+              vertical: 'xxsmall',
+              horizontal: 'medium'
             }
           )}
           // eslint-disable-next-line react/jsx-props-no-spreading
