@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Text } from 'grommet'
 import styled, { css } from 'styled-components'
+import { useResponsive } from 'hooks/useResponsive'
 
 const Arrow = styled(Box)`
   ${({ theme }) => css`

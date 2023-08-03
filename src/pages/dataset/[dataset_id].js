@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
+import { Box, Heading } from 'grommet'
 import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
 import { usePageRendered } from 'hooks/usePageRendered'
-import { Box, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
@@ -20,16 +20,22 @@ import {
   DownloadFilesSummary
 } from 'components/Download'
 
-// https://github.com/AlexsLemonade/refinebio-frontend/issues/27
-
+// NOTE: Add the Spinner component for loading after replacing the mock with the API response
 // TEMPORARY
+// endpoint: https://api.refine.bio/v1/dataset/{datasetId}/?details=true
 export const getServerSideProps = ({ query }) => {
   return { props: { query } }
 }
 
+// Dataset page has 3 states which correspond with the backend's states
+// Processing - The download file is being created
+// Processed - The download file is ready
+// Expired - Download files expire after some time
+// https://github.com/AlexsLemonade/refinebio-frontend/issues/27
+
 export const Dataset = ({ query }) => {
-  const { dataset_id: datasetId, ref } = query
   const { dataset } = useDataset()
+  const { dataset_id: datasetId, ref } = query
   const isSharedDataset = ref === 'share'
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
@@ -63,7 +69,7 @@ export const Dataset = ({ query }) => {
         <Heading
           level={2}
           margin={{ bottom: setResponsive('small', 'large') }}
-          size={setResponsive('h2_small', 'h2_large')}
+          size={setResponsive('small', 'large')}
         >
           Shared Dataset
         </Heading>
@@ -74,7 +80,7 @@ export const Dataset = ({ query }) => {
         pad={{ bottom: setResponsive('medium', 'small') }}
       >
         <Box>
-          <MoveToDatasetButton />
+          <MoveToDatasetButton dataset={data} />
         </Box>
         <Row
           gap={setResponsive('medium', 'small')}
@@ -90,7 +96,7 @@ export const Dataset = ({ query }) => {
         <>
           <DownloadFilesSummary dataset={data} />
           <DownloadDatasetSummary dataset={data} />
-          <DownloadDatasetDetails dataset={data} shared={isSharedDataset} />
+          <DownloadDatasetDetails dataset={data} isImmutable />
         </>
       )}
     </FixedContainer>

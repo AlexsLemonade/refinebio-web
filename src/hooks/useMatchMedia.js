@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { isWindow } from 'helpers/isWindow'
+import isWindow from 'helpers/isWindow'
 
 // Returns true if the document currently matches the mediaQuery, otherwise false
 // e.g.) useMatchMedia('(max-width: 600px)')
