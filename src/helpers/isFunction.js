@@ -1,3 +1,3 @@
 // Returns true if 'value' is a function
-// https://lodash.com/docs#isFunction
-export const isFunction = (value) => value && value instanceof Function
+// equivalent to  https://lodash.com/docs#isFunction
+export default (value) => value && value instanceof Function

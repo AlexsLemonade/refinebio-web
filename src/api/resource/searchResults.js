@@ -1,5 +1,5 @@
 // TEMPORARY for testing
-import { http } from '../http'
+import http from '../http'
 
 const url = 'search/'
 

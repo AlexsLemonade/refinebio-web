@@ -1,12 +1,13 @@
 /* eslint-disable no-nested-ternary */
 import { useResponsive } from 'hooks/useResponsive'
-import { formatNumbers } from 'helpers/formatNumbers'
-import { formatString } from 'helpers/formatString'
-import { isArray } from 'helpers/isArray'
-import { formatPlatformName } from 'helpers/formatPlatformName'
+import formatNumbers from 'helpers/formatNumbers'
+import formatString from 'helpers/formatString'
+import isArray from 'helpers/isArray'
+import formatPlatformName from 'helpers/formatPlatformName'
 import { Box } from 'grommet'
 import { IconBadge } from 'components/shared/IconBadge'
 import { Row } from 'components/shared/Row'
+import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
 
 export const SearchCardMeta = ({
@@ -33,13 +34,18 @@ export const SearchCardMeta = ({
         }
       ]}
       direction={setResponsive('column', 'column', 'row')}
+      justify="start"
       gap="small"
       pad={{ vertical: 'xsmall' }}
     >
       <Box flex="grow" width={setResponsive('100%', '100%', { max: '30%' })}>
         {organismNames.length > 0 ? (
           <IconBadge
-            label={organismNames.map(formatString).join(', ')}
+            label={
+              <TextHighlight>
+                {organismNames.map(formatString).join(', ')}
+              </TextHighlight>
+            }
             name="Organism"
             size={size}
           />
@@ -47,17 +53,27 @@ export const SearchCardMeta = ({
           <TextNull text="No species" />
         )}
       </Box>
-      <Box flex="grow">
-        <IconBadge
-          label={`${formatNumbers(downloadableSamples)} Downloadable Samples`}
-          name="Samples"
-          size={size}
-        />
-      </Box>
+      {downloadableSamples && (
+        <Box flex="grow">
+          <IconBadge
+            label={`${
+              downloadableSamples > 0
+                ? formatNumbers(downloadableSamples)
+                : 'No'
+            } Downloadable Samples`}
+            name="Samples"
+            size={size}
+          />
+        </Box>
+      )}
       <Box flex="grow" width={setResponsive('100%', '100%', { max: '40%' })}>
         {platformNames.length > 0 ? (
           <IconBadge
-            label={platformNames.map(formatPlatformName).join(', ')}
+            label={
+              <TextHighlight>
+                {platformNames.map(formatPlatformName).join(', ')}
+              </TextHighlight>
+            }
             name={
               technologyName === 'MICROARRAY'
                 ? 'MicroArray'

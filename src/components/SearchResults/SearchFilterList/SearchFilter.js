@@ -1,14 +1,18 @@
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
-import { formatNumbers } from 'helpers/formatNumbers'
-import { formatString } from 'helpers/formatString'
-import { isLastIndex } from 'helpers/isLastIndex'
-import { scrollToId } from 'helpers/scrollToId'
+import { useSearchManager } from 'hooks/useSearchManager'
+import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
+import formatNumbers from 'helpers/formatNumbers'
+import formatPlatformName from 'helpers/formatPlatformName'
+import formatString from 'helpers/formatString'
+import isLastIndex from 'helpers/isLastIndex'
 import { Box, CheckBox, Heading } from 'grommet'
 import { Button as sharedButton } from 'components/shared/Button'
 import { SearchBox } from 'components/shared/SearchBox'
+import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
 import styled, { css } from 'styled-components'
+import cache from 'api/api_data.json'
 
 const ToggleButton = styled(sharedButton)`
   border-bottom: 1px solid transparent;
@@ -18,80 +22,74 @@ const ToggleButton = styled(sharedButton)`
     }
   `}
 `
-export const SearchFilter = ({
-  checkedFilter,
-  filterGroup,
-  filterParam,
-  label,
-  handleToggle
-}) => {
-  const { setResponsive } = useResponsive()
+export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
+  const { viewport } = useResponsive()
+  const { isFilterChecked, toggleFilter } = useSearchManager()
   const maxCount = 5
-  const options = useMemo(() => {
-    return Object.entries(filterGroup)
-  }, [filterGroup])
-  const filterLength = options.length
-  const [filteredResult, setfilteredResult] = useState(options)
-  const [open, setOpen] = useState(false)
+  const filterList = Object.entries(filterGroup)
+  const filterLength = filterList.length
   const [userInput, setUserInput] = useState('')
-
-  const filterOptions = (val) => {
-    setUserInput(val)
-
-    if (val.trim() !== '') {
-      setfilteredResult(() =>
-        options.filter((option) =>
-          formatString(option[0]).toLowerCase().startsWith(val.toLowerCase())
-        )
-      )
-    } else {
-      setfilteredResult(options)
-    }
-  }
-
-  const getOptionsToRender = () =>
-    open ? filteredResult : filteredResult.slice(0, maxCount)
+  const [open, setOpen] = useState(false)
+  const formattedFilterList = filterList
+    .filter((option) =>
+      formatString(option[0]).toLowerCase().startsWith(userInput.toLowerCase())
+    )
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, open && !userInput ? filterList.length : maxCount)
 
   return (
     <>
-      <Heading
-        level={4}
-        margin={{ bottom: 'xsmall' }}
-        id={label.toLowerCase()}
-        size={setResponsive('h4_xsmall', 'medium')}
-      >
-        {label}
+      <Heading level={4} margin={{ bottom: 'xsmall' }} responsive={false}>
+        {filterLabel}
       </Heading>
 
       {filterLength > maxCount && (
-        <SearchBox
-          pad={{ bottom: 'xsmall' }}
-          placeholder={`Filter ${label}`}
-          value={userInput}
-          size="small"
-          changeHandler={(e) => filterOptions(e.target.value)}
-        />
+        <Box margin={{ bottom: 'small' }}>
+          <SearchBox
+            pad={{ bottom: 'xsmall' }}
+            placeholder={`Filter ${filterLabel}`}
+            value={userInput}
+            size="small"
+            changeHandler={(e) => setUserInput(e.target.value)}
+          />
+        </Box>
       )}
 
-      <Box
-        margin={{ top: 'xsmall' }}
-        animation={open ? { type: 'fadeIn', duration: 1000 } : {}}
-      >
-        {getOptionsToRender().map((option, i, arr) => (
-          <Box
-            key={option[0]}
-            margin={{ bottom: !isLastIndex(i, arr) ? 'xsmall' : '0' }}
-          >
-            <CheckBox
-              label={`${formatString(option[0])} (${formatNumbers(option[1])})`}
-              checked={checkedFilter.includes(option[0])}
-              onChange={(e) => handleToggle(e, filterParam, option[0])}
-            />
-          </Box>
-        ))}
-      </Box>
+      <TextHighlightContextProvider match={userInput}>
+        <Box animation={open ? { type: 'fadeIn', duration: 1000 } : {}}>
+          {formattedFilterList.map((option, i, arr) => (
+            <Box
+              key={option[0]}
+              margin={{ bottom: !isLastIndex(i, arr) ? 'xsmall' : '0' }}
+            >
+              <CheckBox
+                label={
+                  <>
+                    <TextHighlight>
+                      {filterOption === 'platform'
+                        ? formatPlatformName(cache.platforms[option[0]]) ||
+                          option[0]
+                        : formatString(option[0])}
+                    </TextHighlight>{' '}
+                    ({formatNumbers(option[1])})
+                  </>
+                }
+                checked={isFilterChecked(filterOption, option[0])}
+                onChange={(e) =>
+                  toggleFilter(
+                    e.target.checked,
+                    filterOption,
+                    option[0],
+                    viewport === 'large'
+                  )
+                }
+              />
+            </Box>
+          ))}
+        </Box>
+      </TextHighlightContextProvider>
 
-      {filteredResult.length === 0 && <TextNull text="No match found" />}
+      {formattedFilterList.length === 0 && <TextNull text="No match found" />}
 
       {filterLength > maxCount && (
         <ToggleButton
@@ -103,7 +101,7 @@ export const SearchFilter = ({
               ? `+ ${filterLength - maxCount} More`
               : ''
           }
-          margin={{ top: 'xsmall', left: 'medium' }}
+          margin={{ top: 'xxsmall', left: 'medium' }}
           style={{
             borderRadius: '0',
             boxShadow: 'none',
@@ -112,7 +110,6 @@ export const SearchFilter = ({
           }}
           onClick={() => {
             setOpen(!open)
-            scrollToId(label.toLowerCase())
           }}
         />
       )}

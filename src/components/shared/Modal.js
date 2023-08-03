@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
-import { isWindow } from 'helpers/isWindow'
+import isWindow from 'helpers/isWindow'
 import { Box } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
@@ -27,7 +27,7 @@ const ModalBox = styled(Box)`
 //    {children}
 // </Modal>
 // NOTE: nested modals will simply stack on top of one another, and they
-// will have its '< Back' button
+// will have its '< Back' button if the prop 'nested' is set to true (by default it's false)
 
 export const Modal = ({
   id, // must be unique
@@ -37,17 +37,16 @@ export const Modal = ({
   fullHeight = true, // for responsive views (mobole/tablet)
   height = 'none',
   width = 'auto',
+  nested = false, // if true, show '< Back' button in a modal
   cleanUp = () => {}
 }) => {
   const { setResponsive } = useResponsive()
   const { modal, closeModal } = useModal()
-  const visibleModals = Object.keys(modal).filter((key) => modal[key].show)
-  const [current, setCurrent] = useState(visibleModals)
+  const modalCount = Object.keys(modal).length
 
   const handleClose = () => {
-    setCurrent((prev) => prev.filter((element) => id !== element))
-    cleanUp()
     closeModal(id)
+    cleanUp()
   }
 
   const handleKeyDown = (event) => {
@@ -66,10 +65,6 @@ export const Modal = ({
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [])
-
-  useEffect(() => {
-    setCurrent(visibleModals)
-  }, [modal])
 
   return (
     <>
@@ -107,7 +102,7 @@ export const Modal = ({
           >
             <Box direction="row" justify="between">
               <Box>
-                {current.length > 1 && current[0] !== id && (
+                {modalCount > 1 && nested && Object.keys(modal)[0] !== id && (
                   <Box
                     align="center"
                     direction="row"

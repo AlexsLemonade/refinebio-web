@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
-import { scrollToTop } from 'helpers/scrollToTop'
-import { isWindow } from 'helpers/isWindow'
+import scrollToTop from 'helpers/scrollToTop'
+import isWindow from 'helpers/isWindow'
 import { Box, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 
