@@ -7,6 +7,7 @@ const isFirst = (accessionCode) => accessionCode === 'GSE116436'
 const isSixth = (accessionCode) => accessionCode === 'ERP006132'
 const isTenth = (accessionCode) => accessionCode === 'GSE57542'
 const isArrayExpress = (accessionCode) => accessionCode === 'E-MTAB-1811'
+const pageSizes = [10, 20, 50]
 
 export const getExperimentPageData = (accessionCode) => {
   const first = isFirst(accessionCode)
@@ -34,12 +35,7 @@ export const getExperimentPageData = (accessionCode) => {
   return { experiment, samples }
 }
 
-export const getSamplesTableData = (
-  accessionCode,
-  pageSize,
-  pageSizes,
-  setTableData
-) => {
+export const getSamplesTableData = (accessionCode, pageSize, setTableData) => {
   const first = isFirst(accessionCode)
   const sixth = isSixth(accessionCode)
   const tenth = isTenth(accessionCode)

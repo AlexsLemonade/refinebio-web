@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
+import { Box } from 'grommet'
+import styled from 'styled-components'
 import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
-import { isWindow } from 'helpers/isWindow'
-import { Box } from 'grommet'
+import isWindow from 'helpers/isWindow'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
 import { Portal } from 'components/shared//Portal'
 import { SrOnly } from 'components/shared//SrOnly'
-import styled from 'styled-components'
 
 const ModalBox = styled(Box)`
   @keyframes zoomIn {

@@ -1,4 +1,4 @@
-import { unionizeArrays } from 'helpers/unionizeArrays'
+import unionizeArrays from 'helpers/unionizeArrays'
 import { ViewBlock } from './ViewBlock'
 import { ViewBlocks } from '../ViewBlocks'
 

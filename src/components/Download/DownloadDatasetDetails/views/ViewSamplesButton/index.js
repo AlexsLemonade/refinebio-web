@@ -10,7 +10,9 @@ export const ViewSamplesButton = ({
   isImmutable
 }) => {
   const { openModal } = useModal()
-  const id = `view-samples-${params.dataset_id + params.organism__name}`
+  const id = `view-samples-${params.dataset_id}-${
+    params[Object.keys(params)[1]]
+  }`
 
   return (
     <Modal

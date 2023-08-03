@@ -1,15 +1,15 @@
 import { memo, useState } from 'react'
 import { nanoid } from 'nanoid'
+import { Box, Heading, Text } from 'grommet'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, Heading, Text } from 'grommet'
+import { FilterTextInput } from 'components/shared/FilterTextInput'
 import {
   InformationList,
   InformationItem
 } from 'components/shared/InformationList'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
-import { TextInput } from 'components/shared/TextInput'
 import { TextNull } from 'components/shared/TextNull'
 import { Annotation } from './Annotation'
 
@@ -60,8 +60,10 @@ export const ModalContent = ({ annotations }) => {
             margin={{ bottom: setResponsive('small', 'none') }}
             width={setResponsive('100%', 'auto')}
           >
-            <Text margin={{ right: 'xsmall' }}>Filter</Text>
-            <TextInput onChange={(e) => setFilter(e.target.value)} />
+            <FilterTextInput
+              setFilter={setFilter}
+              placeholder="Filter metadata"
+            />
           </Box>
           <InlineMessage
             fontSize={setResponsive('small', 'medium')}

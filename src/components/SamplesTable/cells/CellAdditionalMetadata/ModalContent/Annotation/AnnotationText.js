@@ -1,8 +1,8 @@
-import { isString } from 'helpers/isString'
-import { isValidURL } from 'helpers/isValidURL'
 import { Text } from 'grommet'
+import isString from 'helpers/isString'
+import isValidURL from 'helpers/isValidURL'
 import { Anchor } from 'components/shared/Anchor'
-import { TextHighlighted } from 'components/shared/TextHighlighted'
+import { TextHighlight } from 'components/shared/TextHighlight'
 
 export const AnnotationText = ({ value }) => {
   if (isString(value)) {
@@ -17,7 +17,7 @@ export const AnnotationText = ({ value }) => {
       )
     }
 
-    return <TextHighlighted text={value} />
+    return <TextHighlight>{value}</TextHighlight>
   }
 
   return <Text as="code">{JSON.stringify(value)}</Text>

@@ -1,10 +1,3 @@
-import { useResponsive } from 'hooks/useResponsive'
-import {
-  getExperimentCountBySpecies,
-  getTotalExperiments,
-  getTotalSamples
-} from 'helpers/dataset'
-
 import {
   Box,
   Heading,
@@ -14,6 +7,13 @@ import {
   TableHeader,
   TableRow
 } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
+import {
+  getExperimentCountBySpecies,
+  getTotalExperiments,
+  getTotalSamples
+} from 'helpers/dataset'
+
 import { Row } from 'components/shared/Row'
 import { RowSpieces, RowTotal } from './rows'
 
@@ -29,11 +29,7 @@ export const DownloadDatasetSummary = ({ dataset }) => {
 
   return (
     <Box margin={{ top: 'large' }}>
-      <Heading
-        level={2}
-        margin={{ bottom: 'small' }}
-        size={setResponsive('h2_xsmall', 'h2_small')}
-      >
+      <Heading level={2} margin={{ bottom: 'small' }}>
         Dataset Summary
       </Heading>
       <Row

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
+import { Box, Heading } from 'grommet'
 import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
 import { usePageRendered } from 'hooks/usePageRendered'
-import { Box, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
@@ -20,6 +20,7 @@ import {
   DownloadFilesSummary
 } from 'components/Download'
 
+// NOTE: Add the Spinner component for loading after replacing the mock with the API response
 // TEMPORARY
 // endpoint: https://api.refine.bio/v1/dataset/{datasetId}/?details=true
 export const getServerSideProps = ({ query }) => {
@@ -68,7 +69,7 @@ export const Dataset = ({ query }) => {
         <Heading
           level={2}
           margin={{ bottom: setResponsive('small', 'large') }}
-          size={setResponsive('h2_small', 'h2_large')}
+          size={setResponsive('small', 'large')}
         >
           Shared Dataset
         </Heading>
