@@ -38,6 +38,7 @@ const CustomLinkButton = styled(GrommetButton)`
 `
 
 const CustomButton = styled(GrommetButton)`
+  border-radius: 3px;
   position: relative;
 
   ${({ underlineOnHover }) =>
