@@ -1,4 +1,4 @@
-ARG NODE_VER=16.17-alpine 
+ARG NODE_VER=18.17-alpine 
 
 #  
 # Dependency Installation
