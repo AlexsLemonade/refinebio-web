@@ -1,21 +1,31 @@
 import { memo } from 'react'
 import { useResponsive } from 'hooks/useResponsive'
-import { formatNumbers } from 'helpers/formatNumbers'
+import formatNumbers from 'helpers/formatNumbers'
 import { Box, Select, Text } from 'grommet'
 
 export const PageSizes = ({
   textPrepend = 'Show',
   textAppended = 'Total Samples',
-  totalPages,
   pageSize,
+  setPageSize,
   pageSizes,
-  setPageSize
+  totalPages,
+  updatePageSize
 }) => {
   const { viewport } = useResponsive()
-  const handleChange = (value) => {
-    setPageSize(value)
-  }
   const isSinglePage = totalPages < pageSizes[0]
+
+  // syncs the search page url with selected page size
+  const updateQueryForPageSize = (newPageSize) => {
+    if (updatePageSize) {
+      updatePageSize(newPageSize)
+    }
+  }
+
+  const handleChange = (newPageSize) => {
+    setPageSize(newPageSize)
+    updateQueryForPageSize(newPageSize)
+  }
 
   return (
     <Box align="center" direction="row">

@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
-import { isArray } from 'helpers/isArray'
-import { isObject } from 'helpers/isObject'
-import { isString } from 'helpers/isString'
+import isArray from 'helpers/isArray'
+import isObject from 'helpers/isObject'
+import isString from 'helpers/isString'
 import { Box, Text } from 'grommet'
 import { AnnotationText } from './AnnotationText'
 
