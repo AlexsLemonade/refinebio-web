@@ -1,4 +1,4 @@
-import { Box } from 'grommet'
+import { BoxBlock } from 'components/shared/BoxBlock'
 
 export const ExpandableBlock = ({
   duration = '.8s',
@@ -10,7 +10,7 @@ export const ExpandableBlock = ({
   ...props
 }) => {
   return (
-    <Box
+    <BoxBlock
       margin={{ bottom: 'xsmall' }}
       style={{
         opacity: expand ? 1 : opacity,
@@ -22,7 +22,7 @@ export const ExpandableBlock = ({
       {...props}
     >
       {children}
-    </Box>
+    </BoxBlock>
   )
 }
 

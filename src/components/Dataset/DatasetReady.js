@@ -1,8 +1,8 @@
 import { useState } from 'react'
+import { Box, CheckBox, Heading, Text } from 'grommet'
 import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
-import { formatBytes } from 'helpers/formatBytes'
-import { Box, CheckBox, Heading, Text } from 'grommet'
+import formatBytes from 'helpers/formatBytes'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
@@ -33,11 +33,7 @@ export const DatasetReady = ({ dataset }) => {
             align={setResponsive('center', 'start')}
             flexValue={setResponsive('1 1 auto', 'auto')}
           >
-            <Heading
-              level={1}
-              margin={{ bottom: 'small' }}
-              size={setResponsive('h1_xsmall', 'h1_small')}
-            >
+            <Heading level={1} margin={{ bottom: 'small' }}>
               Your Dataset is ready for download!
             </Heading>
             <Text>

@@ -1,11 +1,10 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { Box, Form } from 'grommet'
 import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, Heading, Form } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Row } from 'components/shared/Row'
-import { ShareDatasetButton } from 'components/Dataset'
 import { AdvancedOptions, AdvancedOptionsButton } from './AdvancedOptions'
 import { AggregateOptions } from './AggregateOptions'
 import { TransformationOptions } from './TransformationOptions'
@@ -24,16 +23,6 @@ export const DownloadAdvancedOptions = () => {
   return (
     <Box border={{ side: 'bottom' }}>
       <Form onSubmit={handleSubmit}>
-        <Row>
-          <Heading
-            level={2}
-            margin={{ bottom: setResponsive('small', 'large') }}
-            size={setResponsive('h2_small', 'h2_large')}
-          >
-            My Dataset
-          </Heading>
-          <ShareDatasetButton />
-        </Row>
         <Row direction={setResponsive('column', 'column', 'row')}>
           <Box>
             <Row align={setResponsive('start', 'center')} justify="start">

@@ -1,19 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
+import { Box, Heading, Text } from 'grommet'
 import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
-import { formatString } from 'helpers/formatString'
-import { formatURLString } from 'helpers/formatURLString'
-import { Box, Heading, Text } from 'grommet'
+import formatString from 'helpers/formatString'
+import formatURLString from 'helpers/formatURLString'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { IconBadge } from 'components/shared/IconBadge'
 import { Pill } from 'components/shared/Pill'
 import { Row } from 'components/shared/Row'
 import { TextNull } from 'components/shared/TextNull'
-import { links } from 'config'
 import { ViewSamplesButton } from '../ViewSamplesButton'
 
 export const ViewBlock = ({
+  datasetId,
   addedSamples,
   experiment,
   defaultOrganismFilterOption,
@@ -49,7 +49,7 @@ export const ViewBlock = ({
     <Box animation={{ type: 'fadeIn', duration: 800 }}>
       {/* max value to preserve UI layout for wider screens */}
       <Box margin={{ bottom: 'xsmall' }} width={{ max: '640px' }}>
-        <Heading level={5} weight="700" size="h5_small">
+        <Heading level={5} responsive={false} weight="700">
           <Anchor
             href={`experiments/${experimentAccessionCode}/${formatURLString(
               experiment.title
@@ -60,18 +60,7 @@ export const ViewBlock = ({
         {experiment.technology === 'RNA-SEQ' && !quantileNormalize && (
           <Box margin={{ vertical: 'xsmall' }}>
             <Pill
-              label={
-                <Anchor
-                  href={
-                    links.refinebio_docs_quantile_normalization_rna_seq_samples
-                  }
-                  label="Quantile Normalization will be skipped"
-                  linkColor="black"
-                  underlineOnHover={false}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              }
+              label="Quantile Normalization will be skipped"
               status="info"
             />
           </Box>
@@ -105,7 +94,7 @@ export const ViewBlock = ({
             />
           </Box>
           <Box margin={{ top: 'large', bottom: 'medium' }}>
-            <Heading level={5} weight="500" size="h5_small">
+            <Heading level={5} responsive={false} weight="500">
               Sample Metadata Fields
             </Heading>
             <Box direction="row" margin={{ top: 'xsmall' }}>
@@ -118,8 +107,13 @@ export const ViewBlock = ({
           </Box>
           {addedSamples.length > 0 && (
             <ViewSamplesButton
-              id={experiment.accession_code}
+              dataset={{ [experimentAccessionCode]: addedSamples }}
+              params={{
+                dataset_id: datasetId,
+                experiment_accession_code: experimentAccessionCode
+              }}
               sampleMetadataFields={experiment.sample_metadata}
+              isImmutable={isImmutable}
             />
           )}
         </Box>

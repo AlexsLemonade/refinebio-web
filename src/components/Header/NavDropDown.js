@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { isMatchPath } from 'helpers/isMatchPath'
 import { Box, Text } from 'grommet'
+import styled, { css } from 'styled-components'
+import isMatchPath from 'helpers/isMatchPath'
 import { Anchor } from 'components/shared/Anchor'
 import { Button as SharedButton } from 'components/shared/Button'
 import { List } from 'components/shared/List'
 import { Icon } from 'components/shared/Icon'
-import styled, { css } from 'styled-components'
 
 const Button = styled(SharedButton)`
   ${({ theme, light }) =>
@@ -112,9 +112,11 @@ export const NavDropDown = ({ active, light }) => {
         <Box
           animation={{ type: 'zoomIn', duration: 200 }}
           background="white"
-          elevation="small"
           margin={{ top: '24px', left: '-40px' }}
-          style={{ position: 'absolute' }}
+          style={{
+            boxShadow: ' 0px 3px 20px rgba(0, 0, 0, 0.1)',
+            position: 'absolute'
+          }}
         >
           <List
             alignItems="left"

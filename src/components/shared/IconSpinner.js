@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 const Spinner = styled(Box)`
   ${({ theme }) => css`
-    border: 1px solid ${theme.global.colors.rgba_light_2};
+    border: 1px solid ${theme.global.colors.rgbaLight2};
     border-radius: 100% !important;
     border-top-color: ${theme.global.colors.white};
     display: inline-block;

@@ -1,22 +1,19 @@
 import { memo } from 'react'
-import { useResponsive } from 'hooks/useResponsive'
-import { isEmptyObject } from 'helpers/isEmptyObject'
 import { Box, Heading } from 'grommet'
+import isEmptyObject from 'helpers/isEmptyObject'
 import { Anchor } from 'components/shared/Anchor'
-import { Modal } from 'components/shared/Modal'
 import { Pill } from 'components/shared/Pill'
 import { links } from 'config'
 import { Pipeline, SubmitterSupplied } from './sections'
 
 export const ModalContent = ({ results, sample }) => {
-  const { setResponsive } = useResponsive()
   const pipelinesText = results.map((result) => result.processor.name)
   const isSubmitterProcessed = pipelinesText.every(
     (pipelineText) => pipelineText === 'Submitter-processed'
   )
 
   return (
-    <Modal center={false} width={setResponsive('100vw', '100vw', '950px')}>
+    <>
       <Box margin={{ bottom: 'small' }} pad={{ horizontal: 'large' }}>
         <Heading level={1}>Processing Information</Heading>
       </Box>
@@ -78,7 +75,7 @@ export const ModalContent = ({ results, sample }) => {
           />
         )}
       </Box>
-    </Modal>
+    </>
   )
 }
 

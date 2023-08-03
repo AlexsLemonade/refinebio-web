@@ -1,10 +1,10 @@
 import { Box, Heading, Paragraph } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
-import { links } from 'config'
 import {
-  SuppliedProtocolList,
-  SuppliedProtocolItem
-} from './SuppliedProtocolList'
+  InformationList,
+  InformationItem
+} from 'components/shared/InformationList'
+import { links } from 'config'
 
 export const GeoSubmitterSupplied = ({
   protocol_info: protocolInfo,
@@ -20,11 +20,11 @@ export const GeoSubmitterSupplied = ({
 
   return (
     <>
-      <SuppliedProtocolList>
+      <InformationList>
         {protocolProtocolList.map(
           (field) =>
             protocolInfo[field] && (
-              <SuppliedProtocolItem
+              <InformationItem
                 key={field}
                 field={field}
                 value={protocolInfo[field].join('. ')}
@@ -32,7 +32,7 @@ export const GeoSubmitterSupplied = ({
             )
         )}
         {protocolInfo.Reference && (
-          <SuppliedProtocolItem
+          <InformationItem
             field="Reference"
             value={
               <Anchor
@@ -44,7 +44,7 @@ export const GeoSubmitterSupplied = ({
             }
           />
         )}
-      </SuppliedProtocolList>
+      </InformationList>
       {isSubmitterProcessed && (
         <Box
           border={{ side: 'top' }}

@@ -30,6 +30,7 @@ export const decorators = [
               <Story />
             </Box>
           </Box>
+          <div id="portal"></div>
         </ModalContextProvider>
       </Grommet>
     </>
