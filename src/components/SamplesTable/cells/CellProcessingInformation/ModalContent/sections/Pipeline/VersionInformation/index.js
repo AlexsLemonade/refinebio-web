@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid'
-import { pickObjectPropByKey } from 'helpers/pickObjectPropByKey'
 import { Box, Heading } from 'grommet'
+import pickObjectPropByKey from 'helpers/pickObjectPropByKey'
 import { Accordion, AccordionPanel } from 'components/shared/Accordion'
 import { ProcessorVersion } from './ProcessorVersion'
 import { VersionItem } from './VersionList'
@@ -17,7 +17,7 @@ export const VersionInformation = ({ results }) => {
           'Brainarray'
         ])
       case 'Salmon Quant':
-        // remove the text 'salmon'
+        // removes the text 'salmon'
         return {
           salmon: processor.environment.cmd_line['salmon --version']?.replace(
             'salmon ',
@@ -76,7 +76,7 @@ export const VersionInformation = ({ results }) => {
 
     return (
       <Box margin={{ top: 'small' }}>
-        <Heading level={5} size="h5_small" weight="500">
+        <Heading level={5} responsive={false} weight="500">
           Genome Build
         </Heading>
         {verionItems.map((versionItem) => (
@@ -88,7 +88,7 @@ export const VersionInformation = ({ results }) => {
 
   return (
     <>
-      <Heading level={2} size="h2_xsmall">
+      <Heading level={2} size="small">
         Version Information
       </Heading>
       <Accordion>

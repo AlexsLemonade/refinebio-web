@@ -1,10 +1,11 @@
 /* eslint-disable no-nested-ternary */
 import { useEffect, useState, memo } from 'react'
+import { Box, Heading } from 'grommet'
 import { useRouter } from 'next/router'
 import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
+import scrollToTop from 'helpers/scrollToTop'
 import { isDownloadableDataset } from 'helpers/dataset'
-import { Box, Heading } from 'grommet'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { ShareDatasetButton } from 'components/Dataset'
@@ -25,7 +26,7 @@ export const Download = () => {
 
   useEffect(() => {
     if (!isDownloadable) {
-      window.scrollTo(0, 0)
+      scrollToTop()
     }
   }, [isDownloadable])
 
@@ -36,17 +37,16 @@ export const Download = () => {
   return (
     <FixedContainer>
       <Box pad={{ top: 'basex7', bottom: 'large' }}>
-        {isDownloadable && !router.query.start ? (
+        {dataset && isDownloadable && !router.query.start ? (
           <>
             <Row>
               <Heading
-                level={2}
+                level={1}
                 margin={{ bottom: setResponsive('small', 'large') }}
-                size={setResponsive('h2_small', 'h2_large')}
               >
                 My Dataset
               </Heading>
-              <ShareDatasetButton datasetId={dataset.id} />
+              <ShareDatasetButton datasetId={dataset?.id} />
             </Row>
             <DownloadAdvancedOptions />
             <DownloadFilesSummary dataset={dataset} />

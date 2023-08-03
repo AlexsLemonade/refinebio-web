@@ -1,22 +1,23 @@
-import { useMemo, memo, useState, useEffect } from 'react'
+/* eslint-disable no-nested-ternary */
+import { memo, useEffect, useMemo, useState } from 'react'
+import { Box, CheckBox, Spinner, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
+import { useSamplesTableManager } from 'hooks/useSamplesTableManager'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
-import { formatString } from 'helpers/formatString'
-import { Box, CheckBox, Heading, Spinner } from 'grommet'
+import formatString from 'helpers/formatString'
 import { Anchor } from 'components/shared/Anchor'
-import { Column } from 'components/shared/Column'
-import {
-  DataTable,
-  ExpandTableButton,
-  GlobalFilter
-} from 'components/shared/DataTable'
+import { BoxBlock } from 'components/shared/BoxBlock'
+import { Button } from 'components/shared/Button'
+import { DataTable, ExpandTableButton } from 'components/shared/DataTable'
+import { FilterTextInput } from 'components/shared/FilterTextInput'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Overlay } from 'components/shared/Ovevrlay'
 import { PageSizes } from 'components/shared/PageSizes'
 import { Pagination } from 'components/shared/Pagination'
 import { Row } from 'components/shared/Row'
-import { links } from 'config'
-import { getSamplesTableData } from 'api/mockHelper'
+import { TextNull } from 'components/shared/TextNull'
+import { links, options } from 'config'
+import { SamplesTableEmpty } from './SamplesTableEmpty'
 import {
   CellAccessionCode,
   CellAddRemove,
@@ -25,35 +26,57 @@ import {
   CellSampleMetadata,
   CellTitle
 } from './cells'
-import { SamplesTableCTA } from './SamplesTableCTA'
 
-export const SamplesTable = ({ accessionCode, experiment, samples }) => {
+export const SamplesTable = ({
+  experimentSampleAssociations,
+  queryToAdd,
+  sampleMetadataFields,
+  isImmutable = false,
+  modalView = false
+}) => {
+  const {
+    samplesTable: { pageSizes }
+  } = options
+  const {
+    config: { defaultColumn, minColumns },
+    hasError,
+    hasSamples,
+    hasSamplesInDataset,
+    loading,
+    samplesTable,
+    totalPages,
+    tableData,
+    getSamplesTableData,
+    updateFilterBy,
+    updatePage,
+    updatePageSize,
+    updateSortBy
+  } = useSamplesTableManager(queryToAdd)
   const { viewport, setResponsive } = useResponsive()
-  const tableHeight = { default: '60vh', expanded: '75vh' } // required for a table loading screen
-  const minColumns = 5 // matches the current refine.bio
-  const totalColumns = experiment ? 4 + experiment.sample_metadata.length : 0 // matches the current refine.bio
-  const stickyColumns = 3
-  const pageSizes = [10, 20, 50]
-  const sampleMetadata = experiment.sample_metadata
   const [tableExpanded, setTableExpanded] = useState(false)
-  // TEMPORARY
-  // for API calls(data, filter, pageSize, limit, offset, order)
-  // endpoint: `v1/samples/experiment_accession_code=${accessionCode}`
-  const [loading, setLoading] = useState(false)
-  const [tableData, setTableData] = useState([])
-  const [globalFilter, setGlobalFilter] = useState(null) // match the react-table useGlobalFilter API's names
-  const [page, setPage] = useState(0) // 'page' matches the react-table usePagination API's name
-  const [pageSize, setPageSize] = useState(pageSizes[0]) // match the react-table usePagination API's names
-
-  const data = useMemo(() => tableData, [tableData])
+  const tableHeight = tableExpanded ? '75vh' : '800px' // required for the table height on expanded view
+  const data = useMemo(() => tableData.results, [tableData])
   const columns = useMemo(() => {
     const temp = [
       {
         Header: 'Add/Remove',
-        Cell: CellAddRemove,
+        // eslint-disable-next-line react/no-unstable-nested-components
+        Cell: ({ row: { original: sample } }) => (
+          <CellAddRemove
+            experimentAccessionCodes={Object.keys(
+              experimentSampleAssociations
+            ).filter((accessionCode) =>
+              experimentSampleAssociations[accessionCode].includes(
+                sample.accession_code
+              )
+            )}
+            sample={sample}
+          />
+        ),
         disableSortBy: true,
         id: 'add_remove',
-        maxWidth: 160
+        width: 200,
+        maxWidth: 200
       },
       {
         Header: 'Accession Code',
@@ -71,8 +94,8 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
         accessor: 'id',
         isVisible: false
       },
-      // map the available columns in the experiment.sample_metadata
-      ...sampleMetadata.map((column) => ({
+      // maps the available columns in the experiment.sample_metadata
+      ...sampleMetadataFields.map((column) => ({
         id: column,
         accessor: column,
         Header: formatString(column),
@@ -93,64 +116,42 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
         Cell: CellAdditionalMetadata
       }
     ]
-    // columns stick to left only for large(enough screen real estate)
+    // makes columns stick to left only for 'large' (enough screen real estate)
     if (viewport === 'large') {
-      for (let i = 0; i <= stickyColumns; i++) {
+      let stickyColumns = 3
+      let i = 0
+      // removes the add/remove button if the dataset is immutable
+      if (isImmutable) {
+        temp.shift()
+        stickyColumns = 2
+      }
+      for (i; i <= stickyColumns; i++) {
         temp[i].sticky = 'left'
       }
     }
 
     return temp
-  }, [viewport, experiment])
-  const defaultColumn = useMemo(
-    () => ({ minWidth: 60, width: 160, maxWidth: 250 }),
-    []
-  )
+  }, [isImmutable, viewport])
+  const totalColumns =
+    tableData && sampleMetadataFields ? columns.length - 2 : 0 // excludes add/remove and hidden cells
 
-  // TEMPORARY (* for UI demo)
   useEffect(() => {
-    setLoading(true)
-    // TODO: create helpers for building a url query string
-    const url = `v1/samples/experiment_accession_code=${accessionCode}&offset=${
-      page * pageSize
-    }&limit=${pageSize}`
-    // eslint-disable-next-line no-console
-    console.log(url)
-    getSamplesTableData(accessionCode, pageSize, pageSizes, setTableData)
-    setLoading(false)
-  }, [globalFilter, page, pageSize])
+    getSamplesTableData()
+  }, [])
 
   return (
-    <Box
-      elevation="medium"
-      pad={setResponsive('medium', 'large')}
-      margin={{ bottom: 'basex6' }}
-    >
-      <Row margin={{ bottom: 'medium' }}>
-        <Column>
-          <Heading
-            level={2}
-            size="h2_small"
-            margin={{ bottom: setResponsive('small', 'none') }}
-          >
-            Samples
-          </Heading>
-        </Column>
-        <Column>
-          <SamplesTableCTA />
-        </Column>
-      </Row>
+    <>
       {tableExpanded && <Overlay duration={0} toggle={tableExpanded} />}
       <Box
         animation={tableExpanded ? { type: 'zoomIn', duration: 250 } : {}}
         background="white"
+        height={tableExpanded ? '100vh' : '100%'}
+        width={tableExpanded ? '100vw' : '100%'}
         style={{
-          width: tableExpanded ? '100vw' : '100%',
-          height: tableExpanded ? '100vh' : '100%',
           position: tableExpanded ? 'fixed' : 'relative',
           top: 0,
           left: 0,
-          zIndex: tableExpanded ? 5 : 'inherit'
+          zIndex: tableExpanded ? 10 : 'inherit'
         }}
       >
         <Row
@@ -166,11 +167,10 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
             margin={{ bottom: setResponsive('medium', 'none') }}
           >
             <PageSizes
-              pageSizeLabel="Total Samples"
-              pageSize={pageSize}
+              pageSize={samplesTable.pageSize}
               pageSizes={pageSizes}
-              totalPages={samples.count}
-              setPageSize={setPageSize}
+              totalPages={totalPages}
+              setPageSize={updatePageSize}
             />
             <Box
               margin={{
@@ -178,89 +178,142 @@ export const SamplesTable = ({ accessionCode, experiment, samples }) => {
                 top: setResponsive('small', 'xsmall', 'none')
               }}
             >
-              <CheckBox label="Show only samples in current dataset" />
+              <CheckBox
+                disabled={!hasSamplesInDataset} // TEMP
+                label="Show only samples in current dataset"
+              />
             </Box>
           </Box>
           <Box direction="row">
-            <GlobalFilter
-              globalFilter={globalFilter}
-              setGlobalFilter={setGlobalFilter}
-            />
-            {viewport === 'large' && totalColumns > minColumns && (
-              <ExpandTableButton
-                tableExpanded={tableExpanded}
-                setTableExpanded={setTableExpanded}
-              />
-            )}
-          </Box>
-        </Row>
-        <Box
-          height={tableExpanded ? tableHeight.expanded : tableHeight.default}
-          style={{ position: 'relative' }}
-        >
-          {loading ? (
-            <Box align="center" fill justify="center">
-              <Spinner
-                color="gray-shade-70"
-                message={{ start: 'Loading data', end: 'Data loaded' }}
+            <Box
+              direction="row"
+              justify="start"
+              align={setResponsive('start', 'center')}
+            >
+              <FilterTextInput
+                filter={samplesTable.filterBy}
+                setFilter={updateFilterBy}
+                placeholder="Filter samples"
               />
             </Box>
-          ) : (
-            <TextHighlightContextProvider match={globalFilter}>
-              <DataTable
-                columns={columns}
-                data={data}
-                defaultColumn={defaultColumn}
-                hiddenColumns={columns
-                  .filter((column) => column.isVisible === false)
-                  .map((column) => column.accessor)}
-                loading={loading}
-                manualPagination
-                tableDefaultHeight={tableHeight.default}
-                tableExpandedHeight={tableHeight.expanded}
-                tableExpanded={tableExpanded}
+            {!modalView &&
+              viewport === 'large' &&
+              totalColumns > minColumns && (
+                <ExpandTableButton
+                  tableExpanded={tableExpanded}
+                  setTableExpanded={setTableExpanded}
+                />
+              )}
+          </Box>
+        </Row>
+        <BoxBlock>
+          <TextHighlightContextProvider match={samplesTable.filterBy}>
+            <DataTable
+              columns={columns}
+              data={data || []}
+              defaultColumn={defaultColumn}
+              hasTableData={hasSamples}
+              hiddenColumns={columns
+                .filter((column) => column.isVisible === false)
+                .map((column) => column.accessor)}
+              loading={loading}
+              manualPagination
+              tableHeight={tableHeight}
+              tableExpanded={tableExpanded}
+              updateSortBy={updateSortBy}
+            />
+            {!hasSamples && samplesTable.filterBy && (
+              <SamplesTableEmpty>
+                <TextNull
+                  text={
+                    <>
+                      No rows found matching
+                      <Text
+                        color="black"
+                        style={{ fontStyle: 'normal' }}
+                        margin={{ left: 'xsmall' }}
+                      >
+                        <strong>"{samplesTable.filterBy}"</strong>
+                      </Text>
+                    </>
+                  }
+                />
+              </SamplesTableEmpty>
+            )}
+          </TextHighlightContextProvider>
+          {loading ? (
+            <SamplesTableEmpty background="rgbaLight7">
+              <Spinner
+                color="gray-shade-70"
+                message={{
+                  start: 'Loading data',
+                  end: 'Data loaded'
+                }}
               />
-            </TextHighlightContextProvider>
+            </SamplesTableEmpty>
+          ) : (
+            hasError && (
+              <SamplesTableEmpty background="rgbaLight7">
+                <Box direction="row" gap="xxsmall">
+                  <Text color="error">
+                    Temporarily under heavy traffic load. Please
+                  </Text>
+                  <Button
+                    label="try again"
+                    link
+                    linkColor="error"
+                    linkFontSize="medium"
+                    onClick={getSamplesTableData}
+                    className="color-error"
+                  />
+                  <Text color="error">later.</Text>
+                </Box>
+              </SamplesTableEmpty>
+            )
           )}
-        </Box>
-        <Box
-          direction={setResponsive('column', 'row')}
-          justify="start"
-          margin={{ top: 'small' }}
-        >
-          <InlineMessage
-            color="info"
-            fontSize="medium"
-            margin={{
-              left: tableExpanded ? 'basex6' : 'none',
-              right: 'xsmall',
-              bottom: setResponsive('xsmall', 'none')
-            }}
-            label="Some fields may be harmonized."
-            name="Info"
-          />
-          <Anchor
-            href={links.refinebio_docs_harmonized_metadata}
-            label="Learn More"
-            rel="noopener noreferrer"
-            target="_blank"
-          />
-        </Box>
-        <Box
-          align="center"
-          direction="row"
-          justify="center"
-          margin={{ top: 'medium' }}
-        >
-          <Pagination
-            page={page}
-            pageSize={pageSize}
-            setPage={setPage}
-            totalPages={samples.count}
-          />
-        </Box>
+        </BoxBlock>
+        {hasSamples && (
+          <Box>
+            <Box
+              direction={setResponsive('column', 'row')}
+              justify="start"
+              margin={{ top: 'small' }}
+            >
+              <InlineMessage
+                color="info"
+                fontSize="medium"
+                margin={{
+                  left: tableExpanded ? 'basex6' : 'none',
+                  right: 'xsmall',
+                  bottom: setResponsive('xsmall', 'none')
+                }}
+                label="Some fields may be harmonized."
+                name="Info"
+              />
+              <Anchor
+                href={links.refinebio_docs_harmonized_metadata}
+                label="Learn More"
+                rel="noopener noreferrer"
+              />
+            </Box>
+            <Box
+              align="center"
+              direction="row"
+              justify="center"
+              margin={{ top: 'medium' }}
+            >
+              <Pagination
+                page={samplesTable.page}
+                pageSize={samplesTable.pageSize}
+                reset={samplesTable.reset}
+                totalPages={totalPages}
+                setPage={updatePage}
+              />
+            </Box>
+          </Box>
+        )}
       </Box>
-    </Box>
+    </>
   )
 }
 

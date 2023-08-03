@@ -1,24 +1,15 @@
 import { useState } from 'react'
-import { useResponsive } from 'hooks/useResponsive'
-import { getHumanReadable } from 'helpers/getHumanReadable'
 import { Box, Select, Text } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { Icon } from 'components/shared/Icon'
-import { links } from 'config'
+import { links, options } from 'config'
 
 export const AggregateOptions = () => {
   const { setResponsive } = useResponsive()
-  const aggretateOptionValues = {
-    EXPERIMENT: 'Experiment',
-    SPECIES: 'Species'
-  }
-  const aggirateOptions = Object.keys(aggretateOptionValues).map((option) =>
-    getHumanReadable(option, aggretateOptionValues)
+  const [aggregateOption, setAggregateOption] = useState(
+    options.aggregation[0].value
   )
-  const [selectedAggregate, setSelectedAggregate] = useState(aggirateOptions[0])
-
-  // NOTE: when calling API, use helpers/getAPIReadable to get the API value
-  // e.g.) getAPIReadable(selectedSortByOption, aggretateOptionValues)
 
   return (
     <>
@@ -38,17 +29,14 @@ export const AggregateOptions = () => {
           </Anchor>
         </Text>
       </Box>
-      <Box
-        margin={{
-          top: setResponsive('xsmall', 'none'),
-          left: setResponsive('none', 'xsmall')
-        }}
-        width="140px"
-      >
+      <Box margin={{ top: setResponsive('xsmall', 'none') }} width="150px">
         <Select
-          options={aggirateOptions}
-          value={selectedAggregate}
-          onChange={({ option }) => setSelectedAggregate(option)}
+          options={Object.values(options.aggregation)}
+          labelKey="label"
+          value={aggregateOption}
+          valueKey={{ key: 'value', reduce: true }}
+          margin={{ horizontal: 'xxsmall' }}
+          onChange={({ value: nextValue }) => setAggregateOption(nextValue)}
         />
       </Box>
     </>

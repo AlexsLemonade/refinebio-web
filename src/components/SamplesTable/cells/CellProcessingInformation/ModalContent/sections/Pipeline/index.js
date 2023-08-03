@@ -1,6 +1,6 @@
-import { formatPipelinesText } from 'helpers/dataset'
-import { isLastIndex } from 'helpers/isLastIndex'
 import { Box, Heading, Paragraph } from 'grommet'
+import { formatPipelinesText } from 'helpers/dataset'
+import isLastIndex from 'helpers/isLastIndex'
 import { Anchor } from 'components/shared/Anchor'
 import { links } from 'config'
 import { PipelineSteps } from './PipelineSteps'
@@ -45,7 +45,7 @@ export const Pipeline = ({
   return (
     <>
       <Box margin={{ bottom: 'medium' }}>
-        <Heading level={2} size="h2_xsmall">
+        <Heading level={2} size="small">
           {formatPipelinesText(pipelinesText)}
         </Heading>
         <PipelineSteps results={results} />
