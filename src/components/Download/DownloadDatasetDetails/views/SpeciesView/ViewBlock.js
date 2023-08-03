@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from 'react'
+import { Box, Heading, Text } from 'grommet'
 import { useDataset } from 'hooks/useDataset'
 import { useResponsive } from 'hooks/useResponsive'
-import { formatNumbers } from 'helpers/formatNumbers'
-import { formatString } from 'helpers/formatString'
-import { Box, Heading, Text } from 'grommet'
+import formatNumbers from 'helpers/formatNumbers'
+import formatString from 'helpers/formatString'
 import { Button } from 'components/shared/Button'
 import { Pill } from 'components/shared/Pill'
 import { Row } from 'components/shared/Row'
@@ -11,6 +11,7 @@ import { TextCapitalized } from 'components/shared/TextCapitalized'
 import { ViewSamplesButton } from '../ViewSamplesButton'
 
 export const ViewBlock = ({
+  datasetId,
   specieName,
   samplesInSpecie,
   hasRnaSeqExperiments,
@@ -21,6 +22,7 @@ export const ViewBlock = ({
 }) => {
   const { removeSamples } = useDataset()
   const { setResponsive } = useResponsive()
+  const totalSamples = formatNumbers(samplesInSpecie.length)
 
   /* === TEMPORARY for Demo : START === */
   // This will be replaced and handled with API calls
@@ -56,12 +58,16 @@ export const ViewBlock = ({
       <Row margin={{ top: 'small' }}>
         <Box>
           <Text margin={{ bottom: 'small' }}>
-            {formatNumbers(samplesInSpecie.length)}{' '}
-            {samplesInSpecie.length > 1 ? 'Samples' : 'Sample'}
+            {totalSamples} {samplesInSpecie.length > 1 ? 'Samples' : 'Sample'}
           </Text>
           <ViewSamplesButton
-            id={specieName}
+            dataset={specieDatasetSlice}
+            params={{
+              dataset_id: datasetId,
+              organism__name: specieName
+            }}
             sampleMetadataFields={sampleMetadataFields}
+            isImmutable={isImmutable}
           />
         </Box>
         {!isImmutable && (

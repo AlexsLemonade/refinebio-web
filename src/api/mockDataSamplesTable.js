@@ -1,3 +1,5 @@
+// https://api.refine.bio/v1/samples/?experiment_accession_code=accessionCode
+
 export default [
   [
     // pageSize 10
@@ -34932,6 +34934,15692 @@ export default [
           contributed_metadata: {},
           contributed_keywords: {},
           experiment_accession_codes: ['SRP066613']
+        }
+      ]
+    }
+  ],
+  [
+    {
+      count: 2822,
+      next: 'http://api.refine.bio/v1/samples/?experiment_accession_code=ERP006132&limit=10&offset=10',
+      previous: null,
+      results: [
+        {
+          id: 5681,
+          title: 'Danio rerio',
+          accession_code: 'ERR657520',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 10812,
+              processor: {
+                id: 10,
+                name: 'Salmon Quant',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 10814,
+              processor: {
+                id: 11,
+                name: 'MultiQC',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:40.827343Z',
+          last_modified: '2019-02-13T05:20:09.309276Z',
+          original_files: [6614],
+          computed_files: [13487, 1076690, 1079515],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5809,
+          title: 'Danio rerio',
+          accession_code: 'ERR657522',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 47803,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 47809,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:44.520005Z',
+          last_modified: '2019-02-13T05:20:09.296100Z',
+          original_files: [6742],
+          computed_files: [61103, 1076690, 1079513],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5595,
+          title: 'Danio rerio',
+          accession_code: 'ERR657519',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 33067,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 33092,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:38.879278Z',
+          last_modified: '2019-02-13T05:20:09.315939Z',
+          original_files: [6524],
+          computed_files: [41919, 1076690, 1079516],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5868,
+          title: 'Danio rerio',
+          accession_code: 'ERR657523',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 32188,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 32220,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:46.339153Z',
+          last_modified: '2019-02-13T05:20:09.288725Z',
+          original_files: [6801],
+          computed_files: [40741, 1076690, 1079512],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5511,
+          title: 'Danio rerio',
+          accession_code: 'ERR657518',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 3549,
+              processor: {
+                id: 3,
+                name: 'Salmon Quant',
+                version: 'v1.0.1',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.1'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 3602,
+              processor: {
+                id: 4,
+                name: 'Salmontools',
+                version: 'v1.0.1',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    'g++': '4:5.3.1-1ubuntu1',
+                    cmake: '3.5.1-1ubuntu3',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.1'
+                  },
+                  cmd_line: {
+                    'salmontools --version': 'Salmon Tools 0.1.0'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 3603,
+              processor: {
+                id: 5,
+                name: 'MultiQC',
+                version: 'v1.0.1',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.1'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:36.981417Z',
+          last_modified: '2019-02-13T05:20:09.326800Z',
+          original_files: [6435],
+          computed_files: [4227, 4228, 1076690, 1079517],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5926,
+          title: 'Danio rerio',
+          accession_code: 'ERR657524',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 26349,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 184347,
+              processor: {
+                id: 34,
+                name: 'Salmon Quant',
+                version: 'v1.2.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.2.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 184360,
+              processor: {
+                id: 35,
+                name: 'MultiQC',
+                version: 'v1.2.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    multiqc: '1.6',
+                    'data-refinery-common': '1.2.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:48.112651Z',
+          last_modified: '2019-02-13T05:20:09.281926Z',
+          original_files: [6859],
+          computed_files: [32711, 230751, 1076690, 1079511],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5985,
+          title: 'Danio rerio',
+          accession_code: 'ERR657525',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 34342,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 34353,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:50.087543Z',
+          last_modified: '2019-02-13T05:20:09.275051Z',
+          original_files: [6918],
+          computed_files: [43612, 1076690, 1079510],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6246,
+          title: 'Danio rerio',
+          accession_code: 'ERR657530',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 28546,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 28570,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:59.417451Z',
+          last_modified: '2019-02-13T05:20:09.240117Z',
+          original_files: [7179],
+          computed_files: [35756, 1076690, 1079505],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6511,
+          title: 'Danio rerio',
+          accession_code: 'ERR657533',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 35081,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 35106,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:34:05.000826Z',
+          last_modified: '2019-02-13T05:20:09.215618Z',
+          original_files: [7469],
+          computed_files: [44563, 1076690, 1079502],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5743,
+          title: 'Danio rerio',
+          accession_code: 'ERR657521',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 330257,
+              processor: {
+                id: 45,
+                name: 'Salmon Quant',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 330271,
+              processor: {
+                id: 46,
+                name: 'MultiQC',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    multiqc: '1.6',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:42.651300Z',
+          last_modified: '2019-02-13T05:20:09.302717Z',
+          original_files: [6676],
+          computed_files: [399915, 1076690, 1079514],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        }
+      ]
+    },
+    {
+      count: 2822,
+      next: 'http://api.refine.bio/v1/samples/?experiment_accession_code=ERP006132&limit=20&offset=20',
+      previous: null,
+      results: [
+        {
+          id: 5681,
+          title: 'Danio rerio',
+          accession_code: 'ERR657520',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 10812,
+              processor: {
+                id: 10,
+                name: 'Salmon Quant',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 10814,
+              processor: {
+                id: 11,
+                name: 'MultiQC',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:40.827343Z',
+          last_modified: '2019-02-13T05:20:09.309276Z',
+          original_files: [6614],
+          computed_files: [13487, 1076690, 1079515],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5809,
+          title: 'Danio rerio',
+          accession_code: 'ERR657522',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 47803,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 47809,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:44.520005Z',
+          last_modified: '2019-02-13T05:20:09.296100Z',
+          original_files: [6742],
+          computed_files: [61103, 1076690, 1079513],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5595,
+          title: 'Danio rerio',
+          accession_code: 'ERR657519',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 33067,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 33092,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:38.879278Z',
+          last_modified: '2019-02-13T05:20:09.315939Z',
+          original_files: [6524],
+          computed_files: [41919, 1076690, 1079516],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5868,
+          title: 'Danio rerio',
+          accession_code: 'ERR657523',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 32188,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 32220,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:46.339153Z',
+          last_modified: '2019-02-13T05:20:09.288725Z',
+          original_files: [6801],
+          computed_files: [40741, 1076690, 1079512],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5511,
+          title: 'Danio rerio',
+          accession_code: 'ERR657518',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 3549,
+              processor: {
+                id: 3,
+                name: 'Salmon Quant',
+                version: 'v1.0.1',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.1'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 3602,
+              processor: {
+                id: 4,
+                name: 'Salmontools',
+                version: 'v1.0.1',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    'g++': '4:5.3.1-1ubuntu1',
+                    cmake: '3.5.1-1ubuntu3',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.1'
+                  },
+                  cmd_line: {
+                    'salmontools --version': 'Salmon Tools 0.1.0'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 3603,
+              processor: {
+                id: 5,
+                name: 'MultiQC',
+                version: 'v1.0.1',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.1'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:36.981417Z',
+          last_modified: '2019-02-13T05:20:09.326800Z',
+          original_files: [6435],
+          computed_files: [4227, 4228, 1076690, 1079517],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5926,
+          title: 'Danio rerio',
+          accession_code: 'ERR657524',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 26349,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 184347,
+              processor: {
+                id: 34,
+                name: 'Salmon Quant',
+                version: 'v1.2.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.2.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 184360,
+              processor: {
+                id: 35,
+                name: 'MultiQC',
+                version: 'v1.2.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    multiqc: '1.6',
+                    'data-refinery-common': '1.2.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:48.112651Z',
+          last_modified: '2019-02-13T05:20:09.281926Z',
+          original_files: [6859],
+          computed_files: [32711, 230751, 1076690, 1079511],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5985,
+          title: 'Danio rerio',
+          accession_code: 'ERR657525',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 34342,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 34353,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:50.087543Z',
+          last_modified: '2019-02-13T05:20:09.275051Z',
+          original_files: [6918],
+          computed_files: [43612, 1076690, 1079510],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6246,
+          title: 'Danio rerio',
+          accession_code: 'ERR657530',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 28546,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 28570,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:59.417451Z',
+          last_modified: '2019-02-13T05:20:09.240117Z',
+          original_files: [7179],
+          computed_files: [35756, 1076690, 1079505],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6511,
+          title: 'Danio rerio',
+          accession_code: 'ERR657533',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 35081,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 35106,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:34:05.000826Z',
+          last_modified: '2019-02-13T05:20:09.215618Z',
+          original_files: [7469],
+          computed_files: [44563, 1076690, 1079502],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6613,
+          title: 'Danio rerio',
+          accession_code: 'ERR657535',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 61901,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 61909,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:34:08.601281Z',
+          last_modified: '2019-02-13T05:20:09.201281Z',
+          original_files: [7574],
+          computed_files: [79176, 1076690, 1079500],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6301,
+          title: 'Danio rerio',
+          accession_code: 'ERR657531',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 26860,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 26897,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:34:01.262915Z',
+          last_modified: '2019-02-13T05:20:09.233096Z',
+          original_files: [7234],
+          computed_files: [33465, 1076690, 1079504],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6040,
+          title: 'Danio rerio',
+          accession_code: 'ERR657526',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 61849,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 61853,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:52.147203Z',
+          last_modified: '2019-02-13T05:20:09.268193Z',
+          original_files: [6973],
+          computed_files: [79100, 1076690, 1079509],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6093,
+          title: 'Danio rerio',
+          accession_code: 'ERR657527',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 24981,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 25011,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:53.928655Z',
+          last_modified: '2019-02-13T05:20:09.261310Z',
+          original_files: [7026],
+          computed_files: [30954, 1076690, 1079508],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6146,
+          title: 'Danio rerio',
+          accession_code: 'ERR657528',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 42062,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 42299,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 294115,
+              processor: {
+                id: 45,
+                name: 'Salmon Quant',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 294124,
+              processor: {
+                id: 46,
+                name: 'MultiQC',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    multiqc: '1.6',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:55.736033Z',
+          last_modified: '2019-02-13T05:20:09.254248Z',
+          original_files: [7079],
+          computed_files: [53676, 54005, 361199, 1076690, 1079507],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6198,
+          title: 'Danio rerio',
+          accession_code: 'ERR657529',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 61639,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 61644,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:57.581382Z',
+          last_modified: '2019-02-13T05:20:09.247055Z',
+          original_files: [7131],
+          computed_files: [78834, 1076690, 1079506],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6427,
+          title: 'Danio rerio',
+          accession_code: 'ERR657532',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 61641,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 61645,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:34:03.114941Z',
+          last_modified: '2019-02-13T05:20:09.225386Z',
+          original_files: [7385],
+          computed_files: [78836, 1076690, 1079503],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6563,
+          title: 'Danio rerio',
+          accession_code: 'ERR657534',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 33152,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 33175,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:34:06.743054Z',
+          last_modified: '2019-02-13T05:20:09.208168Z',
+          original_files: [7523],
+          computed_files: [42039, 1076690, 1079501],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8679,
+          title: 'Danio rerio',
+          accession_code: 'ERR657536',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 39217,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 39228,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:17.778515Z',
+          last_modified: '2019-02-13T05:20:09.194591Z',
+          original_files: [9770],
+          computed_files: [50008, 1076690, 1079499],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8700,
+          title: 'Danio rerio',
+          accession_code: 'ERR657537',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 94821,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 94830,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:19.528444Z',
+          last_modified: '2019-02-13T05:20:09.187792Z',
+          original_files: [9791],
+          computed_files: [121888, 1076690, 1079498],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5743,
+          title: 'Danio rerio',
+          accession_code: 'ERR657521',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 330257,
+              processor: {
+                id: 45,
+                name: 'Salmon Quant',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 330271,
+              processor: {
+                id: 46,
+                name: 'MultiQC',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    multiqc: '1.6',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:42.651300Z',
+          last_modified: '2019-02-13T05:20:09.302717Z',
+          original_files: [6676],
+          computed_files: [399915, 1076690, 1079514],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        }
+      ]
+    },
+    {
+      count: 2822,
+      next: 'http://api.refine.bio/v1/samples/?experiment_accession_code=ERP006132&limit=50&offset=50',
+      previous: null,
+      results: [
+        {
+          id: 5681,
+          title: 'Danio rerio',
+          accession_code: 'ERR657520',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 10812,
+              processor: {
+                id: 10,
+                name: 'Salmon Quant',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 10814,
+              processor: {
+                id: 11,
+                name: 'MultiQC',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:40.827343Z',
+          last_modified: '2019-02-13T05:20:09.309276Z',
+          original_files: [6614],
+          computed_files: [13487, 1076690, 1079515],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5809,
+          title: 'Danio rerio',
+          accession_code: 'ERR657522',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 47803,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 47809,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:44.520005Z',
+          last_modified: '2019-02-13T05:20:09.296100Z',
+          original_files: [6742],
+          computed_files: [61103, 1076690, 1079513],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5595,
+          title: 'Danio rerio',
+          accession_code: 'ERR657519',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 33067,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 33092,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:38.879278Z',
+          last_modified: '2019-02-13T05:20:09.315939Z',
+          original_files: [6524],
+          computed_files: [41919, 1076690, 1079516],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5868,
+          title: 'Danio rerio',
+          accession_code: 'ERR657523',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 32188,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 32220,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:46.339153Z',
+          last_modified: '2019-02-13T05:20:09.288725Z',
+          original_files: [6801],
+          computed_files: [40741, 1076690, 1079512],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5511,
+          title: 'Danio rerio',
+          accession_code: 'ERR657518',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 3549,
+              processor: {
+                id: 3,
+                name: 'Salmon Quant',
+                version: 'v1.0.1',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.1'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 3602,
+              processor: {
+                id: 4,
+                name: 'Salmontools',
+                version: 'v1.0.1',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    'g++': '4:5.3.1-1ubuntu1',
+                    cmake: '3.5.1-1ubuntu3',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.1'
+                  },
+                  cmd_line: {
+                    'salmontools --version': 'Salmon Tools 0.1.0'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 3603,
+              processor: {
+                id: 5,
+                name: 'MultiQC',
+                version: 'v1.0.1',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.1'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:36.981417Z',
+          last_modified: '2019-02-13T05:20:09.326800Z',
+          original_files: [6435],
+          computed_files: [4227, 4228, 1076690, 1079517],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5926,
+          title: 'Danio rerio',
+          accession_code: 'ERR657524',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 26349,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 184347,
+              processor: {
+                id: 34,
+                name: 'Salmon Quant',
+                version: 'v1.2.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.2.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 184360,
+              processor: {
+                id: 35,
+                name: 'MultiQC',
+                version: 'v1.2.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    multiqc: '1.6',
+                    'data-refinery-common': '1.2.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:48.112651Z',
+          last_modified: '2019-02-13T05:20:09.281926Z',
+          original_files: [6859],
+          computed_files: [32711, 230751, 1076690, 1079511],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5985,
+          title: 'Danio rerio',
+          accession_code: 'ERR657525',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 34342,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 34353,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:50.087543Z',
+          last_modified: '2019-02-13T05:20:09.275051Z',
+          original_files: [6918],
+          computed_files: [43612, 1076690, 1079510],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6246,
+          title: 'Danio rerio',
+          accession_code: 'ERR657530',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 28546,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 28570,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:59.417451Z',
+          last_modified: '2019-02-13T05:20:09.240117Z',
+          original_files: [7179],
+          computed_files: [35756, 1076690, 1079505],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6511,
+          title: 'Danio rerio',
+          accession_code: 'ERR657533',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 35081,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 35106,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:34:05.000826Z',
+          last_modified: '2019-02-13T05:20:09.215618Z',
+          original_files: [7469],
+          computed_files: [44563, 1076690, 1079502],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6613,
+          title: 'Danio rerio',
+          accession_code: 'ERR657535',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 61901,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 61909,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:34:08.601281Z',
+          last_modified: '2019-02-13T05:20:09.201281Z',
+          original_files: [7574],
+          computed_files: [79176, 1076690, 1079500],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6301,
+          title: 'Danio rerio',
+          accession_code: 'ERR657531',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 26860,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 26897,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:34:01.262915Z',
+          last_modified: '2019-02-13T05:20:09.233096Z',
+          original_files: [7234],
+          computed_files: [33465, 1076690, 1079504],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6040,
+          title: 'Danio rerio',
+          accession_code: 'ERR657526',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 61849,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 61853,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:52.147203Z',
+          last_modified: '2019-02-13T05:20:09.268193Z',
+          original_files: [6973],
+          computed_files: [79100, 1076690, 1079509],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6093,
+          title: 'Danio rerio',
+          accession_code: 'ERR657527',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 24981,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 25011,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:53.928655Z',
+          last_modified: '2019-02-13T05:20:09.261310Z',
+          original_files: [7026],
+          computed_files: [30954, 1076690, 1079508],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6146,
+          title: 'Danio rerio',
+          accession_code: 'ERR657528',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 42062,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 42299,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 294115,
+              processor: {
+                id: 45,
+                name: 'Salmon Quant',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 294124,
+              processor: {
+                id: 46,
+                name: 'MultiQC',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    multiqc: '1.6',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:55.736033Z',
+          last_modified: '2019-02-13T05:20:09.254248Z',
+          original_files: [7079],
+          computed_files: [53676, 54005, 361199, 1076690, 1079507],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6198,
+          title: 'Danio rerio',
+          accession_code: 'ERR657529',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 61639,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 61644,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:57.581382Z',
+          last_modified: '2019-02-13T05:20:09.247055Z',
+          original_files: [7131],
+          computed_files: [78834, 1076690, 1079506],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6427,
+          title: 'Danio rerio',
+          accession_code: 'ERR657532',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 61641,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 61645,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:34:03.114941Z',
+          last_modified: '2019-02-13T05:20:09.225386Z',
+          original_files: [7385],
+          computed_files: [78836, 1076690, 1079503],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 6563,
+          title: 'Danio rerio',
+          accession_code: 'ERR657534',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 33152,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 33175,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:34:06.743054Z',
+          last_modified: '2019-02-13T05:20:09.208168Z',
+          original_files: [7523],
+          computed_files: [42039, 1076690, 1079501],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8679,
+          title: 'Danio rerio',
+          accession_code: 'ERR657536',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 39217,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 39228,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:17.778515Z',
+          last_modified: '2019-02-13T05:20:09.194591Z',
+          original_files: [9770],
+          computed_files: [50008, 1076690, 1079499],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8700,
+          title: 'Danio rerio',
+          accession_code: 'ERR657537',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 94821,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 94830,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:19.528444Z',
+          last_modified: '2019-02-13T05:20:09.187792Z',
+          original_files: [9791],
+          computed_files: [121888, 1076690, 1079498],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8722,
+          title: 'Danio rerio',
+          accession_code: 'ERR657538',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 94907,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 280254,
+              processor: {
+                id: 45,
+                name: 'Salmon Quant',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 280271,
+              processor: {
+                id: 46,
+                name: 'MultiQC',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    multiqc: '1.6',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:21.276357Z',
+          last_modified: '2019-02-13T05:20:09.181004Z',
+          original_files: [9813],
+          computed_files: [121981, 345212, 1076690, 1079497],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8743,
+          title: 'Danio rerio',
+          accession_code: 'ERR657539',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 92419,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 92460,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:22.996742Z',
+          last_modified: '2019-02-13T05:20:09.174220Z',
+          original_files: [9834],
+          computed_files: [118542, 1076690, 1079496],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8765,
+          title: 'Danio rerio',
+          accession_code: 'ERR657540',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 95021,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 95035,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:24.733976Z',
+          last_modified: '2019-02-13T05:20:09.167209Z',
+          original_files: [9856],
+          computed_files: [122131, 1076690, 1079495],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8806,
+          title: 'Danio rerio',
+          accession_code: 'ERR657542',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 93496,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 93535,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:28.212767Z',
+          last_modified: '2019-02-13T05:20:09.150852Z',
+          original_files: [9898],
+          computed_files: [120038, 1076690, 1079493],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 9157,
+          title: 'Danio rerio',
+          accession_code: 'ERR659764',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 7827,
+              processor: {
+                id: 10,
+                name: 'Salmon Quant',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 7855,
+              processor: {
+                id: 11,
+                name: 'MultiQC',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:58.137809Z',
+          last_modified: '2019-02-13T05:20:09.035564Z',
+          original_files: [10258],
+          computed_files: [9492, 1076690, 1079476],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 9175,
+          title: 'Danio rerio',
+          accession_code: 'ERR659765',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 181025,
+              processor: {
+                id: 35,
+                name: 'MultiQC',
+                version: 'v1.2.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    multiqc: '1.6',
+                    'data-refinery-common': '1.2.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 293764,
+              processor: {
+                id: 45,
+                name: 'Salmon Quant',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 293778,
+              processor: {
+                id: 46,
+                name: 'MultiQC',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    multiqc: '1.6',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:59.893173Z',
+          last_modified: '2019-02-13T05:20:09.029224Z',
+          original_files: [10276],
+          computed_files: [227595, 360793, 1076690, 1079475],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 9213,
+          title: 'Danio rerio',
+          accession_code: 'ERR659767',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 7668,
+              processor: {
+                id: 10,
+                name: 'Salmon Quant',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 7695,
+              processor: {
+                id: 11,
+                name: 'MultiQC',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:37:03.541419Z',
+          last_modified: '2019-02-13T05:20:09.016352Z',
+          original_files: [10314],
+          computed_files: [9237, 1076690, 1079473],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 9310,
+          title: 'Danio rerio',
+          accession_code: 'ERR659773',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 33916,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 33935,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:37:13.963579Z',
+          last_modified: '2019-02-13T05:20:08.969819Z',
+          original_files: [10414],
+          computed_files: [43062, 1076690, 1079467],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8886,
+          title: 'Danio rerio',
+          accession_code: 'ERR657546',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 14157,
+              processor: {
+                id: 10,
+                name: 'Salmon Quant',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 14158,
+              processor: {
+                id: 11,
+                name: 'MultiQC',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:35.349074Z',
+          last_modified: '2019-02-13T05:20:09.122017Z',
+          original_files: [9980],
+          computed_files: [17803, 1076690, 1079489],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8907,
+          title: 'Danio rerio',
+          accession_code: 'ERR657547',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 92616,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 92651,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:37.126908Z',
+          last_modified: '2019-02-13T05:20:09.115570Z',
+          original_files: [10000],
+          computed_files: [118782, 1076690, 1079488],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8991,
+          title: 'Danio rerio',
+          accession_code: 'ERR657551',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 41600,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 41612,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:44.242461Z',
+          last_modified: '2019-02-13T05:20:09.088561Z',
+          original_files: [10085],
+          computed_files: [53099, 1076690, 1079484],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 9032,
+          title: 'Danio rerio',
+          accession_code: 'ERR657553',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 30903,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 30918,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:47.690288Z',
+          last_modified: '2019-02-13T05:20:09.075087Z',
+          original_files: [10126],
+          computed_files: [38965, 1076690, 1079482],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 9053,
+          title: 'Danio rerio',
+          accession_code: 'ERR657554',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 8523,
+              processor: {
+                id: 10,
+                name: 'Salmon Quant',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 8538,
+              processor: {
+                id: 11,
+                name: 'MultiQC',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:49.450372Z',
+          last_modified: '2019-02-13T05:20:09.068555Z',
+          original_files: [10147],
+          computed_files: [10479, 1076690, 1079481],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 9073,
+          title: 'Danio rerio',
+          accession_code: 'ERR657555',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 72065,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 72067,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:51.120046Z',
+          last_modified: '2019-02-13T05:20:09.062066Z',
+          original_files: [10167],
+          computed_files: [92380, 1076690, 1079480],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8786,
+          title: 'Danio rerio',
+          accession_code: 'ERR657541',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 94806,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 94817,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:26.479959Z',
+          last_modified: '2019-02-13T05:20:09.159133Z',
+          original_files: [9877],
+          computed_files: [121868, 1076690, 1079494],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8826,
+          title: 'Danio rerio',
+          accession_code: 'ERR657543',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 70447,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 70449,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:29.957736Z',
+          last_modified: '2019-02-13T05:20:09.142578Z',
+          original_files: [9919],
+          computed_files: [90256, 1076690, 1079492],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8846,
+          title: 'Danio rerio',
+          accession_code: 'ERR657544',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 190220,
+              processor: {
+                id: 40,
+                name: 'Salmon Quant',
+                version: 'v1.2.1',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.2.1'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 190478,
+              processor: {
+                id: 41,
+                name: 'MultiQC',
+                version: 'v1.2.1',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    multiqc: '1.6',
+                    'data-refinery-common': '1.2.1'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:31.716847Z',
+          last_modified: '2019-02-13T05:20:09.135062Z',
+          original_files: [9939],
+          computed_files: [237553, 1076690, 1079491],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8865,
+          title: 'Danio rerio',
+          accession_code: 'ERR657545',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 92900,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 92927,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:33.560642Z',
+          last_modified: '2019-02-13T05:20:09.128632Z',
+          original_files: [9958],
+          computed_files: [119147, 1076690, 1079490],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 9192,
+          title: 'Danio rerio',
+          accession_code: 'ERR659766',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 235861,
+              processor: {
+                id: 46,
+                name: 'MultiQC',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    multiqc: '1.6',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 282400,
+              processor: {
+                id: 45,
+                name: 'Salmon Quant',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 282415,
+              processor: {
+                id: 46,
+                name: 'MultiQC',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    multiqc: '1.6',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:37:01.634328Z',
+          last_modified: '2019-02-13T05:20:09.022886Z',
+          original_files: [10293],
+          computed_files: [291778, 347744, 1076690, 1079474],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 9246,
+          title: 'Danio rerio',
+          accession_code: 'ERR659769',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 7797,
+              processor: {
+                id: 10,
+                name: 'Salmon Quant',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 7824,
+              processor: {
+                id: 11,
+                name: 'MultiQC',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:37:07.012803Z',
+          last_modified: '2019-02-13T05:20:09.003060Z',
+          original_files: [10350],
+          computed_files: [9442, 1076690, 1079471],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 9262,
+          title: 'Danio rerio',
+          accession_code: 'ERR659770',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 88099,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 88102,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:37:08.738887Z',
+          last_modified: '2019-02-13T05:20:08.996306Z',
+          original_files: [10366],
+          computed_files: [113223, 1076690, 1079470],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 9294,
+          title: 'Danio rerio',
+          accession_code: 'ERR659772',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 93858,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 93886,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:37:12.245851Z',
+          last_modified: '2019-02-13T05:20:08.979038Z',
+          original_files: [10398],
+          computed_files: [120543, 1076690, 1079468],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8928,
+          title: 'Danio rerio',
+          accession_code: 'ERR657548',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 31518,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 31530,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:38.920120Z',
+          last_modified: '2019-02-13T05:20:09.108800Z',
+          original_files: [10021],
+          computed_files: [39797, 1076690, 1079487],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8949,
+          title: 'Danio rerio',
+          accession_code: 'ERR657549',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 7834,
+              processor: {
+                id: 10,
+                name: 'Salmon Quant',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 7875,
+              processor: {
+                id: 11,
+                name: 'MultiQC',
+                version: 'v1.0.2',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.2'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:40.734586Z',
+          last_modified: '2019-02-13T05:20:09.102441Z',
+          original_files: [10042],
+          computed_files: [9524, 1076690, 1079486],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 8970,
+          title: 'Danio rerio',
+          accession_code: 'ERR657550',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 25283,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 25317,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:42.510444Z',
+          last_modified: '2019-02-13T05:20:09.095472Z',
+          original_files: [10064],
+          computed_files: [31344, 1076690, 1079485],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 9012,
+          title: 'Danio rerio',
+          accession_code: 'ERR657552',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 93725,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 93766,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:45.982816Z',
+          last_modified: '2019-02-13T05:20:09.081415Z',
+          original_files: [10106],
+          computed_files: [120391, 1076690, 1079483],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 9094,
+          title: 'Danio rerio',
+          accession_code: 'ERR657556',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 94951,
+              processor: {
+                id: 16,
+                name: 'Salmon Quant',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 94970,
+              processor: {
+                id: 17,
+                name: 'MultiQC',
+                version: 'v1.0.3',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.3'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:52.823823Z',
+          last_modified: '2019-02-13T05:20:09.055593Z',
+          original_files: [10189],
+          computed_files: [122064, 1076690, 1079479],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 9114,
+          title: 'Danio rerio',
+          accession_code: 'ERR657557',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 331612,
+              processor: {
+                id: 45,
+                name: 'Salmon Quant',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 331618,
+              processor: {
+                id: 46,
+                name: 'MultiQC',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    multiqc: '1.6',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:54.577247Z',
+          last_modified: '2019-02-13T05:20:09.048452Z',
+          original_files: [10215],
+          computed_files: [401402, 1076690, 1079478],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 9137,
+          title: 'Danio rerio',
+          accession_code: 'ERR657558',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 190370,
+              processor: {
+                id: 40,
+                name: 'Salmon Quant',
+                version: 'v1.2.1',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.2.1'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 190643,
+              processor: {
+                id: 41,
+                name: 'MultiQC',
+                version: 'v1.2.1',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    multiqc: '1.6',
+                    'data-refinery-common': '1.2.1'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:36:56.317171Z',
+          last_modified: '2019-02-13T05:20:09.041880Z',
+          original_files: [10237],
+          computed_files: [237852, 1076690, 1079477],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 9229,
+          title: 'Danio rerio',
+          accession_code: 'ERR659768',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 4066,
+              processor: {
+                id: 3,
+                name: 'Salmon Quant',
+                version: 'v1.0.1',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.1'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 4128,
+              processor: {
+                id: 4,
+                name: 'Salmontools',
+                version: 'v1.0.1',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    'g++': '4:5.3.1-1ubuntu1',
+                    cmake: '3.5.1-1ubuntu3',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    'data-refinery-common': '1.0.1'
+                  },
+                  cmd_line: {
+                    'salmontools --version': 'Salmon Tools 0.1.0'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 4129,
+              processor: {
+                id: 5,
+                name: 'MultiQC',
+                version: 'v1.0.1',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.0.6',
+                    multiqc: '1.5',
+                    'data-refinery-common': '1.0.1'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:37:05.241558Z',
+          last_modified: '2019-02-13T05:20:09.009809Z',
+          original_files: [10330],
+          computed_files: [4904, 4905, 1076690, 1079472],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        },
+        {
+          id: 5743,
+          title: 'Danio rerio',
+          accession_code: 'ERR657521',
+          source_database: 'SRA',
+          organism: {
+            name: 'DANIO_RERIO',
+            taxonomy_id: 7955
+          },
+          platform_accession_code: 'IlluminaHiSeq2500',
+          platform_name: 'Illumina HiSeq 2500',
+          pretty_platform: 'Illumina HiSeq 2500 (IlluminaHiSeq2500)',
+          technology: 'RNA-SEQ',
+          manufacturer: 'ILLUMINA',
+          protocol_info: [
+            {
+              Reference: 'https://www.ebi.ac.uk/ena/data/view/ERP006132',
+              Description:
+                'Illumina sequencing of library 10756881, constructed from sample accession ERS499086 for study accession ERP006132.  This is part of an Illumina multiplexed sequencing run (13467_1).  This submission includes reads tagged with the sequence TGCTGATA.'
+            }
+          ],
+          annotations: [],
+          results: [
+            {
+              id: 330257,
+              processor: {
+                id: 45,
+                name: 'Salmon Quant',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: {
+                id: 86,
+                assembly_name: 'GRCz11',
+                organism_name: 'DANIO_RERIO',
+                database_name: 'EnsemblMain',
+                release_version: '93',
+                index_type: 'TRANSCRIPTOME_SHORT',
+                salmon_version: 'salmon 0.9.1',
+                download_url:
+                  'https://s3.amazonaws.com/data-refinery-s3-transcriptome-index-circleci-prod/DANIO_RERIO_TRANSCRIPTOME_SHORT.tar.gz',
+                result_id: 85,
+                last_modified: '2018-09-27T15:28:53.184909Z'
+              }
+            },
+            {
+              id: 330271,
+              processor: {
+                id: 46,
+                name: 'MultiQC',
+                version: 'v1.3.0',
+                docker_image: 'dr_salmon',
+                environment: {
+                  os_pkg: {
+                    python3: '3.5.1-3',
+                    'default-jre': '2:1.8-56ubuntu2',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.2',
+                    multiqc: '1.6',
+                    'data-refinery-common': '1.3.0'
+                  },
+                  cmd_line: {
+                    'salmon --version': 'salmon 0.9.1',
+                    '/home/user/FastQC/fastqc --version': 'FastQC v0.11.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            },
+            {
+              id: 959822,
+              processor: {
+                id: 127,
+                name: 'Tximport',
+                version: 'v1.7.12-hotfix',
+                docker_image: 'dr_salmon',
+                environment: {
+                  R: {
+                    readr: '1.1.1',
+                    rjson: '0.2.19',
+                    tximport: '1.6.0',
+                    Bioconductor: '3.5'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    numpy: '1.15.2',
+                    Django: '2.1.5',
+                    pandas: '0.23.4',
+                    'data-refinery-common': '=v1.7.12-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-09-27T15:33:42.651300Z',
+          last_modified: '2019-02-13T05:20:09.302717Z',
+          original_files: [6676],
+          computed_files: [399915, 1076690, 1079514],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['ERP006132']
+        }
+      ]
+    }
+  ],
+  [
+    {
+      count: 2554,
+      next: 'http://api.refine.bio/v1/samples/?experiment_accession_code=GSE57542&limit=10&offset=10',
+      previous: null,
+      results: [
+        {
+          id: 2011727,
+          title: '1250V083011_dNS1_20121210_n143_01_11.RCC',
+          accession_code: 'GSM1285069',
+          source_database: 'GEO',
+          organism: {
+            name: 'HOMO_SAPIENS',
+            taxonomy_id: 9606
+          },
+          platform_accession_code: 'hugene10st',
+          platform_name: '[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array',
+          pretty_platform: 'Affymetrix Human Gene 1.0 ST Array (hugene10st)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: {
+            Reference:
+              'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1285069',
+            'Scan protocol': [
+              'Nanostring nCounter system (Nanostring; Seattle, WA) was used to digitally count transcripts in a multiplex reaction.'
+            ],
+            'Label protocol': ['none'],
+            'Data processing': [
+              'The raw data is first scaled by positive spike-ins, shifted by negative spike-ins, and a negative binomial is fit using DESeq based on the scale parameter estimated from the positive spike-ins'
+            ],
+            'Extraction protocol': [
+              'Total RNA was isolated using Qiagen RNeasy columns.'
+            ],
+            'Hybridization protocol': [
+              'Lysates in Qiagen RLT buffer were hybridized for 12-24 hours with custom nCounter Gene Expression CodeSets.'
+            ]
+          },
+          annotations: [
+            {
+              data: {
+                type: ['RNA'],
+                title: ['1250V083011_dNS1_20121210_n143_01_11.RCC'],
+                status: ['Public on Mar 01 2014'],
+                label_ch1: ['n/a'],
+                series_id: ['GSE53165', 'GSE57542'],
+                taxid_ch1: ['9606'],
+                platform_id: ['GPL18032'],
+                contact_city: ['Cambridge'],
+                contact_name: ['Nir,,Hacohen'],
+                hyb_protocol: [
+                  'Lysates in Qiagen RLT buffer were hybridized for 12-24 hours with custom nCounter Gene Expression CodeSets.'
+                ],
+                molecule_ch1: ['total RNA'],
+                organism_ch1: ['Homo sapiens'],
+                channel_count: ['1'],
+                contact_email: ['nhacohen@partners.org'],
+                contact_state: ['MA'],
+                geo_accession: ['GSM1285069'],
+                scan_protocol: [
+                  'Nanostring nCounter system (Nanostring; Seattle, WA) was used to digitally count transcripts in a multiplex reaction.'
+                ],
+                data_row_count: ['414'],
+                contact_address: ['7 Cambridge Center'],
+                contact_country: ['USA'],
+                data_processing: [
+                  'The raw data is first scaled by positive spike-ins, shifted by negative spike-ins, and a negative binomial is fit using DESeq based on the scale parameter estimated from the positive spike-ins'
+                ],
+                source_name_ch1: ['1250V083011'],
+                submission_date: ['Dec 10 2013'],
+                last_update_date: ['Mar 01 2014'],
+                contact_institute: ['Broad Institute'],
+                label_protocol_ch1: ['none'],
+                supplementary_file: [
+                  'ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM1285nnn/GSM1285069/suppl/GSM1285069_20121210_n143_01_11.RCC.gz'
+                ],
+                characteristics_ch1: [
+                  'stimulation: dNS1',
+                  'hours: 10',
+                  'plate: V2',
+                  'cartridge: n143',
+                  'lane: 11',
+                  'date of visit: 2011-08-30',
+                  'time of visit: 8:13 AM',
+                  'gender: M',
+                  'age (years): 35',
+                  'ethnicity: Caucasian',
+                  'million pbmc: 29.555588',
+                  'cd14 %: 96.4',
+                  'cd16 %: 0.2',
+                  'million dcs: 0.475',
+                  'height (cm): 180',
+                  'weight (kg): 85.65',
+                  'systolic/diastolic: 104/78',
+                  'bmi: 26.43518519'
+                ],
+                growth_protocol_ch1: [
+                  'Monocyte-derived dendritic cells from each donor were cultured for 7 days in RPMI supplemented with 10% FBS, 100 ng/mL GM-CSF and 40 ng/mL IL-4.'
+                ],
+                extract_protocol_ch1: [
+                  'Total RNA was isolated using Qiagen RNeasy columns.'
+                ],
+                treatment_protocol_ch1: [
+                  'MoDCs were stimulated with 15 ng/mL LPS for 2.5 h or 5 h, influenza virus for 10 h, 100 U/mL IFN for 6.5 h, or left unstimulated.'
+                ],
+                'contact_zip/postal_code': ['02143']
+              },
+              is_ccdl: false,
+              created_at: '2019-09-27T06:47:49.856246Z',
+              last_modified: '2019-09-27T06:47:49.856246Z'
+            }
+          ],
+          results: [
+            {
+              id: 2655522,
+              processor: {
+                id: 464,
+                name: 'Submitter-processed',
+                version: 'v1.27.16-hotfix',
+                docker_image: 'dr_no_op',
+                environment: {
+                  R: {
+                    dplyr: '0.7.8',
+                    rlang: '0.3.1',
+                    Bioconductor: '3.5',
+                    AnnotationDbi: '1.40.0',
+                    'illuminaRatv1.db': '1.26.0',
+                    'illuminaHumanv1.db': '1.26.0',
+                    'illuminaHumanv2.db': '1.26.0',
+                    'illuminaHumanv3.db': '1.26.0',
+                    'illuminaHumanv4.db': '1.26.0',
+                    'illuminaMousev1.db': '1.26.0',
+                    'illuminaMousev2.db': '1.26.0',
+                    'illuminaMousev1p1.db': '1.26.0'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.8',
+                    'data-refinery-common': '=v1.27.16-hotfix'
+                  },
+                  cmd_line: {
+                    'cat /etc/identifier_refinery_url':
+                      'https://zenodo.org/record/1410647/files/all_1536267482.zip'
+                  },
+                  os_distribution: 'Ubuntu 16.04.6 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: false,
+          sex: 'male',
+          age: '35.000',
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: 'caucasian',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2019-09-27T06:47:49.851378Z',
+          last_modified: '2019-09-27T08:59:18.287330Z',
+          original_files: [2716213, 2717627, 2723618, 2728673],
+          computed_files: [4976380],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['GSE57542']
+        },
+        {
+          id: 563773,
+          title: 'V4_rep [217665]',
+          accession_code: 'GSM1281538',
+          source_database: 'GEO',
+          organism: {
+            name: 'HOMO_SAPIENS',
+            taxonomy_id: 9606
+          },
+          platform_accession_code: 'hugene10st',
+          platform_name: '[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array',
+          pretty_platform: 'Affymetrix Human Gene 1.0 ST Array (hugene10st)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: {
+            Reference:
+              'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1281538',
+            'Scan protocol': [
+              'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+            ],
+            'Label protocol': [
+              'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+            ],
+            'Data processing': [
+              'Data were processed using Bioconductor RMA package.',
+              'probe group file: HuGene-1_0-st-v1.r4.pgf',
+              'meta-probeset file: HuGene-1_0-st-v1.r4.mps'
+            ],
+            'Extraction protocol': [
+              'Total RNA was isolated using Qiagen RNeasy columns.'
+            ],
+            'Hybridization protocol': [
+              'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+            ]
+          },
+          annotations: [
+            {
+              data: {
+                type: ['RNA'],
+                title: ['V4_rep [217665]'],
+                status: ['Public on Mar 01 2014'],
+                relation: ['Reanalyzed by: GSE86357'],
+                label_ch1: ['biotin'],
+                series_id: ['GSE53166', 'GSE57542'],
+                taxid_ch1: ['9606'],
+                platform_id: ['GPL6244'],
+                contact_city: ['Cambridge'],
+                contact_name: ['Nir,,Hacohen'],
+                hyb_protocol: [
+                  'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+                ],
+                molecule_ch1: ['total RNA'],
+                organism_ch1: ['Homo sapiens'],
+                channel_count: ['1'],
+                contact_email: ['nhacohen@partners.org'],
+                contact_state: ['MA'],
+                geo_accession: ['GSM1281538'],
+                scan_protocol: [
+                  'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+                ],
+                data_row_count: ['26981'],
+                contact_address: ['7 Cambridge Center'],
+                contact_country: ['USA'],
+                data_processing: [
+                  'Data were processed using Bioconductor RMA package.',
+                  'probe group file: HuGene-1_0-st-v1.r4.pgf',
+                  'meta-probeset file: HuGene-1_0-st-v1.r4.mps'
+                ],
+                source_name_ch1: ['V4_rep'],
+                submission_date: ['Dec 06 2013'],
+                last_update_date: ['Sep 01 2016'],
+                contact_institute: ['Broad Institute'],
+                label_protocol_ch1: [
+                  'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+                ],
+                supplementary_file: [
+                  'ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM1281nnn/GSM1281538/suppl/GSM1281538_EA10047_217665_HUGENE-1_0-ST-V1_V4_REP.CEL.gz'
+                ],
+                characteristics_ch1: [
+                  'stimulation: dNS1',
+                  'total rna (ug): 7.425',
+                  'rna concentration (ug/ul): 0.265',
+                  'cd4 %: 96.6',
+                  'cd16 %: 0.7',
+                  'age (years): 38',
+                  'million modc: 0.39875',
+                  'million monocyte: 1.3171536',
+                  'million pbmc: 36.498402',
+                  'ethnicity: Asian',
+                  'Sex: M',
+                  'individual id: IGTB1153'
+                ],
+                growth_protocol_ch1: [
+                  'Monocyte-derived dendritic cells from each donor were cultured for 7 days in RPMI supplemented with 10% FBS, 100 ng/mL GM-CSF and 40 ng/mL IL-4.'
+                ],
+                extract_protocol_ch1: [
+                  'Total RNA was isolated using Qiagen RNeasy columns.'
+                ],
+                treatment_protocol_ch1: [
+                  'MoDCs were stimulated with 15 ng/mL LPS for 5 h, influenza virus for 10 h, or left unstimulated.'
+                ],
+                'contact_zip/postal_code': ['02143']
+              },
+              is_ccdl: false,
+              created_at: '2018-12-14T04:22:59.346792Z',
+              last_modified: '2018-12-14T04:22:59.346792Z'
+            }
+          ],
+          results: [
+            {
+              id: 728702,
+              processor: {
+                id: 95,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.6',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.6'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: 'male',
+          age: '38.000',
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: 'asian',
+          subject: 'igtb1153',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-14T04:22:57.608457Z',
+          last_modified: '2018-12-14T22:27:19.558172Z',
+          original_files: [872389, 993603, 2723177],
+          computed_files: [844648],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['GSE53166', 'GSE57542']
+        },
+        {
+          id: 2010591,
+          title: '1663V012612_dNS1_20121206_n116_01_06.RCC',
+          accession_code: 'GSM1284740',
+          source_database: 'GEO',
+          organism: {
+            name: 'HOMO_SAPIENS',
+            taxonomy_id: 9606
+          },
+          platform_accession_code: 'hugene10st',
+          platform_name: '[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array',
+          pretty_platform: 'Affymetrix Human Gene 1.0 ST Array (hugene10st)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: {
+            Reference:
+              'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1284740',
+            'Scan protocol': [
+              'Nanostring nCounter system (Nanostring; Seattle, WA) was used to digitally count transcripts in a multiplex reaction.'
+            ],
+            'Label protocol': ['none'],
+            'Data processing': [
+              'The raw data is first scaled by positive spike-ins, shifted by negative spike-ins, and a negative binomial is fit using DESeq based on the scale parameter estimated from the positive spike-ins'
+            ],
+            'Extraction protocol': [
+              'Total RNA was isolated using Qiagen RNeasy columns.'
+            ],
+            'Hybridization protocol': [
+              'Lysates in Qiagen RLT buffer were hybridized for 12-24 hours with custom nCounter Gene Expression CodeSets.'
+            ]
+          },
+          annotations: [
+            {
+              data: {
+                type: ['RNA'],
+                title: ['1663V012612_dNS1_20121206_n116_01_06.RCC'],
+                status: ['Public on Mar 01 2014'],
+                label_ch1: ['n/a'],
+                series_id: ['GSE53165', 'GSE57542'],
+                taxid_ch1: ['9606'],
+                platform_id: ['GPL18032'],
+                contact_city: ['Cambridge'],
+                contact_name: ['Nir,,Hacohen'],
+                hyb_protocol: [
+                  'Lysates in Qiagen RLT buffer were hybridized for 12-24 hours with custom nCounter Gene Expression CodeSets.'
+                ],
+                molecule_ch1: ['total RNA'],
+                organism_ch1: ['Homo sapiens'],
+                channel_count: ['1'],
+                contact_email: ['nhacohen@partners.org'],
+                contact_state: ['MA'],
+                geo_accession: ['GSM1284740'],
+                scan_protocol: [
+                  'Nanostring nCounter system (Nanostring; Seattle, WA) was used to digitally count transcripts in a multiplex reaction.'
+                ],
+                data_row_count: ['414'],
+                contact_address: ['7 Cambridge Center'],
+                contact_country: ['USA'],
+                data_processing: [
+                  'The raw data is first scaled by positive spike-ins, shifted by negative spike-ins, and a negative binomial is fit using DESeq based on the scale parameter estimated from the positive spike-ins'
+                ],
+                source_name_ch1: ['1663V012612'],
+                submission_date: ['Dec 10 2013'],
+                last_update_date: ['Mar 01 2014'],
+                contact_institute: ['Broad Institute'],
+                label_protocol_ch1: ['none'],
+                supplementary_file: [
+                  'ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM1284nnn/GSM1284740/suppl/GSM1284740_20121206_n116_01_06.RCC.gz'
+                ],
+                characteristics_ch1: [
+                  'stimulation: dNS1',
+                  'hours: 10',
+                  'plate: V2',
+                  'cartridge: n116',
+                  'lane: 6',
+                  'date of visit: 2012-01-26',
+                  'time of visit: 8:46 AM',
+                  'gender: F',
+                  'age (years): 32',
+                  'ethnicity: East Asian',
+                  'million pbmc: 27.5534555',
+                  'cd14 %: 96.7',
+                  'cd16 %: 1.3',
+                  'million dcs: 0.1296',
+                  'height (cm): 167',
+                  'weight (kg): 65.85',
+                  'systolic/diastolic: 90/60',
+                  'bmi: 23.61145972'
+                ],
+                growth_protocol_ch1: [
+                  'Monocyte-derived dendritic cells from each donor were cultured for 7 days in RPMI supplemented with 10% FBS, 100 ng/mL GM-CSF and 40 ng/mL IL-4.'
+                ],
+                extract_protocol_ch1: [
+                  'Total RNA was isolated using Qiagen RNeasy columns.'
+                ],
+                treatment_protocol_ch1: [
+                  'MoDCs were stimulated with 15 ng/mL LPS for 2.5 h or 5 h, influenza virus for 10 h, 100 U/mL IFN for 6.5 h, or left unstimulated.'
+                ],
+                'contact_zip/postal_code': ['02143']
+              },
+              is_ccdl: false,
+              created_at: '2019-09-27T06:44:16.084097Z',
+              last_modified: '2019-09-27T06:44:16.084097Z'
+            }
+          ],
+          results: [
+            {
+              id: 2655482,
+              processor: {
+                id: 464,
+                name: 'Submitter-processed',
+                version: 'v1.27.16-hotfix',
+                docker_image: 'dr_no_op',
+                environment: {
+                  R: {
+                    dplyr: '0.7.8',
+                    rlang: '0.3.1',
+                    Bioconductor: '3.5',
+                    AnnotationDbi: '1.40.0',
+                    'illuminaRatv1.db': '1.26.0',
+                    'illuminaHumanv1.db': '1.26.0',
+                    'illuminaHumanv2.db': '1.26.0',
+                    'illuminaHumanv3.db': '1.26.0',
+                    'illuminaHumanv4.db': '1.26.0',
+                    'illuminaMousev1.db': '1.26.0',
+                    'illuminaMousev2.db': '1.26.0',
+                    'illuminaMousev1p1.db': '1.26.0'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.8',
+                    'data-refinery-common': '=v1.27.16-hotfix'
+                  },
+                  cmd_line: {
+                    'cat /etc/identifier_refinery_url':
+                      'https://zenodo.org/record/1410647/files/all_1536267482.zip'
+                  },
+                  os_distribution: 'Ubuntu 16.04.6 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: false,
+          sex: 'female',
+          age: '32.000',
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: 'east asian',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2019-09-27T06:44:16.079734Z',
+          last_modified: '2019-09-27T08:58:41.258291Z',
+          original_files: [2714935, 2717627, 2721643, 2723601],
+          computed_files: [4976340],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['GSE57542']
+        },
+        {
+          id: 572360,
+          title: '21V [209538]',
+          accession_code: 'GSM1281478',
+          source_database: 'GEO',
+          organism: {
+            name: 'HOMO_SAPIENS',
+            taxonomy_id: 9606
+          },
+          platform_accession_code: 'hugene10st',
+          platform_name: '[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array',
+          pretty_platform: 'Affymetrix Human Gene 1.0 ST Array (hugene10st)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: {
+            Reference:
+              'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1281478',
+            'Scan protocol': [
+              'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+            ],
+            'Label protocol': [
+              'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+            ],
+            'Data processing': [
+              'Data were processed using Bioconductor RMA package.',
+              'probe group file: HuGene-1_0-st-v1.r4.pgf',
+              'meta-probeset file: HuGene-1_0-st-v1.r4.mps'
+            ],
+            'Extraction protocol': [
+              'Total RNA was isolated using Qiagen RNeasy columns.'
+            ],
+            'Hybridization protocol': [
+              'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+            ]
+          },
+          annotations: [
+            {
+              data: {
+                type: ['RNA'],
+                title: ['21V [209538]'],
+                status: ['Public on Mar 01 2014'],
+                relation: ['Reanalyzed by: GSE86357'],
+                label_ch1: ['biotin'],
+                series_id: ['GSE53166', 'GSE57542'],
+                taxid_ch1: ['9606'],
+                platform_id: ['GPL6244'],
+                contact_city: ['Cambridge'],
+                contact_name: ['Nir,,Hacohen'],
+                hyb_protocol: [
+                  'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+                ],
+                molecule_ch1: ['total RNA'],
+                organism_ch1: ['Homo sapiens'],
+                channel_count: ['1'],
+                contact_email: ['nhacohen@partners.org'],
+                contact_state: ['MA'],
+                geo_accession: ['GSM1281478'],
+                scan_protocol: [
+                  'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+                ],
+                data_row_count: ['26981'],
+                contact_address: ['7 Cambridge Center'],
+                contact_country: ['USA'],
+                data_processing: [
+                  'Data were processed using Bioconductor RMA package.',
+                  'probe group file: HuGene-1_0-st-v1.r4.pgf',
+                  'meta-probeset file: HuGene-1_0-st-v1.r4.mps'
+                ],
+                source_name_ch1: ['21V'],
+                submission_date: ['Dec 06 2013'],
+                last_update_date: ['Sep 01 2016'],
+                contact_institute: ['Broad Institute'],
+                label_protocol_ch1: [
+                  'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+                ],
+                supplementary_file: [
+                  'ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM1281nnn/GSM1281478/suppl/GSM1281478_EA10047_209538_HUGENE-1_0-ST-V1_21V.CEL.gz'
+                ],
+                characteristics_ch1: [
+                  'stimulation: dNS1',
+                  'total rna (ug): 7.864',
+                  'rna concentration (ug/ul): 0.281',
+                  'cd4 %: 90.5',
+                  'cd16 %: 0.9',
+                  'age (years): 26',
+                  'million modc: 0.300751857',
+                  'million monocyte: 2.17936128',
+                  'million pbmc: 49.35956',
+                  'ethnicity: Caucasian',
+                  'Sex: F',
+                  'individual id: IGTB950'
+                ],
+                growth_protocol_ch1: [
+                  'Monocyte-derived dendritic cells from each donor were cultured for 7 days in RPMI supplemented with 10% FBS, 100 ng/mL GM-CSF and 40 ng/mL IL-4.'
+                ],
+                extract_protocol_ch1: [
+                  'Total RNA was isolated using Qiagen RNeasy columns.'
+                ],
+                treatment_protocol_ch1: [
+                  'MoDCs were stimulated with 15 ng/mL LPS for 5 h, influenza virus for 10 h, or left unstimulated.'
+                ],
+                'contact_zip/postal_code': ['02143']
+              },
+              is_ccdl: false,
+              created_at: '2018-12-14T04:40:45.558751Z',
+              last_modified: '2018-12-14T04:40:45.558751Z'
+            }
+          ],
+          results: [
+            {
+              id: 730136,
+              processor: {
+                id: 95,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.6',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.6'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: 'female',
+          age: '26.000',
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: 'caucasian',
+          subject: 'igtb950',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-14T04:40:44.245151Z',
+          last_modified: '2018-12-14T23:11:36.255018Z',
+          original_files: [880834, 1017150, 2722472],
+          computed_files: [846080],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['GSE53166', 'GSE57542']
+        },
+        {
+          id: 2011751,
+          title: '0695V060711_dNS1_20121209_n140_01_09.RCC',
+          accession_code: 'GSM1285031',
+          source_database: 'GEO',
+          organism: {
+            name: 'HOMO_SAPIENS',
+            taxonomy_id: 9606
+          },
+          platform_accession_code: 'hugene10st',
+          platform_name: '[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array',
+          pretty_platform: 'Affymetrix Human Gene 1.0 ST Array (hugene10st)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: {
+            Reference:
+              'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1285031',
+            'Scan protocol': [
+              'Nanostring nCounter system (Nanostring; Seattle, WA) was used to digitally count transcripts in a multiplex reaction.'
+            ],
+            'Label protocol': ['none'],
+            'Data processing': [
+              'The raw data is first scaled by positive spike-ins, shifted by negative spike-ins, and a negative binomial is fit using DESeq based on the scale parameter estimated from the positive spike-ins'
+            ],
+            'Extraction protocol': [
+              'Total RNA was isolated using Qiagen RNeasy columns.'
+            ],
+            'Hybridization protocol': [
+              'Lysates in Qiagen RLT buffer were hybridized for 12-24 hours with custom nCounter Gene Expression CodeSets.'
+            ]
+          },
+          annotations: [
+            {
+              data: {
+                type: ['RNA'],
+                title: ['0695V060711_dNS1_20121209_n140_01_09.RCC'],
+                status: ['Public on Mar 01 2014'],
+                label_ch1: ['n/a'],
+                series_id: ['GSE53165', 'GSE57542'],
+                taxid_ch1: ['9606'],
+                platform_id: ['GPL18032'],
+                contact_city: ['Cambridge'],
+                contact_name: ['Nir,,Hacohen'],
+                hyb_protocol: [
+                  'Lysates in Qiagen RLT buffer were hybridized for 12-24 hours with custom nCounter Gene Expression CodeSets.'
+                ],
+                molecule_ch1: ['total RNA'],
+                organism_ch1: ['Homo sapiens'],
+                channel_count: ['1'],
+                contact_email: ['nhacohen@partners.org'],
+                contact_state: ['MA'],
+                geo_accession: ['GSM1285031'],
+                scan_protocol: [
+                  'Nanostring nCounter system (Nanostring; Seattle, WA) was used to digitally count transcripts in a multiplex reaction.'
+                ],
+                data_row_count: ['414'],
+                contact_address: ['7 Cambridge Center'],
+                contact_country: ['USA'],
+                data_processing: [
+                  'The raw data is first scaled by positive spike-ins, shifted by negative spike-ins, and a negative binomial is fit using DESeq based on the scale parameter estimated from the positive spike-ins'
+                ],
+                source_name_ch1: ['0695V060711'],
+                submission_date: ['Dec 10 2013'],
+                last_update_date: ['Mar 01 2014'],
+                contact_institute: ['Broad Institute'],
+                label_protocol_ch1: ['none'],
+                supplementary_file: [
+                  'ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM1285nnn/GSM1285031/suppl/GSM1285031_20121209_n140_01_09.RCC.gz'
+                ],
+                characteristics_ch1: [
+                  'stimulation: dNS1',
+                  'hours: 10',
+                  'plate: V1',
+                  'cartridge: n140',
+                  'lane: 9',
+                  'date of visit: 2011-06-07',
+                  'time of visit: 7:58 AM',
+                  'gender: M',
+                  'age (years): 38',
+                  'ethnicity: Caucasian',
+                  'million pbmc: 32.287787',
+                  'cd14 %: 98.2',
+                  'cd16 %: 0.1',
+                  'million dcs: 0.45',
+                  'height (cm): 179.5',
+                  'weight (kg): 96.8',
+                  'systolic/diastolic: 100/66',
+                  'bmi: 30.04321816'
+                ],
+                growth_protocol_ch1: [
+                  'Monocyte-derived dendritic cells from each donor were cultured for 7 days in RPMI supplemented with 10% FBS, 100 ng/mL GM-CSF and 40 ng/mL IL-4.'
+                ],
+                extract_protocol_ch1: [
+                  'Total RNA was isolated using Qiagen RNeasy columns.'
+                ],
+                treatment_protocol_ch1: [
+                  'MoDCs were stimulated with 15 ng/mL LPS for 2.5 h or 5 h, influenza virus for 10 h, 100 U/mL IFN for 6.5 h, or left unstimulated.'
+                ],
+                'contact_zip/postal_code': ['02143']
+              },
+              is_ccdl: false,
+              created_at: '2019-09-27T06:47:54.807194Z',
+              last_modified: '2019-09-27T06:47:54.807194Z'
+            }
+          ],
+          results: [
+            {
+              id: 2655542,
+              processor: {
+                id: 464,
+                name: 'Submitter-processed',
+                version: 'v1.27.16-hotfix',
+                docker_image: 'dr_no_op',
+                environment: {
+                  R: {
+                    dplyr: '0.7.8',
+                    rlang: '0.3.1',
+                    Bioconductor: '3.5',
+                    AnnotationDbi: '1.40.0',
+                    'illuminaRatv1.db': '1.26.0',
+                    'illuminaHumanv1.db': '1.26.0',
+                    'illuminaHumanv2.db': '1.26.0',
+                    'illuminaHumanv3.db': '1.26.0',
+                    'illuminaHumanv4.db': '1.26.0',
+                    'illuminaMousev1.db': '1.26.0',
+                    'illuminaMousev2.db': '1.26.0',
+                    'illuminaMousev1p1.db': '1.26.0'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.8',
+                    'data-refinery-common': '=v1.27.16-hotfix'
+                  },
+                  cmd_line: {
+                    'cat /etc/identifier_refinery_url':
+                      'https://zenodo.org/record/1410647/files/all_1536267482.zip'
+                  },
+                  os_distribution: 'Ubuntu 16.04.6 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: false,
+          sex: 'male',
+          age: '38.000',
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: 'caucasian',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2019-09-27T06:47:54.794340Z',
+          last_modified: '2019-09-27T08:59:32.015196Z',
+          original_files: [2716238, 2717627, 2723605, 2728104],
+          computed_files: [4976400],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['GSE57542']
+        },
+        {
+          id: 2010508,
+          title: '1120V012011_unstim_20121210_n151_01_07.RCC',
+          accession_code: 'GSM1285161',
+          source_database: 'GEO',
+          organism: {
+            name: 'HOMO_SAPIENS',
+            taxonomy_id: 9606
+          },
+          platform_accession_code: 'hugene10st',
+          platform_name: '[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array',
+          pretty_platform: 'Affymetrix Human Gene 1.0 ST Array (hugene10st)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: {
+            Reference:
+              'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1285161',
+            'Scan protocol': [
+              'Nanostring nCounter system (Nanostring; Seattle, WA) was used to digitally count transcripts in a multiplex reaction.'
+            ],
+            'Label protocol': ['none'],
+            'Data processing': [
+              'The raw data is first scaled by positive spike-ins, shifted by negative spike-ins, and a negative binomial is fit using DESeq based on the scale parameter estimated from the positive spike-ins'
+            ],
+            'Extraction protocol': [
+              'Total RNA was isolated using Qiagen RNeasy columns.'
+            ],
+            'Hybridization protocol': [
+              'Lysates in Qiagen RLT buffer were hybridized for 12-24 hours with custom nCounter Gene Expression CodeSets.'
+            ]
+          },
+          annotations: [
+            {
+              data: {
+                type: ['RNA'],
+                title: ['1120V012011_unstim_20121210_n151_01_07.RCC'],
+                status: ['Public on Mar 01 2014'],
+                label_ch1: ['n/a'],
+                series_id: ['GSE53165', 'GSE57542'],
+                taxid_ch1: ['9606'],
+                platform_id: ['GPL18032'],
+                contact_city: ['Cambridge'],
+                contact_name: ['Nir,,Hacohen'],
+                hyb_protocol: [
+                  'Lysates in Qiagen RLT buffer were hybridized for 12-24 hours with custom nCounter Gene Expression CodeSets.'
+                ],
+                molecule_ch1: ['total RNA'],
+                organism_ch1: ['Homo sapiens'],
+                channel_count: ['1'],
+                contact_email: ['nhacohen@partners.org'],
+                contact_state: ['MA'],
+                geo_accession: ['GSM1285161'],
+                scan_protocol: [
+                  'Nanostring nCounter system (Nanostring; Seattle, WA) was used to digitally count transcripts in a multiplex reaction.'
+                ],
+                data_row_count: ['414'],
+                contact_address: ['7 Cambridge Center'],
+                contact_country: ['USA'],
+                data_processing: [
+                  'The raw data is first scaled by positive spike-ins, shifted by negative spike-ins, and a negative binomial is fit using DESeq based on the scale parameter estimated from the positive spike-ins'
+                ],
+                source_name_ch1: ['1120V012011'],
+                submission_date: ['Dec 10 2013'],
+                last_update_date: ['Mar 01 2014'],
+                contact_institute: ['Broad Institute'],
+                label_protocol_ch1: ['none'],
+                supplementary_file: [
+                  'ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM1285nnn/GSM1285161/suppl/GSM1285161_20121210_n151_01_07.RCC.gz'
+                ],
+                characteristics_ch1: [
+                  'stimulation: unstim',
+                  'hours: 0',
+                  'plate: U1',
+                  'cartridge: n151',
+                  'lane: 7',
+                  'date of visit: 2011-01-20',
+                  'time of visit: 8:32 AM',
+                  'gender: F',
+                  'age (years): 45',
+                  'ethnicity: East Asian',
+                  'million pbmc: 18.55092765',
+                  'cd14 %: 93.9',
+                  'cd16 %: 1.5',
+                  'million dcs: 0.1353',
+                  'height (cm): 164',
+                  'weight (kg): 78.9',
+                  'systolic/diastolic: 162/96',
+                  'bmi: 29.33521713'
+                ],
+                growth_protocol_ch1: [
+                  'Monocyte-derived dendritic cells from each donor were cultured for 7 days in RPMI supplemented with 10% FBS, 100 ng/mL GM-CSF and 40 ng/mL IL-4.'
+                ],
+                extract_protocol_ch1: [
+                  'Total RNA was isolated using Qiagen RNeasy columns.'
+                ],
+                treatment_protocol_ch1: [
+                  'MoDCs were stimulated with 15 ng/mL LPS for 2.5 h or 5 h, influenza virus for 10 h, 100 U/mL IFN for 6.5 h, or left unstimulated.'
+                ],
+                'contact_zip/postal_code': ['02143']
+              },
+              is_ccdl: false,
+              created_at: '2019-09-27T06:43:59.994279Z',
+              last_modified: '2019-09-27T06:43:59.994279Z'
+            }
+          ],
+          results: [
+            {
+              id: 2655565,
+              processor: {
+                id: 464,
+                name: 'Submitter-processed',
+                version: 'v1.27.16-hotfix',
+                docker_image: 'dr_no_op',
+                environment: {
+                  R: {
+                    dplyr: '0.7.8',
+                    rlang: '0.3.1',
+                    Bioconductor: '3.5',
+                    AnnotationDbi: '1.40.0',
+                    'illuminaRatv1.db': '1.26.0',
+                    'illuminaHumanv1.db': '1.26.0',
+                    'illuminaHumanv2.db': '1.26.0',
+                    'illuminaHumanv3.db': '1.26.0',
+                    'illuminaHumanv4.db': '1.26.0',
+                    'illuminaMousev1.db': '1.26.0',
+                    'illuminaMousev2.db': '1.26.0',
+                    'illuminaMousev1p1.db': '1.26.0'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.8',
+                    'data-refinery-common': '=v1.27.16-hotfix'
+                  },
+                  cmd_line: {
+                    'cat /etc/identifier_refinery_url':
+                      'https://zenodo.org/record/1410647/files/all_1536267482.zip'
+                  },
+                  os_distribution: 'Ubuntu 16.04.6 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: false,
+          sex: 'female',
+          age: '45.000',
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: 'east asian',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2019-09-27T06:43:59.989307Z',
+          last_modified: '2019-09-27T08:59:45.459131Z',
+          original_files: [2714846, 2717627, 2721550, 2723534],
+          computed_files: [4976423],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['GSE57542']
+        },
+        {
+          id: 2010502,
+          title: '1423V092211_dNS1_20121216_n199_01_05.RCC',
+          accession_code: 'GSM1285723',
+          source_database: 'GEO',
+          organism: {
+            name: 'HOMO_SAPIENS',
+            taxonomy_id: 9606
+          },
+          platform_accession_code: 'hugene10st',
+          platform_name: '[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array',
+          pretty_platform: 'Affymetrix Human Gene 1.0 ST Array (hugene10st)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: {
+            Reference:
+              'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1285723',
+            'Scan protocol': [
+              'Nanostring nCounter system (Nanostring; Seattle, WA) was used to digitally count transcripts in a multiplex reaction.'
+            ],
+            'Label protocol': ['none'],
+            'Data processing': [
+              'The raw data is first scaled by positive spike-ins, shifted by negative spike-ins, and a negative binomial is fit using DESeq based on the scale parameter estimated from the positive spike-ins'
+            ],
+            'Extraction protocol': [
+              'Total RNA was isolated using Qiagen RNeasy columns.'
+            ],
+            'Hybridization protocol': [
+              'Lysates in Qiagen RLT buffer were hybridized for 12-24 hours with custom nCounter Gene Expression CodeSets.'
+            ]
+          },
+          annotations: [
+            {
+              data: {
+                type: ['RNA'],
+                title: ['1423V092211_dNS1_20121216_n199_01_05.RCC'],
+                status: ['Public on Mar 01 2014'],
+                label_ch1: ['n/a'],
+                series_id: ['GSE53165', 'GSE57542'],
+                taxid_ch1: ['9606'],
+                platform_id: ['GPL18032'],
+                contact_city: ['Cambridge'],
+                contact_name: ['Nir,,Hacohen'],
+                hyb_protocol: [
+                  'Lysates in Qiagen RLT buffer were hybridized for 12-24 hours with custom nCounter Gene Expression CodeSets.'
+                ],
+                molecule_ch1: ['total RNA'],
+                organism_ch1: ['Homo sapiens'],
+                channel_count: ['1'],
+                contact_email: ['nhacohen@partners.org'],
+                contact_state: ['MA'],
+                geo_accession: ['GSM1285723'],
+                scan_protocol: [
+                  'Nanostring nCounter system (Nanostring; Seattle, WA) was used to digitally count transcripts in a multiplex reaction.'
+                ],
+                data_row_count: ['414'],
+                contact_address: ['7 Cambridge Center'],
+                contact_country: ['USA'],
+                data_processing: [
+                  'The raw data is first scaled by positive spike-ins, shifted by negative spike-ins, and a negative binomial is fit using DESeq based on the scale parameter estimated from the positive spike-ins'
+                ],
+                source_name_ch1: ['1423V092211'],
+                submission_date: ['Dec 10 2013'],
+                last_update_date: ['Mar 01 2014'],
+                contact_institute: ['Broad Institute'],
+                label_protocol_ch1: ['none'],
+                supplementary_file: [
+                  'ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM1285nnn/GSM1285723/suppl/GSM1285723_20121216_n199_01_05.RCC.gz'
+                ],
+                characteristics_ch1: [
+                  'stimulation: dNS1',
+                  'hours: 10',
+                  'plate: V1',
+                  'cartridge: n199',
+                  'lane: 5',
+                  'date of visit: 2011-09-22',
+                  'time of visit: 8:01 AM',
+                  'gender: M',
+                  'age (years): 34',
+                  'ethnicity: Caucasian',
+                  'million pbmc: 38.996658',
+                  'cd14 %: 91.3',
+                  'cd16 %: 1',
+                  'million dcs: 0.4644',
+                  'height (cm): 182.11',
+                  'weight (kg): 76.75',
+                  'systolic/diastolic: 110/70',
+                  'bmi: 23.14252787'
+                ],
+                growth_protocol_ch1: [
+                  'Monocyte-derived dendritic cells from each donor were cultured for 7 days in RPMI supplemented with 10% FBS, 100 ng/mL GM-CSF and 40 ng/mL IL-4.'
+                ],
+                extract_protocol_ch1: [
+                  'Total RNA was isolated using Qiagen RNeasy columns.'
+                ],
+                treatment_protocol_ch1: [
+                  'MoDCs were stimulated with 15 ng/mL LPS for 2.5 h or 5 h, influenza virus for 10 h, 100 U/mL IFN for 6.5 h, or left unstimulated.'
+                ],
+                'contact_zip/postal_code': ['02143']
+              },
+              is_ccdl: false,
+              created_at: '2019-09-27T06:43:58.732041Z',
+              last_modified: '2019-09-27T06:43:58.732041Z'
+            }
+          ],
+          results: [
+            {
+              id: 2655511,
+              processor: {
+                id: 464,
+                name: 'Submitter-processed',
+                version: 'v1.27.16-hotfix',
+                docker_image: 'dr_no_op',
+                environment: {
+                  R: {
+                    dplyr: '0.7.8',
+                    rlang: '0.3.1',
+                    Bioconductor: '3.5',
+                    AnnotationDbi: '1.40.0',
+                    'illuminaRatv1.db': '1.26.0',
+                    'illuminaHumanv1.db': '1.26.0',
+                    'illuminaHumanv2.db': '1.26.0',
+                    'illuminaHumanv3.db': '1.26.0',
+                    'illuminaHumanv4.db': '1.26.0',
+                    'illuminaMousev1.db': '1.26.0',
+                    'illuminaMousev2.db': '1.26.0',
+                    'illuminaMousev1p1.db': '1.26.0'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.8',
+                    'data-refinery-common': '=v1.27.16-hotfix'
+                  },
+                  cmd_line: {
+                    'cat /etc/identifier_refinery_url':
+                      'https://zenodo.org/record/1410647/files/all_1536267482.zip'
+                  },
+                  os_distribution: 'Ubuntu 16.04.6 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: false,
+          sex: 'male',
+          age: '34.000',
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: 'caucasian',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2019-09-27T06:43:58.702363Z',
+          last_modified: '2019-09-27T08:59:08.671176Z',
+          original_files: [2714838, 2717627, 2723577, 2721693],
+          computed_files: [4976369],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['GSE57542']
+        },
+        {
+          id: 2010583,
+          title: '1442V100411_LPS_20121207_n125_01_10.RCC',
+          accession_code: 'GSM1284852',
+          source_database: 'GEO',
+          organism: {
+            name: 'HOMO_SAPIENS',
+            taxonomy_id: 9606
+          },
+          platform_accession_code: 'hugene10st',
+          platform_name: '[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array',
+          pretty_platform: 'Affymetrix Human Gene 1.0 ST Array (hugene10st)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: {
+            Reference:
+              'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1284852',
+            'Scan protocol': [
+              'Nanostring nCounter system (Nanostring; Seattle, WA) was used to digitally count transcripts in a multiplex reaction.'
+            ],
+            'Label protocol': ['none'],
+            'Data processing': [
+              'The raw data is first scaled by positive spike-ins, shifted by negative spike-ins, and a negative binomial is fit using DESeq based on the scale parameter estimated from the positive spike-ins'
+            ],
+            'Extraction protocol': [
+              'Total RNA was isolated using Qiagen RNeasy columns.'
+            ],
+            'Hybridization protocol': [
+              'Lysates in Qiagen RLT buffer were hybridized for 12-24 hours with custom nCounter Gene Expression CodeSets.'
+            ]
+          },
+          annotations: [
+            {
+              data: {
+                type: ['RNA'],
+                title: ['1442V100411_LPS_20121207_n125_01_10.RCC'],
+                status: ['Public on Mar 01 2014'],
+                label_ch1: ['n/a'],
+                series_id: ['GSE53165', 'GSE57542'],
+                taxid_ch1: ['9606'],
+                platform_id: ['GPL18032'],
+                contact_city: ['Cambridge'],
+                contact_name: ['Nir,,Hacohen'],
+                hyb_protocol: [
+                  'Lysates in Qiagen RLT buffer were hybridized for 12-24 hours with custom nCounter Gene Expression CodeSets.'
+                ],
+                molecule_ch1: ['total RNA'],
+                organism_ch1: ['Homo sapiens'],
+                channel_count: ['1'],
+                contact_email: ['nhacohen@partners.org'],
+                contact_state: ['MA'],
+                geo_accession: ['GSM1284852'],
+                scan_protocol: [
+                  'Nanostring nCounter system (Nanostring; Seattle, WA) was used to digitally count transcripts in a multiplex reaction.'
+                ],
+                data_row_count: ['414'],
+                contact_address: ['7 Cambridge Center'],
+                contact_country: ['USA'],
+                data_processing: [
+                  'The raw data is first scaled by positive spike-ins, shifted by negative spike-ins, and a negative binomial is fit using DESeq based on the scale parameter estimated from the positive spike-ins'
+                ],
+                source_name_ch1: ['1442V100411'],
+                submission_date: ['Dec 10 2013'],
+                last_update_date: ['Mar 01 2014'],
+                contact_institute: ['Broad Institute'],
+                label_protocol_ch1: ['none'],
+                supplementary_file: [
+                  'ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM1284nnn/GSM1284852/suppl/GSM1284852_20121207_n125_01_10.RCC.gz'
+                ],
+                characteristics_ch1: [
+                  'stimulation: LPS',
+                  'hours: 2.5',
+                  'plate: L2a',
+                  'cartridge: n125',
+                  'lane: 10',
+                  'date of visit: 2011-10-04',
+                  'time of visit: 7:45 AM',
+                  'gender: F',
+                  'age (years): 23',
+                  'ethnicity: Caucasian',
+                  'million pbmc: 48.332071',
+                  'cd14 %: 93.5',
+                  'cd16 %: 0.6',
+                  'million dcs: 0.2106',
+                  'height (cm): 156',
+                  'weight (kg): 54.05',
+                  'systolic/diastolic: 102/68',
+                  'bmi: 22.20989481'
+                ],
+                growth_protocol_ch1: [
+                  'Monocyte-derived dendritic cells from each donor were cultured for 7 days in RPMI supplemented with 10% FBS, 100 ng/mL GM-CSF and 40 ng/mL IL-4.'
+                ],
+                extract_protocol_ch1: [
+                  'Total RNA was isolated using Qiagen RNeasy columns.'
+                ],
+                treatment_protocol_ch1: [
+                  'MoDCs were stimulated with 15 ng/mL LPS for 2.5 h or 5 h, influenza virus for 10 h, 100 U/mL IFN for 6.5 h, or left unstimulated.'
+                ],
+                'contact_zip/postal_code': ['02143']
+              },
+              is_ccdl: false,
+              created_at: '2019-09-27T06:44:14.514941Z',
+              last_modified: '2019-09-27T06:44:14.514941Z'
+            }
+          ],
+          results: [
+            {
+              id: 2655552,
+              processor: {
+                id: 464,
+                name: 'Submitter-processed',
+                version: 'v1.27.16-hotfix',
+                docker_image: 'dr_no_op',
+                environment: {
+                  R: {
+                    dplyr: '0.7.8',
+                    rlang: '0.3.1',
+                    Bioconductor: '3.5',
+                    AnnotationDbi: '1.40.0',
+                    'illuminaRatv1.db': '1.26.0',
+                    'illuminaHumanv1.db': '1.26.0',
+                    'illuminaHumanv2.db': '1.26.0',
+                    'illuminaHumanv3.db': '1.26.0',
+                    'illuminaHumanv4.db': '1.26.0',
+                    'illuminaMousev1.db': '1.26.0',
+                    'illuminaMousev2.db': '1.26.0',
+                    'illuminaMousev1p1.db': '1.26.0'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.8',
+                    'data-refinery-common': '=v1.27.16-hotfix'
+                  },
+                  cmd_line: {
+                    'cat /etc/identifier_refinery_url':
+                      'https://zenodo.org/record/1410647/files/all_1536267482.zip'
+                  },
+                  os_distribution: 'Ubuntu 16.04.6 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: false,
+          sex: 'female',
+          age: '23.000',
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: 'caucasian',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2019-09-27T06:44:14.510013Z',
+          last_modified: '2019-09-27T08:59:37.007294Z',
+          original_files: [2714926, 2717627, 2721672, 2723604],
+          computed_files: [4976410],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['GSE57542']
+        },
+        {
+          id: 525453,
+          title: '9L [209516]',
+          accession_code: 'GSM1281467',
+          source_database: 'GEO',
+          organism: {
+            name: 'HOMO_SAPIENS',
+            taxonomy_id: 9606
+          },
+          platform_accession_code: 'hugene10st',
+          platform_name: '[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array',
+          pretty_platform: 'Affymetrix Human Gene 1.0 ST Array (hugene10st)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: {
+            Reference:
+              'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1281467',
+            'Scan protocol': [
+              'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+            ],
+            'Label protocol': [
+              'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+            ],
+            'Data processing': [
+              'Data were processed using Bioconductor RMA package.',
+              'probe group file: HuGene-1_0-st-v1.r4.pgf',
+              'meta-probeset file: HuGene-1_0-st-v1.r4.mps'
+            ],
+            'Extraction protocol': [
+              'Total RNA was isolated using Qiagen RNeasy columns.'
+            ],
+            'Hybridization protocol': [
+              'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+            ]
+          },
+          annotations: [
+            {
+              data: {
+                type: ['RNA'],
+                title: ['9L [209516]'],
+                status: ['Public on Mar 01 2014'],
+                relation: ['Reanalyzed by: GSE86357'],
+                label_ch1: ['biotin'],
+                series_id: ['GSE53166', 'GSE57542'],
+                taxid_ch1: ['9606'],
+                platform_id: ['GPL6244'],
+                contact_city: ['Cambridge'],
+                contact_name: ['Nir,,Hacohen'],
+                hyb_protocol: [
+                  'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+                ],
+                molecule_ch1: ['total RNA'],
+                organism_ch1: ['Homo sapiens'],
+                channel_count: ['1'],
+                contact_email: ['nhacohen@partners.org'],
+                contact_state: ['MA'],
+                geo_accession: ['GSM1281467'],
+                scan_protocol: [
+                  'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+                ],
+                data_row_count: ['26981'],
+                contact_address: ['7 Cambridge Center'],
+                contact_country: ['USA'],
+                data_processing: [
+                  'Data were processed using Bioconductor RMA package.',
+                  'probe group file: HuGene-1_0-st-v1.r4.pgf',
+                  'meta-probeset file: HuGene-1_0-st-v1.r4.mps'
+                ],
+                source_name_ch1: ['9L'],
+                submission_date: ['Dec 06 2013'],
+                last_update_date: ['Sep 01 2016'],
+                contact_institute: ['Broad Institute'],
+                label_protocol_ch1: [
+                  'cDNA synthesis, labeling, hybridization, and scanning were performed by the company Expression Analysis (Durham, NC).'
+                ],
+                supplementary_file: [
+                  'ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM1281nnn/GSM1281467/suppl/GSM1281467_EA10047_209516_HUGENE-1_0-ST-V1_9L.CEL.gz'
+                ],
+                characteristics_ch1: [
+                  'stimulation: LPS',
+                  'total rna (ug): 7.851',
+                  'rna concentration (ug/ul): 0.28',
+                  'cd4 %: 94.6',
+                  'cd16 %: 0.5',
+                  'age (years): 40',
+                  'million modc: 0.191800172',
+                  'million monocyte: 1.38985632',
+                  'million pbmc: 43.64778',
+                  'ethnicity: Asian',
+                  'Sex: M',
+                  'individual id: IGTB1043'
+                ],
+                growth_protocol_ch1: [
+                  'Monocyte-derived dendritic cells from each donor were cultured for 7 days in RPMI supplemented with 10% FBS, 100 ng/mL GM-CSF and 40 ng/mL IL-4.'
+                ],
+                extract_protocol_ch1: [
+                  'Total RNA was isolated using Qiagen RNeasy columns.'
+                ],
+                treatment_protocol_ch1: [
+                  'MoDCs were stimulated with 15 ng/mL LPS for 5 h, influenza virus for 10 h, or left unstimulated.'
+                ],
+                'contact_zip/postal_code': ['02143']
+              },
+              is_ccdl: false,
+              created_at: '2018-12-14T00:10:45.887948Z',
+              last_modified: '2018-12-14T00:10:45.887948Z'
+            }
+          ],
+          results: [
+            {
+              id: 1489679,
+              processor: {
+                id: 321,
+                name: 'Affymetrix SCAN',
+                version: 'v1.22.14-hotfix',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.5',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.8',
+                    'data-refinery-common': '=v1.22.14-hotfix'
+                  },
+                  os_distribution: 'Ubuntu 16.04.6 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: true,
+          sex: 'male',
+          age: '40.000',
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: 'asian',
+          subject: 'igtb1043',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-14T00:10:32.295762Z',
+          last_modified: '2019-08-06T20:17:09.203146Z',
+          original_files: [812649, 1874481, 2722540],
+          computed_files: [2645193],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['GSE53166', 'GSE57542']
+        },
+        {
+          id: 2010537,
+          title: '0494V031011_unstim_20121210_n154_01_06.RCC',
+          accession_code: 'GSM1285196',
+          source_database: 'GEO',
+          organism: {
+            name: 'HOMO_SAPIENS',
+            taxonomy_id: 9606
+          },
+          platform_accession_code: 'hugene10st',
+          platform_name: '[HuGene-1_0-st] Affymetrix Human Gene 1.0 ST Array',
+          pretty_platform: 'Affymetrix Human Gene 1.0 ST Array (hugene10st)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: {
+            Reference:
+              'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1285196',
+            'Scan protocol': [
+              'Nanostring nCounter system (Nanostring; Seattle, WA) was used to digitally count transcripts in a multiplex reaction.'
+            ],
+            'Label protocol': ['none'],
+            'Data processing': [
+              'The raw data is first scaled by positive spike-ins, shifted by negative spike-ins, and a negative binomial is fit using DESeq based on the scale parameter estimated from the positive spike-ins'
+            ],
+            'Extraction protocol': [
+              'Total RNA was isolated using Qiagen RNeasy columns.'
+            ],
+            'Hybridization protocol': [
+              'Lysates in Qiagen RLT buffer were hybridized for 12-24 hours with custom nCounter Gene Expression CodeSets.'
+            ]
+          },
+          annotations: [
+            {
+              data: {
+                type: ['RNA'],
+                title: ['0494V031011_unstim_20121210_n154_01_06.RCC'],
+                status: ['Public on Mar 01 2014'],
+                label_ch1: ['n/a'],
+                series_id: ['GSE53165', 'GSE57542'],
+                taxid_ch1: ['9606'],
+                platform_id: ['GPL18032'],
+                contact_city: ['Cambridge'],
+                contact_name: ['Nir,,Hacohen'],
+                hyb_protocol: [
+                  'Lysates in Qiagen RLT buffer were hybridized for 12-24 hours with custom nCounter Gene Expression CodeSets.'
+                ],
+                molecule_ch1: ['total RNA'],
+                organism_ch1: ['Homo sapiens'],
+                channel_count: ['1'],
+                contact_email: ['nhacohen@partners.org'],
+                contact_state: ['MA'],
+                geo_accession: ['GSM1285196'],
+                scan_protocol: [
+                  'Nanostring nCounter system (Nanostring; Seattle, WA) was used to digitally count transcripts in a multiplex reaction.'
+                ],
+                data_row_count: ['414'],
+                contact_address: ['7 Cambridge Center'],
+                contact_country: ['USA'],
+                data_processing: [
+                  'The raw data is first scaled by positive spike-ins, shifted by negative spike-ins, and a negative binomial is fit using DESeq based on the scale parameter estimated from the positive spike-ins'
+                ],
+                source_name_ch1: ['0494V031011'],
+                submission_date: ['Dec 10 2013'],
+                last_update_date: ['Mar 01 2014'],
+                contact_institute: ['Broad Institute'],
+                label_protocol_ch1: ['none'],
+                supplementary_file: [
+                  'ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM1285nnn/GSM1285196/suppl/GSM1285196_20121210_n154_01_06.RCC.gz'
+                ],
+                characteristics_ch1: [
+                  'stimulation: unstim',
+                  'hours: 0',
+                  'plate: U1',
+                  'cartridge: n154',
+                  'lane: 6',
+                  'date of visit: 2011-03-10',
+                  'time of visit: 8:11 AM',
+                  'gender: F',
+                  'age (years): 25',
+                  'ethnicity: Caucasian',
+                  'million pbmc: 21.1315845',
+                  'cd14 %: 88.5',
+                  'cd16 %: 1.2',
+                  'million dcs: 0.1599',
+                  'height (cm): 168.5',
+                  'weight (kg): 48.75',
+                  'systolic/diastolic: 92/60',
+                  'bmi: 17.17017848'
+                ],
+                growth_protocol_ch1: [
+                  'Monocyte-derived dendritic cells from each donor were cultured for 7 days in RPMI supplemented with 10% FBS, 100 ng/mL GM-CSF and 40 ng/mL IL-4.'
+                ],
+                extract_protocol_ch1: [
+                  'Total RNA was isolated using Qiagen RNeasy columns.'
+                ],
+                treatment_protocol_ch1: [
+                  'MoDCs were stimulated with 15 ng/mL LPS for 2.5 h or 5 h, influenza virus for 10 h, 100 U/mL IFN for 6.5 h, or left unstimulated.'
+                ],
+                'contact_zip/postal_code': ['02143']
+              },
+              is_ccdl: false,
+              created_at: '2019-09-27T06:44:05.584589Z',
+              last_modified: '2019-09-27T06:44:05.584589Z'
+            }
+          ],
+          results: [
+            {
+              id: 2655579,
+              processor: {
+                id: 464,
+                name: 'Submitter-processed',
+                version: 'v1.27.16-hotfix',
+                docker_image: 'dr_no_op',
+                environment: {
+                  R: {
+                    dplyr: '0.7.8',
+                    rlang: '0.3.1',
+                    Bioconductor: '3.5',
+                    AnnotationDbi: '1.40.0',
+                    'illuminaRatv1.db': '1.26.0',
+                    'illuminaHumanv1.db': '1.26.0',
+                    'illuminaHumanv2.db': '1.26.0',
+                    'illuminaHumanv3.db': '1.26.0',
+                    'illuminaHumanv4.db': '1.26.0',
+                    'illuminaMousev1.db': '1.26.0',
+                    'illuminaMousev2.db': '1.26.0',
+                    'illuminaMousev1p1.db': '1.26.0'
+                  },
+                  os_pkg: {
+                    'r-base': 'r-base',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    Django: '2.1.8',
+                    'data-refinery-common': '=v1.27.16-hotfix'
+                  },
+                  cmd_line: {
+                    'cat /etc/identifier_refinery_url':
+                      'https://zenodo.org/record/1410647/files/all_1536267482.zip'
+                  },
+                  os_distribution: 'Ubuntu 16.04.6 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url: '',
+          has_raw: false,
+          sex: 'female',
+          age: '25.000',
+          specimen_part: '',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: 'caucasian',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2019-09-27T06:44:05.579565Z',
+          last_modified: '2019-09-27T09:00:01.587249Z',
+          original_files: [2714880, 2717627, 2721724, 2724063],
+          computed_files: [4976438],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['GSE57542']
+        }
+      ]
+    }
+  ],
+  [
+    {
+      count: 32,
+      next: 'http://api.refine.bio/v1/samples/?experiment_accession_code=E-MTAB-1811&limit=10&offset=10',
+      previous: null,
+      results: [
+        {
+          id: 668387,
+          title: 'Sample2 RNA',
+          accession_code: 'E-MTAB-1811-Sample2',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-073_51-11degreesCAP.CEL',
+                    name: '101650-073_51-11degreesCAP.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 2'
+                },
+                source: {
+                  name: 'Sample2'
+                },
+                extract: {
+                  name: 'Sample2 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 11
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'micropylar endosperm'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'micropylar endosperm',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 11,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample2 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:45:44.678041Z',
+              last_modified: '2018-12-19T15:45:44.678041Z'
+            }
+          ],
+          results: [
+            {
+              id: 793900,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'micropylar endosperm',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:45:43.241884Z',
+          last_modified: '2018-12-19T20:12:12.895784Z',
+          original_files: [1091778],
+          computed_files: [909757],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 669107,
+          title: 'Sample3 RNA',
+          accession_code: 'E-MTAB-1811-Sample3',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-074_52-11degreesCAP.CEL',
+                    name: '101650-074_52-11degreesCAP.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 3'
+                },
+                source: {
+                  name: 'Sample3'
+                },
+                extract: {
+                  name: 'Sample3 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 11
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'micropylar endosperm'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'micropylar endosperm',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 11,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample3 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:45:54.001593Z',
+              last_modified: '2018-12-19T15:45:54.001593Z'
+            }
+          ],
+          results: [
+            {
+              id: 794056,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'micropylar endosperm',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:45:51.318361Z',
+          last_modified: '2018-12-19T20:12:33.127522Z',
+          original_files: [1092282],
+          computed_files: [909913],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 669802,
+          title: 'Sample4 RNA',
+          accession_code: 'E-MTAB-1811-Sample4',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-075_53-11degreesCAP.CEL',
+                    name: '101650-075_53-11degreesCAP.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 4'
+                },
+                source: {
+                  name: 'Sample4'
+                },
+                extract: {
+                  name: 'Sample4 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 11
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'micropylar endosperm'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'micropylar endosperm',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 11,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample4 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:46:02.657613Z',
+              last_modified: '2018-12-19T15:46:02.657613Z'
+            }
+          ],
+          results: [
+            {
+              id: 794216,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'micropylar endosperm',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:46:00.884893Z',
+          last_modified: '2018-12-19T20:12:51.155335Z',
+          original_files: [1092745],
+          computed_files: [910073],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 670516,
+          title: 'Sample5 RNA',
+          accession_code: 'E-MTAB-1811-Sample5',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-076_55-11degreesRAD.CEL',
+                    name: '101650-076_55-11degreesRAD.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 5'
+                },
+                source: {
+                  name: 'Sample5'
+                },
+                extract: {
+                  name: 'Sample5 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 11
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'radicle'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'radicle',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 11,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample5 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:46:12.481578Z',
+              last_modified: '2018-12-19T15:46:12.481578Z'
+            }
+          ],
+          results: [
+            {
+              id: 794394,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'radicle',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:46:10.414968Z',
+          last_modified: '2018-12-19T20:13:12.608761Z',
+          original_files: [1093220],
+          computed_files: [910251],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 672445,
+          title: 'Sample8 RNA',
+          accession_code: 'E-MTAB-1811-Sample8',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-105_Repl-11degreesRAD.CEL',
+                    name: '101650-105_Repl-11degreesRAD.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 8'
+                },
+                source: {
+                  name: 'Sample8'
+                },
+                extract: {
+                  name: 'Sample8 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 11
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'radicle'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'radicle',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 11,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample8 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:46:39.105757Z',
+              last_modified: '2018-12-19T15:46:39.105757Z'
+            }
+          ],
+          results: [
+            {
+              id: 794883,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'radicle',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:46:37.050771Z',
+          last_modified: '2018-12-19T20:14:07.933012Z',
+          original_files: [1094492],
+          computed_files: [910740],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 671182,
+          title: 'Sample6 RNA',
+          accession_code: 'E-MTAB-1811-Sample6',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-077_56-11degreesRAD.CEL',
+                    name: '101650-077_56-11degreesRAD.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 6'
+                },
+                source: {
+                  name: 'Sample6'
+                },
+                extract: {
+                  name: 'Sample6 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 11
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'radicle'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'radicle',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 11,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample6 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:46:20.531934Z',
+              last_modified: '2018-12-19T15:46:20.531934Z'
+            }
+          ],
+          results: [
+            {
+              id: 794603,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'radicle',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:46:19.618987Z',
+          last_modified: '2018-12-19T20:13:35.079999Z',
+          original_files: [1093665],
+          computed_files: [910460],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 671811,
+          title: 'Sample7 RNA',
+          accession_code: 'E-MTAB-1811-Sample7',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-079_58-11degreesRAD.CEL',
+                    name: '101650-079_58-11degreesRAD.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 7'
+                },
+                source: {
+                  name: 'Sample7'
+                },
+                extract: {
+                  name: 'Sample7 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 11
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'radicle'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'radicle',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 11,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample7 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:46:29.666313Z',
+              last_modified: '2018-12-19T15:46:29.666313Z'
+            }
+          ],
+          results: [
+            {
+              id: 794710,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'radicle',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:46:27.691285Z',
+          last_modified: '2018-12-19T20:13:49.611952Z',
+          original_files: [1094089],
+          computed_files: [910566],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 673029,
+          title: 'Sample9 RNA',
+          accession_code: 'E-MTAB-1811-Sample9',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-080_59-18degreesCAP.CEL',
+                    name: '101650-080_59-18degreesCAP.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 9'
+                },
+                source: {
+                  name: 'Sample9'
+                },
+                extract: {
+                  name: 'Sample9 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 18
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'micropylar endosperm'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'micropylar endosperm',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 18,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample9 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:46:50.194593Z',
+              last_modified: '2018-12-19T15:46:50.194593Z'
+            }
+          ],
+          results: [
+            {
+              id: 795037,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'micropylar endosperm',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:46:47.663926Z',
+          last_modified: '2018-12-19T20:14:26.480126Z',
+          original_files: [1094881],
+          computed_files: [910894],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 673580,
+          title: 'Sample10 RNA',
+          accession_code: 'E-MTAB-1811-Sample10',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-081_60-18degreesCAP.CEL',
+                    name: '101650-081_60-18degreesCAP.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 10'
+                },
+                source: {
+                  name: 'Sample10'
+                },
+                extract: {
+                  name: 'Sample10 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 18
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'micropylar endosperm'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'micropylar endosperm',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 18,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample10 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:46:59.602260Z',
+              last_modified: '2018-12-19T15:46:59.602260Z'
+            }
+          ],
+          results: [
+            {
+              id: 795170,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'micropylar endosperm',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:46:57.718350Z',
+          last_modified: '2018-12-19T20:14:42.072077Z',
+          original_files: [1095231],
+          computed_files: [911026],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
+        },
+        {
+          id: 667549,
+          title: 'Sample1 RNA',
+          accession_code: 'E-MTAB-1811-Sample1',
+          source_database: 'ARRAY_EXPRESS',
+          organism: {
+            name: 'LEPIDIUM_SATIVUM',
+            taxonomy_id: 33125
+          },
+          platform_accession_code: 'ath1121501',
+          platform_name:
+            '[ATH1-121501] Affymetrix Arabidopsis ATH1 Genome Array',
+          pretty_platform:
+            'Affymetrix Arabidopsis ATH1 Genome Array (ath1121501)',
+          technology: 'MICROARRAY',
+          manufacturer: 'AFFYMETRIX',
+          protocol_info: [
+            {
+              Text: 'P-AFFY-3 GeneChip hybridization',
+              Type: 'nucleic acid hybridization to array protocol',
+              Accession: 'P-AFFY-3',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Title: Affymetrix CEL analysis. Description:',
+              Type: 'feature_extraction',
+              Accession: 'P-AFFY-6',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "After-ripened Lepidium sativum L. FR1 ('Gartenkresse, einfache') seeds (Juliwa, Heidelberg, Germany) were incubated in petri dishes on two layers of filter paper with 6 ml 1/10 Murashige-Skoog salts in continuous white light (ca. 100 µmol•s-1•m-2) at the temperature indicated.",
+              Type: 'growth protocol',
+              Accession: 'P-MTAB-34006',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'Four biological replicates of seeds were sampled after 10h of imbibition at 11 degrees C, 18 degrees C, 27 degrees C and 32 degrees C.  Two tissues (micropylar endosperm cap and radicle) were dissected from individual seeds. The dissected tissues (ca. 200 endosperm caps (Cap), and ca. 50 radicles (Rad)) were pooled for each sample, frozen in liquid nitrogen and stored at -80 ºC.',
+              Type: 'treatment protocol',
+              Accession: 'P-MTAB-34007',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: 'CTAB/Chloroform extraction followed by RNA clean-up with the Qiagen Rneasy kit, followed by quantity and quality controls',
+              Type: 'nucleic acid extraction protocol',
+              Accession: 'P-MTAB-34008',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            },
+            {
+              Text: "The Affymetrix 3' IVT-Express Labeling Kit (#901229) was used to synthesize Biotin-labeled cRNA. From each RNA sample 100 ng was used as input for the labeling reactions.",
+              Type: 'nucleic acid labeling protocol',
+              Accession: 'P-MTAB-34009',
+              Reference:
+                'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/protocols'
+            }
+          ],
+          annotations: [
+            {
+              data: {
+                file: [
+                  {
+                    url: 'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip/101650-072_49-11degreesCAP.CEL',
+                    name: '101650-072_49-11degreesCAP.CEL',
+                    type: 'data',
+                    comment: {
+                      name: 'ArrayExpress FTP file',
+                      value:
+                        'ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-1811/E-MTAB-1811.raw.1.zip'
+                    }
+                  }
+                ],
+                assay: {
+                  name: 'Assay 1'
+                },
+                source: {
+                  name: 'Sample1'
+                },
+                extract: {
+                  name: 'Sample1 RNA'
+                },
+                variable: [
+                  {
+                    name: 'temperature',
+                    unit: 'degree celsius',
+                    value: 11
+                  },
+                  {
+                    name: 'organism part',
+                    value: 'micropylar endosperm'
+                  }
+                ],
+                characteristic: [
+                  {
+                    value: 'Lepidium sativum',
+                    category: 'organism'
+                  },
+                  {
+                    value: 'seed',
+                    category: 'developmental stage'
+                  },
+                  {
+                    value: 'fresh_sample',
+                    category: 'specimen with known storage state'
+                  },
+                  {
+                    value: 'micropylar endosperm',
+                    category: 'organism part'
+                  },
+                  {
+                    unit: 'degree celsius',
+                    value: 11,
+                    category: 'temperature'
+                  }
+                ],
+                'labeled-extract': {
+                  name: 'Sample1 labeled_extract',
+                  label: 'biotin'
+                }
+              },
+              is_ccdl: false,
+              created_at: '2018-12-19T15:45:34.765755Z',
+              last_modified: '2018-12-19T15:45:34.765755Z'
+            }
+          ],
+          results: [
+            {
+              id: 793713,
+              processor: {
+                id: 99,
+                name: 'Affymetrix SCAN',
+                version: 'v1.4.7',
+                docker_image: 'dr_affymetrix',
+                environment: {
+                  R: {
+                    sva: '3.26.0',
+                    affy: '1.56.0',
+                    limma: '3.34.9',
+                    oligo: '1.42.0',
+                    affyio: '1.48.0',
+                    'SCAN.UPC': '2.20.0',
+                    Brainarray: '22.0.0',
+                    Bioconductor: '3.6',
+                    AnnotationDbi: '1.40.0'
+                  },
+                  os_pkg: {
+                    'r-base': '3.4.4-1xenial0',
+                    python3: '3.5.1-3',
+                    'python3-pip': '8.1.1-2ubuntu0.4'
+                  },
+                  python: {
+                    rpy2: '2.9.5',
+                    Django: '2.1.2',
+                    'data-refinery-common': '1.4.7'
+                  },
+                  os_distribution: 'Ubuntu 16.04.5 LTS'
+                }
+              },
+              organism_index: null
+            }
+          ],
+          source_archive_url:
+            'https://www.ebi.ac.uk/arrayexpress/json/v3/experiments/E-MTAB-1811/samples',
+          has_raw: true,
+          sex: '',
+          age: null,
+          specimen_part: 'micropylar endosperm',
+          genotype: '',
+          disease: '',
+          disease_stage: '',
+          cell_line: '',
+          treatment: '',
+          race: '',
+          subject: '',
+          compound: '',
+          time: '',
+          is_processed: true,
+          is_unable_to_be_processed: false,
+          created_at: '2018-12-19T15:45:33.410406Z',
+          last_modified: '2018-12-19T20:11:46.779759Z',
+          original_files: [1091222],
+          computed_files: [909570],
+          last_processor_job: null,
+          last_downloader_job: null,
+          most_recent_smashable_file: null,
+          most_recent_quant_file: null,
+          contributed_metadata: {},
+          contributed_keywords: {},
+          experiment_accession_codes: ['E-MTAB-1811']
         }
       ]
     }

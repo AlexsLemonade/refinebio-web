@@ -1,6 +1,6 @@
-import { useResponsive } from 'hooks/useResponsive'
 import { Tabs as GrommetTabs } from 'grommet'
 import styled, { css } from 'styled-components'
+import { useResponsive } from 'hooks/useResponsive'
 
 // NOTE: Set the prop 'text' to true for the text-based tab button
 

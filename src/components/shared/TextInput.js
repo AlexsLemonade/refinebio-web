@@ -1,6 +1,6 @@
 import { Box, Text, TextInput as GrommetTextInput } from 'grommet'
-import { Icon } from 'components/shared/Icon'
 import styled, { css } from 'styled-components'
+import { Icon } from 'components/shared/Icon'
 
 const CustomInput = styled(GrommetTextInput)`
   ${({ theme, error }) =>
@@ -18,7 +18,7 @@ const CustomInput = styled(GrommetTextInput)`
 
 export const TextInput = ({ error = false, ...props }) => {
   return (
-    <Box style={{ position: 'relative' }}>
+    <Box style={{ position: 'relative' }} width="100%">
       {error && (
         <Text
           focusable="false"

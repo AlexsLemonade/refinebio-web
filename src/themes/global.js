@@ -1,4 +1,4 @@
-import { makeEdgeSizes } from 'helpers/makeEdgeSizes'
+import makeEdgeSizes from 'helpers/makeEdgeSizes'
 import { colors } from 'themes/colors'
 
 /* RULE: 
