@@ -96,8 +96,6 @@ export const useSearchManager = () => {
     return key in search
   }
 
-  console.log(search)
-
   // toggles a filter option in facets
   const toggleFilter = (checked, key, val, updateQuery = true) => {
     if (clientOnlyFilterQueries.includes(key)) {
@@ -166,6 +164,8 @@ export const useSearchManager = () => {
           } else {
             temp[key] = queryParams[key]
           }
+        } else {
+          temp[key] = queryParams[key]
         }
       }
     })

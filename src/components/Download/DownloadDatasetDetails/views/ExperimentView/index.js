@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { formatSampleMetadata } from 'helpers/dataset'
 import { Paragraph } from 'grommet'
+import { formatSampleMetadata } from 'helpers/dataset'
 import { OrganismFilter } from './OrganismFilter'
 import { ViewBlock } from './ViewBlock'
 import { ViewBlocks } from '../ViewBlocks'

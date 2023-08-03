@@ -1,5 +1,5 @@
-import { useSearchManager } from 'hooks/useSearchManager'
 import { CheckBox } from 'grommet'
+import { useSearchManager } from 'hooks/useSearchManager'
 
 // the special quary string '?empty=true' is used in FE-only to toggle the `num_downloadable_samples__gt` value
 // - its value is 0 by default which excludes non-doownloadable samples from API results

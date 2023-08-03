@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Box } from 'grommet'
-import { BoxBlock } from 'components/shared/BoxBlock'
 import styled from 'styled-components'
+import { BoxBlock } from 'components/shared/BoxBlock'
 
 // total numner of lines
 const lineTotal = 5

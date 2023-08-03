@@ -1,10 +1,10 @@
 /* eslint-disable no-nested-ternary */
 import { memo, useEffect, useMemo, useState } from 'react'
+import { Box, CheckBox, Spinner, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { useSamplesTableManager } from 'hooks/useSamplesTableManager'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import formatString from 'helpers/formatString'
-import { Box, CheckBox, Spinner, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { BoxBlock } from 'components/shared/BoxBlock'
 import { Button } from 'components/shared/Button'

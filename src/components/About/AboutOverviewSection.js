@@ -1,5 +1,5 @@
-import { useResponsive } from 'hooks/useResponsive'
 import { Heading, Paragraph } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Column } from 'components/shared/Column'
 import { Row } from 'components/shared/Row'
 

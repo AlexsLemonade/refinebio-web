@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
+import { Box } from 'grommet'
 import { useSearchManager } from 'hooks/useSearchManager'
 import formatURLString from 'helpers/formatURLString'
-import { Box } from 'grommet'
 import { Button } from 'components/shared/Button'
 
 export const SearchCardFooter = ({ accessionCode, title }) => {

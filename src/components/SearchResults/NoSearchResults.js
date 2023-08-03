@@ -1,6 +1,6 @@
+import { Box, Heading, Paragraph, Text } from 'grommet'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, Heading, Paragraph, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { MissingResultsFormButton } from './MissingResultsFormButton'
 

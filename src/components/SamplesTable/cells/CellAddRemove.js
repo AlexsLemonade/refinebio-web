@@ -1,7 +1,7 @@
 import { memo } from 'react'
+import { Box, Text } from 'grommet'
 import apiData from 'api/api_data.json'
 import { links } from 'config'
-import { Box, Text } from 'grommet'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'

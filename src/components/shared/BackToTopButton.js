@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
+import { Box, Text } from 'grommet'
+import styled, { css } from 'styled-components'
 import { useResponsive } from 'hooks/useResponsive'
 import scrollToTop from 'helpers/scrollToTop'
 import isWindow from 'helpers/isWindow'
-import { Box, Text } from 'grommet'
-import styled, { css } from 'styled-components'
 
 const ArrowIcon = styled(Box)`
   ${({ theme }) => css`

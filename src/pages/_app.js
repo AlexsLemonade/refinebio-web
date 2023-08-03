@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/nextjs'
 import 'regenerator-runtime'
-import { GlobalStyle } from 'styles/GlobalStyle'
 import { Grommet } from 'grommet'
+import { GlobalStyle } from 'styles/GlobalStyle'
 import { theme } from 'themes'
 import { BandContextProvider } from 'contexts/BandContext'
 import { DatasetContextProvider } from 'contexts/DatasetContext'

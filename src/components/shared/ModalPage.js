@@ -1,5 +1,5 @@
-import { useModal } from 'hooks/useModal'
 import { Box, Grid } from 'grommet'
+import { useModal } from 'hooks/useModal'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Portal } from 'components/shared//Portal'

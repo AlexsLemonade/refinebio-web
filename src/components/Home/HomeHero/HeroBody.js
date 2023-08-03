@@ -1,7 +1,7 @@
 import { useState } from 'react'
+import { Box, Heading, Text } from 'grommet'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, Heading, Text } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { SearchBox } from 'components/shared/SearchBox'
 

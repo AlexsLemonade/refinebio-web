@@ -1,7 +1,7 @@
+import { Box } from 'grommet'
 import { useRefinebio } from 'hooks/useRefinebio'
 import { useDataset } from 'hooks/useDataset'
 import { useModal } from 'hooks/useModal'
-import { Box } from 'grommet'
 import { Modal } from 'components/shared/Modal'
 import { Pill } from 'components/shared/Pill'
 import { ModalContent } from './ModalContent'

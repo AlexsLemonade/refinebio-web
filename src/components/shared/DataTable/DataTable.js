@@ -8,8 +8,8 @@ import {
   useTable
 } from 'react-table'
 import { useSticky } from 'react-table-sticky'
-import { useIntersectObserver } from 'hooks/useIntersectObserver'
 import { Box, Text } from 'grommet'
+import { useIntersectObserver } from 'hooks/useIntersectObserver'
 import { BoxBlock } from 'components/shared/BoxBlock'
 import {
   HorizontalScrollIndicator,

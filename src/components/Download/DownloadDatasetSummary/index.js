@@ -1,10 +1,3 @@
-import { useResponsive } from 'hooks/useResponsive'
-import {
-  getExperimentCountBySpecies,
-  getTotalExperiments,
-  getTotalSamples
-} from 'helpers/dataset'
-
 import {
   Box,
   Heading,
@@ -14,6 +7,13 @@ import {
   TableHeader,
   TableRow
 } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
+import {
+  getExperimentCountBySpecies,
+  getTotalExperiments,
+  getTotalSamples
+} from 'helpers/dataset'
+
 import { Row } from 'components/shared/Row'
 import { RowSpieces, RowTotal } from './rows'
 

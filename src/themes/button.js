@@ -1,6 +1,5 @@
 const boxShadow = `0px 3px 4px rgba(0, 0, 0, 0.3)`
 const gray = 'gray-shade-40'
-const grayLinkButton = '#999'
 const radius = '3px'
 
 export default {
@@ -94,13 +93,7 @@ export default {
         align-self: center;
       }
     }
-    // for link buttons
-    &:disabled {
-      color: ${grayLinkButton};
-      &:hover {
-        color:${grayLinkButton};
-      }
-    }
+  
     white-space: nowrap;
     &:active:not([disabled]) {
       box-shadow: ${boxShadow};

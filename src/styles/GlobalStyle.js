@@ -54,5 +54,4 @@ export const GlobalStyle = createGlobalStyle`
     #nprogress .peg {
       box-shadow: none;
     }
-
 `

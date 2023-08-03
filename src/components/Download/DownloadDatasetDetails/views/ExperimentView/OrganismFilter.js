@@ -1,5 +1,5 @@
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, RadioButtonGroup, Text } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import formatString from 'helpers/formatString'
 import unionizeArrays from 'helpers/unionizeArrays'
 

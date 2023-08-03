@@ -1,6 +1,6 @@
+import { Box, Grid, Select } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { useSearchManager } from 'hooks/useSearchManager'
-import { Box, Grid, Select } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { PageSizes } from 'components/shared/PageSizes'
 import { options } from 'config'

@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useResponsive } from 'hooks/useResponsive'
-import { makePagination } from 'helpers/makePagination'
 import { nanoid } from 'nanoid'
 import { Box, Form, Text } from 'grommet'
+import styled, { css } from 'styled-components'
+import { useResponsive } from 'hooks/useResponsive'
+import makePagination from 'helpers/makePagination'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { TextInput } from 'components/shared/TextInput'
-import styled, { css } from 'styled-components'
 
 const PaginationButton = styled(Button)`
   ${({ theme, current }) => css`
@@ -193,6 +193,7 @@ export const Pagination = ({
               margin={{ left: 'xsmall' }}
               secondary
               type="submit"
+              style={{ borderRadius: '3px' }}
             />
           </Box>
         </Form>

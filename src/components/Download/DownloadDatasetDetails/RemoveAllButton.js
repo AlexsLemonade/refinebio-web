@@ -1,7 +1,7 @@
+import { Box, Heading } from 'grommet'
 import { useDataset } from 'hooks/useDataset'
 import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { Modal } from 'components/shared/Modal'
 import { Row } from 'components/shared/Row'

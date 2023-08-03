@@ -1,6 +1,6 @@
 import { memo } from 'react'
-import isEmptyObject from 'helpers/isEmptyObject'
 import { Box, Heading } from 'grommet'
+import isEmptyObject from 'helpers/isEmptyObject'
 import { Anchor } from 'components/shared/Anchor'
 import { Pill } from 'components/shared/Pill'
 import { links } from 'config'

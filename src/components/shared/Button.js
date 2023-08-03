@@ -1,6 +1,6 @@
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Button as GrommetButton } from 'grommet'
 import styled, { css } from 'styled-components'
+import { useResponsive } from 'hooks/useResponsive'
 import { IconSpinner } from './IconSpinner'
 
 /* NOTE: 
@@ -10,6 +10,15 @@ import { IconSpinner } from './IconSpinner'
 
 const CustomLinkButton = styled(GrommetButton)`
   position: relative;
+
+  ${({ theme }) => css`
+    &:disabled {
+      color: ${theme.global.colors['gray-shade-40']};
+      &:hover {
+        color: ${theme.global.colors['gray-shade-40']};
+      }
+    }
+  `}
 
   ${({ theme, linkColor }) => css`
     color: ${theme.global.colors[linkColor]};
@@ -180,8 +189,8 @@ export const Button = ({
               horizontal: 'large'
             },
             {
-              vertical: 'small',
-              horizontal: 'large'
+              vertical: 'xxsmall',
+              horizontal: 'medium'
             }
           )}
           // eslint-disable-next-line react/jsx-props-no-spreading

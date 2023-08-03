@@ -1,7 +1,7 @@
 import { useState } from 'react'
+import { Box, Heading, Paragraph, Text } from 'grommet'
 import { formatSampleMetadata } from 'helpers/dataset'
 import getURLForAccessionCode from 'helpers/getURLForAccessionCode'
-import { Box, Heading, Paragraph, Text } from 'grommet'
 import { Icon } from 'components/shared/Icon'
 import { Anchor } from 'components/shared/Anchor'
 import { TextHighlight } from 'components/shared/TextHighlight'

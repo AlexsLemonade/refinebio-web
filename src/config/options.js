@@ -3,6 +3,14 @@ export const options = {
     { label: 'Experiment', value: 'EXPERIMENT' },
     { label: 'Species', value: 'SPECIES' }
   ],
+  // setting for the experiment hook
+  experiment: {
+    databaseNames: {
+      GEO: 'Gene Expression Omnibus (GEO)',
+      SRA: 'Sequence Read Archive (SRA)',
+      ARRAY_EXPRESS: 'ArrayExpress'
+    }
+  },
   // setting for the search manager
   search: {
     // default values for common queries

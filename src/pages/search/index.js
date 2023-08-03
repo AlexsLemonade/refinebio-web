@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
+import { Box, Grid, Heading } from 'grommet'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
 import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
 import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
-import { Box, Grid, Heading } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -47,7 +47,6 @@ export const Search = (props) => {
   const [page, setPage] = useState(Number(query.p) || 1)
   const [pageSize, setPageSize] = useState(Number(query.size) || pageSizes[0])
   const [sortBy, setSortBy] = useState(query.sortby || sortby[0].value)
-
   const isResults = results.results.length > 0
 
   const handleClearSearchTerm = () => {
