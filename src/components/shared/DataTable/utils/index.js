@@ -1,3 +1,4 @@
 export { HorizontalScrollIndicator } from './HorizontalScrollIndicator'
 export { Resizer } from './Resizer'
-export { SortBy, SortByBorder } from './SortBy'
+export { SortBy } from './SortBy'
+export { Table, TableHeader, TableBody, TableRow, TableCell } from './Table'

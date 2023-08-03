@@ -1,8 +1,8 @@
 import { nanoid } from 'nanoid'
-import { isArray } from 'helpers/isArray'
-import { isObject } from 'helpers/isObject'
-import { isString } from 'helpers/isString'
 import { Box, Text } from 'grommet'
+import isArray from 'helpers/isArray'
+import isObject from 'helpers/isObject'
+import isString from 'helpers/isString'
 import { AnnotationText } from './AnnotationText'
 
 export const AnnotationValue = ({ value }) => {
