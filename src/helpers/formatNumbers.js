@@ -1,5 +1,6 @@
 // Formats numbers to a locale string (e.g., 1000 to 1,000)
+export default (nums) => {
+  if (!nums) return null
 
-export const formatNumbers = (nums) => nums.toLocaleString()
-
-export default formatNumbers
+  return nums.toLocaleString()
+}

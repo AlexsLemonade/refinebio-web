@@ -73,7 +73,7 @@ export const colors = {
   /* Others
   */
   // status
-  error: 'coral',
+  error: '#E56E60',
   info: '#002F6C', // 'alex-navy'
   'info-bg': '#D6E8FF', // 'alex-navy-tint-90'
   success: '#41A36D', // 'pastel-green'
@@ -84,19 +84,22 @@ export const colors = {
   gradient:
     'linear-gradient(180deg, rgba(12, 52, 131, 0.937981) 0%, #6B8CCE 131.35%, #A2B6DF 190.36%, #A1B6DF 190.36%, #A2B6DF 190.36%)',
   'gradient-light': 'linear-gradient(180deg, #DFE9F3 7.13%, #FFFFFF 75%)',
-  gradient_light: 'linear-gradient(360deg, #DFE9F3 7.13%, #FFFFFF 75%)',
-  gradient_light_reverse: 'linear-gradient(180deg, #DFE9F3 7.13%, #FFFFFF 75%)',
-  gradient_blue:
+  gradientLight: 'linear-gradient(360deg, #DFE9F3 7.13%, #FFFFFF 75%)',
+  gradientLightReverse: 'linear-gradient(180deg, #DFE9F3 7.13%, #FFFFFF 75%)',
+  gradientBlue:
     'linear-gradient(179.93deg, rgba(12, 52, 131, 0.937981) -11.89%, rgba(25, 64, 142, 0.946665) 21.67%, #6b8cce 75.91%, #a2b6df 129.12%, #a2b6df 192.17%)',
-  gradient_blue_dark:
+  gradientBlueDark:
     'linear-gradient(180deg, rgba(12, 52, 131, 0.937981) 0%, #6B8CCE 131.35%, #A2B6DF 190.36%, #A1B6DF 190.36%, #A2B6DF 190.36%)',
-  gradient_left:
+  gradientLeft:
     'linear-gradient(270deg,rgba(253, 253, 253, 0) 0%,rgba(204, 204, 204, 0.2) 40%,rgba(204, 204, 204, 1) 100%)',
-  gradient_right:
+  gradientRight:
     'linear-gradient(90deg,rgba(253, 253, 253, 0) 0%,rgba(204, 204, 204, 0.2) 40%,rgba(204, 204, 204, 1) 100%)',
   // Opaque
-  rgba_4: 'rgba(0, 0, 0, 0.4)',
-  rgba_6: 'rgba(0, 0, 0, 0.6)',
+  rgbaLight2: 'rgba(255, 255, 255, 0.2)',
+  rgbaLight7: 'rgba(255, 255, 255, 0.7)',
+  rgba4: 'rgba(0, 0, 0, 0.4)',
+  rgba6: 'rgba(0, 0, 0, 0.6)',
+  rgba3: 'rgba(0, 0, 0, 0.3)',
   // Social Media
   twitter: '#55acee',
   // default font color

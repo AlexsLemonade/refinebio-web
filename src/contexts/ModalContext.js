@@ -2,13 +2,26 @@ import { createContext, useMemo, useState } from 'react'
 
 export const ModalContext = createContext()
 
-// id must be unique
+// each modal's "id" must to be unique
 export const ModalContextProvider = ({ children }) => {
-  const [modal, setModal] = useState({ show: false, id: null })
+  const [modal, setModal] = useState({})
 
-  const openModal = (id) => setModal({ show: true, id })
+  const openModal = (id) =>
+    setModal((prev) => ({
+      ...prev,
+      [id]: {
+        id,
+        show: true
+      }
+    }))
 
-  const closeModal = () => setModal({ show: false, id: null })
+  const closeModal = (id) =>
+    setModal(() => {
+      const temp = { ...modal }
+      delete temp[id]
+
+      return temp
+    })
 
   const value = useMemo(
     () => ({ modal, closeModal, openModal }),
