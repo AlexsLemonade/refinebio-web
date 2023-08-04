@@ -20,7 +20,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const { asPath, pathname, push } = router
   const { viewport, setResponsive } = useResponsive()
   // TEMPORARY
-  const { dataset } = useDataset()
+  const { dataset, getDataset } = useDataset()
   const [totalSamples, setTotalSamples] = useState()
 
   useEffect(() => {
@@ -32,6 +32,12 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const handleClick = () => {
     if (viewport !== 'small') return
     setToggle(!toggle)
+  }
+
+  // TEMPORARY for Demo (will be handled with API call)
+  const handleGetDataset = () => {
+    if (!totalSamples) return
+    getDataset(true)
   }
 
   return (
@@ -175,7 +181,10 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                   padding: setResponsive('12px 0', '4px 24px'),
                   width: '100%'
                 }}
-                onClick={() => push('/download')}
+                onClick={() => {
+                  push('/download')
+                  handleGetDataset()
+                }}
               />
             </Box>
           </List>

@@ -1,5 +1,6 @@
 import { Box, Heading } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
+import { SamplesTableManagerContextProvider } from 'contexts/SamplesTableManagerContext'
 import formatString from 'helpers/formatString'
 import { SamplesTable } from 'components/SamplesTable'
 import { TextCapitalized } from 'components/shared/TextCapitalized'
@@ -35,13 +36,15 @@ export const ModalContent = ({
           Samples
         </Heading>
       </Box>
-      <SamplesTable
-        experimentSampleAssociations={dataset}
-        queryToAdd={params}
-        sampleMetadataFields={sampleMetadataFields}
-        isImmutable={isImmutable}
-        modalView
-      />
+      <SamplesTableManagerContextProvider>
+        <SamplesTable
+          experimentSampleAssociations={dataset} // TEMPORARY for demo
+          queryToAdd={params}
+          sampleMetadataFields={sampleMetadataFields}
+          isImmutable={isImmutable}
+          modalView
+        />
+      </SamplesTableManagerContextProvider>
     </Box>
   )
 }

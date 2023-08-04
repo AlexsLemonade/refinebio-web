@@ -40,7 +40,11 @@ export const RemoveAllButton = () => {
             label="Yes, remove all samples"
             tertiary
             responsive
-            onClick={removeAllDataset}
+            onClick={() => {
+              // TEMPORARY for demo
+              removeAllDataset()
+              closeModal(id)
+            }}
           />
           <Button
             label="No, keep all samples"
