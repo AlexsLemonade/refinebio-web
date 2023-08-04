@@ -1,5 +1,5 @@
-import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { SignUpBlock } from 'components/shared/SignUpBlock'
 import { HomeDocumentationSection } from 'components/Home/HomeDocumentationSection'
 import { HomeExamplesSection } from 'components/Home/HomeExamplesSection'

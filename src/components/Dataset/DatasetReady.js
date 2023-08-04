@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { useResponsive } from 'hooks/useResponsive'
-import { formatBytes } from 'helpers/formatBytes'
 import { Box, CheckBox, Heading, Text } from 'grommet'
+import { useRefinebio } from 'hooks/useRefinebio'
+import { useResponsive } from 'hooks/useResponsive'
+import formatBytes from 'helpers/formatBytes'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
@@ -10,20 +11,29 @@ import { links } from 'config'
 import { DatasetExplore } from './DatasetExplore'
 
 export const DatasetReady = ({ dataset }) => {
+  const { token, setToken } = useRefinebio()
   const { setResponsive } = useResponsive()
-  const [agree, setAgree] = useState(false)
-  const handleDownloadNow = () => {}
+
+  const [agree, setAgree] = useState(!!token)
+
+  const handleAgreeToTerms = () => {
+    setAgree(!agree)
+    setToken(!token)
+  }
+
+  const handleDownloadNow = () => {
+    // TEMP
+  }
 
   return (
     <>
       <Box align="center">
-        <Row justify="center" width={setResponsive('100%', '80%')}>
-          <Column align={setResponsive('center', 'start')}>
-            <Heading
-              level={1}
-              margin={{ bottom: 'small' }}
-              size={setResponsive('h1Xsmall', 'h1Small')}
-            >
+        <Row justify="center" width={setResponsive('100%', '70%')}>
+          <Column
+            align={setResponsive('center', 'start')}
+            flexValue={setResponsive('1 1 auto', 'auto')}
+          >
+            <Heading level={1} margin={{ bottom: 'small' }}>
               Your Dataset is ready for download!
             </Heading>
             <Text>
@@ -49,11 +59,12 @@ export const DatasetReady = ({ dataset }) => {
                       <Anchor
                         href={links.terms}
                         label="Terms of Use"
+                        target="_blank"
                         rel="noopener noreferrer"
                       />
                     </Text>
                   }
-                  onClick={() => setAgree(!agree)}
+                  onClick={handleAgreeToTerms}
                 />
                 <Box
                   margin={{
@@ -64,7 +75,7 @@ export const DatasetReady = ({ dataset }) => {
                 >
                   <Button
                     label="Download Now"
-                    disabled={!agree}
+                    disabled={!agree || !token}
                     primary
                     responsive
                     clickHandler={handleDownloadNow}
@@ -75,6 +86,7 @@ export const DatasetReady = ({ dataset }) => {
           </Column>
           <Column
             align="center"
+            flexValue={setResponsive('1 1 auto', 'auto')}
             margin={{
               top: setResponsive('large', 'none'),
               bottom: setResponsive('large', 'none'),

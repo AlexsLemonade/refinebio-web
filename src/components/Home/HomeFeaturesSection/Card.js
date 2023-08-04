@@ -1,5 +1,5 @@
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Column } from 'components/shared/Column'
 import { Row } from 'components/shared/Row'
 
@@ -20,7 +20,7 @@ export const Card = ({ heading, body, svgIcon, ...props }) => {
           <Heading
             level={2}
             margin={{ bottom: 'small' }}
-            size={setResponsive('h2Small', 'h2Large')}
+            size={setResponsive('small', 'large')}
           >
             {heading}
           </Heading>

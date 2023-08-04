@@ -87,12 +87,13 @@ export default {
   extend: () => `
     > div {
       border-radius: ${radius};
-      //  to center an icon
+      // to center an icon
       > span {
         display: inline-flex;
         align-self: center;
       }
     }
+  
     white-space: nowrap;
     &:active:not([disabled]) {
       box-shadow: ${boxShadow};

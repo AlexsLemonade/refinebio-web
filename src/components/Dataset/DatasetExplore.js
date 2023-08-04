@@ -1,5 +1,5 @@
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { Column } from 'components/shared/Column'
 import { List } from 'components/shared/List'
@@ -95,6 +95,7 @@ export const DatasetExplore = () => {
     >
       <Column
         align="center"
+        flexValue={setResponsive('1 1 auto', 'auto')}
         margin={{
           right: setResponsive('none', 'xlarge', 'none')
         }}
@@ -113,12 +114,11 @@ export const DatasetExplore = () => {
           width={setResponsive('250px', '350px', '400px')}
         />
       </Column>
-      <Column pad={{ top: setResponsive('none', 'basex7', 'basex9') }}>
-        <Heading
-          level={2}
-          margin={{ bottom: 'small' }}
-          size={setResponsive('h2Xsmall', 'h2Small')}
-        >
+      <Column
+        flexValue={setResponsive('1 1 auto', 'auto')}
+        pad={{ top: setResponsive('none', 'basex7', 'basex9') }}
+      >
+        <Heading level={2} margin={{ bottom: 'small' }}>
           Explore what you can do with your refine.bio dataset!
         </Heading>
         <List alignItems="start" flexDirection="column">

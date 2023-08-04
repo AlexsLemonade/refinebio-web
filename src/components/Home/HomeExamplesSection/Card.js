@@ -1,5 +1,5 @@
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Column } from 'components/shared/Column'
 
 export const Card = ({ heading, body, footer, svgIcon, ...props }) => {
@@ -15,12 +15,7 @@ export const Card = ({ heading, body, footer, svgIcon, ...props }) => {
       <Box height="xxxlarge" margin={{ bottom: 'medium' }} aria-hidden>
         {svgIcon}
       </Box>
-      <Heading
-        level={4}
-        margin={{ bottom: 'small' }}
-        size="h4Small"
-        weight="500"
-      >
+      <Heading level={4} margin={{ bottom: 'small' }} size="small" weight="500">
         {heading}
       </Heading>
       <Paragraph>{body}</Paragraph>

@@ -1,6 +1,6 @@
 import { memo } from 'react'
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Paragraph, Text } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
@@ -65,7 +65,7 @@ export const CompendiaDownloadBlock = ({ type }) => {
             level={2}
             color="white"
             margin={{ bottom: 'medium' }}
-            size={setResponsive('h2Small', 'h2Large')}
+            size={setResponsive('small', 'large')}
             style={{ textShadow: '0 3px 19px rgba(0,0,0,.5)' }}
             alignSelf="center"
           >

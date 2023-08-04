@@ -1,5 +1,5 @@
-import { useResponsive } from 'hooks/useResponsive'
 import { Heading, Paragraph } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Column } from 'components/shared/Column'
 import { Row } from 'components/shared/Row'
 
@@ -25,8 +25,8 @@ const Card = ({
       >
         <Heading
           level={2}
-          margin={{ bottom: setResponsive('small', 'small') }}
-          size={setResponsive('h2Small', 'h2Large')}
+          margin={{ bottom: 'small' }}
+          size={setResponsive('small', 'large')}
         >
           {heading}
         </Heading>

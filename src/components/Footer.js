@@ -1,5 +1,4 @@
 import { Fragment } from 'react'
-import { useResponsive } from 'hooks/useResponsive'
 import {
   Box,
   Footer as GrommentFooter,
@@ -7,13 +6,14 @@ import {
   Paragraph,
   Text
 } from 'grommet'
+import styled, { css } from 'styled-components'
+import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Icon } from 'components/shared/Icon'
 import { Row } from 'components/shared/Row'
-import styled, { css } from 'styled-components'
 import { contributors, links } from 'config'
 import { CoinIcon } from '../images/coin.svg'
 
@@ -81,6 +81,7 @@ export const Footer = () => {
                   icon={<CoinIcon aria-hidden />}
                   primary
                   rel="noopener noreferrer"
+                  target="_blank"
                 />
                 <Box align="center" direction="row" gap="medium">
                   <TwitterLink
@@ -122,7 +123,9 @@ export const Footer = () => {
             <Column>
               <Heading
                 level={5}
-                style={{ fontFamily: `'Lato', sans-serif`, fontWeight: '700' }}
+                style={{ fontFamily: `'Lato', sans-serif` }}
+                responsive={false}
+                weight="bold"
               >
                 Cite refine.bio
               </Heading>

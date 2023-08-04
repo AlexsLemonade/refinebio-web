@@ -4,7 +4,7 @@ import Help from '../../images/help.svg'
 import Organism from '../../images/organism.svg'
 import MicroArray from '../../images/microarray.svg'
 import MixedPlatform from '../../images/mixed-platform.svg'
-import Rna from '../../images/rna.svg'
+import RnaSeq from '../../images/rna.svg'
 import Samples from '../../images/samples.svg'
 
 const SVGs = {
@@ -13,7 +13,7 @@ const SVGs = {
   Organism,
   MicroArray,
   MixedPlatform,
-  Rna,
+  RnaSeq,
   Samples
 }
 
@@ -27,7 +27,7 @@ export const IconBadge = ({ name, label, size = 'small', ...props }) => {
         { name: 'left', start: [0, 1], end: [0, 1] },
         { name: 'right', start: [1, 1], end: [1, 1] }
       ]}
-      columns={['24px', 'auto']}
+      columns={['26px', 'auto']}
       rows={['auto', 'auto']}
       gap={{
         column: 'xxsmall'

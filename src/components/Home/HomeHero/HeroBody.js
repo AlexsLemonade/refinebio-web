@@ -1,30 +1,43 @@
-import { useResponsive } from 'hooks/useResponsive'
+import { useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
-import { Anchor } from 'components/shared/Anchor'
+import { useSearchManager } from 'hooks/useSearchManager'
+import { useResponsive } from 'hooks/useResponsive'
+import { Button } from 'components/shared/Button'
 import { SearchBox } from 'components/shared/SearchBox'
 
 export const HeroBody = () => {
   const { setResponsive } = useResponsive()
+  const { navigateToSearch } = useSearchManager()
+  const [userInput, setUserInput] = useState()
   const queries = ['Notch', 'medulloblastoma', 'GSE24528']
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    navigateToSearch(userInput && { search: userInput })
+  }
 
   return (
     <>
       <Heading
         level={1}
         margin={{ bottom: setResponsive('medium', 'medium', 'xlarge') }}
-        size={setResponsive('h1Small', 'h1Large')}
+        size="large"
         textAlign="center"
       >
         Search for normalized transcriptome data
       </Heading>
       <SearchBox
-        size="large"
         placeholder={setResponsive(
           'Search accessions, pathways, etc.,',
           'Search accessions, pathways, diseases, etc.,'
         )}
+        value={userInput}
+        size="large"
         primary
         responsive
+        clickHandler={() => setUserInput('')}
+        changeHandler={(e) => setUserInput(e.target.value)}
+        submitHandler={handleSubmit}
       />
       <Box
         align={setResponsive('center', 'start')}
@@ -34,20 +47,14 @@ export const HeroBody = () => {
         width="100%"
       >
         <Text size="xlarge">Try searching for:</Text>
-
         {queries.map((query) => (
-          <Text
+          <Button
             key={query}
-            size="large"
+            label={<Text size="xlarge">{query}</Text>}
+            link
             margin={{ top: setResponsive('small') }}
-          >
-            <Anchor
-              label={query}
-              href={{ pathname: '/search', query: { query } }}
-              size="xlarge"
-              underline
-            />
-          </Text>
+            onClick={() => navigateToSearch({ search: query })}
+          />
         ))}
       </Box>
     </>

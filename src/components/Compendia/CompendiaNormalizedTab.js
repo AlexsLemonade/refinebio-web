@@ -1,6 +1,6 @@
 import { memo } from 'react'
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Text } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { links } from 'config'
@@ -28,7 +28,7 @@ export const CompendiaNormalizedTab = ({ type = 'normalized' }) => {
           <Heading
             level={2}
             margin={{ bottom: setResponsive('medium', 'large') }}
-            size={setResponsive('h2Small', 'h2Large')}
+            size={setResponsive('small', 'large')}
             textAlign="center"
           >
             The normalized compendia is created by aggregating all samples from
@@ -50,7 +50,7 @@ export const CompendiaNormalizedTab = ({ type = 'normalized' }) => {
           <Heading
             level={2}
             margin={{ bottom: setResponsive('medium', 'large') }}
-            size={setResponsive('h2Small', 'h2Large')}
+            size={setResponsive('small', 'large')}
             textAlign="center"
           >
             Data scientists and computational biologists can use the normalized

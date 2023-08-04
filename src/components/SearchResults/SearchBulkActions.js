@@ -1,37 +1,28 @@
-import { useState } from 'react'
+import { Box, Grid, Select } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { Box, CheckBox, Grid, Select, Text } from 'grommet'
+import { useSearchManager } from 'hooks/useSearchManager'
 import { Button } from 'components/shared/Button'
+import { PageSizes } from 'components/shared/PageSizes'
+import { options } from 'config'
+import { NonDownloadableExperiment } from './SearchFilterList'
 
-export const SearchBulkActions = ({ results }) => {
+export const SearchBulkActions = ({
+  pageSize,
+  setPageSize,
+  sortBy,
+  setSortBy,
+  totalResults
+}) => {
+  const {
+    search: { pageSizes, sortby }
+  } = options
+  const { updatePageSize, updateSortBy } = useSearchManager()
   const { getForBreakpoint, setResponsive } = useResponsive()
-  const { count: totalResults } = results
-  const pageSizes = [10, 20, 50]
-  const sortByOptions = [
-    {
-      label: 'Best Match',
-      value: '_score'
-    },
-    {
-      label: 'Most No. of samples',
-      value: '-num_downloadable_samples'
-    },
-    {
-      label: 'Least No. of samples',
-      value: 'num_downloadable_samples'
-    },
-    {
-      label: 'Newest Experiment',
-      value: '-source_first_published'
-    },
-    {
-      label: 'Oldest Experiment',
-      value: 'source_first_published'
-    }
-  ]
-  const [selectedSortByOption, setSelectedSortByOption] = useState(
-    sortByOptions[0].value
-  )
+
+  const handleChageSort = (newOrder) => {
+    setSortBy(newOrder)
+    updateSortBy(newOrder)
+  }
 
   return (
     <Box pad={{ bottom: 'medium' }}>
@@ -109,17 +100,18 @@ export const SearchBulkActions = ({ results }) => {
           column: 'xsmall'
         }}
       >
-        <Box gridArea="page-display">
+        <Box gridArea="page-display" justify="center">
           <Box align="center" direction="row">
-            Showing
-            <Box width="84px">
-              <Select
-                defaultValue={pageSizes[0]}
-                options={pageSizes}
-                margin={{ horizontal: 'xxsmall' }}
-              />
-            </Box>
-            <Text>of {totalResults.toLocaleString()} results</Text>
+            <PageSizes
+              textPrepend="Showing"
+              textAppended="results"
+              pageSizeLabel="Total Samples"
+              pageSize={pageSize}
+              setPageSize={setPageSize}
+              pageSizes={pageSizes}
+              totalPages={totalResults}
+              updatePageSize={updatePageSize}
+            />
           </Box>
         </Box>
         <Box gridArea="sort-by">
@@ -127,14 +119,12 @@ export const SearchBulkActions = ({ results }) => {
             Sort by
             <Box width="208px">
               <Select
-                options={Object.values(sortByOptions)}
+                options={Object.values(sortby)}
                 labelKey="label"
-                value={selectedSortByOption}
+                value={sortBy}
                 valueKey={{ key: 'value', reduce: true }}
                 margin={{ horizontal: 'xxsmall' }}
-                onChange={({ value: nextValue }) =>
-                  setSelectedSortByOption(nextValue)
-                }
+                onChange={({ value: nextValue }) => handleChageSort(nextValue)}
               />
             </Box>
           </Box>
@@ -149,7 +139,7 @@ export const SearchBulkActions = ({ results }) => {
           </Box>
         </Box>
         <Box gridArea="hide-non-downloadble">
-          <CheckBox label="Hide non-downloadable experiments" checked />
+          <NonDownloadableExperiment />
         </Box>
       </Grid>
     </Box>

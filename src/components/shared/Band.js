@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { isMatchPath } from 'helpers/isMatchPath'
 import { Box } from 'grommet'
+import isMatchPath from 'helpers/isMatchPath'
 import { FixedContainer } from 'components/shared/FixedContainer'
 
 // render <ParticlesBg /> only in client

@@ -1,5 +1,5 @@
-import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
@@ -25,8 +25,6 @@ export const HomeDocumentationSection = () => {
                 label="Learn More"
                 secondary
                 responsive
-                rel="noopener noreferrer"
-                target="_blank"
               />
             }
             img="network.svg"

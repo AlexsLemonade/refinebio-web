@@ -1,5 +1,6 @@
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Text } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
+import formatNumbers from 'helpers/formatNumbers'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Hero } from 'components/shared/Hero'
 
@@ -11,7 +12,7 @@ const HeroHeader = () => {
       color="white"
       level={1}
       margin={{ bottom: 'large' }}
-      size={setResponsive('h1Small', 'h1Xlarge')}
+      size={setResponsive('large', 'xlarge')}
       style={{ textShadow: '0 3px 19px rgba(0,0,0,.5)' }}
       textAlign="center"
       weight="500"
@@ -55,10 +56,10 @@ const HeroBody = () => {
       <Heading
         level={2}
         margin={{ bottom: setResponsive('none', 'xlarge') }}
-        size={setResponsive('h2Xsmall', 'h2Large')}
+        size={setResponsive('small', 'large')}
         textAlign="center"
       >
-        refine.bio has harmonized over {data.gene_count.toLocaleString()} gene
+        refine.bio has harmonized over {formatNumbers(data.gene_count)} gene
         expression experiments
       </Heading>
 

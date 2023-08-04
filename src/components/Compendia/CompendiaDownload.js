@@ -1,6 +1,7 @@
 import { useEffect, useState, memo } from 'react'
-import { useResponsive } from 'hooks/useResponsive'
 import { Anchor, Box, CheckBox, Heading, Text } from 'grommet'
+import styled, { css } from 'styled-components'
+import { useResponsive } from 'hooks/useResponsive'
 import { Icon } from 'components/shared/Icon'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
@@ -8,11 +9,12 @@ import { List } from 'components/shared/List'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
 import { SearchBox } from 'components/shared/SearchBox'
-import { formatBytes } from 'helpers/formatBytes'
-import { formatString } from 'helpers/formatString'
+import formatBytes from 'helpers/formatBytes'
+import formatString from 'helpers/formatString'
 import { links } from 'config'
-import styled, { css } from 'styled-components'
 import data from 'api/mockDataCompendia'
+
+const boxShadow = `0px 3px 4px rgba(0, 0, 0, 0.3)`
 
 const DropDown = styled(Box)`
   > div:nth-child(2) {
@@ -20,6 +22,7 @@ const DropDown = styled(Box)`
   }
   &:focus-within > div:nth-child(2) {
     display: block;
+    box-shadow: ${boxShadow};
   }
 `
 
@@ -118,14 +121,14 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
       <Heading
         level={2}
         margin={{ bottom: 'medium' }}
-        size={setResponsive('h2Small', 'h2Large')}
+        size={setResponsive('small', 'large')}
       >
         Download the {heading}
       </Heading>
       <Box
         as="label"
         margin={{ bottom: 'medium' }}
-        style={{ font: "22px 'Rubik', sans-serif" }}
+        style={{ font: `${setResponsive('18px', '22px')} 'Rubik', sans-serif` }}
       >
         Choose Organism
       </Box>

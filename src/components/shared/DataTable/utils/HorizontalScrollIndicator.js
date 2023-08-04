@@ -1,6 +1,6 @@
 import { memo } from 'react'
-import { useResponsive } from 'hooks/useResponsive'
 import { Box } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
 
@@ -27,7 +27,7 @@ export const HorizontalScrollIndicator = ({
             type: isFirstCellVisible ? 'fadeOut' : 'fadeIn',
             duration: isFirstCellVisible ? 500 : 800
           }}
-          background="gradient_left"
+          background="gradientLeft"
           justify="center"
           height="100%"
           style={{
@@ -35,13 +35,14 @@ export const HorizontalScrollIndicator = ({
             position: 'absolute',
             left: 0,
             top: 0,
-            zIndex: 200
+            zIndex: 3
           }}
           width="30px"
         >
           <Button
             aria-label="Scroll to left"
             disabled={isFirstCellVisible}
+            gap="none"
             icon={<Icon name="ChevronLeft" size="xsmall" />}
             primary
             style={{
@@ -62,7 +63,7 @@ export const HorizontalScrollIndicator = ({
           type: isLastCellVisible ? 'fadeOut' : 'fadeIn',
           duration: isLastCellVisible ? 500 : 800
         }}
-        background="gradient_right"
+        background="gradientRight"
         justify="center"
         height="100%"
         style={{
@@ -77,6 +78,7 @@ export const HorizontalScrollIndicator = ({
         <Button
           aria-label="Scroll to right"
           disabled={isLastCellVisible}
+          gap="none"
           icon={<Icon name="ChevronRight" size="xsmall" />}
           primary
           style={{
