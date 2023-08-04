@@ -320,7 +320,7 @@ export default {
       source_first_published: '2018-06-29T00:00:00+00:00'
     },
     {
-      status: 'added',
+      status: '',
       id: 49187,
       title:
         'RNA-seq analysis of single cells of the oligodendrocyte lineage from nine distinct regions of the anterior-posterior and dorsal-ventral axis of the mouse juvenile central nervous system',
