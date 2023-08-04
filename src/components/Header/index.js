@@ -4,7 +4,6 @@ import { Box, Header as GrommetHeader } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import isMatchPath from 'helpers/isMatchPath'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { Overlay } from 'components/shared/Ovevrlay'
 import { GlobalNav } from './GlobalNav'
 import { LogoAnchor } from './LogoAnchor'
 
@@ -35,7 +34,15 @@ export const Header = ({ light = false }) => {
         zIndex: 10
       }}
     >
-      {viewport === 'small' && <Overlay toggle={toggle} />}
+      {viewport === 'small' && toggle && (
+        <Box
+          animation={{ type: toggle ? 'fadeIn' : 'fedeOut', duration: 150 }}
+          background="rgba3"
+          fill
+          toggle={toggle}
+          style={{ opacity: 0, position: 'fixed', left: 0, top: 0, zIndex: 1 }}
+        />
+      )}
       <FixedContainer direction="row" justify="between">
         <LogoAnchor light={light} />
         <Box align="center" direction="row">
