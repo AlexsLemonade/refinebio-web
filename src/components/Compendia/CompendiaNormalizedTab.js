@@ -1,12 +1,12 @@
 import { memo } from 'react'
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Heading, Text } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { links } from 'config'
 import { CompendiaDownloadBlock } from './CompendiaDownloadBlock'
 
-export const CompendiaNormalizedTab = ({ type }) => {
+export const CompendiaNormalizedTab = ({ type = 'normalized' }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -28,7 +28,7 @@ export const CompendiaNormalizedTab = ({ type }) => {
           <Heading
             level={2}
             margin={{ bottom: setResponsive('medium', 'large') }}
-            size={setResponsive('h2_small', 'h2_large')}
+            size={setResponsive('small', 'large')}
             textAlign="center"
           >
             The normalized compendia is created by aggregating all samples from
@@ -37,7 +37,7 @@ export const CompendiaNormalizedTab = ({ type }) => {
             quantile normalization.
           </Heading>
           <Button
-            aria-label="Go to refinebio docs - Normalized Compendia"
+            aria-label="Go to the refinebio docs - Normalized Compendia"
             href={links.refinebio_docs_normalized_compendia}
             label="Learn More"
             secondary
@@ -50,7 +50,7 @@ export const CompendiaNormalizedTab = ({ type }) => {
           <Heading
             level={2}
             margin={{ bottom: setResponsive('medium', 'large') }}
-            size={setResponsive('h2_small', 'h2_large')}
+            size={setResponsive('small', 'large')}
             textAlign="center"
           >
             Data scientists and computational biologists can use the normalized

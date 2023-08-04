@@ -1,27 +1,15 @@
 import { useState } from 'react'
-import { useResponsive } from 'hooks/useResponsive'
 import { Box, Select, Text } from 'grommet'
+import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { Icon } from 'components/shared/Icon'
-import { links } from 'config'
-import { getHumanReadable } from 'helpers/getHumanReadable'
+import { links, options } from 'config'
 
 export const TransformationOptions = () => {
   const { setResponsive } = useResponsive()
-  const transformationOptionValues = {
-    NONE: 'None',
-    MINMAX: 'Zero to One',
-    STANDARD: 'Z-score'
-  }
-  const transformationOptions = Object.keys(transformationOptionValues).map(
-    (option) => getHumanReadable(option, transformationOptionValues)
+  const [transformationOption, setTransformationOption] = useState(
+    options.transformation[0].value
   )
-  const [selectedTransformation, setSelectedTransformation] = useState(
-    transformationOptions[0]
-  )
-
-  // NOTE: when calling API, use helpers/getAPIReadable to get the API value
-  // e.g.) getAPIReadable(selectedTransformation, transformationOptionValues)
 
   return (
     <>
@@ -51,9 +39,14 @@ export const TransformationOptions = () => {
         width="150px"
       >
         <Select
-          options={transformationOptions}
-          value={selectedTransformation}
-          onChange={({ option }) => setSelectedTransformation(option)}
+          options={Object.values(options.transformation)}
+          labelKey="label"
+          value={transformationOption}
+          valueKey={{ key: 'value', reduce: true }}
+          margin={{ horizontal: 'xxsmall' }}
+          onChange={({ value: nextValue }) =>
+            setTransformationOption(nextValue)
+          }
         />
       </Box>
     </>

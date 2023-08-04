@@ -1,6 +1,6 @@
-import { useResponsive } from 'hooks/useResponsive'
 import { Tabs as GrommetTabs } from 'grommet'
 import styled, { css } from 'styled-components'
+import { useResponsive } from 'hooks/useResponsive'
 
 // NOTE: Set the prop 'text' to true for the text-based tab button
 
@@ -9,10 +9,11 @@ const CustomTabs = styled(GrommetTabs)`
     text &&
     css`
       div {
+        border: none;
         button {
+          border: none;
           > div {
             background: none;
-            border: none;
           }
           span {
             display: block;
@@ -30,7 +31,6 @@ const CustomTabs = styled(GrommetTabs)`
             span {
               border-bottom-color: ${theme.global.colors.brand};
               border-bottom-width: 3px;
-              font-weight: bold;
             }
           }
         }

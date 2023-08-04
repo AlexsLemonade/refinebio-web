@@ -2,7 +2,7 @@ import { memo } from 'react'
 import { Box } from 'grommet'
 import { Icon } from 'components/shared/Icon'
 
-export const SortByBorder = memo(({ isSorted }) => (
+const Border = memo(({ isSorted }) => (
   <Box
     background={isSorted ? 'gray-shade-70' : 'transparent'}
     height="3px"
@@ -16,23 +16,39 @@ export const SortByBorder = memo(({ isSorted }) => (
 ))
 
 export const SortBy = ({ isSorted, isSortedDesc }) => {
-  const size = '10px'
+  const size = '12px'
 
   return (
-    <Box width="fit-content" justify="center" margin={{ top: '-2px' }}>
-      {isSorted && !isSortedDesc && (
-        <Icon name="ChevronUp" size={size} color="black" />
-      )}
-      {isSorted && isSortedDesc && (
-        <Icon name="ChevronDown" size={size} color="black" />
-      )}
-      {!isSorted && (
-        <>
-          <Icon name="ChevronUp" size={size} color="gray-shade-40" />
-          <Icon name="ChevronDown" size={size} color="gray-shade-40" />
-        </>
-      )}
-    </Box>
+    <>
+      <Box
+        fill
+        justify="center"
+        margin={{ top: '-2px' }}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0
+        }}
+      >
+        <Box fill align="end" pad={{ right: 'xsmall' }}>
+          <Box margin={{ top: 'small' }}>
+            {isSorted && !isSortedDesc && (
+              <Icon name="ChevronUp" size={size} color="black" />
+            )}
+            {isSorted && isSortedDesc && (
+              <Icon name="ChevronDown" size={size} color="black" />
+            )}
+          </Box>
+          {!isSorted && (
+            <Box margin={{ top: '-6px' }}>
+              <Icon name="ChevronUp" size={size} color="gray-shade-40" />
+              <Icon name="ChevronDown" size={size} color="gray-shade-40" />
+            </Box>
+          )}
+        </Box>
+      </Box>
+      <Border isSorted={isSorted} />
+    </>
   )
 }
 
