@@ -1,3 +1,3 @@
-export { AboutCCDLSection } from './AboutCCDLSection'
-export { AboutOverviewSection } from './AboutOverviewSection'
-export { AboutHero } from './AboutHero'
+export { CCDL } from './CCDL'
+export { Overview } from './Overview'
+export { Hero } from './Hero'

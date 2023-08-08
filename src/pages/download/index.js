@@ -11,12 +11,12 @@ import { Row } from 'components/shared/Row'
 import { Spinner } from 'components/shared/Spinner'
 import { ShareDatasetButton } from 'components/Dataset'
 import {
-  DownloadDatasetSummary,
-  DownloadDatasetDetails,
-  DownloadEmpty,
-  DownloadAdvancedOptions,
-  DownloadStartProcessing,
-  DownloadFilesSummary
+  DatasetSummary,
+  DatasetDetails,
+  EmptyDataset,
+  AdvancedOptions,
+  StartProcessing,
+  FilesSummary
 } from 'components/Download'
 
 export const Download = () => {
@@ -61,20 +61,20 @@ export const Download = () => {
                 </Heading>
                 <ShareDatasetButton datasetId={dataset?.id} />
               </Row>
-              <DownloadAdvancedOptions />
-              <DownloadFilesSummary dataset={dataset} />
-              <DownloadDatasetSummary dataset={dataset} />
-              <DownloadDatasetDetails dataset={dataset} />
+              <AdvancedOptions />
+              <FilesSummary dataset={dataset} />
+              <DatasetSummary dataset={dataset} />
+              <DatasetDetails dataset={dataset} />
             </>
           ) : start ? (
-            <DownloadStartProcessing />
+            <StartProcessing />
           ) : (
             <Box
               pad={{
                 top: 'basex14'
               }}
             >
-              <DownloadEmpty />
+              <EmptyDataset />
             </Box>
           )}
         </Box>

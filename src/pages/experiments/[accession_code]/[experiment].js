@@ -23,10 +23,10 @@ import { PageTitle } from 'components/shared/PageTitle'
 import { Spinner } from 'components/shared/Spinner'
 import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
-import { SamplesTable, SamplesTableCTA } from 'components/SamplesTable'
-import { SearchCardHeader } from 'components/SearchCard/SearchCardHeader'
-import { SearchCardCTAs } from 'components/SearchCard/SearchCardCTAs/SearchCardCTAs'
-import { SearchCardMeta } from 'components/SearchCard/SearchCardMeta'
+import { SamplesTable, SamplesTableCTA } from 'components/shared/SamplesTable'
+import { SearchCardHeader } from 'components/shared/SearchCard/SearchCardHeader'
+import { SearchCardCTAs } from 'components/shared/SearchCard/SearchCardCTAs/SearchCardCTAs'
+import { SearchCardMeta } from 'components/shared/SearchCard/SearchCardMeta'
 
 const InformationItemBlock = ({ condition, field, value, textNull = '' }) => (
   <InformationItem

@@ -1,5 +1,5 @@
 import { Box } from 'grommet'
-import { UnknownGeneIdentifierModal } from 'components/SamplesTable/cells/UnknownGeneIdentifierModal'
+import { UnknownGeneIdentifierModal } from 'components/shared/SamplesTable/cells/UnknownGeneIdentifierModal'
 
 export const Temp = () => {
   return (
