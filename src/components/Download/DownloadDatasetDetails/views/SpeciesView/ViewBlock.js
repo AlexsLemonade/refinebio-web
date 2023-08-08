@@ -1,6 +1,5 @@
-import { useEffect, useState, useRef } from 'react'
 import { Box, Heading, Text } from 'grommet'
-import { useDataset } from 'hooks/useDataset'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
 import formatString from 'helpers/formatString'
@@ -20,27 +19,9 @@ export const ViewBlock = ({
   specieDatasetSlice,
   isImmutable
 }) => {
-  const { removeSamples } = useDataset()
+  const { loading, removeSamples } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const totalSamples = formatNumbers(samplesInSpecie.length)
-
-  /* === TEMPORARY for Demo : START === */
-  // This will be replaced and handled with API calls
-  const timer = useRef(null)
-  const [loading, setLoading] = useState(false)
-  const stopTimer = () => clearTimeout(timer.current)
-  const handleRemoveSamples = (datasetSlice) => {
-    if (timer.current) stopTimer()
-    setLoading(true)
-    timer.current = window.setTimeout(() => {
-      removeSamples(datasetSlice)
-      setLoading(false)
-    }, 1500)
-  }
-  useEffect(() => {
-    return () => stopTimer()
-  }, [])
-  /* === TEMPORARY for Demo : END === */
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 800 }}>
@@ -77,7 +58,7 @@ export const ViewBlock = ({
             margin={{ top: setResponsive('small', 'none') }}
             responsive
             tertiary
-            onClick={() => handleRemoveSamples(specieDatasetSlice)}
+            onClick={() => removeSamples(specieDatasetSlice, true)}
           />
         )}
       </Row>

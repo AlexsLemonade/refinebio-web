@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Nav, Text } from 'grommet'
-import { useDataset } from 'hooks/useDataset'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { getTotalSamples } from 'helpers/dataset'
 import isMatchPath from 'helpers/isMatchPath'
@@ -20,7 +20,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const { asPath, pathname, push } = router
   const { viewport, setResponsive } = useResponsive()
   // TEMPORARY
-  const { dataset, getDataset } = useDataset()
+  const { dataset, getDataset } = useDatasetManager()
   const [totalSamples, setTotalSamples] = useState()
 
   useEffect(() => {

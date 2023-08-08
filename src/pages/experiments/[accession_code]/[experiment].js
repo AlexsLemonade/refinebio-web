@@ -305,7 +305,11 @@ export const Experiment = () => {
                         </Heading>
                       </Column>
                       <Column>
-                        <SamplesTableCTA />
+                        <SamplesTableCTA
+                          downloadableSamples={
+                            experiment.num_downloadable_samples
+                          }
+                        />
                       </Column>
                     </Row>
                     <SamplesTableManagerContextProvider>

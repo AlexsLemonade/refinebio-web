@@ -1,21 +1,19 @@
-import { useDataset } from 'hooks/useDataset'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { Button } from 'components/shared/Button'
 
 export const AddToDatasetButton = ({ accessionCode, downloadableSamples }) => {
-  const { updateDataset } = useDataset()
+  const { loading, updateDataset } = useDatasetManager()
 
   return (
     <Button
+      isLoading={loading}
       label="Add to Dataset"
       primary
       responsive
       onClick={() =>
-        updateDataset(
-          {
-            [accessionCode]: { all: true, total: downloadableSamples }
-          },
-          accessionCode // TEMPORARY for UI testing
-        )
+        updateDataset({
+          [accessionCode]: { all: true, total: downloadableSamples }
+        })
       }
     />
   )

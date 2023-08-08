@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { Box, Heading, RadioButtonGroup } from 'grommet'
-import { useDataset } from 'hooks/useDataset'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
 import { getTotalSamples } from 'helpers/dataset'
@@ -18,7 +18,7 @@ export const ModalContent = ({
   closeModal,
   setValue
 }) => {
-  const { addSamples, replaceSamples } = useDataset()
+  const { addSamples, replaceSamples } = useDatasetManager()
   const { setResponsive } = useResponsive()
 
   const router = useRouter()

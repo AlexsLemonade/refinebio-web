@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Form } from 'grommet'
-import { useDataset } from 'hooks/useDataset'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { Row } from 'components/shared/Row'
@@ -11,7 +11,7 @@ import { TransformationOptions } from './TransformationOptions'
 
 export const DownloadAdvancedOptions = () => {
   const router = useRouter()
-  const { datasetId } = useDataset()
+  const { datasetId } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const [toggle, setToggle] = useState(false)
 

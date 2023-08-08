@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Box, Heading } from 'grommet'
-import { useDataset } from 'hooks/useDataset'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { usePageRendered } from 'hooks/usePageRendered'
 import { Button } from 'components/shared/Button'
@@ -34,7 +34,7 @@ export const getServerSideProps = ({ query }) => {
 // https://github.com/AlexsLemonade/refinebio-frontend/issues/27
 
 export const Dataset = ({ query }) => {
-  const { dataset } = useDataset()
+  const { dataset } = useDatasetManager()
   const { dataset_id: datasetId, ref } = query
   const isSharedDataset = ref === 'share'
   const pageRendered = usePageRendered()

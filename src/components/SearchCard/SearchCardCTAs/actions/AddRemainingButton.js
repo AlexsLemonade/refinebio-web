@@ -1,10 +1,10 @@
-import { useDataset } from 'hooks/useDataset'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { InlineMessage } from 'components/shared/InlineMessage'
 
 export const AddRemainingButton = ({ samplesInDataset }) => {
-  const { addSamples } = useDataset() // TEMPORARY
+  const { addSamples } = useDatasetManager()
   const { viewport } = useResponsive()
 
   return (

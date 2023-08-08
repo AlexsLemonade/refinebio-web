@@ -2,7 +2,10 @@ import { TableCell, TableRow, Text } from 'grommet'
 import formatNumbers from 'helpers/formatNumbers'
 import formatString from 'helpers/formatString'
 
-export const RowSpieces = ({ samplesBySpecies, experimentCountBySpecies }) => (
+export const RowSpieces = ({
+  samplesBySpecies = [],
+  experimentCountBySpecies = []
+}) => (
   <>
     {Object.keys(samplesBySpecies).map((organism) => (
       <TableRow key={organism}>

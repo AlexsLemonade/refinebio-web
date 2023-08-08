@@ -1,39 +1,47 @@
 import { Box } from 'grommet'
+import { useRouter } from 'next/router'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
-import { Button } from 'components/shared/Button'
-import { InlineMessage } from 'components/shared/InlineMessage'
+import formatNumbers from 'helpers/formatNumbers'
+import {
+  AddRemainingButton,
+  AddToDatasetButton,
+  ProcessingDataset,
+  RemoveAddedData
+} from 'components/SearchCard/SearchCardCTAs/actions'
 
-/* TEMPORARY the following prop is added for demo purpose
-prop name: 'status' 
-   - ''(default)
-   - add_remaining
-*/
-// display CTAs based on a 'status'
-export const SamplesTableCTA = ({ status }) => {
-  const { viewport, setResponsive } = useResponsive()
+export const SamplesTableCTA = ({ downloadableSamples }) => {
+  const {
+    query: { accession_code: accessionCode }
+  } = useRouter()
+  const { dataset } = useDatasetManager()
+  const { setResponsive } = useResponsive()
 
   return (
     <Box align={setResponsive('start', 'end')} width="100%">
-      {/* state: default  */}
-      {!status && <Button label="Add to Dataset" primary responsive />}
+      <>
+        {dataset?.is_processing && <ProcessingDataset dataset={dataset} />}
 
-      {/* state: add-remaining  */}
-      {status === 'add_remaining' && (
-        <>
-          <Button label="Add Remaining" secondary responsive />
-          <InlineMessage
-            label={
-              <>
-                60,000 samples already
-                {viewport !== 'small' && <br />}
-                in My Dataset
-              </>
-            }
-            color="info"
-            margin={{ top: 'small' }}
+        {/* If no samples have yet been added, this will add ["ALL"] samples in the experiment */}
+        {dataset?.data[accessionCode] === undefined ? (
+          <AddToDatasetButton
+            accessionCode={accessionCode}
+            downloadableSamples={downloadableSamples}
           />
-        </>
-      )}
+        ) : (
+          // when ["ALL"] samples have been added, this will remove all of them
+          <RemoveAddedData accessionCode={accessionCode} />
+        )}
+
+        {/* This will add the remaining samples if they haven't already been added. */}
+        {dataset?.data[accessionCode]?.length < downloadableSamples && (
+          <AddRemainingButton
+            samplesInDataset={formatNumbers(
+              dataset?.data[accessionCode]?.length
+            )}
+          />
+        )}
+      </>
     </Box>
   )
 }
