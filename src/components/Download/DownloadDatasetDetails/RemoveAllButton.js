@@ -1,5 +1,5 @@
 import { Box, Heading } from 'grommet'
-import { useDataset } from 'hooks/useDataset'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
@@ -7,7 +7,7 @@ import { Modal } from 'components/shared/Modal'
 import { Row } from 'components/shared/Row'
 
 export const RemoveAllButton = () => {
-  const { removeAllDataset } = useDataset()
+  const { loading, emptyDataset } = useDatasetManager()
   const { closeModal, openModal } = useModal()
   const { setResponsive } = useResponsive()
   const id = 'remove-all'
@@ -17,6 +17,7 @@ export const RemoveAllButton = () => {
       id={id}
       button={
         <Button
+          isLoading={loading}
           label="Remove All"
           tertiary
           responsive
@@ -40,7 +41,11 @@ export const RemoveAllButton = () => {
             label="Yes, remove all samples"
             tertiary
             responsive
-            onClick={removeAllDataset}
+            onClick={() => {
+              // TEMPORARY for demo
+              emptyDataset()
+              closeModal(id)
+            }}
           />
           <Button
             label="No, keep all samples"

@@ -1,7 +1,6 @@
 import { useEffect, useState, memo } from 'react'
 import { Anchor, Box, CheckBox, Heading, Text } from 'grommet'
 import styled, { css } from 'styled-components'
-import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
 import { Icon } from 'components/shared/Icon'
 import { Button } from 'components/shared/Button'
@@ -68,9 +67,8 @@ const ListItem = ({ label, selectedOption, clickHandler }) => {
 }
 
 export const CompendiaDownload = ({ heading, isNormalized }) => {
-  const { token, setToken } = useRefinebio()
   const { setResponsive } = useResponsive()
-  const [agree, setAgree] = useState(!!token)
+  const [agree, setAgree] = useState(false)
   const [filteredOptions, setFilteredOptions] = useState([])
   const [options, setOptions] = useState([])
   const [selectedOption, setSelectedOption] = useState(null)
@@ -111,10 +109,7 @@ export const CompendiaDownload = ({ heading, isNormalized }) => {
     updateFilteredOptions(formatString(option.primary_organism_name))
   }
 
-  const downloadCompendia = () => {
-    // TEMP
-    setToken(!token)
-  }
+  const downloadCompendia = () => {}
 
   useEffect(() => {
     setOptions(() => (isNormalized ? data[0].results : data[1].results))

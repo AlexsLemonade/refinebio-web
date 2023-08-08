@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react'
-import { DatasetContext } from 'contexts/DatasetContext'
+import { DatasetManagerContext } from 'contexts/DatasetManagerContext'
 import { SamplesTableManagerContext } from 'contexts/SamplesTableManagerContext'
 import { api } from 'api'
 
 export const useSamplesTableManager = (queryToAdd = {}) => {
-  const { datasetId } = useContext(DatasetContext) // TEMP
+  const { datasetId } = useContext(DatasetManagerContext) // TEMP
   const {
     config: configState,
     setConfig: setConfigState,

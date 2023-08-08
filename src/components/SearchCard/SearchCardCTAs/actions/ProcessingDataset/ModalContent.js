@@ -1,5 +1,5 @@
 import { Box, Heading, Paragraph, Text } from 'grommet'
-import { useDataset } from 'hooks/useDataset'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import getDomain from 'helpers/getDomain'
 import { Anchor } from 'components/shared/Anchor'
@@ -8,7 +8,7 @@ import { IconProcessingGears } from 'components/shared/IconProcessingGears'
 
 export const ModalContent = ({ dataset, email, closeModal }) => {
   // TEMPORARY
-  const { datasetId } = useDataset()
+  const { datasetId } = useDatasetManager()
   const { setResponsive } = useResponsive()
 
   return (

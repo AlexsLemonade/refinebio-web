@@ -64,7 +64,6 @@ export const CompendiaRNASeqTab = ({ type = 'rna-seq' }) => {
                 href={links.salmon}
                 label="Salmon"
                 rel="noopener noreferrer"
-                target="_blank"
               />{' '}
               and the output{' '}
               <Text color="coral-shade-20" style={{ background: '#f2f2f2' }}>

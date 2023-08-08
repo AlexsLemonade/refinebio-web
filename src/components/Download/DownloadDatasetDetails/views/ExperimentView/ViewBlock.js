@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
-import { useDataset } from 'hooks/useDataset'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatString from 'helpers/formatString'
 import formatURLString from 'helpers/formatURLString'
@@ -23,27 +22,12 @@ export const ViewBlock = ({
   isImmutable,
   setOrganism
 }) => {
-  const { removeExperiment } = useDataset()
+  const { loading, removeExperiment } = useDatasetManager()
   const { setResponsive } = useResponsive()
-
-  /* === TEMPORARY for Demo : START === */
-  // This will be replaced and handled with API calls
-  const timer = useRef(null)
-  const [loading, setLoading] = useState(false)
-  const stopTimer = () => clearTimeout(timer.current)
   const handleRemoveExperiment = (datasetSlice) => {
-    if (timer.current) stopTimer()
-    setLoading(true)
-    timer.current = window.setTimeout(() => {
-      removeExperiment(datasetSlice)
-      setLoading(false)
-      setOrganism(defaultOrganismFilterOption.value)
-    }, 1500)
+    removeExperiment(datasetSlice, true)
+    setOrganism(defaultOrganismFilterOption.value)
   }
-  useEffect(() => {
-    return () => stopTimer()
-  }, [])
-  /* === TEMPORARY for Demo : END === */
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 800 }}>

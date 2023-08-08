@@ -1,6 +1,6 @@
 import { Box } from 'grommet'
 import { useRefinebio } from 'hooks/useRefinebio'
-import { useDataset } from 'hooks/useDataset'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useModal } from 'hooks/useModal'
 import { Modal } from 'components/shared/Modal'
 import { Pill } from 'components/shared/Pill'
@@ -10,7 +10,7 @@ import { ModalContent } from './ModalContent'
 export const ProcessingDataset = ({ dataset }) => {
   // TEMPORARY
   const { email } = useRefinebio()
-  const { datasetId } = useDataset()
+  const { datasetId } = useDatasetManager()
   const { closeModal, openModal } = useModal()
   const id = `procecssing-dataset-${dataset?.id || datasetId}`
 

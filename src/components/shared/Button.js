@@ -148,7 +148,17 @@ export const Button = ({
         <CustomLinkButton
           link={link}
           linkColor={linkColor}
-          label={label}
+          label={
+            isLoading ? (
+              <IconSpinner
+                style={{
+                  position: 'relative'
+                }}
+              />
+            ) : (
+              label
+            )
+          }
           style={{
             border: 'none',
             fontSize: linkFontSize,

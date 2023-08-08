@@ -2,8 +2,9 @@ import { Box } from 'grommet'
 import styled, { css } from 'styled-components'
 
 const Spinner = styled(Box)`
-  ${({ theme }) => css`
-    border: 1px solid ${theme.global.colors.rgbaLight2};
+  ${({ theme, datk }) => css`
+    border: 1px solid
+      ${datk ? theme.global.colors.rgbaLight2 : theme.global.colors.brand};
     border-radius: 100% !important;
     border-top-color: ${theme.global.colors.white};
     display: inline-block;
@@ -25,9 +26,10 @@ const sizes = {
   large: '32px'
 }
 
-export const IconSpinner = ({ size = sizes.small, ...props }) => {
+export const IconSpinner = ({ size = sizes.small, dark = false, ...props }) => {
   return (
     <Spinner
+      dark={dark}
       width={sizes[size] || size}
       height={sizes[size] || size}
       // eslint-disable-next-line react/jsx-props-no-spreading

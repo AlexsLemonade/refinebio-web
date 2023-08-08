@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { Box } from 'grommet'
-import { useDataset } from 'hooks/useDataset'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
 import {
@@ -8,14 +8,14 @@ import {
   AddToDatasetButton,
   DownloadNowButton,
   ProcessingDataset,
-  RemoveAddedDataset,
+  RemoveAddedData,
   RequestExperimentFormButton
 } from './actions'
 
 // TODO: remove mock data and need to test with API response
 
 export const SearchCardCTAs = ({ accessionCode, downloadableSamples }) => {
-  const { dataset } = useDataset() // TEMPORARY
+  const { dataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
 
   return (
@@ -32,7 +32,7 @@ export const SearchCardCTAs = ({ accessionCode, downloadableSamples }) => {
             />
           ) : (
             // when ["ALL"] samples have been added, this will remove all of them
-            <RemoveAddedDataset />
+            <RemoveAddedData accessionCode={accessionCode} />
           )}
 
           {/* This will add the remaining samples if they haven't already been added. */}

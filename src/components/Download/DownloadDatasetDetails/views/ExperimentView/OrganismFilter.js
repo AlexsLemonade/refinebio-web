@@ -12,15 +12,15 @@ export const OrganismFilter = ({
 }) => {
   const { setResponsive } = useResponsive()
 
-  // merge all of the organism_names arrays into a single
+  // merges all of the organism_names arrays into a single
   // one-dimensional array containing only unique elements
   const uniqueOrganisms = unionizeArrays(
-    Object.keys(datasetData)
+    ...Object.keys(datasetData)
       .map((accessionCode) => experiments[accessionCode].organism_names)
       .reduce((accumulator, organisms) => accumulator.concat(organisms), [])
   )
 
-  if (uniqueOrganisms.length <= 1) {
+  if (typeof uniqueOrganisms === 'string' || uniqueOrganisms.length <= 1) {
     return null
   }
 
