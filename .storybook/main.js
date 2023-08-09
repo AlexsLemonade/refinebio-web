@@ -33,6 +33,14 @@ export default {
         resource.request = resource.request.replace(/^node:/, '')
       })
     )
+    // excludes the polyfills for the following modules
+    config.resolve = {
+      ...config.resolve,
+      fallback: {
+        net: false,
+        fs: false
+      }
+    }
 
     // Return the altered config
     return config
