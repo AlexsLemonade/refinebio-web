@@ -1,5 +1,6 @@
-const path = require('path')
-module.exports = {
+import * as path from 'path'
+
+export default {
   stories: ['./stories/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
   addons: [
     '@storybook/addon-a11y',
@@ -23,6 +24,10 @@ module.exports = {
 
     config.resolve.modules.push(path.resolve(__dirname, './../src'))
     config.resolve.alias['utils'] = path.resolve(__dirname, './utils')
+    config.resolve.alias['unfetch'] = path.resolve(
+      __dirname,
+      './../node_modules/unfetch/dist/unfetch.mjs'
+    )
     // Return the altered config
     return config
   }
