@@ -1,8 +1,7 @@
 import { Pill } from 'components/shared/Pill'
-import { getTitle } from 'utils/getTitle'
 
 export default {
-  title: getTitle('ProcessInfo'),
+  title: 'Badges/ProcessInfo',
   component: Pill,
   argTypes: {
     background: {
