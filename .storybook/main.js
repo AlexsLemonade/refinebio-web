@@ -1,10 +1,6 @@
 const path = require('path')
-
 module.exports = {
-  stories: [
-    './stories/**/*.stories.mdx',
-    './stories/**/*.stories.@(js|jsx|ts|tsx)'
-  ],
+  stories: ['./stories/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
   addons: [
     '@storybook/addon-a11y',
     '@storybook/addon-links',
@@ -12,9 +8,15 @@ module.exports = {
     '@storybook/addon-interactions'
   ],
   staticDirs: ['../public'],
-  framework: '@storybook/react',
+  framework: {
+    name: '@storybook/nextjs',
+    options: {}
+  },
   core: {
     builder: '@storybook/builder-webpack5'
+  },
+  docs: {
+    autodocs: true
   },
   webpackFinal: async (config) => {
     // (resource) 'configType' https://storybook.js.org/docs/react/builders/webpack#extending-storybooks-webpack-config

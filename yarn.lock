@@ -4130,7 +4130,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react@npm:7.2.1, @storybook/react@npm:^7.2.1":
+"@storybook/react@npm:7.2.1":
   version: 7.2.1
   resolution: "@storybook/react@npm:7.2.1"
   dependencies:
@@ -13275,7 +13275,6 @@ __metadata:
     "@storybook/addon-interactions": ^7.2.1
     "@storybook/addon-links": ^7.2.1
     "@storybook/nextjs": ^7.2.1
-    "@storybook/react": ^7.2.1
     "@storybook/testing-library": ^0.2.0
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.4.0
