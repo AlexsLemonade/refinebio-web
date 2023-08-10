@@ -10,6 +10,7 @@ RUN apk add --no-cache bash
 WORKDIR /app
 # Install dependencies
 COPY package.json yarn.lock ./
+RUN yarn set version 3.6.1
 RUN yarn install
 
 #
@@ -20,7 +21,7 @@ FROM node:$NODE_VER as local
 RUN apk add --no-cache bash
 # Temp directory
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps . .
 
 #
 # Test
