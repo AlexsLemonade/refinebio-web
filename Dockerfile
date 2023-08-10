@@ -10,7 +10,7 @@ RUN apk add --no-cache bash
 WORKDIR /app
 # Install dependencies
 COPY package.json yarn.lock ./
-RUN yarn install --slient  --frozen-lockfile
+RUN yarn install
 
 #
 # Local(development)

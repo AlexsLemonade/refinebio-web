@@ -63,5 +63,6 @@
     "prettier": "^2.7.1"
   },
   "repository": "https://github.com/AlexsLemonade/refinebio-web.git",
-  "license": "BSD-3-Clause"
+  "license": "BSD-3-Clause",
+  "packageManager": "yarn@3.6.1"
 }
