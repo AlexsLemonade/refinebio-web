@@ -1,10 +1,7 @@
 import { Box } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { SignUpBlock } from 'components/shared/SignUpBlock'
-import { HomeDocumentationSection } from 'components/Home/HomeDocumentationSection'
-import { HomeExamplesSection } from 'components/Home/HomeExamplesSection'
-import { HomeFeaturesSection } from 'components/Home/HomeFeaturesSection'
-import { HomeHero } from 'components/Home/HomeHero'
+import { Documents, Examples, Features, Hero } from 'components/Home'
 
 const Home = () => {
   const { setResponsive } = useResponsive()
@@ -17,11 +14,11 @@ const Home = () => {
           bottom: setResponsive('xlarge', 'xlarge', 'basex12')
         }}
       >
-        <HomeHero />
-        <HomeFeaturesSection />
+        <Hero />
+        <Features />
       </Box>
-      <HomeExamplesSection />
-      <HomeDocumentationSection />
+      <Examples />
+      <Documents />
       <SignUpBlock />
     </>
   )

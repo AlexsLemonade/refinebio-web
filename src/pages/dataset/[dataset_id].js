@@ -15,9 +15,9 @@ import {
   ShareDatasetButton
 } from 'components/Dataset'
 import {
-  DownloadDatasetDetails,
-  DownloadDatasetSummary,
-  DownloadFilesSummary
+  DatasetDetails,
+  DatasetSummary,
+  FilesSummary
 } from 'components/Download'
 
 // NOTE: Add the Spinner component for loading after replacing the mock with the API response
@@ -39,7 +39,6 @@ export const Dataset = ({ query }) => {
   const isSharedDataset = ref === 'share'
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
-
   const [data, setData] = useState(null)
 
   useEffect(() => {
@@ -94,9 +93,9 @@ export const Dataset = ({ query }) => {
       </Row>
       {data && isSharedDataset && (
         <>
-          <DownloadFilesSummary dataset={data} />
-          <DownloadDatasetSummary dataset={data} />
-          <DownloadDatasetDetails dataset={data} isImmutable />
+          <FilesSummary dataset={data} />
+          <DatasetSummary dataset={data} />
+          <DatasetDetails dataset={data} isImmutable />
         </>
       )}
     </FixedContainer>

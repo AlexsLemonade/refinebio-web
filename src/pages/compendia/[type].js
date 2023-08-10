@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Box } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { CompendiaHero, CompendiaTabs } from 'components/Compendia'
+import { Hero, Tabs } from 'components/Compendia'
 import { PageTitle } from 'components/shared/PageTitle'
 import { SignUpBlock } from 'components/shared/SignUpBlock'
 
@@ -27,8 +27,8 @@ export const Compendia = () => {
           top: setResponsive('basex7', 'basex7', 'basex10')
         }}
       >
-        <CompendiaHero />
-        <CompendiaTabs />
+        <Hero />
+        <Tabs />
         <SignUpBlock />
       </Box>
     </>
