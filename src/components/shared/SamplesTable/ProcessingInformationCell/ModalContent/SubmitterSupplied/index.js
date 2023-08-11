@@ -1,9 +1,7 @@
 import { Box, Heading } from 'grommet'
-import {
-  ArrayExpressSupplied,
-  GeoSubmitterSupplied,
-  SRASubmitterSupplied
-} from './protocols-by-sample'
+import { ArrayExpressSupplied } from './ArrayExpressSupplied'
+import { GeoSubmitterSupplied } from './GeoSubmitterSupplied'
+import { SRASubmitterSupplied } from './SRASubmitterSupplied'
 
 // renders the submitter supplied protocol information which depends on the type of sample
 // https://github.com/AlexsLemonade/refinebio-frontend/issues/225#issuecomment-417345139

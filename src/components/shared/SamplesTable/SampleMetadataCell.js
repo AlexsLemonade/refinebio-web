@@ -1,7 +1,7 @@
 import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
 
-export const CellSampleMetadata = ({ value }) => {
+export const SampleMetadataCell = ({ value }) => {
   return value ? (
     <TextHighlight>{value}</TextHighlight>
   ) : (
@@ -9,4 +9,4 @@ export const CellSampleMetadata = ({ value }) => {
   )
 }
 
-export default CellSampleMetadata
+export default SampleMetadataCell

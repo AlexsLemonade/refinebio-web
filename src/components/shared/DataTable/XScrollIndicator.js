@@ -4,7 +4,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
 
-export const HorizontalScrollIndicator = ({
+export const XScrollIndicator = ({
   isFirstCellVisible,
   isLastCellVisible,
   target
@@ -96,4 +96,4 @@ export const HorizontalScrollIndicator = ({
   )
 }
 
-export default memo(HorizontalScrollIndicator)
+export default memo(XScrollIndicator)

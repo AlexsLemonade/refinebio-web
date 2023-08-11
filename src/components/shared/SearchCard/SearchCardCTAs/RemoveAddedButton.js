@@ -5,7 +5,7 @@ import { Button } from 'components/shared/Button'
 import { InlineMessage } from 'components/shared/InlineMessage'
 
 // eslint-disable-next-line no-unused-vars
-export const RemoveAddedData = ({ accessionCode }) => {
+export const RemoveAddedButton = ({ accessionCode }) => {
   const { loading, removeExperiment } = useDatasetManager()
   const { setResponsive } = useResponsive()
 
@@ -25,4 +25,4 @@ export const RemoveAddedData = ({ accessionCode }) => {
   )
 }
 
-export default RemoveAddedData
+export default RemoveAddedButton
