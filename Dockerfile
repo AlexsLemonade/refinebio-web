@@ -10,6 +10,7 @@ RUN apk add --no-cache bash
 WORKDIR /app
 # Install dependencies
 COPY package.json yarn.lock ./
+RUN yarn set version 3.6.1
 RUN yarn install
 
 #
