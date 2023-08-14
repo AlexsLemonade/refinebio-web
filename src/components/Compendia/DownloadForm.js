@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import { Box, Heading, Paragraph, Text } from 'grommet'
+import { options } from 'config'
 import { useResponsive } from 'hooks/useResponsive'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -7,17 +8,14 @@ import { Row } from 'components/shared/Row'
 import { Download } from './Download'
 
 export const DownloadForm = ({ type }) => {
+  const {
+    compendia: { heading, svg }
+  } = options
+
   const { setResponsive } = useResponsive()
-  const isNormalized = type === 'normalized'
-  const svgImage = isNormalized
-    ? 'normalizaed-curve.svg'
-    : 'gene-expression-matrix.svg'
-  const heading = isNormalized
-    ? 'Normalized Compendia'
-    : 'RNA-seq Sample Compendia'
   const paragraph = (
     <Paragraph color="white" size="xlarge">
-      {isNormalized ? (
+      {type === 'normalized' ? (
         'Normalized Compendia are the collection of all the samples available on refine.bio, aggregated and normalized by species.'
       ) : (
         <>
@@ -47,7 +45,7 @@ export const DownloadForm = ({ type }) => {
         <FixedContainer>
           <Box
             background={{
-              image: `url(/${svgImage})`,
+              image: `url(/${svg[type]})`,
               position: 'center',
               repeat: 'no-repeat',
               size: '100%'
@@ -64,12 +62,12 @@ export const DownloadForm = ({ type }) => {
           <Heading
             level={2}
             color="white"
-            margin={{ bottom: 'medium' }}
+            margin={{ bottom: 'xlarge' }}
             size={setResponsive('small', 'large')}
             style={{ textShadow: '0 3px 19px rgba(0,0,0,.5)' }}
             alignSelf="center"
           >
-            {heading}
+            {heading[type]}
           </Heading>
           <Row direction={setResponsive('column', 'column', 'row')}>
             <Column margin={{ right: setResponsive('none', 'none', 'xlarge') }}>
@@ -82,7 +80,7 @@ export const DownloadForm = ({ type }) => {
               }}
               width="100%"
             >
-              <Download heading={heading} isNormalized={isNormalized} />
+              <Download type={type} />
             </Column>
           </Row>
         </FixedContainer>
