@@ -30,7 +30,7 @@ const Card = ({ heading, pad, children }) => {
   )
 }
 
-export const RNASeqTab = ({ type = 'rna-seq' }) => {
+export const RNASeqTab = ({ type = 'rnaSeq' }) => {
   const { setResponsive } = useResponsive()
 
   return (
