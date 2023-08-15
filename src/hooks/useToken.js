@@ -21,7 +21,7 @@ export const useToken = () => {
     return id
   }
 
-  // clears the existing token value and re-generate a new one
+  // clears the existing token and re-generate a new one
   // (e.g., in the case of a corrupted token (403))
   const resetToken = async () => {
     await setToken(null)
