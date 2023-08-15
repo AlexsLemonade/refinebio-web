@@ -30,7 +30,7 @@ const Card = ({ heading, pad, children }) => {
   )
 }
 
-export const CompendiaRNASeqTab = ({ type = 'rna-seq' }) => {
+export const RNASeqTab = ({ type = 'rna-seq' }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -113,4 +113,4 @@ export const CompendiaRNASeqTab = ({ type = 'rna-seq' }) => {
   )
 }
 
-export default memo(CompendiaRNASeqTab)
+export default memo(RNASeqTab)

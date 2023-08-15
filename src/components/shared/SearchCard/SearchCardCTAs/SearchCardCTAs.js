@@ -3,14 +3,12 @@ import { Box } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
-import {
-  AddRemainingButton,
-  AddToDatasetButton,
-  DownloadNowButton,
-  ProcessingDataset,
-  RemoveAddedData,
-  RequestExperimentFormButton
-} from './actions'
+import { AddRemainingButton } from './AddRemainingButton'
+import { AddToDatasetButton } from './AddToDatasetButton'
+import { DownloadNowButton } from './DownloadNowButton'
+import { ProcessingDatasetButton } from './ProcessingDatasetButton'
+import { RemoveAddedButton } from './RemoveAddedButton'
+import { RequestExperimentFormButton } from './RequestExperimentFormButton'
 
 // TODO: remove mock data and need to test with API response
 
@@ -22,7 +20,9 @@ export const SearchCardCTAs = ({ accessionCode, downloadableSamples }) => {
     <Box align={setResponsive('start', 'end')} width="100%">
       {downloadableSamples ? (
         <>
-          {dataset?.is_processing && <ProcessingDataset dataset={dataset} />}
+          {dataset?.is_processing && (
+            <ProcessingDatasetButton dataset={dataset} />
+          )}
 
           {/* If no samples have yet been added, this will add ["ALL"] samples in the experiment */}
           {dataset?.data[accessionCode] === undefined ? (
@@ -32,7 +32,7 @@ export const SearchCardCTAs = ({ accessionCode, downloadableSamples }) => {
             />
           ) : (
             // when ["ALL"] samples have been added, this will remove all of them
-            <RemoveAddedData accessionCode={accessionCode} />
+            <RemoveAddedButton accessionCode={accessionCode} />
           )}
 
           {/* This will add the remaining samples if they haven't already been added. */}

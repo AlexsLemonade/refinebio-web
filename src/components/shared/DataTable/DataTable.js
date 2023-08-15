@@ -11,16 +11,10 @@ import { useSticky } from 'react-table-sticky'
 import { Box, Text } from 'grommet'
 import { useIntersectObserver } from 'hooks/useIntersectObserver'
 import { BoxBlock } from 'components/shared/BoxBlock'
-import {
-  HorizontalScrollIndicator,
-  Resizer,
-  SortBy,
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableCell
-} from './utils'
+import { Resizer } from './Resizer'
+import { SortBy } from './SortBy'
+import { Table, TableHeader, TableBody, TableRow, TableCell } from './Table'
+import { XScrollIndicator } from './XScrollIndicator'
 
 export const DataTable = ({
   columns: tableColumns,
@@ -106,7 +100,7 @@ export const DataTable = ({
       style={{ overflow: 'visible' }}
     >
       <BoxBlock>
-        <HorizontalScrollIndicator
+        <XScrollIndicator
           isFirstCellVisible={isFirstCellVisible}
           isLastCellVisible={isLastCellVisible}
           target={tableRef.current}

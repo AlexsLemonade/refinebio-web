@@ -7,7 +7,7 @@ import { Modal } from 'components/shared/Modal'
 import { TextNull } from 'components/shared/TextNull'
 import { ModalContent } from './ModalContent'
 
-export const CellProcessingInformation = ({
+export const ProcessingInformationCell = ({
   row: { original: sample },
   linkFontSize = '14px'
 }) => {
@@ -55,4 +55,4 @@ export const CellProcessingInformation = ({
   )
 }
 
-export default memo(CellProcessingInformation)
+export default memo(ProcessingInformationCell)

@@ -1,2 +1,2 @@
 export { DataTable } from './DataTable'
-export { ExpandTableButton } from './utils/ExpandTableButton'
+export { ExpandTableButton } from './ExpandTableButton'

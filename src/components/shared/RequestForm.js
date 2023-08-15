@@ -9,9 +9,9 @@ import {
 } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
+import { FormField } from 'components/shared/FormField'
 import { TextInput } from 'components/shared/TextInput'
 import { TextRequired } from 'components/shared/TextRequired'
-import { FieldBlock } from './FieldBlock'
 
 export const RequestForm = ({
   formTitle,
@@ -43,11 +43,11 @@ export const RequestForm = ({
         width={setResponsive('100%', '100%', '800px')} // to preserve the UI for the desktop view
         style={{ boxShadow: ' 0px 3px 20px rgba(0, 0, 0, 0.1)' }}
       >
-        <FieldBlock>
+        <FormField>
           <Heading level={1}>{formTitle}</Heading>
-        </FieldBlock>
+        </FormField>
         {children}
-        <FieldBlock>
+        <FormField>
           <Heading level={2} margin={{ bottom: 'xsmall' }}>
             Help us priortize your request by answering these questions
           </Heading>
@@ -59,8 +59,8 @@ export const RequestForm = ({
             name="pediatric-cancer"
             margin={{ top: 'small' }}
           />
-        </FieldBlock>
-        <FieldBlock>
+        </FormField>
+        <FormField>
           <Paragraph>
             Which of these most closely describes your primary approach?{' '}
             <TextRequired />
@@ -70,14 +70,14 @@ export const RequestForm = ({
             name="primary-approach"
             margin={{ top: 'small' }}
           />
-        </FieldBlock>
-        <FieldBlock>
+        </FormField>
+        <FormField>
           <Paragraph margin={{ bottom: 'xsmall' }}>
             Is there anything else you would like to add?
           </Paragraph>
           <TextArea />
-        </FieldBlock>
-        <FieldBlock>
+        </FormField>
+        <FormField>
           <Paragraph>
             Email <TextRequired />
           </Paragraph>
@@ -94,14 +94,14 @@ export const RequestForm = ({
           <Box margin={{ vertical: 'xsmall' }}>
             <CheckBox label="I would like to receive occasional updates from the refine.bio team" />
           </Box>
-        </FieldBlock>
-        <FieldBlock
+        </FormField>
+        <FormField
           direction={setResponsive('column', 'row')}
           gap={setResponsive('small', 'xsmall')}
         >
           <Button label="Cancel" secondary responsive onClick={closeForm} />
           <Button label="Submit" primary responsive type="submit" />
-        </FieldBlock>
+        </FormField>
       </Box>
       {viewport === 'large' && (
         <Box

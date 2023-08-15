@@ -6,9 +6,9 @@ import formatNumbers from 'helpers/formatNumbers'
 import {
   AddRemainingButton,
   AddToDatasetButton,
-  ProcessingDataset,
-  RemoveAddedData
-} from 'components/shared/SearchCard/SearchCardCTAs/actions'
+  ProcessingDatasetButton,
+  RemoveAddedButton
+} from 'components/shared/SearchCard/SearchCardCTAs/'
 
 export const SamplesTableCTA = ({ downloadableSamples }) => {
   const {
@@ -20,7 +20,9 @@ export const SamplesTableCTA = ({ downloadableSamples }) => {
   return (
     <Box align={setResponsive('start', 'end')} width="100%">
       <>
-        {dataset?.is_processing && <ProcessingDataset dataset={dataset} />}
+        {dataset?.is_processing && (
+          <ProcessingDatasetButton dataset={dataset} />
+        )}
 
         {/* If no samples have yet been added, this will add ["ALL"] samples in the experiment */}
         {dataset?.data[accessionCode] === undefined ? (
@@ -30,7 +32,7 @@ export const SamplesTableCTA = ({ downloadableSamples }) => {
           />
         ) : (
           // when ["ALL"] samples have been added, this will remove all of them
-          <RemoveAddedData accessionCode={accessionCode} />
+          <RemoveAddedButton accessionCode={accessionCode} />
         )}
 
         {/* This will add the remaining samples if they haven't already been added. */}

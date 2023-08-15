@@ -1,5 +1,6 @@
 import { Paragraph, Text } from 'grommet'
-import { FieldBlock, RequestForm } from 'components/shared/RequestForm'
+import { FormField } from 'components/shared/FormField'
+import { RequestForm } from 'components/shared/RequestForm'
 import { TextInput } from 'components/shared/TextInput'
 import { TextNull } from 'components/shared/TextNull'
 import { TextRequired } from 'components/shared/TextRequired'
@@ -11,7 +12,7 @@ export const MissingResultsForm = ({ closeForm, queryParam = '' }) => {
       illustration="lamp-illustration.svg"
       closeForm={closeForm}
     >
-      <FieldBlock>
+      <FormField>
         <Paragraph>
           List experiment accessions (separated by commas) you expect for search
           term{' '}
@@ -27,7 +28,7 @@ export const MissingResultsForm = ({ closeForm, queryParam = '' }) => {
         </Text>
         <TextInput />
         <TextNull text="Example: GSE3303, E-MEXP-3405, SRP2422" />
-      </FieldBlock>
+      </FormField>
     </RequestForm>
   )
 }
