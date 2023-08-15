@@ -7,7 +7,7 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { Download } from './Download'
 
-export const DownloadForm = ({ type }) => {
+export const DownloadBlock = ({ type }) => {
   const {
     compendia: { heading, svg }
   } = options
@@ -89,4 +89,4 @@ export const DownloadForm = ({ type }) => {
   )
 }
 
-export default memo(DownloadForm)
+export default memo(DownloadBlock)

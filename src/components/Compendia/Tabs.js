@@ -21,7 +21,9 @@ export const Tabs = () => {
   }, [isReady])
 
   const clickHandle = (tabType) => {
-    replace({ pathname, query: { type: tabType } }, `/compendia/${tabType}`, {
+    const tabName = tabType === 'rnaSeq' ? 'rna-seq' : tabType
+
+    replace({ pathname, query: { type: tabType } }, `/compendia/${tabName}`, {
       shallow: true
     })
   }

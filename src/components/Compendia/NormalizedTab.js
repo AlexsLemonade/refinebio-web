@@ -4,14 +4,14 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { links } from 'config'
-import { DownloadForm } from './DownloadForm'
+import { DownloadBlock } from './DownloadBlock'
 
 export const NormalizedTab = ({ type = 'normalized' }) => {
   const { setResponsive } = useResponsive()
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 350, delay: 200 }}>
-      <DownloadForm type={type} />
+      <DownloadBlock type={type} />
       <FixedContainer
         pad={{
           horizontal: setResponsive('large', 'medium', 'basex15'),
