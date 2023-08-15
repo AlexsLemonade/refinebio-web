@@ -1,6 +1,8 @@
 import { useEffect, useState, memo } from 'react'
 import { Anchor, Box, CheckBox, Heading, Text } from 'grommet'
 import styled, { css } from 'styled-components'
+import { links, options } from 'config'
+import { useCompendia } from 'hooks/useCompendia'
 import { useResponsive } from 'hooks/useResponsive'
 import { Icon } from 'components/shared/Icon'
 import { Button } from 'components/shared/Button'
@@ -9,12 +11,9 @@ import { List } from 'components/shared/List'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
 import { SearchBox } from 'components/shared/SearchBox'
+import { Spinner } from 'components/shared/Spinner'
 import formatBytes from 'helpers/formatBytes'
 import formatString from 'helpers/formatString'
-import { links } from 'config'
-import data from 'api/mockDataCompendia'
-
-const boxShadow = `0px 3px 4px rgba(0, 0, 0, 0.3)`
 
 const DropDown = styled(Box)`
   > div:nth-child(2) {
@@ -22,7 +21,7 @@ const DropDown = styled(Box)`
   }
   &:focus-within > div:nth-child(2) {
     display: block;
-    box-shadow: ${boxShadow};
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
   }
 `
 
@@ -43,8 +42,8 @@ const DropDownButton = styled(Button)`
   `}
 `
 
-const ListItem = ({ label, selectedOption, clickHandler }) => {
-  const selected = selectedOption === label
+const ListItem = ({ label, selectedOrganism, clickHandler }) => {
+  const selected = selectedOrganism === label
 
   return (
     <Box as="li" style={{ listStyle: 'none', width: '100%' }}>
@@ -66,32 +65,46 @@ const ListItem = ({ label, selectedOption, clickHandler }) => {
   )
 }
 
-export const Download = ({ heading, isNormalized }) => {
+export const Download = ({ type }) => {
+  const {
+    compendia: { heading }
+  } = options
+  const {
+    compendia,
+    downloadCompendia,
+    getCompendia,
+    navigateToFileDownload,
+    loading
+  } = useCompendia()
   const { setResponsive } = useResponsive()
-  const [agree, setAgree] = useState(false)
   const [filteredOptions, setFilteredOptions] = useState([])
-  const [options, setOptions] = useState([])
-  const [selectedOption, setSelectedOption] = useState(null)
+  const [selectedOrganism, setSelectedOrganism] = useState(null)
   const [showOptions, setShowOptions] = useState(false)
   const [userInput, setUserInput] = useState('')
+  const [acceptTerms, setAcceptTerms] = useState(false)
+
+  const goToDownloadPage = async (id, token) => {
+    const response = await downloadCompendia(id, token)
+    navigateToFileDownload(response.organism, response.url)
+  }
 
   const updateFilteredOptions = (val) => {
     if (val.trim() !== '') {
       setFilteredOptions(() =>
-        options.filter((option) =>
-          formatString(option.primary_organism_name)
+        compendia.filter((organism) =>
+          formatString(organism.primary_organism_name)
             .toLowerCase()
             .startsWith(val.toLowerCase())
         )
       )
     } else {
-      setFilteredOptions(options)
+      setFilteredOptions(compendia)
     }
   }
 
   const handleChange = (val) => {
     if (val.trim() === '' || val !== userInput) {
-      setSelectedOption(null)
+      setSelectedOrganism(null)
     }
 
     setUserInput(val)
@@ -103,18 +116,19 @@ export const Download = ({ heading, isNormalized }) => {
   }
 
   const handleClick = (option) => {
-    setSelectedOption(option)
+    setSelectedOrganism(option)
     setUserInput(formatString(option.primary_organism_name))
     setShowOptions(false)
     updateFilteredOptions(formatString(option.primary_organism_name))
   }
 
-  const downloadCompendia = () => {}
+  useEffect(() => {
+    getCompendia(type === 'rnaSeq')
+  }, [])
 
   useEffect(() => {
-    setOptions(() => (isNormalized ? data[0].results : data[1].results))
-    setFilteredOptions(options)
-  }, [options])
+    setFilteredOptions(compendia)
+  }, [compendia])
 
   return (
     <Box background="white" pad={setResponsive('medium', 'large', 'xlarge')}>
@@ -123,7 +137,7 @@ export const Download = ({ heading, isNormalized }) => {
         margin={{ bottom: 'medium' }}
         size={setResponsive('small', 'large')}
       >
-        Download the {heading}
+        Download the {heading[type]}
       </Heading>
       <Box
         as="label"
@@ -141,52 +155,56 @@ export const Download = ({ heading, isNormalized }) => {
             zIndex: 1
           }}
         >
-          <Icon name="ChevronDown" size="xsmall" />
+          {!loading && <Icon name="ChevronDown" size="xsmall" />}
         </Box>
-        <DropDown style={{ position: 'relative' }}>
-          <SearchBox
-            padding="16px 32px"
-            placeholder="Search for an organism"
-            size="small"
-            reverse={false}
-            responsive
-            value={userInput}
-            changeHandler={(e) => handleChange(e.target.value)}
-            focusHandler={handleFocus}
-          />
-          {showOptions && filteredOptions.length > 0 && (
-            <Box
-              animation={{ type: 'zoomIn', duration: 50 }}
-              background="white"
-              border={{ color: 'brand', size: 'medium' }}
-              margin={{ top: 'xlarge' }}
-              height={{ max: '200px' }}
-              width="100%"
-              style={{
-                overflowY: 'scroll',
-                position: 'absolute',
-                zIndex: 1
-              }}
-            >
-              <List flexDirection="column">
-                {filteredOptions.map((option) => (
-                  <ListItem
-                    key={option.primary_organism_name}
-                    label={formatString(option.primary_organism_name)}
-                    selectedOption={
-                      selectedOption
-                        ? formatString(selectedOption.primary_organism_name)
-                        : null
-                    }
-                    clickHandler={() => handleClick(option)}
-                  />
-                ))}
-              </List>
-            </Box>
-          )}
-        </DropDown>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <DropDown style={{ position: 'relative' }}>
+            <SearchBox
+              padding="16px 32px"
+              placeholder="Search for an organism"
+              size="small"
+              reverse={false}
+              responsive
+              value={userInput}
+              changeHandler={(e) => handleChange(e.target.value)}
+              focusHandler={handleFocus}
+            />
+            {showOptions && filteredOptions.length > 0 && (
+              <Box
+                animation={{ type: 'zoomIn', duration: 50 }}
+                background="white"
+                border={{ color: 'brand', size: 'medium' }}
+                margin={{ top: 'xlarge' }}
+                height={{ max: '200px' }}
+                width="100%"
+                style={{
+                  overflowY: 'scroll',
+                  position: 'absolute',
+                  zIndex: 1
+                }}
+              >
+                <List flexDirection="column">
+                  {filteredOptions.map((option) => (
+                    <ListItem
+                      key={option.primary_organism_name}
+                      label={formatString(option.primary_organism_name)}
+                      selectedOrganism={
+                        selectedOrganism
+                          ? formatString(selectedOrganism.primary_organism_name)
+                          : null
+                      }
+                      clickHandler={() => handleClick(option)}
+                    />
+                  ))}
+                </List>
+              </Box>
+            )}
+          </DropDown>
+        )}
       </Box>
-      {!isNormalized && (
+      {type === 'rnaSeq' && (
         <Box margin={{ top: setResponsive('small', 'medium') }}>
           <InlineMessage label="Data is not normalized or aggregated." />
         </Box>
@@ -198,16 +216,16 @@ export const Download = ({ heading, isNormalized }) => {
               I agree to the <Anchor href={links.terms}>Terms of Use</Anchor>
             </Text>
           }
-          onClick={() => setAgree(!agree)}
+          onClick={() => setAcceptTerms(!acceptTerms)}
         />
       </Box>
       <Row>
         <Column margin={{ bottom: setResponsive('small', 'small', 'none') }}>
-          {selectedOption && (
+          {selectedOrganism && (
             <Box animation={{ type: 'fadeIn', duration: 800 }}>
               <Text>
                 Download Size:{' '}
-                {formatBytes(selectedOption.computed_file.size_in_bytes)}
+                {formatBytes(selectedOrganism.computed_file.size_in_bytes)}
               </Text>
             </Box>
           )}
@@ -215,10 +233,10 @@ export const Download = ({ heading, isNormalized }) => {
         <Column align={setResponsive('start', 'end')}>
           <Button
             label="Download Now"
-            disabled={!agree || !selectedOption}
+            disabled={!acceptTerms || !selectedOrganism}
             primary
             responsive
-            clickHandler={downloadCompendia}
+            clickHandler={() => goToDownloadPage(selectedOrganism.id, null)} // TEMP
           />
         </Column>
       </Row>
