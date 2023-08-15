@@ -83,9 +83,29 @@ export const Download = ({ type }) => {
   const [userInput, setUserInput] = useState('')
   const [acceptTerms, setAcceptTerms] = useState(false)
 
-  const goToDownloadPage = async (id, token) => {
+  const handleChange = (val) => {
+    if (val.trim() === '' || val !== userInput) {
+      setSelectedOrganism(null)
+    }
+
+    setUserInput(val)
+    updateFilteredOptions(val)
+  }
+
+  const handleClick = (option) => {
+    setSelectedOrganism(option)
+    setUserInput(formatString(option.primary_organism_name))
+    setShowOptions(false)
+    updateFilteredOptions(formatString(option.primary_organism_name))
+  }
+
+  const handleFileDownload = async (id, token) => {
     const response = await downloadCompendia(id, token)
     navigateToFileDownload(response.organism, response.url)
+  }
+
+  const handleFocus = () => {
+    setShowOptions(true)
   }
 
   const updateFilteredOptions = (val) => {
@@ -100,26 +120,6 @@ export const Download = ({ type }) => {
     } else {
       setFilteredOptions(compendia)
     }
-  }
-
-  const handleChange = (val) => {
-    if (val.trim() === '' || val !== userInput) {
-      setSelectedOrganism(null)
-    }
-
-    setUserInput(val)
-    updateFilteredOptions(val)
-  }
-
-  const handleFocus = () => {
-    setShowOptions(true)
-  }
-
-  const handleClick = (option) => {
-    setSelectedOrganism(option)
-    setUserInput(formatString(option.primary_organism_name))
-    setShowOptions(false)
-    updateFilteredOptions(formatString(option.primary_organism_name))
   }
 
   useEffect(() => {
@@ -236,7 +236,7 @@ export const Download = ({ type }) => {
             disabled={!acceptTerms || !selectedOrganism}
             primary
             responsive
-            clickHandler={() => goToDownloadPage(selectedOrganism.id, null)} // TEMP
+            clickHandler={() => handleFileDownload(selectedOrganism.id, null)} // TEMP
           />
         </Column>
       </Row>
