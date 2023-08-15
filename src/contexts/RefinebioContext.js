@@ -5,7 +5,7 @@ export const RefinebioContext = createContext({})
 
 export const RefinebioContextProvider = ({ children }) => {
   const [email, setEmail] = useLocalStorage('user-email', null)
-  const [token, setToken] = useLocalStorage('api-token', null)
+  const [token, setToken] = useLocalStorage('token', null)
 
   const value = useMemo(
     () => ({
