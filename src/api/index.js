@@ -1,3 +1,4 @@
+import compendia from './interfaces/compendia'
 import computedFiles from './interfaces/computedFiles'
 import { downloader, processor } from './interfaces/jobs'
 import dataset from './interfaces/dataset'
@@ -7,6 +8,7 @@ import samples from './interfaces/samples'
 import search from './interfaces/search'
 
 export const api = {
+  compendia,
   computedFiles,
   downloader,
   experiments,
