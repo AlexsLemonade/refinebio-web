@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { useToken } from 'hooks/useToken'
 import { api } from 'api'
 import { options } from 'config'
 
@@ -8,26 +9,32 @@ export const useCompendia = () => {
     compendia: { commonQueries }
   } = options
   const { push } = useRouter()
+  const {
+    token: tokenState,
+    createToken,
+    resetToken,
+    validateToken
+  } = useToken()
   const [compendia, setCompendia] = useState()
   const [loading, setLoading] = useState(false)
-  // TEMPORARY created for this hook (remove after the useToken hook implementation)
-  const tempTokenId = '3064bb92-e761-49d7-a7ac-7f7d90181576'
 
-  const getCompendia = async (quantSfOnly = false, token = null) => {
+  const getCompendia = async (quantSfOnly = false) => {
     const compendiaQuery = {
       ...commonQueries,
       quant_sf_only: quantSfOnly
     }
 
     setLoading(true)
-    const response = await api.compendia.get(compendiaQuery, token)
+    const response = await api.compendia.get(compendiaQuery, tokenState)
     setCompendia(response.results)
     setLoading(false)
   }
 
-  const downloadCompendia = async (id, token) => {
-    const tokenId = token || tempTokenId
-    const response = await api.compendia.download(id, tokenId)
+  const downloadCompendia = async (compendiaId) => {
+    const token = !validateToken()
+      ? await resetToken()
+      : tokenState || (await createToken())
+    const response = await api.compendia.download(compendiaId, token)
 
     return {
       organism: response.primary_organism_name,
@@ -47,7 +54,6 @@ export const useCompendia = () => {
 
   return {
     compendia,
-    tempTokenId,
     loading,
     downloadCompendia,
     getCompendia,
