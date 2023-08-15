@@ -6,7 +6,7 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import { links } from 'config'
 import { DownloadForm } from './DownloadForm'
 
-export const CompendiaNormalizedTab = ({ type = 'normalized' }) => {
+export const NormalizedTab = ({ type = 'normalized' }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -66,4 +66,4 @@ export const CompendiaNormalizedTab = ({ type = 'normalized' }) => {
   )
 }
 
-export default memo(CompendiaNormalizedTab)
+export default memo(NormalizedTab)

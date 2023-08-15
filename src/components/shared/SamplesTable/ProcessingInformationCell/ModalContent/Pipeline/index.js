@@ -5,13 +5,11 @@ import { Anchor } from 'components/shared/Anchor'
 import { links } from 'config'
 import { PipelineSteps } from './PipelineSteps'
 import { VersionInformation } from './VersionInformation'
-import {
-  AffymetrixScan,
-  IlluminaScan,
-  Salmon,
-  SubmitterSupplied,
-  Txtimport
-} from './protocols'
+import { AffymetrixScan } from './AffymetrixScan'
+import { IlluminaScan } from './IlluminaScan'
+import { Salmon } from './Salmon'
+import { Txtimport } from './Txtimport'
+import { SubmitterSupplied } from '../SubmitterSupplied'
 
 export const Pipeline = ({
   isSubmitterProcessed,

@@ -4,7 +4,8 @@ import isEmptyObject from 'helpers/isEmptyObject'
 import { Anchor } from 'components/shared/Anchor'
 import { Pill } from 'components/shared/Pill'
 import { links } from 'config'
-import { Pipeline, SubmitterSupplied } from './sections'
+import { Pipeline } from './Pipeline'
+import { SubmitterSupplied } from './SubmitterSupplied'
 
 export const ModalContent = ({ results, sample }) => {
   const pipelinesText = results.map((result) => result.processor.name)

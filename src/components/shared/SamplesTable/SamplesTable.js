@@ -18,14 +18,12 @@ import { Row } from 'components/shared/Row'
 import { TextNull } from 'components/shared/TextNull'
 import { links, options } from 'config'
 import { SamplesTableEmpty } from './SamplesTableEmpty'
-import {
-  CellAccessionCode,
-  CellAddRemove,
-  CellAdditionalMetadata,
-  CellProcessingInformation,
-  CellSampleMetadata,
-  CellTitle
-} from './cells'
+import { AccessionCodeCell } from './AccessionCodeCell'
+import { AddRemoveCell } from './AddRemoveCell'
+import { AdditionalMetadataCell } from './AdditionalMetadataCell'
+import { ProcessingInformationCell } from './ProcessingInformationCell'
+import { SampleMetadataCell } from './SampleMetadataCell'
+import { TitleCell } from './TitleCell'
 
 export const SamplesTable = ({
   experimentSampleAssociations,
@@ -62,7 +60,7 @@ export const SamplesTable = ({
         Header: 'Add/Remove',
         // eslint-disable-next-line react/no-unstable-nested-components
         Cell: ({ row: { original: sample } }) => (
-          <CellAddRemove
+          <AddRemoveCell
             experimentAccessionCodes={Object.keys(
               experimentSampleAssociations
             ).filter((accessionCode) =>
@@ -81,13 +79,13 @@ export const SamplesTable = ({
       {
         Header: 'Accession Code',
         accessor: 'accession_code',
-        Cell: CellAccessionCode,
+        Cell: AccessionCodeCell,
         maxWidth: 160
       },
       {
         Header: 'Title',
         accessor: 'title',
-        Cell: CellTitle
+        Cell: TitleCell
       },
       {
         id: 'id',
@@ -99,21 +97,21 @@ export const SamplesTable = ({
         id: column,
         accessor: column,
         Header: formatString(column),
-        Cell: CellSampleMetadata
+        Cell: SampleMetadataCell
       })),
       {
         Header: 'Processing Information',
         disableSortBy: true,
         id: 'processing_information',
         width: 180,
-        Cell: CellProcessingInformation
+        Cell: ProcessingInformationCell
       },
       {
         Header: 'Additional Metadata',
         disableSortBy: true,
         id: 'additional_metadata',
         width: 180,
-        Cell: CellAdditionalMetadata
+        Cell: AdditionalMetadataCell
       }
     ]
     // makes columns stick to left only for 'large' (enough screen real estate)

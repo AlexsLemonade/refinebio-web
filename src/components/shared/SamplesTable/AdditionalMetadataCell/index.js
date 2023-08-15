@@ -6,7 +6,7 @@ import { Modal } from 'components/shared/Modal'
 import { TextNull } from 'components/shared/TextNull'
 import { ModalContent } from './ModalContent'
 
-export const CellAdditionalMetadata = ({
+export const AdditionalMetadataCell = ({
   row: { original: sample },
   linkFontSize = '14px'
 }) => {
@@ -39,4 +39,4 @@ export const CellAdditionalMetadata = ({
   )
 }
 
-export default memo(CellAdditionalMetadata)
+export default memo(AdditionalMetadataCell)

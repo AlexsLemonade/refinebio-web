@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Tab } from 'grommet'
 import { Tabs as SharedTabs } from 'components/shared/Tabs'
-import { CompendiaNormalizedTab } from './NormalizedTab'
-import { CompendiaRNASeqTab } from './RNASeqTab'
+import { NormalizedTab } from './NormalizedTab'
+import { RNASeqTab } from './RNASeqTab'
 
 export const Tabs = () => {
   const router = useRouter()
@@ -45,9 +45,9 @@ export const Tabs = () => {
           onClick={() => clickHandle(tab.type)}
         >
           {tab.type === tabs[0].type ? (
-            <CompendiaNormalizedTab type={tab.type} />
+            <NormalizedTab type={tab.type} />
           ) : (
-            <CompendiaRNASeqTab type={tab.type} />
+            <RNASeqTab type={tab.type} />
           )}
         </Tab>
       ))}
