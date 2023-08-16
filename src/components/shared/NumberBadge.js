@@ -4,25 +4,22 @@ import styled, { css } from 'styled-components'
 // NOTE: Set the prop 'light' to true for the dark background
 
 const Badge = styled(Box)`
-  border-radius: 30px;
-  display: flex;
   align-item: center;
+  border-radius: 24px;
+  display: flex;
   font-size: 12px;
+  min-width: max-content;
+  padding: 3px 12px;
   position: absolute;
-  top: -8px;
-  right: -4px;
+  top: -16px;
+  right: -16px;
   text-align: center;
-  vertical-align: middle;
   z-index: 1;
-  ${({ theme, count, light }) => css`
+  ${({ theme, light }) => css`
     background: ${light
       ? theme.global.colors.white
       : theme.global.colors.brand};
     color: ${light ? theme.global.colors.brand : theme.global.colors.white};
-    line-height: ${Number.isNaN(Number(count)) ? '12px' : '16px'};
-    padding: ${Number.isNaN(Number(count)) ? '0 4px' : '0 2px'};
-    height: ${Number.isNaN(Number(count)) ? '12px' : '16px'};
-    min-width: ${Number.isNaN(Number(count)) ? 'max-content' : '16px'};
   `}
 `
 
