@@ -99,8 +99,8 @@ export const Download = ({ type }) => {
     updateFilteredOptions(formatString(option.primary_organism_name))
   }
 
-  const handleFileDownload = async (id, token) => {
-    const response = await downloadCompendia(id, token)
+  const handleFileDownload = async (id) => {
+    const response = await downloadCompendia(id)
     navigateToFileDownload(response.organism, response.url)
   }
 
@@ -236,7 +236,7 @@ export const Download = ({ type }) => {
             disabled={!acceptTerms || !selectedOrganism}
             primary
             responsive
-            clickHandler={() => handleFileDownload(selectedOrganism.id, null)} // TEMP
+            clickHandler={() => handleFileDownload(selectedOrganism.id)}
           />
         </Column>
       </Row>
