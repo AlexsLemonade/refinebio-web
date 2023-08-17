@@ -8,10 +8,7 @@ import { ExpandableBlock } from 'components/shared/ExpandableBlock'
 import { Icon } from 'components/shared/Icon'
 
 export const SearchInfoBanner = () => {
-  const [userVisited, setUserVisited] = useLocalStorage(
-    'refinebio-user-visited-before',
-    null
-  )
+  const [userVisited, setUserVisited] = useLocalStorage('visited-before', null)
   const { viewport } = useResponsive()
   const { startTimer, clearTimer } = useTimeoutInCallback(() => {
     setShow(false)

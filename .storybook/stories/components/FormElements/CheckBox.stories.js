@@ -1,8 +1,7 @@
 import { CheckBox } from 'grommet'
-import { getTitle } from 'utils/getTitle'
 
 export default {
-  title: getTitle('Checkbox'),
+  title: 'Form Elements/Checkbox',
   component: CheckBox,
   args: {
     checked: true,

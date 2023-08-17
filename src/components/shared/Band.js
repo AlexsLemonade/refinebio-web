@@ -10,7 +10,9 @@ const ParticlesBg = dynamic(() => import('../ParticlesBg'), {
 })
 
 export const Band = ({ bandHeight, light = false, ...props }) => {
-  const router = useRouter()
+  const { asPath, pathname } = useRouter()
+
+  if (asPath.includes('download')) return null
 
   return (
     <Box
@@ -22,7 +24,7 @@ export const Band = ({ bandHeight, light = false, ...props }) => {
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
-      {isMatchPath(router.pathname, '/compendia/[type]') && (
+      {isMatchPath(pathname, '/compendia/[type]') && (
         <Box
           height="10000%" // for the container to stretch
           style={{

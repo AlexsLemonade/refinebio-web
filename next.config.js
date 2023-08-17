@@ -39,7 +39,12 @@ const moduleExports = () => {
       // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/#use-hidden-source-map
       hideSourceMaps: true
     },
-    swcMinify: true
+    swcMinify: true,
+    webpack(config) {
+      // eslint-disable-next-line no-param-reassign
+      // config.infrastructureLogging = { debug: /PackFileCache/ }
+      return config
+    }
   }
 }
 

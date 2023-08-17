@@ -12,8 +12,12 @@ export const links = {
   refinebio_docs: 'https://docs.refine.bio',
   refinebio_docs_aggregation:
     'https://docs.refine.bio/en/latest/main_text.html#aggregations',
+  refinebio_docs_getting_started_with_species_compendia:
+    'https://docs.refine.bio/en/latest/getting_started.html#getting-started-with-species-compendia',
+  refinebio_docs_species_compendia:
+    'https://docs.refine.bio/en/latest/main_text.html#species-compendia',
   refinebio_docs_harmonized_metadata:
-    'https://docs.refine.bio/en/latest/main_text.html#refine-bio-harmonized-metadata  ',
+    'https://docs.refine.bio/en/latest/main_text.html#refine-bio-harmonized-metadata',
   refinebio_docs_normalized_compendia:
     'https://docs.refine.bio/en/latest/main_text.html#normalized-compendia',
   refinebio_docs_rna_seq_sample_compendia:
@@ -34,6 +38,8 @@ export const links = {
     'https://docs.refine.bio/en/latest/faq.html#why-can-t-i-add-certain-samples-to-my-dataset',
   refinebio_github_differential_expression_rnaseq:
     'https://alexslemonade.github.io/refinebio-examples/03-rnaseq/differential-expression_rnaseq_01.html',
+  refinebio_github_compendium_processing:
+    'https://github.com/AlexsLemonade/compendium-processing/tree/master/quality_check',
   refinebio_github_differential_expression_microarray:
     'https://alexslemonade.github.io/refinebio-examples/02-microarray/differential-expression_microarray_01_2-groups.html',
   refinebio_github_example:

@@ -3,6 +3,32 @@ export const options = {
     { label: 'Experiment', value: 'EXPERIMENT' },
     { label: 'Species', value: 'SPECIES' }
   ],
+  // setting for the compendia
+  compendia: {
+    // default values for common queries
+    commonQueries: {
+      latest_version: true,
+      limit: 1000
+    },
+    heading: {
+      normalized: 'Normalized Compendia',
+      rnaSeq: 'RNA-seq Sample Compendia'
+    },
+    svg: {
+      normalized: 'normalizaed-curve.svg',
+      rnaSeq: 'gene-expression-matrix.svg'
+    },
+    tabs: [
+      {
+        type: 'normalized',
+        label: 'Normalized Compendia'
+      },
+      {
+        type: 'rnaSeq',
+        label: 'RNA-seq Sample Compendia'
+      }
+    ]
+  },
   // setting for the experiment hook
   experiment: {
     databaseNames: {

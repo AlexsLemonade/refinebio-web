@@ -4,7 +4,7 @@ import { Grommet } from 'grommet'
 import { GlobalStyle } from 'styles/GlobalStyle'
 import { theme } from 'themes'
 import { BandContextProvider } from 'contexts/BandContext'
-import { DatasetContextProvider } from 'contexts/DatasetContext'
+import { DatasetManagerContextProvider } from 'contexts/DatasetManagerContext'
 import { ModalContextProvider } from 'contexts/ModalContext'
 import { RefinebioContextProvider } from 'contexts/RefinebioContext'
 import { SearchManagerContextProvider } from 'contexts/SearchManagerContext'
@@ -18,28 +18,26 @@ const Fallback = () => <ErrorPage />
 
 const App = ({ Component, pageProps }) => {
   return (
-    <>
+    <RefinebioContextProvider>
       <GlobalStyle />
       <Grommet theme={theme}>
-        <RefinebioContextProvider>
-          <SearchManagerContextProvider>
-            <DatasetContextProvider>
-              <BandContextProvider>
-                <PageTitle />
-                <Layout>
-                  <Sentry.ErrorBoundary fallback={Fallback} showDialog>
-                    <ModalContextProvider>
-                      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-                      <Component {...pageProps} />
-                    </ModalContextProvider>
-                  </Sentry.ErrorBoundary>
-                </Layout>
-              </BandContextProvider>
-            </DatasetContextProvider>
-          </SearchManagerContextProvider>
-        </RefinebioContextProvider>
+        <SearchManagerContextProvider>
+          <DatasetManagerContextProvider>
+            <BandContextProvider>
+              <PageTitle />
+              <Layout>
+                <Sentry.ErrorBoundary fallback={Fallback} showDialog>
+                  <ModalContextProvider>
+                    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+                    <Component {...pageProps} />
+                  </ModalContextProvider>
+                </Sentry.ErrorBoundary>
+              </Layout>
+            </BandContextProvider>
+          </DatasetManagerContextProvider>
+        </SearchManagerContextProvider>
       </Grommet>
-    </>
+    </RefinebioContextProvider>
   )
 }
 

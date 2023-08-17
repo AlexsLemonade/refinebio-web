@@ -1,8 +1,7 @@
 import { Select } from 'grommet'
-import { getTitle } from 'utils/getTitle'
 
 export default {
-  title: getTitle('Select'),
+  title: 'Form Elements/Select',
   component: Select,
   args: {
     defaultValue: 'Mene Option',

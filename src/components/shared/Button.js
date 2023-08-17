@@ -38,6 +38,7 @@ const CustomLinkButton = styled(GrommetButton)`
 `
 
 const CustomButton = styled(GrommetButton)`
+  border-radius: 3px;
   position: relative;
 
   ${({ underlineOnHover }) =>
@@ -147,7 +148,17 @@ export const Button = ({
         <CustomLinkButton
           link={link}
           linkColor={linkColor}
-          label={label}
+          label={
+            isLoading ? (
+              <IconSpinner
+                style={{
+                  position: 'relative'
+                }}
+              />
+            ) : (
+              label
+            )
+          }
           style={{
             border: 'none',
             fontSize: linkFontSize,

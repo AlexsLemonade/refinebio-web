@@ -15,7 +15,7 @@ import { PageTitle } from 'components/shared/PageTitle'
 import { Pagination } from 'components/shared/Pagination'
 import { SearchBox } from 'components/shared/SearchBox'
 import { SearchInfoBanner } from 'components/SearchResults/SearchInfoBanner'
-import { SearchCard } from 'components/SearchCard'
+import { SearchCard } from 'components/shared/SearchCard'
 import {
   MissingResultsAlert,
   NoFilteringResults,

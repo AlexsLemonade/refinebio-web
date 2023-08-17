@@ -1,11 +1,7 @@
 import { Box } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import {
-  AboutCCDLSection,
-  AboutOverviewSection,
-  AboutHero
-} from 'components/About'
+import { CCDL, Overview, Hero } from 'components/About'
 
 const About = () => {
   const { setResponsive } = useResponsive()
@@ -20,18 +16,18 @@ const About = () => {
       <FixedContainer
         pad={{ horizontal: setResponsive('none', 'medium', 'basex15') }}
       >
-        <AboutHero />
+        <Hero />
       </FixedContainer>
 
       <FixedContainer
         pad={{ horizontal: setResponsive('medium', 'medium', 'basex15') }}
       >
-        <AboutOverviewSection />
+        <Overview />
       </FixedContainer>
       <FixedContainer
         pad={{ horizontal: setResponsive('medium', 'medium', 'basex15') }}
       >
-        <AboutCCDLSection />
+        <CCDL />
       </FixedContainer>
     </Box>
   )

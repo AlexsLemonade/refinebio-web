@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Box, Heading } from 'grommet'
-import { useDataset } from 'hooks/useDataset'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { usePageRendered } from 'hooks/usePageRendered'
 import { Button } from 'components/shared/Button'
@@ -15,9 +15,9 @@ import {
   ShareDatasetButton
 } from 'components/Dataset'
 import {
-  DownloadDatasetDetails,
-  DownloadDatasetSummary,
-  DownloadFilesSummary
+  DatasetDetails,
+  DatasetSummary,
+  FilesSummary
 } from 'components/Download'
 
 // NOTE: Add the Spinner component for loading after replacing the mock with the API response
@@ -34,12 +34,11 @@ export const getServerSideProps = ({ query }) => {
 // https://github.com/AlexsLemonade/refinebio-frontend/issues/27
 
 export const Dataset = ({ query }) => {
-  const { dataset } = useDataset()
+  const { dataset } = useDatasetManager()
   const { dataset_id: datasetId, ref } = query
   const isSharedDataset = ref === 'share'
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
-
   const [data, setData] = useState(null)
 
   useEffect(() => {
@@ -60,7 +59,7 @@ export const Dataset = ({ query }) => {
       >
         {/* TEMPORARY START */}
         {datasetId === 'error' && <DatasetErrorDownloading />}
-        {datasetId === 'processing' && <DatasetProcessing />}
+        {datasetId === 'processing' && <DatasetProcessing dataset={dataset} />}
         {datasetId === 'ready' && <DatasetReady />}
         {datasetId === 'regenerate' && <DatasetRegenerate />}
         {/* TEMPORARY END */}
@@ -94,9 +93,9 @@ export const Dataset = ({ query }) => {
       </Row>
       {data && isSharedDataset && (
         <>
-          <DownloadFilesSummary dataset={data} />
-          <DownloadDatasetSummary dataset={data} />
-          <DownloadDatasetDetails dataset={data} isImmutable />
+          <FilesSummary dataset={data} />
+          <DatasetSummary dataset={data} />
+          <DatasetDetails dataset={data} isImmutable />
         </>
       )}
     </FixedContainer>

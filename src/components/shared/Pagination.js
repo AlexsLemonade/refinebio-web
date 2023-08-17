@@ -193,7 +193,6 @@ export const Pagination = ({
               margin={{ left: 'xsmall' }}
               secondary
               type="submit"
-              style={{ borderRadius: '3px' }}
             />
           </Box>
         </Form>

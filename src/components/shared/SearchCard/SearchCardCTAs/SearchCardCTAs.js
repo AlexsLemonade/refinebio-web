@@ -1,0 +1,64 @@
+import { memo } from 'react'
+import { Box } from 'grommet'
+import { useDatasetManager } from 'hooks/useDatasetManager'
+import { useResponsive } from 'hooks/useResponsive'
+import formatNumbers from 'helpers/formatNumbers'
+import { AddRemainingButton } from './AddRemainingButton'
+import { AddToDatasetButton } from './AddToDatasetButton'
+import { DownloadNowButton } from './DownloadNowButton'
+import { ProcessingDatasetButton } from './ProcessingDatasetButton'
+import { RemoveAddedButton } from './RemoveAddedButton'
+import { RequestExperimentFormButton } from './RequestExperimentFormButton'
+
+// TODO: remove mock data and need to test with API response
+
+export const SearchCardCTAs = ({ accessionCode, downloadableSamples }) => {
+  const { dataset } = useDatasetManager()
+  const { setResponsive } = useResponsive()
+
+  return (
+    <Box align={setResponsive('start', 'end')} width="100%">
+      {downloadableSamples ? (
+        <>
+          {dataset?.is_processing && (
+            <ProcessingDatasetButton dataset={dataset} />
+          )}
+
+          {/* If no samples have yet been added, this will add ["ALL"] samples in the experiment */}
+          {dataset?.data[accessionCode] === undefined ? (
+            <AddToDatasetButton
+              accessionCode={accessionCode}
+              downloadableSamples={downloadableSamples}
+            />
+          ) : (
+            // when ["ALL"] samples have been added, this will remove all of them
+            <RemoveAddedButton accessionCode={accessionCode} />
+          )}
+
+          {/* This will add the remaining samples if they haven't already been added. */}
+          {dataset?.data[accessionCode]?.length < downloadableSamples && (
+            <AddRemainingButton
+              samplesInDataset={formatNumbers(
+                dataset?.data[accessionCode]?.length
+              )}
+            />
+          )}
+
+          {!dataset?.is_processing && (
+            <Box
+              margin={{ top: 'small' }}
+              width={setResponsive('100%', 'auto')}
+            >
+              <DownloadNowButton accessionCode={accessionCode} />
+            </Box>
+          )}
+        </>
+      ) : (
+        // For non-downloadable experiment
+        <RequestExperimentFormButton accessionCode={accessionCode} />
+      )}
+    </Box>
+  )
+}
+
+export default memo(SearchCardCTAs)

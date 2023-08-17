@@ -1,2 +1,3 @@
-export { CompendiaHero } from './CompendiaHero'
-export { CompendiaTabs } from './CompendiaTabs'
+export { Hero } from './Hero'
+export { Tabs } from './Tabs'
+export { FileDownload } from './FileDownload'
