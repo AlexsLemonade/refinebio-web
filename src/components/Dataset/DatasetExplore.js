@@ -1,11 +1,12 @@
+import { useEffect, useState } from 'react'
 import { Box, Heading } from 'grommet'
+import { usePageRendered } from 'hooks/usePageRendered'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { Column } from 'components/shared/Column'
 import { List } from 'components/shared/List'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
-import mock from 'api/mockDataExperiment'
 
 const ListItem = ({ text, href }) => (
   <Box as="li" margin={{ bottom: 'small' }}>
@@ -13,15 +14,21 @@ const ListItem = ({ text, href }) => (
   </Box>
 )
 
-export const DatasetExplore = () => {
+export const DatasetExplore = ({ dataset }) => {
+  const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
+  const [technologies, setTechnologies] = useState(null)
 
-  // check technology and render links based on it
-  // const { experiments } = dataset
-  const experiments = mock[0].samples // TEMPORARY
-  const technologies = Object.values(experiments).map((e) => e.technology)
-  const hasRNASeq = technologies.includes('RNA-SEQ')
-  const hasMicroarray = technologies.includes('MICROARRAY')
+  useEffect(() => {
+    if (pageRendered) {
+      setTechnologies(
+        Object.values(dataset.experiments).map((e) => e.technology)
+      )
+    }
+  }, [pageRendered])
+
+  const hasRNASeq = technologies && technologies.includes('RNA-SEQ')
+  const hasMicroarray = technologies && technologies.includes('MICROARRAY')
   const isMixed = hasRNASeq && hasMicroarray
 
   const rnaSeqLinks = [

@@ -45,9 +45,7 @@ export const PageTitle = ({ title = '' }) => {
 
   return (
     <Head>
-      <title>
-        {pageTitle} {!home ? appName : ''}
-      </title>
+      <title>{`${pageTitle} ${!home ? appName : ''}`}</title>
     </Head>
   )
 }

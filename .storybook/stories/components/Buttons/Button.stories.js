@@ -1,8 +1,7 @@
 import { Button } from 'components/shared/Button'
-import { getTitle } from 'utils/getTitle'
 
 export default {
-  title: getTitle('Button'),
+  title: 'Button',
   component: Button,
   argTypes: {
     count: { control: 'text' },

@@ -1,8 +1,7 @@
 import { Footer } from 'components/Footer'
-import { getTitle } from 'utils/getTitle'
 
 export default {
-  title: getTitle('Footer'),
+  title: 'Footer',
   component: Footer
 }
 
