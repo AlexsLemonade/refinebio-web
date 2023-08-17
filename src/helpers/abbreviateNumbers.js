@@ -1,7 +1,7 @@
-// abbreviates the given number with the specified decimal place value
+// abbreviates the given number with the specified decimal place
 // (original) https://stackoverflow.com/q/2692323
-export default (number, decPlaces = 1) => {
-  const decNumber = 10 ** decPlaces
+export default (number, decPlace = 1) => {
+  const decValue = 10 ** decPlace
   const abbrev = ['k', 'm', 'b', 't']
   let count = abbrev.length - 1
   let temp = number
@@ -10,7 +10,7 @@ export default (number, decPlaces = 1) => {
     const size = 10 ** ((count + 1) * 3)
 
     if (size <= temp) {
-      temp = Math.round((temp * decNumber) / size) / decNumber
+      temp = Math.round((temp * decValue) / size) / decValue
       temp += abbrev[count]
       break
     }
