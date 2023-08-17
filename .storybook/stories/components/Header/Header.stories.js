@@ -1,8 +1,7 @@
 import { Header } from 'components/Header'
-import { getTitle } from 'utils/getTitle'
 
 export default {
-  title: getTitle('Header'),
+  title: 'Header',
   component: Header,
   argTypes: {
     color: {

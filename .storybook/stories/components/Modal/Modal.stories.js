@@ -1,4 +1,3 @@
-import { getTitle } from 'utils/getTitle'
 import { useModal } from 'hooks/useModal'
 import { Box, Heading, Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
@@ -194,7 +193,7 @@ const ModalContent = () => {
 }
 
 export default {
-  title: getTitle('Modal'),
+  title: 'Modal',
   component: ModalContent
 }
 
