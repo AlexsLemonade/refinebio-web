@@ -1,9 +1,8 @@
 import { Heading } from 'grommet'
-import { getTitle } from 'utils/getTitle'
 import { useThemeContext } from 'utils/useThemeContext'
 
 export default {
-  title: getTitle('Heading'),
+  title: 'Heading',
   component: Heading,
   argTypes: {
     level: {

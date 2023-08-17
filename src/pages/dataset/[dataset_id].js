@@ -59,7 +59,7 @@ export const Dataset = ({ query }) => {
       >
         {/* TEMPORARY START */}
         {datasetId === 'error' && <DatasetErrorDownloading />}
-        {datasetId === 'processing' && <DatasetProcessing />}
+        {datasetId === 'processing' && <DatasetProcessing dataset={dataset} />}
         {datasetId === 'ready' && <DatasetReady />}
         {datasetId === 'regenerate' && <DatasetRegenerate />}
         {/* TEMPORARY END */}
