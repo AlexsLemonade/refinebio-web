@@ -32,7 +32,7 @@ export const Anchor = ({
       {...props}
     />
   ) : (
-    <Link href={href} passHref>
+    <Link href={href} passHref legacyBehavior>
       <CustomAnchor
         icon={icon}
         color={linkColor}

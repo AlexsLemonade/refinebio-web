@@ -1,8 +1,7 @@
 import { RadioButton } from 'grommet'
-import { getTitle } from 'utils/getTitle'
 
 export default {
-  title: getTitle('RadioButton'),
+  title: 'Form Elements/RadioButton',
   component: RadioButton,
   args: {
     checked: true,

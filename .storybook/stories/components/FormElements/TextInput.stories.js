@@ -1,9 +1,8 @@
 import { TextInput } from 'components/shared/TextInput'
 import { InlineMessage } from 'components/shared/InlineMessage'
-import { getTitle } from 'utils/getTitle'
 
 export default {
-  title: getTitle('TextInput'),
+  title: 'Form Elements/TextInput',
   component: TextInput,
   argTypes: {
     value: { control: 'text' }
