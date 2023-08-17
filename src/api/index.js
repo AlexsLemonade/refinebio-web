@@ -6,6 +6,7 @@ import experiments from './interfaces/experiments'
 import originalFiles from './interfaces/originalFiles'
 import samples from './interfaces/samples'
 import search from './interfaces/search'
+import token from './interfaces/token'
 
 export const api = {
   compendia,
@@ -16,5 +17,6 @@ export const api = {
   originalFiles,
   processor,
   samples,
-  search
+  search,
+  token
 }

@@ -18,28 +18,26 @@ const Fallback = () => <ErrorPage />
 
 const App = ({ Component, pageProps }) => {
   return (
-    <>
+    <RefinebioContextProvider>
       <GlobalStyle />
       <Grommet theme={theme}>
-        <RefinebioContextProvider>
-          <SearchManagerContextProvider>
-            <DatasetManagerContextProvider>
-              <BandContextProvider>
-                <PageTitle />
-                <Layout>
-                  <Sentry.ErrorBoundary fallback={Fallback} showDialog>
-                    <ModalContextProvider>
-                      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-                      <Component {...pageProps} />
-                    </ModalContextProvider>
-                  </Sentry.ErrorBoundary>
-                </Layout>
-              </BandContextProvider>
-            </DatasetManagerContextProvider>
-          </SearchManagerContextProvider>
-        </RefinebioContextProvider>
+        <SearchManagerContextProvider>
+          <DatasetManagerContextProvider>
+            <BandContextProvider>
+              <PageTitle />
+              <Layout>
+                <Sentry.ErrorBoundary fallback={Fallback} showDialog>
+                  <ModalContextProvider>
+                    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+                    <Component {...pageProps} />
+                  </ModalContextProvider>
+                </Sentry.ErrorBoundary>
+              </Layout>
+            </BandContextProvider>
+          </DatasetManagerContextProvider>
+        </SearchManagerContextProvider>
       </Grommet>
-    </>
+    </RefinebioContextProvider>
   )
 }
 
