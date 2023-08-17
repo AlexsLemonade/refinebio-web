@@ -6,7 +6,7 @@ import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
-import { DownloadForm } from './DownloadForm'
+import { DownloadBlock } from './DownloadBlock'
 
 const Card = ({ heading, pad, children }) => {
   const { setResponsive } = useResponsive()
@@ -30,12 +30,12 @@ const Card = ({ heading, pad, children }) => {
   )
 }
 
-export const RNASeqTab = ({ type = 'rna-seq' }) => {
+export const RNASeqTab = ({ type = 'rnaSeq' }) => {
   const { setResponsive } = useResponsive()
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 350, delay: 200 }}>
-      <DownloadForm type={type} />
+      <DownloadBlock type={type} />
       <FixedContainer>
         <Row
           direction={setResponsive('column', 'column', 'row')}

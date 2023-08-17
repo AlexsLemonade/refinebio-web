@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Box } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { Hero, Tabs } from 'components/Compendia'
+import { FileDownload, Hero, Tabs } from 'components/Compendia'
 import { PageTitle } from 'components/shared/PageTitle'
 import { SignUpBlock } from 'components/shared/SignUpBlock'
 
@@ -13,24 +13,34 @@ export const Compendia = () => {
 
   useEffect(() => {
     if (!isReady) return
-
     setTabName(
-      `${asPath.includes('normalized') ? 'Normalized' : 'RNA-seq'} Compendia -`
+      `${
+        // eslint-disable-next-line no-nested-ternary
+        asPath.includes('normalized')
+          ? 'Normalized'
+          : asPath.includes('rna-seq')
+          ? 'RNA-seq'
+          : 'Download'
+      } Compendia -`
     )
   }, [asPath, isReady])
 
   return (
     <>
       <PageTitle title={tabName} />
-      <Box
-        pad={{
-          top: setResponsive('basex7', 'basex7', 'basex10')
-        }}
-      >
-        <Hero />
-        <Tabs />
-        <SignUpBlock />
-      </Box>
+      {asPath.includes('download') ? (
+        <FileDownload />
+      ) : (
+        <Box
+          pad={{
+            top: setResponsive('basex7', 'basex7', 'basex10')
+          }}
+        >
+          <Hero />
+          <Tabs />
+          <SignUpBlock />
+        </Box>
+      )}
     </>
   )
 }

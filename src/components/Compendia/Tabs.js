@@ -1,40 +1,32 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Tab } from 'grommet'
+import { options } from 'config'
 import { Tabs as SharedTabs } from 'components/shared/Tabs'
 import { NormalizedTab } from './NormalizedTab'
 import { RNASeqTab } from './RNASeqTab'
 
 export const Tabs = () => {
-  const router = useRouter()
+  const {
+    compendia: { tabs }
+  } = options
+  const { isReady, pathname, query, replace } = useRouter()
   const [activeIndex, setActiveIndex] = useState(0)
-  const [type, setType] = useState('')
   const handleActive = (nextIndex) => setActiveIndex(nextIndex)
 
   useEffect(() => {
-    setType(router.query.type)
-    setActiveIndex(type === 'rna-seq' ? 1 : 0)
-  }, [router, type])
+    if (!isReady) return
+
+    setActiveIndex(query.type === 'rna-seq' ? 1 : 0)
+  }, [isReady])
 
   const clickHandle = (tabType) => {
-    setType(tabType)
-    router.replace(
-      { pathname: router.pathname, query: { type: tabType } },
-      `/compendia/${tabType}`,
-      { shallow: true }
-    )
+    const tabName = tabType === 'rnaSeq' ? 'rna-seq' : tabType
+
+    replace({ pathname, query: { type: tabType } }, `/compendia/${tabName}`, {
+      shallow: true
+    })
   }
-  // tab items
-  const tabs = [
-    {
-      type: 'normalized',
-      label: 'Normalized Compendia'
-    },
-    {
-      type: 'rna-seq',
-      label: 'RNA-seq Sample Compendia'
-    }
-  ]
 
   return (
     <SharedTabs activeIndex={activeIndex} text onActive={handleActive}>
