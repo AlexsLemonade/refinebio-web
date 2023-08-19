@@ -1,49 +1,159 @@
-# refinebio-web
+[![Node.js](https://img.shields.io/badge/Node.js-v18.17-dddddd?style=for-the-badge&labelColor=222222)](https://nodejs.org) [![Yarn](https://img.shields.io/badge/yarn-v3.6.1-7254ab?style=for-the-badge&labelColor=222222)](https://yarnpkg.com) [![formatter: prettier](https://img.shields.io/badge/formatter-prettier-fc59ec?style=for-the-badge&labelColor=222222)](https://github.com/prettier/prettier) [![license: BSD-3-Clause](https://img.shields.io/badge/license-BSD--3--Clause-green?style=for-the-badge&labelColor=222222)](https://opensource.org/licenses/BSD-3-Clause)
 
-Refinebio Client using [Next.js](https://nextjs.org/)
+# refine.bio Web
+
+This is a [refine.bio](https://github.com/AlexsLemonade/refinebio) web application that allows users to search, build, and download custom datasets for their needs including gene expression matrices and sample metadata.
+
+<details>
+
+<summary><strong>Table of Contents</strong></summary><br/>
+
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+- [Development](#development)
+  - [Initialization](#initialization)
+  - [Services](#services)
+  - [Linter](#linter)
+  - [Build](#build)
+- [Deployment](#deployment)
+  - [Environments](#environments)
+    - [Staging](#staging)
+    - [Production](#production)
+- [Tech Stacks](#tech-stacks)
+  - [Framework and Tool](#framework-and-tool)
+  - [Formatting](#formatting)
+  - [Linting](#linting)
+  - [Styling](#styling)
+- [Support](#support)
+- [License](#license)
+
+</details>
 
 ## Getting Started
 
-### Ports
+### Prerequisites
 
-- `client`: http://localhost:3002
+To run the application on localhost, the following requirements must be installed on your environment:
 
-- Storybook: http://localhost:6006
+- [Node.js](https://nodejs.org/en/download) verson `18.17`
+- [Yarn package manager](https://yarnpkg.com/getting-started/install) version `3.6.1` (required Node.js)
+- [Docker](https://www.docker.com/get-started)
 
-### Run the Local Environment
+#### Homebrew
 
-The following command starts both `client` and Storybook:
+For macOS, Yarn can be installed with [Homebrew package manager](https://brew.sh) which also installs Node.js if it's not already installed.
 
-```bash
+In the terminal, run:
+
+1. [`brew install yarn`](https://formulae.brew.sh/formula/yarn) to install Yarn
+2. [`yarn set version 3.6.1`](https://yarnpkg.com/cli/set/version) to set the Yarn version
+
+#### npm
+
+Alternetvely, you can install Yarn using [npm](https://www.npmjs.com/package/yarn) which comes with Node.js.
+
+To switch the Node.js version, we recommend using a node version manager such as [fnm](https://github.com/Schniz/fnm?ref=blog.apify.com) or [nvm](https://github.com/nvm-sh/nvm).
+
+## Development
+
+### Initialization
+
+To install the packages and dependencies, run the following command in the project root directory:
+
+```
+yarn install
+```
+
+### Services
+
+The following ports are used by a client and a storybook services that run locally in a separate Docker container.
+
+| Service   | Port | URL                                            |
+| :-------- | :--- | :--------------------------------------------- |
+| Client    | 3002 | [http://localhost:3002](http://localhost:3002) |
+| Storybook | 6006 | [http://localhost:3002](http://localhost:6006) |
+
+To start the services, run the following commands in the project root directory:
+
+#### Run all services:
+
+```
 yarn start-local
 ```
 
-### Run `client`
+#### Run the client:
 
-The following command starts `client`:
-
-```bash
+```
 yarn start-client
 ```
 
-### Run Storybook
+#### Run the storybook:
 
-The following command starts Storybook:
-
-```bash
+```
 yarn start-storybook
 ```
 
-### Stop the Local Environment
+#### Stop all services:
 
-The following command stops both `client` and Storybook:
-
-```bash
+```
 yarn stop-local
 ```
 
-## Other resources
+### Linter
 
-- [Vercel with Next.js](https://vercel.com/solutions/nextjs)
-- [Next.js docs](https://nextjs.org/docs)
-- [Storybook CLI](https://storybook.js.org/docs/react/api/cli-options)
+To lint the code, run the following command:
+
+```
+yarn lint
+```
+
+You can run this command with [options](https://eslint.org/docs/latest/use/command-line-interface#options) such as `--fix` which automatically fix linting errors (e.g., module import order, layout formatting).
+
+### Build
+
+To generate the production build, run the following command in the project root directory:
+
+```
+yarn build
+```
+
+Next.js will autogenerate a `.next` build directory which is optinized and exportable.
+
+## Deployment
+
+### Environments
+
+#### Staging
+
+The staging environment is a close replica of the production environment and we use it to run QA tests before releasing it to production. The staging server is deployed automatically by merging PR into `dev` branch.
+
+#### Production
+
+The production environment is the latest release of the application that are available to end users. We manually promote a staging deployment to production in [Vecel](https://vercel.com/solutions/nextjs) onceall QA tests are passed.
+
+## Tech Stacks
+
+### Framework and tool
+
+This project is using [Next.js](https://nextjs.org) as a frontend framework and [Storybook](https://storybook.js.org) as a collaboration tool for UI development.
+
+### Formatting
+
+We use [Prettier](https://prettier.io/), an opinionated code formatter, for JS code formatting. Whenever a commit is made, Prettier will automatically format the changed files. Prettier can also be [integrated](https://prettier.io/docs/en/editors.html) into many text editors.
+
+### Linting
+
+We use [Eslint](https://eslint.org) to statically analyze our codebase to fix common issues to build a bug free application.
+
+### Styling
+
+- CSS-in-JS: [Styled Component](https://styled-components.com)
+- Component Library: [Grommet](https://v2.grommet.io)
+
+## Support
+
+refine.bio web is developed by [Childhood Cancer Data Lab](https://www.ccdatalab.org) and powered by Alex's Lemonade Stand Foundation](https://www.alexslemonade.org). You can [donate](https://www.ccdatalab.org/donate-link) to support the CCDL’s efforts to give researchers the tools to create a healthier, more prosperous future for kids fighting cancer and beyond.
+
+## License
+
+Distrubuted under [The 3-Clause BSD License](https://opensource.org/licenses/BSD-3-Clause).
