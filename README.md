@@ -2,7 +2,7 @@
 
 # refine.bio Web
 
-This is a [refine.bio](https://github.com/AlexsLemonade/refinebio) web application that allows users to search, build, and download custom datasets for their needs including gene expression matrices and sample metadata.
+This is a [refine.bio](https://github.com/AlexsLemonade/refinebio) web application that enables users to search, build, and download custom datasets for their needs including gene expression matrices and sample metadata.
 
 <details>
 
@@ -66,7 +66,7 @@ yarn install
 
 ### Services
 
-The following ports are used by a client and a storybook services that run locally in a separate Docker container.
+The following ports are used by a client and a storybook services that run locally in separate Docker containers.
 
 | Service   | Port | URL                                            |
 | :-------- | :--- | :--------------------------------------------- |
@@ -135,11 +135,11 @@ The production environment is the latest release of the application that are ava
 
 ### Framework and tool
 
-This project is using [Next.js](https://nextjs.org) as a frontend framework and [Storybook](https://storybook.js.org) as a collaboration tool for UI development.
+This project is using [Next.js](https://nextjs.org) (version `13`) as a frontend framework and [Storybook](https://storybook.js.org) (version `7`) as a collaboration tool for UI development.
 
 ### Formatting
 
-We use [Prettier](https://prettier.io/), an opinionated code formatter, for JS code formatting. Whenever a commit is made, Prettier will automatically format the changed files. Prettier can also be [integrated](https://prettier.io/docs/en/editors.html) into many text editors.
+We use [Prettier](https://prettier.io/) for JS code formatting to automatically format the changed files on each commit. It can be [integrated](https://prettier.io/docs/en/editors.html) into various IDE.
 
 ### Linting
 
@@ -152,8 +152,8 @@ We use [Eslint](https://eslint.org) to statically analyze our codebase to fix co
 
 ## Support
 
-refine.bio web is developed by [Childhood Cancer Data Lab](https://www.ccdatalab.org) and powered by Alex's Lemonade Stand Foundation](https://www.alexslemonade.org). You can [donate](https://www.ccdatalab.org/donate-link) to support the CCDL’s efforts to give researchers the tools to create a healthier, more prosperous future for kids fighting cancer and beyond.
+refine.bio web is developed by [Childhood Cancer Data Lab](https://www.ccdatalab.org) and powered by [Alex's Lemonade Stand Foundation](https://www.alexslemonade.org). You can [support](https://www.ccdatalab.org/donate-link) the CCDL’s efforts to give researchers the tools to create a healthier, more prosperous future for kids fighting cancer and beyond.
 
 ## License
 
-Distrubuted under [The 3-Clause BSD License](https://opensource.org/licenses/BSD-3-Clause).
+Distrubuted under [the 3-Clause BSD License](https://opensource.org/licenses/BSD-3-Clause).
