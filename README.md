@@ -41,7 +41,7 @@ To run the application on localhost, the following requirements must be installe
 
 #### Homebrew
 
-For macOS, Yarn can be installed with [Homebrew package manager](https://brew.sh) which also installs Node.js if it's not already installed.
+For macOS, Yarn can be installed with the [Homebrew package manager](https://brew.sh) which also installs Node.js if it's not already installed.
 
 In the terminal, run:
 
@@ -117,7 +117,7 @@ To generate the production build, run the following command in the project root 
 yarn build
 ```
 
-Next.js will autogenerate a `.next` build directory which is optinized and exportable.
+Next.js will autogenerate a `.next` build directory which is optimized and exportable.
 
 ## Deployment
 
@@ -125,7 +125,7 @@ Next.js will autogenerate a `.next` build directory which is optinized and expor
 
 #### Staging
 
-The staging environment is a close replica of the production environment and we use it to run QA tests before releasing it to production. The staging server is deployed automatically by merging PR into `dev` branch.
+The staging environment is a close replica of the production environment and we use it to run QA tests before releasing it to production. The staging server is deployed automatically by merging PR into the `dev` branch.
 
 #### Production
 
