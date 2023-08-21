@@ -11,12 +11,9 @@ export const ErrorPage = ({ statusCode }) => {
   )
 }
 
-ErrorPage.getInitialProps = async ({ res, err }) => {
-  // eslint-disable-next-line no-nested-ternary
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404
-
+ErrorPage.getInitialProps = async ({ err }) => {
   return {
-    statusCode
+    statusCode: err ? err.statusCode : 504
   }
 }
 
