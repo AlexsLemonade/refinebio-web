@@ -8,12 +8,12 @@ const Badge = styled(Box)`
   align-item: center;
   border-radius: 24px;
   display: flex;
-  font-size: 12px;
+  font-size: 13px;
   min-width: max-content;
-  padding: 3px 12px;
+  padding: 2px 8px;
   position: absolute;
   top: -16px;
-  right: -16px;
+  right: -12px;
   text-align: center;
   z-index: 1;
   ${({ theme, light }) => css`
