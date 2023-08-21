@@ -143,7 +143,7 @@ We use [Prettier](https://prettier.io/) for JS code formatting to automatically 
 
 ### Linting
 
-We use [Eslint](https://eslint.org) to statically analyze our JS code to correct common issues to build a bug free application.
+We use [Eslint](https://eslint.org) to statically analyze our JS code to correct common issues to write a bug free application.
 
 ### Styling
 
