@@ -107,7 +107,7 @@ To lint the code, run the following command:
 yarn lint
 ```
 
-You can run this command with [options](https://eslint.org/docs/latest/use/command-line-interface#options) such as `--fix` which automatically fix linting errors (e.g., module import order, layout formatting).
+You can run this command with [options](https://eslint.org/docs/latest/use/command-line-interface#options) such as `--fix` which automatically fixes linting errors (e.g., module import order, layout formatting).
 
 ### Build
 
@@ -129,17 +129,17 @@ The staging environment is a close replica of the production environment and we 
 
 #### Production
 
-The production environment is the latest release of the application that are available to end users. We manually promote a staging deployment to production in [Vecel](https://vercel.com/solutions/nextjs) onceall QA tests are passed.
+The production environment is the latest release of the application that are available to end users. We manually promote a staging deployment to the production server in [Vecel](https://vercel.com/solutions/nextjs) once all the QA tests are passed.
 
 ## Tech Stacks
 
 ### Framework and tool
 
-This project is using [Next.js](https://nextjs.org) (version `13`) as a frontend framework and [Storybook](https://storybook.js.org) (version `7`) as a collaboration tool for UI development.
+This project is using [Next.js](https://nextjs.org) (currently version `13`) as a frontend framework and [Storybook](https://storybook.js.org) (currently version `7`) as a collaboration tool for the UI development.
 
 ### Formatting
 
-We use [Prettier](https://prettier.io/) for JS code formatting to automatically format the changed files on each commit. It can be [integrated](https://prettier.io/docs/en/editors.html) into various IDE.
+We use [Prettier](https://prettier.io/) for JS code formatting to automatically format the changed files on each commit. It can be [integrated](https://prettier.io/docs/en/editors.html) into various IDEs.
 
 ### Linting
 
