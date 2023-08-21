@@ -2,7 +2,7 @@
 
 # refine.bio Web
 
-This is a [refine.bio](https://github.com/AlexsLemonade/refinebio) web application that enables users to search, build, and download custom datasets for their needs including gene expression matrices and sample metadata.
+This is a web application for [refine.bio](https://github.com/AlexsLemonade/refinebio) that enables users to search, build, and download custom datasets for their needs including gene expression matrices and sample metadata.
 
 <details>
 
@@ -41,7 +41,7 @@ To run the application on localhost, the following requirements must be installe
 
 #### Yarn
 
-For macOS, Yarn can be installed with the [Homebrew package manager](https://brew.sh) which also installs Node.js if it's not already installed.
+For macOS, Yarn can be installed using the [Homebrew package manager](https://brew.sh) which also installs Node.js if it's not already installed.
 
 In the terminal, run:
 
@@ -58,7 +58,7 @@ To switch the Node.js version, we recommend using a node version manager such as
 
 ## Development
 
-The following commands must be run in the project root directory.
+The following commands must be run from the project root directory.
 
 ### Initialization
 
@@ -75,7 +75,7 @@ The following ports are used by a client and a storybook services that run local
 | Service   | Port | URL                                            |
 | :-------- | :--- | :--------------------------------------------- |
 | Client    | 3002 | [http://localhost:3002](http://localhost:3002) |
-| Storybook | 6006 | [http://localhost:3002](http://localhost:6006) |
+| Storybook | 6006 | [http://localhost:6006](http://localhost:6006) |
 
 To start the services, run the following commands:
 
@@ -147,7 +147,7 @@ We use [Prettier](https://prettier.io/) for JS code formatting to automatically 
 
 ### Linting
 
-We use [Eslint](https://eslint.org) to statically analyze our JS code to correct common issues to write a bug free application.
+We use [ESlint](https://eslint.org) to statically analyze our JS code to correct common issues to write a bug free application.
 
 ### Styling
 
