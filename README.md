@@ -39,7 +39,7 @@ To run the application on localhost, the following requirements must be installe
 - [Yarn package manager](https://yarnpkg.com/getting-started/install) version `3.6.1` (required Node.js)
 - [Docker](https://www.docker.com/get-started)
 
-#### Homebrew
+#### Yarn
 
 For macOS, Yarn can be installed with the [Homebrew package manager](https://brew.sh) which also installs Node.js if it's not already installed.
 
@@ -51,6 +51,8 @@ In the terminal, run:
 #### npm
 
 Alternatively, Yarn can be installed using [npm](https://www.npmjs.com/package/yarn) which comes with Node.js.
+
+#### Node.js
 
 To switch the Node.js version, we recommend using a node version manager such as [fnm](https://github.com/Schniz/fnm?ref=blog.apify.com) or [nvm](https://github.com/nvm-sh/nvm).
 
