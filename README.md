@@ -46,19 +46,21 @@ For macOS, Yarn can be installed with the [Homebrew package manager](https://bre
 In the terminal, run:
 
 1. [`brew install yarn`](https://formulae.brew.sh/formula/yarn) to install Yarn
-2. [`yarn set version 3.6.1`](https://yarnpkg.com/cli/set/version) to set the Yarn version
+2. [`yarn set version 3.6.1`](https://yarnpkg.com/cli/set/version) to specify the Yarn version
 
 #### npm
 
-Alternetvely, you can install Yarn using [npm](https://www.npmjs.com/package/yarn) which comes with Node.js.
+Alternatively, Yarn can be installed using [npm](https://www.npmjs.com/package/yarn) which comes with Node.js.
 
 To switch the Node.js version, we recommend using a node version manager such as [fnm](https://github.com/Schniz/fnm?ref=blog.apify.com) or [nvm](https://github.com/nvm-sh/nvm).
 
 ## Development
 
+The following commands must be run in the project root directory.
+
 ### Initialization
 
-To install the packages and dependencies, run the following command in the project root directory:
+To install the packages and dependencies, run the following command:
 
 ```
 yarn install
@@ -73,27 +75,27 @@ The following ports are used by a client and a storybook services that run local
 | Client    | 3002 | [http://localhost:3002](http://localhost:3002) |
 | Storybook | 6006 | [http://localhost:3002](http://localhost:6006) |
 
-To start the services, run the following commands in the project root directory:
+To start the services, run the following commands:
 
-#### Run all services:
+#### Run all services
 
 ```
 yarn start-local
 ```
 
-#### Run the client:
+#### Run the client
 
 ```
 yarn start-client
 ```
 
-#### Run the storybook:
+#### Run the storybook
 
 ```
 yarn start-storybook
 ```
 
-#### Stop all services:
+#### Stop all services
 
 ```
 yarn stop-local
@@ -111,7 +113,7 @@ You can run this command with [options](https://eslint.org/docs/latest/use/comma
 
 ### Build
 
-To generate the production build, run the following command in the project root directory:
+To generate the production build, run the following command:
 
 ```
 yarn build
