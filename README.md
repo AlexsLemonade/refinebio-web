@@ -107,7 +107,7 @@ To lint the code, run the following command:
 yarn lint
 ```
 
-You can run this command with [options](https://eslint.org/docs/latest/use/command-line-interface#options) such as `--fix` which automatically fixes linting errors (e.g., module import order, layout formatting).
+You can run this command with [options](https://eslint.org/docs/latest/use/command-line-interface#options) such as `--fix` which automatically corrects minor linting errors (e.g., module import order, layout formatting).
 
 ### Build
 
@@ -117,7 +117,7 @@ To generate the production build, run the following command in the project root 
 yarn build
 ```
 
-Next.js will autogenerate a `.next` build directory which is optimized and exportable.
+Next.js will autogenerate the `.next` build directory which is optimized and exportable.
 
 ## Deployment
 
@@ -125,11 +125,11 @@ Next.js will autogenerate a `.next` build directory which is optimized and expor
 
 #### Staging
 
-The staging environment is a close replica of the production environment and we use it to run QA tests before releasing it to production. The staging server is deployed automatically by merging PR into the `dev` branch.
+The staging environment is a close replica of the production environment and we use it to run QA tests before releasing it to the production server. The staging server is deployed automatically by merging PR into the `dev` branch.
 
 #### Production
 
-The production environment is the latest release of the application that are available to end users. We manually promote a staging deployment to the production server in [Vecel](https://vercel.com/solutions/nextjs) once all the QA tests are passed.
+The production environment is the latest release of the application that is available to end users. We manually promote a staging deployment to the production server in [Vecel](https://vercel.com/solutions/nextjs) once all the QA tests are passed.
 
 ## Tech Stacks
 
@@ -143,7 +143,7 @@ We use [Prettier](https://prettier.io/) for JS code formatting to automatically 
 
 ### Linting
 
-We use [Eslint](https://eslint.org) to statically analyze our codebase to fix common issues to build a bug free application.
+We use [Eslint](https://eslint.org) to statically analyze our JS code to correct common issues to build a bug free application.
 
 ### Styling
 
