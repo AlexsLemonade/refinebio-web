@@ -1,2 +1,2 @@
 export { Custom404 } from './Custom404'
-export { HeavyTraffic } from './HeavyTraffic'
+export { Custom504 } from './Custom504'

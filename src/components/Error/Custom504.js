@@ -2,7 +2,7 @@ import { Box, Heading, Paragraph } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Row } from 'components/shared/Row'
 
-export const HeavyTraffic = () => {
+export const Custom504 = () => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -42,4 +42,4 @@ export const HeavyTraffic = () => {
   )
 }
 
-export default HeavyTraffic
+export default Custom504
