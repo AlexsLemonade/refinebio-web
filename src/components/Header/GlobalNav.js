@@ -5,7 +5,7 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { getTotalSamples } from 'helpers/dataset'
 import isMatchPath from 'helpers/isMatchPath'
-import { Button } from 'components/shared/Button'
+import { BadgedButton } from 'components/shared/BadgedButton'
 import { LayerResponsive } from 'components/shared/LayerResponsive'
 import { List } from 'components/shared/List'
 import { Icon } from 'components/shared/Icon'
@@ -26,8 +26,6 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   useEffect(() => {
     setTotalSamples(getTotalSamples(dataset?.data))
   }, [dataset])
-
-  const buttonWidth = '80vw' // TEMPORARY until creatre a custom budged button component
 
   const handleClick = () => {
     if (viewport !== 'small') return
@@ -73,11 +71,12 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
           <List
             alignItems={setResponsive('start', 'center')}
             flexDirection={setResponsive('column', 'row')}
+            width={setResponsive('100%', 'auto')}
           >
             <Box
-              margin={{ left: 'small' }}
+              margin={{ left: setResponsive('none', 'small') }}
               viewport={viewport}
-              width={setResponsive('90%', 'auto')}
+              width={setResponsive('100%', 'auto')}
             >
               <NavLink
                 active={isMatchPath(pathname, '/search')}
@@ -90,9 +89,9 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
             </Box>
             <Box
               light={light}
-              margin={{ left: 'small' }}
+              margin={{ left: setResponsive('none', 'small', 'small') }}
               viewport={viewport}
-              width={setResponsive('90%', 'auto')}
+              width={setResponsive('100%', 'auto')}
             >
               {viewport === 'small' ? (
                 <>
@@ -100,7 +99,6 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                     alignSelf="start"
                     pad={{ vertical: 'medium' }}
                     margin={{ horizontal: 'xlarge' }}
-                    width={buttonWidth}
                   >
                     <Text size="large">
                       Compendia <Icon name="ChevronDown" size="xsmall" />
@@ -164,23 +162,18 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 top: setResponsive('medium', 'none')
               }}
               viewport={viewport}
+              width={setResponsive('80%', 'auto')}
             >
-              <Button
+              <BadgedButton
                 aria-label="View My Dataset"
-                badge={{
-                  max: 1000000,
-                  value: totalSamples || 0
-                }}
+                count={totalSamples || 0}
                 label="My Dataset"
-                margin={{ left: setResponsive('xlarge', 'none') }}
-                width={viewport === 'small' ? buttonWidth : 'max-content'}
                 light={viewport !== 'small' ? light : false}
+                linkFontSize={setResponsive('18px', '16px')}
+                margin={{ left: setResponsive('xlarge', 'none') }}
+                pad={setResponsive('12px 0', '4px 24px')}
+                responsive
                 secondary
-                style={{
-                  fontSize: setResponsive('18px', '16px'),
-                  padding: setResponsive('12px 0', '4px 24px'),
-                  width: '100%'
-                }}
                 onClick={() => {
                   push('/download')
                   handleGetDataset()
