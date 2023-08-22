@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Box, Heading, Paragraph } from 'grommet'
+import { Box, Paragraph } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
-import { Row } from 'components/shared/Row'
+import { TwoColumns } from './TwoColumns'
 
 export const Custom500 = () => {
   const { back, events } = useRouter()
@@ -21,19 +21,9 @@ export const Custom500 = () => {
   }
 
   return (
-    <Row
-      direction={setResponsive('column', 'column', 'row')}
-      gap="xlarge"
-      justify="center"
-      margin={{ top: setResponsive('none', 'none', 'basex15') }}
-    >
-      <Box
-        align={setResponsive('center', 'center', 'start')}
-        margin={{ top: 'basex8' }}
-      >
-        <Heading level={1} margin={{ bottom: 'small' }} size="small">
-          Uh-oh something went wrong!
-        </Heading>
+    <TwoColumns
+      heading=" Uh-oh something went wrong!"
+      body={
         <Box
           align="center"
           direction={setResponsive('column', 'row')}
@@ -42,21 +32,9 @@ export const Custom500 = () => {
           <Paragraph size="large">Try refreshing the page or</Paragraph>
           <Button label="Go Back" primary responsive onClick={goBack} />
         </Box>
-      </Box>
-      <Box
-        aria-hidden
-        background={{
-          image: "url('/spilled-sample.svg')",
-          position: 'center',
-          repeat: 'no-repeat',
-          size: 'contain'
-        }}
-        alignSelf={setResponsive('center', 'center', 'start')}
-        // to preserve the height of SVG image
-        height={setResponsive('250px', '350px')}
-        width={setResponsive('250px', '350px')}
-      />
-    </Row>
+      }
+      img="/spilled-sample.svg"
+    />
   )
 }
 
