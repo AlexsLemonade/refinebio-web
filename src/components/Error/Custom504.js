@@ -10,7 +10,10 @@ export const Custom504 = () => {
       direction={setResponsive('column', 'column', 'row')}
       gap="xlarge"
       justify="center"
-      margin={{ top: setResponsive('none', 'none', 'basex15') }}
+      margin={{
+        top: setResponsive('none', 'none', 'basex15'),
+        bottom: setResponsive('basex7', 'none')
+      }}
     >
       <Box
         align={setResponsive('center', 'center', 'start')}
