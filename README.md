@@ -70,7 +70,7 @@ yarn install
 
 ### Services
 
-The following ports are used by a client and a storybook services that run locally in separate Docker containers.
+These ports are used by a client and a storybook services that run locally in separate Docker containers.
 
 | Service   | Port | URL                                            |
 | :-------- | :--- | :--------------------------------------------- |
@@ -78,12 +78,6 @@ The following ports are used by a client and a storybook services that run local
 | Storybook | 6006 | [http://localhost:6006](http://localhost:6006) |
 
 To start the services, run the following commands:
-
-#### Run all services
-
-```
-yarn start-local
-```
 
 #### Run the client
 
@@ -95,6 +89,12 @@ yarn start-client
 
 ```
 yarn start-storybook
+```
+
+#### Run all services
+
+```
+yarn start-local
 ```
 
 #### Stop all services
