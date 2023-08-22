@@ -28,6 +28,7 @@ export const Custom500 = () => {
           align="center"
           direction={setResponsive('column', 'row')}
           gap="xsmall"
+          width={setResponsive('100%', 'auto')}
         >
           <Paragraph size="large">Try refreshing the page or</Paragraph>
           <Button label="Go Back" primary responsive onClick={goBack} />

@@ -14,6 +14,7 @@ export const Custom504 = () => {
         </Box>
       }
       img="/distressed-tubey.svg"
+      marginBottom="basex7"
     />
   )
 }

@@ -2,7 +2,7 @@ import { Box, Heading } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Row } from 'components/shared/Row'
 
-export const TwoColumns = ({ heading, body, img }) => {
+export const TwoColumns = ({ heading, body, img, marginBottom = 'none' }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -10,7 +10,10 @@ export const TwoColumns = ({ heading, body, img }) => {
       direction={setResponsive('column', 'column', 'row')}
       gap="xlarge"
       justify="center"
-      margin={{ top: setResponsive('none', 'none', 'basex15') }}
+      margin={{
+        top: setResponsive('none', 'none', 'basex15'),
+        bottom: setResponsive(marginBottom, 'none')
+      }}
     >
       <Box
         align={setResponsive('center', 'center', 'start')}
@@ -30,8 +33,7 @@ export const TwoColumns = ({ heading, body, img }) => {
           size: 'contain'
         }}
         alignSelf={setResponsive('center', 'center', 'start')}
-        margin={{ bottom: setResponsive('medium', 'none') }}
-        // to preserve the height of SVG image
+        // to preserve the size of SVG image
         height={setResponsive('250px', '350px')}
         width={setResponsive('250px', '350px')}
       />
