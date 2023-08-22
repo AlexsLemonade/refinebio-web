@@ -15,7 +15,7 @@ export const ErrorPage = ({ statusCode }) => {
 
 ErrorPage.getInitialProps = async ({ err }) => {
   return {
-    statusCode: err ? err.statusCode : 500
+    statusCode: err ? err.statusCode : 404
   }
 }
 
