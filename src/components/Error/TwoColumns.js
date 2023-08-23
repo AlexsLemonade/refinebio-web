@@ -12,7 +12,7 @@ export const TwoColumns = ({ heading, body, img, marginBottom = 'none' }) => {
       justify="center"
       margin={{
         top: setResponsive('none', 'none', 'basex15'),
-        bottom: setResponsive(marginBottom, 'none')
+        bottom: marginBottom
       }}
     >
       <Box
