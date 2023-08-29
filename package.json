@@ -10,7 +10,7 @@
     "stop-local": "yarn compose down",
     "dev": "next dev",
     "prebuild": "node sitemap.js",
-    "build": "next build",
+    "build": "yarn prebuild && next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
