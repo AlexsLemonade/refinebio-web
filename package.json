@@ -9,6 +9,7 @@
     "start-storybook": "yarn start-local storybook",
     "stop-local": "yarn compose down",
     "dev": "next dev",
+    "prebuild": "node cacheApi.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
