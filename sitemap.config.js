@@ -6,7 +6,7 @@ const formatURLString = require('./src/helpers/formatURLString')
 const apiVersion = process.env.API_VERSION || 'v1'
 const apiPath = process.env.API_PATH || `https://api.refine.bio/${apiVersion}`
 const hostname = process.env.HOST_NAME || 'https://www.refine.bio'
-const limit = 1 // TEMPORARY set to 1 for development but it should be 10000
+const limit = 1000 // for API
 const config = {
   apiVersion,
   apiPath,
@@ -19,7 +19,7 @@ const config = {
   sitemapInfoFile: 'sitemap-info.json',
   staticPaths: ['/', '/about', '/license', '/privacy', '/terms'],
   baseConfig: {
-    limit: 50000
+    limit: 50000 // a sitemap size limit
   }
 }
 
@@ -47,12 +47,11 @@ const getSitemapUrlForResource = (resource) => {
 const getSitemapUrlsForResources = async (...resources) => {
   const resourceUrls = []
   const resourceInfo = {}
-  let i = 0 // TEMPORARY use i for development
 
   for (const resource of resources) {
     let current = `${config.endpoints[resource]}`
 
-    while (current && i < 3) {
+    while (current) {
       try {
         console.log(`Fetching ${resource} from ${current}`)
         const readableStream = await fetch(current)
@@ -67,7 +66,6 @@ const getSitemapUrlsForResources = async (...resources) => {
         resourceUrls.push(
           ...response.results.map(getSitemapUrlForResource(resource))
         )
-        i += 1
       } catch (e) {
         console.log(`Encountered error ${e}`)
         current = null
