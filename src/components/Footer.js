@@ -14,7 +14,7 @@ import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Icon } from 'components/shared/Icon'
 import { Row } from 'components/shared/Row'
-import { contributors, links } from 'config'
+import { cache, contributors, links } from 'config'
 import { CoinIcon } from '../images/coin.svg'
 
 const TwitterLink = styled(Anchor)`
@@ -189,11 +189,13 @@ export const Footer = () => {
               href={`mailto:${links.email_request}`}
             />
           </Row>
-          <Box margin={{ top: setResponsive('small', 'none') }}>
-            <Text color="gray-shade-40" size="xsmall">
-              Version 24354-23111
-            </Text>
-          </Box>
+          {cache.version && cache.xSourceRevision && (
+            <Box margin={{ top: setResponsive('small', 'none') }}>
+              <Text color="gray-shade-40" size="xsmall">
+                Version {cache.xSourceRevision} - {cache.version.slice(1)}
+              </Text>
+            </Box>
+          )}
         </Row>
       </FixedContainer>
     </GrommentFooter>

@@ -61,7 +61,7 @@ export const Dataset = ({ query }) => {
         {datasetId === 'error' && <DatasetErrorDownloading />}
         {datasetId === 'processing' && <DatasetProcessing dataset={dataset} />}
         {datasetId === 'ready' && <DatasetReady />}
-        {datasetId === 'regenerate' && <DatasetRegenerate />}
+        {datasetId === 'regenerate' && <DatasetRegenerate dataset={dataset} />}
         {/* TEMPORARY END */}
       </Box>
       {isSharedDataset && (

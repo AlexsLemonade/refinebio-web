@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import { Box, Text } from 'grommet'
-import apiData from 'api/api_data.json'
-import { links } from 'config'
+import { cache, links } from 'config'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
@@ -23,7 +22,7 @@ export const AddRemoveCell = ({ experimentAccessionCodes, sample }) => {
 
   if (
     !sample.is_processed ||
-    (apiData.qnTargets && !apiData.qnTargets[sample.organism.name])
+    (cache.qnTargets && !cache.qnTargets[sample.organism.name])
   ) {
     return (
       <Box direction="row" gap="xsmall">
