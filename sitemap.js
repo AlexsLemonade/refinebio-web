@@ -105,7 +105,7 @@ const generateSitemap = async () => {
 const init = async () => {
   const isValid = await verifySitemap()
   console.log(
-    isValid ? 'Sitemap already exists ✅' : 'No valid sitemap found...'
+    isValid ? 'Sitemap already exists ✅' : 'No valid sitemap found ❌'
   )
 
   if (isValid) return
