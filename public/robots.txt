@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /download
+Disallow: /dataset/*
+
+# Host
+Host: https://www.refine.bio
+
+# Sitemaps
+Sitemap: https://www.refine.bio/sitemap-index.xml
