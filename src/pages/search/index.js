@@ -29,7 +29,7 @@ export const Search = (props) => {
   const {
     search: { pageSizes, sortby }
   } = options
-  const { query, results, accessionCodesResult } = props
+  const { query, results, accessionCodesResults } = props
   const {
     formatFacetNames,
     getSearchQueryParam,
@@ -178,9 +178,9 @@ export const Search = (props) => {
                   totalResults={results.count}
                 />
 
-                {accessionCodesResult.length > 0 && (
+                {accessionCodesResults.length > 0 && (
                   <>
-                    {accessionCodesResult.map((data) =>
+                    {accessionCodesResults.map((data) =>
                       data.results.map((result) => (
                         <SearchCard key={result.id} result={result} />
                       ))
@@ -261,7 +261,7 @@ Search.getInitialProps = async (ctx) => {
   const queryString = {
     ...getSearchQueryForAPI(query),
     limit: query.size || Number(limit),
-    offset: (query.p - 1) * (query.size || Number(offset)) || Number(offset),
+    offset: (query.p - 1 || Number(offset)) * (query.size || Number(limit)),
     ordering: query.sortby || ordering,
     ...(query.search ? { search: query.search } : {}),
     num_downloadable_samples__gt: !query.empty
@@ -274,7 +274,7 @@ Search.getInitialProps = async (ctx) => {
     pathname,
     query,
     results: response,
-    accessionCodesResult: accessionCodesResponse
+    accessionCodesResults: accessionCodesResponse
   }
 }
 
