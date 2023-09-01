@@ -180,8 +180,8 @@ export const Button = ({
                 <IconSpinner
                   style={{
                     position: 'absolute',
-                    top: '25%', // NOTE: temporary set these values
-                    left: '45%' // since 'translate3d' is ignored (bug)
+                    top: '30%',
+                    left: '45%'
                   }}
                 />
               )}

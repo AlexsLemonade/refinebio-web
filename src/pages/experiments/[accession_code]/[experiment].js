@@ -127,6 +127,7 @@ export const Experiment = () => {
                       <Box
                         gridArea="ctas"
                         margin={{ top: setResponsive('none', 'large') }}
+                        align="end"
                       >
                         <SearchCardCTAs
                           accessionCode={accessionCode}

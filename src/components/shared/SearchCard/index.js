@@ -8,19 +8,20 @@ import { SearchCardFooter } from './SearchCardFooter'
 import { SearchCardCTAs } from './SearchCardCTAs/SearchCardCTAs'
 import { SearchCardMeta } from './SearchCardMeta'
 
-/* TEMPORARY the following prop is added to the mock data for demo purpose
-prop name: `status` 
-   - ''(default)
-   - added
-   - processing 
-   - add_remaining
-   - not_supported
-   - request
-   - unavailable
-*/
-
 export const SearchCard = ({ result = {} }) => {
   const { viewport, setResponsive } = useResponsive()
+  const {
+    accession_code: accessionCode,
+    alternate_accession_code: alternateAccessionCode,
+    description,
+    num_downloadable_samples: downloadableSamples,
+    organism_names: organismNames,
+    platform_names: platformNames,
+    publication_title: publicationTitle,
+    sample_metadata_fields: sampleMetadataFields,
+    technology,
+    title
+  } = result
 
   return (
     <Box
@@ -50,38 +51,36 @@ export const SearchCard = ({ result = {} }) => {
         }}
       >
         <Box gridArea="header">
-          <SearchCardHeader
-            accessionCode={result.accession_code}
-            title={result.title}
-          />
+          <SearchCardHeader accessionCode={accessionCode} title={title} />
         </Box>
         <Box gridArea="ctas" margin={{ top: setResponsive('none', 'large') }}>
-          <SearchCardCTAs
-            accessionCode={result.accession_code}
-            downloadableSamples={result.num_downloadable_samples}
-            status={result.status}
-          />
+          <Box align={setResponsive('start', 'end')} width="100%">
+            <SearchCardCTAs
+              accessionCode={accessionCode}
+              downloadableSamples={downloadableSamples}
+            />
+          </Box>
         </Box>
         <Box gridArea="meta">
           <SearchCardMeta
-            downloadableSamples={result.num_downloadable_samples}
-            organismNames={result.organism_names}
-            platformNames={result.platform_names}
-            technology={result.technology}
+            downloadableSamples={downloadableSamples}
+            organismNames={organismNames}
+            platformNames={platformNames}
+            technology={technology}
           />
         </Box>
       </Grid>
       {viewport !== 'small' && (
         <>
           <SearchCardBody
-            alternateAccessionCode={result.alternate_accession_code}
-            description={result.description}
-            publicationTitle={result.publication_title}
-            sampleMetadataFields={result.sample_metadata_fields}
+            alternateAccessionCode={alternateAccessionCode}
+            description={description}
+            publicationTitle={publicationTitle}
+            sampleMetadataFields={sampleMetadataFields}
           />
           <SearchCardFooter
-            accessionCode={result.accession_code}
-            title={formatString(result.title)}
+            accessionCode={accessionCode}
+            title={formatString(title)}
           />
         </>
       )}

@@ -171,11 +171,11 @@ export const Search = (props) => {
                   />
                 )}
                 <SearchBulkActions
+                  results={results}
                   pageSize={pageSize}
                   setPageSize={setPageSize}
                   sortBy={sortBy}
                   setSortBy={setSortBy}
-                  totalResults={results.count}
                 />
 
                 {accessionCodesResults.length > 0 && (
