@@ -1,5 +1,4 @@
 import { Box, Heading, Paragraph } from 'grommet'
-import { formatPipelinesText } from 'helpers/dataset'
 import isLastIndex from 'helpers/isLastIndex'
 import { Anchor } from 'components/shared/Anchor'
 import { links } from 'config'
@@ -10,6 +9,14 @@ import { IlluminaScan } from './IlluminaScan'
 import { Salmon } from './Salmon'
 import { Txtimport } from './Txtimport'
 import { SubmitterSupplied } from '../SubmitterSupplied'
+
+// formats the pipelines' name for UI (e.g., ['Salmon Quant', 'Tximport'] to 'Salmon Quant, and Specimen part')
+const formatPipelinesText = (names) =>
+  names.length === 1
+    ? names[0]
+    : `${names.slice(0, names.length - 1).join(', ')}, and ${
+        names[names.length - 1]
+      }`
 
 export const Pipeline = ({
   isSubmitterProcessed,

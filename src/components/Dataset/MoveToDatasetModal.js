@@ -3,7 +3,6 @@ import { Box, Heading, RadioButtonGroup } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
-import { getTotalSamples } from 'helpers/dataset'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
@@ -18,11 +17,12 @@ export const MoveToDatasetModal = ({
   closeModal,
   setValue
 }) => {
-  const { addSamples, replaceSamples } = useDatasetManager()
+  const { addSamples, getTotalSamples, replaceSamples } = useDatasetManager()
   const { setResponsive } = useResponsive()
-
   const router = useRouter()
-  const moveToDataSet = async (action = 'append') => {
+  const totalSamples = getTotalSamples(dataset.data)
+
+  const handleMoveToDataSet = async (action = 'append') => {
     if (action === 'append') {
       await addSamples(dataset.data)
       router.push(
@@ -30,7 +30,7 @@ export const MoveToDatasetModal = ({
           pathname: '/download',
           query: {
             message: `Appended ${formatNumbers(
-              getTotalSamples(dataset.data)
+              totalSamples
             )} samples to My Dataset`,
             status: 'success'
           }
@@ -45,7 +45,7 @@ export const MoveToDatasetModal = ({
           pathname: '/download',
           query: {
             message: `Moved  ${formatNumbers(
-              getTotalSamples(dataset.data)
+              totalSamples
             )} samples to My Dataset`,
             status: 'success'
           }
@@ -71,7 +71,7 @@ export const MoveToDatasetModal = ({
       <Box direction="row" gap="xsmall" margin={{ bottom: 'medium' }}>
         <Icon color="error" name="Warning" size="medium" />
         <Heading level={2} size="small">
-          There are {formatNumbers(getTotalSamples(dataset.data))} samples in{' '}
+          There are {formatNumbers(totalSamples)} samples in{' '}
           <Anchor href="/download" label="My Dataset" target="_blank" />
         </Heading>
       </Box>
@@ -92,7 +92,7 @@ export const MoveToDatasetModal = ({
           label="Move Samples"
           primary
           responsive
-          onClick={() => moveToDataSet(value)}
+          onClick={() => handleMoveToDataSet(value)}
         />
       </Row>
     </Box>

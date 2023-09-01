@@ -7,26 +7,49 @@ import {
   TableHeader,
   TableRow
 } from 'grommet'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
-import {
-  getExperimentCountBySpecies,
-  getTotalExperiments,
-  getTotalSamples
-} from 'helpers/dataset'
-
+import isEmptyObject from 'helpers/isEmptyObject'
 import { Row } from 'components/shared/Row'
 import { SpiecesRow } from './SpeciesRow'
 import { TotalRow } from './TotalRow'
 
+// returns the count of expriment by spcecies
+const getExperimentCountBySpecies = (data, experiments) => {
+  if (!data || !experiments) return {}
+
+  const species = {}
+
+  for (const accessionCode of Object.keys(data)) {
+    const experimentInfo = experiments[accessionCode]
+
+    if (!experimentInfo) return {}
+
+    const { organism_names: organismNames } = experimentInfo
+
+    for (const organism of organismNames) {
+      if (!species[organism]) species[organism] = 0
+      species[organism] += 1
+    }
+  }
+
+  return species
+}
+
+// returns the total length of experiments added in My Dataset
+const getTotalExperiments = (data) =>
+  isEmptyObject(data) ? 0 : Object.keys(data).length
+
 export const DatasetSummary = ({ dataset }) => {
   const { setResponsive } = useResponsive()
-  const samplesBySpecies = dataset.organism_samples
-  const totalSamples = getTotalSamples(dataset.data)
-  const totalExperiments = getTotalExperiments(dataset.data)
+  const { getTotalSamples } = useDatasetManager()
   const experimentCountBySpecies = getExperimentCountBySpecies(
     dataset.data,
     dataset.experiments
   )
+  const samplesBySpecies = dataset.organism_samples
+  const totalExperiments = getTotalExperiments(dataset.data)
+  const totalSamples = getTotalSamples(dataset.data)
 
   return (
     <Box margin={{ top: 'large' }}>
