@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react'
-import { DatasetManagerContext } from 'contexts/DatasetManagerContext'
+import { useRefinebio } from 'hooks/useRefinebio'
 import { SamplesTableManagerContext } from 'contexts/SamplesTableManagerContext'
 import { api } from 'api'
 
 export const useSamplesTableManager = (queryToAdd = {}) => {
-  const { datasetId } = useContext(DatasetManagerContext) // TEMP
+  const { datasetId } = useRefinebio() // TEMP
   const {
     config: configState,
     setConfig: setConfigState,
