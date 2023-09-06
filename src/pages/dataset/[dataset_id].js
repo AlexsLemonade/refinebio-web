@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { Box, Heading } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
@@ -20,9 +19,6 @@ import {
   FilesSummary
 } from 'components/Download'
 
-// NOTE: Add the Spinner component for loading after replacing the mock with the API response
-// TEMPORARY
-// endpoint: https://api.refine.bio/v1/dataset/{datasetId}/?details=true
 export const getServerSideProps = ({ query }) => {
   return { props: { query } }
 }
@@ -39,13 +35,8 @@ export const Dataset = ({ query }) => {
   const isSharedDataset = ref === 'share'
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
-  const [data, setData] = useState(null)
 
-  useEffect(() => {
-    if (pageRendered) {
-      setData(dataset)
-    }
-  }, [pageRendered])
+  if (!pageRendered) return null
 
   return (
     <FixedContainer>
@@ -79,7 +70,7 @@ export const Dataset = ({ query }) => {
         pad={{ bottom: setResponsive('medium', 'small') }}
       >
         <Box>
-          <MoveToDatasetButton dataset={data} />
+          <MoveToDatasetButton dataset={dataset} />
         </Box>
         <Row
           gap={setResponsive('medium', 'small')}
@@ -91,11 +82,11 @@ export const Dataset = ({ query }) => {
           )}
         </Row>
       </Row>
-      {data && isSharedDataset && (
+      {isSharedDataset && (
         <>
-          <FilesSummary dataset={data} />
-          <DatasetSummary dataset={data} />
-          <DatasetDetails dataset={data} isImmutable />
+          <FilesSummary dataset={dataset} />
+          <DatasetSummary dataset={dataset} />
+          <DatasetDetails dataset={dataset} isImmutable />
         </>
       )}
     </FixedContainer>

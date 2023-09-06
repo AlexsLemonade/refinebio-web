@@ -7,7 +7,6 @@ import { Button } from 'components/shared/Button'
 import { IconProcessingGears } from 'components/shared/IconProcessingGears'
 
 export const ModalContent = ({ dataset, email, closeModal }) => {
-  // TEMPORARY
   const { datasetId } = useDatasetManager()
   const { setResponsive } = useResponsive()
 

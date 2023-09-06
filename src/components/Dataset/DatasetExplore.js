@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { Box, Heading } from 'grommet'
 import { usePageRendered } from 'hooks/usePageRendered'
 import { useResponsive } from 'hooks/useResponsive'
@@ -17,15 +16,12 @@ const ListItem = ({ text, href }) => (
 export const DatasetExplore = ({ dataset }) => {
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
-  const [technologies, setTechnologies] = useState(null)
 
-  useEffect(() => {
-    if (pageRendered) {
-      setTechnologies(
-        Object.values(dataset.experiments).map((e) => e.technology)
-      )
-    }
-  }, [pageRendered])
+  if (!pageRendered) return null
+
+  const technologies = Object.values(dataset.experiments).map(
+    (e) => e.technology
+  )
 
   const hasRNASeq = technologies && technologies.includes('RNA-SEQ')
   const hasMicroarray = technologies && technologies.includes('MICROARRAY')
