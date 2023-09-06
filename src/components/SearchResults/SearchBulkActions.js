@@ -1,17 +1,17 @@
 import { Box, Grid, Select } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { useSearchManager } from 'hooks/useSearchManager'
-import { Button } from 'components/shared/Button'
 import { PageSizes } from 'components/shared/PageSizes'
 import { options } from 'config'
+import { AddPageToDatasetButton } from './AddPageToDatasetButton'
 import { NonDownloadableExperiment } from './SearchFilterList'
 
 export const SearchBulkActions = ({
+  results,
   pageSize,
   setPageSize,
   sortBy,
-  setSortBy,
-  totalResults
+  setSortBy
 }) => {
   const {
     search: { pageSizes, sortby }
@@ -88,17 +88,15 @@ export const SearchBulkActions = ({
           ]
         )}
         rows={setResponsive(['auto', 'auto', 'auto', 'auto'], ['auto', 'auto'])}
-        columns={
-          setResponsive(
-            ['auto'],
-            getForBreakpoint(1100, ['auto', 'auto'], ['auto', 'auto', 'auto'])
-          )
-          // eslint-disable-next-line no-nested-ternary
-        }
+        columns={setResponsive(
+          ['auto'],
+          getForBreakpoint(1100, ['auto', 'auto'], ['auto', 'auto', 'auto'])
+        )}
         gap={{
           row: 'medium',
           column: 'xsmall'
         }}
+        align="center"
       >
         <Box gridArea="page-display" justify="center">
           <Box align="center" direction="row">
@@ -109,7 +107,7 @@ export const SearchBulkActions = ({
               pageSize={pageSize}
               setPageSize={setPageSize}
               pageSizes={pageSizes}
-              totalPages={totalResults}
+              totalPages={results.count}
               updatePageSize={updatePageSize}
             />
           </Box>
@@ -131,10 +129,11 @@ export const SearchBulkActions = ({
         </Box>
         <Box gridArea="add-page">
           <Box align={setResponsive('start', 'end')}>
-            <Button
+            <AddPageToDatasetButton
               label="Add Page to Dataset"
               secondary
               responsive={setResponsive(true, false)}
+              dataToAdd={results.results}
             />
           </Box>
         </Box>
