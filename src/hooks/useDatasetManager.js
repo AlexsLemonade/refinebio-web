@@ -20,8 +20,9 @@ export const useDatasetManager = () => {
     }
 
     const response = await api.dataset.create(params)
-    await setDataset(response)
-    await setDatasetId(response.id)
+    setDatasetId(response.id)
+
+    return response.id
   }
 
   const getDataset = async () => {
@@ -32,7 +33,7 @@ export const useDatasetManager = () => {
         }
       : {}
     const response = await api.dataset.get(datasetId, null, headers)
-    await setDataset({
+    setDataset({
       ...response
     })
     setLoading(false)
@@ -40,7 +41,8 @@ export const useDatasetManager = () => {
 
   // fetches the dataset with the query 'details'
   // details: https://github.com/AlexsLemonade/refinebio-frontend/pull/485
-  const getDatasetDetails = async () => {
+  // we pass the dataset id in URL if it differs from one in localStorage
+  const getDatasetDetails = async (idFromQuery = '') => {
     setLoading(true)
     const headers = token
       ? {
@@ -48,15 +50,23 @@ export const useDatasetManager = () => {
         }
       : {}
     const response = await api.dataset.get(
-      datasetId,
+      idFromQuery || datasetId,
       { details: true },
       headers
     )
-    await setDataset({
+
+    const formattedResponse = {
       ...response,
       experiments: formatExperiments(response.experiments)
-    })
+    }
+
+    if (!idFromQuery) {
+      setDataset(formattedResponse)
+    }
+
     setLoading(false)
+
+    return formattedResponse
   }
 
   const emptyDataset = async () => {
@@ -70,8 +80,9 @@ export const useDatasetManager = () => {
   /* Experiment */
   // formats the sample and experiment arrays from the API response
   // to objects with experiment accession codes as their keys
-  const formatExperiments = (experiments) => {
+  const formatExperiments = (experiments = []) => {
     if (!experiments.length) return []
+
     return experiments.reduce(
       (acc, experiment) => ({
         ...acc,
@@ -102,12 +113,9 @@ export const useDatasetManager = () => {
 
   /* Sample */
   const addSamples = async (data, details = false) => {
-    if (!datasetId) {
-      createDataset()
-    }
-
     setLoading(true)
     const params = { data: dataset ? { ...dataset.data } : {} }
+
     for (const accessionCode of Object.keys(data)) {
       if (data[accessionCode].all) {
         // the special key 'ALL' to add all samples from an experiment
@@ -121,7 +129,11 @@ export const useDatasetManager = () => {
       }
     }
 
-    const response = await api.dataset.update(datasetId, params, details)
+    const response = await api.dataset.update(
+      datasetId || (await createDataset()),
+      params,
+      details
+    )
     setDataset({
       ...response,
       ...(details
@@ -169,6 +181,16 @@ export const useDatasetManager = () => {
     setLoading(false)
   }
 
+  const replaceSamples = async (data) => {
+    setLoading(true)
+    const response = await api.dataset.update(datasetId, { data }, true)
+    setDataset({
+      ...response,
+      experiments: formatExperiments(response.experiments)
+    })
+    setLoading(false)
+  }
+
   return {
     dataset,
     datasetId,
@@ -181,6 +203,7 @@ export const useDatasetManager = () => {
     addSamples,
     formatSampleMetadata,
     getTotalSamples,
-    removeSamples
+    removeSamples,
+    replaceSamples
   }
 }

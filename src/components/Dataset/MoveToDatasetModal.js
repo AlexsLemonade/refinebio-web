@@ -12,6 +12,7 @@ export const MoveToDatasetModal = ({
   id,
   defaultValue,
   dataset,
+  pathname,
   radioOptions,
   value,
   closeModal,
@@ -19,15 +20,16 @@ export const MoveToDatasetModal = ({
 }) => {
   const { addSamples, getTotalSamples, replaceSamples } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const router = useRouter()
+  const { push } = useRouter()
   const totalSamples = getTotalSamples(dataset.data)
 
-  const handleMoveToDataSet = async (action = 'append') => {
+  const handleMoveSamples = async (action = 'append') => {
+    closeModal(id)
     if (action === 'append') {
       await addSamples(dataset.data)
-      router.push(
+      push(
         {
-          pathname: '/download',
+          pathname,
           query: {
             message: `Appended ${formatNumbers(
               totalSamples
@@ -35,14 +37,13 @@ export const MoveToDatasetModal = ({
             status: 'success'
           }
         },
-        '/download'
+        pathname
       )
-      closeModal(id)
     } else {
       await replaceSamples(dataset.data)
-      router.push(
+      push(
         {
-          pathname: '/download',
+          pathname,
           query: {
             message: `Moved  ${formatNumbers(
               totalSamples
@@ -50,9 +51,8 @@ export const MoveToDatasetModal = ({
             status: 'success'
           }
         },
-        '/download'
+        pathname
       )
-      closeModal(id)
     }
   }
 
@@ -92,7 +92,7 @@ export const MoveToDatasetModal = ({
           label="Move Samples"
           primary
           responsive
-          onClick={() => handleMoveToDataSet(value)}
+          onClick={() => handleMoveSamples(value)}
         />
       </Row>
     </Box>

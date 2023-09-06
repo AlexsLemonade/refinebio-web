@@ -9,7 +9,7 @@ const Badge = styled(Box)`
   border-radius: 24px;
   display: flex;
   font-size: 13px;
-  min-width: max-content;
+  min-width: 24px;
   padding: 2px 8px;
   position: absolute;
   top: -16px;

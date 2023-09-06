@@ -39,7 +39,8 @@ export const DatasetActionButton = ({
 
   if (
     !disableAddRemaining &&
-    dataset?.data[accessionCode]?.length < downloadableSamples &&
+    dataset?.data &&
+    dataset.data[accessionCode]?.length < downloadableSamples &&
     totalSamplesInDataset() > 0
   ) {
     // shows the add remaming button if some of the processed samples are in my dataset
