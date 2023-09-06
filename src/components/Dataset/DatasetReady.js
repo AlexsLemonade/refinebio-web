@@ -28,7 +28,7 @@ export const DatasetReady = ({ dataset }) => {
   return (
     <>
       <Box align="center">
-        <Row justify="center" width={setResponsive('100%', '70%')}>
+        <Row justify="center" width={setResponsive('100%', '75%')}>
           <Column
             align={setResponsive('center', 'start')}
             flexValue={setResponsive('1 1 auto', 'auto')}

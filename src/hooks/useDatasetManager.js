@@ -9,6 +9,7 @@ import { api } from 'api'
 export const useDatasetManager = () => {
   const { dataset, setDataset, datasetId, setDatasetId, email, token } =
     useContext(DatasetManagerContext)
+  const [error, setError] = useState(false) // TODO: create a new issue for the error handling
   const [loading, setLoading] = useState(false)
 
   /* Dataset */
@@ -192,6 +193,8 @@ export const useDatasetManager = () => {
   }
 
   return {
+    error,
+    setError,
     dataset,
     datasetId,
     loading,
