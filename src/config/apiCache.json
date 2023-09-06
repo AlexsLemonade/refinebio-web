@@ -1,6 +1,6 @@
 {
   "version": "0.0.0",
-  "xSourceRevision": "1.42.67-hotfix",
+  "xSourceRevision": "1.45.27-hotfix",
   "platforms": {
     "IonTorrentS5": "Ion Torrent S5",
     "ovigene10st": "[OviGene-1_0-st] Ovine Gene 1.1 ST Array",
