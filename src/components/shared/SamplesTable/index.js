@@ -1,5 +1,5 @@
 export { SamplesTable } from './SamplesTable'
-export { SamplesTableCTA } from './SamplesTableCTA'
+export { SamplesTableAction } from './SamplesTableAction'
 export { AdditionalMetadataCell } from './AdditionalMetadataCell'
 export { AccessionCodeCell } from './AccessionCodeCell'
 export { AddRemoveCell } from './AddRemoveCell'
