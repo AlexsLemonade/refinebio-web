@@ -1,4 +1,5 @@
 import { Box, Heading, Paragraph } from 'grommet'
+import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
 import { Column } from 'components/shared/Column'
 import { IconProcessingGears } from 'components/shared/IconProcessingGears'
@@ -6,6 +7,7 @@ import { Row } from 'components/shared/Row'
 import { DatasetExplore } from './DatasetExplore'
 
 export const DatasetProcessing = ({ dataset }) => {
+  const { email } = useRefinebio()
   const { setResponsive } = useResponsive()
 
   return (
@@ -20,9 +22,18 @@ export const DatasetProcessing = ({ dataset }) => {
               Your dataset is being processed
             </Heading>
             <Paragraph>
-              An email with a download link will be sent to{' '}
-              <strong>{dataset?.email_address || 'jdoe@example.com'}</strong>{' '}
-              when the dataset is ready or you can come back to this page later.
+              {email ? (
+                <>
+                  An email with a download link will be sent to{' '}
+                  <strong>{email}</strong> when the dataset is ready or you can
+                  come back to this page later.
+                </>
+              ) : (
+                <>
+                  This can take several minutes. Check back in later to download
+                  the data.
+                </>
+              )}
             </Paragraph>
           </Column>
           <Column

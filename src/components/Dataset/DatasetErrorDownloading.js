@@ -40,7 +40,9 @@ export const DatasetErrorDownloading = ({ dataset }) => {
             )}
           </Paragraph>
           {dataset?.failure_reason && (
-            <Paragraph color="error">{dataset?.failure_reason}</Paragraph>
+            <Paragraph color="error">
+              Error details: {dataset?.failure_reason}
+            </Paragraph>
           )}
           <Box
             margin={{

@@ -28,7 +28,7 @@ export const DatasetReady = ({ dataset }) => {
   return (
     <>
       <Box align="center">
-        <Row justify="center" width={setResponsive('100%', '75%')}>
+        <Row justify="center" width={setResponsive('100%', '80%')}>
           <Column
             align={setResponsive('center', 'start')}
             flexValue={setResponsive('1 1 auto', 'auto')}
@@ -36,9 +36,7 @@ export const DatasetReady = ({ dataset }) => {
             <Heading level={1} margin={{ bottom: 'small' }}>
               Your Dataset is ready for download!
             </Heading>
-            <Text>
-              Download size: {'4.01MB' || formatBytes(dataset.size_in_bytes)}
-            </Text>
+            <Text>Download size: {formatBytes(dataset.size_in_bytes)}</Text>
             <Row
               direction={setResponsive('column', 'column', 'row')}
               width="100%"
