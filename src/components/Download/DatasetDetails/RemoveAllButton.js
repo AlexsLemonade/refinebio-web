@@ -12,6 +12,11 @@ export const RemoveAllButton = () => {
   const { setResponsive } = useResponsive()
   const id = 'remove-all'
 
+  const handleRemoveAll = () => {
+    emptyDataset()
+    closeModal(id)
+  }
+
   return (
     <Modal
       id={id}
@@ -41,11 +46,7 @@ export const RemoveAllButton = () => {
             label="Yes, remove all samples"
             tertiary
             responsive
-            onClick={() => {
-              // TEMPORARY for demo
-              emptyDataset()
-              closeModal(id)
-            }}
+            onClick={handleRemoveAll}
           />
           <Button
             label="No, keep all samples"
