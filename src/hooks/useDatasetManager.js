@@ -74,7 +74,14 @@ export const useDatasetManager = () => {
     setLoading(true)
     const params = { data: {} }
     const response = await api.dataset.update(datasetId, params)
-    setDataset(response)
+
+    // TEMP
+    if (!response.ok) {
+      setError(response)
+    } else {
+      setDataset(response)
+    }
+
     setLoading(false)
   }
 

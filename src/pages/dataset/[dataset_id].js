@@ -38,7 +38,7 @@ export const Dataset = ({ query }) => {
   const { dataset_id: idFromQuery, ref } = query
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
-  const [data, setData] = useState(dataset)
+  const [data, setData] = useState({})
 
   useEffect(() => {
     const getDataset = async (id) => {
@@ -47,9 +47,7 @@ export const Dataset = ({ query }) => {
       return response
     }
 
-    if (!isSameId) {
-      getDataset(idFromQuery)
-    }
+    getDataset(idFromQuery)
   }, [])
 
   if (!pageRendered) return null
@@ -122,11 +120,13 @@ export const Dataset = ({ query }) => {
           )}
         </Row>
       </Row>
-      <Box>
-        <FilesSummary dataset={data} />
-        <DatasetSummary dataset={data} />
-        <DatasetDetails dataset={data} isImmutable />
-      </Box>
+      {data?.data && (
+        <>
+          <FilesSummary dataset={data} />
+          <DatasetSummary dataset={data} />
+          <DatasetDetails dataset={data} isImmutable />
+        </>
+      )}
     </FixedContainer>
   )
 }
