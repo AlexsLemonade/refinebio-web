@@ -11,7 +11,7 @@ export const DatasetProcessing = ({ dataset }) => {
   return (
     <>
       <Box align="center">
-        <Row justify="center" width={setResponsive('100%', '80%', '50%')}>
+        <Row justify="center" width={setResponsive('100%', '80%')}>
           <Column
             align={setResponsive('center', 'start')}
             flexValue={setResponsive('1 1 auto', 'auto')}
