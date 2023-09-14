@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { Box, Nav, Text } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
-import { getTotalSamples } from 'helpers/dataset'
 import isMatchPath from 'helpers/isMatchPath'
 import { BadgedButton } from 'components/shared/BadgedButton'
 import { LayerResponsive } from 'components/shared/LayerResponsive'
@@ -19,23 +18,21 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const router = useRouter()
   const { asPath, pathname, push } = router
   const { viewport, setResponsive } = useResponsive()
-  // TEMPORARY
-  const { dataset, getDataset } = useDatasetManager()
+  const { dataset, datasetId, getDataset, getTotalSamples } =
+    useDatasetManager()
   const [totalSamples, setTotalSamples] = useState()
 
   useEffect(() => {
-    setTotalSamples(getTotalSamples(dataset?.data))
+    if (dataset) setTotalSamples(getTotalSamples(dataset.data))
   }, [dataset])
+
+  useEffect(() => {
+    if (datasetId) getDataset()
+  }, [datasetId])
 
   const handleClick = () => {
     if (viewport !== 'small') return
     setToggle(!toggle)
-  }
-
-  // TEMPORARY for Demo (will be handled with API call)
-  const handleGetDataset = () => {
-    if (!totalSamples) return
-    getDataset(true)
   }
 
   return (
@@ -176,7 +173,6 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 secondary
                 onClick={() => {
                   push('/download')
-                  handleGetDataset()
                 }}
               />
             </Box>
