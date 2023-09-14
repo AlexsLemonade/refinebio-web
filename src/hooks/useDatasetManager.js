@@ -25,8 +25,9 @@ export const useDatasetManager = () => {
     const params = { data: {}, ...(email ? { email_address: email } : {}) }
     const response = await api.dataset.create(params)
 
-    // if no datasetId in localStorage, stores the newly created one
-    if (setCurrentDatasetId) setDatasetId(response.id)
+    // if no datasetId in localStorage, store the newly created one or
+    // replace the existing datasetId if 'setCurrentDatasetId' set to true
+    if (!datasetId || setCurrentDatasetId) setDatasetId(response.id)
 
     return response.id
   }
