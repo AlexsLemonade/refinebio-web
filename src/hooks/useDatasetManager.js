@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { DatasetManagerContext } from 'contexts/DatasetManagerContext'
 import { useRefinebio } from 'hooks/useRefinebio'
 import { formatExperiments } from 'helpers/dataset'
-import getDifferenceOfArrays from 'helpers/getDifferenceOfArrays'
+import differenceOfArrays from 'helpers/differenceOfArrays'
 import unionizeArrays from 'helpers/unionizeArrays'
 import { api } from 'api'
 
@@ -132,7 +132,7 @@ export const useDatasetManager = () => {
     for (const accessionCode of Object.keys(datasetSlice)) {
       if (!data[accessionCode]) continue
 
-      const samplesStillSelected = getDifferenceOfArrays(
+      const samplesStillSelected = differenceOfArrays(
         data[accessionCode],
         datasetSlice[accessionCode]
       )
