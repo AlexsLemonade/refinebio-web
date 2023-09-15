@@ -7,7 +7,7 @@ import { Pill } from 'components/shared/Pill'
 import { ModalContent } from './ModalContent'
 
 // Showing Badge while dataset is processing
-export const ProcessingDatasetButton = ({ dataset }) => {
+export const ProcessingDatasetPill = ({ dataset }) => {
   // TEMPORARY
   const { email } = useRefinebio()
   const { datasetId } = useDatasetManager()
@@ -34,4 +34,4 @@ export const ProcessingDatasetButton = ({ dataset }) => {
   )
 }
 
-export default ProcessingDatasetButton
+export default ProcessingDatasetPill

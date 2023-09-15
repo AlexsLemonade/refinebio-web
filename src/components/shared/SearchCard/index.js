@@ -5,7 +5,7 @@ import formatString from 'helpers/formatString'
 import { SearchCardHeader } from './SearchCardHeader'
 import { SearchCardBody } from './SearchCardBody'
 import { SearchCardFooter } from './SearchCardFooter'
-import { SearchCardCTAs } from './SearchCardCTAs/SearchCardCTAs'
+import { SearchCardAction } from './SearchCardAction'
 import { SearchCardMeta } from './SearchCardMeta'
 
 /* TEMPORARY the following prop is added to the mock data for demo purpose
@@ -56,7 +56,7 @@ export const SearchCard = ({ result = {} }) => {
           />
         </Box>
         <Box gridArea="ctas" margin={{ top: setResponsive('none', 'large') }}>
-          <SearchCardCTAs
+          <SearchCardAction
             accessionCode={result.accession_code}
             downloadableSamples={result.num_downloadable_samples}
             status={result.status}
