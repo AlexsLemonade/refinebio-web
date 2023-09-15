@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Paragraph } from 'grommet'
-import { formatSampleMetadata } from 'helpers/dataset'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { OrganismFilter } from './OrganismFilter'
 import { ViewBlock } from './ViewBlock'
 import { ViewBlocks } from '../ViewBlocks'
@@ -14,6 +14,7 @@ export const ExperimentView = ({
   },
   isImmutable
 }) => {
+  const { formatSampleMetadata } = useDatasetManager()
   const defaultOrganismFilterOption = { label: 'All Speciess', value: 'ALL' }
   const [organism, setOrganism] = useState(defaultOrganismFilterOption.value)
 

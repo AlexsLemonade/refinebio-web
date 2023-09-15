@@ -1,64 +1,111 @@
 import { useContext, useState } from 'react'
 import { DatasetManagerContext } from 'contexts/DatasetManagerContext'
-import { useRefinebio } from 'hooks/useRefinebio'
-import { formatExperiments } from 'helpers/dataset'
 import differenceOfArrays from 'helpers/differenceOfArrays'
+import formatString from 'helpers/formatString'
+import isEmptyObject from 'helpers/isEmptyObject'
 import unionizeArrays from 'helpers/unionizeArrays'
 import { api } from 'api'
 
 export const useDatasetManager = () => {
   const {
-    dataset: datasetState,
-    setDataset: setDatasetState,
-    datasetId: datasetIdState,
-    setDatasetId: setDatasetIdState
+    dataset,
+    setDataset,
+    datasetId,
+    setDatasetId,
+    downloadOptions,
+    setDownloadOptions,
+    email,
+    token
   } = useContext(DatasetManagerContext)
-  const { email } = useRefinebio()
-  const dataset = datasetState
-  const setDataset = setDatasetState
-  const datasetId = datasetIdState
-  const setDatasetId = setDatasetIdState
-  const tempDatasetId = '7236578f-70ba-4c69-b2da-9f68de3e0847' // TEMPORARY created dataset for demo
+  const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
 
   /* Dataset */
-  const createDataset = async () => {
-    const body = { data: {} }
+  const createDataset = async (setCurrentDatasetId = false) => {
+    const params = { data: {}, ...(email ? { email_address: email } : {}) }
+    const response = await api.dataset.create(params)
 
-    if (email) {
-      body.email_address = email
-    }
+    // if no datasetId in localStorage, store the newly created one or
+    // replace the existing datasetId if 'setCurrentDatasetId' set to true
+    if (!datasetId || setCurrentDatasetId) setDatasetId(response.id)
 
-    // replac with api request to POST v1/dataset/ here
-    await setDatasetId(tempDatasetId) // TEMPORRAY
+    return response.id
   }
 
-  const getDataset = async () => {
-    if (!datasetId) {
-      createDataset()
+  const getDataset = async (id = '') => {
+    setLoading(true)
+    const headers = token
+      ? {
+          'APT-KEY': token
+        }
+      : {}
+    const response = await api.dataset.get(id || datasetId, headers)
+
+    const formattedResponse = {
+      ...response,
+      experiments: formatExperiments(response.experiments)
     }
 
+    if (!id) {
+      setDataset(formattedResponse)
+    }
+
+    setLoading(false)
+
+    return formattedResponse
+  }
+
+  const clearDataset = async (id = '') => {
     setLoading(true)
-    const response = await api.dataset.get(tempDatasetId) // TEMPORRAY
-    setDataset({
-      ...response
-    })
+    const params = { data: {} }
+    const response = await api.dataset.update(id || datasetId, params)
+
+    setDataset(response)
     setLoading(false)
   }
 
-  // fetches the dataset with the query 'details'
-  // details: https://github.com/AlexsLemonade/refinebio-frontend/pull/485
-  const getDatasetDetails = async () => {
-    if (!datasetId) {
-      return
+  const updateDataset = async (id, params) => {
+    const isCurrentDatasetId = id === datasetId
+    const response = await api.dataset.update(id, params)
+
+    if (isCurrentDatasetId) {
+      setDataset({
+        ...response,
+        experiments: formatExperiments(response.experiments)
+      })
     }
 
-    const params = {
-      details: true
-    }
+    return response
+  }
 
+  /* Experiment */
+  const getTotalExperiments = (data) =>
+    isEmptyObject(data) ? 0 : Object.keys(data).length
+
+  // formats the sample and experiment arrays from the API response
+  // to objects with experiment accession codes as their keys for UI
+  const formatExperiments = (experiments = []) => {
+    if (!experiments.length) return []
+
+    return experiments.reduce(
+      (acc, experiment) => ({
+        ...acc,
+        [experiment.accession_code]: experiment
+      }),
+      {}
+    )
+  }
+
+  const removeExperiment = async (experimentAccessionCode) => {
     setLoading(true)
-    const response = await api.dataset.get(tempDatasetId, params) // TEMPORRAY
+    const params = { data: {} }
+
+    for (const experiment in dataset.data) {
+      if (experimentAccessionCode.includes(experiment)) continue
+      params.data[experiment] = dataset.data[experiment]
+    }
+
+    const response = await api.dataset.update(datasetId, params)
     setDataset({
       ...response,
       experiments: formatExperiments(response.experiments)
@@ -66,107 +113,104 @@ export const useDatasetManager = () => {
     setLoading(false)
   }
 
-  const emptyDataset = async () => {
-    const data = {}
-
+  /* Sample */
+  const addSamples = async (data) => {
     setLoading(true)
-    const response = await api.dataset.update(tempDatasetId, { data }) // TEMPORARY
-    setDataset(response)
-    setLoading(false)
-  }
+    const params = { data: dataset ? { ...dataset.data } : {} }
 
-  const updateDataset = async (datasetSlice) => {
-    if (!datasetId) {
-      createDataset()
-    }
-
-    const data = dataset ? { ...dataset.data } : {}
-
-    for (const accessionCode of Object.keys(datasetSlice)) {
-      if (datasetSlice[accessionCode].all) {
-        // the special key 'ALL' to add all samples from an experiment
-        // ALL: https://github.com/AlexsLemonade/refinebio-frontend/issues/496#issuecomment-456543865
-        data[accessionCode] = ['ALL']
+    for (const accessionCode of Object.keys(data)) {
+      if (data[accessionCode].all) {
+        // the key 'ALL' is used to add all samples in an experiment
+        // (ref) https://github.com/AlexsLemonade/refinebio-frontend/issues/496#issuecomment-456543865
+        params.data[accessionCode] = ['ALL']
       } else {
-        data[accessionCode] = unionizeArrays(
-          data[accessionCode] || [],
-          datasetSlice[accessionCode]
+        params.data[accessionCode] = unionizeArrays(
+          params.data[accessionCode] || [],
+          data[accessionCode]
         )
       }
     }
 
-    setLoading(true)
-    const response = await api.dataset.update(tempDatasetId, { data }) // TEMPORRAY
-    setDataset(response)
-    setLoading(false)
-  }
-
-  /* Experiment */
-  const removeExperiment = async (experimentAccessionCode, details = false) => {
-    const data = {}
-
-    for (const experiment in dataset.data) {
-      if (experimentAccessionCode.includes(experiment)) continue
-      data[experiment] = dataset.data[experiment]
-    }
-
-    setLoading(true)
-    const response = await api.dataset.update(tempDatasetId, { data }, details)
+    const response = await api.dataset.update(
+      datasetId || (await createDataset()),
+      params
+    )
     setDataset({
       ...response,
-      ...(details
-        ? { experiments: formatExperiments(response.experiments) }
-        : {})
+      experiments: formatExperiments(response.experiments)
     })
     setLoading(false)
+
+    return {
+      ...response,
+      experiments: formatExperiments(response.experiments)
+    }
   }
 
-  /* Sample */
-  const addSample = () => {}
+  // formats the sample metadata names for UI (e.g., 'specimen_part' to 'Specimen part')
+  const formatSampleMetadata = (metadata) => metadata.map(formatString)
 
-  const removeSample = () => {}
+  const getTotalSamples = (data) => {
+    return !datasetId || isEmptyObject(data)
+      ? 0
+      : unionizeArrays(...Object.values(data)).length
+  }
 
-  const removeSamples = async (datasetSlice, details = false) => {
-    const data = { ...dataset.data }
+  const removeSamples = async (data) => {
+    const params = { data: { ...dataset.data } }
 
-    for (const accessionCode of Object.keys(datasetSlice)) {
-      if (!data[accessionCode]) continue
+    for (const accessionCode of Object.keys(data)) {
+      if (!params.data[accessionCode]) continue
 
       const samplesStillSelected = differenceOfArrays(
-        data[accessionCode],
-        datasetSlice[accessionCode]
+        params.data[accessionCode],
+        data[accessionCode]
       )
 
       if (samplesStillSelected.length > 0) {
-        data[accessionCode] = samplesStillSelected
+        params.data[accessionCode] = samplesStillSelected
       } else {
-        delete data[accessionCode]
+        delete params.data[accessionCode]
       }
     }
 
     setLoading(true)
-    const response = await api.dataset.update(tempDatasetId, { data }, details)
+    const response = await api.dataset.update(datasetId, params)
     setDataset({
       ...response,
-      ...(details
-        ? { experiments: formatExperiments(response.experiments) }
-        : {})
+      experiments: formatExperiments(response.experiments)
+    })
+    setLoading(false)
+  }
+
+  const replaceSamples = async (data) => {
+    setLoading(true)
+    const response = await api.dataset.update(datasetId, { data })
+    setDataset({
+      ...response,
+      experiments: formatExperiments(response.experiments)
     })
     setLoading(false)
   }
 
   return {
+    error,
+    setError,
     dataset,
     datasetId,
+    downloadOptions,
+    setDownloadOptions,
     loading,
     createDataset,
-    emptyDataset,
-    getDataset,
-    getDatasetDetails,
+    clearDataset,
     updateDataset,
+    getDataset,
+    getTotalExperiments,
     removeExperiment,
-    addSample,
-    removeSample,
-    removeSamples
+    addSamples,
+    formatSampleMetadata,
+    getTotalSamples,
+    removeSamples,
+    replaceSamples
   }
 }
