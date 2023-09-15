@@ -1,9 +1,9 @@
 import hasSameElements from 'helpers/hasSameElements'
 import intersectArrays from 'helpers/intersectArrays'
 import unionizeArrays from 'helpers/unionizeArrays'
-// This hook is used for the dataset action buttons and compares the following datasets
-// - data1: a data object in a user-created dataset)
-// - data2: the given dataset - a data object in the API response selected by a user via UI)
+// This hook is used for the dataset action buttons and compares the following datasets:
+// - data1: a data object in a user-created dataset
+// - data2: a data object in the API response selected by a user via UI
 export const useDatasetAction = (data1 = {}, data2 = {}) => {
   // returns true if any downloadable samples in data2
   const anyProcessedSamples = () =>
@@ -17,22 +17,22 @@ export const useDatasetAction = (data1 = {}, data2 = {}) => {
   const allProcessedInDataset = () => {
     if (!anyProcessedSamples()) return false
 
-    const addedSlice = getAddedSlice()
+    const addedSlice = getAddedSamples()
     return hasSameSamples(addedSlice, data2)
   }
 
   // returns true if any processed samples in data2 were added in data1
   const anyProcessedInDataset = () =>
-    Object.values(getAddedSlice()).some(
+    Object.values(getAddedSamples()).some(
       (samples) => samples && samples.length > 0
     )
 
   // returns the samples in data2 that were added in data1
-  const getAddedSlice = () => intersectDatasets(data1, data2)
+  const getAddedSamples = () => intersectDatasets()
 
   // returns all the samples that are in both data1 and data2
   const getSamplesInDatasets = () => {
-    const addedSlice = getAddedSlice()
+    const addedSlice = getAddedSamples()
 
     return unionizeArrays(...Object.values(addedSlice))
   }
@@ -68,22 +68,22 @@ export const useDatasetAction = (data1 = {}, data2 = {}) => {
   }
 
   // returns the intersection of two given datasets
-  const intersectDatasets = (d1, d2) => {
+  const intersectDatasets = () => {
     const data = {}
     const experimentAccessions = intersectArrays(
-      Object.keys(d1),
-      Object.keys(d2)
+      Object.keys(data1),
+      Object.keys(data2)
     )
 
     for (const experimentAccession of experimentAccessions) {
-      if (d2[experimentAccession].all) {
-        data[experimentAccession] = d1[experimentAccession]
-      } else if (d1[experimentAccession].all) {
-        data[experimentAccession] = d2[experimentAccession]
+      if (data2[experimentAccession].all) {
+        data[experimentAccession] = data1[experimentAccession]
+      } else if (data1[experimentAccession].all) {
+        data[experimentAccession] = data2[experimentAccession]
       } else {
         data[experimentAccession] = intersectArrays(
-          d1[experimentAccession],
-          d2[experimentAccession]
+          data1[experimentAccession],
+          data2[experimentAccession]
         )
       }
     }
@@ -99,7 +99,7 @@ export const useDatasetAction = (data1 = {}, data2 = {}) => {
     anyProcessedSamples,
     allProcessedInDataset,
     anyProcessedInDataset,
-    getAddedSlice,
+    getAddedSamples,
     totalSamplesInDataset
   }
 }
