@@ -1,11 +1,13 @@
 import { Box } from 'grommet'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { InlineMessage } from 'components/shared/InlineMessage'
 
 export const RemoveDatasetButton = ({ dataToRemove }) => {
+  const { loading, removeSamples } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const handleRemove = () => {} // TEMP: replace with useDatasetManager method
+
   return (
     <Box align="center" direction="row" wrap>
       <InlineMessage
@@ -15,12 +17,13 @@ export const RemoveDatasetButton = ({ dataToRemove }) => {
         height="fit-content"
       />
       <Button
+        isLoading={loading}
         label="Remove"
         link
         linkFontSize={setResponsive('medium', 'small')}
         margin={{ left: 'xsmall' }}
         width="50px"
-        onClick={() => handleRemove(dataToRemove)}
+        onClick={() => removeSamples(dataToRemove)}
       />
     </Box>
   )

@@ -1,3 +1,4 @@
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { Button } from 'components/shared/Button'
 
 export const AddToDatasetButton = ({
@@ -6,17 +7,18 @@ export const AddToDatasetButton = ({
   label = 'Add To Dataset',
   ...props
 }) => {
-  const handleAdd = () => {} // TEMP: replace with useDatasetManager method
+  const { loading, addSamples } = useDatasetManager()
 
   return (
     <Button
       label={label}
+      isLoading={loading}
       primary={btnType === 'primary'}
       secondary={btnType === 'secondary'}
       responsive
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
-      onClick={() => handleAdd(dataToAdd)}
+      onClick={() => addSamples(dataToAdd)}
     />
   )
 }

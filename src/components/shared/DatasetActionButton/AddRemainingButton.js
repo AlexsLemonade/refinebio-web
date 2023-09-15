@@ -1,17 +1,19 @@
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import formatNumbers from 'helpers/formatNumbers'
 import { Button } from 'components/shared/Button'
 import { InlineMessage } from 'components/shared/InlineMessage'
 
 export const AddRemainingButton = ({ dataToAdd, samplesInDataset }) => {
-  const handleAdd = () => {} // TEMP: replace with useDatasetManager method
+  const { loading, addSamples } = useDatasetManager()
 
   return (
     <>
       <Button
+        isLoading={loading}
         label="Add Remaining"
         secondary
         responsive
-        onClick={() => handleAdd(dataToAdd)}
+        onClick={() => addSamples(dataToAdd)}
       />
       <InlineMessage
         label={
