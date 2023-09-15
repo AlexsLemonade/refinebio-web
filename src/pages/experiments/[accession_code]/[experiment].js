@@ -60,11 +60,7 @@ export const Experiment = () => {
   const { setResponsive } = useResponsive()
 
   useEffect(() => {
-    if (!isReady) return
-
-    if (isReady) {
-      getExperiment(accessionCode)
-    }
+    if (isReady) getExperiment(accessionCode)
   }, [isReady])
 
   return (
@@ -130,6 +126,7 @@ export const Experiment = () => {
                       <Box
                         gridArea="ctas"
                         margin={{ top: setResponsive('none', 'large') }}
+                        align="end"
                       >
                         <SearchCardAction
                           accessionCode={accessionCode}
@@ -309,6 +306,7 @@ export const Experiment = () => {
                       </Column>
                       <Column>
                         <SamplesTableAction
+                          accessionCode={accessionCode}
                           downloadableSamples={
                             experiment.num_downloadable_samples
                           }
