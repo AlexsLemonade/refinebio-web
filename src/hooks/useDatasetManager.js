@@ -33,20 +33,22 @@ export const useDatasetManager = () => {
   }
 
   const getDataset = async (id = '') => {
+    if (!id && !datasetId) return null
+
     setLoading(true)
     const headers = token
       ? {
           'APT-KEY': token
         }
       : {}
-    const response = await api.dataset.get(id || datasetId, headers)
 
+    const response = await api.dataset.get(id || datasetId, headers)
     const formattedResponse = {
       ...response,
       experiments: formatExperiments(response.experiments)
     }
 
-    if (!id) {
+    if (!id && datasetId) {
       setDataset(formattedResponse)
     }
 
@@ -150,11 +152,8 @@ export const useDatasetManager = () => {
   // formats the sample metadata names for UI (e.g., 'specimen_part' to 'Specimen part')
   const formatSampleMetadata = (metadata) => metadata.map(formatString)
 
-  const getTotalSamples = (data) => {
-    return !datasetId || isEmptyObject(data)
-      ? 0
-      : unionizeArrays(...Object.values(data)).length
-  }
+  const getTotalSamples = (data) =>
+    isEmptyObject(data) ? 0 : unionizeArrays(...Object.values(data)).length
 
   const removeSamples = async (data) => {
     const params = { data: { ...dataset.data } }
