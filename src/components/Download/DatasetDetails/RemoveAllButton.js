@@ -7,10 +7,15 @@ import { Modal } from 'components/shared/Modal'
 import { Row } from 'components/shared/Row'
 
 export const RemoveAllButton = () => {
-  const { loading, emptyDataset } = useDatasetManager()
+  const { loading, clearDataset } = useDatasetManager()
   const { closeModal, openModal } = useModal()
   const { setResponsive } = useResponsive()
   const id = 'remove-all'
+
+  const handleRemoveAll = () => {
+    clearDataset()
+    closeModal(id)
+  }
 
   return (
     <Modal
@@ -27,11 +32,11 @@ export const RemoveAllButton = () => {
       fullHeight={false}
     >
       <Box pad={{ bottom: 'small', horizontal: 'large' }}>
+        {/* fixed max-width to preserve UI layout in winder screens */}
         <Box
           width={{ max: setResponsive('none', 'none', '450px') }}
           margin={{ bottom: 'medium' }}
         >
-          {/* fixed max-width to preserve UI layout in winder screens */}
           <Heading level={1}>
             Are you sure you want to remove all samples?
           </Heading>
@@ -41,11 +46,7 @@ export const RemoveAllButton = () => {
             label="Yes, remove all samples"
             tertiary
             responsive
-            onClick={() => {
-              // TEMPORARY for demo
-              emptyDataset()
-              closeModal(id)
-            }}
+            onClick={handleRemoveAll}
           />
           <Button
             label="No, keep all samples"
