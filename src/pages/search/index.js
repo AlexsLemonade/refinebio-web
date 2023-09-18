@@ -171,6 +171,7 @@ export const Search = (props) => {
                   />
                 )}
                 <SearchBulkActions
+                  results={results.results}
                   pageSize={pageSize}
                   setPageSize={setPageSize}
                   sortBy={sortBy}
