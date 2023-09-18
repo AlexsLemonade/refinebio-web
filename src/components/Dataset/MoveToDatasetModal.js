@@ -10,49 +10,47 @@ import { Row } from 'components/shared/Row'
 
 export const MoveToDatasetModal = ({
   id,
+  closeModal,
   defaultValue,
   dataset,
+  pathname,
   radioOptions,
   value,
-  closeModal,
   setValue
 }) => {
-  const { addSamples, getTotalSamples, replaceSamples } = useDatasetManager()
+  const { loading, addSamples, getTotalSamples, replaceSamples } =
+    useDatasetManager()
   const { setResponsive } = useResponsive()
+  const { push } = useRouter()
+  const totalSamples = formatNumbers(getTotalSamples(dataset.data))
 
-  const router = useRouter()
-  const moveToDataSet = async (action = 'append') => {
+  const handleMoveSamples = async (action = 'append') => {
     if (action === 'append') {
       await addSamples(dataset.data)
-      router.push(
+      push(
         {
-          pathname: '/download',
+          pathname,
           query: {
-            message: `Appended ${formatNumbers(
-              getTotalSamples(dataset.data)
-            )} samples to My Dataset`,
+            message: `Appended ${totalSamples} samples to My Dataset`,
             status: 'success'
           }
         },
-        '/download'
+        pathname
       )
-      closeModal(id)
     } else {
       await replaceSamples(dataset.data)
-      router.push(
+      push(
         {
-          pathname: '/download',
+          pathname,
           query: {
-            message: `Moved  ${formatNumbers(
-              getTotalSamples(dataset.data)
-            )} samples to My Dataset`,
+            message: `Moved  ${totalSamples} samples to My Dataset`,
             status: 'success'
           }
         },
-        '/download'
+        pathname
       )
-      closeModal(id)
     }
+    closeModal(id)
   }
 
   const handleClose = () => {
@@ -70,7 +68,7 @@ export const MoveToDatasetModal = ({
       <Box direction="row" gap="xsmall" margin={{ bottom: 'medium' }}>
         <Icon color="error" name="Warning" size="medium" />
         <Heading level={2} size="small">
-          There are {formatNumbers(getTotalSamples(dataset.data))} samples in{' '}
+          There are {totalSamples}samples in{' '}
           <Anchor href="/download" label="My Dataset" target="_blank" />
         </Heading>
       </Box>
@@ -89,9 +87,10 @@ export const MoveToDatasetModal = ({
         <Button label="Cancel" secondary responsive onClick={handleClose} />
         <Button
           label="Move Samples"
+          isLoading={loading}
           primary
           responsive
-          onClick={() => moveToDataSet(value)}
+          onClick={() => handleMoveSamples(value)}
         />
       </Row>
     </Box>
