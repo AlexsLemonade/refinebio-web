@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import { memo, useEffect, useMemo, useState } from 'react'
-import { Box, CheckBox, Spinner, Text } from 'grommet'
+import { Box, Spinner, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { useSamplesTableManager } from 'hooks/useSamplesTableManager'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
@@ -23,14 +23,17 @@ import { AddRemoveCell } from './AddRemoveCell'
 import { AdditionalMetadataCell } from './AdditionalMetadataCell'
 import { ProcessingInformationCell } from './ProcessingInformationCell'
 import { SampleMetadataCell } from './SampleMetadataCell'
+import { ShowOnlyAddedSamplesFilter } from './ShowOnlyAddedSamplesFilter'
 import { TitleCell } from './TitleCell'
 
 export const SamplesTable = ({
   sampleAccessionsInExperiment,
   queryToAdd,
   sampleMetadataFields,
+  allSamples,
   isImmutable = false,
-  modalView = false
+  modalView = false,
+  showOnlyAddedSamples = false
 }) => {
   const {
     samplesTable: { pageSizes }
@@ -39,7 +42,6 @@ export const SamplesTable = ({
     config: { defaultColumn, minColumns },
     hasError,
     hasSamples,
-    hasSamplesInDataset,
     loading,
     samplesTable,
     totalPages,
@@ -48,6 +50,7 @@ export const SamplesTable = ({
     updateFilterBy,
     updatePage,
     updatePageSize,
+    updateDatasetId,
     updateSortBy
   } = useSamplesTableManager(queryToAdd)
   const { viewport, setResponsive } = useResponsive()
@@ -176,10 +179,14 @@ export const SamplesTable = ({
                 top: setResponsive('small', 'xsmall', 'none')
               }}
             >
-              <CheckBox
-                disabled={!hasSamplesInDataset} // TEMP
-                label="Show only samples in current dataset"
-              />
+              {showOnlyAddedSamples && (
+                <ShowOnlyAddedSamplesFilter
+                  data={allSamples}
+                  queryToAdd={queryToAdd}
+                  showOnlyAddedSamples
+                  updateDatasetId={updateDatasetId}
+                />
+              )}
             </Box>
           </Box>
           <Box direction="row">
