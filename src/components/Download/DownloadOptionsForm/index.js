@@ -5,12 +5,12 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { Row } from 'components/shared/Row'
-import { AdvanedOptionsCheckBox } from './AdvanedOptionsCheckBox'
-import { AdvancedOptionsButton } from './AdvancedOptionsButton'
+import { AdvanedOptions } from './AdvanedOptions'
+import { AdvancedOptionsToggle } from './AdvancedOptionsToggle'
 import { AggregateOptions } from './AggregateOptions'
 import { TransformationOptions } from './TransformationOptions'
 
-export const AdvancedOptions = () => {
+export const DownloadOptionsForm = () => {
   const router = useRouter()
   const { datasetId } = useDatasetManager()
   const { setResponsive } = useResponsive()
@@ -35,10 +35,10 @@ export const AdvancedOptions = () => {
                   left: setResponsive('none', 'xsmall')
                 }}
               >
-                <AdvancedOptionsButton toggle={toggle} setToggle={setToggle} />
+                <AdvancedOptionsToggle toggle={toggle} setToggle={setToggle} />
               </Box>
             </Row>
-            <AdvanedOptionsCheckBox datasetId={datasetId} toggle={toggle} />
+            <AdvanedOptions datasetId={datasetId} toggle={toggle} />
           </Box>
           <Button
             label="Download"
@@ -55,4 +55,4 @@ export const AdvancedOptions = () => {
   )
 }
 
-export default AdvancedOptions
+export default DownloadOptionsForm

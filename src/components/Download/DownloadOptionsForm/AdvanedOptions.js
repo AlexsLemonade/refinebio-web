@@ -6,7 +6,7 @@ import { ExpandableBlock } from 'components/shared/ExpandableBlock'
 import { Icon } from 'components/shared/Icon'
 import { links } from 'config'
 
-export const AdvanedOptionsCheckBox = ({ datasetId, toggle }) => {
+export const AdvanedOptions = ({ datasetId, toggle }) => {
   const [skipQuantile, setSkipQuantile] = useState(false)
 
   return (
@@ -47,4 +47,4 @@ export const AdvanedOptionsCheckBox = ({ datasetId, toggle }) => {
   )
 }
 
-export default AdvanedOptionsCheckBox
+export default AdvanedOptions

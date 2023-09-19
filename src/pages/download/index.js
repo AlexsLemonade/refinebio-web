@@ -13,7 +13,7 @@ import {
   DatasetSummary,
   DatasetDetails,
   EmptyDataset,
-  AdvancedOptions,
+  DownloadOptionsForm,
   StartProcessing,
   FilesSummary
 } from 'components/Download'
@@ -60,7 +60,7 @@ export const Download = () => {
                 </Heading>
                 <ShareDatasetButton datasetId={dataset?.id} />
               </Row>
-              <AdvancedOptions />
+              <DownloadOptionsForm />
               <FilesSummary dataset={dataset} />
               <DatasetSummary dataset={dataset} />
               <DatasetDetails dataset={dataset} />
