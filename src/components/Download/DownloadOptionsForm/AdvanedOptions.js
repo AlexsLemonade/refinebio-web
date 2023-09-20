@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { Box, CheckBox, Heading } from 'grommet'
 import { Alert } from 'components/shared/Alert'
 import { Anchor } from 'components/shared/Anchor'
@@ -6,8 +6,19 @@ import { ExpandableBlock } from 'components/shared/ExpandableBlock'
 import { Icon } from 'components/shared/Icon'
 import { links } from 'config'
 
-export const AdvanedOptions = ({ datasetId, toggle }) => {
-  const [skipQuantile, setSkipQuantile] = useState(false)
+export const AdvanedOptions = ({
+  datasetId,
+  values: { aggregate_by: aggregateBy, quantile_normalize: quantileNormalize },
+  handleChange,
+  toggle,
+  setToggle,
+  hideLabel = false
+}) => {
+  const showAlert = !quantileNormalize
+
+  useEffect(() => {
+    setToggle(!quantileNormalize)
+  }, [])
 
   return (
     <ExpandableBlock
@@ -15,11 +26,13 @@ export const AdvanedOptions = ({ datasetId, toggle }) => {
       height="auto"
       margin={{ vertical: 'small' }}
     >
-      <Heading level={5} responsive={false} weight="500">
-        Advanced Options
-      </Heading>
+      {!hideLabel && (
+        <Heading level={5} responsive={false} weight="500">
+          Advanced Options
+        </Heading>
+      )}
       <ExpandableBlock
-        expand={skipQuantile}
+        expand={showAlert}
         margin={{ bottom: 'xsmall' }}
         opacity={0.5}
       >
@@ -31,7 +44,17 @@ export const AdvanedOptions = ({ datasetId, toggle }) => {
       <Box direction="row">
         <CheckBox
           label="Skip quantile normalization for RNA-seq samples"
-          onClick={() => setSkipQuantile(!skipQuantile)}
+          name="quantile_normalize"
+          checked={!quantileNormalize && aggregateBy === 'EXPERIMENT'}
+          disabled={aggregateBy === 'SPECIES'}
+          onChange={() =>
+            handleChange({
+              target: {
+                name: 'quantile_normalize',
+                value: !quantileNormalize
+              }
+            })
+          }
         />
         <Anchor
           href={links.refinebio_docs_quantile_normalization_rna_seq_samples}
