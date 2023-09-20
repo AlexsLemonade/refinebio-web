@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { Formik } from 'formik'
 import { Box, Form } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
@@ -10,47 +11,101 @@ import { AdvancedOptionsToggle } from './AdvancedOptionsToggle'
 import { AggregateOptions } from './AggregateOptions'
 import { TransformationOptions } from './TransformationOptions'
 
-export const DownloadOptionsForm = () => {
-  const router = useRouter()
-  const { datasetId } = useDatasetManager()
+export const DownloadOptionsForm = ({
+  dataset = null,
+  buttonLabel = 'Download',
+  onSubmit = null
+}) => {
+  const { push } = useRouter()
+  const { dataset: datasetState, updateDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const [toggle, setToggle] = useState(false)
+  const [toggleAdvancedOption, setToggleAdvancedOption] = useState(false)
+  const selectedDataset = dataset || datasetState
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    router.push('/download/?start=true')
+  const handleSubmitForm = async (options) => {
+    let pathname = '/download'
+
+    if (onSubmit) {
+      const response = await onSubmit()
+      pathname = response
+    } else {
+      await updateDataset(selectedDataset.id, {
+        ...options,
+        data: selectedDataset.data
+      })
+    }
+
+    push(
+      {
+        pathname,
+        query: {
+          start: true
+        }
+      },
+      pathname
+    )
   }
 
   return (
     <Box border={{ side: 'bottom' }}>
-      <Form onSubmit={handleSubmit}>
-        <Row direction={setResponsive('column', 'column', 'row')}>
-          <Box>
-            <Row align={setResponsive('start', 'center')} justify="start">
-              <AggregateOptions />
-              <TransformationOptions />
-              <Box
-                margin={{
-                  top: setResponsive('xsmall', 'none'),
-                  left: setResponsive('none', 'xsmall')
-                }}
-              >
-                <AdvancedOptionsToggle toggle={toggle} setToggle={setToggle} />
+      <Formik
+        initialValues={{
+          aggregate_by: selectedDataset.aggregate_by,
+          data: selectedDataset.data,
+          scale_by: selectedDataset.scale_by,
+          quantile_normalize: selectedDataset.quantile_normalize
+        }}
+        onSubmit={(values) => {
+          handleSubmitForm(values)
+        }}
+      >
+        {({ handleChange, handleSubmit, isSubmitting, values }) => (
+          <Form onSubmit={handleSubmit}>
+            <Row direction={setResponsive('column', 'column', 'row')}>
+              <Box>
+                <Row align={setResponsive('start', 'center')} justify="start">
+                  <AggregateOptions
+                    value={values.aggregate_by}
+                    handleChange={handleChange}
+                  />
+                  <TransformationOptions
+                    value={values.scale_by}
+                    handleChange={handleChange}
+                  />
+                  <Box
+                    margin={{
+                      top: setResponsive('xsmall', 'none'),
+                      left: setResponsive('none', 'xsmall')
+                    }}
+                  >
+                    <AdvancedOptionsToggle
+                      toggle={toggleAdvancedOption}
+                      setToggle={setToggleAdvancedOption}
+                    />
+                  </Box>
+                </Row>
+                <AdvanedOptions
+                  datasetId={selectedDataset.id}
+                  values={values}
+                  handleChange={handleChange}
+                  toggle={toggleAdvancedOption}
+                  setToggle={setToggleAdvancedOption}
+                />
               </Box>
+              <Button
+                label={buttonLabel}
+                isLoading={isSubmitting}
+                primary
+                responsive
+                margin={{
+                  bottom: setResponsive('small', 'small', 'none')
+                }}
+                type="submit"
+              />
             </Row>
-            <AdvanedOptions datasetId={datasetId} toggle={toggle} />
-          </Box>
-          <Button
-            label="Download"
-            primary
-            responsive
-            margin={{
-              bottom: setResponsive('small', 'small', 'none')
-            }}
-            type="submit"
-          />
-        </Row>
-      </Form>
+          </Form>
+        )}
+      </Formik>
     </Box>
   )
 }
