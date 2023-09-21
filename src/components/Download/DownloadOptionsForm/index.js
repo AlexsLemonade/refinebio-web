@@ -19,18 +19,18 @@ export const DownloadOptionsForm = ({
   const { push } = useRouter()
   const { dataset: datasetState, updateDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const [toggleAdvancedOption, setToggleAdvancedOption] = useState(false)
   const selectedDataset = dataset || datasetState
+  const [toggleAdvancedOption, setToggleAdvancedOption] = useState(false)
 
-  const handleSubmitForm = async (options) => {
+  const handleSubmitForm = async (downloadOptions) => {
     let pathname = '/download'
 
     if (onSubmit) {
-      const response = await onSubmit() // TEMP
+      const response = await onSubmit(downloadOptions)
       pathname = response
     } else {
       await updateDataset(selectedDataset.id, {
-        ...options,
+        ...downloadOptions,
         data: selectedDataset.data
       })
     }
