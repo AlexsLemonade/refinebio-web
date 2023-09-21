@@ -55,8 +55,9 @@ export const DownloadOptionsForm = ({
           scale_by: selectedDataset.scale_by,
           quantile_normalize: selectedDataset.quantile_normalize
         }}
-        onSubmit={(values) => {
-          handleSubmitForm(values)
+        onSubmit={async (values, { setSubmitting }) => {
+          await handleSubmitForm(values)
+          setSubmitting(false)
         }}
       >
         {({ handleChange, handleSubmit, isSubmitting, values }) => (
