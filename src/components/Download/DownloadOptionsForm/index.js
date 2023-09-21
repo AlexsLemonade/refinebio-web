@@ -26,7 +26,7 @@ export const DownloadOptionsForm = ({
     let pathname = '/download'
 
     if (onSubmit) {
-      const response = await onSubmit()
+      const response = await onSubmit() // TEMP
       pathname = response
     } else {
       await updateDataset(selectedDataset.id, {

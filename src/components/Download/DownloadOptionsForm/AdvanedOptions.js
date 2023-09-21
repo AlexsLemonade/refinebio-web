@@ -14,10 +14,10 @@ export const AdvanedOptions = ({
   setToggle,
   hideLabel = false
 }) => {
-  const showAlert = !quantileNormalize
+  const skipQuantileNormalize = !quantileNormalize
 
   useEffect(() => {
-    setToggle(!quantileNormalize)
+    setToggle(skipQuantileNormalize)
   }, [])
 
   return (
@@ -32,7 +32,7 @@ export const AdvanedOptions = ({
         </Heading>
       )}
       <ExpandableBlock
-        expand={showAlert}
+        expand={skipQuantileNormalize}
         margin={{ bottom: 'xsmall' }}
         opacity={0.5}
       >
@@ -45,7 +45,7 @@ export const AdvanedOptions = ({
         <CheckBox
           label="Skip quantile normalization for RNA-seq samples"
           name="quantile_normalize"
-          checked={!quantileNormalize && aggregateBy === 'EXPERIMENT'}
+          checked={skipQuantileNormalize && aggregateBy === 'EXPERIMENT'}
           disabled={aggregateBy === 'SPECIES'}
           onChange={() =>
             handleChange({
