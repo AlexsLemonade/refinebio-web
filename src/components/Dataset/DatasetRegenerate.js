@@ -1,4 +1,7 @@
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { Box, Heading, Paragraph } from 'grommet'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
@@ -8,7 +11,44 @@ import { Row } from 'components/shared/Row'
 import { links } from 'config'
 
 export const DatasetRegenerate = () => {
+  const {
+    query: { dataset_id: idFromQuery },
+    push
+  } = useRouter()
+  const { createDataset, getDataset, updateDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
+  const [selectedDataset, setSelectedDataset] = useState({})
+
+  const handleRegenerateFiles = async () => {
+    const params = {
+      data: selectedDataset.data,
+      aggregate_by: selectedDataset.aggregate_by,
+      scale_by: selectedDataset.scale_by,
+      quantile_normalize: selectedDataset.quantile_normalize
+    }
+    const response = await updateDataset(await createDataset(), params)
+    const pathname = `/dataset/${response.id}`
+
+    push(
+      {
+        pathname,
+        query: {
+          start: true
+        }
+      },
+      pathname
+    )
+  }
+
+  useEffect(() => {
+    const getSelectedDataset = async (id) => {
+      const response = await getDataset(id)
+      setSelectedDataset(response)
+      return response
+    }
+
+    getSelectedDataset(idFromQuery)
+  }, [idFromQuery])
 
   return (
     <Box align="center">
@@ -29,7 +69,12 @@ export const DatasetRegenerate = () => {
             }}
             width={setResponsive('100%', 'auto')}
           >
-            <Button label="Regenerate Files" primary responsive />
+            <Button
+              label="Regenerate Files"
+              primary
+              responsive
+              onClick={handleRegenerateFiles}
+            />
             <Box margin={{ top: 'small' }}>
               <InlineMessage
                 color="info"
