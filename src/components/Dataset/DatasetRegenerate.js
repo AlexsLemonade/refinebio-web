@@ -111,7 +111,7 @@ export const DatasetRegenerate = () => {
           <Box
             aria-hidden
             background={{
-              image: "url('/illustration-dataset.svg')",
+              image: "url('/illustration-download-expired-dataset.svg')",
               position: 'center',
               repeat: 'no-repeat',
               size: 'contain'
