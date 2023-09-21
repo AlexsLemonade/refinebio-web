@@ -1,23 +1,20 @@
-import { Box, Heading } from 'grommet'
+import { Box, Heading, Paragraph } from 'grommet'
 import { EmailForm } from './EmailForm'
 
 // path: /download?start=true
-// renders this component when no email is assigned
+// renders this component when no email in localStorage
 export const StartProcessing = () => {
-  const handleSubmitEmailForm = () => {}
-
   return (
     <Box align="center" alignSelf="center" width="640px">
-      <Heading level={1} margin={{ bottom: 'small' }}>
-        We&#39;re putting your download files together. It usually takes 15- 20
-        minutes.
+      <Heading level={1} margin={{ bottom: 'medium' }}>
+        We're almost ready to start putting your download files together!
       </Heading>
-      <Heading level={2}>
-        Enter your email and we will email you when the files are ready for
-        download.
-      </Heading>
+      <Paragraph size="22px">
+        Enter your email and we will send you the download link when your files
+        are ready. It usually takes about 15-20 minutes.
+      </Paragraph>
       <Box margin={{ top: 'medium' }} alignSelf="start">
-        <EmailForm submitHandler={handleSubmitEmailForm} />
+        <EmailForm />
       </Box>
       <Box
         margin={{ top: 'basex8', bottom: 'xlarge' }}
