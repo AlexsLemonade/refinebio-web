@@ -66,7 +66,7 @@ export const Dataset = ({ query }) => {
   if (start) {
     return (
       <FixedContainer>
-        <StartProcessing idFromQuery={idFromQuery} />
+        <StartProcessing dataset={selectedDataset} />
       </FixedContainer>
     )
   }
