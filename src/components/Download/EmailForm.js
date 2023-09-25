@@ -11,7 +11,7 @@ import { TextInput } from 'components/shared/TextInput'
 import { validationSchemas, links } from 'config'
 
 export const EmailForm = ({ dataset }) => {
-  const { email, token, startProcessingDataset } = useDatasetManager()
+  const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const { DownloadEmailForm } = validationSchemas
 
@@ -20,7 +20,7 @@ export const EmailForm = ({ dataset }) => {
       initialValues={{
         emailAddress: email || '',
         receiveUpdates: true,
-        termsOfService: Boolean(token)
+        termsOfService: false
       }}
       validationSchema={DownloadEmailForm}
       validateOnChange={false}
