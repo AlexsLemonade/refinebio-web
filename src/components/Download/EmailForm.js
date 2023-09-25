@@ -6,39 +6,64 @@ import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { Row } from 'components/shared/Row'
+import { InlineMessage } from 'components/shared/InlineMessage'
 import { TextInput } from 'components/shared/TextInput'
-import { links } from 'config'
+import { validationSchemas, links } from 'config'
 
 export const EmailForm = () => {
-  const { email } = useDatasetManager()
+  const { email, token } = useDatasetManager()
   const { setResponsive } = useResponsive()
+  const { DownloadEmailForm } = validationSchemas
 
   return (
     <Formik
       initialValues={{
-        email: email || '',
+        emailAddress: email || '',
         receiveUpdates: true,
-        termsOfService: false
+        termsOfService: Boolean(token)
       }}
+      validationSchema={DownloadEmailForm}
+      validateOnChange={false}
       onSubmit={async (values, { setSubmitting }) => {
         // TEMP for testing
-        const response = await new Promise((resolve) => {
+        await new Promise((resolve) => {
           setTimeout(() => {
-            resolve(values)
+            resolve()
             setSubmitting(false)
           }, 2000)
         })
-        console.log(response)
+        console.log(values)
       }}
     >
-      {({ handleChange, handleSubmit, isSubmitting, values }) => (
+      {({
+        errors,
+        handleChange,
+        handleSubmit,
+        isSubmitting,
+        touched,
+        values
+      }) => (
         <Form onSubmit={handleSubmit}>
-          <Row pad={{ top: 'small' }}>
-            <Column fill basis="1">
+          <Row>
+            <Column fill basis="1" style={{ position: 'relative' }}>
+              {errors.emailAddress && touched.emailAddress && (
+                <Box animation={{ type: 'fadeIn', duration: 300 }}>
+                  <InlineMessage
+                    color="error"
+                    height="16px"
+                    justify="center"
+                    label={errors.emailAddress}
+                    iconSize="small"
+                    style={{ position: 'absolute', top: '-20px' }}
+                  />
+                </Box>
+              )}
               <TextInput
-                name="email"
+                error={errors.emailAddress}
+                name="emailAddress"
+                hideIcon
                 type="email"
-                value={values.email}
+                value={values.emailAddress}
                 placeholder="jdoe@example.com"
                 onChange={handleChange}
               />
@@ -55,8 +80,21 @@ export const EmailForm = () => {
               type="submit"
             />
           </Row>
-          <Box margin={{ top: 'small' }}>
+          <Box pad={{ top: 'medium' }} style={{ position: 'relative' }}>
+            {errors.termsOfService && touched.termsOfService && (
+              <Box animation={{ type: 'fadeIn', duration: 300 }}>
+                <InlineMessage
+                  color="error"
+                  height="16px"
+                  justify="center"
+                  label={errors.termsOfService}
+                  iconSize="small"
+                  style={{ position: 'absolute', top: '10px' }}
+                />
+              </Box>
+            )}
             <CheckBox
+              checked={values.termsOfService}
               label={
                 <Text>
                   I agree to the{' '}
