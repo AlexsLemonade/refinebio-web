@@ -66,7 +66,7 @@ export const Download = () => {
               <DatasetDetails dataset={dataset} />
             </>
           ) : start ? (
-            <StartProcessing />
+            <StartProcessing dataset={dataset} />
           ) : (
             <Box
               pad={{

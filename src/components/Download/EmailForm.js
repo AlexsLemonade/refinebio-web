@@ -10,8 +10,8 @@ import { InlineMessage } from 'components/shared/InlineMessage'
 import { TextInput } from 'components/shared/TextInput'
 import { validationSchemas, links } from 'config'
 
-export const EmailForm = () => {
-  const { email, token } = useDatasetManager()
+export const EmailForm = ({ dataset }) => {
+  const { email, token, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const { DownloadEmailForm } = validationSchemas
 
@@ -32,7 +32,14 @@ export const EmailForm = () => {
             setSubmitting(false)
           }, 2000)
         })
-        console.log(values)
+
+        const downloadOptions = {
+          data: dataset.data,
+          emailAddress: values.emailAddress,
+          receiveUpdates: values.receiveUpdates
+        }
+
+        startProcessingDataset(dataset.id, downloadOptions)
       }}
     >
       {({
