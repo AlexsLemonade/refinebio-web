@@ -1,4 +1,5 @@
 export { contributors } from './contributors'
+export { default as hubspotForms } from './hubspotForms'
 export { links } from './links'
 export { options } from './options'
 export { default as validationSchemas } from './validationSchemas'
