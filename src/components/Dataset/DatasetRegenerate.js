@@ -53,10 +53,7 @@ export const DatasetRegenerate = () => {
   return (
     <Box align="center">
       <Row justify="center" width={setResponsive('100%', '70%')}>
-        <Column
-          align={setResponsive('center', 'start')}
-          flexValue={setResponsive('1 1 auto', 'auto')}
-        >
+        <Column align={setResponsive('center', 'start')}>
           <Heading level={1} margin={{ bottom: 'small' }}>
             Download Expired!
           </Heading>
@@ -101,11 +98,9 @@ export const DatasetRegenerate = () => {
         </Column>
         <Column
           align="center"
-          flexValue={setResponsive('1 1 auto', 'auto')}
           margin={{
             top: setResponsive('large', 'none'),
-            bottom: setResponsive('large', 'none'),
-            left: setResponsive('none', 'medium', 'basex13')
+            bottom: setResponsive('large', 'none')
           }}
         >
           <Box

@@ -1,6 +1,7 @@
-export { DatasetErrorDownloading } from './DatasetErrorDownloading'
 export { DatasetExplore } from './DatasetExplore'
+export { DatasetPageHeader } from './DatasetPageHeader'
 export { DatasetProcessing } from './DatasetProcessing'
+export { DatasetProcessingError } from './DatasetProcessingError'
 export { DatasetReady } from './DatasetReady'
 export { DatasetRegenerate } from './DatasetRegenerate'
 export { MoveToDatasetButton } from './MoveToDatasetButton'

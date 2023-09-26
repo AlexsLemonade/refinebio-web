@@ -5,16 +5,13 @@ import { Column } from 'components/shared/Column'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
 
-export const DatasetErrorDownloading = ({ dataset }) => {
+export const DatasetProcessingError = ({ dataset }) => {
   const { setResponsive } = useResponsive()
 
   return (
     <Box align="center">
       <Row justify="center" width={setResponsive('100%', '60%')}>
-        <Column
-          align={setResponsive('center', 'start')}
-          flexValue={setResponsive('1 1 auto', 'auto')}
-        >
+        <Column align={setResponsive('center', 'start')}>
           <Heading level={1} margin={{ bottom: 'small' }}>
             Uh-oh something went wrong!
           </Heading>
@@ -57,11 +54,9 @@ export const DatasetErrorDownloading = ({ dataset }) => {
         </Column>
         <Column
           align="center"
-          flexValue={setResponsive('1 1 auto', 'auto')}
           margin={{
             top: setResponsive('large', 'none'),
-            bottom: setResponsive('large', 'none'),
-            left: setResponsive('none', 'medium', 'basex13')
+            bottom: setResponsive('large', 'none')
           }}
         >
           <Box
@@ -82,4 +77,4 @@ export const DatasetErrorDownloading = ({ dataset }) => {
   )
 }
 
-export default DatasetErrorDownloading
+export default DatasetProcessingError

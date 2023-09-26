@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import moment from 'moment'
-import { Box, Heading } from 'grommet'
+import { Box } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { usePageRendered } from 'hooks/usePageRendered'
@@ -9,10 +8,7 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { Spinner } from 'components/shared/Spinner'
 import {
-  DatasetErrorDownloading,
-  DatasetProcessing,
-  DatasetReady,
-  DatasetRegenerate,
+  DatasetPageHeader,
   MoveToDatasetButton,
   ShareDatasetButton
 } from 'components/Dataset'
@@ -36,11 +32,13 @@ export const getServerSideProps = ({ query }) => {
 
 // TODO: create a new issue for the error handling
 export const Dataset = ({ query }) => {
-  const { error, dataset, datasetId, loading, getDataset } = useDatasetManager()
   const { dataset_id: idFromQuery, ref, start } = query
+  const { dataset, datasetId, loading, getDataset } = useDatasetManager()
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
+
   const [selectedDataset, setSelectedDataset] = useState({})
+  const isSharedDataset = ref === 'share' || !selectedDataset.is_processed
 
   useEffect(() => {
     const getSelectedDataset = async (id) => {
@@ -53,15 +51,8 @@ export const Dataset = ({ query }) => {
   }, [query])
 
   if (!pageRendered) return null
-  const expiredOn = selectedDataset?.expires_on
-  const isAvailable = selectedDataset?.is_available
-  const isExpired = moment(expiredOn).isBefore(Date.now())
-  const isProcessed = selectedDataset?.is_processed
-  const isProcessing = selectedDataset?.is_processing
-  const isProcessingError = selectedDataset?.success === false // 'success' may be null
+
   const isSameId = datasetId === idFromQuery
-  const isSharedDataset = ref === 'share'
-  const showSharedDatasetTitleHeader = isSharedDataset || !isProcessed
 
   if (start) {
     return (
@@ -81,40 +72,9 @@ export const Dataset = ({ query }) => {
         <Box>
           {selectedDataset?.data && (
             <>
-              <Box
-                pad={{
-                  top: showSharedDatasetTitleHeader
-                    ? 'large'
-                    : setResponsive('basex6', 'basex8', 'basex14'),
-                  bottom: isSharedDataset ? 'medium' : 'large'
-                }}
-              >
-                {showSharedDatasetTitleHeader && (
-                  <Heading level={2} size={setResponsive('small', 'large')}>
-                    Shared Dataset
-                  </Heading>
-                )}
-                {(error || isProcessingError) && (
-                  <DatasetErrorDownloading dataset={selectedDataset} />
-                )}
-                {isProcessing && (
-                  <DatasetProcessing dataset={selectedDataset} />
-                )}
-                {isExpired ? (
-                  <DatasetRegenerate dataset={selectedDataset} />
-                ) : (
-                  <Box>
-                    {isProcessed && isAvailable && (
-                      <DatasetReady dataset={selectedDataset} />
-                    )}
-                  </Box>
-                )}
-              </Box>
+              <DatasetPageHeader dataset={selectedDataset} />
               <Row
                 border={{ side: 'bottom' }}
-                margin={{
-                  top: showSharedDatasetTitleHeader ? 'none' : 'large'
-                }}
                 pad={{ bottom: setResponsive('medium', 'small') }}
               >
                 <Box>
@@ -129,7 +89,7 @@ export const Dataset = ({ query }) => {
                   margin={{ top: setResponsive('medium', 'none') }}
                 >
                   <ShareDatasetButton datasetId={idFromQuery} />
-                  {showSharedDatasetTitleHeader && (
+                  {isSharedDataset && (
                     <Button label="Download Dataset" primary responsive />
                   )}
                 </Row>
