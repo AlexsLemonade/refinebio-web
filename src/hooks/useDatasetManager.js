@@ -22,6 +22,15 @@ export const useDatasetManager = () => {
   const [loading, setLoading] = useState(false)
 
   /* Dataset */
+  const clearDataset = async (id = '') => {
+    setLoading(true)
+    const params = { data: {} }
+    const response = await api.dataset.update(id || datasetId, params)
+
+    setDataset(response)
+    setLoading(false)
+  }
+
   const createDataset = async (setCurrentDatasetId = false) => {
     const params = { data: {}, ...(email ? { email_address: email } : {}) }
     const response = await api.dataset.create(params)
@@ -34,15 +43,31 @@ export const useDatasetManager = () => {
     return response.id
   }
 
-  const getDataset = async (id = '') => {
+  const downloadDataset = async (id, downloadUrl) => {
+    let href = ''
+
+    if ((token || validateToken()) && downloadUrl) {
+      href = downloadUrl
+    } else {
+      // creates a new token and requests a download url with API-Key
+      const tokenId = await createToken()
+      const { download_url: url } = await getDataset(id, tokenId)
+      href = url
+    }
+
+    window.location.href = href
+  }
+
+  const getDataset = async (id = '', tokenId = '') => {
     if (!id && !datasetId) return null
 
     setLoading(true)
-    const headers = token
-      ? {
-          'API-KEY': token
-        }
-      : {}
+    const headers =
+      token || tokenId
+        ? {
+            'API-KEY': token || tokenId
+          }
+        : {}
 
     const response = await api.dataset.get(id || datasetId, headers)
     const formattedResponse = {
@@ -57,15 +82,6 @@ export const useDatasetManager = () => {
     setLoading(false)
 
     return formattedResponse
-  }
-
-  const clearDataset = async (id = '') => {
-    setLoading(true)
-    const params = { data: {} }
-    const response = await api.dataset.update(id || datasetId, params)
-
-    setDataset(response)
-    setLoading(false)
   }
 
   const startProcessingDataset = async (id, downloadOptions) => {
@@ -223,11 +239,12 @@ export const useDatasetManager = () => {
     datasetId,
     loading,
     token,
-    createDataset,
     clearDataset,
+    createDataset,
+    downloadDataset,
+    getDataset,
     startProcessingDataset,
     updateDataset,
-    getDataset,
     getTotalExperiments,
     removeExperiment,
     addSamples,
