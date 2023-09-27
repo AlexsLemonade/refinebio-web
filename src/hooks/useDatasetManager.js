@@ -46,7 +46,7 @@ export const useDatasetManager = () => {
   const downloadDataset = async (id, downloadUrl) => {
     let href = ''
 
-    if ((token || validateToken()) && downloadUrl) {
+    if (validateToken() && downloadUrl) {
       href = downloadUrl
     } else {
       // creates a new token and requests a download url with API-Key
