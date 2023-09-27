@@ -9,10 +9,6 @@ import { DatasetProcessing } from './DatasetProcessing'
 import { DatasetReady } from './DatasetReady'
 import { DatasetRegenerate } from './DatasetRegenerate'
 
-export const getServerSideProps = ({ query }) => {
-  return { props: { query } }
-}
-
 // Dataset page has 4 states which correspond with the backend's states
 // Processing - The download file is being created
 // Processed - The download file is ready
