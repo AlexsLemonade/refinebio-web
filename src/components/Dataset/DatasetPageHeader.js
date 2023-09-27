@@ -25,15 +25,12 @@ const Block = ({ children }) => {
 
   return (
     <FixedContainer>
-      <Box>
-        <Box
-          pad={{
-            top: setResponsive('basex6', 'basex8', 'basex14'),
-            bottom: 'large'
-          }}
-        >
-          {children}
-        </Box>
+      <Box
+        pad={{
+          vertical: setResponsive('basex6', 'basex8', 'basex14')
+        }}
+      >
+        {children}
       </Box>
     </FixedContainer>
   )
@@ -41,7 +38,6 @@ const Block = ({ children }) => {
 
 export const DatasetPageHeader = ({ dataset }) => {
   const { error, datasetId } = useDatasetManager()
-
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
 

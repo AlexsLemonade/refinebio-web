@@ -23,20 +23,12 @@ export const getServerSideProps = ({ query }) => {
   return { props: { query } }
 }
 
-// Dataset page has 4 states which correspond with the backend's states
-// Processing - The download file is being created
-// Processed - The download file is ready
-// Expired - Download files expire after some time
-// (https://github.com/AlexsLemonade/refinebio-frontend/issues/27)
-// Error = A processing error or network error
-
 // TODO: create a new issue for the error handling
 export const Dataset = ({ query }) => {
   const { dataset_id: idFromQuery, ref, start } = query
   const { dataset, datasetId, loading, getDataset } = useDatasetManager()
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
-
   const [selectedDataset, setSelectedDataset] = useState({})
   const isSharedDataset = ref === 'share' || !selectedDataset.is_processed
 
