@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Box, CheckBox, Heading, Text } from 'grommet'
-import { useRefinebio } from 'hooks/useRefinebio'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
+import { useToken } from 'hooks/useToken'
 import formatBytes from 'helpers/formatBytes'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
@@ -11,18 +12,14 @@ import { links } from 'config'
 import { DatasetExplore } from './DatasetExplore'
 
 export const DatasetReady = ({ dataset }) => {
-  const { token, setToken } = useRefinebio()
+  const { downloadDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
+  const { validateToken } = useToken()
+  const hasToken = validateToken()
+  const [termsOfUse, setTermsOfUse] = useState(hasToken)
 
-  const [agree, setAgree] = useState(!!token)
-
-  const handleAgreeToTerms = () => {
-    setAgree(!agree)
-    setToken(!token)
-  }
-
-  const handleDownloadNow = () => {
-    // TEMP
+  const handleDownloadNow = async () => {
+    await downloadDataset(dataset.id, dataset.download_url)
   }
 
   return (
@@ -49,30 +46,34 @@ export const DatasetReady = ({ dataset }) => {
                 }}
                 fill
               >
-                <CheckBox
-                  label={
-                    <Text>
-                      I agree to the{' '}
-                      <Anchor
-                        href={links.terms}
-                        label="Terms of Use"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      />
-                    </Text>
-                  }
-                  onClick={handleAgreeToTerms}
-                />
+                {!hasToken && (
+                  <CheckBox
+                    label={
+                      <Text>
+                        I agree to the{' '}
+                        <Anchor
+                          href={links.terms}
+                          label="Terms of Use"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        />
+                      </Text>
+                    }
+                    onClick={() => setTermsOfUse(!termsOfUse)}
+                  />
+                )}
                 <Box
                   margin={{
                     top: setResponsive('medium', 'small', 'none'),
-                    left: setResponsive('none', 'none', 'medium')
+                    left: hasToken
+                      ? 'none'
+                      : setResponsive('none', 'none', 'medium')
                   }}
                   width={setResponsive('100%', 'auto')}
                 >
                   <Button
                     label="Download Now"
-                    disabled={!agree || !token}
+                    disabled={!termsOfUse}
                     primary
                     responsive
                     clickHandler={handleDownloadNow}
