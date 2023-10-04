@@ -36,7 +36,7 @@ export const useDatasetManager = () => {
     setLoading(true)
     const headers = token
       ? {
-          'APT-KEY': token
+          'API-KEY': token
         }
       : {}
     const response = await api.dataset.get(id || datasetId, headers)
