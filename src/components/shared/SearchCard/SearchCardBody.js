@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Box, Heading, Paragraph, Text } from 'grommet'
-import { formatSampleMetadata } from 'helpers/dataset'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import getURLForAccessionCode from 'helpers/getURLForAccessionCode'
 import { Icon } from 'components/shared/Icon'
 import { Anchor } from 'components/shared/Anchor'
@@ -14,6 +14,7 @@ export const SearchCardBody = ({
   sampleMetadataFields = [],
   charLimit = 300
 }) => {
+  const { formatSampleMetadata } = useDatasetManager()
   const [toggleDesciption, setToggleDescription] = useState(
     description.length > charLimit
   )
