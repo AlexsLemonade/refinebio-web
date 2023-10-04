@@ -2,39 +2,39 @@ import hasSameElements from 'helpers/hasSameElements'
 import intersectArrays from 'helpers/intersectArrays'
 import unionizeArrays from 'helpers/unionizeArrays'
 // This hook is used for the dataset action buttons and compares the following datasets:
-// - data1: a data object in a user-created dataset
-// - data2: a data object in the API response selected by a user via UI
-export const useDatasetAction = (data1 = {}, data2 = {}) => {
-  // returns true if any downloadable samples in data2
+// - datasetData: a data object (added processed samples) in a user-created dataset
+// - datasetDataChanges: all processed samples in the experiment selected by a user via the search results page
+export const useDatasetAction = (datasetData = {}, datasetDataChanges = {}) => {
+  // returns true if any downloadable samples in datasetDataChanges
   const anyProcessedSamples = () =>
-    Object.values(data2).some(
+    Object.values(datasetDataChanges).some(
       (samples) =>
         (samples && samples.length > 0) ||
         (samples && samples.all && samples.total > 0)
     )
 
-  // returns true if all the processed samples in data2 were added to data1
+  // returns true if all the processed samples in datasetDataChanges were added to datasetData
   const getHasAllProcessed = () => {
     if (!anyProcessedSamples()) return false
 
-    const addedSlice = getAddedSamples()
-    return hasSameSamples(addedSlice, data2)
+    const addedSamples = getAddedSamples()
+    return hasSameSamples(addedSamples, datasetDataChanges)
   }
 
-  // returns true if any processed samples in data2 were added in data1
+  // returns true if any processed samples in datasetDataChanges were added in datasetData
   const getAnyProcessedInDataset = () =>
     Object.values(getAddedSamples()).some(
       (samples) => samples && samples.length > 0
     )
 
-  // returns the samples in data2 that were added in data1
+  // returns the samples in datasetDataChanges that were added in datasetData
   const getAddedSamples = () => getDatasetIntersection()
 
-  // returns all the samples that are in both data1 and data2
+  // returns all the samples that are in both datasetData and datasetDataChanges
   const getSamplesInDatasets = () => {
-    const addedSlice = getAddedSamples()
+    const addedSamples = getAddedSamples()
 
-    return unionizeArrays(...Object.values(addedSlice))
+    return unionizeArrays(...Object.values(addedSamples))
   }
 
   // returns true if two given datasets have the same samples, otherwise false
@@ -71,26 +71,26 @@ export const useDatasetAction = (data1 = {}, data2 = {}) => {
   const getDatasetIntersection = () => {
     const data = {}
     const experimentAccessions = intersectArrays(
-      Object.keys(data1),
-      Object.keys(data2)
+      Object.keys(datasetData),
+      Object.keys(datasetDataChanges)
     )
 
     for (const experimentAccession of experimentAccessions) {
-      if (data2[experimentAccession].all) {
-        data[experimentAccession] = data1[experimentAccession]
-      } else if (data1[experimentAccession].all) {
-        data[experimentAccession] = data2[experimentAccession]
+      if (datasetDataChanges[experimentAccession].all) {
+        data[experimentAccession] = datasetData[experimentAccession]
+      } else if (datasetData[experimentAccession].all) {
+        data[experimentAccession] = datasetDataChanges[experimentAccession]
       } else {
         data[experimentAccession] = intersectArrays(
-          data1[experimentAccession],
-          data2[experimentAccession]
+          datasetData[experimentAccession],
+          datasetDataChanges[experimentAccession]
         )
       }
     }
     return data
   }
 
-  // returns the total samples added in data1
+  // returns the total samples added in datasetData
   const getTotalSamplesInDataset = () => {
     return getSamplesInDatasets().length
   }
