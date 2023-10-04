@@ -3,7 +3,6 @@ import { Box, Heading, RadioButtonGroup } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
-import { getTotalSamples } from 'helpers/dataset'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
@@ -18,7 +17,7 @@ export const MoveToDatasetModal = ({
   closeModal,
   setValue
 }) => {
-  const { addSamples, replaceSamples } = useDatasetManager()
+  const { addSamples, getTotalSamples, replaceSamples } = useDatasetManager()
   const { setResponsive } = useResponsive()
 
   const router = useRouter()
