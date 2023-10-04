@@ -2,7 +2,7 @@ import formatNumbers from 'helpers/formatNumbers'
 import { Button } from 'components/shared/Button'
 import { InlineMessage } from 'components/shared/InlineMessage'
 
-export const AddRemainingButton = ({ dataToAdd, samplesInDataset }) => {
+export const AddRemainingDatasetButton = ({ dataToAdd, samplesInDataset }) => {
   const handleAdd = () => {} // TEMP: replace with useDatasetManager method
 
   return (
@@ -26,4 +26,4 @@ export const AddRemainingButton = ({ dataToAdd, samplesInDataset }) => {
   )
 }
 
-export default AddRemainingButton
+export default AddRemainingDatasetButton

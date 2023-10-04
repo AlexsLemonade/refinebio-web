@@ -2,7 +2,7 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useDatasetAction } from 'hooks/useDatasetAction'
 import { usePageRendered } from 'hooks/usePageRendered'
 import { Button } from 'components/shared/Button'
-import { AddRemainingButton } from './AddRemainingButton'
+import { AddRemainingDatasetButton } from './AddRemainingDatasetButton'
 import { AddToDatasetButton } from './AddToDatasetButton'
 import { RemoveDatasetButton } from './RemoveDatasetButton'
 
@@ -45,7 +45,7 @@ export const DatasetActionButton = ({
     totalSamplesInDataset() > 0
   ) {
     return (
-      <AddRemainingButton
+      <AddRemainingDatasetButton
         samplesInDataset={totalSamplesInDataset()}
         dataToAdd={data}
         // eslint-disable-next-line react/jsx-props-no-spreading
