@@ -91,7 +91,7 @@ export const useDatasetAction = (data1 = {}, data2 = {}) => {
   }
 
   // returns the total samples added in data1
-  const totalSamplesInDataset = () => {
+  const getTotalSamplesInDataset = () => {
     return getSamplesInDatasets().length
   }
 
@@ -100,6 +100,6 @@ export const useDatasetAction = (data1 = {}, data2 = {}) => {
     allProcessedInDataset,
     anyProcessedInDataset,
     getAddedSamples,
-    totalSamplesInDataset
+    getTotalSamplesInDataset
   }
 }
