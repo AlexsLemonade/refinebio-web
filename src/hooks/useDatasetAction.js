@@ -22,7 +22,7 @@ export const useDatasetAction = (data1 = {}, data2 = {}) => {
   }
 
   // returns true if any processed samples in data2 were added in data1
-  const anyProcessedInDataset = () =>
+  const getAnyProcessedInDataset = () =>
     Object.values(getAddedSamples()).some(
       (samples) => samples && samples.length > 0
     )
@@ -98,7 +98,7 @@ export const useDatasetAction = (data1 = {}, data2 = {}) => {
   return {
     anyProcessedSamples,
     getHasAllProcessed,
-    anyProcessedInDataset,
+    getAnyProcessedInDataset,
     getAddedSamples,
     getTotalSamplesInDataset
   }
