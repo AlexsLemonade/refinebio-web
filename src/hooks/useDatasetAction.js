@@ -28,7 +28,7 @@ export const useDatasetAction = (data1 = {}, data2 = {}) => {
     )
 
   // returns the samples in data2 that were added in data1
-  const getAddedSamples = () => intersectDatasets()
+  const getAddedSamples = () => getDatasetIntersection()
 
   // returns all the samples that are in both data1 and data2
   const getSamplesInDatasets = () => {
@@ -68,7 +68,7 @@ export const useDatasetAction = (data1 = {}, data2 = {}) => {
   }
 
   // returns the intersection of two given datasets
-  const intersectDatasets = () => {
+  const getDatasetIntersection = () => {
     const data = {}
     const experimentAccessions = intersectArrays(
       Object.keys(data1),
