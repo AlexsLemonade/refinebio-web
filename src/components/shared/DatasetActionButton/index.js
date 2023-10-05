@@ -9,7 +9,6 @@ import { RemoveDatasetButton } from './RemoveDatasetButton'
 
 export const DatasetActionButton = ({
   accessionCode,
-  btnType,
   data,
   downloadableSamples,
   disableAddRemaining = false,
@@ -53,7 +52,7 @@ export const DatasetActionButton = ({
     )
   }
 
-  return <AddToDatasetButton btnType={btnType} dataToAdd={data} {...props} />
+  return <AddToDatasetButton dataToAdd={data} {...props} />
 }
 
 export default DatasetActionButton
