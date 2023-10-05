@@ -5,7 +5,7 @@ import { InlineMessage } from 'components/shared/InlineMessage'
 
 export const TermsOfUseCheckBox = ({ error, touched, value, handleChange }) => {
   return (
-    <Box pad={{ top: 'medium' }} style={{ position: 'relative' }}>
+    <Box pad={{ top: 'small' }} style={{ position: 'relative' }}>
       {error && touched && (
         <Box animation={{ type: 'fadeIn', duration: 300 }}>
           <InlineMessage
@@ -14,7 +14,7 @@ export const TermsOfUseCheckBox = ({ error, touched, value, handleChange }) => {
             justify="center"
             label={error}
             iconSize="small"
-            style={{ position: 'absolute', top: '10px' }}
+            style={{ position: 'absolute', top: '2px' }}
           />
         </Box>
       )}

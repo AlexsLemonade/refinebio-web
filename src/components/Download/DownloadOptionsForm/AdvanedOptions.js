@@ -17,7 +17,9 @@ export const AdvanedOptions = ({
   const skipQuantileNormalize = !quantileNormalize
 
   useEffect(() => {
-    setToggle(skipQuantileNormalize)
+    if (setToggle) {
+      setToggle(skipQuantileNormalize)
+    }
   }, [])
 
   return (
