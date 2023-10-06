@@ -43,7 +43,6 @@ export const useDatasetManager = () => {
           'API-KEY': token
         }
       : {}
-
     const response = await api.dataset.get(id || datasetId, headers)
     const formattedResponse = {
       ...response,
@@ -81,7 +80,6 @@ export const useDatasetManager = () => {
       start: true,
       token_id: tokenId
     }
-
     const response = await updateDataset(id, params)
 
     return response
@@ -108,7 +106,7 @@ export const useDatasetManager = () => {
   // formats the sample and experiment arrays from the API response
   // to objects with experiment accession codes as their keys for UI
   const formatExperiments = (experiments = []) => {
-    if (!experiments.length) return []
+    if (!experiments.length) return {}
 
     return experiments.reduce(
       (acc, experiment) => ({
