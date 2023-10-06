@@ -44,7 +44,6 @@ export const useDatasetManager = () => {
             'API-KEY': token || tokenId
           }
         : {}
-
     const response = await api.dataset.get(id || datasetId, headers)
     const formattedResponse = {
       ...response,
