@@ -87,7 +87,7 @@ export const useDatasetManager = () => {
   // formats the sample and experiment arrays from the API response
   // to objects with experiment accession codes as their keys for UI
   const formatExperiments = (experiments = []) => {
-    if (!experiments.length) return []
+    if (!experiments.length) return {}
 
     return experiments.reduce(
       (acc, experiment) => ({
@@ -160,7 +160,7 @@ export const useDatasetManager = () => {
 
     for (const accessionCode of Object.keys(data)) {
       if (!params.data[accessionCode]) continue
-
+      
       const samplesStillSelected = differenceOfArrays(
         params.data[accessionCode],
         data[accessionCode]
