@@ -18,11 +18,17 @@ export const MoveToDatasetModal = ({
   value,
   setValue
 }) => {
-  const { loading, addSamples, getTotalSamples, replaceSamples } =
-    useDatasetManager()
+  const {
+    dataset: datasetState,
+    loading,
+    addSamples,
+    getTotalSamples,
+    replaceSamples
+  } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const { push } = useRouter()
-  const totalSamples = formatNumbers(getTotalSamples(dataset.data))
+  const totalSamples = formatNumbers(getTotalSamples(datasetState.data))
+  const newDatasetTotalSamples = formatNumbers(getTotalSamples(dataset.data))
 
   const handleMoveSamples = async (action = 'append') => {
     if (action === 'append') {
@@ -31,7 +37,7 @@ export const MoveToDatasetModal = ({
         {
           pathname,
           query: {
-            message: `Appended ${totalSamples} samples to My Dataset`,
+            message: `Appended ${newDatasetTotalSamples} samples to My Dataset`,
             status: 'success'
           }
         },
@@ -43,7 +49,7 @@ export const MoveToDatasetModal = ({
         {
           pathname,
           query: {
-            message: `Moved  ${totalSamples} samples to My Dataset`,
+            message: `Moved  ${newDatasetTotalSamples} samples to My Dataset`,
             status: 'success'
           }
         },
@@ -68,7 +74,7 @@ export const MoveToDatasetModal = ({
       <Box direction="row" gap="xsmall" margin={{ bottom: 'medium' }}>
         <Icon color="error" name="Warning" size="medium" />
         <Heading level={2} size="small">
-          There are {totalSamples}samples in{' '}
+          There are {totalSamples} samples in{' '}
           <Anchor href="/download" label="My Dataset" target="_blank" />
         </Heading>
       </Box>
