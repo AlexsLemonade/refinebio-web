@@ -87,7 +87,7 @@ export const useDatasetManager = () => {
   // formats the sample and experiment arrays from the API response
   // to objects with experiment accession codes as their keys for UI
   const formatExperiments = (experiments = []) => {
-    if (!experiments.length) return []
+    if (!experiments.length) return {}
 
     return experiments.reduce(
       (acc, experiment) => ({
