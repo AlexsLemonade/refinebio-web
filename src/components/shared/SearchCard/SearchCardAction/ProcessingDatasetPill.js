@@ -4,10 +4,10 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useModal } from 'hooks/useModal'
 import { Modal } from 'components/shared/Modal'
 import { Pill } from 'components/shared/Pill'
-import { ModalContent } from './ModalContent'
+import { ProcessingDatasetPillModal } from './ProcessingDatasetPillModal'
 
 // Showing Badge while dataset is processing
-export const ProcessingDatasetButton = ({ dataset }) => {
+export const ProcessingDatasetPill = ({ dataset }) => {
   // TEMPORARY
   const { email } = useRefinebio()
   const { datasetId } = useDatasetManager()
@@ -25,7 +25,7 @@ export const ProcessingDatasetButton = ({ dataset }) => {
       fullHeight={false}
       width="520px"
     >
-      <ModalContent
+      <ProcessingDatasetPillModal
         dataset={dataset}
         email={email || 'jone.dow@example.com'}
         closeModal={() => closeModal(id)}
@@ -34,4 +34,4 @@ export const ProcessingDatasetButton = ({ dataset }) => {
   )
 }
 
-export default ProcessingDatasetButton
+export default ProcessingDatasetPill
