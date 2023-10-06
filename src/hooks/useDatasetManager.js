@@ -160,7 +160,7 @@ export const useDatasetManager = () => {
 
     for (const accessionCode of Object.keys(data)) {
       if (!params.data[accessionCode]) continue
-      
+
       const samplesStillSelected = differenceOfArrays(
         params.data[accessionCode],
         data[accessionCode]
