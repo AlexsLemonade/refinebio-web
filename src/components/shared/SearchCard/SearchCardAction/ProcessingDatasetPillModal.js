@@ -6,7 +6,7 @@ import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { IconProcessingGears } from 'components/shared/IconProcessingGears'
 
-export const ModalContent = ({ dataset, email, closeModal }) => {
+export const ProcessingDatasetPillModal = ({ dataset, email, closeModal }) => {
   // TEMPORARY
   const { datasetId } = useDatasetManager()
   const { setResponsive } = useResponsive()
@@ -49,4 +49,4 @@ export const ModalContent = ({ dataset, email, closeModal }) => {
   )
 }
 
-export default ModalContent
+export default ProcessingDatasetPillModal
