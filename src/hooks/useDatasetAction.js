@@ -38,28 +38,34 @@ export const useDatasetAction = (datasetData = {}, datasetDataChanges = {}) => {
   }
 
   // returns true if two given datasets have the same samples, otherwise false
-  const hasSameSamples = (d1, d2) => {
-    const d1Keys = Object.keys(d1)
-    const d2Keys = Object.keys(d2)
+  const hasSameSamples = (datasetDataOne, datasetDataTwo) => {
+    const datasetDataOneKeys = Object.keys(datasetDataOne)
+    const datasetDataTwoKeys = Object.keys(datasetDataTwo)
 
-    if (!hasSameElements(d1Keys, d2Keys)) {
+    if (!hasSameElements(datasetDataOneKeys, datasetDataTwoKeys)) {
       return false
     }
 
-    for (const accession of d1Keys) {
-      if (d1[accession].all) {
-        if (d1[accession].total !== d2[accession].length) {
+    for (const accession of datasetDataOneKeys) {
+      if (datasetDataOne[accession].all) {
+        if (
+          datasetDataOne[accession].total !== datasetDataTwo[accession].length
+        ) {
           return false
         }
         continue
       }
-      if (d2[accession].all) {
-        if (d2[accession].total !== d1[accession].length) {
+      if (datasetDataTwo[accession].all) {
+        if (
+          datasetDataTwo[accession].total !== datasetDataOne[accession].length
+        ) {
           return false
         }
         continue
       }
-      if (!hasSameElements(d1[accession], d2[accession])) {
+      if (
+        !hasSameElements(datasetDataOne[accession], datasetDataTwo[accession])
+      ) {
         return false
       }
     }
