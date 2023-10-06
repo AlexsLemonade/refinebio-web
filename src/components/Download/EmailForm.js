@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation'
 import { Formik } from 'formik'
 import { Box, CheckBox, Form, Text } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
@@ -12,6 +13,7 @@ import { TextInput } from 'components/shared/TextInput'
 import { links, validationSchemas } from 'config'
 
 export const EmailForm = ({ dataset }) => {
+  const { push } = useRouter()
   const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const { DownloadEmailForm } = validationSchemas
@@ -41,9 +43,10 @@ export const EmailForm = ({ dataset }) => {
           dataset.id,
           downloadOptions
         )
-        setSubmitting(false)
 
-        return response
+        const pathname = `/dataset/${response.id}`
+        push({ pathname }, pathname)
+        setSubmitting(false)
       }}
     >
       {({
