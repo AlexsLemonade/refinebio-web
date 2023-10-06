@@ -82,7 +82,6 @@ export const useDatasetManager = () => {
       start: true,
       token_id: tokenId
     }
-
     const response = await updateDataset(id, params)
 
     return response
