@@ -9,7 +9,7 @@ export const ShowOnlyAddedSamplesFilter = ({
   updateDatasetId
 }) => {
   const { dataset } = useDatasetManager()
-  const { allProcessedInDataset, anyProcessedInDataset } = useDatasetAction(
+  const { getHasAllProcessed, getAnyProcessedInDataset } = useDatasetAction(
     dataset?.data,
     data
   )
@@ -17,7 +17,7 @@ export const ShowOnlyAddedSamplesFilter = ({
   const [showOnly, setShowOnly] = useState(false)
 
   const handleToggle = () => {
-    if (!allProcessedInDataset()) {
+    if (!getHasAllProcessed()) {
       if (!showOnly) {
         setShowOnly(true)
         updateDatasetId(dataset.id)
@@ -31,14 +31,14 @@ export const ShowOnlyAddedSamplesFilter = ({
   useEffect(() => {
     if (!showOnlyAddedSamples) return
 
-    if (dataset) setShowOnly(allProcessedInDataset())
+    if (dataset) setShowOnly(getHasAllProcessed())
   }, [dataset])
 
   return (
     <CheckBox
-      checked={showOnly || allProcessedInDataset()}
+      checked={showOnly || getHasAllProcessed()}
       label="Show only samples in current dataset"
-      disabled={!anyProcessedInDataset()}
+      disabled={!getAnyProcessedInDataset()}
       onChange={handleToggle}
     />
   )
