@@ -38,7 +38,7 @@ export const useDatasetManager = () => {
     setLoading(true)
     const headers = token
       ? {
-          'APT-KEY': token
+          'API-KEY': token
         }
       : {}
 

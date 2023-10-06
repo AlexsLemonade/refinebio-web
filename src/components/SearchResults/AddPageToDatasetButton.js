@@ -16,7 +16,6 @@ export const AddPageToDatasetButton = ({ dataToAdd }) => {
 
   return (
     <DatasetActionButton
-      btnType="secondary"
       data={downloadableSamples}
       disableAddRemaining
       label="Add Page to Dataset"
