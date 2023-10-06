@@ -132,7 +132,7 @@ export const useDatasetManager = () => {
         )
       }
     }
-    
+
     const response = await api.dataset.update(
       datasetId || (await createDataset()),
       params
