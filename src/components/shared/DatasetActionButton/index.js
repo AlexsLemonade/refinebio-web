@@ -1,15 +1,13 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useDatasetAction } from 'hooks/useDatasetAction'
 import { usePageRendered } from 'hooks/usePageRendered'
 import { Button } from 'components/shared/Button'
-import { AddRemainingButton } from './AddRemainingButton'
+import { AddRemainingDatasetButton } from './AddRemainingDatasetButton'
 import { AddToDatasetButton } from './AddToDatasetButton'
 import { RemoveDatasetButton } from './RemoveDatasetButton'
 
 export const DatasetActionButton = ({
   accessionCode,
-  btnType,
   data,
   downloadableSamples,
   disableAddRemaining = false,
@@ -21,39 +19,42 @@ export const DatasetActionButton = ({
   if (!pageRendered) return null
 
   const {
-    allProcessedInDataset,
+    getHasAllProcessed,
     anyProcessedSamples,
     getAddedSamples,
-    totalSamplesInDataset
+    getTotalSamplesInDataset
   } = useDatasetAction(dataset?.data, data)
 
+  // shows the disabled add button if no processed samples
   if (!anyProcessedSamples()) {
-    // shows the disabled add button if no processed samples
+    // eslint-disable-next-line react/jsx-props-no-spreading
     return <Button disabled {...props} />
   }
 
-  if (allProcessedInDataset()) {
-    // shows the remvove from button if all processed samples are in my dataset
+  // shows the remvove from button if all processed samples are in my dataset
+  if (getHasAllProcessed()) {
     return <RemoveDatasetButton dataToRemove={getAddedSamples()} />
   }
 
+  // shows the add remaming button if some of the processed samples are in my dataset
   if (
     !disableAddRemaining &&
     dataset?.data &&
     dataset.data[accessionCode]?.length < downloadableSamples &&
-    totalSamplesInDataset() > 0
+    getTotalSamplesInDataset() > 0
   ) {
-    // shows the add remaming button if some of the processed samples are in my dataset
     return (
-      <AddRemainingButton
-        samplesInDataset={totalSamplesInDataset()}
+      <AddRemainingDatasetButton
+        samplesInDataset={getTotalSamplesInDataset()}
         dataToAdd={data}
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       />
     )
   }
 
-  return <AddToDatasetButton btnType={btnType} dataToAdd={data} {...props} />
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <AddToDatasetButton dataToAdd={data} {...props} />
 }
 
 export default DatasetActionButton
