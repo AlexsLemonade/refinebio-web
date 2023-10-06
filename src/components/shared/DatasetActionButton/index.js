@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-/* eslint-disable react/jsx-props-no-spreading */
-=======
->>>>>>> dev
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useDatasetAction } from 'hooks/useDatasetAction'
 import { usePageRendered } from 'hooks/usePageRendered'
 import { Button } from 'components/shared/Button'
-<<<<<<< HEAD
-import { AddRemainingButton } from './AddRemainingButton'
-=======
 import { AddRemainingDatasetButton } from './AddRemainingDatasetButton'
->>>>>>> dev
 import { AddToDatasetButton } from './AddToDatasetButton'
 import { RemoveDatasetButton } from './RemoveDatasetButton'
 
