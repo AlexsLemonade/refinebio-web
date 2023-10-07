@@ -24,6 +24,7 @@ export const SearchCardAction = ({ accessionCode, downloadableSamples }) => {
         data={{
           [accessionCode]: { all: true, total: downloadableSamples }
         }}
+        primary
       />
 
       {!dataset?.is_processing && (

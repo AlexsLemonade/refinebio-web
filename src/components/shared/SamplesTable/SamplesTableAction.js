@@ -19,6 +19,7 @@ export const SamplesTableAction = ({ accessionCode, downloadableSamples }) => {
         data={{
           [accessionCode]: { all: true, total: downloadableSamples }
         }}
+        primary
       />
     </Box>
   )
