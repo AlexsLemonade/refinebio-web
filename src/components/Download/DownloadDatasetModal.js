@@ -4,6 +4,7 @@ import { Box, Form, Heading, Paragraph } from 'grommet'
 import { validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
+import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/shared/Button'
 import { AdvanedOptions } from 'components/Download/DownloadOptionsForm/AdvanedOptions'
 import { AggregateOptions } from 'components/Download/DownloadOptionsForm/AggregateOptions'
@@ -40,6 +41,11 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
         validationSchema={DownloadEmailForm}
         validateOnChange={false}
         onSubmit={async (values, { setSubmitting }) => {
+          const { emailAddress, receiveUpdates } = values
+          if (receiveUpdates) {
+            subscribeEmail(emailAddress)
+          }
+
           const response = await startProcessingDataset(dataset.id, values)
           const pathname = `/dataset/${response.id}`
           push({ pathname }, pathname)
