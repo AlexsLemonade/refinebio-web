@@ -19,10 +19,10 @@ export const DatasetActionButton = ({
   if (!pageRendered) return null
 
   const {
-    allProcessedInDataset,
+    getHasAllProcessed,
     anyProcessedSamples,
     getAddedSamples,
-    totalSamplesInDataset
+    getTotalSamplesInDataset
   } = useDatasetAction(dataset?.data, data)
 
   // shows the disabled add button if no processed samples
@@ -32,7 +32,7 @@ export const DatasetActionButton = ({
   }
 
   // shows the remvove from button if all processed samples are in my dataset
-  if (allProcessedInDataset()) {
+  if (getHasAllProcessed()) {
     return <RemoveDatasetButton dataToRemove={getAddedSamples()} />
   }
 
@@ -41,11 +41,11 @@ export const DatasetActionButton = ({
     !disableAddRemaining &&
     dataset?.data &&
     dataset.data[accessionCode]?.length < downloadableSamples &&
-    totalSamplesInDataset() > 0
+    getTotalSamplesInDataset() > 0
   ) {
     return (
       <AddRemainingDatasetButton
-        samplesInDataset={totalSamplesInDataset()}
+        samplesInDataset={getTotalSamplesInDataset()}
         dataToAdd={data}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}

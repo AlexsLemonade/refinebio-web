@@ -1,12 +1,13 @@
 import { Box, Grid, Select } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { useSearchManager } from 'hooks/useSearchManager'
-import { Button } from 'components/shared/Button'
 import { PageSizes } from 'components/shared/PageSizes'
 import { options } from 'config'
+import { AddPageToDatasetButton } from './AddPageToDatasetButton'
 import { NonDownloadableExperiment } from './SearchFilterList'
 
 export const SearchBulkActions = ({
+  results,
   pageSize,
   setPageSize,
   sortBy,
@@ -131,10 +132,11 @@ export const SearchBulkActions = ({
         </Box>
         <Box gridArea="add-page">
           <Box align={setResponsive('start', 'end')}>
-            <Button
+            <AddPageToDatasetButton
               label="Add Page to Dataset"
               secondary
               responsive={setResponsive(true, false)}
+              dataToAdd={results}
             />
           </Box>
         </Box>
