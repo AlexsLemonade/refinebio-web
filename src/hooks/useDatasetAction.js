@@ -15,7 +15,7 @@ export const useDatasetAction = (datasetData = {}, datasetDataChanges = {}) => {
     )
 
   // formats the API response to objects with experiment accession codes as their keys
-  // e.g., { GSE116436: { all: true, total:num_downloadable_samples } }
+  // e.g., { GSE116436: { all: true, total: num_downloadable_samples } }
   const getFormattedExperimentList = (experimentList) =>
     fromPairs(
       experimentList.map((experiment) => [
@@ -23,6 +23,12 @@ export const useDatasetAction = (datasetData = {}, datasetDataChanges = {}) => {
         { all: true, total: experiment.num_downloadable_samples }
       ])
     )
+
+  // formats the API response to an object with an experiment accession code as its key
+  // e.g., { GSE116436: { all: true, total: num_downloadable_samples } }
+  const getFormattedExperiment = (experimentAccessionCode, total) => ({
+    [experimentAccessionCode]: { all: true, total }
+  })
 
   // returns true if all the processed samples in datasetDataChanges were added to datasetData
   const getHasAllProcessed = () => {
@@ -114,6 +120,7 @@ export const useDatasetAction = (datasetData = {}, datasetDataChanges = {}) => {
 
   return {
     anyProcessedSamples,
+    getFormattedExperiment,
     getFormattedExperimentList,
     getHasAllProcessed,
     getAnyProcessedInDataset,
