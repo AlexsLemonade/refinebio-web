@@ -11,6 +11,8 @@ export const useRefinebio = () => {
     setDownloadOptions,
     email,
     setEmail,
+    processingExperiments,
+    setProcessingExperiments,
     token,
     setToken
   } = useContext(RefinebioContext)
@@ -24,6 +26,8 @@ export const useRefinebio = () => {
     setDownloadOptions,
     email,
     setEmail,
+    processingExperiments,
+    setProcessingExperiments,
     token,
     setToken
   }
