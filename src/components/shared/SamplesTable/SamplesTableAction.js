@@ -1,10 +1,12 @@
 import { Box } from 'grommet'
+import { useDatasetAction } from 'hooks/useDatasetAction'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { DatasetActionButton } from 'components/shared/DatasetActionButton'
 import { ProcessingDatasetPill } from 'components/shared/SearchCard/SearchCardAction'
 
 export const SamplesTableAction = ({ accessionCode, downloadableSamples }) => {
+  const { getFormattedExperiment } = useDatasetAction()
   const { dataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
 
@@ -16,9 +18,7 @@ export const SamplesTableAction = ({ accessionCode, downloadableSamples }) => {
       <DatasetActionButton
         accessionCode={accessionCode}
         downloadableSamples={downloadableSamples}
-        data={{
-          [accessionCode]: { all: true, total: downloadableSamples }
-        }}
+        data={getFormattedExperiment(accessionCode, downloadableSamples)}
         primary
       />
     </Box>
