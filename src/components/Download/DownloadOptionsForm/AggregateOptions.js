@@ -1,15 +1,11 @@
-import { useState } from 'react'
 import { Box, Select, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { Icon } from 'components/shared/Icon'
 import { links, options } from 'config'
 
-export const AggregateOptions = () => {
+export const AggregateOptions = ({ value, handleChange }) => {
   const { setResponsive } = useResponsive()
-  const [aggregateOption, setAggregateOption] = useState(
-    options.aggregation[0].value
-  )
 
   return (
     <>
@@ -31,12 +27,13 @@ export const AggregateOptions = () => {
       </Box>
       <Box margin={{ top: setResponsive('xsmall', 'none') }} width="150px">
         <Select
-          options={Object.values(options.aggregation)}
           labelKey="label"
-          value={aggregateOption}
+          name="aggregate_by"
+          options={Object.values(options.aggregation)}
+          value={value}
           valueKey={{ key: 'value', reduce: true }}
           margin={{ horizontal: 'xxsmall' }}
-          onChange={({ value: nextValue }) => setAggregateOption(nextValue)}
+          onChange={handleChange}
         />
       </Box>
     </>
