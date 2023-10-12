@@ -26,7 +26,7 @@ import { SampleMetadataCell } from './SampleMetadataCell'
 import { TitleCell } from './TitleCell'
 
 export const SamplesTable = ({
-  sampleAccessionsInExperiment,
+  experimentSampleAssociations,
   queryToAdd,
   sampleMetadataFields,
   isImmutable = false,
@@ -62,9 +62,9 @@ export const SamplesTable = ({
         Cell: ({ row: { original: sample } }) => (
           <AddRemoveCell
             experimentAccessionCodes={Object.keys(
-              sampleAccessionsInExperiment
-            ).filter((accession) =>
-              sampleAccessionsInExperiment[accession].includes(
+              experimentSampleAssociations
+            ).filter((accessionCode) =>
+              experimentSampleAssociations[accessionCode].includes(
                 sample.accession_code
               )
             )}

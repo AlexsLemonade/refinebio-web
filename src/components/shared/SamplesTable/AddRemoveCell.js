@@ -1,25 +1,29 @@
 import { memo } from 'react'
 import { Box, Text } from 'grommet'
+import apiData from 'api/api_data.json'
 import { links } from 'config'
 import { Anchor } from 'components/shared/Anchor'
-import { DatasetActionButton } from 'components/shared/DatasetActionButton'
+import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
-import cache from 'api/api_data.json' // TEMP mock for the API cache
 
+// TODO: finalize the implementation once the dataset manager (addSample/removeSample) is completed
 export const AddRemoveCell = ({ experimentAccessionCodes, sample }) => {
-  // creates an object with the experiment that containe this sample
-  // in order to update it when it's added or removed
-  // e.g., { experimentAccession: [ sampleAccessions ]}
-  const data = experimentAccessionCodes.reduce((acc, accessionCode) => {
-    acc[accessionCode] = [sample.accession_code]
+  // creates a dataset slice with all of the experiments that are referring this sample
+  // in order to update all of the experiments when it's added or removed
+  // eslint-disable-next-line no-unused-vars
+  const datasetSlice = experimentAccessionCodes.reduce(
+    (result, accessionCode) => {
+      const temp = { ...result }
+      temp[accessionCode] = [sample.accession_code]
 
-    return acc
-  }, {})
+      return temp
+    },
+    {}
+  )
 
-  // ensures the samples have qn targets associated
   if (
     !sample.is_processed ||
-    (cache.qnTargets && !cache.qnTargets[sample.organism.name])
+    (apiData.qnTargets && !apiData.qnTargets[sample.organism.name])
   ) {
     return (
       <Box direction="row" gap="xsmall">
@@ -39,14 +43,7 @@ export const AddRemoveCell = ({ experimentAccessionCodes, sample }) => {
     )
   }
 
-  return (
-    <DatasetActionButton
-      btnType="secondary"
-      data={data}
-      label="Add"
-      secondary
-    />
-  )
+  return <Button label="Add" secondary />
 }
 
 export default memo(AddRemoveCell)

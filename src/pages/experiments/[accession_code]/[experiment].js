@@ -315,7 +315,7 @@ export const Experiment = () => {
                     </Row>
                     <SamplesTableManagerContextProvider>
                       <SamplesTable
-                        sampleAccessionsInExperiment={{
+                        experimentSampleAssociations={{
                           [experiment.accession_code]: experiment.samples.map(
                             (sample) => sample.accession_code
                           )

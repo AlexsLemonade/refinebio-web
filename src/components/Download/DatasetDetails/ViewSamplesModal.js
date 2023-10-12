@@ -5,6 +5,9 @@ import formatString from 'helpers/formatString'
 import { SamplesTable } from 'components/shared/SamplesTable'
 import { TextCapitalized } from 'components/shared/TextCapitalized'
 
+// endpoints:
+// `v1/samples/?dataset_id=${datasetId}&organism__name=${organismName}`
+// e.g.) v1/samples/?dataset_id=1df2e8d0-9d28-4330-97fb-3eff67876755&organism__name=HOMO_SAPIENS&offset=0&limit=10
 export const ViewSamplesModal = ({
   dataset,
   sampleMetadataFields,
@@ -35,7 +38,7 @@ export const ViewSamplesModal = ({
       </Box>
       <SamplesTableManagerContextProvider>
         <SamplesTable
-          sampleAccessionsInExperiment={dataset}
+          experimentSampleAssociations={dataset} // TEMPORARY for demo
           queryToAdd={params}
           sampleMetadataFields={sampleMetadataFields}
           isImmutable={isImmutable}
