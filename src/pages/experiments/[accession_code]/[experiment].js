@@ -315,6 +315,12 @@ export const Experiment = () => {
                     </Row>
                     <SamplesTableManagerContextProvider>
                       <SamplesTable
+                        allSamples={{
+                          [accessionCode]: {
+                            all: true,
+                            total: experiment.num_downloadable_samples
+                          }
+                        }}
                         sampleAccessionsInExperiment={{
                           [experiment.accession_code]: experiment.samples.map(
                             (sample) => sample.accession_code
@@ -324,6 +330,7 @@ export const Experiment = () => {
                           experiment_accession_code: accessionCode
                         }}
                         sampleMetadataFields={experiment.sample_metadata}
+                        showOnlyAddedSamples
                       />
                     </SamplesTableManagerContextProvider>
                   </Box>
