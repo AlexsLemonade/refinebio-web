@@ -16,7 +16,7 @@ const Button = styled(SharedButton)`
     `}
 `
 
-export const AdvancedOptionsButton = ({ toggle, setToggle }) => {
+export const AdvancedOptionsToggle = ({ toggle, setToggle }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -50,4 +50,4 @@ export const AdvancedOptionsButton = ({ toggle, setToggle }) => {
   )
 }
 
-export default AdvancedOptionsButton
+export default AdvancedOptionsToggle
