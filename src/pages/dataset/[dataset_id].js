@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import moment from 'moment'
 import { Box, Heading } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
@@ -6,6 +7,7 @@ import { usePageRendered } from 'hooks/usePageRendered'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
+import { Spinner } from 'components/shared/Spinner'
 import {
   DatasetErrorDownloading,
   DatasetProcessing,
@@ -17,86 +19,127 @@ import {
 import {
   DatasetDetails,
   DatasetSummary,
-  FilesSummary
+  FilesSummary,
+  StartProcessing
 } from 'components/Download'
 
-// NOTE: Add the Spinner component for loading after replacing the mock with the API response
-// TEMPORARY
-// endpoint: https://api.refine.bio/v1/dataset/{datasetId}/?details=true
 export const getServerSideProps = ({ query }) => {
   return { props: { query } }
 }
 
-// Dataset page has 3 states which correspond with the backend's states
+// Dataset page has 4 states which correspond with the backend's states
 // Processing - The download file is being created
 // Processed - The download file is ready
 // Expired - Download files expire after some time
-// https://github.com/AlexsLemonade/refinebio-frontend/issues/27
+// (https://github.com/AlexsLemonade/refinebio-frontend/issues/27)
+// Error = A processing error or network error
 
+// TODO: create a new issue for the error handling
 export const Dataset = ({ query }) => {
-  const { dataset } = useDatasetManager()
-  const { dataset_id: datasetId, ref } = query
-  const isSharedDataset = ref === 'share'
+  const { error, dataset, datasetId, loading, getDataset } = useDatasetManager()
+  const { dataset_id: idFromQuery, ref, start } = query
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
-  const [data, setData] = useState(null)
+  const [selectedDataset, setSelectedDataset] = useState({})
 
   useEffect(() => {
-    if (pageRendered) {
-      setData(dataset)
+    const getSelectedDataset = async (id) => {
+      const response = await getDataset(id)
+      setSelectedDataset(response)
+      return response // once completed the dataset management epic, be sure to remove if it's not in use
     }
-  }, [pageRendered])
+
+    getSelectedDataset(idFromQuery)
+  }, [query])
+
+  if (!pageRendered) return null
+  const expiredOn = selectedDataset?.expires_on
+  const isAvailable = selectedDataset?.is_available
+  const isExpired = moment(expiredOn).isBefore(Date.now())
+  const isProcessed = selectedDataset?.is_processed
+  const isProcessing = selectedDataset?.is_processing
+  const isProcessingError = selectedDataset?.success === false // 'success' may be null
+  const isSameId = datasetId === idFromQuery
+  const isSharedDataset = ref === 'share'
+  const showSharedDatasetTitleHeader = isSharedDataset || !isProcessed
+
+  if (start) {
+    return (
+      <FixedContainer>
+        <StartProcessing idFromQuery={idFromQuery} />
+      </FixedContainer>
+    )
+  }
 
   return (
     <FixedContainer>
-      <Box
-        pad={{
-          top: isSharedDataset
-            ? 'large'
-            : setResponsive('basex6', 'basex8', 'basex14'),
-          bottom: 'large'
-        }}
-      >
-        {/* TEMPORARY START */}
-        {datasetId === 'error' && <DatasetErrorDownloading />}
-        {datasetId === 'processing' && <DatasetProcessing dataset={dataset} />}
-        {datasetId === 'ready' && <DatasetReady />}
-        {datasetId === 'regenerate' && <DatasetRegenerate />}
-        {/* TEMPORARY END */}
-      </Box>
-      {isSharedDataset && (
-        <Heading
-          level={2}
-          margin={{ bottom: setResponsive('small', 'large') }}
-          size={setResponsive('small', 'large')}
-        >
-          Shared Dataset
-        </Heading>
-      )}
-      <Row
-        border={{ side: 'bottom' }}
-        margin={{ bottom: isSharedDataset ? 'none' : 'xlarge' }}
-        pad={{ bottom: setResponsive('medium', 'small') }}
-      >
-        <Box>
-          <MoveToDatasetButton dataset={data} />
+      {loading ? (
+        <Box align="center" fill justify="center" margin={{ top: 'large' }}>
+          <Spinner />
         </Box>
-        <Row
-          gap={setResponsive('medium', 'small')}
-          margin={{ top: setResponsive('medium', 'none') }}
-        >
-          <ShareDatasetButton datasetId={datasetId} />
-          {isSharedDataset && (
-            <Button label="Download Dataset" primary responsive />
+      ) : (
+        <Box>
+          {selectedDataset?.data && (
+            <>
+              <Box
+                pad={{
+                  top: showSharedDatasetTitleHeader
+                    ? 'large'
+                    : setResponsive('basex6', 'basex8', 'basex14'),
+                  bottom: isSharedDataset ? 'medium' : 'large'
+                }}
+              >
+                {showSharedDatasetTitleHeader && (
+                  <Heading level={2} size={setResponsive('small', 'large')}>
+                    Shared Dataset
+                  </Heading>
+                )}
+                {(error || isProcessingError) && (
+                  <DatasetErrorDownloading dataset={selectedDataset} />
+                )}
+                {isProcessing && (
+                  <DatasetProcessing dataset={selectedDataset} />
+                )}
+                {isExpired ? (
+                  <DatasetRegenerate dataset={selectedDataset} />
+                ) : (
+                  <Box>
+                    {isProcessed && isAvailable && (
+                      <DatasetReady dataset={selectedDataset} />
+                    )}
+                  </Box>
+                )}
+              </Box>
+              <Row
+                border={{ side: 'bottom' }}
+                margin={{
+                  top: showSharedDatasetTitleHeader ? 'none' : 'large'
+                }}
+                pad={{ bottom: setResponsive('medium', 'small') }}
+              >
+                <Box>
+                  <MoveToDatasetButton
+                    dataset={dataset}
+                    selectedDataset={selectedDataset}
+                    disabled={isSameId}
+                  />
+                </Box>
+                <Row
+                  gap={setResponsive('medium', 'small')}
+                  margin={{ top: setResponsive('medium', 'none') }}
+                >
+                  <ShareDatasetButton datasetId={idFromQuery} />
+                  {showSharedDatasetTitleHeader && (
+                    <Button label="Download Dataset" primary responsive />
+                  )}
+                </Row>
+              </Row>
+              <FilesSummary dataset={selectedDataset} />
+              <DatasetSummary dataset={selectedDataset} />
+              <DatasetDetails dataset={selectedDataset} isImmutable />
+            </>
           )}
-        </Row>
-      </Row>
-      {data && isSharedDataset && (
-        <>
-          <FilesSummary dataset={data} />
-          <DatasetSummary dataset={data} />
-          <DatasetDetails dataset={data} isImmutable />
-        </>
+        </Box>
       )}
     </FixedContainer>
   )
