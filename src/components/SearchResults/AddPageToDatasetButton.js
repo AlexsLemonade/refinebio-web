@@ -1,9 +1,8 @@
-import { useDatasetAction } from 'hooks/useDatasetAction'
 import { useResponsive } from 'hooks/useResponsive'
+import getFormattedExperimentList from 'helpers/getFormattedExperimentList'
 import { DatasetActionButton } from 'components/shared/DatasetActionButton'
 
 export const AddPageToDatasetButton = ({ dataToAdd }) => {
-  const { getFormattedExperimentList } = useDatasetAction()
   const { setResponsive } = useResponsive()
 
   const downloadableSamples = getFormattedExperimentList(

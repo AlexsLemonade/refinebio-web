@@ -1,15 +1,14 @@
 import { memo } from 'react'
 import { Box } from 'grommet'
-import { useDatasetAction } from 'hooks/useDatasetAction'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
+import getFormattedExperiment from 'helpers/getFormattedExperiment'
 import { DatasetActionButton } from 'components/shared/DatasetActionButton'
 import { DownloadNowButton } from './DownloadNowButton'
 import { ProcessingDatasetPill } from './ProcessingDatasetPill'
 import { RequestExperimentFormButton } from './RequestExperimentFormButton'
 
 export const SearchCardAction = ({ accessionCode, downloadableSamples }) => {
-  const { getFormattedExperiment } = useDatasetAction()
   const { dataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
 
