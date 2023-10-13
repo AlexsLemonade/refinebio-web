@@ -5,12 +5,28 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 export const useOneOffExperiment = (experimentAccessionCode = null) => {
   const { processingExperiments, setProcessingExperiments } = useRefinebio()
   const { getDataset } = useDatasetManager()
+  let startTimer = false
 
   useEffect(() => {
     if (getProcessingExperiment(experimentAccessionCode)) {
-      updateProcessingExperiments()
+      refreshProcessingExperiment()
     }
   }, [])
+
+  useEffect(() => {
+    let timerId = null
+    if (!startTimer && getProcessingExperiment(experimentAccessionCode)) {
+      timerId = setInterval(() => {
+        startTimer = true
+        refreshProcessingExperiment()
+      }, 1000 * 60)
+    }
+    return () => {
+      if (startTimer) {
+        clearInterval(timerId)
+      }
+    }
+  }, [startTimer, processingExperiments])
 
   const addProcessingExperiment = (accessionCode, datasetId) => {
     setProcessingExperiments([
@@ -28,15 +44,14 @@ export const useOneOffExperiment = (experimentAccessionCode = null) => {
     return experiment
   }
 
-  const updateProcessingExperiments = async () => {
-    processingExperiments.forEach(async (experiment) => {
-      const response = await getDataset(experiment.datasetId)
-      if (!response.is_processing) {
-        setProcessingExperiments((prev) =>
-          prev.filter((item) => item.datasetId !== response.id)
-        )
-      }
-    })
+  const refreshProcessingExperiment = async () => {
+    const { datasetId } = getProcessingExperiment(experimentAccessionCode)
+    const response = await getDataset(datasetId)
+    if (!response.is_processing) {
+      setProcessingExperiments((prev) =>
+        prev.filter((item) => item.datasetId !== response.id)
+      )
+    }
   }
 
   return {
