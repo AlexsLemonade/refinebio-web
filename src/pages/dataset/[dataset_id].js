@@ -40,7 +40,7 @@ export const Dataset = ({ query }) => {
     const getSelectedDataset = async (id) => {
       const response = await getDataset(id)
       setSelectedDataset(response)
-      return response
+      return response // once completed the dataset management epic, be sure to remove if it's not in use
     }
 
     getSelectedDataset(idFromQuery)
