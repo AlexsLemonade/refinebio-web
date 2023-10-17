@@ -16,7 +16,7 @@ export const StartProcessingForm = ({ dataset }) => {
   const { push } = useRouter()
   const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const { DownloadEmailForm } = validationSchemas
+  const { StartProcessingFormSchema } = validationSchemas
 
   return (
     <Formik
@@ -25,7 +25,7 @@ export const StartProcessingForm = ({ dataset }) => {
         receiveUpdates: true,
         termsOfUse: false
       }}
-      validationSchema={DownloadEmailForm}
+      validationSchema={StartProcessingFormSchema}
       validateOnChange={false}
       onSubmit={async (values, { setSubmitting }) => {
         const { emailAddress, receiveUpdates } = values
