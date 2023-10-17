@@ -9,9 +9,9 @@ import { Button } from 'components/shared/Button'
 import { AdvanedOptions } from 'components/Download/DownloadOptionsForm/AdvanedOptions'
 import { AggregateOptions } from 'components/Download/DownloadOptionsForm/AggregateOptions'
 import { TransformationOptions } from 'components/Download/DownloadOptionsForm/TransformationOptions'
-import { EmailField } from 'components/Download/EmailForm/EmailField'
-import { ReceiveUpdatesCheckBox } from 'components/Download/EmailForm/ReceiveUpdatesCheckBox'
-import { TermsOfUseCheckBox } from 'components/Download/EmailForm/TermsOfUseCheckBox'
+import { EmailField } from 'components/Download/StartProcessingForm/EmailField'
+import { ReceiveUpdatesCheckBox } from 'components/Download/StartProcessingForm/ReceiveUpdatesCheckBox'
+import { TermsOfUseCheckBox } from 'components/Download/StartProcessingForm/TermsOfUseCheckBox'
 
 export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
   const { push } = useRouter()

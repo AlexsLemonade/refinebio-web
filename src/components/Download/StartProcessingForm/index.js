@@ -12,7 +12,7 @@ import { EmailField } from './EmailField'
 import { ReceiveUpdatesCheckBox } from './ReceiveUpdatesCheckBox'
 import { TermsOfUseCheckBox } from './TermsOfUseCheckBox'
 
-export const EmailForm = ({ dataset }) => {
+export const StartProcessingForm = ({ dataset }) => {
   const { push } = useRouter()
   const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
@@ -95,4 +95,4 @@ export const EmailForm = ({ dataset }) => {
   )
 }
 
-export default EmailForm
+export default StartProcessingForm
