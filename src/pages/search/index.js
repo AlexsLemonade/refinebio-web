@@ -23,6 +23,7 @@ import {
   SearchBulkActions,
   SearchFilterList
 } from 'components/SearchResults'
+import { ErrorPage } from 'pages/_error'
 import { options } from 'config'
 
 export const Search = (props) => {
@@ -30,6 +31,7 @@ export const Search = (props) => {
     search: { pageSizes, sortby }
   } = options
   const { query, results, accessionCodesResults } = props
+
   const {
     formatFacetNames,
     getSearchQueryParam,
@@ -47,7 +49,7 @@ export const Search = (props) => {
   const [page, setPage] = useState(Number(query.p) || 1)
   const [pageSize, setPageSize] = useState(Number(query.size) || pageSizes[0])
   const [sortBy, setSortBy] = useState(query.sortby || sortby[0].value)
-  const isResults = results.results.length > 0
+  const isResults = results?.results?.length > 0
 
   const handleClearSearchTerm = () => {
     if (query.search) {
@@ -63,6 +65,8 @@ export const Search = (props) => {
   }
 
   useEffect(() => {
+    if (!results.ok) return // TODO: create a new issue for the error handling (TEMP)
+
     if (props) {
       if (results) {
         const facetNames = formatFacetNames(Object.keys(results.facets))
@@ -108,7 +112,7 @@ export const Search = (props) => {
               submitHandler={handleSubmit}
             />
           </Box>
-
+          {results && !isResults && <ErrorPage statusCode={results.status} />}
           {results && isResults && (
             <Grid
               areas={[
@@ -223,7 +227,6 @@ export const Search = (props) => {
               </Box>
             </Grid>
           )}
-
           {results && !isResults && hasAppliedFilters() && (
             <Box direction="row">
               <SearchFilterList
@@ -236,7 +239,6 @@ export const Search = (props) => {
               </Box>
             </Box>
           )}
-
           {results && !isResults && !hasAppliedFilters() && query.search && (
             <NoSearchResults setUserSearchTerm={setUserSearchTerm} />
           )}

@@ -3,6 +3,7 @@ import getAccessionCodesQueryParam from './getAccessionCodesQueryParam'
 
 export default async (queryString) => {
   const response = await api.search.get(queryString)
+
   let accessionCodesResponse
 
   const accessionCodes = getAccessionCodesQueryParam(queryString.search)
@@ -21,5 +22,6 @@ export default async (queryString) => {
       )) || []
   }
 
-  return { response, accessionCodesResponse }
+  // TODO: create a new issue for the error handling (TEMP)
+  return response.ok ? { response, accessionCodesResponse } : { response }
 }
