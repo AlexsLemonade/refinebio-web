@@ -7,7 +7,7 @@ import { Icon } from 'components/shared/Icon'
 import { links } from 'config'
 
 export const AdvanedOptions = ({
-  datasetId,
+  id,
   values: { aggregate_by: aggregateBy, quantile_normalize: quantileNormalize },
   handleChange,
   toggle,
@@ -40,7 +40,7 @@ export const AdvanedOptions = ({
       >
         <Alert
           message="Skipping quantile normalization will make your dataset less comparable to other refine.bio data."
-          dismissableKey={`skip_quantile_normalization_${datasetId}`}
+          dismissableKey={`skip_quantile_normalization_${id}`}
         />
       </ExpandableBlock>
       <Box direction="row">

@@ -78,7 +78,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
             </Box>
             <Box>
               <AdvanedOptions
-                datasetId={dataset.id}
+                id={dataset.id}
                 values={values}
                 handleChange={handleChange}
                 toggle

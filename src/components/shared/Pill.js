@@ -18,7 +18,7 @@ export const Pill = ({
       background={status ? `${status}-bg` : background}
       direction="row"
       flex
-      pad={{ horizontal: 'xsmall', vertical: 'xxsmall' }}
+      pad={{ horizontal: 'small', vertical: 'xxsmall' }}
       round={round}
       width="max-content"
       // eslint-disable-next-line react/jsx-props-no-spreading
