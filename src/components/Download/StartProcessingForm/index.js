@@ -8,15 +8,15 @@ import { validationSchemas } from 'config'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { Row } from 'components/shared/Row'
-import { EmailField } from './EmailField'
+import { EmailTextInput } from './EmailTextInput'
 import { ReceiveUpdatesCheckBox } from './ReceiveUpdatesCheckBox'
 import { TermsOfUseCheckBox } from './TermsOfUseCheckBox'
 
-export const EmailForm = ({ dataset }) => {
+export const StartProcessingForm = ({ dataset }) => {
   const { push } = useRouter()
   const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const { DownloadEmailForm } = validationSchemas
+  const { StartProcessingFormSchema } = validationSchemas
 
   return (
     <Formik
@@ -25,7 +25,7 @@ export const EmailForm = ({ dataset }) => {
         receiveUpdates: true,
         termsOfUse: false
       }}
-      validationSchema={DownloadEmailForm}
+      validationSchema={StartProcessingFormSchema}
       validateOnChange={false}
       onSubmit={async (values, { setSubmitting }) => {
         const { emailAddress, receiveUpdates } = values
@@ -60,7 +60,7 @@ export const EmailForm = ({ dataset }) => {
         <Form onSubmit={handleSubmit}>
           <Row>
             <Column fill basis="1">
-              <EmailField
+              <EmailTextInput
                 error={errors.emailAddress}
                 touched={touched.emailAddress}
                 value={values.emailAddress}
@@ -95,4 +95,4 @@ export const EmailForm = ({ dataset }) => {
   )
 }
 
-export default EmailForm
+export default StartProcessingForm

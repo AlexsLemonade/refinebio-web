@@ -9,15 +9,15 @@ import { Button } from 'components/shared/Button'
 import { AdvanedOptions } from 'components/Download/DownloadOptionsForm/AdvanedOptions'
 import { AggregateOptions } from 'components/Download/DownloadOptionsForm/AggregateOptions'
 import { TransformationOptions } from 'components/Download/DownloadOptionsForm/TransformationOptions'
-import { EmailField } from 'components/Download/EmailForm/EmailField'
-import { ReceiveUpdatesCheckBox } from 'components/Download/EmailForm/ReceiveUpdatesCheckBox'
-import { TermsOfUseCheckBox } from 'components/Download/EmailForm/TermsOfUseCheckBox'
+import { EmailTextInput } from 'components/Download/StartProcessingForm/EmailTextInput'
+import { ReceiveUpdatesCheckBox } from 'components/Download/StartProcessingForm/ReceiveUpdatesCheckBox'
+import { TermsOfUseCheckBox } from 'components/Download/StartProcessingForm/TermsOfUseCheckBox'
 
 export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
   const { push } = useRouter()
   const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const { DownloadEmailForm } = validationSchemas
+  const { StartProcessingFormSchema } = validationSchemas
 
   return (
     <Box
@@ -38,7 +38,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
           receiveUpdates: true,
           termsOfUse: false
         }}
-        validationSchema={DownloadEmailForm}
+        validationSchema={StartProcessingFormSchema}
         validateOnChange={false}
         onSubmit={async (values, { setSubmitting }) => {
           const { emailAddress, receiveUpdates } = values
@@ -93,7 +93,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
                 </strong>
               </Paragraph>
               <Box pad={{ top: 'small' }}>
-                <EmailField
+                <EmailTextInput
                   error={errors.emailAddress}
                   touched={touched.emailAddress}
                   value={values.emailAddress}
