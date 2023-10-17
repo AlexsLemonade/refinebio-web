@@ -2,7 +2,7 @@ import { Box } from 'grommet'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { TextInput } from 'components/shared/TextInput'
 
-export const EmailField = ({ error, touched, value, handleChange }) => {
+export const EmailTextInput = ({ error, touched, value, handleChange }) => {
   return (
     <Box style={{ position: 'relative' }}>
       {error && touched && (
@@ -30,4 +30,4 @@ export const EmailField = ({ error, touched, value, handleChange }) => {
   )
 }
 
-export default EmailField
+export default EmailTextInput

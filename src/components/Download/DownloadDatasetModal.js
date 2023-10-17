@@ -9,7 +9,7 @@ import { Button } from 'components/shared/Button'
 import { AdvanedOptions } from 'components/Download/DownloadOptionsForm/AdvanedOptions'
 import { AggregateOptions } from 'components/Download/DownloadOptionsForm/AggregateOptions'
 import { TransformationOptions } from 'components/Download/DownloadOptionsForm/TransformationOptions'
-import { EmailField } from 'components/Download/StartProcessingForm/EmailField'
+import { EmailTextInput } from 'components/Download/StartProcessingForm/EmailTextInput'
 import { ReceiveUpdatesCheckBox } from 'components/Download/StartProcessingForm/ReceiveUpdatesCheckBox'
 import { TermsOfUseCheckBox } from 'components/Download/StartProcessingForm/TermsOfUseCheckBox'
 
@@ -93,7 +93,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
                 </strong>
               </Paragraph>
               <Box pad={{ top: 'small' }}>
-                <EmailField
+                <EmailTextInput
                   error={errors.emailAddress}
                   touched={touched.emailAddress}
                   value={values.emailAddress}

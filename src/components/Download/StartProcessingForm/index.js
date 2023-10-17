@@ -8,7 +8,7 @@ import { validationSchemas } from 'config'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { Row } from 'components/shared/Row'
-import { EmailField } from './EmailField'
+import { EmailTextInput } from './EmailTextInput'
 import { ReceiveUpdatesCheckBox } from './ReceiveUpdatesCheckBox'
 import { TermsOfUseCheckBox } from './TermsOfUseCheckBox'
 
@@ -60,7 +60,7 @@ export const StartProcessingForm = ({ dataset }) => {
         <Form onSubmit={handleSubmit}>
           <Row>
             <Column fill basis="1">
-              <EmailField
+              <EmailTextInput
                 error={errors.emailAddress}
                 touched={touched.emailAddress}
                 value={values.emailAddress}
