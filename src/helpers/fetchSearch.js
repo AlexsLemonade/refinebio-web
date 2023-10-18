@@ -23,5 +23,7 @@ export default async (queryString) => {
   }
 
   // TODO: create a new issue for the error handling (TEMP)
-  return response.ok ? { response, accessionCodesResponse } : { response }
+  return response.ok
+    ? { response, accessionCodesResponse }
+    : { response, accessionCodesResponse }
 }
