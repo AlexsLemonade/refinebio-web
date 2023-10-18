@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import { DatasetManagerContext } from 'contexts/DatasetManagerContext'
+import { useToken } from 'hooks/useToken'
 import differenceOfArrays from 'helpers/differenceOfArrays'
 import formatString from 'helpers/formatString'
 import isEmptyObject from 'helpers/isEmptyObject'
@@ -12,11 +13,11 @@ export const useDatasetManager = () => {
     setDataset,
     datasetId,
     setDatasetId,
-    downloadOptions,
-    setDownloadOptions,
     email,
+    setEmail,
     token
   } = useContext(DatasetManagerContext)
+  const { createToken } = useToken()
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -42,7 +43,6 @@ export const useDatasetManager = () => {
           'API-KEY': token
         }
       : {}
-
     const response = await api.dataset.get(id || datasetId, headers)
     const formattedResponse = {
       ...response,
@@ -65,6 +65,24 @@ export const useDatasetManager = () => {
 
     setDataset(response)
     setLoading(false)
+  }
+
+  const startProcessingDataset = async (id, downloadOptions) => {
+    // create a new token if none
+    const tokenId = token || (await createToken())
+    const { data, emailAddress, receiveUpdates } = downloadOptions
+    // saves the user entered email in localStorage or replace the existing one
+    setEmail(emailAddress)
+    const params = {
+      data,
+      email_address: emailAddress,
+      ...(receiveUpdates ? { email_ccdl_ok: true } : {}),
+      start: true,
+      token_id: tokenId
+    }
+    const response = await updateDataset(id, params)
+
+    return response
   }
 
   const updateDataset = async (id, params) => {
@@ -194,15 +212,16 @@ export const useDatasetManager = () => {
   }
 
   return {
+    email,
     error,
     setError,
     dataset,
     datasetId,
-    downloadOptions,
-    setDownloadOptions,
     loading,
+    token,
     createDataset,
     clearDataset,
+    startProcessingDataset,
     updateDataset,
     getDataset,
     getTotalExperiments,
