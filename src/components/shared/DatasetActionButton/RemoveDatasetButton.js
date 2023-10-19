@@ -4,14 +4,18 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { InlineMessage } from 'components/shared/InlineMessage'
 
-// eslint-disable-next-line no-unused-vars
-export const RemoveAddedButton = ({ accessionCode }) => {
-  const { loading, removeExperiment } = useDatasetManager()
+export const RemoveDatasetButton = ({ dataToRemove }) => {
+  const { loading, removeSamples } = useDatasetManager()
   const { setResponsive } = useResponsive()
 
   return (
-    <Box direction="row">
-      <InlineMessage label="Added to Dataset" color="success" />
+    <Box align="center" direction="row" wrap>
+      <InlineMessage
+        label="Added to Dataset"
+        color="success"
+        iconSize="small"
+        height="fit-content"
+      />
       <Button
         isLoading={loading}
         label="Remove"
@@ -19,10 +23,10 @@ export const RemoveAddedButton = ({ accessionCode }) => {
         linkFontSize={setResponsive('medium', 'small')}
         margin={{ left: 'xsmall' }}
         width="50px"
-        onClick={() => removeExperiment(accessionCode)}
+        onClick={() => removeSamples(dataToRemove)}
       />
     </Box>
   )
 }
 
-export default RemoveAddedButton
+export default RemoveDatasetButton

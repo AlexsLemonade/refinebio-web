@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@sentry/nextjs": "^7.12.1",
+    "formik": "^2.4.5",
     "grommet": "^2.25.3",
     "grommet-icons": "^4.8.0",
     "isomorphic-unfetch": "^4.0.2",

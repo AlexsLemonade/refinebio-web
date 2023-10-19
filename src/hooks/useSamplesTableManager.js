@@ -1,10 +1,8 @@
 import { useContext, useState } from 'react'
-import { DatasetManagerContext } from 'contexts/DatasetManagerContext'
 import { SamplesTableManagerContext } from 'contexts/SamplesTableManagerContext'
 import { api } from 'api'
 
 export const useSamplesTableManager = (queryToAdd = {}) => {
-  const { datasetId } = useContext(DatasetManagerContext) // TEMP
   const {
     config: configState,
     setConfig: setConfigState,
@@ -19,7 +17,6 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
   const [hasError, setHasError] = useState(false)
   const [tableData, setTableData] = useState([])
   const hasSamples = tableData?.results?.length > 0
-  const hasSamplesInDataset = datasetId !== null // TODO: this should check any processed samples in the dataset
   const totalPages = (tableData && tableData.count) || 0
 
   /* Common */
@@ -73,11 +70,6 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
   }
 
   /* Other */
-  // TODO: finalize the implementation once the dataset manager (addSample/removeSample) is completed
-  const addSample = (id) => id // TEMP
-
-  const removeSample = (id) => id // TEMP
-
   const getSamplesTableData = async () => {
     const {
       commonQueries: { offset, limit }
@@ -86,6 +78,7 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
       ...queryToAdd,
       offset: (samplesTable.page - 1) * samplesTable.pageSize || offset,
       limit: samplesTable.pageSize || limit,
+      ...(samplesTable.datasetId ? { dataset_id: samplesTable.datasetId } : {}),
       ...(samplesTable.filterBy ? { filter_by: samplesTable.filterBy } : {}),
       ...(samplesTable.sortBy ? { ordering: samplesTable.sortBy } : {})
     }
@@ -98,6 +91,16 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
     setHasError((response.ok && response.ok === false) || false)
     setTableData(response)
     setLoading(false)
+  }
+
+  const updateDatasetId = (newDatasetId) => {
+    if (!newDatasetId) {
+      delete samplesTable.datasetId
+    } else {
+      samplesTable.datasetId = newDatasetId
+    }
+
+    updateSamplesTableQuery(true)
   }
 
   const updateSamplesTableQuery = (reset = false) => {
@@ -118,16 +121,14 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
     setSamplesTable,
     hasError,
     hasSamples,
-    hasSamplesInDataset,
     loading,
     tableData,
     totalPages,
-    addSample,
-    removeSample,
     getSamplesTableData,
     updateFilterBy,
     updatePage,
     updatePageSize,
+    updateDatasetId,
     updateSamplesTableQuery,
     updateSortBy
   }

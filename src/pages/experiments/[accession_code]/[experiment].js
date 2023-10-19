@@ -23,9 +23,12 @@ import { PageTitle } from 'components/shared/PageTitle'
 import { Spinner } from 'components/shared/Spinner'
 import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
-import { SamplesTable, SamplesTableCTA } from 'components/shared/SamplesTable'
+import {
+  SamplesTable,
+  SamplesTableAction
+} from 'components/shared/SamplesTable'
 import { SearchCardHeader } from 'components/shared/SearchCard/SearchCardHeader'
-import { SearchCardCTAs } from 'components/shared/SearchCard/SearchCardCTAs/SearchCardCTAs'
+import { SearchCardAction } from 'components/shared/SearchCard/SearchCardAction'
 import { SearchCardMeta } from 'components/shared/SearchCard/SearchCardMeta'
 
 const InformationItemBlock = ({ condition, field, value, textNull = '' }) => (
@@ -57,11 +60,7 @@ export const Experiment = () => {
   const { setResponsive } = useResponsive()
 
   useEffect(() => {
-    if (!isReady) return
-
-    if (isReady) {
-      getExperiment(accessionCode)
-    }
+    if (isReady) getExperiment(accessionCode)
   }, [isReady])
 
   return (
@@ -127,8 +126,9 @@ export const Experiment = () => {
                       <Box
                         gridArea="ctas"
                         margin={{ top: setResponsive('none', 'large') }}
+                        align="end"
                       >
-                        <SearchCardCTAs
+                        <SearchCardAction
                           accessionCode={accessionCode}
                           downloadableSamples={
                             experiment.num_downloadable_samples
@@ -305,7 +305,8 @@ export const Experiment = () => {
                         </Heading>
                       </Column>
                       <Column>
-                        <SamplesTableCTA
+                        <SamplesTableAction
+                          accessionCode={accessionCode}
                           downloadableSamples={
                             experiment.num_downloadable_samples
                           }
@@ -314,7 +315,13 @@ export const Experiment = () => {
                     </Row>
                     <SamplesTableManagerContextProvider>
                       <SamplesTable
-                        experimentSampleAssociations={{
+                        allSamples={{
+                          [accessionCode]: {
+                            all: true,
+                            total: experiment.num_downloadable_samples
+                          }
+                        }}
+                        sampleAccessionsInExperiment={{
                           [experiment.accession_code]: experiment.samples.map(
                             (sample) => sample.accession_code
                           )
@@ -323,6 +330,7 @@ export const Experiment = () => {
                           experiment_accession_code: accessionCode
                         }}
                         sampleMetadataFields={experiment.sample_metadata}
+                        showOnlyAddedSamples
                       />
                     </SamplesTableManagerContextProvider>
                   </Box>

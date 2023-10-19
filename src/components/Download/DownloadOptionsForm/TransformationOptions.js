@@ -1,15 +1,11 @@
-import { useState } from 'react'
 import { Box, Select, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { Icon } from 'components/shared/Icon'
 import { links, options } from 'config'
 
-export const TransformationOptions = () => {
+export const TransformationOptions = ({ value, handleChange }) => {
   const { setResponsive } = useResponsive()
-  const [transformationOption, setTransformationOption] = useState(
-    options.transformation[0].value
-  )
 
   return (
     <>
@@ -39,14 +35,13 @@ export const TransformationOptions = () => {
         width="150px"
       >
         <Select
-          options={Object.values(options.transformation)}
           labelKey="label"
-          value={transformationOption}
+          name="scale_by"
+          options={Object.values(options.transformation)}
+          value={value}
           valueKey={{ key: 'value', reduce: true }}
           margin={{ horizontal: 'xxsmall' }}
-          onChange={({ value: nextValue }) =>
-            setTransformationOption(nextValue)
-          }
+          onChange={handleChange}
         />
       </Box>
     </>

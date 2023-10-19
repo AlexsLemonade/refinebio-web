@@ -6,20 +6,21 @@ import { Icon } from 'components/shared/Icon'
 import { SrOnly } from 'components/shared/SrOnly'
 
 export const Notification = () => {
-  const router = useRouter()
-  const { setResponsive } = useResponsive()
   const {
+    push,
     query: { message, status }
-  } = router
+  } = useRouter()
+  const { setResponsive } = useResponsive()
+  const defaultStatus = 'info'
 
   if (!message) return null
 
   const handleClose = () => {
-    router.push({}, '/download')
+    push({}, '/download')
   }
 
   return (
-    <Box background={status}>
+    <Box background={status || defaultStatus}>
       <FixedContainer
         align="center"
         direction="row"
@@ -34,7 +35,10 @@ export const Notification = () => {
           width="100%"
         >
           <Icon
-            name={`${status.slice(0, 1).toUpperCase() + status.slice(1)}`}
+            name={`${
+              (status || defaultStatus).slice(0, 1).toUpperCase() +
+              (status || defaultStatus).slice(1)
+            }`}
             color="white"
             size="20px"
           />
