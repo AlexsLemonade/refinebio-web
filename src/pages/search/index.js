@@ -23,7 +23,6 @@ import {
   SearchBulkActions,
   SearchFilterList
 } from 'components/SearchResults'
-import { ErrorPage } from 'pages/_error'
 import { options } from 'config'
 
 export const Search = (props) => {
@@ -65,8 +64,6 @@ export const Search = (props) => {
   }
 
   useEffect(() => {
-    if (!results.ok) return // TODO: create a new issue for the error handling (TEMP)
-
     if (props) {
       if (results) {
         const facetNames = formatFacetNames(Object.keys(results.facets))
@@ -112,7 +109,6 @@ export const Search = (props) => {
               submitHandler={handleSubmit}
             />
           </Box>
-          {results && !isResults && <ErrorPage statusCode={results.status} />}
           {results && isResults && (
             <Grid
               areas={[
