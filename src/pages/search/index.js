@@ -30,7 +30,6 @@ export const Search = (props) => {
     search: { pageSizes, sortby }
   } = options
   const { query, results, accessionCodesResults } = props
-
   const {
     formatFacetNames,
     getSearchQueryParam,

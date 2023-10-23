@@ -3,9 +3,7 @@ import getAccessionCodesQueryParam from './getAccessionCodesQueryParam'
 
 export default async (queryString) => {
   const response = await api.search.get(queryString)
-
   let accessionCodesResponse
-
   const accessionCodes = getAccessionCodesQueryParam(queryString.search)
 
   if (accessionCodes) {
