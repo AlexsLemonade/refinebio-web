@@ -5,7 +5,7 @@ import { TextInput } from 'components/shared/TextInput'
 import { TextNull } from 'components/shared/TextNull'
 import { TextRequired } from 'components/shared/TextRequired'
 
-export const MissingResultsForm = ({ closeForm, queryParam = '' }) => {
+export const RequestSearchForm = ({ closeForm, queryParam = '' }) => {
   return (
     <RequestForm
       formTitle=" Tell us what’s missing"
@@ -33,4 +33,4 @@ export const MissingResultsForm = ({ closeForm, queryParam = '' }) => {
   )
 }
 
-export default MissingResultsForm
+export default RequestSearchForm

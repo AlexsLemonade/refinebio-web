@@ -2,7 +2,7 @@ import { Box, Heading, Paragraph } from 'grommet'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
-import { MissingResultsFormButton } from './MissingResultsFormButton'
+import { RequestSearchFormButton } from './RequestSearchFormButton'
 
 export const NoMatchingResults = () => {
   const { clearAllFilters } = useSearchManager()
@@ -21,7 +21,7 @@ export const NoMatchingResults = () => {
         <Paragraph size={setResponsive('16x', '22px')}>
           Expecting a specific experiment?{' '}
         </Paragraph>
-        <MissingResultsFormButton size={setResponsive('16px', '22px')} />
+        <RequestSearchFormButton size={setResponsive('16px', '22px')} />
       </Box>
       <Paragraph size={setResponsive('16px', '22px')}>Or</Paragraph>
       <Box direction="row" gap="xsmall" margin={{ top: 'small' }}>

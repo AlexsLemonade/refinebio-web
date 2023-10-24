@@ -1,7 +1,7 @@
 import { Box, Text } from 'grommet'
-import { MissingResultsFormButton } from './MissingResultsFormButton'
+import { RequestSearchFormButton } from './RequestSearchFormButton'
 
-export const MissingResultsAlert = () => {
+export const RequestSearcFormAlert = () => {
   return (
     <Box
       animation={{ type: 'fadeIn', duration: 300 }}
@@ -14,9 +14,9 @@ export const MissingResultsAlert = () => {
       width="fit-content"
     >
       <Text> Didn't see a related experiment?</Text>
-      <MissingResultsFormButton size="16PX" />
+      <RequestSearchFormButton size="16PX" />
     </Box>
   )
 }
 
-export default MissingResultsAlert
+export default RequestSearcFormAlert
