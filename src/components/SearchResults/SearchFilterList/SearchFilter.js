@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Box, CheckBox, Heading } from 'grommet'
+import { useEffect, useState } from 'react'
+import { Box, CheckBox, Heading, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 import { useResponsive } from 'hooks/useResponsive'
 import { useSearchManager } from 'hooks/useSearchManager'
@@ -25,46 +25,70 @@ const ToggleButton = styled(sharedButton)`
 export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
   const { viewport } = useResponsive()
   const { isFilterChecked, toggleFilter } = useSearchManager()
+  const filterList = Object.entries(filterGroup).sort((a, b) => b[1] - a[1])
+  const filterListCount = filterList.length
   const maxCount = 5
-  const filterList = Object.entries(filterGroup)
-  const filterLength = filterList.length
-  const [userInput, setUserInput] = useState('')
+  const isMoreThanMaxCount = filterListCount > maxCount
+  const [filteredResult, setfilteredResult] = useState(
+    filterList.slice(0, maxCount)
+  )
   const [open, setOpen] = useState(false)
-  const formattedFilterList = filterList
-    .filter((option) =>
-      formatString(option[0]).toLowerCase().startsWith(userInput.toLowerCase())
+  const [userInput, setUserInput] = useState('')
+
+  const handleToggleFilterList = (val) => {
+    setUserInput(val)
+    setfilteredResult(() =>
+      // eslint-disable-next-line no-nested-ternary
+      val.trim() !== ''
+        ? filterList.filter((option) => {
+            return (
+              filterOption === 'platform'
+                ? formatPlatformName(cache.platforms[option[0]]) || option[0]
+                : formatString(option[0])
+            )
+              .toLowerCase()
+              .includes(val.toLowerCase())
+          })
+        : open
+        ? filterList
+        : filterList.slice(0, maxCount)
     )
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, open && !userInput ? filterList.length : maxCount)
+  }
+
+  useEffect(() => {
+    if (open && !userInput) {
+      setfilteredResult(filterList)
+    } else {
+      setfilteredResult(filterList.slice(0, maxCount))
+    }
+  }, [filterGroup, open])
 
   return (
     <>
       <Heading level={4} margin={{ bottom: 'xsmall' }} responsive={false}>
         {filterLabel}
       </Heading>
-
-      {filterLength > maxCount && (
+      {isMoreThanMaxCount && (
         <Box margin={{ bottom: 'small' }}>
           <SearchBox
             pad={{ bottom: 'xsmall' }}
             placeholder={`Filter ${filterLabel}`}
             value={userInput}
             size="small"
-            changeHandler={(e) => setUserInput(e.target.value)}
+            changeHandler={(e) => handleToggleFilterList(e.target.value)}
           />
         </Box>
       )}
-
       <TextHighlightContextProvider match={userInput}>
         <Box animation={open ? { type: 'fadeIn', duration: 1000 } : {}}>
-          {formattedFilterList.map((option, i, arr) => (
+          {filteredResult.map((option, i, arr) => (
             <Box
               key={option[0]}
               margin={{ bottom: !isLastIndex(i, arr) ? 'xsmall' : '0' }}
             >
               <CheckBox
                 label={
-                  <>
+                  <Text>
                     <TextHighlight>
                       {filterOption === 'platform'
                         ? formatPlatformName(cache.platforms[option[0]]) ||
@@ -72,7 +96,7 @@ export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
                         : formatString(option[0])}
                     </TextHighlight>{' '}
                     ({formatNumbers(option[1])})
-                  </>
+                  </Text>
                 }
                 checked={isFilterChecked(filterOption, option[0])}
                 onChange={(e) =>
@@ -88,17 +112,15 @@ export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
           ))}
         </Box>
       </TextHighlightContextProvider>
-
-      {formattedFilterList.length === 0 && <TextNull text="No match found" />}
-
-      {filterLength > maxCount && (
+      {filteredResult.length === 0 && <TextNull text="No match found" />}
+      {isMoreThanMaxCount && (
         <ToggleButton
           label={
             // eslint-disable-next-line no-nested-ternary
             open && !userInput.trim()
               ? '- See Less'
               : !open && !userInput.trim()
-              ? `+ ${filterLength - maxCount} More`
+              ? `+ ${filterListCount - maxCount} More`
               : ''
           }
           margin={{ top: 'xxsmall', left: 'medium' }}
