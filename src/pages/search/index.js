@@ -18,7 +18,6 @@ import { SearchInfoBanner } from 'components/SearchResults/SearchInfoBanner'
 import { SearchCard } from 'components/shared/SearchCard'
 import {
   MissingResultsAlert,
-  NoFilteringResults,
   NoSearchResults,
   SearchBulkActions,
   SearchFilterList
@@ -221,18 +220,6 @@ export const Search = (props) => {
                 </Box>
               </Box>
             </Grid>
-          )}
-          {results && !isResults && hasAppliedFilters() && (
-            <Box direction="row">
-              <SearchFilterList
-                facets={results.facets}
-                setToggle={setToggleFilterList}
-                style={{ height: 'auto' }}
-              />
-              <Box width="80%">
-                <NoFilteringResults />
-              </Box>
-            </Box>
           )}
           {results && !isResults && !hasAppliedFilters() && query.search && (
             <NoSearchResults setUserSearchTerm={setUserSearchTerm} />
