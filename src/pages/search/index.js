@@ -222,7 +222,10 @@ export const Search = (props) => {
             </Grid>
           )}
           {results && !isResults && !hasAppliedFilters() && query.search && (
-            <NoSearchResults setUserSearchTerm={setUserSearchTerm} />
+            <NoSearchResults
+              queryTerm={query.search}
+              setUserSearchTerm={setUserSearchTerm}
+            />
           )}
         </FixedContainer>
       </TextHighlightContextProvider>
