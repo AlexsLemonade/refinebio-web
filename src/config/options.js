@@ -37,6 +37,29 @@ export const options = {
       ARRAY_EXPRESS: 'ArrayExpress'
     }
   },
+  // setting for the request data form
+  requestDataForm: {
+    radioPediatricCancer: [
+      { label: 'Yes', value: 'Yes' },
+      { label: 'No', value: 'No' }
+    ],
+    radioPrimaryApproach: [
+      { label: 'Bench Research', value: 'Bench Research' },
+      { label: 'Computational Research', value: 'Computational Research' },
+      { label: 'Clinical Research', value: 'Clinical Research' },
+      { label: 'AI/ML Research', value: 'AI/ML Research' }
+    ]
+  },
+  // setting for the samples table
+  samplesTable: {
+    // default values for common queries
+    commonQueries: {
+      offset: 0,
+      limit: 10
+    },
+    page: 1,
+    pageSizes: [10, 20, 50]
+  },
   // setting for the search manager
   search: {
     // default values for common queries
@@ -81,16 +104,6 @@ export const options = {
         value: 'source_first_published'
       }
     ]
-  },
-  // setting for the samples table
-  samplesTable: {
-    // default values for common queries
-    commonQueries: {
-      offset: 0,
-      limit: 10
-    },
-    page: 1,
-    pageSizes: [10, 20, 50]
   },
   transformation: [
     {
