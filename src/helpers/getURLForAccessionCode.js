@@ -1,17 +1,23 @@
+import { links } from 'config'
+
 // Returns the external accession code URL based on a given accession code
 export default (accessionCode) => {
+  const {
+    accession_code_urls: { array_express: arrayExpress, ena, geo }
+  } = links
+
   if (!accessionCode) return ''
 
   if (accessionCode.startsWith('GSE')) {
-    return `https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=${accessionCode}`
+    return `${geo}${accessionCode}`
   }
 
   if (accessionCode.startsWith('RP', 1)) {
-    return `https://www.ebi.ac.uk/ena/data/view/${accessionCode}`
+    return `${ena}${accessionCode}`
   }
 
   if (accessionCode.startsWith('E-')) {
-    return `https://www.ebi.ac.uk/arrayexpress/experiments/${accessionCode}`
+    return `${arrayExpress}${accessionCode}`
   }
 
   return ''

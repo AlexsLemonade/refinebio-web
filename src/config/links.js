@@ -70,7 +70,12 @@ export const links = {
     'http://bioconductor.org/packages/release/bioc/html/tximport.html',
   bioconductor_tutorial:
     'http://bioconductor.org/packages/release/bioc/vignettes/tximport/inst/doc/tximport.html',
-  nih: 'https://www.ncbi.nlm.nih.gov/pubmed/'
+  nih: 'https://www.ncbi.nlm.nih.gov/pubmed/',
+  accession_code_urls: {
+    array_express: 'https://www.ebi.ac.uk/biostudies/arrayexpress/studies/',
+    ena: 'https://www.ebi.ac.uk/ena/data/view/',
+    geo: 'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc='
+  }
 }
 
 export default links
