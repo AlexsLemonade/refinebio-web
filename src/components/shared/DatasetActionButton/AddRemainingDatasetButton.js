@@ -21,7 +21,7 @@ export const AddRemainingDatasetButton = ({ dataToAdd, samplesInDataset }) => {
         }
         color="info"
         iconSize="small"
-        height="fit-content"
+        height="16px"
         margin={{ top: 'small' }}
       />
     </>

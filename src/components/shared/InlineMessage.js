@@ -29,18 +29,11 @@ export const InlineMessage = ({
       {...props}
     >
       {!labelOnly && (
-        <Box margin={{ right: 'xsmall' }} height="inherit">
-          <Icon
-            color={color === 'error' ? 'coral-shade-20' : color}
-            name={SVG}
-            size={iconSize}
-          />
+        <Box margin={{ right: 'xxsmall' }} height={height}>
+          <Icon color={color} name={SVG} size={iconSize} />
         </Box>
       )}
-      <Paragraph
-        color={color === 'error' ? 'coral-shade-20' : fontColor}
-        size={fontSize}
-      >
+      <Paragraph color={color || fontColor} size={fontSize}>
         {label}
       </Paragraph>
     </Box>

@@ -1,25 +1,15 @@
-import { Box, CheckBox, Text } from 'grommet'
+import { Box, Text } from 'grommet'
 import { links } from 'config'
 import { Anchor } from 'components/shared/Anchor'
-import { InlineMessage } from 'components/shared/InlineMessage'
+import { CheckBox } from 'components/shared/CheckBox'
 
 export const TermsOfUseCheckBox = ({ error, touched, value, handleChange }) => {
   return (
-    <Box pad={{ top: 'small' }} style={{ position: 'relative' }}>
-      {error && touched && (
-        <Box animation={{ type: 'fadeIn', duration: 300 }}>
-          <InlineMessage
-            color="error"
-            height="16px"
-            justify="center"
-            label={error}
-            iconSize="small"
-            style={{ position: 'absolute', top: '2px' }}
-          />
-        </Box>
-      )}
+    <Box margin={{ top: 'small' }}>
       <CheckBox
         checked={value}
+        error={error && touched}
+        errorText={error}
         label={
           <Text>
             I agree to the{' '}
