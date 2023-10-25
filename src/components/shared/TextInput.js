@@ -16,7 +16,13 @@ const CustomInput = styled(GrommetTextInput)`
     `}
 `
 
-export const TextInput = ({ error = false, errorText = '', ...props }) => {
+export const TextInput = ({
+  error = false,
+  errorText = '',
+  labelOnly = false,
+  positionTop = '-20px',
+  ...props
+}) => {
   return (
     <Box style={{ position: 'relative' }} width="100%">
       {error && (
@@ -26,8 +32,9 @@ export const TextInput = ({ error = false, errorText = '', ...props }) => {
             height="16px"
             justify="center"
             label={errorText}
+            labelOnly={labelOnly}
             iconSize="small"
-            style={{ position: 'absolute', top: '-20px' }}
+            style={{ position: 'absolute', top: positionTop }}
           />
         </Box>
       )}
