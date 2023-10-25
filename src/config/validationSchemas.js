@@ -1,4 +1,30 @@
 import * as yup from 'yup'
+import areValidAccessionCodes from 'helpers/areValidAccessionCodes'
+
+function matchesAccessionCodes() {
+  return this.test({
+    name: 'areValidAccessionCodes',
+    message: 'Please enter valid accession codes',
+    test: (value) => {
+      return areValidAccessionCodes(value)
+    }
+  })
+}
+yup.addMethod(yup.string, 'matchesAccessionCodes', matchesAccessionCodes)
+
+const RequestDataFormSchema = yup.object().shape({
+  accession_codes: yup.string().matchesAccessionCodes(),
+  approach: yup
+    .string()
+    .required('Which of these most closely describes your primary approach?'),
+  email: yup
+    .string()
+    .email('Please enter a vaild email')
+    .required('Please enter your email address'),
+  pediatric_cancer: yup
+    .string()
+    .required('Are you using this for pediatric cancer research?')
+})
 
 const StartProcessingFormSchema = yup.object().shape({
   emailAddress: yup
@@ -10,10 +36,10 @@ const StartProcessingFormSchema = yup.object().shape({
     .oneOf(
       [true],
       'Please accept our terms of use to process and download data'
-    ),
-  receiveUpdates: yup.boolean()
+    )
 })
 
 export default {
+  RequestDataFormSchema,
   StartProcessingFormSchema
 }
