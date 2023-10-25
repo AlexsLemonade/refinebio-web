@@ -1,10 +1,10 @@
 // Returns true if all accession codes in the given string (accessionCodes) are valid
 // e.g.) "GSE3303, E-MEXP-3405, SRP2422"
-export default (accessionCodes) => {
+export default (accessionCodes, regex) => {
   if (!accessionCodes) return false
 
-  const accessionCodeRegex = /^(GSE|ERP|SRP)(\d{3,6}$)|(E-[A-Z]{4}-\d{2,6}$)/i
+  const { accessionCode: re } = regex
   const accessionCodesList = accessionCodes.replace(/\s/g, '').split(/,| /i)
 
-  return accessionCodesList.every((item) => accessionCodeRegex.test(item))
+  return accessionCodesList.every((item) => re.test(item))
 }

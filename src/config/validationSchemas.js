@@ -1,19 +1,23 @@
 import * as yup from 'yup'
 import areValidAccessionCodes from 'helpers/areValidAccessionCodes'
+import { regex } from './regex'
 
 function matchesAccessionCodes() {
   return this.test({
-    name: 'areValidAccessionCodes',
+    name: 'matchesAccessionCodes',
     message: 'Please enter valid accession codes',
     test: (value) => {
-      return areValidAccessionCodes(value)
+      return areValidAccessionCodes(value, regex)
     }
   })
 }
 yup.addMethod(yup.string, 'matchesAccessionCodes', matchesAccessionCodes)
 
 const RequestDataFormSchema = yup.object().shape({
-  accession_codes: yup.string().matchesAccessionCodes(),
+  accession_codes: yup
+    .string()
+    .matchesAccessionCodes()
+    .required('Please list the experiment accession codes here'),
   approach: yup
     .string()
     .required('Which of these most closely describes your primary approach?'),
