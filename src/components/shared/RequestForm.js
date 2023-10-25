@@ -1,6 +1,5 @@
 import {
   Box,
-  CheckBox,
   Heading,
   Paragraph,
   RadioButtonGroup,
@@ -9,6 +8,7 @@ import {
 } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
+import { CheckBox } from 'components/shared/CheckBox'
 import { FormField } from 'components/shared/FormField'
 import { TextInput } from 'components/shared/TextInput'
 import { TextRequired } from 'components/shared/TextRequired'

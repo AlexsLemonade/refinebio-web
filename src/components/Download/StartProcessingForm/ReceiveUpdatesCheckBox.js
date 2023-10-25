@@ -1,4 +1,4 @@
-import { CheckBox } from 'grommet'
+import { CheckBox } from 'components/shared/CheckBox'
 
 export const ReceiveUpdatesCheckBox = ({ value, handleChange }) => {
   return (
