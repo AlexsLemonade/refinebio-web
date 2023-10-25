@@ -1,6 +1,6 @@
-import { Box, Text, TextInput as GrommetTextInput } from 'grommet'
+import { Box, TextInput as GrommetTextInput } from 'grommet'
 import styled, { css } from 'styled-components'
-import { Icon } from 'components/shared/Icon'
+import { InlineMessage } from 'components/shared/InlineMessage'
 
 const CustomInput = styled(GrommetTextInput)`
   ${({ theme, error }) =>
@@ -16,23 +16,20 @@ const CustomInput = styled(GrommetTextInput)`
     `}
 `
 
-export const TextInput = ({ error = false, hideIcon = false, ...props }) => {
+export const TextInput = ({ error = false, errorText = '', ...props }) => {
   return (
     <Box style={{ position: 'relative' }} width="100%">
       {error && (
-        <Text
-          focusable="false"
-          style={{
-            position: 'absolute',
-            top: '6px',
-            right: '6px',
-            zIndex: '1'
-          }}
-        >
-          {!hideIcon && (
-            <Icon color="coral-shade-20" name="Warning" size="small" />
-          )}
-        </Text>
+        <Box animation={{ type: 'fadeIn', duration: 300 }}>
+          <InlineMessage
+            color="error"
+            height="16px"
+            justify="center"
+            label={errorText}
+            iconSize="small"
+            style={{ position: 'absolute', top: '-20px' }}
+          />
+        </Box>
       )}
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <CustomInput error={error} {...props} />
