@@ -54,7 +54,7 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
               width={setResponsive('100%', '100%', '800px')} // to preserve the UI for the desktop view
               style={{ boxShadow: ' 0px 3px 20px rgba(0, 0, 0, 0.1)' }}
             >
-              <Heading level={1} margin={{ bottom: 'medium' }}>
+              <Heading level={1} margin={{ bottom: 'medium' }} responsive>
                 Tell us what’s missing
               </Heading>
               <FormField>
@@ -81,7 +81,12 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
                 />
                 <TextNull text="Example: GSE3303, E-MEXP-3405, SRP2422" />
               </FormField>
-              <Heading level={2} margin={{ bottom: 'xsmall' }} size="small">
+              <Heading
+                level={2}
+                margin={{ bottom: 'xsmall' }}
+                size="small"
+                responsive
+              >
                 Help us priortize your request by answering these questions
               </Heading>
               <RequestForm
