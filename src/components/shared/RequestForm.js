@@ -20,7 +20,7 @@ export const RequestForm = ({
   const {
     requestDataForm: { radioPediatricCancer, radioPrimaryApproach }
   } = options
-  const maxCharsForComments = 225
+  const maxCharsForComments = 255
 
   return (
     <Box>

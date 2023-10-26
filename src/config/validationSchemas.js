@@ -6,9 +6,7 @@ function matchesAccessionCodes() {
   return this.test({
     name: 'matchesAccessionCodes',
     message: 'Please enter valid accession codes',
-    test: (value) => {
-      return areValidAccessionCodes(value, regex)
-    }
+    test: (value) => areValidAccessionCodes(value, regex)
   })
 }
 yup.addMethod(yup.string, 'matchesAccessionCodes', matchesAccessionCodes)

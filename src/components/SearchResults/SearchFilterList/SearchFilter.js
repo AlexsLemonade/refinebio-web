@@ -30,7 +30,7 @@ export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
   const filterListCount = filterList.length
   const maxCount = 5
   const isMoreThanMaxCount = filterListCount > maxCount
-  const [filteredResult, setfilteredResult] = useState(
+  const [filteredResults, setFilteredResults] = useState(
     filterList.slice(0, maxCount)
   )
   const [open, setOpen] = useState(false)
@@ -38,7 +38,7 @@ export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
 
   const handleToggleFilterList = (val) => {
     setUserInput(val)
-    setfilteredResult(() =>
+    setFilteredResults(() =>
       // eslint-disable-next-line no-nested-ternary
       val.trim() !== ''
         ? filterList.filter((option) => {
@@ -58,9 +58,9 @@ export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
 
   useEffect(() => {
     if (open && !userInput) {
-      setfilteredResult(filterList)
+      setFilteredResults(filterList)
     } else {
-      setfilteredResult(filterList.slice(0, maxCount))
+      setFilteredResults(filterList.slice(0, maxCount))
     }
   }, [filterGroup, open])
 
@@ -82,7 +82,7 @@ export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
       )}
       <TextHighlightContextProvider match={userInput}>
         <Box animation={open ? { type: 'fadeIn', duration: 1000 } : {}}>
-          {filteredResult.map((option, i, arr) => (
+          {filteredResults.map((option, i, arr) => (
             <Box
               key={option[0]}
               margin={{ bottom: !isLastIndex(i, arr) ? 'xsmall' : '0' }}
@@ -113,7 +113,7 @@ export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
           ))}
         </Box>
       </TextHighlightContextProvider>
-      {filteredResult.length === 0 && <TextNull text="No match found" />}
+      {filteredResults.length === 0 && <TextNull text="No match found" />}
       {isMoreThanMaxCount && (
         <ToggleButton
           label={

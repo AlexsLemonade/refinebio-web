@@ -1,6 +1,6 @@
 import { api } from 'api'
 import getAccessionCodesQueryParam from './getAccessionCodesQueryParam'
-import getUniqElementBy from './getUniqElementBy'
+import getUniqElementsBy from './getUniqElementsBy'
 
 export default async (queryString) => {
   const response = await api.search.get(queryString)
@@ -28,7 +28,7 @@ export default async (queryString) => {
 
     if (matchedAccessionCodes.length > 0) {
       // removes duplicates due to multiple requests for fetching accession codes
-      results = getUniqElementBy(
+      results = getUniqElementsBy(
         [...matchedAccessionCodes, ...results],
         (x) => x.accession_code
       )
