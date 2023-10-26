@@ -41,15 +41,14 @@ export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
     setFilteredResults(() =>
       // eslint-disable-next-line no-nested-ternary
       val.trim() !== ''
-        ? filterList.filter((option) => {
-            return (
-              filterOption === 'platform'
-                ? formatPlatformName(cache.platforms[option[0]]) || option[0]
-                : formatString(option[0])
+        ? filterList.filter((option) =>
+            (filterOption === 'platform'
+              ? formatPlatformName(cache.platforms[option[0]]) || option[0]
+              : formatString(option[0])
             )
               .toLowerCase()
               .includes(val.toLowerCase())
-          })
+          )
         : open
         ? filterList
         : filterList.slice(0, maxCount)
