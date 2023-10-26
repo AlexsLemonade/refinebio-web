@@ -36,7 +36,8 @@
     "regenerator-runtime": "^0.13.11",
     "sitemap": "^7.1.1",
     "styled-components": "^5.3.5",
-    "tsparticles": "^2.9.3"
+    "tsparticles": "^2.9.3",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",

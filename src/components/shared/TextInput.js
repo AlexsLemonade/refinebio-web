@@ -16,7 +16,7 @@ const CustomInput = styled(GrommetTextInput)`
     `}
 `
 
-export const TextInput = ({ error = false, ...props }) => {
+export const TextInput = ({ error = false, hideIcon = false, ...props }) => {
   return (
     <Box style={{ position: 'relative' }} width="100%">
       {error && (
@@ -29,7 +29,9 @@ export const TextInput = ({ error = false, ...props }) => {
             zIndex: '1'
           }}
         >
-          <Icon color="coral-shade-20" name="Warning" size="small" />
+          {!hideIcon && (
+            <Icon color="coral-shade-20" name="Warning" size="small" />
+          )}
         </Text>
       )}
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}

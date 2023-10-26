@@ -12,6 +12,7 @@ export const DatasetManagerContextProvider = ({ children }) => {
     setDownloadOptions: setDownloadOptionsState,
     setDatasetId: setDatasetIdState,
     email: emailState,
+    setEmail: setEmailState,
     token: tokenState
   } = useRefinebio()
 
@@ -22,6 +23,7 @@ export const DatasetManagerContextProvider = ({ children }) => {
   const setDownloadOptions = setDownloadOptionsState
   const setDatasetId = setDatasetIdState
   const email = emailState
+  const setEmail = setEmailState
   const token = tokenState
 
   const value = useMemo(
@@ -33,6 +35,7 @@ export const DatasetManagerContextProvider = ({ children }) => {
       downloadOptions,
       setDownloadOptions,
       email,
+      setEmail,
       token
     }),
     [
@@ -43,6 +46,7 @@ export const DatasetManagerContextProvider = ({ children }) => {
       downloadOptions,
       setDownloadOptions,
       email,
+      setEmail,
       token
     ]
   )
