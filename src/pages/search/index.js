@@ -180,20 +180,21 @@ export const Search = (props) => {
                     result.isMatchedAccessionCode ? (
                       <Fragment key={result.id}>
                         <SearchCard key={result.id} result={result} />
-                        {!results[i + 1].isMatchedAccessionCode && (
-                          <Box
-                            border={{ color: 'gray-shade-5', side: 'top' }}
-                            margin={{ vertical: 'large' }}
-                            style={{ position: 'relative' }}
-                          >
-                            <Heading
-                              level={3}
-                              style={{ position: 'absolute', top: '-12px' }}
+                        {results[i + 1] &&
+                          !results[i + 1].isMatchedAccessionCode && (
+                            <Box
+                              border={{ color: 'gray-shade-5', side: 'top' }}
+                              margin={{ vertical: 'large' }}
+                              style={{ position: 'relative' }}
                             >
-                              Related Results for '{query.search}'
-                            </Heading>
-                          </Box>
-                        )}
+                              <Heading
+                                level={3}
+                                style={{ position: 'absolute', top: '-12px' }}
+                              >
+                                Related Results for '{query.search}'
+                              </Heading>
+                            </Box>
+                          )}
                       </Fragment>
                     ) : (
                       <SearchCard key={result.id} result={result} />
