@@ -88,6 +88,7 @@ export const RequestForm = ({
           touched={touched.email}
           type="email"
           value={values.email}
+          width={{ max: '520px' }}
           onChange={handleChange}
         />
         <Box margin={{ vertical: 'xsmall' }}>

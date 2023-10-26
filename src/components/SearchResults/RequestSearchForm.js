@@ -77,6 +77,7 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
                   positionTop="-40px"
                   touched={touched.accession_codes}
                   values={values.accession_codes}
+                  width={{ max: '520px' }}
                   onChange={handleChange}
                 />
                 <TextNull text="Example: GSE3303, E-MEXP-3405, SRP2422" />
@@ -106,14 +107,14 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
         <Box
           aria-hidden
           background={{
-            image: 'url(/lamp-illustration.svg)',
+            image: 'url(/illustration-lamp.svg)',
             position: 'center',
             repeat: 'no-repeat',
             size: 'contain'
           }}
-          margin={{ right: setResponsive('none', 'large') }}
+          margin={{ right: 'large' }}
           // to preserve the width image
-          width={setResponsive('150px', '250px')}
+          width="250px"
         />
       )}
     </Box>
