@@ -1,10 +1,9 @@
 import { memo } from 'react'
 import { Box, Text } from 'grommet'
-import { links } from 'config'
+import { cache, links } from 'config'
 import { Anchor } from 'components/shared/Anchor'
 import { DatasetActionButton } from 'components/shared/DatasetActionButton'
 import { Icon } from 'components/shared/Icon'
-import cache from 'api/api_data.json' // TEMP mock for the API cache
 
 export const AddRemoveCell = ({ experimentAccessionCodes, sample }) => {
   // creates an object with the experiment that containe this sample

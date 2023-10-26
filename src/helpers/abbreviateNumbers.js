@@ -2,7 +2,7 @@
 // (original) https://stackoverflow.com/q/2692323
 export default (number, decPlace = 1) => {
   const decValue = 10 ** decPlace
-  const abbrev = ['k', 'm', 'b', 't']
+  const abbrev = ['K', 'M', 'B', 'T']
   let count = abbrev.length - 1
   let temp = number
 
