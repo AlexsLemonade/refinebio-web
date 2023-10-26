@@ -9,6 +9,7 @@ import { SamplesTableManagerContextProvider } from 'contexts/SamplesTableManager
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import { links } from 'config'
 import formatNumbers from 'helpers/formatNumbers'
+import { getFormattedExperiment } from 'helpers/formatDatasetAction'
 import getURLForAccessionCode from 'helpers/getURLForAccessionCode'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
@@ -315,12 +316,10 @@ export const Experiment = () => {
                     </Row>
                     <SamplesTableManagerContextProvider>
                       <SamplesTable
-                        allSamples={{
-                          [accessionCode]: {
-                            all: true,
-                            total: experiment.num_downloadable_samples
-                          }
-                        }}
+                        allSamples={getFormattedExperiment(
+                          accessionCode,
+                          experiment.num_downloadable_samples
+                        )}
                         sampleAccessionsInExperiment={{
                           [experiment.accession_code]: experiment.samples.map(
                             (sample) => sample.accession_code
