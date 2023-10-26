@@ -9,7 +9,7 @@ import { SamplesTableManagerContextProvider } from 'contexts/SamplesTableManager
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import { links } from 'config'
 import formatNumbers from 'helpers/formatNumbers'
-import getFormattedExperiment from 'helpers/getFormattedExperiment'
+import { getFormattedExperiment } from 'helpers/formatDatasetAction'
 import getURLForAccessionCode from 'helpers/getURLForAccessionCode'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'

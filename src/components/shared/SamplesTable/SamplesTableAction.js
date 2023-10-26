@@ -1,7 +1,7 @@
 import { Box } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
-import getFormattedExperiment from 'helpers/getFormattedExperiment'
+import { getFormattedExperiment } from 'helpers/formatDatasetAction'
 import { DatasetActionButton } from 'components/shared/DatasetActionButton'
 import { ProcessingDatasetPill } from 'components/shared/SearchCard/SearchCardAction'
 
