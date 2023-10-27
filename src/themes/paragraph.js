@@ -20,7 +20,7 @@ export default {
   extend: () => `
      max-width: none;
      + p {
-        margin-top: 16px;
+        margin-top: 8px;
      }
   `
 }
