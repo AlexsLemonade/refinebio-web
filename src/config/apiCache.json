@@ -1,6 +1,6 @@
 {
   "version": "0.0.0",
-  "xSourceRevision": "1.42.67-hotfix",
+  "xSourceRevision": "1.45.27-hotfix",
   "platforms": {
     "IonTorrentS5": "Ion Torrent S5",
     "ovigene10st": "[OviGene-1_0-st] Ovine Gene 1.1 ST Array",
@@ -333,6 +333,7 @@
     "GPL1519": "Soll albicans",
     "GPL6844": "FHCRC miRNA Array v1.8.1",
     "GPL19574": "Candida albicans MI-CA-8.2k",
+    "NextSeq2000": "NextSeq 2000",
     "GPL9128": "Agilent-014693 Human Genome CGH Microarray 244A (Probe name version)",
     "GPL16385": "Agilent-020166 Candida albicans 8 x 15k Custom Expression Array",
     "GPL9471": "Candida albicans 27.6K genome array",
