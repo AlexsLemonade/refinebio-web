@@ -14,6 +14,7 @@ const List = styled(ShardList)`
 
 export const Terms = () => {
   const lastUpdated = 'March 2, 2018'
+
   return (
     <PageStatic pageTitle="Terms of Use -">
       <Heading
