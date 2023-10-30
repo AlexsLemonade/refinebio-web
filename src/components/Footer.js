@@ -77,7 +77,7 @@ export const Footer = () => {
               >
                 <Button
                   gap="xxsmall"
-                  href={links.donate}
+                  href={links.ccdl_donate}
                   label="Fund the CCDL"
                   icon={<CoinIcon aria-hidden />}
                   primary
@@ -172,7 +172,7 @@ export const Footer = () => {
             <Anchor
               color={anchorColor}
               label="BDS 3-Clause License"
-              href="license"
+              href="/license"
             />
             <Anchor color={anchorColor} label="Privacy" href="/privacy" />
             <Anchor color={anchorColor} label="Terms of Use" href="/terms" />

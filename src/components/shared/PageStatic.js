@@ -3,7 +3,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { PageTitle } from 'components/shared/PageTitle'
 
-export const PageStatic = ({ pageTitle, children }) => {
+export const PageStatic = ({ pageTitle, width = '800px', children }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -15,7 +15,7 @@ export const PageStatic = ({ pageTitle, children }) => {
         }}
         pad={{ horizontal: setResponsive('small', 'medium', 'none') }}
       >
-        <FixedContainer width="800px">{children}</FixedContainer>
+        <FixedContainer width={width}>{children}</FixedContainer>
       </Box>
     </>
   )
