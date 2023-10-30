@@ -53,7 +53,7 @@ export const XScrollIndicator = ({
               top: '50%',
               transform: 'translateY(-50%)'
             }}
-            clickHandler={() => handleScroll(-200)}
+            onClick={() => handleScroll(-200)}
           />
         </Box>
       )}
@@ -89,7 +89,7 @@ export const XScrollIndicator = ({
             top: '50%',
             transform: 'translateY(-50%)'
           }}
-          clickHandler={() => handleScroll(200)}
+          onClick={() => handleScroll(200)}
         />
       </Box>
     </>

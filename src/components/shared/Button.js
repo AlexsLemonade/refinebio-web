@@ -131,7 +131,6 @@ export const Button = ({
   underlineOnHover = false,
   uppercase = false,
   width,
-  clickHandler,
   ...props
 }) => {
   const { viewport, setResponsive } = useResponsive()
@@ -166,7 +165,6 @@ export const Button = ({
             textDecoration
           }}
           underlineOnHover={underlineOnHover}
-          onClick={clickHandler}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...props}
         />
@@ -193,7 +191,6 @@ export const Button = ({
           uppercase={uppercase}
           viewport={viewport}
           width={width}
-          onClick={clickHandler}
           pad={setResponsive(
             {
               vertical: 'xxsmall',

@@ -14,7 +14,7 @@ export const ExpandTableButton = ({ tableExpanded, setTableExpanded }) => {
       gap="xsmall"
       label={tableExpanded ? 'Collaspe Table' : 'Expand Table'}
       style={{ fontWeight: 700, paddingRight: 0 }}
-      clickHandler={() => setTableExpanded(!tableExpanded)}
+      onClick={() => setTableExpanded(!tableExpanded)}
     />
   )
 }

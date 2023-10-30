@@ -101,9 +101,9 @@ export const Search = (props) => {
               size="large"
               value={userSearchTerm}
               responsive
-              clickHandler={handleClearSearchTerm}
-              changeHandler={(e) => setUserSearchTerm(e.target.value)}
-              submitHandler={handleSubmit}
+              onClick={handleClearSearchTerm}
+              onChange={(e) => setUserSearchTerm(e.target.value)}
+              onSubmit={handleSubmit}
             />
           </Box>
           {isResults && (

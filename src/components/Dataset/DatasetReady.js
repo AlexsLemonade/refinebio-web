@@ -77,7 +77,7 @@ export const DatasetReady = ({ dataset }) => {
                     disabled={!termsOfUse}
                     primary
                     responsive
-                    clickHandler={handleDownloadNow}
+                    onClick={handleDownloadNow}
                   />
                 </Box>
               </Row>

@@ -75,7 +75,7 @@ export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
             placeholder={`Filter ${filterLabel}`}
             value={userInput}
             size="small"
-            changeHandler={(e) => handleToggleFilterList(e.target.value)}
+            onChange={(e) => handleToggleFilterList(e.target.value)}
           />
         </Box>
       )}

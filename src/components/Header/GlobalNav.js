@@ -38,11 +38,11 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   return (
     <>
       {viewport === 'small' && (
-        <NavIcon light={light} toggle={toggle} clickHandler={handleClick} />
+        <NavIcon light={light} toggle={toggle} onClick={handleClick} />
       )}
       <LayerResponsive position="right" show={toggle}>
         {viewport === 'small' && (
-          <NavIcon light={light} toggle={toggle} clickHandler={handleClick} />
+          <NavIcon light={light} toggle={toggle} onClick={handleClick} />
         )}
         <Nav
           align="center"
@@ -60,10 +60,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
           width={setResponsive('100vw', 'auto')}
         >
           {viewport === 'small' && (
-            <LogoAnchor
-              margin={{ vertical: 'large' }}
-              clickHandler={handleClick}
-            />
+            <LogoAnchor margin={{ vertical: 'large' }} onClick={handleClick} />
           )}
           <List
             alignItems={setResponsive('start', 'center')}
@@ -81,7 +78,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 light={light}
                 href="/search"
                 viewport={viewport}
-                clickHandler={handleClick}
+                onClick={handleClick}
               />
             </Box>
             <Box
@@ -108,7 +105,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                       light={light}
                       href="/compendia/normalized"
                       viewport={viewport}
-                      clickHandler={handleClick}
+                      onClick={handleClick}
                     />
                     <NavLink
                       active={isMatchPath(asPath, '/compendia/rna-seq')}
@@ -116,7 +113,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                       light={light}
                       href="/compendia/rna-seq"
                       viewport={viewport}
-                      clickHandler={handleClick}
+                      onClick={handleClick}
                     />
                   </Box>
                 </>
@@ -138,7 +135,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 href={links.refinebio_docs}
                 rel="noopener noreferrer"
                 viewport={viewport}
-                clickHandler={handleClick}
+                onClick={handleClick}
               />
             </Box>
             <Box
@@ -152,7 +149,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 label="About"
                 href="/about"
                 viewport={viewport}
-                clickHandler={() => handleClick()}
+                onClick={() => handleClick()}
               />
             </Box>
             <Box

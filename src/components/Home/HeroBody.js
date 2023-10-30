@@ -35,9 +35,9 @@ export const HeroBody = () => {
         size="large"
         primary
         responsive
-        clickHandler={() => setUserInput('')}
-        changeHandler={(e) => setUserInput(e.target.value)}
-        submitHandler={handleSubmit}
+        onClick={() => setUserInput('')}
+        onChange={(e) => setUserInput(e.target.value)}
+        onSubmit={handleSubmit}
       />
       <Box
         align={setResponsive('center', 'start')}
