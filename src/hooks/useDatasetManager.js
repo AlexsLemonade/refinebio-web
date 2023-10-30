@@ -17,7 +17,7 @@ export const useDatasetManager = () => {
     setEmail,
     token
   } = useContext(DatasetManagerContext)
-  const { createToken, resetToken, validateToken } = useToken()
+  const { resetToken, validateToken } = useToken()
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -69,9 +69,7 @@ export const useDatasetManager = () => {
 
   const startProcessingDataset = async (id, downloadOptions) => {
     // validate the existing token or create a new token if none
-    const tokenId = !validateToken()
-      ? await resetToken()
-      : token || (await createToken())
+    const tokenId = !validateToken() ? await resetToken() : token
     const { data, emailAddress, receiveUpdates } = downloadOptions
     // saves the user entered email in localStorage or replace the existing one
     setEmail(emailAddress)
