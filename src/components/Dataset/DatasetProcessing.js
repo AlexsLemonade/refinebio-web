@@ -1,4 +1,5 @@
 import { Box, Heading, Paragraph } from 'grommet'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Column } from 'components/shared/Column'
 import { IconProcessingGears } from 'components/shared/IconProcessingGears'
@@ -7,27 +8,25 @@ import { DatasetExplore } from './DatasetExplore'
 
 export const DatasetProcessing = ({ dataset }) => {
   const { setResponsive } = useResponsive()
+  const { email } = useDatasetManager()
 
   return (
     <>
       <Box align="center">
         <Row justify="center" width={setResponsive('100%', '80%', '50%')}>
-          <Column
-            align={setResponsive('center', 'start')}
-            flexValue={setResponsive('1 1 auto', 'auto')}
-          >
+          <Column align={setResponsive('center', 'start')}>
             <Heading level={1} margin={{ bottom: 'small' }}>
               Your dataset is being processed
             </Heading>
             <Paragraph>
               An email with a download link will be sent to{' '}
-              <strong>{dataset?.email_address || 'jdoe@example.com'}</strong>{' '}
-              when the dataset is ready or you can come back to this page later.
+              <strong>{email}</strong> when the dataset is ready or you can come
+              back to this page later.
             </Paragraph>
           </Column>
           <Column
             align="center"
-            flexValue={setResponsive('1 1 auto', 'auto')}
+            basis="1"
             margin={{
               top: setResponsive('xlarge', 'none'),
               left: setResponsive('none', 'basex13')

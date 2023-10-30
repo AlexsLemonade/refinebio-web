@@ -29,10 +29,7 @@ export const DatasetReady = ({ dataset }) => {
     <>
       <Box align="center">
         <Row justify="center" width={setResponsive('100%', '70%')}>
-          <Column
-            align={setResponsive('center', 'start')}
-            flexValue={setResponsive('1 1 auto', 'auto')}
-          >
+          <Column align={setResponsive('center', 'start')}>
             <Heading level={1} margin={{ bottom: 'small' }}>
               Your Dataset is ready for download!
             </Heading>
@@ -89,8 +86,7 @@ export const DatasetReady = ({ dataset }) => {
             flexValue={setResponsive('1 1 auto', 'auto')}
             margin={{
               top: setResponsive('large', 'none'),
-              bottom: setResponsive('large', 'none'),
-              left: setResponsive('none', 'medium', 'basex13')
+              bottom: setResponsive('large', 'none')
             }}
           >
             <Box

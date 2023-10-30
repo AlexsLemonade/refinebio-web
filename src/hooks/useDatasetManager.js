@@ -34,15 +34,16 @@ export const useDatasetManager = () => {
     return response.id
   }
 
-  const getDataset = async (id = '') => {
+  const getDataset = async (id = '', tokenId = '') => {
     if (!id && !datasetId) return null
 
     setLoading(true)
-    const headers = token
-      ? {
-          'API-KEY': token
-        }
-      : {}
+    const headers =
+      token || tokenId
+        ? {
+            'API-KEY': token || tokenId
+          }
+        : {}
     const response = await api.dataset.get(id || datasetId, headers)
     const formattedResponse = {
       ...response,
@@ -67,20 +68,35 @@ export const useDatasetManager = () => {
     setLoading(false)
   }
 
-  const startProcessingDataset = async (id, downloadOptions) => {
+  const startProcessingDataset = async (id, options) => {
+    const isCurrentDatasetId = id === datasetId
     // validate the existing token or create a new token if none
     const tokenId = validateToken() ? token : await resetToken()
-    const { data, emailAddress, receiveUpdates } = downloadOptions
-    // saves the user entered email in localStorage or replace the existing one
-    setEmail(emailAddress)
+    const { data, emailAddress, receiveUpdates } = options
     const params = {
       data,
       email_address: emailAddress,
+      ...(options.aggregate_by ? { aggregate_by: options.aggregate_by } : {}),
+      ...(options.scale_by ? { scale_by: options.scale_by } : {}),
+      ...(options.aggregate_by ? { aggregate_by: options.aggregate_by } : {}),
+      ...(options.quantile_normalize
+        ? { quantile_normalize: options.quantile_normalize }
+        : {}),
       ...(receiveUpdates ? { email_ccdl_ok: true } : {}),
       start: true,
       token_id: tokenId
     }
-    const response = await updateDataset(id, params)
+    const response = await updateDataset(
+      isCurrentDatasetId ? id : await createDataset(),
+      params
+    )
+    // saves the user's newly entered email or replace the existing one
+    setEmail(emailAddress)
+    // deletes the locally saved dataset data once it has started processing (no longer mutable)
+    if (isCurrentDatasetId) {
+      setDataset({})
+      setDatasetId(null)
+    }
 
     return response
   }
