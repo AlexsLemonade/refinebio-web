@@ -60,6 +60,9 @@ const getSitemapUrlsForResources = async (...resources) => {
 
         if (!resourceInfo.count) {
           resourceInfo.count = response.count
+        }
+
+        if (!resourceInfo.runAt) {
           resourceInfo.runAt = new Date()
         }
 
