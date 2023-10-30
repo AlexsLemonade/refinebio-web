@@ -1,6 +1,9 @@
 import { Box, Heading, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
+import abbreviateNumbers from 'helpers/abbreviateNumbers'
+import formatBytes from 'helpers/formatBytes'
 import formatNumbers from 'helpers/formatNumbers'
+import { cache } from 'config'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Hero as SharedHero } from 'components/shared/Hero'
 
@@ -35,7 +38,7 @@ const Block = ({ count, text }) => {
         {count}
       </Text>
       <Text size={setResponsive('medium', 'large')} textAlign="center">
-        {count} {text}
+        {text}
       </Text>
     </Box>
   )
@@ -43,12 +46,11 @@ const Block = ({ count, text }) => {
 
 const HeroBody = () => {
   const { setResponsive } = useResponsive()
-  // TEMP
-  const data = {
-    gene_count: 60000,
-    sample_count: 1.5,
-    organism_count: 3,
-    raw_data_count: 11.7
+  const apiCache = {
+    availableSamples: abbreviateNumbers(cache.statsAbout.samples_available),
+    processedExperiment: formatNumbers(cache.statsAbout.experiments_processed),
+    supportedOrganism: abbreviateNumbers(cache.statsAbout.supported_organisms),
+    totalSize: formatBytes(cache.statsAbout.total_size_in_bytes, 1)
   }
 
   return (
@@ -59,7 +61,7 @@ const HeroBody = () => {
         size={setResponsive('small', 'large')}
         textAlign="center"
       >
-        refine.bio has harmonized over {formatNumbers(data.gene_count)} gene
+        refine.bio has harmonized over {apiCache.processedExperiment} gene
         expression experiments
       </Heading>
 
@@ -70,16 +72,16 @@ const HeroBody = () => {
         width="100%"
       >
         <Block
-          count={`${data.sample_count}M`}
-          text="million samples available"
+          count={apiCache.availableSamples}
+          text={`${apiCache.availableSamples} samples available`}
         />
         <Block
-          count={`${data.organism_count}K`}
-          text="Support for 3000 organisms"
+          count={apiCache.supportedOrganism}
+          text={`Support for ${apiCache.supportedOrganism} organisms`}
         />
         <Block
-          count={`${data.raw_data_count} TB`}
-          text="terabytes of raw data processed"
+          count={apiCache.totalSize}
+          text={`${apiCache.totalSize} of raw data processed`}
         />
       </Box>
     </>
