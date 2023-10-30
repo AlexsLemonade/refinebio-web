@@ -2,13 +2,14 @@ import { Formik } from 'formik'
 import { Box, CheckBox, Form, Text } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
+import subscribeEmail from 'helpers/subscribeEmail'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { Row } from 'components/shared/Row'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { TextInput } from 'components/shared/TextInput'
-import { validationSchemas, links } from 'config'
+import { links, validationSchemas } from 'config'
 
 export const EmailForm = ({ dataset }) => {
   const { email, startProcessingDataset } = useDatasetManager()
@@ -25,21 +26,24 @@ export const EmailForm = ({ dataset }) => {
       validationSchema={DownloadEmailForm}
       validateOnChange={false}
       onSubmit={async (values, { setSubmitting }) => {
-        // TEMP for testing
-        await new Promise((resolve) => {
-          setTimeout(() => {
-            resolve()
-            setSubmitting(false)
-          }, 2000)
-        })
-
+        const { emailAddress, receiveUpdates } = values
         const downloadOptions = {
           data: dataset.data,
-          emailAddress: values.emailAddress,
-          receiveUpdates: values.receiveUpdates
+          emailAddress,
+          receiveUpdates
         }
 
-        startProcessingDataset(dataset.id, downloadOptions)
+        if (receiveUpdates) {
+          subscribeEmail(emailAddress)
+        }
+
+        const response = await startProcessingDataset(
+          dataset.id,
+          downloadOptions
+        )
+        setSubmitting(false)
+
+        return response
       }}
     >
       {({

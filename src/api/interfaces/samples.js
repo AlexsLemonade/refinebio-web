@@ -1,4 +1,4 @@
-import http from 'api/http'
+import http from 'helpers/http'
 
 const url = 'samples/'
 
