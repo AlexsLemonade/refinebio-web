@@ -17,11 +17,20 @@ export const useDatasetManager = () => {
     setEmail,
     token
   } = useContext(DatasetManagerContext)
-  const { resetToken, validateToken } = useToken()
+  const { createToken, resetToken, validateToken } = useToken()
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
 
   /* Dataset */
+  const clearDataset = async (id = '') => {
+    setLoading(true)
+    const params = { data: {} }
+    const response = await api.dataset.update(id || datasetId, params)
+
+    setDataset(response)
+    setLoading(false)
+  }
+
   const createDataset = async (setCurrentDatasetId = false) => {
     const params = { data: {}, ...(email ? { email_address: email } : {}) }
     const response = await api.dataset.create(params)
@@ -32,6 +41,21 @@ export const useDatasetManager = () => {
     }
 
     return response.id
+  }
+
+  const downloadDataset = async (id, downloadUrl) => {
+    let href = ''
+
+    if (validateToken() && downloadUrl) {
+      href = downloadUrl
+    } else {
+      // creates a new token and requests a download url with API-Key
+      const tokenId = await createToken()
+      const { download_url: url } = await getDataset(id, tokenId)
+      href = url
+    }
+
+    window.location.href = href
   }
 
   const getDataset = async (id = '', tokenId = '') => {
@@ -57,15 +81,6 @@ export const useDatasetManager = () => {
     setLoading(false)
 
     return formattedResponse
-  }
-
-  const clearDataset = async (id = '') => {
-    setLoading(true)
-    const params = { data: {} }
-    const response = await api.dataset.update(id || datasetId, params)
-
-    setDataset(response)
-    setLoading(false)
   }
 
   const startProcessingDataset = async (id, options) => {
@@ -235,11 +250,12 @@ export const useDatasetManager = () => {
     datasetId,
     loading,
     token,
-    createDataset,
     clearDataset,
+    createDataset,
+    downloadDataset,
+    getDataset,
     startProcessingDataset,
     updateDataset,
-    getDataset,
     getTotalExperiments,
     removeExperiment,
     addSamples,

@@ -23,7 +23,7 @@ export const EmailForm = ({ dataset }) => {
       initialValues={{
         emailAddress: email || '',
         receiveUpdates: true,
-        termsOfService: false
+        termsOfUse: false
       }}
       validationSchema={DownloadEmailForm}
       validateOnChange={false}
@@ -95,20 +95,20 @@ export const EmailForm = ({ dataset }) => {
             />
           </Row>
           <Box pad={{ top: 'medium' }} style={{ position: 'relative' }}>
-            {errors.termsOfService && touched.termsOfService && (
+            {errors.termsOfUse && touched.termsOfUse && (
               <Box animation={{ type: 'fadeIn', duration: 300 }}>
                 <InlineMessage
                   color="error"
                   height="16px"
                   justify="center"
-                  label={errors.termsOfService}
+                  label={errors.termsOfUse}
                   iconSize="small"
                   style={{ position: 'absolute', top: '10px' }}
                 />
               </Box>
             )}
             <CheckBox
-              checked={values.termsOfService}
+              checked={values.termsOfUse}
               label={
                 <Text>
                   I agree to the{' '}
@@ -120,7 +120,7 @@ export const EmailForm = ({ dataset }) => {
                   />
                 </Text>
               }
-              name="termsOfService"
+              name="termsOfUse"
               onChange={handleChange}
             />
             <CheckBox

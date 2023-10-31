@@ -5,7 +5,7 @@ const DownloadEmailForm = yup.object().shape({
     .string()
     .email('Please enter a vaild email')
     .required('Please enter your email address'),
-  termsOfService: yup
+  termsOfUse: yup
     .boolean()
     .oneOf(
       [true],
