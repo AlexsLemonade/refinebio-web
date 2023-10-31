@@ -43,7 +43,7 @@ export const useOneOffExperiment = (experimentAccessionCode = null) => {
   const getProcessingExperiment = (accessionCode) => {
     if (!accessionCode || !processingExperiments.length) return null
 
-    const [experiment] = processingExperiments.filter(
+    const experiment = processingExperiments.find(
       (item) => item.accessionCode === accessionCode
     )
     return experiment
