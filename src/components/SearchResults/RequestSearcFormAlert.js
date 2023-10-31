@@ -14,7 +14,7 @@ export const RequestSearcFormAlert = () => {
       width="fit-content"
     >
       <Text> Didn't see a related experiment?</Text>
-      <RequestSearchFormButton size="16PX" />
+      <RequestSearchFormButton size="16px" />
     </Box>
   )
 }
