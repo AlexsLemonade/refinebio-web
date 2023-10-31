@@ -1,5 +1,6 @@
 import { Box } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
+import { getFormattedExperiment } from 'helpers/formatDatasetAction'
 import { DatasetActionButton } from 'components/shared/DatasetActionButton'
 
 export const SamplesTableAction = ({ accessionCode, downloadableSamples }) => {
@@ -12,9 +13,7 @@ export const SamplesTableAction = ({ accessionCode, downloadableSamples }) => {
       <DatasetActionButton
         accessionCode={accessionCode}
         downloadableSamples={downloadableSamples}
-        data={{
-          [accessionCode]: { all: true, total: downloadableSamples }
-        }}
+        data={getFormattedExperiment(accessionCode, downloadableSamples)}
         primary
       />
     </Box>

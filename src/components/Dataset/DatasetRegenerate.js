@@ -8,7 +8,7 @@ import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
-import { links } from 'config'
+import { cache, links } from 'config'
 
 export const DatasetRegenerate = () => {
   const {
@@ -50,6 +50,16 @@ export const DatasetRegenerate = () => {
     getSelectedDataset(idFromQuery)
   }, [idFromQuery])
 
+  // returns true if there's a difference between the two minor versions given
+  const isMinorVersionChange = (v1, v2) => {
+    if (!v1 || !v2) return false
+    const regex = /\.\d+\./gm
+    const v1Match = v1.match(regex)
+    const v2Match = v2.match(regex)
+    if (!v1Match || !v2Match) return false
+    return v1Match[0] !== v2Match[0]
+  }
+
   return (
     <Box align="center">
       <Row justify="center" width={setResponsive('100%', '70%')}>
@@ -72,28 +82,32 @@ export const DatasetRegenerate = () => {
               responsive
               onClick={handleRegenerateFiles}
             />
-            <Box margin={{ top: 'small' }}>
-              <InlineMessage
-                color="info"
-                fontSize="medium"
-                margin={{
-                  right: 'xsmall',
-                  bottom: setResponsive('xsmall', 'xsmall', 'none')
-                }}
-                label={
-                  <>
-                    Some expression values may differ.{' '}
-                    <Anchor
-                      href={links.refinebio_docs_why_expression_values_differ}
-                      label="Learn Why"
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    />
-                  </>
-                }
-                name="Info"
-              />
-            </Box>
+            {isMinorVersionChange(
+              cache.xSourceRevision,
+              selectedDataset?.worker_version
+            ) && (
+              <Box margin={{ top: 'small' }}>
+                <InlineMessage
+                  color="info"
+                  fontSize="medium"
+                  margin={{
+                    right: 'xsmall',
+                    bottom: setResponsive('xsmall', 'xsmall', 'none')
+                  }}
+                  label={
+                    <>
+                      Some expression values may differ.{' '}
+                      <Anchor
+                        href={links.refinebio_docs_why_expression_values_differ}
+                        label="Learn Why"
+                        rel="noopener noreferrer"
+                      />
+                    </>
+                  }
+                  name="Info"
+                />
+              </Box>
+            )}
           </Box>
         </Column>
         <Column

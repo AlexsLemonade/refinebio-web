@@ -8,12 +8,12 @@ import formatNumbers from 'helpers/formatNumbers'
 import formatPlatformName from 'helpers/formatPlatformName'
 import formatString from 'helpers/formatString'
 import isLastIndex from 'helpers/isLastIndex'
+import { cache } from 'config'
 import { Button as sharedButton } from 'components/shared/Button'
 import { CheckBox } from 'components/shared/CheckBox'
 import { SearchBox } from 'components/shared/SearchBox'
 import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
-import cache from 'api/api_data.json'
 
 const ToggleButton = styled(sharedButton)`
   border-bottom: 1px solid transparent;
