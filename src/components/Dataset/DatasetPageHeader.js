@@ -33,7 +33,7 @@ const Block = ({ children }) => {
 }
 
 export const DatasetPageHeader = ({ dataset }) => {
-  const { error, datasetId } = useDatasetManager()
+  const { error } = useDatasetManager()
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
 
@@ -45,7 +45,6 @@ export const DatasetPageHeader = ({ dataset }) => {
   const isProcessed = dataset?.is_processed
   const isProcessing = dataset?.is_processing
   const isProcessingError = dataset?.success === false // 'success' may be null
-  const isSharedDataset = datasetId !== dataset.id
 
   if (isProcessingError || error) {
     return (
@@ -82,17 +81,10 @@ export const DatasetPageHeader = ({ dataset }) => {
     <FixedContainer pad="none">
       <Box>
         {dataset?.data && (
-          <Box
-            pad={{
-              top: isSharedDataset ? 'large' : 'none',
-              bottom: isSharedDataset ? 'medium' : 'large'
-            }}
-          >
-            {isSharedDataset && (
-              <Heading level={2} size={setResponsive('small', 'large')}>
-                Shared Dataset
-              </Heading>
-            )}
+          <Box pad={{ top: 'large', bottom: 'medium' }}>
+            <Heading level={2} size={setResponsive('small', 'large')}>
+              Shared Dataset
+            </Heading>
           </Box>
         )}
       </Box>
