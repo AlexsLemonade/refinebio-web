@@ -47,23 +47,15 @@ export const DatasetPageHeader = ({ dataset }) => {
   const isProcessingError = dataset?.success === false // 'success' may be null
   const isSharedDataset = datasetId !== dataset.id
 
-  if (isExpired) {
+  if (isProcessingError || error) {
     return (
       <Block>
-        <DatasetRegenerate dataset={dataset} />
+        <DatasetProcessingError dataset={dataset} />
       </Block>
     )
   }
 
-  if (isProcessed && isAvailable) {
-    return (
-      <Block>
-        <DatasetReady dataset={dataset} />
-      </Block>
-    )
-  }
-
-  if (isProcessing && !isProcessingError) {
+  if (isProcessing) {
     return (
       <Block>
         <DatasetProcessing dataset={dataset} />
@@ -71,10 +63,17 @@ export const DatasetPageHeader = ({ dataset }) => {
     )
   }
 
-  if (isProcessingError || error) {
+  if (isProcessed) {
+    if (isAvailable && !isExpired) {
+      return (
+        <Block>
+          <DatasetReady dataset={dataset} />
+        </Block>
+      )
+    }
     return (
       <Block>
-        <DatasetProcessingError dataset={dataset} />
+        <DatasetRegenerate dataset={dataset} />
       </Block>
     )
   }
