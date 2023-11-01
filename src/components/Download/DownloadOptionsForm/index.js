@@ -20,7 +20,9 @@ export const DownloadOptionsForm = ({
   const { dataset: datasetState, updateDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const selectedDataset = dataset || datasetState
-  const [toggleAdvancedOption, setToggleAdvancedOption] = useState(false)
+  const [toggleAdvancedOption, setToggleAdvancedOption] = useState(
+    selectedDataset.quantile_normalize
+  )
 
   const handleSubmitForm = async (downloadOptions) => {
     let pathname = '/download'
@@ -89,8 +91,7 @@ export const DownloadOptionsForm = ({
                   datasetId={selectedDataset.id}
                   values={values}
                   handleChange={handleChange}
-                  toggle={toggleAdvancedOption}
-                  setToggle={setToggleAdvancedOption}
+                  toggle={!toggleAdvancedOption}
                 />
               </Box>
               <Button
