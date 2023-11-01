@@ -60,14 +60,15 @@ const IconToggle = styled(Box)`
     `}
 `
 
-export const NavIcon = ({ light, toggle, clickHandler }) => {
+export const NavIcon = ({ light, toggle, ...props }) => {
   return (
     <IconToggle
       light={light}
       toggle={toggle}
       role="button"
       style={{ boxShadow: 'none' }}
-      onClick={clickHandler}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     >
       <Box as="span" />
       <SrOnly

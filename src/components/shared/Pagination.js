@@ -131,7 +131,7 @@ export const Pagination = ({
           label="Previous"
           icon={<Icon name="ChevronLeft" size="xsmall" />}
           style={{ padding: '2px 4px' }}
-          clickHandler={previousPage}
+          onClick={previousPage}
         />
         {pageNumbers.map((pageNumber) =>
           pageNumber === '...' ? (
@@ -142,7 +142,7 @@ export const Pagination = ({
               label={pageNumber}
               key={pageNumber}
               style={{ padding: '2px 4px' }}
-              clickHandler={() => gotoPage(pageNumber)}
+              onClick={() => gotoPage(pageNumber)}
             />
           )
         )}
@@ -153,7 +153,7 @@ export const Pagination = ({
           icon={<Icon name="ChevronRight" size="xsmall" />}
           reverse
           style={{ padding: '2px 4px' }}
-          clickHandler={nextPage}
+          onClick={nextPage}
         />
       </Box>
       <Box

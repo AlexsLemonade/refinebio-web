@@ -42,14 +42,13 @@ const Li = styled(Box)`
   `}
 `
 
-const ListItem = ({ active, href, label, clickHandler, ...props }) => {
+const ListItem = ({ active, href, label, ...props }) => {
   return (
     <Li
       as="li"
       active={active}
       role="none"
       style={{ listStyle: 'none' }}
-      onClick={clickHandler}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
@@ -131,7 +130,7 @@ export const NavDropDown = ({ active, light }) => {
                 active={isMatchPath(asPath, menuItem.path)}
                 href={menuItem.path}
                 label={menuItem.label}
-                clickHandler={handleClick}
+                onClick={handleClick}
               />
             ))}
           </List>

@@ -14,11 +14,11 @@ export const SearchBox = ({
   reverse = true,
   size = 'medium',
   value = '',
-  blurHandler,
-  changeHandler,
-  clickHandler,
-  focusHandler,
-  submitHandler
+  onBlur,
+  onChange,
+  onClick,
+  onFocus,
+  onSubmit
 }) => {
   const { viewport, setResponsive } = useResponsive()
   return (
@@ -34,7 +34,7 @@ export const SearchBox = ({
         htmlFor="search"
         role="search"
         style={{ width: '100%' }}
-        onSubmit={submitHandler}
+        onSubmit={onSubmit}
       >
         <Box
           direction={responsive && viewport === 'small' ? 'column' : 'row'}
@@ -57,9 +57,9 @@ export const SearchBox = ({
                 type="search"
                 reverse={reverse}
                 value={value}
-                onBlur={blurHandler}
-                onChange={changeHandler}
-                onFocus={focusHandler}
+                onBlur={onBlur}
+                onChange={onChange}
+                onFocus={onFocus}
               />
             ) : (
               <TextInput
@@ -71,9 +71,9 @@ export const SearchBox = ({
                   padding: size === 'large' ? '22px' : '16px'
                 }}
                 value={value}
-                onBlur={blurHandler}
-                onChange={changeHandler}
-                onFocus={focusHandler}
+                onBlur={onBlur}
+                onChange={onChange}
+                onFocus={onFocus}
               />
             )}
             {value && size === 'large' && (
@@ -85,7 +85,7 @@ export const SearchBox = ({
                   right: setResponsive('16px', '16px'),
                   top: '16px'
                 }}
-                onClick={clickHandler}
+                onClick={onClick}
               >
                 <Icon name="Close" size="16px" />
                 <SrOnly>Clear text</SrOnly>

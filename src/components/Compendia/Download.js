@@ -43,7 +43,7 @@ const DropDownButton = styled(Button)`
   `}
 `
 
-const ListItem = ({ label, selectedOrganism, clickHandler }) => {
+const ListItem = ({ label, selectedOrganism, ...props }) => {
   const selected = selectedOrganism === label
 
   return (
@@ -60,7 +60,8 @@ const ListItem = ({ label, selectedOrganism, clickHandler }) => {
           padding: '8px 16px',
           textAlign: 'left'
         }}
-        clickHandler={clickHandler}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
       />
     </Box>
   )
@@ -169,8 +170,8 @@ export const Download = ({ type }) => {
               reverse={false}
               responsive
               value={userInput}
-              changeHandler={(e) => handleChange(e.target.value)}
-              focusHandler={handleFocus}
+              onChange={(e) => handleChange(e.target.value)}
+              onFocus={handleFocus}
             />
             {showOptions && filteredOptions.length > 0 && (
               <Box
@@ -196,7 +197,7 @@ export const Download = ({ type }) => {
                           ? formatString(selectedOrganism.primary_organism_name)
                           : null
                       }
-                      clickHandler={() => handleClick(option)}
+                      onClick={() => handleClick(option)}
                     />
                   ))}
                 </List>
@@ -237,7 +238,7 @@ export const Download = ({ type }) => {
             disabled={!acceptTerms || !selectedOrganism}
             primary
             responsive
-            clickHandler={() => handleFileDownload(selectedOrganism.id)}
+            onClick={() => handleFileDownload(selectedOrganism.id)}
           />
         </Column>
       </Row>

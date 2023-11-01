@@ -56,22 +56,7 @@ const Anchor = styled(SharedAnchor)`
     `}
 `
 
-export const NavLink = ({
-  active,
-  label,
-  light,
-  href,
-  viewport,
-  clickHandler
-}) => {
-  return (
-    <Anchor
-      active={active}
-      label={label}
-      light={light}
-      href={href}
-      viewport={viewport}
-      onClick={clickHandler}
-    />
-  )
+export const NavLink = ({ active, light, viewport, ...props }) => {
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <Anchor active={active} light={light} viewport={viewport} {...props} />
 }
