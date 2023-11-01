@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Box, Heading } from 'grommet'
 import { Alert } from 'components/shared/Alert'
 import { Anchor } from 'components/shared/Anchor'
@@ -12,16 +11,9 @@ export const AdvanedOptions = ({
   values: { aggregate_by: aggregateBy, quantile_normalize: quantileNormalize },
   handleChange,
   toggle,
-  setToggle,
   hideLabel = false
 }) => {
   const skipQuantileNormalize = !quantileNormalize
-
-  useEffect(() => {
-    if (setToggle) {
-      setToggle(skipQuantileNormalize)
-    }
-  }, [])
 
   return (
     <ExpandableBlock
