@@ -72,7 +72,7 @@ export const CCDL = () => {
           width={setResponsive('100%', 'auto')}
         >
           <Button
-            href={links.donate}
+            href={links.ccdl_donate}
             label="Donate Now"
             large
             primary

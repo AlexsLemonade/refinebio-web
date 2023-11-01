@@ -94,29 +94,31 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 <>
                   <Box
                     alignSelf="start"
-                    pad={{ vertical: 'medium' }}
+                    pad={{ vertical: 'small' }}
                     margin={{ horizontal: 'xlarge' }}
                   >
                     <Text size="large">
                       Compendia <Icon name="ChevronDown" size="xsmall" />
                     </Text>
                   </Box>
-                  <NavLink
-                    active={isMatchPath(asPath, '/compendia/normalized')}
-                    label="Normalized Compendia"
-                    light={light}
-                    href="/compendia/normalized"
-                    viewport={viewport}
-                    clickHandler={handleClick}
-                  />
-                  <NavLink
-                    active={isMatchPath(asPath, '/compendia/rna-seq')}
-                    label="RNA-seq Sample Compendia"
-                    light={light}
-                    href="/compendia/rna-seq"
-                    viewport={viewport}
-                    clickHandler={handleClick}
-                  />
+                  <Box pad={{ horizontal: 'small' }}>
+                    <NavLink
+                      active={isMatchPath(asPath, '/compendia/normalized')}
+                      label="Normalized Compendia"
+                      light={light}
+                      href="/compendia/normalized"
+                      viewport={viewport}
+                      clickHandler={handleClick}
+                    />
+                    <NavLink
+                      active={isMatchPath(asPath, '/compendia/rna-seq')}
+                      label="RNA-seq Sample Compendia"
+                      light={light}
+                      href="/compendia/rna-seq"
+                      viewport={viewport}
+                      clickHandler={handleClick}
+                    />
+                  </Box>
                 </>
               ) : (
                 <NavDropDown
@@ -126,7 +128,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
               )}
             </Box>
             <Box
-              margin={{ left: 'small' }}
+              margin={{ left: setResponsive('none', 'small') }}
               viewport={viewport}
               width={setResponsive('90%', 'auto')}
             >
@@ -140,7 +142,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
               />
             </Box>
             <Box
-              margin={{ left: 'small' }}
+              margin={{ left: setResponsive('none', 'small') }}
               viewport={viewport}
               width={setResponsive('90%', 'auto')}
             >

@@ -35,6 +35,7 @@ const GithubLink = styled(Anchor)`
 
 export const Footer = () => {
   const { setResponsive } = useResponsive()
+  const anchorColor = 'gray-shade-40'
 
   return (
     <GrommentFooter
@@ -76,7 +77,7 @@ export const Footer = () => {
               >
                 <Button
                   gap="xxsmall"
-                  href={links.donate}
+                  href={links.ccdl_donate}
                   label="Fund the CCDL"
                   icon={<CoinIcon aria-hidden />}
                   primary
@@ -85,16 +86,16 @@ export const Footer = () => {
                 />
                 <Box align="center" direction="row" gap="medium">
                   <TwitterLink
-                    color="gray-shade-40"
-                    href={links.ccdlTwitter}
+                    color={anchorColor}
+                    href={links.ccdl_twitter}
                     icon={<Icon link name="Twitter" />}
                     margin={{ horizontal: setResponsive('xsmall', 'none') }}
                     pad="0"
                     rel="noopener noreferrer"
                   />
                   <GithubLink
-                    color="gray-shade-40"
-                    href={links.ccdlGithub}
+                    color={anchorColor}
+                    href={links.ccdl_github}
                     icon={<Icon link name="Github" />}
                     pad="0"
                     rel="noopener noreferrer"
@@ -169,29 +170,21 @@ export const Footer = () => {
         >
           <Row gap="medium">
             <Anchor
-              color="gray-shade-40"
+              color={anchorColor}
               label="BDS 3-Clause License"
-              href={links.license}
+              href="/license"
             />
+            <Anchor color={anchorColor} label="Privacy" href="/privacy" />
+            <Anchor color={anchorColor} label="Terms of Use" href="/terms" />
             <Anchor
-              color="gray-shade-40"
-              label="Privacy"
-              href={links.privacy}
-            />
-            <Anchor
-              color="gray-shade-40"
-              label="Terms of Use"
-              href={links.terms}
-            />
-            <Anchor
-              color="gray-shade-40"
+              color={anchorColor}
               label="Contact"
-              href={`mailto:${links.email_request}`}
+              href={`mailto:${links.email_request_ccdl}`}
             />
           </Row>
           {cache.version && cache.xSourceRevision && (
             <Box margin={{ top: setResponsive('small', 'none') }}>
-              <Text color="gray-shade-40" size="xsmall">
+              <Text color={anchorColor} size="xsmall">
                 Version {cache.xSourceRevision} - {cache.version.slice(1)}
               </Text>
             </Box>

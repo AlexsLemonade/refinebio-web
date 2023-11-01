@@ -22,8 +22,8 @@ export const DatasetProcessingError = ({ dataset }) => {
           <Paragraph>
             Please contact{' '}
             <Anchor
-              label={links.email_request}
-              href={`mailto:${links.email_request}`}
+              label={links.email_request_ccdl}
+              href={`mailto:${links.email_request_ccdl}`}
             />
             {!dataset?.failure_reason && '.'}
             {dataset?.failure_reason && (
