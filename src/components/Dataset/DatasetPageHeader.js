@@ -54,7 +54,7 @@ export const DatasetPageHeader = ({ dataset }) => {
     )
   }
 
-  if (isProcessing) {
+  if (isProcessing && !isProcessingError) {
     return (
       <Block>
         <DatasetProcessing dataset={dataset} />
