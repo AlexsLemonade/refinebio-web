@@ -243,7 +243,6 @@ Search.getInitialProps = async (ctx) => {
       }
     }
   } = options
-
   const queryString = {
     ...getSearchQueryForAPI(query),
     limit: query.size || Number(limit),
@@ -254,7 +253,11 @@ Search.getInitialProps = async (ctx) => {
       ? Number(numDownloadableSamples.hide)
       : Number(numDownloadableSamples.show)
   }
-  const { facets, results, totalResults } = await fetchSearch(queryString)
+
+  const { facets, results, totalResults } = await fetchSearch(
+    queryString,
+    Number(query.p) || 1
+  )
 
   return {
     pathname,

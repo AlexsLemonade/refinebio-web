@@ -2,13 +2,14 @@ import { api } from 'api'
 import getAccessionCodesQueryParam from './getAccessionCodesQueryParam'
 import getUniqElementsBy from './getUniqElementsBy'
 
-export default async (queryString) => {
+export default async (queryString, currentPage) => {
   const response = await api.search.get(queryString)
   let { results } = response
   const { count: totalResults, facets } = response
   const accessionCodes = getAccessionCodesQueryParam(queryString.search)
 
-  if (accessionCodes) {
+  // makes requests for accession codes only from the first page
+  if (accessionCodes.length > 0 && currentPage === 1) {
     const accessionCodesResponse = await Promise.all(
       accessionCodes.map((code) =>
         api.search.get({
