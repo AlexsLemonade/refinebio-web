@@ -4,7 +4,11 @@ import { Anchor } from 'components/shared/Anchor'
 import { Icon } from 'components/shared/Icon'
 import { links, options } from 'config'
 
-export const TransformationOptions = ({ value, handleChange }) => {
+export const TransformationOptions = ({
+  value,
+  handleChange,
+  column = false
+}) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -12,10 +16,10 @@ export const TransformationOptions = ({ value, handleChange }) => {
       <Box
         margin={{
           top: setResponsive('small', 'none'),
-          left: setResponsive('none', 'medium')
+          left: column ? 'none' : setResponsive('none', 'medium')
         }}
       >
-        <Text>
+        <Text margin={{ bottom: column ? 'small' : 'none' }}>
           Transformation{' '}
           <Anchor
             href={links.refinebio_docs_transformation}
@@ -30,7 +34,7 @@ export const TransformationOptions = ({ value, handleChange }) => {
       <Box
         margin={{
           top: setResponsive('xsmall', 'none'),
-          left: setResponsive('none', 'xsmall')
+          left: column ? 'none' : setResponsive('none', 'xsmall')
         }}
         width="150px"
       >

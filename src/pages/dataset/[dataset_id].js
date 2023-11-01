@@ -3,7 +3,6 @@ import { Box } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { usePageRendered } from 'hooks/usePageRendered'
-import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { Spinner } from 'components/shared/Spinner'
@@ -15,6 +14,7 @@ import {
 import {
   DatasetDetails,
   DatasetSummary,
+  DownloadDatasetButton,
   FilesSummary,
   StartProcessing
 } from 'components/Download'
@@ -25,12 +25,15 @@ export const getServerSideProps = ({ query }) => {
 
 // TODO: create a new issue for the error handling
 export const Dataset = ({ query }) => {
-  const { dataset_id: idFromQuery, ref, start } = query
+  const { dataset_id: idFromQuery, start } = query
   const { dataset, datasetId, loading, getDataset } = useDatasetManager()
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
   const [selectedDataset, setSelectedDataset] = useState({})
-  const isSharedDataset = ref === 'share' || !selectedDataset.is_processed
+  const unprocessedDataset =
+    !selectedDataset.is_processing &&
+    !selectedDataset.is_processed &&
+    selectedDataset.success !== false
 
   useEffect(() => {
     const getSelectedDataset = async (id) => {
@@ -81,8 +84,8 @@ export const Dataset = ({ query }) => {
                   margin={{ top: setResponsive('medium', 'none') }}
                 >
                   <ShareDatasetButton datasetId={idFromQuery} />
-                  {isSharedDataset && (
-                    <Button label="Download Dataset" primary responsive />
+                  {unprocessedDataset && (
+                    <DownloadDatasetButton dataset={selectedDataset} />
                   )}
                 </Row>
               </Row>

@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-const DownloadEmailForm = yup.object().shape({
+const StartProcessingFormSchema = yup.object().shape({
   emailAddress: yup
     .string()
     .email('Please enter a vaild email')
@@ -15,5 +15,5 @@ const DownloadEmailForm = yup.object().shape({
 })
 
 export default {
-  DownloadEmailForm
+  StartProcessingFormSchema
 }

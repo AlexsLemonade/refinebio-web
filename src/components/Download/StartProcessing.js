@@ -1,5 +1,5 @@
 import { Box, Heading, Paragraph } from 'grommet'
-import { EmailForm } from './EmailForm'
+import { StartProcessingForm } from './StartProcessingForm'
 
 // path: /download?start=true
 // renders this component when no email in localStorage
@@ -14,7 +14,7 @@ export const StartProcessing = ({ dataset }) => {
         are ready. It usually takes about 15-20 minutes.
       </Paragraph>
       <Box margin={{ top: 'medium' }} alignSelf="start">
-        <EmailForm dataset={dataset} />
+        <StartProcessingForm dataset={dataset} />
       </Box>
       <Box
         margin={{ top: 'basex8', bottom: 'xlarge' }}

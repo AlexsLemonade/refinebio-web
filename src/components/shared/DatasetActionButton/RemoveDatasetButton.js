@@ -14,7 +14,7 @@ export const RemoveDatasetButton = ({ dataToRemove }) => {
         label="Added to Dataset"
         color="success"
         iconSize="small"
-        height="fit-content"
+        height="16px"
       />
       <Button
         isLoading={loading}

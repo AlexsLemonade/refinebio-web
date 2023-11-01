@@ -1,4 +1,4 @@
-import { Box, Heading, Paragraph } from 'grommet'
+import { Box, Heading, Paragraph, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { Column } from 'components/shared/Column'
@@ -10,15 +10,19 @@ export const DatasetProcessingError = ({ dataset }) => {
 
   return (
     <Box align="center">
-      <Row justify="center" width={setResponsive('100%', '60%')}>
+      <Row justify="center" width={setResponsive('100%', '70%')}>
         <Column align={setResponsive('center', 'start')}>
           <Heading level={1} margin={{ bottom: 'small' }}>
             Uh-oh something went wrong!
           </Heading>
           <Paragraph>
-            If the problem persists, please contact{' '}
+            We encountered a problem while getting your dataset ready. We
+            apologize for the inconvenience.
+          </Paragraph>
+          <Paragraph>
+            Please contact{' '}
             <Anchor
-              label="requests@ccdatalab.org"
+              label={links.email_request}
               href={`mailto:${links.email_request}`}
             />
             {!dataset?.failure_reason && '.'}
@@ -37,7 +41,15 @@ export const DatasetProcessingError = ({ dataset }) => {
             )}
           </Paragraph>
           {dataset?.failure_reason && (
-            <Paragraph color="error">{dataset?.failure_reason}</Paragraph>
+            <Box
+              background="gray-shade-5"
+              margin={{ top: 'small' }}
+              pad="small"
+            >
+              <Text color="error" weight="bold">
+                {dataset.failure_reason}
+              </Text>
+            </Box>
           )}
           <Box
             margin={{

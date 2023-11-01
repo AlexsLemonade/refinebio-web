@@ -4,7 +4,7 @@ import { Anchor } from 'components/shared/Anchor'
 import { Icon } from 'components/shared/Icon'
 import { links, options } from 'config'
 
-export const AggregateOptions = ({ value, handleChange }) => {
+export const AggregateOptions = ({ value, handleChange, column = false }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -13,7 +13,7 @@ export const AggregateOptions = ({ value, handleChange }) => {
         margin={{ top: setResponsive('small', 'none') }}
         style={{ position: 'relative' }}
       >
-        <Text>
+        <Text margin={{ bottom: column ? 'small' : 'none' }}>
           Aggregate{' '}
           <Anchor
             href={links.refinebio_docs_aggregation}

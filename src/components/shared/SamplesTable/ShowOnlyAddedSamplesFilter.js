@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { CheckBox } from 'grommet'
 import { useDatasetAction } from 'hooks/useDatasetAction'
 import { useDatasetManager } from 'hooks/useDatasetManager'
+import { CheckBox } from 'components/shared/CheckBox'
 
 export const ShowOnlyAddedSamplesFilter = ({
   data,
