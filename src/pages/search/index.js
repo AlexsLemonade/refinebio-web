@@ -200,7 +200,10 @@ export const Search = (props) => {
                       <SearchCard key={result.id} result={result} />
                     )
                   )}
-                  {results.length < 10 && <RequestSearchFormAlert />}
+                  {(results.length < 10 ||
+                    page === Math.ceil(totalResults / pageSize)) && (
+                    <RequestSearchFormAlert />
+                  )}
                 </Box>
                 <Box
                   align="center"
