@@ -1,7 +1,7 @@
 import { Box } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 
-export const FixedContainer = ({ children, width = '1250px', ...props }) => {
+export const FixedContainer = ({ children, width, ...props }) => {
   const { setResponsive } = useResponsive()
 
   return (
