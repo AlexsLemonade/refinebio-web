@@ -1,4 +1,4 @@
-export { RequestSearcFormAlert } from './RequestSearcFormAlert'
+export { RequestSearchFormAlert } from './RequestSearchFormAlert'
 export { RequestSearchFormButton } from './RequestSearchFormButton'
 export { NoSearchResults } from './NoSearchResults'
 export { SearchBulkActions } from './SearchBulkActions'
