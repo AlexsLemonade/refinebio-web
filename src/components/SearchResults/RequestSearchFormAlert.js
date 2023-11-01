@@ -1,7 +1,7 @@
 import { Box, Text } from 'grommet'
 import { RequestSearchFormButton } from './RequestSearchFormButton'
 
-export const RequestSearcFormAlert = () => {
+export const RequestSearchFormAlert = () => {
   return (
     <Box
       animation={{ type: 'fadeIn', duration: 300 }}
@@ -14,9 +14,9 @@ export const RequestSearcFormAlert = () => {
       width="fit-content"
     >
       <Text> Didn't see a related experiment?</Text>
-      <RequestSearchFormButton size="16PX" />
+      <RequestSearchFormButton size="16px" />
     </Box>
   )
 }
 
-export default RequestSearcFormAlert
+export default RequestSearchFormAlert

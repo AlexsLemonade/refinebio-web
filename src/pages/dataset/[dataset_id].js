@@ -25,16 +25,15 @@ export const getServerSideProps = ({ query }) => {
 
 // TODO: create a new issue for the error handling
 export const Dataset = ({ query }) => {
-  const { dataset_id: idFromQuery, ref, start } = query
+  const { dataset_id: idFromQuery, start } = query
   const { dataset, datasetId, loading, getDataset } = useDatasetManager()
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
   const [selectedDataset, setSelectedDataset] = useState({})
-  const isSharedDataset =
-    (ref === 'share' &&
-      !selectedDataset.is_processed &&
-      selectedDataset.success !== false) ||
-    (!selectedDataset.is_processed && selectedDataset.success !== false)
+  const unprocessedDataset =
+    !selectedDataset.is_processing &&
+    !selectedDataset.is_processed &&
+    selectedDataset.success !== false
 
   useEffect(() => {
     const getSelectedDataset = async (id) => {
@@ -85,7 +84,7 @@ export const Dataset = ({ query }) => {
                   margin={{ top: setResponsive('medium', 'none') }}
                 >
                   <ShareDatasetButton datasetId={idFromQuery} />
-                  {isSharedDataset && !selectedDataset.is_processing && (
+                  {unprocessedDataset && (
                     <DownloadDatasetButton dataset={selectedDataset} />
                   )}
                 </Row>

@@ -68,7 +68,6 @@ export const useDatasetManager = () => {
             'API-KEY': token || tokenId
           }
         : {}
-
     const response = await api.dataset.get(id || datasetId, headers)
     const formattedResponse = {
       ...response,
@@ -87,9 +86,7 @@ export const useDatasetManager = () => {
   const startProcessingDataset = async (id, options) => {
     const isCurrentDatasetId = id === datasetId
     // validate the existing token or create a new token if none
-    const tokenId = !validateToken()
-      ? await resetToken()
-      : token || (await createToken())
+    const tokenId = validateToken() ? token : await resetToken()
     const { data, emailAddress, receiveUpdates } = options
     const params = {
       data,
