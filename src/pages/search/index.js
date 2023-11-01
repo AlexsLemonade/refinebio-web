@@ -17,7 +17,7 @@ import { SearchBox } from 'components/shared/SearchBox'
 import { SearchInfoBanner } from 'components/SearchResults/SearchInfoBanner'
 import { SearchCard } from 'components/shared/SearchCard'
 import {
-  RequestSearcFormAlert,
+  RequestSearchFormAlert,
   NoSearchResults,
   SearchBulkActions,
   SearchFilterList
@@ -200,7 +200,7 @@ export const Search = (props) => {
                       <SearchCard key={result.id} result={result} />
                     )
                   )}
-                  {results.length < 10 && <RequestSearcFormAlert />}
+                  {results.length < 10 && <RequestSearchFormAlert />}
                 </Box>
                 <Box
                   align="center"
