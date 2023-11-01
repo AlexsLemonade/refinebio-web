@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import { Box } from 'grommet'
-import { useDatasetManager } from 'hooks/useDatasetManager'
+import { useOneOffExperiment } from 'hooks/useOneOffExperiment'
+import { usePageRendered } from 'hooks/usePageRendered'
 import { useResponsive } from 'hooks/useResponsive'
 import { getFormattedExperiment } from 'helpers/formatDatasetAction'
 import { DatasetActionButton } from 'components/shared/DatasetActionButton'
@@ -9,15 +10,23 @@ import { ProcessingDatasetPill } from './ProcessingDatasetPill'
 import { RequestExperimentFormButton } from './RequestExperimentFormButton'
 
 export const SearchCardAction = ({ accessionCode, downloadableSamples }) => {
-  const { dataset } = useDatasetManager()
+  const { getProcessingExperiment } = useOneOffExperiment(accessionCode)
+  const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
+  const experiment = getProcessingExperiment(accessionCode)
+
+  if (!pageRendered) return null
 
   if (!downloadableSamples)
     return <RequestExperimentFormButton accessionCode={accessionCode} />
 
   return (
     <>
-      {dataset?.is_processing && <ProcessingDatasetPill dataset={dataset} />}
+      {experiment && (
+        <Box margin={{ bottom: 'small' }}>
+          <ProcessingDatasetPill datasetId={experiment.datasetId} />
+        </Box>
+      )}
 
       <DatasetActionButton
         accessionCode={accessionCode}
@@ -26,7 +35,7 @@ export const SearchCardAction = ({ accessionCode, downloadableSamples }) => {
         primary
       />
 
-      {!dataset?.is_processing && (
+      {!experiment && (
         <Box margin={{ top: 'small' }} width={setResponsive('100%', 'auto')}>
           <DownloadNowButton accessionCode={accessionCode} />
         </Box>

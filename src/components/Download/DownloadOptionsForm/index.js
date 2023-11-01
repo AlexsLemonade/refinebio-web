@@ -88,7 +88,7 @@ export const DownloadOptionsForm = ({
                   </Box>
                 </Row>
                 <AdvanedOptions
-                  datasetId={selectedDataset.id}
+                  id={selectedDataset.id}
                   values={values}
                   handleChange={handleChange}
                   toggle={!toggleAdvancedOption}

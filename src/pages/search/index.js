@@ -47,7 +47,7 @@ export const Search = (props) => {
   const [page, setPage] = useState(Number(query.p) || 1)
   const [pageSize, setPageSize] = useState(Number(query.size) || pageSizes[0])
   const [sortBy, setSortBy] = useState(query.sortby || sortby[0].value)
-  const isResults = results.results.length > 0
+  const isResults = results?.results?.length > 0
 
   const handleClearSearchTerm = () => {
     if (query.search) {
@@ -108,7 +108,6 @@ export const Search = (props) => {
               submitHandler={handleSubmit}
             />
           </Box>
-
           {results && isResults && (
             <Grid
               areas={[
@@ -223,7 +222,6 @@ export const Search = (props) => {
               </Box>
             </Grid>
           )}
-
           {results && !isResults && hasAppliedFilters() && (
             <Box direction="row">
               <SearchFilterList
@@ -236,7 +234,6 @@ export const Search = (props) => {
               </Box>
             </Box>
           )}
-
           {results && !isResults && !hasAppliedFilters() && query.search && (
             <NoSearchResults setUserSearchTerm={setUserSearchTerm} />
           )}

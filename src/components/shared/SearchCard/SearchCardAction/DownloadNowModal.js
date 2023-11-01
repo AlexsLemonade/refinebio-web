@@ -1,39 +1,49 @@
-import { useRouter } from 'next/navigation'
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
-import { validationSchemas } from 'config'
+import { options, validationSchemas } from 'config'
+import { useOneOffExperiment } from 'hooks/useOneOffExperiment'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/shared/Button'
-import { AdvanedOptions } from 'components/Download/DownloadOptionsForm/AdvanedOptions'
-import { AggregateOptions } from 'components/Download/DownloadOptionsForm/AggregateOptions'
 import { TransformationOptions } from 'components/Download/DownloadOptionsForm/TransformationOptions'
 import { EmailTextInput } from 'components/Download/StartProcessingForm/EmailTextInput'
 import { ReceiveUpdatesCheckBox } from 'components/Download/StartProcessingForm/ReceiveUpdatesCheckBox'
 import { TermsOfUseCheckBox } from 'components/Download/StartProcessingForm/TermsOfUseCheckBox'
+import { ProcessingDatasetPillModal } from './ProcessingDatasetPillModal'
 
-export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
-  const { push } = useRouter()
+export const DownloadNowModal = ({ accessionCode, id }) => {
+  const { addProcessingExperiment, getProcessingExperiment } =
+    useOneOffExperiment()
   const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const { StartProcessingFormSchema } = validationSchemas
+  const experiment = getProcessingExperiment(accessionCode)
+
+  if (experiment) {
+    return (
+      <ProcessingDatasetPillModal datasetId={experiment.datasetId} id={id} />
+    )
+  }
 
   return (
-    <Box
-      margin={{ bottom: 'medium' }}
-      pad={{ horizontal: 'large' }}
-      width={setResponsive('100%', '100%', '500px')}
-    >
+    <Box pad={{ bottom: 'small', horizontal: 'large' }}>
+      <Box
+        border={{ side: 'bottom' }}
+        margin={{ bottom: 'medium' }}
+        pad={{ bottom: 'small' }}
+      >
+        <Heading level={1}>Download All Samples Now</Heading>
+      </Box>
       <Heading level={5} weight="500" margin={{ bottom: 'medium' }}>
         Download Options:
       </Heading>
       <Formik
         initialValues={{
-          aggregate_by: dataset.aggregate_by,
-          data: dataset.data,
-          scale_by: dataset.scale_by,
-          quantile_normalize: dataset.quantile_normalize,
+          aggregate_by: options.aggregation[0].value,
+          data: { [accessionCode]: ['ALL'] },
+          scale_by: options.transformation[0].value,
+          quantile_normalize: true,
           emailAddress: email || '',
           receiveUpdates: true,
           termsOfUse: false
@@ -46,10 +56,8 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
             subscribeEmail(emailAddress)
           }
 
-          const response = await startProcessingDataset(dataset.id, values)
-          const pathname = `/dataset/${response.id}`
-          push({ pathname }, pathname)
-          closeModal(id)
+          const response = await startProcessingDataset(null, values)
+          addProcessingExperiment(accessionCode, response.id)
           setSubmitting(false)
         }}
       >
@@ -62,26 +70,11 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
           values
         }) => (
           <Form onSubmit={handleSubmit}>
-            <Box margin={{ bottom: 'small' }}>
-              <AggregateOptions
-                value={values.aggregate_by}
-                handleChange={handleChange}
-                column
-              />
-            </Box>
-            <Box margin={{ bottom: 'xsmall' }}>
+            <Box margin={{ bottom: 'large' }}>
               <TransformationOptions
                 value={values.scale_by}
                 handleChange={handleChange}
                 column
-              />
-            </Box>
-            <Box>
-              <AdvanedOptions
-                id={dataset.id}
-                values={values}
-                handleChange={handleChange}
-                toggle
               />
             </Box>
             <Box margin={{ bottom: 'large' }}>
@@ -130,4 +123,4 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
   )
 }
 
-export default DownloadDatasetModal
+export default DownloadNowModal
