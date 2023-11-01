@@ -66,6 +66,11 @@ export default {
       alert: '0px 1px 5px rgba(0, 0, 0, 0.15)'
     }
   },
+  focus: {
+    border: {
+      color: 'brand'
+    }
+  },
   font: {
     family: `'Lato', sans-serif`,
     size: '16px', // 1rem

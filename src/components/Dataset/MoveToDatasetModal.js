@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router'
-import { Box, Heading, RadioButtonGroup } from 'grommet'
+import { Box, Heading } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
+import { RadioButtonGroup } from 'components/shared/RadioButtonGroup'
 import { Row } from 'components/shared/Row'
 
 export const MoveToDatasetModal = ({

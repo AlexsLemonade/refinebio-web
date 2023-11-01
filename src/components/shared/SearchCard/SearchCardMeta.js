@@ -53,19 +53,15 @@ export const SearchCardMeta = ({
           <TextNull text="No species" />
         )}
       </Box>
-      {downloadableSamples && (
-        <Box flex="grow">
-          <IconBadge
-            label={`${
-              downloadableSamples > 0
-                ? formatNumbers(downloadableSamples)
-                : 'No'
-            } Downloadable Samples`}
-            name="Samples"
-            size={size}
-          />
-        </Box>
-      )}
+      <Box flex="grow">
+        <IconBadge
+          label={`${
+            downloadableSamples > 0 ? formatNumbers(downloadableSamples) : 'No'
+          } Downloadable Samples`}
+          name="Samples"
+          size={size}
+        />
+      </Box>
       <Box flex="grow" width={setResponsive('100%', '100%', { max: '40%' })}>
         {platformNames.length > 0 ? (
           <IconBadge

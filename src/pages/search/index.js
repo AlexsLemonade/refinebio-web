@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Box, Grid, Heading } from 'grommet'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
@@ -17,8 +17,7 @@ import { SearchBox } from 'components/shared/SearchBox'
 import { SearchInfoBanner } from 'components/SearchResults/SearchInfoBanner'
 import { SearchCard } from 'components/shared/SearchCard'
 import {
-  MissingResultsAlert,
-  NoFilteringResults,
+  RequestSearchFormAlert,
   NoSearchResults,
   SearchBulkActions,
   SearchFilterList
@@ -29,11 +28,10 @@ export const Search = (props) => {
   const {
     search: { pageSizes, sortby }
   } = options
-  const { query, results, accessionCodesResults } = props
+  const { query, results, totalResults, facets } = props
   const {
     formatFacetNames,
     getSearchQueryParam,
-    hasAppliedFilters,
     setConfig,
     setSearch,
     updatePage,
@@ -47,7 +45,7 @@ export const Search = (props) => {
   const [page, setPage] = useState(Number(query.p) || 1)
   const [pageSize, setPageSize] = useState(Number(query.size) || pageSizes[0])
   const [sortBy, setSortBy] = useState(query.sortby || sortby[0].value)
-  const isResults = results?.results?.length > 0
+  const isResults = results?.length > 0
 
   const handleClearSearchTerm = () => {
     if (query.search) {
@@ -64,8 +62,8 @@ export const Search = (props) => {
 
   useEffect(() => {
     if (props) {
-      if (results) {
-        const facetNames = formatFacetNames(Object.keys(results.facets))
+      if (facets) {
+        const facetNames = formatFacetNames(Object.keys(facets))
 
         setConfig({
           filterOptions: facetNames
@@ -108,7 +106,7 @@ export const Search = (props) => {
               submitHandler={handleSubmit}
             />
           </Box>
-          {results && isResults && (
+          {isResults && (
             <Grid
               areas={[
                 { name: 'side', start: [0, 1], end: [0, 1] },
@@ -153,7 +151,7 @@ export const Search = (props) => {
                     </Box>
                   )}
                   <SearchFilterList
-                    facets={results.facets}
+                    facets={facets}
                     setToggle={setToggleFilterList}
                   />
                 </BoxBlock>
@@ -170,40 +168,42 @@ export const Search = (props) => {
                   />
                 )}
                 <SearchBulkActions
-                  results={results.results}
+                  results={results}
                   pageSize={pageSize}
                   setPageSize={setPageSize}
                   sortBy={sortBy}
                   setSortBy={setSortBy}
-                  totalResults={results.count}
+                  totalResults={totalResults}
                 />
-
-                {accessionCodesResults.length > 0 && (
-                  <>
-                    {accessionCodesResults.map((data) =>
-                      data.results.map((result) => (
-                        <SearchCard key={result.id} result={result} />
-                      ))
-                    )}
-                    <Box
-                      border={{ color: 'gray-shade-5', side: 'top' }}
-                      margin={{ vertical: 'large' }}
-                      style={{ position: 'relative' }}
-                    >
-                      <Heading
-                        level={3}
-                        style={{ position: 'absolute', top: '-12px' }}
-                      >
-                        Related Results for '{query.search}'
-                      </Heading>
-                    </Box>
-                  </>
-                )}
                 <Box animation={{ type: 'fadeIn', duration: 300 }}>
-                  {results.results.map((result) => (
-                    <SearchCard key={result.id} result={result} />
-                  ))}
-                  {results.results.length < 10 && <MissingResultsAlert />}
+                  {results.map((result, i) =>
+                    result.isMatchedAccessionCode ? (
+                      <Fragment key={result.id}>
+                        <SearchCard key={result.id} result={result} />
+                        {results[i + 1] &&
+                          !results[i + 1].isMatchedAccessionCode && (
+                            <Box
+                              border={{ color: 'gray-shade-5', side: 'top' }}
+                              margin={{ vertical: 'large' }}
+                              style={{ position: 'relative' }}
+                            >
+                              <Heading
+                                level={3}
+                                style={{ position: 'absolute', top: '-12px' }}
+                              >
+                                Related Results for '{query.search}'
+                              </Heading>
+                            </Box>
+                          )}
+                      </Fragment>
+                    ) : (
+                      <SearchCard key={result.id} result={result} />
+                    )
+                  )}
+                  {(results.length < 10 ||
+                    page === Math.ceil(totalResults / pageSize)) && (
+                    <RequestSearchFormAlert />
+                  )}
                 </Box>
                 <Box
                   align="center"
@@ -215,27 +215,18 @@ export const Search = (props) => {
                     page={page}
                     pageSize={pageSize}
                     setPage={setPage}
-                    totalPages={results.count}
+                    totalPages={totalResults}
                     updatePage={updatePage}
                   />
                 </Box>
               </Box>
             </Grid>
           )}
-          {results && !isResults && hasAppliedFilters() && (
-            <Box direction="row">
-              <SearchFilterList
-                facets={results.facets}
-                setToggle={setToggleFilterList}
-                style={{ height: 'auto' }}
-              />
-              <Box width="80%">
-                <NoFilteringResults />
-              </Box>
-            </Box>
-          )}
-          {results && !isResults && !hasAppliedFilters() && query.search && (
-            <NoSearchResults setUserSearchTerm={setUserSearchTerm} />
+          {!isResults && query.search && (
+            <NoSearchResults
+              queryTerm={query.search}
+              setUserSearchTerm={setUserSearchTerm}
+            />
           )}
         </FixedContainer>
       </TextHighlightContextProvider>
@@ -255,7 +246,6 @@ Search.getInitialProps = async (ctx) => {
       }
     }
   } = options
-
   const queryString = {
     ...getSearchQueryForAPI(query),
     limit: query.size || Number(limit),
@@ -266,13 +256,18 @@ Search.getInitialProps = async (ctx) => {
       ? Number(numDownloadableSamples.hide)
       : Number(numDownloadableSamples.show)
   }
-  const { response, accessionCodesResponse } = await fetchSearch(queryString)
+
+  const { facets, results, totalResults } = await fetchSearch(
+    queryString,
+    Number(query.p) || 1
+  )
 
   return {
     pathname,
     query,
-    results: response,
-    accessionCodesResults: accessionCodesResponse
+    facets,
+    results,
+    totalResults
   }
 }
 

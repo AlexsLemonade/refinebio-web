@@ -21,12 +21,15 @@ export default {
     input:not([disabled]) + div:hover {
         box-shadow: 0 0 1px 1px ${normalizeColor(boxShadow, theme)};
     }
-     input:checked:not([disabled]) + div {
-        box-shadow: none;
-        &:hover {
-            border-color: ${theme.global.colors.brand};
-        }
-     }
+    input:checked:not([disabled]) + div {
+      background: ${theme.global.colors.white};
+      border-color: ${theme.global.colors.brand};
+      box-shadow: none;
+      svg {
+        fill: ${theme.global.colors.brand};
+     
+      }
+   }
      input:disabled + div {
         background: ${normalizeColor(backgroundDisabled, theme)};
         cursor: not-allowed;

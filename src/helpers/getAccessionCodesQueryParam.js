@@ -1,7 +1,10 @@
-export default (query) => {
-  const accessionCodeRegex = /^(GSE|ERP|SRP)(\d{3,6}$)|(E-[A-Z]{4}-\d{2,6}$)/i
+import { regex } from 'config'
 
+export default (query) => {
   if (!query) return []
+
+  const { accessionCode: re } = regex
   const accessionCodes = query.split(/,| /i)
-  return accessionCodes.filter((code) => accessionCodeRegex.test(code))
+
+  return accessionCodes.filter((code) => re.test(code))
 }

@@ -1,9 +1,9 @@
 import { useModal } from 'hooks/useModal'
 import { Button } from 'components/shared/Button'
 import { ModalPage } from 'components/shared/ModalPage'
-import { MissingResultsForm } from './MissingResultsForm'
+import { RequestSearchForm } from './RequestSearchForm'
 
-export const MissingResultsFormButton = ({ size }) => {
+export const RequestSearchFormButton = ({ queryTerm, size }) => {
   const { closeModal, openModal } = useModal()
   const id = 'missing-results-form'
 
@@ -20,9 +20,12 @@ export const MissingResultsFormButton = ({ size }) => {
       }
       fullHeight={false}
     >
-      <MissingResultsForm closeForm={() => closeModal(id)} />
+      <RequestSearchForm
+        closeForm={() => closeModal(id)}
+        queryTerm={queryTerm}
+      />
     </ModalPage>
   )
 }
 
-export default MissingResultsFormButton
+export default RequestSearchFormButton

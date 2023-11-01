@@ -1,122 +1,118 @@
-import {
-  Box,
-  Heading,
-  Paragraph,
-  RadioButtonGroup,
-  Text,
-  TextArea
-} from 'grommet'
+import { Box, Paragraph, Text, TextArea } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
+import { options } from 'config'
 import { Button } from 'components/shared/Button'
 import { CheckBox } from 'components/shared/CheckBox'
 import { FormField } from 'components/shared/FormField'
+import { RadioButtonGroup } from 'components/shared/RadioButtonGroup'
 import { TextInput } from 'components/shared/TextInput'
 import { TextRequired } from 'components/shared/TextRequired'
 
 export const RequestForm = ({
-  formTitle,
-  illustration,
-  children,
-  closeForm
+  closeForm,
+  errors,
+  handleChange,
+  isSubmitting,
+  touched,
+  values
 }) => {
-  const { viewport, setResponsive } = useResponsive()
-  const radioPediatricCancer = [
-    { label: 'Yes', value: 'Yes' },
-    { label: 'No', value: 'No' }
-  ]
-  const radioPrimaryApproach = [
-    { label: 'Bench Research', value: 'Bench Research' },
-    { label: 'Computational Research', value: 'Computational Research' },
-    { label: 'Clinical Research', value: 'Clinical Research' },
-    { label: 'AI/ML Research', value: 'AI/ML Research' }
-  ]
+  const { setResponsive } = useResponsive()
+  const {
+    requestDataForm: { radioPediatricCancer, radioPrimaryApproach }
+  } = options
+  const maxCharsForComments = 255
 
   return (
-    <Box
-      animation={{ type: 'fadeIn', duration: 500 }}
-      direction="row"
-      justify="between"
-    >
-      <Box
-        border={{ color: 'brand-tint-80', side: 'bottom', size: '16px' }}
-        pad={{ horizontal: 'large', vertical: 'xlarge' }}
-        width={setResponsive('100%', '100%', '800px')} // to preserve the UI for the desktop view
-        style={{ boxShadow: ' 0px 3px 20px rgba(0, 0, 0, 0.1)' }}
-      >
-        <FormField>
-          <Heading level={1}>{formTitle}</Heading>
-        </FormField>
-        {children}
-        <FormField>
-          <Heading level={2} margin={{ bottom: 'xsmall' }}>
-            Help us priortize your request by answering these questions
-          </Heading>
-          <Paragraph>
-            Are you using this for pediatric cancer research? <TextRequired />
-          </Paragraph>
-          <RadioButtonGroup
-            options={radioPediatricCancer}
-            name="pediatric-cancer"
-            margin={{ top: 'small' }}
-          />
-        </FormField>
-        <FormField>
-          <Paragraph>
-            Which of these most closely describes your primary approach?{' '}
-            <TextRequired />
-          </Paragraph>
-          <RadioButtonGroup
-            options={radioPrimaryApproach}
-            name="primary-approach"
-            margin={{ top: 'small' }}
-          />
-        </FormField>
-        <FormField>
-          <Paragraph margin={{ bottom: 'xsmall' }}>
-            Is there anything else you would like to add?
-          </Paragraph>
-          <TextArea />
-        </FormField>
-        <FormField>
-          <Paragraph>
-            Email <TextRequired />
-          </Paragraph>
-          <Text margin={{ vertical: 'xsmall' }}>
-            <i>
-              Be notified when your requested experiment(s) become available
-            </i>
-          </Text>
-          <TextInput
-            name="comments"
-            placeholder="jdoe@example.com"
-            type="email"
-          />
-          <Box margin={{ vertical: 'xsmall' }}>
-            <CheckBox label="I would like to receive occasional updates from the refine.bio team" />
-          </Box>
-        </FormField>
-        <FormField
-          direction={setResponsive('column', 'row')}
-          gap={setResponsive('small', 'xsmall')}
-        >
-          <Button label="Cancel" secondary responsive onClick={closeForm} />
-          <Button label="Submit" primary responsive type="submit" />
-        </FormField>
-      </Box>
-      {viewport === 'large' && (
-        <Box
-          aria-hidden
-          background={{
-            image: ` url('/${illustration}')`,
-            position: 'center',
-            repeat: 'no-repeat',
-            size: 'contain'
-          }}
-          margin={{ right: setResponsive('none', 'large') }}
-          // to preserve the width image
-          width={setResponsive('150px', '250px')}
+    <Box>
+      <FormField>
+        <Paragraph margin={{ bottom: 'small' }}>
+          Are you using this for pediatric cancer research? <TextRequired />
+        </Paragraph>
+        <RadioButtonGroup
+          error={errors.pediatric_cancer}
+          errorText={errors.pediatric_cancer}
+          labelOnly
+          name="pediatric_cancer"
+          options={radioPediatricCancer}
+          touched={touched.pediatric_cancer}
+          values={values.pediatric_cancer}
+          onChange={handleChange}
         />
-      )}
+      </FormField>
+      <FormField>
+        <Paragraph margin={{ bottom: 'small' }}>
+          Which of these most closely describes your primary approach?{' '}
+          <TextRequired />
+        </Paragraph>
+        <RadioButtonGroup
+          error={errors.approach}
+          errorText={errors.approach}
+          labelOnly
+          options={radioPrimaryApproach}
+          name="approach"
+          touched={touched.approach}
+          value={values.approach}
+          onChange={handleChange}
+        />
+      </FormField>
+      <FormField>
+        <Paragraph margin={{ bottom: 'xsmall' }}>
+          Is there anything else you would like to add?
+        </Paragraph>
+        <TextArea
+          maxLength={225}
+          name="comments"
+          value={values.comments}
+          onChange={handleChange}
+        />
+        <Text alignSelf="end" margin={{ top: 'xxsmall' }} size="small">
+          {`Characters remaining: ${
+            maxCharsForComments - values.comments.length
+          }`}
+        </Text>
+      </FormField>
+      <FormField>
+        <Text>
+          Email <TextRequired />
+        </Text>
+        <Paragraph margin={{ top: 'small' }}>
+          <i>Be notified when your requested experiment(s) become available</i>
+        </Paragraph>
+        <TextInput
+          error={errors.email}
+          errorText={errors.email}
+          labelOnly
+          name="email"
+          placeholder="jdoe@example.com"
+          positionTop="-40px"
+          touched={touched.email}
+          type="email"
+          value={values.email}
+          width={{ max: '520px' }}
+          onChange={handleChange}
+        />
+        <Box margin={{ vertical: 'xsmall' }}>
+          <CheckBox
+            label="I would like to receive occasional updates from the refine.bio team"
+            name="email_updates"
+            value={values.email_updates}
+            onChange={handleChange}
+          />
+        </Box>
+      </FormField>
+      <FormField
+        direction={setResponsive('column', 'row')}
+        gap={setResponsive('small', 'xsmall')}
+      >
+        <Button label="Cancel" secondary responsive onClick={closeForm} />
+        <Button
+          label="Submit"
+          isLoading={isSubmitting}
+          primary
+          responsive
+          type="submit"
+        />
+      </FormField>
     </Box>
   )
 }
