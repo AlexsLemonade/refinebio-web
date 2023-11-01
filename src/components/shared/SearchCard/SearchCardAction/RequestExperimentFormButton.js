@@ -1,7 +1,7 @@
 import { useModal } from 'hooks/useModal'
 import { Button } from 'components/shared/Button'
 import { ModalPage } from 'components/shared/ModalPage'
-import { RequestForm } from 'components/shared/RequestForm'
+import { RequestExperimentForm } from './RequestExperimentForm'
 
 export const RequestExperimentFormButton = ({ accessionCode }) => {
   const { closeModal, openModal } = useModal()
@@ -20,9 +20,8 @@ export const RequestExperimentFormButton = ({ accessionCode }) => {
       }
       fullHeight={false}
     >
-      <RequestForm
-        formTitle={`Request Experiment '${accessionCode}'`}
-        illustration="lamp-illustration.svg"
+      <RequestExperimentForm
+        accessionCode={accessionCode}
         closeForm={() => closeModal(id)}
       />
     </ModalPage>
