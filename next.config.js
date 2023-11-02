@@ -49,8 +49,7 @@ const moduleExports = () => {
 }
 
 const sentryWebpackPluginOptions = {
-  // TEMPORARY dry run in all environments until add required env variables in Vercel
-  dryRun: true,
+  dryRun: process.env.VERCEL_ENV !== 'production', // TEMPORARY until add required env variables in Vercel (env names were already added to Vercel w/o values)
   silent: true // Suppresses all logs
 }
 
