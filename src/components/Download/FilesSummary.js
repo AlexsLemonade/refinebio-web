@@ -132,6 +132,11 @@ export const FilesSummary = ({ dataset }) => {
               <Text weight="bold">
                 Transformation: {transformationOptions[dataset.scale_by]}
               </Text>
+              {!dataset.quantile_normalize && (
+                <Text weight="bold">
+                  Quantile Normalization Skipped for RNA-seq samples
+                </Text>
+              )}
               <Text weight="bold">
                 <Button
                   label="Change"
