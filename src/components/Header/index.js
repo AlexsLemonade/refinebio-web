@@ -50,7 +50,7 @@ export const Header = ({ light = false }) => {
           <GlobalNav light={light} toggle={toggle} setToggle={setToggle} />
         </Box>
       </FixedContainer>
-      <GithubAnchor light={light} />
+      {viewport === 'large' && <GithubAnchor light={light} />}
     </GrommetHeader>
   )
 }
