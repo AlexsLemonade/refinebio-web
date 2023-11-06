@@ -33,7 +33,7 @@ export const InlineMessage = ({
           <Icon color={color} name={SVG} size={iconSize} />
         </Box>
       )}
-      <Paragraph color={color || fontColor} size={fontSize}>
+      <Paragraph color={color !== 'info' ? color : fontColor} size={fontSize}>
         {label}
       </Paragraph>
     </Box>
