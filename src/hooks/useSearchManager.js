@@ -5,10 +5,12 @@ import { options } from 'config'
 
 export const useSearchManager = () => {
   const {
+    config: configState,
+    setConfig: setConfigState,
     search: searchState,
     setSearch: setSearchState,
-    config: configState,
-    setConfig: setConfigState
+    filterOrders: filterOrdersState,
+    setFilterOrders: setFilterOrdersState
   } = useContext(SearchManagerContext)
   const {
     search: {
@@ -20,10 +22,12 @@ export const useSearchManager = () => {
     }
   } = options
   const router = useRouter()
-  const search = searchState
-  const setSearch = setSearchState
   const config = configState
   const setConfig = setConfigState
+  const filterOrders = filterOrdersState
+  const setFilterOrders = setFilterOrdersState
+  const search = searchState
+  const setSearch = setSearchState
 
   /* Common */
   const resetPage = () => {
@@ -71,6 +75,7 @@ export const useSearchManager = () => {
       if (key in search) delete search[key]
     })
 
+    updateFilterOrders(true)
     setSearch({ ...search })
     updateSearchQuery(true)
   }
@@ -112,16 +117,40 @@ export const useSearchManager = () => {
         } else {
           search[key] = [val]
         }
-      } else if (search[key].length > 0) {
-        search[key] = search[key].filter((item) => item !== val)
-        if (search[key].length === 0) delete search[key]
+        addFilterOrder(key)
+      } else {
+        if (search[key].length > 0) {
+          search[key] = search[key].filter((item) => item !== val)
+          if (search[key].length === 0) delete search[key]
+        }
+        removeFilterOrder(key)
       }
     }
+
+    updateFilterOrders()
 
     setSearch({ ...search })
     // skips the query update on mobile/table devices
     if (updateQuery) {
       updateSearchQuery(true)
+    }
+  }
+
+  /* Filter Orders */
+  const addFilterOrder = (newOrder) => {
+    filterOrders.push(newOrder)
+  }
+
+  const removeFilterOrder = (orderToRemove) => {
+    filterOrders.splice(filterOrders.lastIndexOf(orderToRemove), 1)
+  }
+
+  const updateFilterOrders = (clearAll = false) => {
+    if (filterOrders.length === 0 || clearAll) {
+      delete search.filter_order
+      setFilterOrders([])
+    } else {
+      search.filter_order = filterOrders.join(',')
     }
   }
 
