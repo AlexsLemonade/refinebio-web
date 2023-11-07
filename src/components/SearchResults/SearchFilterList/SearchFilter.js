@@ -23,7 +23,12 @@ const ToggleButton = styled(sharedButton)`
     }
   `}
 `
-export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
+export const SearchFilter = ({
+  filterGroup,
+  filterLabel,
+  filterOption,
+  filterKey
+}) => {
   const { viewport } = useResponsive()
   const { isFilterChecked, toggleFilter } = useSearchManager()
   const filterList = Object.entries(filterGroup).sort((a, b) => b[1] - a[1])
@@ -103,6 +108,7 @@ export const SearchFilter = ({ filterGroup, filterOption, filterLabel }) => {
                   toggleFilter(
                     e.target.checked,
                     filterOption,
+                    filterKey,
                     option[0],
                     viewport === 'large'
                   )

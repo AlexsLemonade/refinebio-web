@@ -102,33 +102,32 @@ export const useSearchManager = () => {
   }
 
   // toggles a filter option in facets
-  const toggleFilter = (checked, key, val, updateQuery = true) => {
-    if (clientOnlyFilterQueries.includes(key)) {
+  const toggleFilter = (checked, option, key, val, updateQuery = true) => {
+    if (clientOnlyFilterQueries.includes(option)) {
       if (checked) {
-        delete search[key]
+        delete search[option]
       } else {
-        search[key] = true
+        search[option] = true
       }
     } else {
       // eslint-disable-next-line no-lonely-if
       if (checked) {
-        if (search[key] !== undefined) {
-          search[key].push(val)
+        if (search[option] !== undefined) {
+          search[option].push(val)
         } else {
-          search[key] = [val]
+          search[option] = [val]
         }
         addFilterOrder(key)
       } else {
-        if (search[key].length > 0) {
-          search[key] = search[key].filter((item) => item !== val)
-          if (search[key].length === 0) delete search[key]
+        if (search[option].length > 0) {
+          search[option] = search[option].filter((item) => item !== val)
+          if (search[option].length === 0) delete search[option]
         }
         removeFilterOrder(key)
       }
     }
 
     updateFilterOrders()
-
     setSearch({ ...search })
     // skips the query update on mobile/table devices
     if (updateQuery) {
