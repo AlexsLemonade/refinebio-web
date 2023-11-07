@@ -42,7 +42,7 @@ export const IconBadge = ({ name, label, size = 'small', ...props }) => {
         <Text
           margin={{ left: 'xxsmall' }}
           size={size}
-          style={{ wordBreak: 'break-all' }}
+          style={{ wordBreak: 'break-word' }}
         >
           {label}
         </Text>
