@@ -5,7 +5,7 @@ import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
-import { links } from 'config'
+import { links, options } from 'config'
 import { DownloadBlock } from './DownloadBlock'
 
 const Card = ({ heading, pad, children }) => {
@@ -75,7 +75,7 @@ export const RNASeqTab = ({ type = 'rnaSeq' }) => {
               Note: This compendia is not normalized or aggregated.
             </Paragraph>
             <Button
-              aria-label="Go to the refinebio docs - RNA-seq Sample Compendia"
+              aria-label={`Go to the refinebio docs - ${options.compendia.tabs[1].label}`}
               href={links.refinebio_docs_rna_seq_sample_compendia}
               label="Learn More"
               margin={{ top: 'small' }}

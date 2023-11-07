@@ -18,7 +18,7 @@ export const Tabs = () => {
     if (!isReady) return
 
     setActiveIndex(query.type === 'rna-seq' ? 1 : 0)
-  }, [isReady])
+  }, [isReady, query])
 
   const clickHandle = (tabType) => {
     const tabName = tabType === 'rnaSeq' ? 'rna-seq' : tabType

@@ -3,7 +3,7 @@ import { Box, Heading, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { links } from 'config'
+import { links, options } from 'config'
 import { DownloadBlock } from './DownloadBlock'
 
 export const NormalizedTab = ({ type = 'normalized' }) => {
@@ -37,7 +37,7 @@ export const NormalizedTab = ({ type = 'normalized' }) => {
             quantile normalization.
           </Heading>
           <Button
-            aria-label="Go to the refinebio docs - Normalized Compendia"
+            aria-label={`Go to the refinebio docs - ${options.compendia.tabs[0].label}`}
             href={links.refinebio_docs_normalized_compendia}
             label="Learn More"
             secondary

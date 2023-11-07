@@ -3,12 +3,12 @@ import { useRouter } from 'next/router'
 import { Box, Nav, Text } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
+import { links, options } from 'config'
 import isMatchPath from 'helpers/isMatchPath'
 import { BadgedButton } from 'components/shared/BadgedButton'
 import { LayerResponsive } from 'components/shared/LayerResponsive'
 import { List } from 'components/shared/List'
 import { Icon } from 'components/shared/Icon'
-import { links } from 'config'
 import { LogoAnchor } from './LogoAnchor'
 import { NavDropDown } from './NavDropDown'
 import { NavLink } from './NavLink'
@@ -20,6 +20,9 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const { viewport, setResponsive } = useResponsive()
   const { dataset, datasetId, getDataset, getTotalSamples } =
     useDatasetManager()
+  const {
+    compendia: { tabs }
+  } = options
   const [totalSamples, setTotalSamples] = useState()
 
   useEffect(() => {
@@ -100,18 +103,18 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                   </Box>
                   <Box pad={{ horizontal: 'small' }}>
                     <NavLink
-                      active={isMatchPath(asPath, '/compendia/normalized')}
-                      label="Normalized Compendia"
+                      active={isMatchPath(asPath, tabs[0].path)}
+                      label={tabs[0].label}
                       light={light}
-                      href="/compendia/normalized"
+                      href={tabs[0].path}
                       viewport={viewport}
                       onClick={handleClick}
                     />
                     <NavLink
-                      active={isMatchPath(asPath, '/compendia/rna-seq')}
-                      label="RNA-seq Sample Compendia"
+                      active={isMatchPath(asPath, tabs[1].path)}
+                      label={tabs[1].label}
                       light={light}
-                      href="/compendia/rna-seq"
+                      href={tabs[1].path}
                       viewport={viewport}
                       onClick={handleClick}
                     />

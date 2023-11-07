@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Text } from 'grommet'
 import styled, { css } from 'styled-components'
+import { options } from 'config'
 import isMatchPath from 'helpers/isMatchPath'
 import { Anchor } from 'components/shared/Anchor'
 import { Button as SharedButton } from 'components/shared/Button'
@@ -66,9 +67,13 @@ const ListItem = ({ active, href, label, ...props }) => {
 export const NavDropDown = ({ active, light }) => {
   const router = useRouter()
   const { asPath } = router
+  const {
+    compendia: { tabs }
+  } = options
+
   const menuItems = [
-    { label: 'Normalized Compendia', path: '/compendia/normalized' },
-    { label: 'RNA-seq Example Compendia', path: '/compendia/rna-seq' }
+    { label: tabs[0].label, path: tabs[0].path },
+    { label: tabs[1].label, path: tabs[1].path }
   ]
   const [isOpen, setIsOpen] = useState(false)
 
