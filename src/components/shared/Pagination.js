@@ -34,6 +34,7 @@ export const Pagination = ({
   pageSize,
   totalPages,
   setPage,
+  updatePage = () => {}, // for updateing a page url with selected page number
   reset = false
 }) => {
   const { query, isReady } = useRouter()
@@ -45,11 +46,18 @@ export const Pagination = ({
   const [isInvalid, setIsInvalid] = useState(false)
   const [canPreviousPage, setCanPreviousPage] = useState(false)
   const [canNextPage, setCanNextPage] = useState(true)
-  const nextPage = () => setCurrentPage(currentPage + 1)
-  const previousPage = () => setCurrentPage(currentPage - 1)
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1)
+    updatePage(currentPage + 1)
+  }
+  const previousPage = () => {
+    setCurrentPage(currentPage - 1)
+    updatePage(currentPage - 1)
+  }
 
   const gotoPage = (pageNumber) => {
     setCurrentPage(pageNumber)
+    updatePage(pageNumber)
     setUserInput('')
   }
 
