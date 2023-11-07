@@ -48,10 +48,6 @@ export const Search = (props) => {
   const isResults = results?.length > 0
 
   const handleClearSearchTerm = () => {
-    if (query.search) {
-      updateSearchTerm('')
-    }
-
     setUserSearchTerm('')
   }
 
