@@ -55,11 +55,6 @@ export const Search = (props) => {
     setUserSearchTerm('')
   }
 
-  const handleSetPage = (newPage) => {
-    setPage(newPage)
-    updatePage(newPage)
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault()
     updateSearchTerm(userSearchTerm)
@@ -220,7 +215,8 @@ export const Search = (props) => {
                     page={page}
                     pageSize={pageSize}
                     totalPages={totalResults}
-                    setPage={handleSetPage}
+                    setPage={setPage}
+                    updatePage={updatePage}
                   />
                 </Box>
               </Box>
