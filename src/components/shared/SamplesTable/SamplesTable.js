@@ -7,7 +7,6 @@ import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import formatString from 'helpers/formatString'
 import { Anchor } from 'components/shared/Anchor'
 import { BoxBlock } from 'components/shared/BoxBlock'
-import { Button } from 'components/shared/Button'
 import { DataTable, ExpandTableButton } from 'components/shared/DataTable'
 import { FilterTextInput } from 'components/shared/FilterTextInput'
 import { InlineMessage } from 'components/shared/InlineMessage'
@@ -18,6 +17,7 @@ import { Row } from 'components/shared/Row'
 import { TextNull } from 'components/shared/TextNull'
 import { links, options } from 'config'
 import { SamplesTableEmpty } from './SamplesTableEmpty'
+import { SamplesTableError } from './SamplesTableError'
 import { AccessionCodeCell } from './AccessionCodeCell'
 import { AddRemoveCell } from './AddRemoveCell'
 import { AdditionalMetadataCell } from './AdditionalMetadataCell'
@@ -246,7 +246,7 @@ export const SamplesTable = ({
               </SamplesTableEmpty>
             )}
           </TextHighlightContextProvider>
-          {loading ? (
+          {loading && (
             <SamplesTableEmpty background="rgbaLight7">
               <Spinner
                 color="gray-shade-70"
@@ -256,26 +256,8 @@ export const SamplesTable = ({
                 }}
               />
             </SamplesTableEmpty>
-          ) : (
-            hasError && (
-              <SamplesTableEmpty background="rgbaLight7">
-                <Box direction="row" gap="xxsmall">
-                  <Text color="error">
-                    Temporarily under heavy traffic load. Please
-                  </Text>
-                  <Button
-                    label="try again"
-                    link
-                    linkColor="error"
-                    linkFontSize="medium"
-                    onClick={getSamplesTableData}
-                    className="color-error"
-                  />
-                  <Text color="error">later.</Text>
-                </Box>
-              </SamplesTableEmpty>
-            )
           )}
+          {hasError && <SamplesTableError onClick={getSamplesTableData} />}
         </BoxBlock>
         {hasSamples && (
           <Box>
