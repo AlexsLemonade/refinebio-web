@@ -34,7 +34,7 @@ export const Custom500 = () => {
           <Button label="Go Back" primary responsive onClick={goBack} />
         </Box>
       }
-      img="/spilled-sample.svg"
+      img="/tubey-spilled-sample.svg"
     />
   )
 }

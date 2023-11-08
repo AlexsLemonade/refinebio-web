@@ -1,4 +1,6 @@
 import { Box, Paragraph } from 'grommet'
+import { links } from 'config'
+import { Anchor } from 'components/shared/Anchor'
 import { TwoColumns } from './TwoColumns'
 
 export const Custom504 = () => {
@@ -11,9 +13,18 @@ export const Custom504 = () => {
             We apologize for the inconvenience. We are working hard to restore
             normal service.
           </Paragraph>
+          <Paragraph size="large">
+            Follow us on twitter{' '}
+            <Anchor
+              href={links.ccdl_twitter}
+              label="@CancerDataLab"
+              rel="nofol low noopener noreferrer"
+            />{' '}
+            for updates.
+          </Paragraph>
         </Box>
       }
-      img="/distressed-tubey.svg"
+      img="/tubey-distressed.svg"
       marginBottom="basex7"
     />
   )
