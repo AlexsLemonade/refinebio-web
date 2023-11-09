@@ -58,7 +58,6 @@ export default async (queryString, currentPage, filterOrders) => {
   }
 
   return {
-    message: response.message,
     facets,
     hasError: !response.ok,
     results,
