@@ -163,10 +163,10 @@ export const Pagination = ({
         {isInvalid && (
           <Box animation={{ type: 'fadeIn', duration: 500 }}>
             <InlineMessage
-              color="error"
+              type="error"
+              label="Please enter a valid page number"
               height="16px"
               justify="center"
-              label="Please enter a valid page number"
               iconSize="small"
               style={{ position: 'absolute', right: '-80px', top: '-24px' }}
             />

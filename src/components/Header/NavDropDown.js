@@ -43,26 +43,24 @@ const Li = styled(Box)`
   `}
 `
 
-const ListItem = ({ active, href, label, ...props }) => {
-  return (
-    <Li
-      as="li"
-      active={active}
-      role="none"
-      style={{ listStyle: 'none' }}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-    >
-      <Anchor
-        color={active ? 'white' : 'black'}
-        href={href}
-        label={label}
-        role="menuitem"
-        style={{ display: 'block', whiteSpace: 'nowrap', padding: '16px' }}
-      />
-    </Li>
-  )
-}
+const ListItem = ({ active, href, label, ...props }) => (
+  <Li
+    as="li"
+    active={active}
+    role="none"
+    style={{ listStyle: 'none' }}
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...props}
+  >
+    <Anchor
+      color={active ? 'white' : 'black'}
+      href={href}
+      label={label}
+      role="menuitem"
+      style={{ display: 'block', whiteSpace: 'nowrap', padding: '16px' }}
+    />
+  </Li>
+)
 
 export const NavDropDown = ({ active, light }) => {
   const router = useRouter()
@@ -70,11 +68,7 @@ export const NavDropDown = ({ active, light }) => {
   const {
     compendia: { tabs }
   } = options
-
-  const menuItems = [
-    { label: tabs[0].label, path: tabs[0].path },
-    { label: tabs[1].label, path: tabs[1].path }
-  ]
+  const menuItems = tabs.map(({ label, path }) => ({ label, path }))
   const [isOpen, setIsOpen] = useState(false)
 
   const handleClick = () => {
@@ -129,12 +123,12 @@ export const NavDropDown = ({ active, light }) => {
             pad="none"
             role="menu"
           >
-            {menuItems.map((menuItem) => (
+            {menuItems.map(({ label, path }) => (
               <ListItem
-                key={menuItem.label}
-                active={isMatchPath(asPath, menuItem.path)}
-                href={menuItem.path}
-                label={menuItem.label}
+                key={label}
+                active={isMatchPath(asPath, path)}
+                href={path}
+                label={label}
                 onClick={handleClick}
               />
             ))}

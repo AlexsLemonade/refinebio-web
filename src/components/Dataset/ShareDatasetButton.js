@@ -59,10 +59,9 @@ export const ShareDatasetButton = ({ datasetId }) => {
               }}
             >
               <InlineMessage
-                color="success"
-                fontColor="success"
-                iconSize="medium"
+                type="success"
                 label="Copied to clipboard"
+                iconSize="medium"
               />
             </Box>
           )}

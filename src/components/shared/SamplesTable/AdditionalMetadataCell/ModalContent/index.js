@@ -66,8 +66,8 @@ export const ModalContent = ({ annotations }) => {
             />
           </Box>
           <InlineMessage
-            fontSize={setResponsive('small', 'medium')}
             label="Sample metadata included in download"
+            fontSize={setResponsive('small', 'medium')}
           />
         </Row>
       </Box>
