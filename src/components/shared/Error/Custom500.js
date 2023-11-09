@@ -5,7 +5,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { Template } from './Template'
 
-export const Custom500 = () => {
+export const Custom500 = ({ ...props }) => {
   const { back, events } = useRouter()
   const { setResponsive } = useResponsive()
 
@@ -35,6 +35,8 @@ export const Custom500 = () => {
         </Box>
       }
       img="/tubey-spilled-sample.svg"
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     />
   )
 }

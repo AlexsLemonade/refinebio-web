@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { Button } from 'components/shared/Button'
 import { Template } from './Template'
 
-export const Custom404 = () => {
+export const Custom404 = ({ ...props }) => {
   const { back, events } = useRouter()
 
   useEffect(() => {
@@ -30,6 +30,8 @@ export const Custom404 = () => {
         />
       }
       img="/tubey-reward-poster.svg"
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     />
   )
 }

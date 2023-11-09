@@ -3,7 +3,7 @@ import { links } from 'config'
 import { Anchor } from 'components/shared/Anchor'
 import { Template } from './Template'
 
-export const Custom504 = () => {
+export const Custom504 = ({ ...props }) => {
   return (
     <Template
       heading="We’re a little overwhelmed at the moment."
@@ -26,6 +26,8 @@ export const Custom504 = () => {
       }
       img="/tubey-distressed.svg"
       marginBottom="basex7"
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     />
   )
 }
