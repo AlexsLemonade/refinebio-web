@@ -12,7 +12,7 @@ export default {
   args: {
     label: 'Added to Dataset',
     labelOnly: false,
-    type: 'success' || alternatievColor
+    type: 'success' || alternativeType
   }
 }
 
