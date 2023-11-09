@@ -102,22 +102,17 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                     </Text>
                   </Box>
                   <Box pad={{ horizontal: 'small' }}>
-                    <NavLink
-                      active={isMatchPath(asPath, tabs[0].path)}
-                      label={tabs[0].label}
-                      light={light}
-                      href={tabs[0].path}
-                      viewport={viewport}
-                      onClick={handleClick}
-                    />
-                    <NavLink
-                      active={isMatchPath(asPath, tabs[1].path)}
-                      label={tabs[1].label}
-                      light={light}
-                      href={tabs[1].path}
-                      viewport={viewport}
-                      onClick={handleClick}
-                    />
+                    {tabs.map(({ label, path }) => (
+                      <NavLink
+                        key={label}
+                        active={isMatchPath(asPath, path)}
+                        label={label}
+                        light={light}
+                        href={path}
+                        viewport={viewport}
+                        onClick={handleClick}
+                      />
+                    ))}
                   </Box>
                 </>
               ) : (

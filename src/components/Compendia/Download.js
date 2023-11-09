@@ -220,7 +220,7 @@ export const Download = ({ type }) => {
                 Also contains small number of samples from other organisms from
                 the same species.{' '}
                 <Anchor
-                  href={links.refinebio_docs_collaspi_by_genus}
+                  href={links.refinebio_docs_collapsing_by_genus}
                   label="View"
                   rel="noopener noreferrer"
                 />
