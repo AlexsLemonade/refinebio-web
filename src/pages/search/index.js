@@ -214,8 +214,8 @@ export const Search = (props) => {
                   <Pagination
                     page={page}
                     pageSize={pageSize}
-                    setPage={setPage}
                     totalPages={totalResults}
+                    setPage={setPage}
                     updatePage={updatePage}
                   />
                 </Box>
