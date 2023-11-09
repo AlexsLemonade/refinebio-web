@@ -81,8 +81,9 @@ export const SearchFilterList = ({ facets, setToggle }) => {
             >
               <SearchFilter
                 filterGroup={filterGroup[i]}
-                filterOption={f.option}
                 filterLabel={f.label}
+                filterOption={f.option}
+                filterKey={f.key}
               />
             </Box>
           )}

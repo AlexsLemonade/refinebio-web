@@ -246,6 +246,8 @@ Search.getInitialProps = async (ctx) => {
       }
     }
   } = options
+
+  const filterOrders = query.filter_order ? query.filter_order.split(',') : []
   const queryString = {
     ...getSearchQueryForAPI(query),
     limit: query.size || Number(limit),
@@ -259,7 +261,8 @@ Search.getInitialProps = async (ctx) => {
 
   const { facets, results, totalResults } = await fetchSearch(
     queryString,
-    Number(query.p) || 1
+    Number(query.p) || 1,
+    filterOrders
   )
 
   return {

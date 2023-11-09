@@ -1,11 +1,30 @@
 import { api } from 'api'
+import { options } from 'config'
 import getAccessionCodesQueryParam from './getAccessionCodesQueryParam'
 import getUniqElementsBy from './getUniqElementsBy'
 
-export default async (queryString, currentPage) => {
+export default async (queryString, currentPage, filterOrders) => {
+  const {
+    search: { formattedFacetNames }
+  } = options
   const response = await api.search.get(queryString)
-  let { results } = response
-  const { count: totalResults, facets } = response
+  const { count: totalResults } = response
+  let { results, facets } = response
+
+  if (filterOrders.length > 0) {
+    const lastFilterOrderName = filterOrders[filterOrders.length - 1]
+    const { facets: previousFacets } = await api.search.get({
+      ...queryString,
+      limit: 1,
+      [formattedFacetNames[lastFilterOrderName]]: undefined
+    })
+
+    facets = {
+      ...facets,
+      [lastFilterOrderName]: previousFacets[lastFilterOrderName]
+    }
+  }
+  /* Accession Codes */
   const accessionCodes = getAccessionCodesQueryParam(queryString.search)
 
   // makes requests for accession codes only from the first page
