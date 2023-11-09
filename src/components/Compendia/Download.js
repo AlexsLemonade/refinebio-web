@@ -116,7 +116,7 @@ export const Download = ({ type }) => {
         compendia.filter((organism) =>
           formatString(organism.primary_organism_name)
             .toLowerCase()
-            .startsWith(val.toLowerCase())
+            .includes(val.toLowerCase())
         )
       )
     } else {
