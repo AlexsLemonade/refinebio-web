@@ -267,15 +267,13 @@ export const SamplesTable = ({
               margin={{ top: 'small' }}
             >
               <InlineMessage
-                color="info"
+                label="Some fields may be harmonized."
                 fontSize="medium"
                 margin={{
                   left: tableExpanded ? 'basex6' : 'none',
                   right: 'xsmall',
                   bottom: setResponsive('xsmall', 'none')
                 }}
-                label="Some fields may be harmonized."
-                name="Info"
               />
               <Anchor
                 href={links.refinebio_docs_harmonized_metadata}

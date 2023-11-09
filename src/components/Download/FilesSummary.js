@@ -172,12 +172,6 @@ export const FilesSummary = ({ dataset }) => {
         ))}
       </Row>
       <InlineMessage
-        color="info"
-        fontSize="medium"
-        margin={{
-          right: 'xsmall',
-          bottom: setResponsive('xsmall', 'none')
-        }}
         label={
           <>
             All data you download from refine.bio has been uniformly processed
@@ -190,7 +184,11 @@ export const FilesSummary = ({ dataset }) => {
             />
           </>
         }
-        name="Info"
+        fontSize="medium"
+        margin={{
+          right: 'xsmall',
+          bottom: setResponsive('xsmall', 'none')
+        }}
       />
     </Box>
   )

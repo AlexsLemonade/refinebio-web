@@ -18,7 +18,7 @@ export const links = {
   refinebio_docs: 'https://docs.refine.bio',
   refinebio_docs_aggregation:
     'https://docs.refine.bio/en/latest/main_text.html#aggregations',
-  refinebio_docs_collaspi_by_genus:
+  refinebio_docs_collapsing_by_genus:
     'https://docs.refine.bio/en/latest/main_text.html#collapsing-by-genus',
   refinebio_docs_getting_started_with_species_compendia:
     'https://docs.refine.bio/en/latest/getting_started.html#getting-started-with-species-compendia',
