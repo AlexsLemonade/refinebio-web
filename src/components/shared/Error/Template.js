@@ -2,7 +2,7 @@ import { Box, Heading } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Row } from 'components/shared/Row'
 
-export const TwoColumns = ({ heading, body, img, marginBottom = 'none' }) => {
+export const Template = ({ heading, body, img, marginBottom = 'none' }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -41,4 +41,4 @@ export const TwoColumns = ({ heading, body, img, marginBottom = 'none' }) => {
   )
 }
 
-export default TwoColumns
+export default Template

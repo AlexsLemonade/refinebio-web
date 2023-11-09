@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { Box, Paragraph } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
-import { TwoColumns } from './TwoColumns'
+import { Template } from './Template'
 
 export const Custom500 = () => {
   const { back, events } = useRouter()
@@ -21,7 +21,7 @@ export const Custom500 = () => {
   }
 
   return (
-    <TwoColumns
+    <Template
       heading=" Uh-oh something went wrong!"
       body={
         <Box

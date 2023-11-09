@@ -1,11 +1,11 @@
 import { Box, Paragraph } from 'grommet'
 import { links } from 'config'
 import { Anchor } from 'components/shared/Anchor'
-import { TwoColumns } from './TwoColumns'
+import { Template } from './Template'
 
 export const Custom504 = () => {
   return (
-    <TwoColumns
+    <Template
       heading="We’re a little overwhelmed at the moment."
       body={
         <Box width={{ max: '450px' }}>

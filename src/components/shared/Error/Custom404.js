@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Button } from 'components/shared/Button'
-import { TwoColumns } from './TwoColumns'
+import { Template } from './Template'
 
 export const Custom404 = () => {
   const { back, events } = useRouter()
@@ -18,7 +18,7 @@ export const Custom404 = () => {
   }
 
   return (
-    <TwoColumns
+    <Template
       heading="The page you are looking for isn’t expressed."
       body={
         <Button
