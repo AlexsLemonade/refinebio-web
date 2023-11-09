@@ -7,10 +7,10 @@ export const CheckBox = ({ error = false, errorText = '', ...props }) => {
       {error && (
         <Box animation={{ type: 'fadeIn', duration: 300 }}>
           <InlineMessage
-            color="error"
+            type="error"
+            label={errorText}
             height="16px"
             justify="center"
-            label={errorText}
             iconSize="small"
             style={{ position: 'absolute', top: '-14px' }}
           />

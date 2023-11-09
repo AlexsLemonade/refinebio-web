@@ -88,12 +88,6 @@ export const DatasetRegenerate = () => {
             ) && (
               <Box margin={{ top: 'small' }}>
                 <InlineMessage
-                  color="info"
-                  fontSize="medium"
-                  margin={{
-                    right: 'xsmall',
-                    bottom: setResponsive('xsmall', 'xsmall', 'none')
-                  }}
                   label={
                     <>
                       Some expression values may differ.{' '}
@@ -104,7 +98,11 @@ export const DatasetRegenerate = () => {
                       />
                     </>
                   }
-                  name="Info"
+                  fontSize="medium"
+                  margin={{
+                    right: 'xsmall',
+                    bottom: setResponsive('xsmall', 'xsmall', 'none')
+                  }}
                 />
               </Box>
             )}
