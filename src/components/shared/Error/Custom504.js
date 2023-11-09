@@ -8,7 +8,7 @@ export const Custom504 = ({ ...props }) => {
     <Template
       heading="We’re a little overwhelmed at the moment."
       body={
-        <Box width={{ max: '450px' }}>
+        <Box width={{ max: '540px' }}>
           <Paragraph size="large">
             We apologize for the inconvenience. We are working hard to restore
             normal service.
