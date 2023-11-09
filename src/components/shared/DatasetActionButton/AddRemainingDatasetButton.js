@@ -19,7 +19,6 @@ export const AddRemainingDatasetButton = ({ dataToAdd, samplesInDataset }) => {
         label={
           <>{formatNumbers(samplesInDataset)} samples already in My Dataset</>
         }
-        color="info"
         iconSize="small"
         height="16px"
         margin={{ top: 'small' }}
