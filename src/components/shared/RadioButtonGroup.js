@@ -13,11 +13,11 @@ export const RadioButtonGroup = ({
       {error && (
         <Box animation={{ type: 'fadeIn', duration: 300 }}>
           <InlineMessage
-            color="error"
-            height="16px"
-            justify="center"
+            type="error"
             label={errorText}
             labelOnly={labelOnly}
+            height="16px"
+            justify="center"
             iconSize="small"
             style={{ position: 'absolute', top: positionTop }}
           />
