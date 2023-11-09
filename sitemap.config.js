@@ -4,7 +4,7 @@ const fetch = require('isomorphic-unfetch')
 const formatURLString = require('./src/helpers/formatURLString')
 
 const apiVersion = process.env.API_VERSION || 'v1'
-const apiPath = process.env.API_PATH || `https://api.refine.bio/${apiVersion}`
+const apiPath = process.env.API_HOST || `https://api.refine.bio/${apiVersion}`
 const hostname = process.env.HOST_NAME || 'https://www.refine.bio'
 const limit = 1000 // for API limit value
 const config = {

@@ -1,10 +1,8 @@
 // TEMPORARY for testing
 import fetch from 'isomorphic-unfetch'
 
-// Store the last api version detected - used to detect updates to the api
-// while the app is running.
-const host = 'https://api.refine.bio'
-const apiVersion = 'v1'
+const host = process.env.API_HOST || 'https://api.refine.bio'
+const apiVersion = process.env.API_VERSION || 'v1'
 
 // Returns the fulfilled promise using isomorphic-unfetc with async/await
 export default async (url, params = false) => {
