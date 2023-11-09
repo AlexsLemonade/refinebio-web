@@ -36,7 +36,6 @@ export default async (queryString, currentPage, filterOrders) => {
         })
       )
     )
-
     const matchedAccessionCodes = []
       .concat(...accessionCodesResponse.map((data) => data.results))
       .map((result) => ({
@@ -58,5 +57,12 @@ export default async (queryString, currentPage, filterOrders) => {
     }
   }
 
-  return { facets, results, totalResults }
+  return {
+    message: response.message,
+    facets,
+    hasError: !response.ok,
+    results,
+    totalResults,
+    statusCode: response.statusCode
+  }
 }
