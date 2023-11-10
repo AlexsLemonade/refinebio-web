@@ -30,7 +30,7 @@ export const Custom500 = ({ ...props }) => {
           gap="xsmall"
           width={setResponsive('100%', 'auto')}
         >
-          <Paragraph size="large">Try refreshing the page or</Paragraph>
+          <Paragraph size="20px">Try refreshing the page or</Paragraph>
           <Button label="Go Back" primary responsive onClick={goBack} />
         </Box>
       }
