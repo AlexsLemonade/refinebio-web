@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Text } from 'grommet'
 import styled, { css } from 'styled-components'
+import { options } from 'config'
 import isMatchPath from 'helpers/isMatchPath'
 import { Anchor } from 'components/shared/Anchor'
 import { Button as SharedButton } from 'components/shared/Button'
@@ -42,34 +43,32 @@ const Li = styled(Box)`
   `}
 `
 
-const ListItem = ({ active, href, label, ...props }) => {
-  return (
-    <Li
-      as="li"
-      active={active}
-      role="none"
-      style={{ listStyle: 'none' }}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-    >
-      <Anchor
-        color={active ? 'white' : 'black'}
-        href={href}
-        label={label}
-        role="menuitem"
-        style={{ display: 'block', whiteSpace: 'nowrap', padding: '16px' }}
-      />
-    </Li>
-  )
-}
+const ListItem = ({ active, href, label, ...props }) => (
+  <Li
+    as="li"
+    active={active}
+    role="none"
+    style={{ listStyle: 'none' }}
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...props}
+  >
+    <Anchor
+      color={active ? 'white' : 'black'}
+      href={href}
+      label={label}
+      role="menuitem"
+      style={{ display: 'block', whiteSpace: 'nowrap', padding: '16px' }}
+    />
+  </Li>
+)
 
 export const NavDropDown = ({ active, light }) => {
   const router = useRouter()
   const { asPath } = router
-  const menuItems = [
-    { label: 'Normalized Compendia', path: '/compendia/normalized' },
-    { label: 'RNA-seq Example Compendia', path: '/compendia/rna-seq' }
-  ]
+  const {
+    compendia: { tabs }
+  } = options
+  const menuItems = tabs.map(({ label, path }) => ({ label, path }))
   const [isOpen, setIsOpen] = useState(false)
 
   const handleClick = () => {
@@ -124,12 +123,12 @@ export const NavDropDown = ({ active, light }) => {
             pad="none"
             role="menu"
           >
-            {menuItems.map((menuItem) => (
+            {menuItems.map(({ label, path }) => (
               <ListItem
-                key={menuItem.label}
-                active={isMatchPath(asPath, menuItem.path)}
-                href={menuItem.path}
-                label={menuItem.label}
+                key={label}
+                active={isMatchPath(asPath, path)}
+                href={path}
+                label={label}
                 onClick={handleClick}
               />
             ))}

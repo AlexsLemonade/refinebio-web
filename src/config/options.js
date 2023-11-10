@@ -21,11 +21,13 @@ export const options = {
     tabs: [
       {
         type: 'normalized',
-        label: 'Normalized Compendia'
+        label: 'Normalized Compendia',
+        path: '/compendia/normalized'
       },
       {
         type: 'rnaSeq',
-        label: 'RNA-seq Sample Compendia'
+        label: 'RNA-seq Sample Compendia',
+        path: '/compendia/rna-seq'
       }
     ]
   },
