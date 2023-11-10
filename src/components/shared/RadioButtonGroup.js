@@ -1,5 +1,13 @@
 import { RadioButtonGroup as GrommetRadioButtonGroup, Box } from 'grommet'
+import styled from 'styled-components'
 import { InlineMessage } from 'components/shared/InlineMessage'
+
+const CustomRadioButton = styled(GrommetRadioButtonGroup)`
+  flex-wrap: wrap;
+  label > span {
+    width: max-content;
+  }
+`
 
 export const RadioButtonGroup = ({
   error = false,
@@ -24,7 +32,7 @@ export const RadioButtonGroup = ({
         </Box>
       )}
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <GrommetRadioButtonGroup error={error} {...props} />
+      <CustomRadioButton error={error} {...props} />
     </Box>
   )
 }

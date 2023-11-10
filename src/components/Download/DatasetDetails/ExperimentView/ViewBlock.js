@@ -1,6 +1,7 @@
 import { Box, Heading, Text } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
+import formatNumbers from 'helpers/formatNumbers'
 import formatString from 'helpers/formatString'
 import formatURLString from 'helpers/formatURLString'
 import { Anchor } from 'components/shared/Anchor'
@@ -63,7 +64,7 @@ export const ViewBlock = ({
               size="medium"
             />
             <IconBadge
-              label={`${addedSamples.length} Downloadable ${
+              label={`${formatNumbers(addedSamples.length)} Downloadable ${
                 addedSamples.length > 1 ? 'Samples' : 'Sample'
               }`}
               name="Samples"
