@@ -27,7 +27,7 @@ export const Template = ({
         align={setResponsive('center', 'center', align)}
         margin={{ top: 'basex8' }}
       >
-        <Heading level={1} margin={{ bottom: 'small' }} size="small">
+        <Heading level={1} margin={{ bottom: 'small' }} size="medium">
           {heading}
         </Heading>
         {body}
