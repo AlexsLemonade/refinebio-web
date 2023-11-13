@@ -1,6 +1,6 @@
 {
   "version": "0.0.0",
-  "xSourceRevision": "1.45.27-hotfix",
+  "xSourceRevision": "1.46.22",
   "platforms": {
     "IonTorrentS5": "Ion Torrent S5",
     "ovigene10st": "[OviGene-1_0-st] Ovine Gene 1.1 ST Array",
@@ -155,8 +155,8 @@
     "GPL6782": "MHP Human 1Mb-resolution CGH array",
     "rhegene11st": "[RheGene-1_1-st] Rhesus Gene 1.1 ST Array",
     "IonTorrentS5XL": "Ion Torrent S5 XL",
-    "GPL18609": "miRCURY LNA microRNA Array, 5th and 7th generation combined - hsa, mmu & rno (miRBase 19.0)",
     "GPL4723": "SWEGENE_BAC_32K_Full",
+    "GPL18609": "miRCURY LNA microRNA Array, 5th and 7th generation combined - hsa, mmu & rno (miRBase 19.0)",
     "GPL2719": "intestine-spleen combined array",
     "GPL8786": "[miRNA-1] Affymetrix Multispecies miRNA-1 Array",
     "maize": "[Maize] Affymetrix Maize Genome Array",
