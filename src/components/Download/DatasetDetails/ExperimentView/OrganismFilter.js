@@ -37,7 +37,6 @@ export const OrganismFilter = ({
     <Box
       direction="row"
       margin={{ bottom: 'small', horizontal: setResponsive('none', 'small') }}
-      wrap
     >
       <Text margin={{ right: 'small' }}>Show</Text>
       <RadioButtonGroup

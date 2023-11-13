@@ -2,6 +2,8 @@ export const links = {
   // ALSF
   alsf: 'https://www.alexslemonade.org/',
   email_ccdl_alsf: 'ccdl@alexslemonade.org',
+  // ALSF github
+  alsf_github: 'https://github.com/AlexsLemonade',
   // CCDL
   ccdl: 'https://www.ccdatalab.org',
   ccdl_donate: 'https://www.ccdatalab.org/donate-link',
@@ -16,6 +18,8 @@ export const links = {
   refinebio_docs: 'https://docs.refine.bio',
   refinebio_docs_aggregation:
     'https://docs.refine.bio/en/latest/main_text.html#aggregations',
+  refinebio_docs_collapsing_by_genus:
+    'https://docs.refine.bio/en/latest/main_text.html#collapsing-by-genus',
   refinebio_docs_getting_started_with_species_compendia:
     'https://docs.refine.bio/en/latest/getting_started.html#getting-started-with-species-compendia',
   refinebio_docs_species_compendia:

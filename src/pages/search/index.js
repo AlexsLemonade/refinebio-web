@@ -48,10 +48,6 @@ export const Search = (props) => {
   const isResults = results?.length > 0
 
   const handleClearSearchTerm = () => {
-    if (query.search) {
-      updateSearchTerm('')
-    }
-
     setUserSearchTerm('')
   }
 
@@ -214,8 +210,8 @@ export const Search = (props) => {
                   <Pagination
                     page={page}
                     pageSize={pageSize}
-                    setPage={setPage}
                     totalPages={totalResults}
+                    setPage={setPage}
                     updatePage={updatePage}
                   />
                 </Box>
@@ -246,6 +242,8 @@ Search.getInitialProps = async (ctx) => {
       }
     }
   } = options
+
+  const filterOrders = query.filter_order ? query.filter_order.split(',') : []
   const queryString = {
     ...getSearchQueryForAPI(query),
     limit: query.size || Number(limit),
@@ -259,7 +257,8 @@ Search.getInitialProps = async (ctx) => {
 
   const { facets, results, totalResults } = await fetchSearch(
     queryString,
-    Number(query.p) || 1
+    Number(query.p) || 1,
+    filterOrders
   )
 
   return {

@@ -5,6 +5,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import isMatchPath from 'helpers/isMatchPath'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { GlobalNav } from './GlobalNav'
+import { GithubAnchor } from './GithubAnchor'
 import { LogoAnchor } from './LogoAnchor'
 
 export const Header = ({ light = false }) => {
@@ -49,6 +50,7 @@ export const Header = ({ light = false }) => {
           <GlobalNav light={light} toggle={toggle} setToggle={setToggle} />
         </Box>
       </FixedContainer>
+      {viewport === 'large' && <GithubAnchor light={light} />}
     </GrommetHeader>
   )
 }

@@ -39,11 +39,7 @@ export const AdvancedOptionsToggle = ({ toggle, setToggle }) => {
           style={{ padding: '0' }}
         />
         <Text color="brand">
-          {toggle ? (
-            <Icon name="ChevronUp" size="xsmall" />
-          ) : (
-            <Icon name="ChevronDown" size="xsmall" />
-          )}
+          <Icon name={toggle ? 'ChevronDown' : 'ChevronUp'} size="xsmall" />
         </Text>
       </Box>
     </Box>

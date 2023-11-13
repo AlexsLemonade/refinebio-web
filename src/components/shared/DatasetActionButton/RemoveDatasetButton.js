@@ -11,8 +11,8 @@ export const RemoveDatasetButton = ({ dataToRemove }) => {
   return (
     <Box align="center" direction="row" wrap>
       <InlineMessage
+        type="success"
         label="Added to Dataset"
-        color="success"
         iconSize="small"
         height="16px"
       />

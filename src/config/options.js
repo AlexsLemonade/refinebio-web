@@ -21,11 +21,13 @@ export const options = {
     tabs: [
       {
         type: 'normalized',
-        label: 'Normalized Compendia'
+        label: 'Normalized Compendia',
+        path: '/compendia/normalized'
       },
       {
         type: 'rnaSeq',
-        label: 'RNA-seq Sample Compendia'
+        label: 'RNA-seq Sample Compendia',
+        path: '/compendia/rna-seq'
       }
     ]
   },
@@ -73,7 +75,7 @@ export const options = {
       }
     },
     // client-only queries
-    clientOnlyQueries: ['empty', 'p', 'size', 'sortby'],
+    clientOnlyQueries: ['empty', 'filter_order', 'p', 'size', 'sortby'],
     // client-only filter queries
     clientOnlyFilterQueries: ['empty'],
     formattedFacetNames: {

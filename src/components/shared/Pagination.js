@@ -34,7 +34,7 @@ export const Pagination = ({
   pageSize,
   totalPages,
   setPage,
-  updatePage,
+  updatePage = () => {}, // for updateing a page url with selected page number
   reset = false
 }) => {
   const { query, isReady } = useRouter()
@@ -46,27 +46,25 @@ export const Pagination = ({
   const [isInvalid, setIsInvalid] = useState(false)
   const [canPreviousPage, setCanPreviousPage] = useState(false)
   const [canNextPage, setCanNextPage] = useState(true)
-  const nextPage = () => setCurrentPage(currentPage + 1)
-  const previousPage = () => setCurrentPage(currentPage - 1)
-
-  // updates the search page url with selected page number
-  const updateQueryForPage = (newPage) => {
-    if (updatePage) {
-      updatePage(newPage)
-    }
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1)
+    updatePage(currentPage + 1)
+  }
+  const previousPage = () => {
+    setCurrentPage(currentPage - 1)
+    updatePage(currentPage - 1)
   }
 
   const gotoPage = (pageNumber) => {
     setCurrentPage(pageNumber)
+    updatePage(pageNumber)
     setUserInput('')
-    updateQueryForPage(pageNumber)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if (userInput.trim() === '') return
 
-    updateQueryForPage(Number(userInput))
     gotoPage(Number(userInput))
   }
 
@@ -165,10 +163,10 @@ export const Pagination = ({
         {isInvalid && (
           <Box animation={{ type: 'fadeIn', duration: 500 }}>
             <InlineMessage
-              color="error"
+              type="error"
+              label="Please enter a valid page number"
               height="16px"
               justify="center"
-              label="Please enter a valid page number"
               iconSize="small"
               style={{ position: 'absolute', right: '-80px', top: '-24px' }}
             />

@@ -1,20 +1,21 @@
 import { useEffect, useState, memo } from 'react'
-import { Anchor, Box, Heading, Text } from 'grommet'
+import { Box, Heading, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 import { links, options } from 'config'
 import { useCompendia } from 'hooks/useCompendia'
 import { useResponsive } from 'hooks/useResponsive'
-import { Icon } from 'components/shared/Icon'
+import formatBytes from 'helpers/formatBytes'
+import formatString from 'helpers/formatString'
+import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { CheckBox } from 'components/shared/CheckBox'
 import { Column } from 'components/shared/Column'
 import { List } from 'components/shared/List'
+import { Icon } from 'components/shared/Icon'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
 import { SearchBox } from 'components/shared/SearchBox'
 import { Spinner } from 'components/shared/Spinner'
-import formatBytes from 'helpers/formatBytes'
-import formatString from 'helpers/formatString'
 
 const DropDown = styled(Box)`
   > div:nth-child(2) {
@@ -116,7 +117,7 @@ export const Download = ({ type }) => {
         compendia.filter((organism) =>
           formatString(organism.primary_organism_name)
             .toLowerCase()
-            .startsWith(val.toLowerCase())
+            .includes(val.toLowerCase())
         )
       )
     } else {
@@ -209,6 +210,23 @@ export const Download = ({ type }) => {
       {type === 'rnaSeq' && (
         <Box margin={{ top: setResponsive('small', 'medium') }}>
           <InlineMessage label="Data is not normalized or aggregated." />
+        </Box>
+      )}
+      {selectedOrganism && selectedOrganism.organism_names.length > 1 && (
+        <Box margin={{ top: 'large' }}>
+          <InlineMessage
+            label={
+              <Text margin={{ left: 'small' }} style={{ display: 'block' }}>
+                Also contains small number of samples from other organisms from
+                the same species.{' '}
+                <Anchor
+                  href={links.refinebio_docs_collapsing_by_genus}
+                  label="View"
+                  rel="noopener noreferrer"
+                />
+              </Text>
+            }
+          />
         </Box>
       )}
       <Box margin={{ vertical: setResponsive('small', 'medium') }}>

@@ -1,5 +1,13 @@
 import { RadioButtonGroup as GrommetRadioButtonGroup, Box } from 'grommet'
+import styled from 'styled-components'
 import { InlineMessage } from 'components/shared/InlineMessage'
+
+const CustomRadioButton = styled(GrommetRadioButtonGroup)`
+  flex-wrap: wrap;
+  label > span {
+    width: max-content;
+  }
+`
 
 export const RadioButtonGroup = ({
   error = false,
@@ -13,18 +21,18 @@ export const RadioButtonGroup = ({
       {error && (
         <Box animation={{ type: 'fadeIn', duration: 300 }}>
           <InlineMessage
-            color="error"
-            height="16px"
-            justify="center"
+            type="error"
             label={errorText}
             labelOnly={labelOnly}
+            height="16px"
+            justify="center"
             iconSize="small"
             style={{ position: 'absolute', top: positionTop }}
           />
         </Box>
       )}
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <GrommetRadioButtonGroup error={error} {...props} />
+      <CustomRadioButton error={error} {...props} />
     </Box>
   )
 }

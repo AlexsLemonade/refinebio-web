@@ -132,6 +132,11 @@ export const FilesSummary = ({ dataset }) => {
               <Text weight="bold">
                 Transformation: {transformationOptions[dataset.scale_by]}
               </Text>
+              {!dataset.quantile_normalize && (
+                <Text weight="bold">
+                  Quantile Normalization Skipped for RNA-seq samples
+                </Text>
+              )}
               <Text weight="bold">
                 <Button
                   label="Change"
@@ -167,12 +172,6 @@ export const FilesSummary = ({ dataset }) => {
         ))}
       </Row>
       <InlineMessage
-        color="info"
-        fontSize="medium"
-        margin={{
-          right: 'xsmall',
-          bottom: setResponsive('xsmall', 'none')
-        }}
         label={
           <>
             All data you download from refine.bio has been uniformly processed
@@ -185,7 +184,11 @@ export const FilesSummary = ({ dataset }) => {
             />
           </>
         }
-        name="Info"
+        fontSize="medium"
+        margin={{
+          right: 'xsmall',
+          bottom: setResponsive('xsmall', 'none')
+        }}
       />
     </Box>
   )
