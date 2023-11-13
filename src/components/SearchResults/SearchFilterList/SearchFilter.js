@@ -40,6 +40,11 @@ export const SearchFilter = ({
   )
   const [open, setOpen] = useState(false)
   const [userInput, setUserInput] = useState('')
+  const getFormattedTechnologyNames = (option) => {
+    const rnaSeq = 'RNA-seq' // 'rna-seq' should be rendered as 'RNA-seq' in UI
+
+    return option.match(rnaSeq.toLowerCase()) ? rnaSeq : formatString(option)
+  }
 
   const handleToggleFilterList = (val) => {
     setUserInput(val)
@@ -95,9 +100,12 @@ export const SearchFilter = ({
                 label={
                   <Text>
                     <TextHighlight>
+                      {/* eslint-disable-next-line no-nested-ternary */}
                       {filterOption === 'platform'
                         ? formatPlatformName(cache.platforms[option[0]]) ||
                           option[0]
+                        : filterOption === 'technology'
+                        ? getFormattedTechnologyNames(option[0])
                         : formatString(option[0])}
                     </TextHighlight>{' '}
                     ({formatNumbers(option[1])})
