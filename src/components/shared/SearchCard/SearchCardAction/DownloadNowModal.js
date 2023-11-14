@@ -6,13 +6,20 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/shared/Button'
+import { AdvanedOptions } from 'components/Download/DownloadOptionsForm/AdvanedOptions'
+import { AggregateOptions } from 'components/Download/DownloadOptionsForm/AggregateOptions'
 import { TransformationOptions } from 'components/Download/DownloadOptionsForm/TransformationOptions'
 import { EmailTextInput } from 'components/Download/StartProcessingForm/EmailTextInput'
 import { ReceiveUpdatesCheckBox } from 'components/Download/StartProcessingForm/ReceiveUpdatesCheckBox'
 import { TermsOfUseCheckBox } from 'components/Download/StartProcessingForm/TermsOfUseCheckBox'
 import { ProcessingDatasetPillModal } from './ProcessingDatasetPillModal'
 
-export const DownloadNowModal = ({ accessionCode, id }) => {
+export const DownloadNowModal = ({
+  accessionCode,
+  hasMultipleOrganisms,
+  hasRnaSeq,
+  id
+}) => {
   const { addProcessingExperiment, getProcessingExperiment } =
     useOneOffExperiment()
   const { email, startProcessingDataset } = useDatasetManager()
@@ -70,14 +77,33 @@ export const DownloadNowModal = ({ accessionCode, id }) => {
           values
         }) => (
           <Form onSubmit={handleSubmit}>
-            <Box margin={{ bottom: 'large' }}>
+            {hasMultipleOrganisms && (
+              <Box margin={{ bottom: 'medium' }}>
+                <AggregateOptions
+                  value={values.aggregate_by}
+                  handleChange={handleChange}
+                  column
+                />
+              </Box>
+            )}
+            <Box margin={{ bottom: 'medium' }}>
               <TransformationOptions
                 value={values.scale_by}
                 handleChange={handleChange}
                 column
               />
             </Box>
-            <Box margin={{ bottom: 'large' }}>
+            {hasRnaSeq && (
+              <Box margin={{ bottom: 'medium' }}>
+                <AdvanedOptions
+                  id={accessionCode}
+                  values={values}
+                  handleChange={handleChange}
+                  toggle
+                />
+              </Box>
+            )}
+            <Box margin={{ bottom: 'medium' }}>
               <Paragraph>
                 <strong>
                   Putting the download files together takes about 10-20 minutes.

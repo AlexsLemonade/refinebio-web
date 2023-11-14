@@ -58,6 +58,8 @@ export const SearchCard = ({ result = {} }) => {
             <SearchCardAction
               accessionCode={accessionCode}
               downloadableSamples={downloadableSamples}
+              organismNames={organismNames}
+              technology={technology}
             />
           </Box>
         </Box>

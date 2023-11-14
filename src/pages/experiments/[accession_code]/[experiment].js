@@ -134,6 +134,8 @@ export const Experiment = () => {
                           downloadableSamples={
                             experiment.num_downloadable_samples
                           }
+                          organismNames={experiment.organism_names}
+                          technology={getTechnologyNames()}
                         />
                       </Box>
                       <Box gridArea="meta">
