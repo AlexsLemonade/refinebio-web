@@ -61,9 +61,9 @@ export const DownloadOptionsForm = ({
     )
   }
 
-  const handleUpdateDownloadOptions = (change) => (name, newValue) => {
+  const handleUpdateDownloadOptions = (onChange) => (name, newValue) => {
     updateDownloadOptions({ [name]: newValue }, selectedDataset.id)
-    return change({
+    return onChange({
       target: {
         name,
         value: newValue
