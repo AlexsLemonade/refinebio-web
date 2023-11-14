@@ -19,6 +19,14 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
   const { setResponsive } = useResponsive()
   const { StartProcessingFormSchema } = validationSchemas
 
+  const handleUpdateDownloadOptions = (onChange) => (name, newValue) =>
+    onChange({
+      target: {
+        name,
+        value: newValue
+      }
+    })
+
   return (
     <Box
       margin={{ bottom: 'medium' }}
@@ -65,14 +73,14 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
             <Box margin={{ bottom: 'small' }}>
               <AggregateOptions
                 value={values.aggregate_by}
-                handleChange={handleChange}
+                handleChange={handleUpdateDownloadOptions(handleChange)}
                 column
               />
             </Box>
             <Box margin={{ bottom: 'xsmall' }}>
               <TransformationOptions
                 value={values.scale_by}
-                handleChange={handleChange}
+                handleChange={handleUpdateDownloadOptions(handleChange)}
                 column
               />
             </Box>
@@ -80,7 +88,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
               <AdvanedOptions
                 id={dataset.id}
                 values={values}
-                handleChange={handleChange}
+                handleChange={handleUpdateDownloadOptions(handleChange)}
                 toggle
               />
             </Box>

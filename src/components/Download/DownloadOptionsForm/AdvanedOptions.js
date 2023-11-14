@@ -11,6 +11,7 @@ export const AdvanedOptions = ({
   values: { aggregate_by: aggregateBy, quantile_normalize: quantileNormalize },
   handleChange,
   toggle,
+  name = 'quantile_normalize',
   hideLabel = false
 }) => {
   const skipQuantileNormalize = !quantileNormalize
@@ -40,17 +41,10 @@ export const AdvanedOptions = ({
         <Box>
           <CheckBox
             label="Skip quantile normalization for RNA-seq samples"
-            name="quantile_normalize"
+            name={name}
             checked={skipQuantileNormalize && aggregateBy === 'EXPERIMENT'}
             disabled={aggregateBy === 'SPECIES'}
-            onChange={() =>
-              handleChange({
-                target: {
-                  name: 'quantile_normalize',
-                  value: !quantileNormalize
-                }
-              })
-            }
+            onChange={() => handleChange(name, !quantileNormalize)}
           />
         </Box>
         <Anchor
