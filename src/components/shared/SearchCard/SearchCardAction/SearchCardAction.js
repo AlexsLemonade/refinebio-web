@@ -20,10 +20,11 @@ export const SearchCardAction = ({
   const { setResponsive } = useResponsive()
   const experiment = getProcessingExperiment(accessionCode)
   const hasMultipleOrganisms = organismNames.length > 1
+  const rnaSeq = 'RNA-SEQ'
   const hasRnaSeq =
     typeof technology === 'string'
-      ? technology === 'RNA-SEQ'
-      : technology.find((x) => x === 'RNA-SEQ')
+      ? technology === rnaSeq
+      : technology.find((x) => x === rnaSeq)
 
   if (!pageRendered) return null
 
