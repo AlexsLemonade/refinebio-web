@@ -26,7 +26,7 @@ export const getServerSideProps = ({ query }) => {
 // TODO: create a new issue for the error handling
 export const Dataset = ({ query }) => {
   const { dataset_id: idFromQuery, start } = query
-  const { dataset, datasetId, loading, getDataset, regenratedDataset } =
+  const { dataset, datasetId, loading, getDataset, regeneratedDataset } =
     useDatasetManager()
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
@@ -91,12 +91,12 @@ export const Dataset = ({ query }) => {
                 </Row>
               </Row>
               <FilesSummary
-                dataset={regenratedDataset || selectedDataset}
+                dataset={regeneratedDataset || selectedDataset}
                 isProcessed={isProcessed}
               />
-              <DatasetSummary dataset={regenratedDataset || selectedDataset} />
+              <DatasetSummary dataset={regeneratedDataset || selectedDataset} />
               <DatasetDetails
-                dataset={regenratedDataset || selectedDataset}
+                dataset={regeneratedDataset || selectedDataset}
                 isImmutable
               />
             </>

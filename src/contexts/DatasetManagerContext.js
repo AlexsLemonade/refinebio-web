@@ -13,7 +13,7 @@ export const DatasetManagerContextProvider = ({ children }) => {
     setDatasetId: setDatasetIdState,
     email: emailState,
     setEmail: setEmailState,
-    regenratedDataset: regenratedDatasetState,
+    regeneratedDataset: regeneratedDatasetState,
     setRegeneratedDataset: setRegeneratedDatasetState,
     token: tokenState
   } = useRefinebio()
@@ -26,7 +26,7 @@ export const DatasetManagerContextProvider = ({ children }) => {
   const setDatasetId = setDatasetIdState
   const email = emailState
   const setEmail = setEmailState
-  const regenratedDataset = regenratedDatasetState
+  const regeneratedDataset = regeneratedDatasetState
   const setRegeneratedDataset = setRegeneratedDatasetState
   const token = tokenState
 
@@ -40,7 +40,7 @@ export const DatasetManagerContextProvider = ({ children }) => {
       setDownloadOptions,
       email,
       setEmail,
-      regenratedDataset,
+      regeneratedDataset,
       setRegeneratedDataset,
       token
     }),
@@ -53,7 +53,7 @@ export const DatasetManagerContextProvider = ({ children }) => {
       setDownloadOptions,
       email,
       setEmail,
-      regenratedDataset,
+      regeneratedDataset,
       setRegeneratedDataset,
       token
     ]

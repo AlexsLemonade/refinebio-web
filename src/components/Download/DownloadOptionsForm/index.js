@@ -22,7 +22,7 @@ export const DownloadOptionsForm = ({
     dataset: datasetState,
     createDataset,
     updateDataset,
-    regenratedDataset,
+    regeneratedDataset,
     getDownloadOptions,
     updateDownloadOptions
   } = useDatasetManager()
@@ -47,7 +47,7 @@ export const DownloadOptionsForm = ({
       const response = await onSubmit(downloadOptions)
       pathname = response
     } else {
-      const datasetToUpdate = isProcessed ? regenratedDataset : selectedDataset
+      const datasetToUpdate = isProcessed ? regeneratedDataset : selectedDataset
       await updateDataset(datasetToUpdate.id || datasetToUpdate.id, {
         ...downloadOptions,
         data: datasetToUpdate.data
@@ -68,8 +68,8 @@ export const DownloadOptionsForm = ({
   const handleUpdateDownloadOptions = async (name, newValue) => {
     // eslint-disable-next-line no-nested-ternary
     const datasetId = isProcessed
-      ? regenratedDataset
-        ? regenratedDataset.id
+      ? regeneratedDataset
+        ? regeneratedDataset.id
         : await createDataset()
       : selectedDataset.id
 

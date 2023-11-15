@@ -18,7 +18,7 @@ export const useDatasetManager = () => {
     setDownloadOptions,
     email,
     setEmail,
-    regenratedDataset,
+    regeneratedDataset,
     setRegeneratedDataset,
     token
   } = useContext(DatasetManagerContext)
@@ -284,7 +284,7 @@ export const useDatasetManager = () => {
     dataset,
     datasetId,
     loading,
-    regenratedDataset,
+    regeneratedDataset,
     token,
     clearDataset,
     createDataset,

@@ -13,7 +13,7 @@ export const useRefinebio = () => {
     setEmail,
     processingExperiments,
     setProcessingExperiments,
-    regenratedDataset,
+    regeneratedDataset,
     setRegeneratedDataset,
     token,
     setToken
@@ -30,7 +30,7 @@ export const useRefinebio = () => {
     setEmail,
     processingExperiments,
     setProcessingExperiments,
-    regenratedDataset,
+    regeneratedDataset,
     setRegeneratedDataset,
     token,
     setToken

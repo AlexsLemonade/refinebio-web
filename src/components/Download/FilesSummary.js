@@ -38,7 +38,7 @@ const Card = ({ description, format, index, title }) => {
 }
 
 export const FilesSummary = ({ dataset, isProcessed }) => {
-  const { createDataset, updateDataset, regenratedDataset } =
+  const { createDataset, updateDataset, regeneratedDataset } =
     useDatasetManager()
   const { setResponsive } = useResponsive()
   // returns the file size estimates of the given dataset and its aggregate_by value (either 'EXPERIMENT' or 'SPECIES')
@@ -111,7 +111,7 @@ export const FilesSummary = ({ dataset, isProcessed }) => {
     const params = { data: dataset.data, ...downloadOptions }
 
     const response = await updateDataset(
-      regenratedDataset.id || (await createDataset()),
+      regeneratedDataset.id || (await createDataset()),
       params
     )
     const pathname = `/dataset/${response.id}`
