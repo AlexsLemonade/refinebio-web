@@ -43,10 +43,7 @@ export const FileDownload = () => {
         }}
       >
         <Row justify="center" width={setResponsive('100%', '70%')}>
-          <Column
-            align={setResponsive('center', 'start')}
-            flexValue={setResponsive('1 1 auto', 'auto')}
-          >
+          <Column align={setResponsive('center', 'start')}>
             <Box direction="row" gap="xxsmall" margin={{ bottom: 'small' }}>
               <Heading level={1}>
                 <Icon color="success" name="Success" /> Downloading{' '}
@@ -61,7 +58,6 @@ export const FileDownload = () => {
           </Column>
           <Column
             align="center"
-            flexValue={setResponsive('1 1 auto', 'auto')}
             margin={{
               top: setResponsive('large', 'none'),
               bottom: setResponsive('large', 'none'),
