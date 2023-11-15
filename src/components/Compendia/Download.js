@@ -245,7 +245,7 @@ export const Download = ({ type }) => {
               label={
                 <Text>
                   I agree to the{' '}
-                  <Anchor href={links.terms}>Terms of Use</Anchor>
+                  <Anchor href={links.terms_of_use}>Terms of Use</Anchor>
                 </Text>
               }
               onClick={() => setAcceptTerms(!acceptTerms)}

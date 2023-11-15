@@ -144,11 +144,7 @@ export const Footer = () => {
               </Text>
               <Text>
                 URL:{' '}
-                <Anchor
-                  color="black"
-                  label="https://www.refine.bio"
-                  rel="nofollow"
-                />
+                <Anchor color="black" label={links.refinebio} rel="nofollow" />
               </Text>
               <Paragraph margin={{ top: 'small' }}>
                 <i>
@@ -175,7 +171,11 @@ export const Footer = () => {
               href="/license"
             />
             <Anchor color={anchorColor} label="Privacy" href="/privacy" />
-            <Anchor color={anchorColor} label="Terms of Use" href="/terms" />
+            <Anchor
+              color={anchorColor}
+              label="Terms of Use"
+              href={links.terms_of_use}
+            />
             <Anchor
               color={anchorColor}
               label="Contact"

@@ -26,7 +26,7 @@ export const DatasetReady = ({ dataset }) => {
   return (
     <>
       <Box align="center">
-        <Row justify="center" width={setResponsive('100%', '70%')}>
+        <Row justify="center" width={setResponsive('100%', '80%')}>
           <Column align={setResponsive('center', 'start')}>
             <Heading level={1} margin={{ bottom: 'small' }}>
               Your Dataset is ready for download!
@@ -43,34 +43,36 @@ export const DatasetReady = ({ dataset }) => {
                 direction={setResponsive('column', 'column', 'row')}
                 justify="start"
                 margin={{
-                  top: 'medium'
+                  top: 'small'
                 }}
                 fill
               >
                 {!hasToken && (
-                  <CheckBox
-                    label={
-                      <Text>
-                        I agree to the{' '}
-                        <Anchor
-                          href={links.terms}
-                          label="Terms of Use"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        />
-                      </Text>
-                    }
-                    onClick={() => setTermsOfUse(!termsOfUse)}
-                  />
+                  <Column align={setResponsive('center', 'start')}>
+                    <CheckBox
+                      label={
+                        <Text>
+                          I agree to the{' '}
+                          <Anchor
+                            label="Terms of Use"
+                            href={links.terms_of_use}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          />
+                        </Text>
+                      }
+                      onClick={() => setTermsOfUse(!termsOfUse)}
+                    />
+                  </Column>
                 )}
-                <Box
+                <Column
+                  align={setResponsive('center', 'start')}
                   margin={{
                     top: setResponsive('medium', 'small', 'none'),
                     left: hasToken
                       ? 'none'
                       : setResponsive('none', 'none', 'medium')
                   }}
-                  width={setResponsive('100%', 'auto')}
                 >
                   <Button
                     label="Download Now"
@@ -79,13 +81,12 @@ export const DatasetReady = ({ dataset }) => {
                     responsive
                     onClick={handleDownloadNow}
                   />
-                </Box>
+                </Column>
               </Row>
             </Row>
           </Column>
           <Column
             align="center"
-            flexValue={setResponsive('1 1 auto', 'auto')}
             margin={{
               top: setResponsive('large', 'none'),
               bottom: setResponsive('large', 'none')
