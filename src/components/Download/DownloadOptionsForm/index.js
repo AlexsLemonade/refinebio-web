@@ -48,7 +48,7 @@ export const DownloadOptionsForm = ({
       pathname = response
     } else {
       const datasetToUpdate = isProcessed ? regeneratedDataset : selectedDataset
-      await updateDataset(datasetToUpdate.id || datasetToUpdate.id, {
+      await updateDataset(datasetToUpdate.id, {
         ...downloadOptions,
         data: datasetToUpdate.data
       })
