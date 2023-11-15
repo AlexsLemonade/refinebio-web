@@ -14,12 +14,15 @@ import { TransformationOptions } from './TransformationOptions'
 export const DownloadOptionsForm = ({
   dataset = null,
   buttonLabel = 'Download',
+  isProcessed = false,
   onSubmit = null
 }) => {
   const { push } = useRouter()
   const {
     dataset: datasetState,
+    createDataset,
     updateDataset,
+    regenratedDataset,
     getDownloadOptions,
     updateDownloadOptions
   } = useDatasetManager()
@@ -44,9 +47,10 @@ export const DownloadOptionsForm = ({
       const response = await onSubmit(downloadOptions)
       pathname = response
     } else {
-      await updateDataset(selectedDataset.id, {
+      const datasetToUpdate = isProcessed ? regenratedDataset : selectedDataset
+      await updateDataset(datasetToUpdate.id || datasetToUpdate.id, {
         ...downloadOptions,
-        data: selectedDataset.data
+        data: datasetToUpdate.data
       })
     }
 
@@ -61,14 +65,15 @@ export const DownloadOptionsForm = ({
     )
   }
 
-  const handleUpdateDownloadOptions = (onChange) => (name, newValue) => {
-    updateDownloadOptions({ [name]: newValue }, selectedDataset.id)
-    return onChange({
-      target: {
-        name,
-        value: newValue
-      }
-    })
+  const handleUpdateDownloadOptions = async (name, newValue) => {
+    // eslint-disable-next-line no-nested-ternary
+    const datasetId = isProcessed
+      ? regenratedDataset
+        ? regenratedDataset.id
+        : await createDataset()
+      : selectedDataset.id
+
+    await updateDownloadOptions({ [name]: newValue }, datasetId, isProcessed)
   }
 
   return (
@@ -92,11 +97,13 @@ export const DownloadOptionsForm = ({
                 <Row align={setResponsive('start', 'center')} justify="start">
                   <AggregateOptions
                     value={values.aggregate_by}
-                    handleChange={handleUpdateDownloadOptions(handleChange)}
+                    handleChange={handleChange}
+                    handleUpdateDownloadOptions={handleUpdateDownloadOptions}
                   />
                   <TransformationOptions
                     value={values.scale_by}
-                    handleChange={handleUpdateDownloadOptions(handleChange)}
+                    handleChange={handleChange}
+                    handleUpdateDownloadOptions={handleUpdateDownloadOptions}
                   />
                   <Box
                     margin={{
@@ -114,7 +121,8 @@ export const DownloadOptionsForm = ({
                   id={selectedDataset.id}
                   values={values}
                   toggle={!toggleAdvancedOption}
-                  handleChange={handleUpdateDownloadOptions(handleChange)}
+                  handleChange={handleChange}
+                  handleUpdateDownloadOptions={handleUpdateDownloadOptions}
                 />
               </Box>
               <Button

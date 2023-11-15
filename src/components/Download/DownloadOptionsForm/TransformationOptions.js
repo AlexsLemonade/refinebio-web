@@ -7,6 +7,7 @@ import { links, options } from 'config'
 export const TransformationOptions = ({
   value,
   handleChange,
+  handleUpdateDownloadOptions = () => {},
   name = 'scale_by',
   column = false
 }) => {
@@ -46,7 +47,10 @@ export const TransformationOptions = ({
           value={value}
           valueKey={{ key: 'value', reduce: true }}
           margin={{ horizontal: 'xxsmall' }}
-          onChange={(e) => handleChange(name, e.value)}
+          onChange={(e) => {
+            handleUpdateDownloadOptions(name, e.value)
+            return handleChange({ target: { name, value: e.value } })
+          }}
         />
       </Box>
     </>

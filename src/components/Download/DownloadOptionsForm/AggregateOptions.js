@@ -7,6 +7,7 @@ import { links, options } from 'config'
 export const AggregateOptions = ({
   value,
   handleChange,
+  handleUpdateDownloadOptions = () => {},
   name = 'aggregate_by',
   column = false
 }) => {
@@ -38,7 +39,10 @@ export const AggregateOptions = ({
           value={value}
           valueKey={{ key: 'value', reduce: true }}
           margin={{ horizontal: 'xxsmall' }}
-          onChange={(e) => handleChange(name, e.value)}
+          onChange={(e) => {
+            handleUpdateDownloadOptions(name, e.value)
+            return handleChange({ target: { name, value: e.value } })
+          }}
         />
       </Box>
     </>
