@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Paragraph } from 'grommet'
 import { Button } from 'components/shared/Button'
 import { TwoColumns } from './TwoColumns'
 
@@ -22,18 +21,15 @@ export const Custom404 = () => {
     <TwoColumns
       heading="The page you are looking for isn’t expressed."
       body={
-        <>
-          <Paragraph size="large">Please try again later..</Paragraph>
-          <Button
-            label="Go Back"
-            margin={{ top: 'large' }}
-            primary
-            responsive
-            onClick={goBack}
-          />
-        </>
+        <Button
+          label="Go Back"
+          margin={{ top: 'large' }}
+          primary
+          responsive
+          onClick={goBack}
+        />
       }
-      img="/illustration-reward-poster.svg"
+      img="/tubey-reward-poster.svg"
     />
   )
 }
