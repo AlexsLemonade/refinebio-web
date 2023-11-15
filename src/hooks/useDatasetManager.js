@@ -18,6 +18,8 @@ export const useDatasetManager = () => {
     setDownloadOptions,
     email,
     setEmail,
+    regenratedDataset,
+    setRegeneratedDataset,
     token
   } = useContext(DatasetManagerContext)
   const { createToken, resetToken, validateToken } = useToken()
@@ -143,12 +145,23 @@ export const useDatasetManager = () => {
     return temp
   }
 
-  const updateDownloadOptions = (options, id = '') => {
+  const updateDownloadOptions = async (
+    options,
+    id = '',
+    regenerate = false
+  ) => {
     const newOptions = { ...downloadOptions, ...options }
 
     if (id) {
-      updateDataset(id, newOptions)
+      const response = await updateDataset(id, newOptions)
+      if (regenerate) {
+        setRegeneratedDataset({
+          ...response,
+          experiments: formatExperiments(response.experiments)
+        })
+      }
     }
+
     setDownloadOptions(newOptions)
   }
 
@@ -271,6 +284,7 @@ export const useDatasetManager = () => {
     dataset,
     datasetId,
     loading,
+    regenratedDataset,
     token,
     clearDataset,
     createDataset,

@@ -6,13 +6,14 @@ export const RefinebioContext = createContext({})
 export const RefinebioContextProvider = ({ children }) => {
   const [dataset, setDataset] = useLocalStorage('dataset', {})
   const [datasetId, setDatasetId] = useLocalStorage('datasetId', null)
+  const [downloadOptions, setDownloadOptions] = useState({})
   const [email, setEmail] = useLocalStorage('email-address', null)
   const [processingExperiments, setProcessingExperiments] = useLocalStorage(
     'processing-experiments',
     []
   )
+  const [regenratedDataset, setRegeneratedDataset] = useState(null)
   const [token, setToken] = useLocalStorage('token', null)
-  const [downloadOptions, setDownloadOptions] = useState({})
 
   const value = useMemo(
     () => ({
@@ -26,6 +27,8 @@ export const RefinebioContextProvider = ({ children }) => {
       setEmail,
       processingExperiments,
       setProcessingExperiments,
+      regenratedDataset,
+      setRegeneratedDataset,
       token,
       setToken
     }),
@@ -40,6 +43,8 @@ export const RefinebioContextProvider = ({ children }) => {
       setEmail,
       processingExperiments,
       setProcessingExperiments,
+      regenratedDataset,
+      setRegeneratedDataset,
       token,
       setToken
     ]
