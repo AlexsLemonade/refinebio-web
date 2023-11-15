@@ -37,8 +37,9 @@ const Card = ({ description, format, index, title }) => {
   )
 }
 
-export const FilesSummary = ({ dataset }) => {
-  const { createDataset, updateDataset } = useDatasetManager()
+export const FilesSummary = ({ dataset, isProcessed }) => {
+  const { createDataset, updateDataset, regenratedDataset } =
+    useDatasetManager()
   const { setResponsive } = useResponsive()
   // returns the file size estimates of the given dataset and its aggregate_by value (either 'EXPERIMENT' or 'SPECIES')
   const downloadFilesData = (data, samplesBySpecies, aggregateBy) => {
@@ -100,7 +101,6 @@ export const FilesSummary = ({ dataset }) => {
     samplesBySpecies,
     dataset.aggregate_by
   )
-  const showDownloadForm = dataset.is_processed && dataset.success !== false
   const transformationOptions = options.transformation.reduce(
     (acc, cur) => ({ ...acc, [cur.value]: cur.label }),
     {}
@@ -109,7 +109,11 @@ export const FilesSummary = ({ dataset }) => {
 
   const handleRegenerateDataset = async (downloadOptions) => {
     const params = { data: dataset.data, ...downloadOptions }
-    const response = await updateDataset(await createDataset(), params)
+
+    const response = await updateDataset(
+      regenratedDataset.id || (await createDataset()),
+      params
+    )
     const pathname = `/dataset/${response.id}`
 
     return pathname
@@ -121,7 +125,7 @@ export const FilesSummary = ({ dataset }) => {
         Download Files Summary
       </Heading>
 
-      {showDownloadForm && (
+      {isProcessed && (
         <Box margin={{ bottom: 'small' }}>
           {!openForm && (
             <Box direction="row" gap="xlarge">
@@ -150,6 +154,7 @@ export const FilesSummary = ({ dataset }) => {
             <DownloadOptionsForm
               dataset={dataset}
               buttonLabel="Regenerate Dataset"
+              isProcessed={isProcessed}
               onSubmit={handleRegenerateDataset}
             />
           </ExpandableBlock>
