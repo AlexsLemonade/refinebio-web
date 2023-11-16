@@ -6,7 +6,7 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { Row } from 'components/shared/Row'
-import { AdvanedOptions } from './AdvanedOptions'
+import { AdvancedOptions } from './AdvancedOptions'
 import { AdvancedOptionsToggle } from './AdvancedOptionsToggle'
 import { AggregateOptions } from './AggregateOptions'
 import { TransformationOptions } from './TransformationOptions'
@@ -110,7 +110,7 @@ export const DownloadOptionsForm = ({
                     />
                   </Box>
                 </Row>
-                <AdvanedOptions
+                <AdvancedOptions
                   id={selectedDataset.id}
                   values={values}
                   toggle={!toggleAdvancedOption}
