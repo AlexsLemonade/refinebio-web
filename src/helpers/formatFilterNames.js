@@ -5,12 +5,12 @@ import formatTechnologyName from 'helpers/formatTechnologyName'
 
 export default (filterOption, item, formattedPlatformName) => {
   const { filterOptionsToFormat } = options.search
-  const formatNames = () =>
+  const formatName = () =>
     filterOption === 'platforom'
       ? formatPlatformName(formattedPlatformName)
       : formatTechnologyName(item)
 
   return !filterOptionsToFormat[filterOption]
     ? formatString(item)
-    : formatNames()
+    : formatName()
 }
