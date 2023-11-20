@@ -20,7 +20,6 @@ const Card = ({ description, format, index, title }) => {
       align="center"
       background="white"
       elevation="medium"
-      flexValue={setResponsive('1 1 auto', '1 1 auto', '1 1 0')}
       pad="medium"
       margin={{
         left: index ? setResponsive('none', 'none', 'large') : 'none',
