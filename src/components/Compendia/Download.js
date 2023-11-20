@@ -1,5 +1,5 @@
 import { useEffect, useState, memo } from 'react'
-import { Box, Heading, Text } from 'grommet'
+import { Box, Heading, Paragraph, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 import { links, options } from 'config'
 import { useCompendia } from 'hooks/useCompendia'
@@ -74,10 +74,11 @@ export const Download = ({ type }) => {
   } = options
   const {
     compendia,
+    hasError,
+    loading,
     downloadCompendia,
     getCompendia,
-    navigateToFileDownload,
-    loading
+    navigateToFileDownload
   } = useCompendia()
   const { setResponsive } = useResponsive()
   const [filteredOptions, setFilteredOptions] = useState([])
@@ -135,131 +136,146 @@ export const Download = ({ type }) => {
 
   return (
     <Box background="white" pad={setResponsive('medium', 'large', 'xlarge')}>
-      <Heading
-        level={2}
-        margin={{ bottom: 'medium' }}
-        size={setResponsive('small', 'large')}
-      >
-        Download the {heading[type]}
-      </Heading>
-      <Box
-        as="label"
-        margin={{ bottom: 'medium' }}
-        style={{ font: `${setResponsive('18px', '22px')} 'Rubik', sans-serif` }}
-      >
-        Choose Organism
-      </Box>
-      <Box style={{ position: 'relative' }}>
-        <Box
-          style={{
-            position: 'absolute',
-            right: '10px',
-            top: '10px',
-            zIndex: 1
-          }}
-        >
-          {!loading && <Icon name="ChevronDown" size="xsmall" />}
-        </Box>
-        {loading ? (
-          <Spinner />
-        ) : (
-          <DropDown style={{ position: 'relative' }}>
-            <SearchBox
-              padding="16px 32px"
-              placeholder="Search for an organism"
-              size="small"
-              reverse={false}
-              responsive
-              value={userInput}
-              onChange={(e) => handleChange(e.target.value)}
-              onFocus={handleFocus}
-            />
-            {showOptions && filteredOptions.length > 0 && (
-              <Box
-                animation={{ type: 'zoomIn', duration: 50 }}
-                background="white"
-                border={{ color: 'brand', size: 'medium' }}
-                margin={{ top: 'xlarge' }}
-                height={{ max: '200px' }}
-                width="100%"
-                style={{
-                  overflowY: 'scroll',
-                  position: 'absolute',
-                  zIndex: 1
-                }}
-              >
-                <List flexDirection="column">
-                  {filteredOptions.map((option) => (
-                    <ListItem
-                      key={option.primary_organism_name}
-                      label={formatString(option.primary_organism_name)}
-                      selectedOrganism={
-                        selectedOrganism
-                          ? formatString(selectedOrganism.primary_organism_name)
-                          : null
-                      }
-                      onClick={() => handleClick(option)}
-                    />
-                  ))}
-                </List>
-              </Box>
-            )}
-          </DropDown>
-        )}
-      </Box>
-      {type === 'rnaSeq' && (
-        <Box margin={{ top: setResponsive('small', 'medium') }}>
-          <InlineMessage label="Data is not normalized or aggregated." />
-        </Box>
-      )}
-      {selectedOrganism && selectedOrganism.organism_names.length > 1 && (
-        <Box margin={{ top: 'large' }}>
-          <InlineMessage
-            label={
-              <Text margin={{ left: 'small' }} style={{ display: 'block' }}>
-                Also contains small number of samples from other organisms from
-                the same species.{' '}
-                <Anchor
-                  href={links.refinebio_docs_collapsing_by_genus}
-                  label="View"
-                  rel="noopener noreferrer"
+      {hasError ? (
+        <Paragraph>
+          Download unavailable at this time. Please check again soon!
+        </Paragraph>
+      ) : (
+        <>
+          <Heading
+            level={2}
+            margin={{ bottom: 'medium' }}
+            size={setResponsive('small', 'large')}
+          >
+            Download the {heading[type]}
+          </Heading>
+          <Box
+            as="label"
+            margin={{ bottom: 'medium' }}
+            style={{
+              font: `${setResponsive('18px', '22px')} 'Rubik', sans-serif`
+            }}
+          >
+            Choose Organism
+          </Box>
+          <Box style={{ position: 'relative' }}>
+            <Box
+              style={{
+                position: 'absolute',
+                right: '10px',
+                top: '10px',
+                zIndex: 1
+              }}
+            >
+              {!loading && <Icon name="ChevronDown" size="xsmall" />}
+            </Box>
+            {loading ? (
+              <Spinner />
+            ) : (
+              <DropDown style={{ position: 'relative' }}>
+                <SearchBox
+                  padding="16px 32px"
+                  placeholder="Search for an organism"
+                  size="small"
+                  reverse={false}
+                  responsive
+                  value={userInput}
+                  onChange={(e) => handleChange(e.target.value)}
+                  onFocus={handleFocus}
                 />
-              </Text>
-            }
-          />
-        </Box>
-      )}
-      <Box margin={{ vertical: setResponsive('small', 'medium') }}>
-        <CheckBox
-          label={
-            <Text>
-              I agree to the <Anchor href={links.terms}>Terms of Use</Anchor>
-            </Text>
-          }
-          onClick={() => setAcceptTerms(!acceptTerms)}
-        />
-      </Box>
-      <Row>
-        <Column margin={{ bottom: setResponsive('small', 'small', 'none') }}>
-          {selectedOrganism && (
-            <Box animation={{ type: 'fadeIn', duration: 800 }}>
-              <Text>
-                Download Size:{' '}
-                {formatBytes(selectedOrganism.computed_file.size_in_bytes)}
-              </Text>
+                {showOptions && filteredOptions.length > 0 && (
+                  <Box
+                    animation={{ type: 'zoomIn', duration: 50 }}
+                    background="white"
+                    border={{ color: 'brand', size: 'medium' }}
+                    margin={{ top: 'xlarge' }}
+                    height={{ max: '200px' }}
+                    width="100%"
+                    style={{
+                      overflowY: 'scroll',
+                      position: 'absolute',
+                      zIndex: 1
+                    }}
+                  >
+                    <List flexDirection="column">
+                      {filteredOptions.map((option) => (
+                        <ListItem
+                          key={option.primary_organism_name}
+                          label={formatString(option.primary_organism_name)}
+                          selectedOrganism={
+                            selectedOrganism
+                              ? formatString(
+                                  selectedOrganism.primary_organism_name
+                                )
+                              : null
+                          }
+                          onClick={() => handleClick(option)}
+                        />
+                      ))}
+                    </List>
+                  </Box>
+                )}
+              </DropDown>
+            )}
+          </Box>
+          {type === 'rnaSeq' && (
+            <Box margin={{ top: setResponsive('small', 'medium') }}>
+              <InlineMessage label="Data is not normalized or aggregated." />
             </Box>
           )}
-        </Column>
-        <Column align={setResponsive('start', 'end')}>
-          <Button
-            label="Download Now"
-            disabled={!acceptTerms || !selectedOrganism}
-            primary
-            responsive
-            onClick={() => handleFileDownload(selectedOrganism.id)}
-          />
-        </Column>
-      </Row>
+          {selectedOrganism && selectedOrganism.organism_names.length > 1 && (
+            <Box margin={{ top: 'large' }}>
+              <InlineMessage
+                label={
+                  <Text margin={{ left: 'small' }} style={{ display: 'block' }}>
+                    Also contains small number of samples from other organisms
+                    from the same species.{' '}
+                    <Anchor
+                      href={links.refinebio_docs_collapsing_by_genus}
+                      label="View"
+                      rel="noopener noreferrer"
+                    />
+                  </Text>
+                }
+              />
+            </Box>
+          )}
+          <Box margin={{ vertical: setResponsive('small', 'medium') }}>
+            <CheckBox
+              label={
+                <Text>
+                  I agree to the{' '}
+                  <Anchor href={links.terms}>Terms of Use</Anchor>
+                </Text>
+              }
+              onClick={() => setAcceptTerms(!acceptTerms)}
+            />
+          </Box>
+          <Row>
+            <Column
+              margin={{ bottom: setResponsive('small', 'small', 'none') }}
+            >
+              {selectedOrganism && (
+                <Box animation={{ type: 'fadeIn', duration: 800 }}>
+                  <Text>
+                    Download Size:{' '}
+                    {formatBytes(selectedOrganism.computed_file.size_in_bytes)}
+                  </Text>
+                </Box>
+              )}
+            </Column>
+            <Column align={setResponsive('start', 'end')}>
+              <Button
+                label="Download Now"
+                disabled={!acceptTerms || !selectedOrganism}
+                primary
+                responsive
+                onClick={() => handleFileDownload(selectedOrganism.id)}
+              />
+            </Column>
+          </Row>
+        </>
+      )}
     </Box>
   )
 }

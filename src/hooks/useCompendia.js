@@ -17,6 +17,7 @@ export const useCompendia = () => {
   } = useToken()
   const [compendia, setCompendia] = useState()
   const [loading, setLoading] = useState(false)
+  const [hasError, setHasError] = useState(false)
 
   const getCompendia = async (quantSfOnly = false) => {
     const compendiaQuery = {
@@ -26,6 +27,7 @@ export const useCompendia = () => {
 
     setLoading(true)
     const response = await api.compendia.get(compendiaQuery, tokenState)
+    setHasError(response?.ok === false)
     setCompendia(response.results)
     setLoading(false)
   }
@@ -54,6 +56,7 @@ export const useCompendia = () => {
 
   return {
     compendia,
+    hasError,
     loading,
     downloadCompendia,
     getCompendia,
