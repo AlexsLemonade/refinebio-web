@@ -27,6 +27,14 @@ export const DownloadNowModal = ({
   const { StartProcessingFormSchema } = validationSchemas
   const experiment = getProcessingExperiment(accessionCode)
 
+  const handleUpdateDownloadOptions = (onChange) => (name, newValue) =>
+    onChange({
+      target: {
+        name,
+        value: newValue
+      }
+    })
+
   if (experiment) {
     return (
       <ProcessingDatasetPillModal datasetId={experiment.datasetId} id={id} />
@@ -81,7 +89,7 @@ export const DownloadNowModal = ({
               <Box margin={{ bottom: 'medium' }}>
                 <AggregateOptions
                   value={values.aggregate_by}
-                  handleChange={handleChange}
+                  handleChange={handleUpdateDownloadOptions(handleChange)}
                   column
                 />
               </Box>
@@ -89,7 +97,7 @@ export const DownloadNowModal = ({
             <Box margin={{ bottom: 'medium' }}>
               <TransformationOptions
                 value={values.scale_by}
-                handleChange={handleChange}
+                handleChange={handleUpdateDownloadOptions(handleChange)}
                 column
               />
             </Box>
@@ -98,7 +106,7 @@ export const DownloadNowModal = ({
                 <AdvancedOptions
                   id={accessionCode}
                   values={values}
-                  handleChange={handleChange}
+                  handleChange={handleUpdateDownloadOptions(handleChange)}
                   toggle
                 />
               </Box>

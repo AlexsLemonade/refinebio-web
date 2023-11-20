@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Formik } from 'formik'
 import { Box, Form } from 'grommet'
@@ -17,12 +17,25 @@ export const DownloadOptionsForm = ({
   onSubmit = null
 }) => {
   const { push } = useRouter()
-  const { dataset: datasetState, updateDataset } = useDatasetManager()
+  const {
+    dataset: datasetState,
+    updateDataset,
+    getDownloadOptions,
+    updateDownloadOptions
+  } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const selectedDataset = dataset || datasetState
   const [toggleAdvancedOption, setToggleAdvancedOption] = useState(
     selectedDataset.quantile_normalize
   )
+
+  useEffect(() => {
+    if (selectedDataset) {
+      updateDownloadOptions({
+        ...getDownloadOptions(selectedDataset)
+      })
+    }
+  }, [])
 
   const handleSubmitForm = async (downloadOptions) => {
     let pathname = '/download'
@@ -48,6 +61,16 @@ export const DownloadOptionsForm = ({
     )
   }
 
+  const handleUpdateDownloadOptions = (onChange) => (name, newValue) => {
+    updateDownloadOptions({ [name]: newValue }, selectedDataset.id)
+    return onChange({
+      target: {
+        name,
+        value: newValue
+      }
+    })
+  }
+
   return (
     <Box border={{ side: 'bottom' }}>
       <Formik
@@ -69,11 +92,11 @@ export const DownloadOptionsForm = ({
                 <Row align={setResponsive('start', 'center')} justify="start">
                   <AggregateOptions
                     value={values.aggregate_by}
-                    handleChange={handleChange}
+                    handleChange={handleUpdateDownloadOptions(handleChange)}
                   />
                   <TransformationOptions
                     value={values.scale_by}
-                    handleChange={handleChange}
+                    handleChange={handleUpdateDownloadOptions(handleChange)}
                   />
                   <Box
                     margin={{
@@ -90,8 +113,8 @@ export const DownloadOptionsForm = ({
                 <AdvancedOptions
                   id={selectedDataset.id}
                   values={values}
-                  handleChange={handleChange}
                   toggle={!toggleAdvancedOption}
+                  handleChange={handleUpdateDownloadOptions(handleChange)}
                 />
               </Box>
               <Button
