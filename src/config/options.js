@@ -83,7 +83,6 @@ export const options = {
       platform_accession_codes: 'platform',
       technology: 'technology'
     },
-    filterOptionsToFormat: { platform: 'platform', technology: 'technology' },
     pageSizes: [10, 20, 50],
     sortby: [
       {
