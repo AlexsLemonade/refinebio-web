@@ -41,7 +41,6 @@ export const Explore = () => {
     >
       <Column
         align="center"
-        flexValue={setResponsive('1 1 auto', 'auto')}
         margin={{
           right: setResponsive('none', 'xlarge', 'none')
         }}
@@ -60,10 +59,7 @@ export const Explore = () => {
           width={setResponsive('250px', '350px', '400px')}
         />
       </Column>
-      <Column
-        flexValue={setResponsive('1 1 auto', 'auto')}
-        pad={{ top: setResponsive('none', 'basex7', 'basex9') }}
-      >
+      <Column pad={{ top: setResponsive('none', 'basex7', 'basex9') }}>
         <Heading level={2} margin={{ bottom: 'small' }}>
           Explore what you can do with the species compendia!
         </Heading>

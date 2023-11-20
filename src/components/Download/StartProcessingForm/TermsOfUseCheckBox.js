@@ -14,7 +14,7 @@ export const TermsOfUseCheckBox = ({ error, touched, value, handleChange }) => {
           <Text>
             I agree to the{' '}
             <Anchor
-              href={links.terms}
+              href={links.terms_of_use}
               label="Terms of Use"
               rel="noopener noreferrer"
               target="_blank"

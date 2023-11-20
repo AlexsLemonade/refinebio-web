@@ -7,6 +7,8 @@ import { links, options } from 'config'
 export const TransformationOptions = ({
   value,
   handleChange,
+  handleUpdateDownloadOptions = () => {},
+  name = 'scale_by',
   column = false
 }) => {
   const { setResponsive } = useResponsive()
@@ -40,12 +42,15 @@ export const TransformationOptions = ({
       >
         <Select
           labelKey="label"
-          name="scale_by"
+          name={name}
           options={Object.values(options.transformation)}
           value={value}
           valueKey={{ key: 'value', reduce: true }}
           margin={{ horizontal: 'xxsmall' }}
-          onChange={handleChange}
+          onChange={(e) => {
+            handleUpdateDownloadOptions(name, e.value)
+            return handleChange({ target: { name, value: e.value } })
+          }}
         />
       </Box>
     </>

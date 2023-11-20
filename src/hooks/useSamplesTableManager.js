@@ -88,7 +88,7 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
 
     if (!hasSamples) resetCommonQueries()
 
-    setHasError((response.ok && response.ok === false) || false)
+    setHasError(response?.ok === false)
     setTableData(response)
     setLoading(false)
   }

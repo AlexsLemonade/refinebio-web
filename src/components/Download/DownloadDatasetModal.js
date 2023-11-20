@@ -6,7 +6,7 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/shared/Button'
-import { AdvanedOptions } from 'components/Download/DownloadOptionsForm/AdvanedOptions'
+import { AdvancedOptions } from 'components/Download/DownloadOptionsForm/AdvancedOptions'
 import { AggregateOptions } from 'components/Download/DownloadOptionsForm/AggregateOptions'
 import { TransformationOptions } from 'components/Download/DownloadOptionsForm/TransformationOptions'
 import { EmailTextInput } from 'components/Download/StartProcessingForm/EmailTextInput'
@@ -77,7 +77,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
               />
             </Box>
             <Box>
-              <AdvanedOptions
+              <AdvancedOptions
                 id={dataset.id}
                 values={values}
                 handleChange={handleChange}

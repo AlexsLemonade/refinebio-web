@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Formik } from 'formik'
 import { Box, Form } from 'grommet'
@@ -6,7 +6,7 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { Row } from 'components/shared/Row'
-import { AdvanedOptions } from './AdvanedOptions'
+import { AdvancedOptions } from './AdvancedOptions'
 import { AdvancedOptionsToggle } from './AdvancedOptionsToggle'
 import { AggregateOptions } from './AggregateOptions'
 import { TransformationOptions } from './TransformationOptions'
@@ -14,15 +14,31 @@ import { TransformationOptions } from './TransformationOptions'
 export const DownloadOptionsForm = ({
   dataset = null,
   buttonLabel = 'Download',
+  isProcessed = false,
   onSubmit = null
 }) => {
   const { push } = useRouter()
-  const { dataset: datasetState, updateDataset } = useDatasetManager()
+  const {
+    dataset: datasetState,
+    createDataset,
+    updateDataset,
+    regeneratedDataset,
+    getDownloadOptions,
+    updateDownloadOptions
+  } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const selectedDataset = dataset || datasetState
   const [toggleAdvancedOption, setToggleAdvancedOption] = useState(
     selectedDataset.quantile_normalize
   )
+
+  useEffect(() => {
+    if (selectedDataset) {
+      updateDownloadOptions({
+        ...getDownloadOptions(selectedDataset)
+      })
+    }
+  }, [])
 
   const handleSubmitForm = async (downloadOptions) => {
     let pathname = '/download'
@@ -31,9 +47,10 @@ export const DownloadOptionsForm = ({
       const response = await onSubmit(downloadOptions)
       pathname = response
     } else {
-      await updateDataset(selectedDataset.id, {
+      const datasetToUpdate = isProcessed ? regeneratedDataset : selectedDataset
+      await updateDataset(datasetToUpdate.id, {
         ...downloadOptions,
-        data: selectedDataset.data
+        data: datasetToUpdate.data
       })
     }
 
@@ -46,6 +63,17 @@ export const DownloadOptionsForm = ({
       },
       pathname
     )
+  }
+
+  const handleUpdateDownloadOptions = async (name, newValue) => {
+    // eslint-disable-next-line no-nested-ternary
+    const datasetId = isProcessed
+      ? regeneratedDataset
+        ? regeneratedDataset.id
+        : await createDataset()
+      : selectedDataset.id
+
+    await updateDownloadOptions({ [name]: newValue }, datasetId, isProcessed)
   }
 
   return (
@@ -70,10 +98,12 @@ export const DownloadOptionsForm = ({
                   <AggregateOptions
                     value={values.aggregate_by}
                     handleChange={handleChange}
+                    handleUpdateDownloadOptions={handleUpdateDownloadOptions}
                   />
                   <TransformationOptions
                     value={values.scale_by}
                     handleChange={handleChange}
+                    handleUpdateDownloadOptions={handleUpdateDownloadOptions}
                   />
                   <Box
                     margin={{
@@ -87,11 +117,12 @@ export const DownloadOptionsForm = ({
                     />
                   </Box>
                 </Row>
-                <AdvanedOptions
+                <AdvancedOptions
                   id={selectedDataset.id}
                   values={values}
-                  handleChange={handleChange}
                   toggle={!toggleAdvancedOption}
+                  handleChange={handleChange}
+                  handleUpdateDownloadOptions={handleUpdateDownloadOptions}
                 />
               </Box>
               <Button

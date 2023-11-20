@@ -13,6 +13,8 @@ export const useRefinebio = () => {
     setEmail,
     processingExperiments,
     setProcessingExperiments,
+    regeneratedDataset,
+    setRegeneratedDataset,
     token,
     setToken
   } = useContext(RefinebioContext)
@@ -28,6 +30,8 @@ export const useRefinebio = () => {
     setEmail,
     processingExperiments,
     setProcessingExperiments,
+    regeneratedDataset,
+    setRegeneratedDataset,
     token,
     setToken
   }

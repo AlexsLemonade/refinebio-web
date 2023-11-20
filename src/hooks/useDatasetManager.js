@@ -5,6 +5,7 @@ import differenceOfArrays from 'helpers/differenceOfArrays'
 import formatString from 'helpers/formatString'
 import isEmptyObject from 'helpers/isEmptyObject'
 import unionizeArrays from 'helpers/unionizeArrays'
+import { options as configOptions } from 'config'
 import { api } from 'api'
 
 export const useDatasetManager = () => {
@@ -13,8 +14,12 @@ export const useDatasetManager = () => {
     setDataset,
     datasetId,
     setDatasetId,
+    downloadOptions,
+    setDownloadOptions,
     email,
     setEmail,
+    regeneratedDataset,
+    setRegeneratedDataset,
     token
   } = useContext(DatasetManagerContext)
   const { createToken, resetToken, validateToken } = useToken()
@@ -85,18 +90,12 @@ export const useDatasetManager = () => {
 
   const startProcessingDataset = async (id, options) => {
     const isCurrentDatasetId = id === datasetId
-    // validate the existing token or create a new token if none
+    // validates the existing token or create a new token if none
     const tokenId = validateToken() ? token : await resetToken()
-    const { data, emailAddress, receiveUpdates } = options
+    const { emailAddress, receiveUpdates } = options
     const params = {
-      data,
+      ...getDownloadOptions(options),
       email_address: emailAddress,
-      ...(options.aggregate_by ? { aggregate_by: options.aggregate_by } : {}),
-      ...(options.scale_by ? { scale_by: options.scale_by } : {}),
-      ...(options.aggregate_by ? { aggregate_by: options.aggregate_by } : {}),
-      ...(options.quantile_normalize
-        ? { quantile_normalize: options.quantile_normalize }
-        : {}),
       ...(receiveUpdates ? { email_ccdl_ok: true } : {}),
       start: true,
       token_id: tokenId
@@ -128,6 +127,42 @@ export const useDatasetManager = () => {
     }
 
     return response
+  }
+
+  /* Download Options */
+  const getDownloadOptions = (options) => {
+    const {
+      dataset: { downloadOptionsKeys }
+    } = configOptions
+    const temp = {}
+
+    Object.keys(options).forEach((key) => {
+      if (downloadOptionsKeys.includes(key)) {
+        temp[key] = options[key]
+      }
+    })
+
+    return temp
+  }
+
+  const updateDownloadOptions = async (
+    options,
+    id = '',
+    regenerate = false
+  ) => {
+    const newOptions = { ...downloadOptions, ...options }
+
+    if (id) {
+      const response = await updateDataset(id, newOptions)
+      if (regenerate) {
+        setRegeneratedDataset({
+          ...response,
+          experiments: formatExperiments(response.experiments)
+        })
+      }
+    }
+
+    setDownloadOptions(newOptions)
   }
 
   /* Experiment */
@@ -249,6 +284,7 @@ export const useDatasetManager = () => {
     dataset,
     datasetId,
     loading,
+    regeneratedDataset,
     token,
     clearDataset,
     createDataset,
@@ -256,6 +292,8 @@ export const useDatasetManager = () => {
     getDataset,
     startProcessingDataset,
     updateDataset,
+    getDownloadOptions,
+    updateDownloadOptions,
     getTotalExperiments,
     removeExperiment,
     addSamples,

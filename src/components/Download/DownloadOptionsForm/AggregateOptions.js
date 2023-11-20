@@ -4,7 +4,13 @@ import { Anchor } from 'components/shared/Anchor'
 import { Icon } from 'components/shared/Icon'
 import { links, options } from 'config'
 
-export const AggregateOptions = ({ value, handleChange, column = false }) => {
+export const AggregateOptions = ({
+  value,
+  handleChange,
+  handleUpdateDownloadOptions = () => {},
+  name = 'aggregate_by',
+  column = false
+}) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -28,12 +34,15 @@ export const AggregateOptions = ({ value, handleChange, column = false }) => {
       <Box margin={{ top: setResponsive('xsmall', 'none') }} width="150px">
         <Select
           labelKey="label"
-          name="aggregate_by"
+          name={name}
           options={Object.values(options.aggregation)}
           value={value}
           valueKey={{ key: 'value', reduce: true }}
           margin={{ horizontal: 'xxsmall' }}
-          onChange={handleChange}
+          onChange={(e) => {
+            handleUpdateDownloadOptions(name, e.value)
+            return handleChange({ target: { name, value: e.value } })
+          }}
         />
       </Box>
     </>

@@ -11,7 +11,7 @@ const moduleExports = () => {
 
   // Set the env variables for 'staging' if not 'production'
   const env = {
-    API_PATH: isProduction ? process.env.API_PATH : process.env.STAGE_API_PATH,
+    API_HOST: isProduction ? process.env.API_HOST : process.env.STAGE_API_HOST,
     API_VERSION: isProduction
       ? process.env.API_VERSION
       : process.env.STAGE_API_VERSION,

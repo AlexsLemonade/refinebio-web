@@ -9,11 +9,22 @@ import { DownloadNowButton } from './DownloadNowButton'
 import { ProcessingDatasetPill } from './ProcessingDatasetPill'
 import { RequestExperimentFormButton } from './RequestExperimentFormButton'
 
-export const SearchCardAction = ({ accessionCode, downloadableSamples }) => {
+export const SearchCardAction = ({
+  accessionCode,
+  downloadableSamples,
+  organismNames,
+  technology
+}) => {
   const { getProcessingExperiment } = useOneOffExperiment(accessionCode)
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
   const experiment = getProcessingExperiment(accessionCode)
+  const hasMultipleOrganisms = organismNames.length > 1
+  const rnaSeq = 'RNA-SEQ'
+  const hasRnaSeq =
+    typeof technology === 'string'
+      ? technology === rnaSeq
+      : technology.find((x) => x === rnaSeq)
 
   if (!pageRendered) return null
 
@@ -37,7 +48,11 @@ export const SearchCardAction = ({ accessionCode, downloadableSamples }) => {
 
       {!experiment && (
         <Box margin={{ top: 'small' }} width={setResponsive('100%', 'auto')}>
-          <DownloadNowButton accessionCode={accessionCode} />
+          <DownloadNowButton
+            accessionCode={accessionCode}
+            hasMultipleOrganisms={hasMultipleOrganisms}
+            hasRnaSeq={hasRnaSeq}
+          />
         </Box>
       )}
     </>
