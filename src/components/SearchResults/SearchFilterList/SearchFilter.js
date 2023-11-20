@@ -4,11 +4,9 @@ import styled, { css } from 'styled-components'
 import { useResponsive } from 'hooks/useResponsive'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
+import formatFilterName from 'helpers/formatFilterName'
 import formatNumbers from 'helpers/formatNumbers'
-import formatPlatformName from 'helpers/formatPlatformName'
-import formatString from 'helpers/formatString'
 import isLastIndex from 'helpers/isLastIndex'
-import { cache } from 'config'
 import { Button as sharedButton } from 'components/shared/Button'
 import { CheckBox } from 'components/shared/CheckBox'
 import { SearchBox } from 'components/shared/SearchBox'
@@ -40,11 +38,6 @@ export const SearchFilter = ({
   )
   const [open, setOpen] = useState(false)
   const [userInput, setUserInput] = useState('')
-  const getFormattedTechnologyNames = (option) => {
-    const rnaSeq = 'RNA-seq' // 'rna-seq' should be rendered as 'RNA-seq' in UI
-
-    return option.match(rnaSeq.toLowerCase()) ? rnaSeq : formatString(option)
-  }
 
   const handleToggleFilterList = (val) => {
     setUserInput(val)
@@ -52,10 +45,7 @@ export const SearchFilter = ({
       // eslint-disable-next-line no-nested-ternary
       val.trim() !== ''
         ? filterList.filter((option) =>
-            (filterOption === 'platform'
-              ? formatPlatformName(cache.platforms[option[0]]) || option[0]
-              : formatString(option[0])
-            )
+            formatFilterName(filterOption, option[0])
               .toLowerCase()
               .includes(val.toLowerCase())
           )
@@ -89,6 +79,7 @@ export const SearchFilter = ({
           />
         </Box>
       )}
+
       <TextHighlightContextProvider match={userInput}>
         <Box animation={open ? { type: 'fadeIn', duration: 1000 } : {}}>
           {filteredResults.map((option, i, arr) => (
@@ -100,13 +91,7 @@ export const SearchFilter = ({
                 label={
                   <Text>
                     <TextHighlight>
-                      {/* eslint-disable-next-line no-nested-ternary */}
-                      {filterOption === 'platform'
-                        ? formatPlatformName(cache.platforms[option[0]]) ||
-                          option[0]
-                        : filterOption === 'technology'
-                        ? getFormattedTechnologyNames(option[0])
-                        : formatString(option[0])}
+                      {formatFilterName(filterOption, option[0])}
                     </TextHighlight>{' '}
                     ({formatNumbers(option[1])})
                   </Text>
