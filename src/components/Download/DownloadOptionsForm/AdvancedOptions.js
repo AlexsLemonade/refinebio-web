@@ -6,7 +6,7 @@ import { ExpandableBlock } from 'components/shared/ExpandableBlock'
 import { Icon } from 'components/shared/Icon'
 import { links } from 'config'
 
-export const AdvanedOptions = ({
+export const AdvancedOptions = ({
   id,
   values: { aggregate_by: aggregateBy, quantile_normalize: quantileNormalize },
   handleChange,
@@ -61,4 +61,4 @@ export const AdvanedOptions = ({
   )
 }
 
-export default AdvanedOptions
+export default AdvancedOptions
