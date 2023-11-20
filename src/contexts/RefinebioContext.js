@@ -20,7 +20,6 @@ export const RefinebioContextProvider = ({ children }) => {
   const [regeneratedDataset, setRegeneratedDataset] = useState(null)
   const [token, setToken] = useLocalStorage('token', null)
   const pageRendered = usePageRendered()
-  const [downloadOptions, setDownloadOptions] = useState({})
 
   // NOTE: migration support is removed 12 months after the site swap
   useEffect(() => {
