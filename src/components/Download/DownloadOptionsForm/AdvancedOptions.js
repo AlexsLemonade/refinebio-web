@@ -6,7 +6,7 @@ import { ExpandableBlock } from 'components/shared/ExpandableBlock'
 import { Icon } from 'components/shared/Icon'
 import { links } from 'config'
 
-export const AdvanedOptions = ({
+export const AdvancedOptions = ({
   id,
   values: { aggregate_by: aggregateBy, quantile_normalize: quantileNormalize },
   handleChange,
@@ -37,20 +37,22 @@ export const AdvanedOptions = ({
         />
       </ExpandableBlock>
       <Box direction="row">
-        <CheckBox
-          label="Skip quantile normalization for RNA-seq samples"
-          name="quantile_normalize"
-          checked={skipQuantileNormalize && aggregateBy === 'EXPERIMENT'}
-          disabled={aggregateBy === 'SPECIES'}
-          onChange={() =>
-            handleChange({
-              target: {
-                name: 'quantile_normalize',
-                value: !quantileNormalize
-              }
-            })
-          }
-        />
+        <Box>
+          <CheckBox
+            label="Skip quantile normalization for RNA-seq samples"
+            name="quantile_normalize"
+            checked={skipQuantileNormalize && aggregateBy === 'EXPERIMENT'}
+            disabled={aggregateBy === 'SPECIES'}
+            onChange={() =>
+              handleChange({
+                target: {
+                  name: 'quantile_normalize',
+                  value: !quantileNormalize
+                }
+              })
+            }
+          />
+        </Box>
         <Anchor
           href={links.refinebio_docs_quantile_normalization_rna_seq_samples}
           title="What does it mean to skip quantile normalization for RNA-seq samples?"
@@ -65,4 +67,4 @@ export const AdvanedOptions = ({
   )
 }
 
-export default AdvanedOptions
+export default AdvancedOptions

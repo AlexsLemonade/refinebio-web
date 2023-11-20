@@ -3,7 +3,11 @@ import { Button } from 'components/shared/Button'
 import { Modal } from 'components/shared/Modal'
 import { DownloadNowModal } from './DownloadNowModal'
 
-export const DownloadNowButton = ({ accessionCode }) => {
+export const DownloadNowButton = ({
+  accessionCode,
+  hasMultipleOrganisms,
+  hasRnaSeq
+}) => {
   const { openModal } = useModal()
   const id = `download-now-${accessionCode}`
 
@@ -21,7 +25,12 @@ export const DownloadNowButton = ({ accessionCode }) => {
       fullHeight={false}
       width="600px"
     >
-      <DownloadNowModal accessionCode={accessionCode} id={id} />
+      <DownloadNowModal
+        accessionCode={accessionCode}
+        hasMultipleOrganisms={hasMultipleOrganisms}
+        hasRnaSeq={hasRnaSeq}
+        id={id}
+      />
     </Modal>
   )
 }
