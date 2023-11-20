@@ -7,7 +7,6 @@ import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import formatFilterName from 'helpers/formatFilterName'
 import formatNumbers from 'helpers/formatNumbers'
 import isLastIndex from 'helpers/isLastIndex'
-import { cache } from 'config'
 import { Button as sharedButton } from 'components/shared/Button'
 import { CheckBox } from 'components/shared/CheckBox'
 import { SearchBox } from 'components/shared/SearchBox'
@@ -46,11 +45,7 @@ export const SearchFilter = ({
       // eslint-disable-next-line no-nested-ternary
       val.trim() !== ''
         ? filterList.filter((option) =>
-            formatFilterName(
-              filterOption,
-              option[0],
-              cache.platforms[option[0]]
-            )
+            formatFilterName(filterOption, option[0])
               .toLowerCase()
               .includes(val.toLowerCase())
           )
@@ -84,6 +79,7 @@ export const SearchFilter = ({
           />
         </Box>
       )}
+
       <TextHighlightContextProvider match={userInput}>
         <Box animation={open ? { type: 'fadeIn', duration: 1000 } : {}}>
           {filteredResults.map((option, i, arr) => (
@@ -95,11 +91,7 @@ export const SearchFilter = ({
                 label={
                   <Text>
                     <TextHighlight>
-                      {formatFilterName(
-                        filterOption,
-                        option[0],
-                        cache.platforms[option[0]]
-                      )}
+                      {formatFilterName(filterOption, option[0])}
                     </TextHighlight>{' '}
                     ({formatNumbers(option[1])})
                   </Text>
