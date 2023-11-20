@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import { useResponsive } from 'hooks/useResponsive'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
-import formatFilterNames from 'helpers/formatFilterNames'
+import formatFilterName from 'helpers/formatFilterName'
 import formatNumbers from 'helpers/formatNumbers'
 import isLastIndex from 'helpers/isLastIndex'
 import { cache } from 'config'
@@ -46,7 +46,7 @@ export const SearchFilter = ({
       // eslint-disable-next-line no-nested-ternary
       val.trim() !== ''
         ? filterList.filter((option) =>
-            formatFilterNames(
+            formatFilterName(
               filterOption,
               option[0],
               cache.platforms[option[0]]
@@ -95,7 +95,7 @@ export const SearchFilter = ({
                 label={
                   <Text>
                     <TextHighlight>
-                      {formatFilterNames(
+                      {formatFilterName(
                         filterOption,
                         option[0],
                         cache.platforms[option[0]]
