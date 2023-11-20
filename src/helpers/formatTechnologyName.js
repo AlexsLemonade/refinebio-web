@@ -1,7 +1,8 @@
 import formatString from 'helpers/formatString'
 
-export default (option) => {
-  const rnaSeq = 'RNA-seq' // 'rna-seq' should be rendered as 'RNA-seq' in UI
+// 'rna-seq' should be rendered as 'RNA-seq' in UI
+const technologyNamesToFormat = { 'rna-seq': 'RNA-seq' }
 
-  return option.match(rnaSeq.toLowerCase()) ? rnaSeq : formatString(option)
+export default (option) => {
+  return technologyNamesToFormat[option.toLowerCase()] || formatString(option)
 }
