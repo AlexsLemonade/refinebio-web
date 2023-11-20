@@ -1,19 +1,24 @@
 import { Box, Paragraph } from 'grommet'
 import { links } from 'config'
 import { Anchor } from 'components/shared/Anchor'
-import { TwoColumns } from './TwoColumns'
+import { Template } from './Template'
 
-export const Custom504 = () => {
+export const Custom504 = ({ ...props }) => {
+  // makes text align center for a single column
+  // and sets max width to auto
+  const isColumn = props.direction === 'column'
+  const textAlign = isColumn ? 'center' : 'start'
+
   return (
-    <TwoColumns
+    <Template
       heading="We’re a little overwhelmed at the moment."
       body={
-        <Box width={{ max: '450px' }}>
-          <Paragraph size="large">
+        <Box width={{ max: isColumn ? 'auto' : '540px' }}>
+          <Paragraph size="20px" textAlign={textAlign}>
             We apologize for the inconvenience. We are working hard to restore
             normal service.
           </Paragraph>
-          <Paragraph size="large">
+          <Paragraph size="20px" textAlign={textAlign}>
             Follow us on twitter{' '}
             <Anchor
               href={links.ccdl_twitter}
@@ -26,6 +31,8 @@ export const Custom504 = () => {
       }
       img="/tubey-distressed.svg"
       marginBottom="basex7"
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     />
   )
 }

@@ -3,9 +3,9 @@ import { useRouter } from 'next/router'
 import { Box, Paragraph } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
-import { TwoColumns } from './TwoColumns'
+import { Template } from './Template'
 
-export const Custom500 = () => {
+export const Custom500 = ({ ...props }) => {
   const { back, events } = useRouter()
   const { setResponsive } = useResponsive()
 
@@ -21,7 +21,7 @@ export const Custom500 = () => {
   }
 
   return (
-    <TwoColumns
+    <Template
       heading=" Uh-oh something went wrong!"
       body={
         <Box
@@ -30,11 +30,13 @@ export const Custom500 = () => {
           gap="xsmall"
           width={setResponsive('100%', 'auto')}
         >
-          <Paragraph size="large">Try refreshing the page or</Paragraph>
+          <Paragraph size="20px">Try refreshing the page or</Paragraph>
           <Button label="Go Back" primary responsive onClick={goBack} />
         </Box>
       }
       img="/tubey-spilled-sample.svg"
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     />
   )
 }

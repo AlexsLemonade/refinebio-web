@@ -8,6 +8,7 @@ import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
 import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
+import { Error } from 'components/shared/Error'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { LayerResponsive } from 'components/shared/LayerResponsive'
 import { Icon } from 'components/shared/Icon'
@@ -24,11 +25,17 @@ import {
 } from 'components/SearchResults'
 import { options } from 'config'
 
-export const Search = (props) => {
+export const Search = ({
+  query,
+  facets,
+  hasError,
+  results,
+  totalResults,
+  statusCode
+}) => {
   const {
     search: { pageSizes, sortby }
   } = options
-  const { query, results, totalResults, facets } = props
   const {
     formatFacetNames,
     getSearchQueryParam,
@@ -57,19 +64,17 @@ export const Search = (props) => {
   }
 
   useEffect(() => {
-    if (props) {
-      if (facets) {
-        const facetNames = formatFacetNames(Object.keys(facets))
+    if (facets) {
+      const facetNames = formatFacetNames(Object.keys(facets))
 
-        setConfig({
-          filterOptions: facetNames
+      setConfig({
+        filterOptions: facetNames
+      })
+
+      if (query) {
+        setSearch({
+          ...getSearchQueryParam(query)
         })
-
-        if (query) {
-          setSearch({
-            ...getSearchQueryParam(query)
-          })
-        }
       }
     }
   }, [])
@@ -102,6 +107,14 @@ export const Search = (props) => {
               onSubmit={handleSubmit}
             />
           </Box>
+          {hasError && (
+            <Error
+              statusCode={statusCode}
+              align="center"
+              direction="column"
+              marginTop="none"
+            />
+          )}
           {isResults && (
             <Grid
               areas={[
@@ -231,7 +244,7 @@ export const Search = (props) => {
 }
 
 Search.getInitialProps = async (ctx) => {
-  const { pathname, query } = ctx
+  const { query } = ctx
   const {
     search: {
       commonQueries: {
@@ -255,18 +268,15 @@ Search.getInitialProps = async (ctx) => {
       : Number(numDownloadableSamples.show)
   }
 
-  const { facets, results, totalResults } = await fetchSearch(
+  const response = await fetchSearch(
     queryString,
     Number(query.p) || 1,
     filterOrders
   )
 
   return {
-    pathname,
     query,
-    facets,
-    results,
-    totalResults
+    ...response
   }
 }
 

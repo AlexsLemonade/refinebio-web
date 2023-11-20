@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Button } from 'components/shared/Button'
-import { TwoColumns } from './TwoColumns'
+import { Template } from './Template'
 
-export const Custom404 = () => {
+export const Custom404 = ({ ...props }) => {
   const { back, events } = useRouter()
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export const Custom404 = () => {
   }
 
   return (
-    <TwoColumns
+    <Template
       heading="The page you are looking for isn’t expressed."
       body={
         <Button
@@ -30,6 +30,8 @@ export const Custom404 = () => {
         />
       }
       img="/tubey-reward-poster.svg"
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     />
   )
 }

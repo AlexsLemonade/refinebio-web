@@ -2,24 +2,32 @@ import { Box, Heading } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Row } from 'components/shared/Row'
 
-export const TwoColumns = ({ heading, body, img, marginBottom = 'none' }) => {
+export const Template = ({
+  heading,
+  body,
+  img,
+  align = 'start',
+  direction = 'row',
+  marginTop = 'basex15',
+  marginBottom = 'none'
+}) => {
   const { setResponsive } = useResponsive()
 
   return (
     <Row
-      direction={setResponsive('column', 'column', 'row')}
+      direction={setResponsive('column', 'column', direction)}
       gap="xlarge"
       justify="center"
       margin={{
-        top: setResponsive('none', 'none', 'basex15'),
+        top: setResponsive('none', 'none', marginTop),
         bottom: marginBottom
       }}
     >
       <Box
-        align={setResponsive('center', 'center', 'start')}
+        align={setResponsive('center', 'center', align)}
         margin={{ top: 'basex8' }}
       >
-        <Heading level={1} margin={{ bottom: 'small' }} size="small">
+        <Heading level={1} margin={{ bottom: 'small' }} size="medium">
           {heading}
         </Heading>
         {body}
@@ -32,7 +40,7 @@ export const TwoColumns = ({ heading, body, img, marginBottom = 'none' }) => {
           repeat: 'no-repeat',
           size: 'contain'
         }}
-        alignSelf={setResponsive('center', 'center', 'start')}
+        alignSelf={setResponsive('center', 'center', align)}
         // to preserve the size of SVG image
         height={setResponsive('250px', '350px')}
         width={setResponsive('250px', '350px')}
@@ -41,4 +49,4 @@ export const TwoColumns = ({ heading, body, img, marginBottom = 'none' }) => {
   )
 }
 
-export default TwoColumns
+export default Template
