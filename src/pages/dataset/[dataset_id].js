@@ -26,11 +26,13 @@ export const getServerSideProps = ({ query }) => {
 // TODO: create a new issue for the error handling
 export const Dataset = ({ query }) => {
   const { dataset_id: idFromQuery, start } = query
-  const { dataset, datasetId, loading, getDataset } = useDatasetManager()
+  const { dataset, datasetId, loading, getDataset, regeneratedDataset } =
+    useDatasetManager()
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
   const [selectedDataset, setSelectedDataset] = useState({})
-  const unprocessedDataset =
+  const isProcessed = selectedDataset.is_processed && selectedDataset.success
+  const isUnprocessedDataset =
     !selectedDataset.is_processing &&
     !selectedDataset.is_processed &&
     selectedDataset.success !== false
@@ -39,7 +41,6 @@ export const Dataset = ({ query }) => {
     const getSelectedDataset = async (id) => {
       const response = await getDataset(id)
       setSelectedDataset(response)
-      return response // once completed the dataset management epic, be sure to remove if it's not in use
     }
 
     getSelectedDataset(idFromQuery)
@@ -84,14 +85,20 @@ export const Dataset = ({ query }) => {
                   margin={{ top: setResponsive('medium', 'none') }}
                 >
                   <ShareDatasetButton datasetId={idFromQuery} />
-                  {unprocessedDataset && (
+                  {isUnprocessedDataset && (
                     <DownloadDatasetButton dataset={selectedDataset} />
                   )}
                 </Row>
               </Row>
-              <FilesSummary dataset={selectedDataset} />
-              <DatasetSummary dataset={selectedDataset} />
-              <DatasetDetails dataset={selectedDataset} isImmutable />
+              <FilesSummary
+                dataset={regeneratedDataset || selectedDataset}
+                isProcessed={isProcessed}
+              />
+              <DatasetSummary dataset={regeneratedDataset || selectedDataset} />
+              <DatasetDetails
+                dataset={regeneratedDataset || selectedDataset}
+                isImmutable
+              />
             </>
           )}
         </Box>

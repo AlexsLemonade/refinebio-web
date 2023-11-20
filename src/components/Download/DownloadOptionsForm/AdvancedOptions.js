@@ -9,8 +9,9 @@ import { links } from 'config'
 export const AdvancedOptions = ({
   id,
   values: { aggregate_by: aggregateBy, quantile_normalize: quantileNormalize },
-  handleChange,
   toggle,
+  handleChange,
+  handleUpdateDownloadOptions = () => {},
   name = 'quantile_normalize',
   hideLabel = false
 }) => {
@@ -44,7 +45,12 @@ export const AdvancedOptions = ({
             name={name}
             checked={skipQuantileNormalize && aggregateBy === 'EXPERIMENT'}
             disabled={aggregateBy === 'SPECIES'}
-            onChange={() => handleChange(name, !quantileNormalize)}
+            onChange={() => {
+              handleUpdateDownloadOptions(name, !quantileNormalize)
+              return handleChange({
+                target: { name, value: !quantileNormalize }
+              })
+            }}
           />
         </Box>
         <Anchor

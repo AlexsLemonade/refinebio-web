@@ -31,37 +31,39 @@ export const ExperimentView = ({
         organism={organism}
         setOrganism={setOrganism}
       />
-      <ViewBlocks elevation="medium" pad="medium">
-        {Object.keys(datasetData).map((experimentAccessionCode) => {
-          const addedSamples = datasetData[experimentAccessionCode]
-          const experiment = experiments[experimentAccessionCode]
-          const metadataFields = formatSampleMetadata(
-            experiment.sample_metadata
-          )
+      {experiments && (
+        <ViewBlocks elevation="medium" pad="medium">
+          {Object.keys(datasetData).map((experimentAccessionCode) => {
+            const addedSamples = datasetData[experimentAccessionCode]
+            const experiment = experiments[experimentAccessionCode]
+            const metadataFields = formatSampleMetadata(
+              experiment.sample_metadata
+            )
 
-          if (
-            organism !== 'ALL' &&
-            !experiment.organism_names.includes(organism)
-          ) {
-            return null
-          }
+            if (
+              organism !== 'ALL' &&
+              !experiment.organism_names.includes(organism)
+            ) {
+              return null
+            }
 
-          return (
-            <ViewBlock
-              key={experimentAccessionCode}
-              addedSamples={addedSamples}
-              datasetId={datasetId}
-              defaultOrganismFilterOption={defaultOrganismFilterOption}
-              experiment={experiment}
-              experimentAccessionCode={experimentAccessionCode}
-              metadataFields={metadataFields}
-              quantileNormalize={quantileNormalize}
-              isImmutable={isImmutable}
-              setOrganism={setOrganism}
-            />
-          )
-        })}
-      </ViewBlocks>
+            return (
+              <ViewBlock
+                key={experimentAccessionCode}
+                addedSamples={addedSamples}
+                datasetId={datasetId}
+                defaultOrganismFilterOption={defaultOrganismFilterOption}
+                experiment={experiment}
+                experimentAccessionCode={experimentAccessionCode}
+                metadataFields={metadataFields}
+                quantileNormalize={quantileNormalize}
+                isImmutable={isImmutable}
+                setOrganism={setOrganism}
+              />
+            )
+          })}
+        </ViewBlocks>
+      )}
     </>
   )
 }
