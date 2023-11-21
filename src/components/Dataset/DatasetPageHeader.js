@@ -1,6 +1,6 @@
+/* eslint-disable no-nested-ternary */
 import moment from 'moment'
 import { Box, Heading } from 'grommet'
-import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { usePageRendered } from 'hooks/usePageRendered'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -32,8 +32,7 @@ const Block = ({ children }) => {
   )
 }
 
-export const DatasetPageHeader = ({ dataset }) => {
-  const { error } = useDatasetManager()
+export const DatasetPageHeader = ({ dataset, hasError }) => {
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
 
@@ -46,46 +45,36 @@ export const DatasetPageHeader = ({ dataset }) => {
   const isProcessing = dataset?.is_processing
   const isProcessingError = dataset?.success === false // 'success' may be null
 
-  if (isProcessingError || error) {
-    return (
-      <Block>
-        <DatasetProcessingError dataset={dataset} />
-      </Block>
-    )
-  }
-
-  if (isProcessing && !isProcessingError) {
-    return (
-      <Block>
-        <DatasetProcessing dataset={dataset} />
-      </Block>
-    )
-  }
-
-  if (isProcessed) {
-    if (isAvailable && !isExpired) {
-      return (
-        <Block>
-          <DatasetReady dataset={dataset} />
-        </Block>
-      )
-    }
-    return (
-      <Block>
-        <DatasetRegenerate dataset={dataset} />
-      </Block>
-    )
-  }
-
   return (
     <FixedContainer pad="none">
       <Box>
-        {dataset?.data && (
-          <Box pad={{ top: 'large', bottom: 'medium' }}>
-            <Heading level={2} size={setResponsive('small', 'large')}>
-              Shared Dataset
-            </Heading>
-          </Box>
+        {isProcessing && !isProcessingError ? (
+          <Block>
+            <DatasetProcessing dataset={dataset} />
+          </Block>
+        ) : isProcessingError || hasError ? (
+          <Block>
+            <DatasetProcessingError dataset={dataset} />
+          </Block>
+        ) : isProcessed ? (
+          isAvailable &&
+          (!isExpired ? (
+            <Block>
+              <DatasetReady dataset={dataset} />
+            </Block>
+          ) : (
+            <Block>
+              <DatasetRegenerate dataset={dataset} />
+            </Block>
+          ))
+        ) : (
+          dataset?.data && (
+            <Box pad={{ top: 'large', bottom: 'medium' }}>
+              <Heading level={2} size={setResponsive('small', 'large')}>
+                Shared Dataset
+              </Heading>
+            </Box>
+          )
         )}
       </Box>
     </FixedContainer>

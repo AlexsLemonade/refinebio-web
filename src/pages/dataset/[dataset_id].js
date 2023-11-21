@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Box } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
+import { useResourceLoader } from 'hooks/useResourceLoader'
 import { useResponsive } from 'hooks/useResponsive'
 import { usePageRendered } from 'hooks/usePageRendered'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -28,23 +29,40 @@ export const Dataset = ({ query }) => {
   const { dataset_id: idFromQuery, start } = query
   const { dataset, datasetId, loading, getDataset, regeneratedDataset } =
     useDatasetManager()
+  const {
+    hasError,
+    isProcessingDataset,
+    latestDatasetState,
+    addProcessingResource
+  } = useResourceLoader(idFromQuery)
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
   const [selectedDataset, setSelectedDataset] = useState({})
-  const isProcessed = selectedDataset.is_processed && selectedDataset.success
+  const isProcessed = selectedDataset?.is_processed && selectedDataset?.success
   const isUnprocessedDataset =
-    !selectedDataset.is_processing &&
-    !selectedDataset.is_processed &&
-    selectedDataset.success !== false
+    !selectedDataset?.is_processing &&
+    !selectedDataset?.is_processed &&
+    selectedDataset?.success !== false
 
-  useEffect(() => {
-    const getSelectedDataset = async (id) => {
-      const response = await getDataset(id)
-      setSelectedDataset(response)
+  const getSelectedDataset = async (id) => {
+    const response = await getDataset(id)
+
+    if (response.is_processing) {
+      addProcessingResource(idFromQuery)
     }
 
+    setSelectedDataset(response)
+  }
+
+  useEffect(() => {
     getSelectedDataset(idFromQuery)
   }, [query])
+
+  useEffect(() => {
+    if (latestDatasetState && !isProcessingDataset) {
+      setSelectedDataset(latestDatasetState)
+    }
+  }, [isProcessingDataset, latestDatasetState])
 
   if (!pageRendered) return null
 
@@ -68,7 +86,10 @@ export const Dataset = ({ query }) => {
         <Box>
           {selectedDataset?.data && (
             <>
-              <DatasetPageHeader dataset={selectedDataset} />
+              <DatasetPageHeader
+                dataset={selectedDataset}
+                hasError={hasError}
+              />
               <Row
                 border={{ side: 'bottom' }}
                 pad={{ bottom: setResponsive('medium', 'small') }}
