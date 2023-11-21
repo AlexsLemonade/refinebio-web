@@ -8,6 +8,10 @@ export const RefinebioContextProvider = ({ children }) => {
   const [datasetId, setDatasetId] = useLocalStorage('datasetId', null)
   const [downloadOptions, setDownloadOptions] = useState({})
   const [email, setEmail] = useLocalStorage('email-address', null)
+  const [processingDatasets, setProcessingDatasets] = useLocalStorage(
+    'processing-datasets',
+    []
+  )
   const [processingExperiments, setProcessingExperiments] = useLocalStorage(
     'processing-experiments',
     []
@@ -27,6 +31,8 @@ export const RefinebioContextProvider = ({ children }) => {
       setEmail,
       processingExperiments,
       setProcessingExperiments,
+      processingDatasets,
+      setProcessingDatasets,
       regeneratedDataset,
       setRegeneratedDataset,
       token,
@@ -41,6 +47,8 @@ export const RefinebioContextProvider = ({ children }) => {
       setDownloadOptions,
       email,
       setEmail,
+      processingDatasets,
+      setProcessingDatasets,
       processingExperiments,
       setProcessingExperiments,
       regeneratedDataset,
