@@ -1,8 +1,8 @@
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
 import { options, validationSchemas } from 'config'
-import { useOneOffExperiment } from 'hooks/useOneOffExperiment'
 import { useDatasetManager } from 'hooks/useDatasetManager'
+import { useResourceLoader } from 'hooks/useResourceLoader'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/shared/Button'
@@ -20,16 +20,21 @@ export const DownloadNowModal = ({
   hasRnaSeq,
   id
 }) => {
-  const { addProcessingExperiment, getProcessingExperiment } =
-    useOneOffExperiment()
+  const { addProcessingResource, getProcessingResource } = useResourceLoader(
+    accessionCode,
+    true
+  )
   const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const { StartProcessingFormSchema } = validationSchemas
-  const experiment = getProcessingExperiment(accessionCode)
+  const processingExperiment = getProcessingResource(accessionCode)
 
-  if (experiment) {
+  if (processingExperiment) {
     return (
-      <ProcessingDatasetPillModal datasetId={experiment.datasetId} id={id} />
+      <ProcessingDatasetPillModal
+        datasetId={processingExperiment.datasetId}
+        id={id}
+      />
     )
   }
 
@@ -59,12 +64,13 @@ export const DownloadNowModal = ({
         validateOnChange={false}
         onSubmit={async (values, { setSubmitting }) => {
           const { emailAddress, receiveUpdates } = values
+
           if (receiveUpdates) {
             subscribeEmail(emailAddress)
           }
 
           const response = await startProcessingDataset(null, values)
-          addProcessingExperiment(accessionCode, response.id)
+          addProcessingResource(response.id, accessionCode)
           setSubmitting(false)
         }}
       >

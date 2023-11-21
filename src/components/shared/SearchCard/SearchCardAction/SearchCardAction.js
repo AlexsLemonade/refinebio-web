@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { Box } from 'grommet'
-import { useOneOffExperiment } from 'hooks/useOneOffExperiment'
+import { useResourceLoader } from 'hooks/useResourceLoader'
 import { usePageRendered } from 'hooks/usePageRendered'
 import { useResponsive } from 'hooks/useResponsive'
 import { getFormattedExperiment } from 'helpers/formatDatasetAction'
@@ -15,10 +15,10 @@ export const SearchCardAction = ({
   organismNames,
   technology
 }) => {
-  const { getProcessingExperiment } = useOneOffExperiment(accessionCode)
+  const { getProcessingResource } = useResourceLoader(accessionCode, true)
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
-  const experiment = getProcessingExperiment(accessionCode)
+  const processingExperiment = getProcessingResource(accessionCode)
   const hasMultipleOrganisms = organismNames.length > 1
   const rnaSeq = 'RNA-SEQ'
   const hasRnaSeq =
@@ -33,9 +33,9 @@ export const SearchCardAction = ({
 
   return (
     <>
-      {experiment && (
+      {processingExperiment && (
         <Box margin={{ bottom: 'small' }}>
-          <ProcessingDatasetPill datasetId={experiment.datasetId} />
+          <ProcessingDatasetPill datasetId={processingExperiment.datasetId} />
         </Box>
       )}
 
@@ -46,7 +46,7 @@ export const SearchCardAction = ({
         primary
       />
 
-      {!experiment && (
+      {!processingExperiment && (
         <Box margin={{ top: 'small' }} width={setResponsive('100%', 'auto')}>
           <DownloadNowButton
             accessionCode={accessionCode}
