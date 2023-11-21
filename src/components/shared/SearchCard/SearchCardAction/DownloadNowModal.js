@@ -20,14 +20,14 @@ export const DownloadNowModal = ({
   hasRnaSeq,
   id
 }) => {
+  const { email, startProcessingDataset } = useDatasetManager()
   const { addProcessingResource, getProcessingResource } = useResourceLoader(
     accessionCode,
     true
   )
-  const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const { StartProcessingFormSchema } = validationSchemas
   const processingExperiment = getProcessingResource(accessionCode)
+  const { StartProcessingFormSchema } = validationSchemas
 
   if (processingExperiment) {
     return (

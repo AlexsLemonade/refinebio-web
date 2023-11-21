@@ -1,36 +1,23 @@
 import { useEffect, useState } from 'react'
-import { useRefinebio } from 'hooks/useRefinebio'
 import { useDatasetManager } from 'hooks/useDatasetManager'
+import { useRefinebio } from 'hooks/useRefinebio'
 
-// resourceId: the processing dataset ID || the processing experiment accession code for the one-off experiment
+// resourceId: a processing dataset ID || a processing experiment accession code for the one-off experiment
 export const useResourceLoader = (resourceId, oneOffExperiment = false) => {
-  const {
-    processingDatasets,
-    setProcessingDatasets,
-    processingExperiments,
-    setProcessingExperiments
-  } = useRefinebio()
-  const processingResources = oneOffExperiment
-    ? processingExperiments
-    : processingDatasets
-
-  const setProcessingResources = oneOffExperiment
-    ? setProcessingExperiments
-    : setProcessingDatasets
-
   const { getDataset } = useDatasetManager()
+  const { processingResources, setProcessingResources } = useRefinebio()
   const [hasError, setHasError] = useState(false)
   const [latestDatasetState, setLatestDatasetState] = useState(false)
   let startTimer = false
 
-  // fetches the latest dataset status of the processing resource on mount
+  // fetches the latest state of the processing resource on mount
   useEffect(() => {
     if (getProcessingResource(resourceId)) {
       refreshProcessingResource()
     }
   }, [])
 
-  // polls the latest dataset status of the processing resource per minute
+  // polls the latest state of the processing resource per minute
   // (the processing usually takes a few minutes)
   useEffect(() => {
     let timerId = null
@@ -56,7 +43,7 @@ export const useResourceLoader = (resourceId, oneOffExperiment = false) => {
     })
   }
 
-  // id: an experiment accession code or a dataset ID
+  // id: a dataset ID || an experiment accession code
   const getProcessingResource = (id) => {
     const keyToFind = oneOffExperiment ? 'accesionCode' : 'datasetId'
     const resource = processingResources.find((item) => item[keyToFind] === id)
@@ -67,7 +54,7 @@ export const useResourceLoader = (resourceId, oneOffExperiment = false) => {
   const isProcessingDataset = latestDatasetState?.is_processing
 
   const refreshProcessingResource = async () => {
-    const { datasetId } = getProcessingResource(resourceId, oneOffExperiment)
+    const { datasetId } = getProcessingResource(resourceId)
     const response = await getDataset(datasetId)
 
     setHasError(response?.ok === false)

@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { Box } from 'grommet'
-import { useResourceLoader } from 'hooks/useResourceLoader'
 import { usePageRendered } from 'hooks/usePageRendered'
+import { useResourceLoader } from 'hooks/useResourceLoader'
 import { useResponsive } from 'hooks/useResponsive'
 import { getFormattedExperiment } from 'helpers/formatDatasetAction'
 import { DatasetActionButton } from 'components/shared/DatasetActionButton'
@@ -15,16 +15,16 @@ export const SearchCardAction = ({
   organismNames,
   technology
 }) => {
-  const { getProcessingResource } = useResourceLoader(accessionCode, true)
   const pageRendered = usePageRendered()
+  const { getProcessingResource } = useResourceLoader(accessionCode, true)
   const { setResponsive } = useResponsive()
-  const processingExperiment = getProcessingResource(accessionCode)
   const hasMultipleOrganisms = organismNames.length > 1
   const rnaSeq = 'RNA-SEQ'
   const hasRnaSeq =
     typeof technology === 'string'
       ? technology === rnaSeq
       : technology.find((x) => x === rnaSeq)
+  const processingExperiment = getProcessingResource(accessionCode)
 
   if (!pageRendered) return null
 

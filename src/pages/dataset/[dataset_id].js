@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Box } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
+import { usePageRendered } from 'hooks/usePageRendered'
 import { useResourceLoader } from 'hooks/useResourceLoader'
 import { useResponsive } from 'hooks/useResponsive'
-import { usePageRendered } from 'hooks/usePageRendered'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { Spinner } from 'components/shared/Spinner'
@@ -29,13 +29,13 @@ export const Dataset = ({ query }) => {
   const { dataset_id: idFromQuery, start } = query
   const { dataset, datasetId, loading, getDataset, regeneratedDataset } =
     useDatasetManager()
+  const pageRendered = usePageRendered()
   const {
     hasError,
     isProcessingDataset,
     latestDatasetState,
     addProcessingResource
   } = useResourceLoader(idFromQuery)
-  const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
   const [selectedDataset, setSelectedDataset] = useState({})
   const isProcessed = selectedDataset?.is_processed && selectedDataset?.success

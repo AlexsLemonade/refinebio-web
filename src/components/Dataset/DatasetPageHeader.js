@@ -1,11 +1,11 @@
 /* eslint-disable no-nested-ternary */
 import moment from 'moment'
 import { Box, Heading } from 'grommet'
-import { useResponsive } from 'hooks/useResponsive'
 import { usePageRendered } from 'hooks/usePageRendered'
+import { useResponsive } from 'hooks/useResponsive'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { DatasetProcessingError } from './DatasetProcessingError'
 import { DatasetProcessing } from './DatasetProcessing'
+import { DatasetProcessingError } from './DatasetProcessingError'
 import { DatasetReady } from './DatasetReady'
 import { DatasetRegenerate } from './DatasetRegenerate'
 
