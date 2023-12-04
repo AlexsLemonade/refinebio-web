@@ -4,6 +4,7 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 import { usePageRendered } from 'hooks/usePageRendered'
 import { useResourceLoader } from 'hooks/useResourceLoader'
 import { useResponsive } from 'hooks/useResponsive'
+import { Error } from 'components/shared/Error'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { Spinner } from 'components/shared/Spinner'
@@ -24,11 +25,16 @@ export const getServerSideProps = ({ query }) => {
   return { props: { query } }
 }
 
-// TODO: create a new issue for the error handling
 export const Dataset = ({ query }) => {
   const { dataset_id: idFromQuery, start } = query
-  const { dataset, datasetId, loading, getDataset, regeneratedDataset } =
-    useDatasetManager()
+  const {
+    dataset,
+    datasetId,
+    error: { hasError: hasPageError, statusCode },
+    loading,
+    getDataset,
+    regeneratedDataset
+  } = useDatasetManager()
   const pageRendered = usePageRendered()
   const {
     hasError,
@@ -73,6 +79,17 @@ export const Dataset = ({ query }) => {
       <FixedContainer>
         <StartProcessing dataset={selectedDataset} />
       </FixedContainer>
+    )
+  }
+
+  if (hasPageError) {
+    return (
+      <Error
+        statusCode={statusCode}
+        align="center"
+        direction="column"
+        marginTop="none"
+      />
     )
   }
 

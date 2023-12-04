@@ -23,7 +23,7 @@ export const useDatasetManager = () => {
     token
   } = useContext(DatasetManagerContext)
   const { createToken, resetToken, validateToken } = useToken()
-  const [error, setError] = useState(false)
+  const [error, setError] = useState({})
   const [loading, setLoading] = useState(false)
 
   /* Dataset */
@@ -74,6 +74,14 @@ export const useDatasetManager = () => {
           }
         : {}
     const response = await api.dataset.get(id || datasetId, headers)
+
+    if (response?.ok === false) {
+      setError({
+        hasError: true,
+        statusCode: response.statusCode
+      })
+    }
+
     const formattedResponse = {
       ...response,
       experiments: formatExperiments(response.experiments)
@@ -279,7 +287,6 @@ export const useDatasetManager = () => {
   return {
     email,
     error,
-    setError,
     dataset,
     datasetId,
     loading,
