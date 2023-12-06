@@ -5,7 +5,9 @@ import getIP from 'helpers/getIP'
 
 // posts to slack (configured in CCDL channel) and returns true if 200, otherwise false
 const postToSlack = async (params) => {
-  const slackHookUrl = process.env.SLACK_HOOK_URL
+  // TEMP: usng the webhook url for the ccdl test channel for dev
+  const slackHookUrl =
+    process.env.SLACK_HOOK_URL || process.env.NEXT_PUBLIC_SLACK_HOOK_URL
 
   try {
     const res = await fetch(slackHookUrl, {
