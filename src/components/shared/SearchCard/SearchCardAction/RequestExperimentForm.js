@@ -1,10 +1,15 @@
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
 import { validationSchemas } from 'config'
+import requestData from 'helpers/requestData'
 import { useResponsive } from 'hooks/useResponsive'
 import { RequestForm } from 'components/shared/RequestForm'
 
-export const RequestExperimentForm = ({ accessionCode, closeForm }) => {
+export const RequestExperimentForm = ({
+  accessionCode,
+  addRequestedExperiment,
+  closeForm
+}) => {
   const { viewport, setResponsive } = useResponsive()
   const { RequestDataFormSchema } = validationSchemas
 
@@ -21,17 +26,24 @@ export const RequestExperimentForm = ({ accessionCode, closeForm }) => {
           pediatric_cancer: '',
           approach: '',
           email: '',
-          email_updates: false
+          email_updates: false,
+          request_type: 'experiment'
         }}
         validationSchema={RequestDataFormSchema}
         validateOnChange={false}
         onSubmit={async (values, { setSubmitting }) => {
-          // TEMP
-          await new Promise((resolve) => {
-            setTimeout(() => resolve(values), 1000)
+          const response = await requestData({
+            requestValues: {
+              ...values
+            }
           })
-          // eslint-disable-next-line no-console
-          console.log(values)
+
+          // adds the experiment accession code if not 500
+          if (response.status !== 500) {
+            addRequestedExperiment()
+          }
+
+          closeForm()
           setSubmitting(false)
         }}
       >
