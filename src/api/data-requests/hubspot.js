@@ -13,15 +13,16 @@ const request = async (action, query) => {
   const listId =
     process.env.HUBSPOT_LIST_ID || process.env.NEXT_PUBLIC_HUBSPOT_LIST_ID
   const apiKeyQuery = `?hapikey=${hubspotApiKey}`
+  const apiUrl = 'https://api.hubapi.com/contacts/v1/'
   const urls = {
     // creates a contact
-    create: `https://api.hubapi.com/contacts/v1/contact/${apiKeyQuery}`,
+    create: `${apiUrl}contact/${apiKeyQuery}`,
     // adds a new contact to list
-    add: `https://api.hubapi.com/contacts/v1/lists/${listId}/add${apiKeyQuery}`,
+    add: `${apiUrl}lists/${listId}/add${apiKeyQuery}`,
     // gets contact by email
-    get: `https://api.hubapi.com/contacts/v1/contact/email/${query}/profile${apiKeyQuery}`,
+    get: `${apiUrl}contact/email/${query}/profile${apiKeyQuery}`,
     // updates a contact by email
-    update: `https://api.hubapi.com/contacts/v1/contact/email/${query}/profile${apiKeyQuery}`
+    update: `${apiUrl}contact/email/${query}/profile${apiKeyQuery}`
   }
   const isGet = action === 'get'
   const method = isGet ? 'GET' : 'POST'
