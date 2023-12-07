@@ -1,3 +1,4 @@
+import { submitHubspotDataRequest } from 'api/data-requests/hubspot'
 import { submitSlackDataRequest } from 'api/data-requests/slack'
 
 export default async (req, res) => {
@@ -10,9 +11,12 @@ export default async (req, res) => {
   switch (method) {
     case 'POST': {
       const response = { status: 204, message: '' }
-      // TEMP
-      const githubSuccess = false
-      const hubspotSuccess = false
+      const githubSuccess = false // TEMP
+
+      const hubspotSuccess = await submitHubspotDataRequest(
+        requestValues,
+        requestValues.request_type
+      )
 
       // requests to Slack only if requests to GitHub and/or HubSpot fail
       if (!githubSuccess || !hubspotSuccess) {
