@@ -17,7 +17,7 @@ const moduleExports = () => {
       : process.env.STAGE_API_VERSION,
     HUBSPOT_ACCESS_TOKEN: isProduction
       ? process.env.HUBSPOT_ACCESS_TOKEN
-      : process.env.STAGEHUBSPOT_ACCESS_TOKEN,
+      : process.env.STAGE_HUBSPOT_ACCESS_TOKEN,
     HUBSPOT_ILS_LIST_ID: process.env.HUBSPOT_ILS_LIST_ID,
     SENTRY_DSN: isProduction
       ? process.env.SENTRY_DSN
