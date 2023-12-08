@@ -10,9 +10,8 @@ export default async (req, res) => {
 
   switch (method) {
     case 'POST': {
-      const response = { status: 204, message: '' }
+      const response = { status: null }
       const githubSuccess = false // TEMP
-
       const hubspotSuccess = await submitHubspotDataRequest(
         requestValues,
         requestValues.request_type
@@ -20,14 +19,14 @@ export default async (req, res) => {
 
       // requests to Slack only if requests to GitHub and/or HubSpot fail
       if (!githubSuccess || !hubspotSuccess) {
-        let failedRequest
-        if (!githubSuccess && !hubspotSuccess) {
-          failedRequest = 'GitHub and HubSpot'
-        } else if (!githubSuccess) {
-          failedRequest = 'GitHub'
-        } else {
-          failedRequest = 'HubSpot'
-        }
+        // sets failed requests' API name(s) to print
+        const failedRequest =
+          // eslint-disable-next-line no-nested-ternary
+          !githubSuccess && !hubspotSuccess
+            ? 'GitHub and HubSpot'
+            : !githubSuccess
+            ? 'GitHub'
+            : 'HubSpot'
 
         const slackSuccess = await submitSlackDataRequest(
           requestValues,
@@ -38,11 +37,9 @@ export default async (req, res) => {
         if (slackSuccess) {
           response.status = 206
           response.message = `${failedRequest} failed, sent to Slack instead`
-        }
-        // sets Slack status to 500, as it won't have all of the data from both HubSpot and GitHub even if they succeed
-        else {
+        } else {
           response.status = 500
-          response.message = `${failedRequest} failed, sent to Slack but that also failed`
+          response.message = `${failedRequest}, and Slack failed`
         }
       } else {
         response.status = 200
@@ -50,7 +47,6 @@ export default async (req, res) => {
       }
 
       res.status(response.status).json(response)
-
       break
     }
     default: {
