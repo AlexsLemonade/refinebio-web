@@ -1,121 +1,81 @@
 // Hubspot data request
 import fetch from 'isomorphic-unfetch'
-// Hubspot list URL https://app.hubspot.com/contacts/[PORTAL_ID]/lists/[listId]
-// (resouces)
-// Contacts API https://developers.hubspot.com/docs/methods/contacts/contacts-overview
-// Contact Lists API https://developers.hubspot.com/docs/methods/lists/contact-lists-overview
+import { links } from 'config'
 
-const request = async (action, query) => {
-  // TEMP: usng local env var for api key
-  const hubspotApiKey =
-    process.env.HUBSPOT_APIKEY || process.env.NEXT_PUBLIC_HUBSPOT_APIKEY
-  // TEMP: usng test ccdl data requesterslist ID
-  const listId =
-    process.env.HUBSPOT_LIST_ID || process.env.NEXT_PUBLIC_HUBSPOT_LIST_ID
-  const apiKeyQuery = `?hapikey=${hubspotApiKey}`
-  const apiUrl = 'https://api.hubapi.com/contacts/v1/'
-  const urls = {
-    // creates a contact
-    create: `${apiUrl}contact/${apiKeyQuery}`,
-    // adds a new contact to list
-    add: `${apiUrl}lists/${listId}/add${apiKeyQuery}`,
-    // gets contact by email
-    get: `${apiUrl}contact/email/${query}/profile${apiKeyQuery}`,
-    // updates a contact by email
-    update: `${apiUrl}contact/email/${query}/profile${apiKeyQuery}`
+// (resouces) HubSpot CRM API v3 https://developers.hubspot.com/docs/api/overview
+const request = async (action, email, properties = '') => {
+  // TEMP: usng local env var for access token
+  const accessToken =
+    process.env.HUBSPOT_ACCESS_TOKEN ||
+    process.env.NEXT_PUBLIC_HUBSPOT_ACCESS_TOKEN
+  const endpointContact = `${links.webhooks.hubspot}/objects/contacts`
+  const endpointContactByEmail = `${endpointContact}/${email}?idProperty=email&properties=dataset_request_details`
+  const actions = {
+    createContact: {
+      method: 'POST',
+      url: endpointContact
+    },
+    getContact: {
+      method: 'GET',
+      url: endpointContactByEmail
+    },
+    updateContact: {
+      method: 'PATCH',
+      url: endpointContactByEmail
+    }
   }
-  const isGet = action === 'get'
-  const method = isGet ? 'GET' : 'POST'
+  const isGet = actions[action].method === 'GET'
 
-  const response = await fetch(urls[action], {
-    method,
+  const response = await fetch(actions[action].url, {
+    method: actions[action].method,
     headers: {
+      Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'application/json'
     },
-    ...(!isGet ? { body: JSON.stringify(query) } : {})
+    ...(!isGet ? { body: JSON.stringify(properties) } : {})
   })
 
-  if (isGet) {
-    const { status } = response
-    const json = await response.json()
-
-    if (json.status !== 'error' && json.properties.dataset_request_details) {
-      return {
-        status,
-        datasetRequestDetails: json.properties.dataset_request_details.value
-      }
-    }
-
-    return { status }
-  }
-
-  return response
+  return isGet ? response.status : response
 }
 
 // updates an exsisting contact list or creates a new one and adds the requested details
-const updateContactList = async (email, newDetails) => {
-  let details = newDetails
-
-  const contactData = await request('get', email)
-
-  // creates a new contact email if it doesn't exist
-  if (contactData.status === 404) {
-    await request('create', {
-      properties: [
-        {
-          property: 'email',
-          value: email
-        },
-        {
-          property: 'dataset_request_details',
-          value: details
-        }
-      ]
-    })
+const updateContactList = async (email, newDatasetRequestDetails) => {
+  let response
+  const properties = {
+    email,
+    dataset_request_details: newDatasetRequestDetails
   }
-  // updates existing contact otherwise
+
+  const { status } = await request('getContact', email)
+
+  // creates a new contact with dataset request details if no record
+  if (status === 404) {
+    response = await request('createContact', email, { properties })
+  }
+  // or updates existing contact's dataset request details
   else {
-    const oldDatasetRequestDetails = contactData.datasetRequestDetails
-
-    // appends the requested details to the old data's fields if the existing contact already has it
-    if (oldDatasetRequestDetails !== undefined) {
-      details = `${newDetails}\n----------\n${oldDatasetRequestDetails}`
-    }
-
-    await request('update', email, {
-      properties: [
-        {
-          property: 'dataset_request_details',
-          value: details
-        }
-      ]
-    })
+    response = await request('updateContact', email, { properties })
   }
 
-  const response = await request('add', {
-    emails: [email]
-  })
-  return response.ok
+  return response.status >= 200 && response.status < 300
 }
 
-// returns false if there are any errors with updating the contact list
-export const submitHubspotDataRequest = async (values, requestType) => {
+// returns false if any errors when updating the contact
+export const submitHubspotDataRequest = async (requestValues, requestType) => {
   const requestHeading = {
-    experiment: `Requested experiment ${values.accession_codes}`,
-    search: `Requested experiment(s) ${values.accession_codes} for search term "${values.query}"`
+    experiment: `Requested Experiment ${requestValues.accession_codes}`,
+    search: `Requested Experiment(s) ${requestValues.accession_codes} for search term "${requestValues.query}"`
   }
-  const newDetails = `${
-    requestHeading[requestType]
-  }\nPediatric cancer research: ${values.pediatric_cancer}\nPrimary approach: ${
-    values.approach
-  }\n\nAdditional Notes:\n${values.comments ? values.comments : 'none'}\n\n${
-    values.email_updates
-      ? '(Wants email updates)'
-      : '(Does not want email updates)'
-  }\nSubmitted ${new Date().toLocaleString()}`
+  const newDatasetRequestDetails = `${requestHeading[requestType]}
+  \nPediatric Cancer Research: ${requestValues.pediatric_cancer}
+  \nPrimary Approach: ${requestValues.approach}
+  \nAdditional Notes:\n${
+    requestValues.comments ? requestValues.comments : 'none'
+  }\nWants Email Update: ${requestValues.email_updates ? 'Yes' : 'No'}
+  \nSubmitted ${new Date().toLocaleString()}`
 
   try {
-    return updateContactList(values.email, newDetails)
+    return updateContactList(requestValues.email, newDatasetRequestDetails)
   } catch {
     return false
   }
