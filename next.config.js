@@ -15,10 +15,10 @@ const moduleExports = () => {
     API_VERSION: isProduction
       ? process.env.API_VERSION
       : process.env.STAGE_API_VERSION,
-    HUBSPOT_APIKEY: isProduction
-      ? process.env.HUBSPOT_APIKEY
-      : process.env.STAGE_HUBSPOT_APIKEY,
-    HUBSPOT_LIST_ID: process.env.HUBSPOT_LIST_ID,
+    HUBSPOT_ACCESS_TOKEN: isProduction
+      ? process.env.HUBSPOT_ACCESS_TOKEN
+      : process.env.STAGEHUBSPOT_ACCESS_TOKEN,
+    HUBSPOT_ILS_LIST_ID: process.env.HUBSPOT_ILS_LIST_ID,
     SENTRY_DSN: isProduction
       ? process.env.SENTRY_DSN
       : process.env.STAGE_SENTRY_DSN,
