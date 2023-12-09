@@ -35,7 +35,18 @@ const request = async (action, email, properties = '') => {
     ...(!isGet ? { body: JSON.stringify(properties) } : {})
   })
 
-  return isGet ? response.status : response
+  if (isGet) {
+    const { status } = response
+
+    if (status === 200) {
+      const results = await response.json()
+
+      return { status, results }
+    }
+    return { status }
+  }
+
+  return response
 }
 
 // updates an exsisting contact list or creates a new one and adds the requested details
@@ -46,7 +57,7 @@ const updateContactList = async (email, newDatasetRequestDetails) => {
     dataset_request_details: newDatasetRequestDetails
   }
 
-  const { status } = await request('getContact', email)
+  const { status, results } = await request('getContact', email)
 
   // creates a new contact with dataset request details if no record
   if (status === 404) {
@@ -54,6 +65,13 @@ const updateContactList = async (email, newDatasetRequestDetails) => {
   }
   // or updates existing contact's dataset request details
   else {
+    const oldDatasetRequestDetails = results.properties?.dataset_request_details
+
+    // concatenates new dataset request details value to existing one
+    if (oldDatasetRequestDetails) {
+      properties.dataset_request_details = `${newDatasetRequestDetails}\n----------\n${oldDatasetRequestDetails}`
+    }
+
     response = await request('updateContact', email, { properties })
   }
 
