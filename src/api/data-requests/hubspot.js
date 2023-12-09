@@ -80,20 +80,29 @@ const updateContactList = async (email, newDatasetRequestDetails) => {
 
 // returns false if any errors when updating the contact
 export const submitHubspotDataRequest = async (requestValues, requestType) => {
+  const {
+    accession_codes: accessionCodes,
+    approach,
+    comments,
+    email,
+    emailUpdates,
+    pediatric_cancer: pediatricCancer,
+    query
+  } = requestValues
+
   const requestHeading = {
-    experiment: `Requested Experiment ${requestValues.accession_codes}`,
-    search: `Requested Experiment(s) ${requestValues.accession_codes} for search term "${requestValues.query}"`
+    experiment: `Requested Experiment ${accessionCodes}`,
+    search: `Requested Experiment(s) ${accessionCodes} for search term "${query}"`
   }
   const newDatasetRequestDetails = `${requestHeading[requestType]}
-  \nPediatric Cancer Research: ${requestValues.pediatric_cancer}
-  \nPrimary Approach: ${requestValues.approach}
-  \nAdditional Notes:\n${
-    requestValues.comments ? requestValues.comments : 'none'
-  }\nWants Email Update: ${requestValues.email_updates ? 'Yes' : 'No'}
+  \nPediatric Cancer Research: ${pediatricCancer}
+  \nPrimary Approach: ${approach}
+  \nAdditional Notes:\n${comments || 'none'}
+  \nWants Email Update: ${emailUpdates ? 'Yes' : 'No'}
   \nSubmitted ${new Date().toLocaleString()}`
 
   try {
-    return updateContactList(requestValues.email, newDatasetRequestDetails)
+    return updateContactList(email, newDatasetRequestDetails)
   } catch {
     return false
   }
