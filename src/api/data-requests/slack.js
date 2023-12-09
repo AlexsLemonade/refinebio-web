@@ -21,25 +21,36 @@ const postToSlack = async (params) => {
 }
 
 export const submitSlackDataRequest = async (
-  values,
+  requestValues,
   requestType,
   failedRequest
 ) => {
   const ip = await getIP()
+  const {
+    accession_codes: accessionCodes,
+    approach,
+    comments,
+    email,
+    emailUpdates,
+    navigatorUserAgent,
+    pediatric_cancer: pediatricCancer,
+    query
+  } = requestValues
+  const requestUrl = links.refinebio_data_request[requestType]
   const requestAttachments = {
     experiment: {
-      fallback: `${values.accession_codes} Experiment Requested`,
-      title: `${values.accession_codes} Experiment Requested`,
-      title_link: `${links.refinebio_data_request[requestType]}${values.accession_codes}`
+      fallback: `${accessionCodes} Experiment Requested`,
+      title: `${accessionCodes} Experiment Requested`,
+      title_link: `${requestUrl}${accessionCodes}`
     },
     search: {
-      fallback: `Missing data for search term '${values.query}'`,
-      title: `Missing data for search term '${values.query}'`,
-      title_link: `${links.refinebio_data_request[requestType]}${values.query}`,
+      fallback: `Missing data for search term '${query}'`,
+      title: `Missing data for search term '${query}'`,
+      title_link: `${requestUrl}${query}`,
       fields: [
         {
           title: 'Accession Codes',
-          value: values.accession_codes,
+          value: accessionCodes,
           short: true
         }
       ]
@@ -55,33 +66,31 @@ export const submitSlackDataRequest = async (
           ...(requestAttachments[requestType].fields || []),
           {
             title: 'Pediatric Cancer Research',
-            value: values.pediatric_cancer,
+            value: pediatricCancer,
             short: true
           },
           {
             title: 'Primary Approach',
-            value: values.approach,
+            value: approach,
             short: true
           },
           {
             title: 'Email',
-            value: `${values.email}${
-              values.email_updates ? ' _(wants updates)_' : ''
-            }`,
+            value: `${email}${emailUpdates ? ' _(wants updates)_' : ''}`,
             short: false
           },
-          ...(values.comments
+          ...(comments
             ? [
                 {
                   title: 'Additional Notes',
-                  value: values.comments,
+                  value: comments,
                   short: false
                 }
               ]
             : [])
         ],
 
-        footer: `Refine.bio | ${ip} | ${values.navigatorUserAgent} | This message was sent because the request to ${failedRequest} failed`,
+        footer: `Refine.bio | ${ip} | ${navigatorUserAgent} | This message was sent because the request to ${failedRequest} failed`,
         footer_icon: links.refinebio_email_logo,
         ts: Date.now() / 1000 // unix time
       }
