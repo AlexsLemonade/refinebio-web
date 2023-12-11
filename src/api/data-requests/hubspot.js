@@ -85,7 +85,7 @@ export const submitHubspotDataRequest = async (requestValues, requestType) => {
     approach,
     comments,
     email,
-    emailUpdates,
+    email_updates: emailUpdates,
     pediatric_cancer: pediatricCancer,
     query
   } = requestValues
