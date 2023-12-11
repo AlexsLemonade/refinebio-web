@@ -41,9 +41,8 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
               ...values
             }
           })
-
           // redirects to the homepage after submission
-          const isSuccess = response.status === 200
+          const isSuccess = JSON.parse(response).status === 200
           push(
             {
               pathname,
