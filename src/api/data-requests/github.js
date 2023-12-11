@@ -33,7 +33,7 @@ export const submitGithubDataRequest = async (requestValues, requestType) => {
   const { accession_codes: accessionCodes, query } = requestValues
   const requestUrl = links.refinebio_data_request[requestType]
   const requestBody = {
-    experiment: `### Context\r\n\r\nA user requested [${accessionCodes}](${requestUrl}${query})`,
+    experiment: `### Context\r\n\r\nA user requested [${accessionCodes}](${requestUrl}${accessionCodes})`,
     search: `### Context\r\n\r\nA user requested ${accessionCodes} for the search term ["${query}"](${requestUrl}${query})`
   }
 
