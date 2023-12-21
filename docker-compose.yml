@@ -5,6 +5,8 @@ services:
     image: refinebio-web
     ports:
       - ${CLIENT_PORT}:${CLIENT_PORT}
+    environment:
+      NEXT_PUBLIC_DEV: true
     build:
       context: .
       dockerfile: Dockerfile

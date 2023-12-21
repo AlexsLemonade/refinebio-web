@@ -1,9 +1,12 @@
 ARG NODE_VER=18.17-alpine 
+ARG NEXT_PUBLIC_DEV
 
 #  
 # Dependency Installation
 #
 FROM node:$NODE_VER as deps
+ENV NEXT_PUBLIC_DEV=${NEXT_PUBLIC_DEV}
+
 # Install bash
 RUN apk add --no-cache bash
 # Temp directory
