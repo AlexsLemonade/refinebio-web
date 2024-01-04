@@ -71,7 +71,7 @@ export const Experiment = () => {
   }, [isReady])
 
   useEffect(() => {
-    if (!fromViewSamples || !samplesTableData?.results.length) {
+    if (!fromViewSamples || !samplesTableData?.results?.length) {
       return
     }
 
