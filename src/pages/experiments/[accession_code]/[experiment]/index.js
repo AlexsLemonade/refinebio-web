@@ -1,8 +1,9 @@
-import { Fragment, memo, useEffect } from 'react'
+import { Fragment, memo, useEffect, useRef, useState } from 'react'
 import { nanoid } from 'nanoid'
 import { Box, Grid, Heading } from 'grommet'
 import { useRouter } from 'next/router'
 import { useExperiments } from 'hooks/useExperiments'
+import { useSamplesTableManager } from 'hooks/useSamplesTableManager'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { SamplesTableManagerContextProvider } from 'contexts/SamplesTableManagerContext'
@@ -11,6 +12,7 @@ import { links } from 'config'
 import formatNumbers from 'helpers/formatNumbers'
 import { getFormattedExperiment } from 'helpers/formatDatasetAction'
 import getURLForAccessionCode from 'helpers/getURLForAccessionCode'
+import scrollView from 'helpers/scrollView'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
@@ -47,6 +49,7 @@ export const Experiment = () => {
     isReady,
     query: { accession_code: accessionCode }
   } = useRouter()
+  const { samplesTableData } = useSamplesTableManager()
   const {
     databaseNames,
     experiment,
@@ -58,11 +61,27 @@ export const Experiment = () => {
   } = useExperiments()
   const { search, navigateToSearch } = useSearchManager()
   const fromSearch = search.ref === 'search'
+  const fromViewSamples = search.from === 'view-samples'
   const { setResponsive } = useResponsive()
+  const [offset, setOffset] = useState(0)
+  const tableRef = useRef(null)
 
   useEffect(() => {
     if (isReady) getExperiment(accessionCode)
   }, [isReady])
+
+  useEffect(() => {
+    if (!fromViewSamples || !samplesTableData?.results.length) {
+      return
+    }
+
+    if (tableRef.current) {
+      setOffset(tableRef.current.offsetTop > 0 ? 128 : 0)
+      scrollView(tableRef.current, {
+        block: 'start'
+      })
+    }
+  }, [fromViewSamples, samplesTableData, tableRef])
 
   return (
     <>
@@ -89,254 +108,263 @@ export const Experiment = () => {
             </Box>
           ) : (
             hasSamples && (
-              <Box>
-                <FixedContainer>
-                  <Box
-                    elevation="medium"
-                    pad="large"
-                    margin={{ bottom: 'basex6' }}
-                  >
-                    <Grid
-                      areas={setResponsive(
-                        [
-                          { name: 'header', start: [0, 0], end: [1, 0] },
-                          { name: 'meta', start: [0, 1], end: [1, 1] },
-                          { name: 'ctas', start: [0, 2], end: [1, 2] }
-                        ],
-                        [
-                          { name: 'header', start: [0, 0], end: [0, 1] },
-                          { name: 'ctas', start: [1, 0], end: [1, 1] },
-                          { name: 'meta', start: [0, 2], end: [1, 2] }
-                        ]
-                      )}
-                      columns={['1fr', 'auto']}
-                      rows={['auto', 'auto', 'auto']}
-                      gap={{
-                        row: setResponsive('small', 'medium'),
-                        column: 'medium'
-                      }}
-                      margin={{ bottom: 'medium' }}
+              <>
+                <Box margin={{ bottom: `-${offset}px` }}>
+                  <FixedContainer>
+                    <Box
+                      elevation="medium"
+                      pad="large"
+                      margin={{ bottom: 'basex6' }}
                     >
-                      <Box gridArea="header">
-                        <SearchCardHeader
-                          accessionCode={accessionCode}
-                          title={experiment.title}
-                          isLinked={false}
-                        />
-                      </Box>
-                      <Box
-                        gridArea="ctas"
-                        margin={{ top: setResponsive('none', 'large') }}
-                        align="end"
+                      <Grid
+                        areas={setResponsive(
+                          [
+                            { name: 'header', start: [0, 0], end: [1, 0] },
+                            { name: 'meta', start: [0, 1], end: [1, 1] },
+                            { name: 'ctas', start: [0, 2], end: [1, 2] }
+                          ],
+                          [
+                            { name: 'header', start: [0, 0], end: [0, 1] },
+                            { name: 'ctas', start: [1, 0], end: [1, 1] },
+                            { name: 'meta', start: [0, 2], end: [1, 2] }
+                          ]
+                        )}
+                        columns={['1fr', 'auto']}
+                        rows={['auto', 'auto', 'auto']}
+                        gap={{
+                          row: setResponsive('small', 'medium'),
+                          column: 'medium'
+                        }}
+                        margin={{ bottom: 'medium' }}
                       >
-                        <SearchCardAction
-                          accessionCode={accessionCode}
-                          downloadableSamples={
-                            experiment.num_downloadable_samples
-                          }
-                          organismNames={experiment.organism_names}
-                          technology={getTechnologyNames()}
-                        />
-                      </Box>
-                      <Box gridArea="meta">
-                        <SearchCardMeta
-                          downloadableSamples={
-                            experiment.num_downloadable_samples
-                          }
-                          organismNames={experiment.organism_names}
-                          platformNames={getPlatformNames()}
-                          technology={getTechnologyNames()}
-                          size="medium"
-                        />
-                      </Box>
-                    </Grid>
-                    <Box margin={{ bottom: 'medium' }}>
-                      <Heading level={4} responsive={false}>
-                        Submitter Supplied Information
-                      </Heading>
-                    </Box>
-                    <InformationList>
-                      <InformationItem
-                        field="Description"
-                        value={
-                          <TextHighlight>
-                            {experiment.description}
-                          </TextHighlight>
-                        }
-                        margin={{ left: '-32px' }}
-                        width={{ min: 'calc(100% + 64px)' }}
-                      />
-                      <InformationItemBlock
-                        condition={experiment.pubmed_id}
-                        field="PubMedID"
-                        value={
-                          <Anchor
-                            label={
-                              <TextHighlight>
-                                {experiment.pubmed_id}
-                              </TextHighlight>
-                            }
-                            href={`${links.nih}${experiment.pubmed_id}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <Box gridArea="header">
+                          <SearchCardHeader
+                            accessionCode={accessionCode}
+                            title={experiment.title}
+                            isLinked={false}
                           />
-                        }
-                        textNull="No associated PubMed ID"
-                      />
-                      <InformationItemBlock
-                        condition={experiment.publication_title}
-                        field="Publication Title"
-                        value={
-                          <Anchor
-                            label={
-                              <TextHighlight>
-                                {experiment.publication_title}
-                              </TextHighlight>
-                            }
-                            href={`${links.nih}${experiment.pubmed_id}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          />
-                        }
-                        textNull="No associated publication"
-                      />
-                      <InformationItem
-                        field="Total Samples"
-                        value={formatNumbers(experiment.num_total_samples)}
-                      />
-                      <InformationItemBlock
-                        condition={
-                          experiment.submitter_institution &&
-                          experiment.submitter_institution !== 'N/A'
-                        }
-                        field="Submitter’s Institution"
-                        value={
-                          <Button
-                            label={
-                              <TextHighlight>
-                                {experiment.submitter_institution}
-                              </TextHighlight>
-                            }
-                            link
-                            linkFontSize="medium"
-                            underlineOnHover
-                            onClick={() =>
-                              navigateToSearch({
-                                search: `submitter_institution: ${experiment.submitter_institution}`
-                              })
-                            }
-                          />
-                        }
-                        textNull="No associated institution"
-                      />
-                      <InformationItemBlock
-                        condition={experiment.publication_authors.length > 0}
-                        field="Authors"
-                        value={experiment.publication_authors.map(
-                          (author, i) => (
-                            <Fragment key={nanoid()}>
-                              {i ? ', ' : ''}
-                              <Button
-                                display="inline-block"
-                                label={<TextHighlight>{author}</TextHighlight>}
-                                link
-                                linkFontSize="medium"
-                                underlineOnHover
-                                onClick={() =>
-                                  navigateToSearch({
-                                    search: `publication_authors:${author}`
-                                  })
-                                }
-                              />
-                            </Fragment>
-                          )
-                        )}
-                        textNull="No associated authors"
-                        direction="row"
-                      />
-                      <InformationItemBlock
-                        condition={experiment.source_database}
-                        field="Source Repositories"
-                        value={
-                          <Anchor
-                            label={
-                              <TextHighlight>
-                                {databaseNames[experiment.source_database]}
-                              </TextHighlight>
-                            }
-                            href={experiment.source_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          />
-                        }
-                      />
-                      <InformationItemBlock
-                        condition={experiment.alternate_accession_code}
-                        field="Alternate Accession IDs"
-                        value={
-                          <Anchor
-                            label={
-                              <TextHighlight>
-                                {experiment.alternate_accession_code}
-                              </TextHighlight>
-                            }
-                            href={getURLForAccessionCode(
-                              experiment.alternate_accession_code
-                            )}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          />
-                        }
-                        textNull="None"
-                      />
-                    </InformationList>
-                  </Box>
-                </FixedContainer>
-                <FixedContainer>
-                  <Box
-                    elevation="medium"
-                    pad={setResponsive('medium', 'large')}
-                    margin={{ bottom: 'basex6' }}
-                  >
-                    <Row margin={{ bottom: 'medium' }}>
-                      <Column>
-                        <Heading
-                          level={2}
-                          margin={{ bottom: setResponsive('small', 'none') }}
+                        </Box>
+                        <Box
+                          gridArea="ctas"
+                          margin={{ top: setResponsive('none', 'large') }}
+                          align="end"
                         >
-                          Samples
+                          <SearchCardAction
+                            accessionCode={accessionCode}
+                            downloadableSamples={
+                              experiment.num_downloadable_samples
+                            }
+                            organismNames={experiment.organism_names}
+                            technology={getTechnologyNames()}
+                          />
+                        </Box>
+                        <Box gridArea="meta">
+                          <SearchCardMeta
+                            downloadableSamples={
+                              experiment.num_downloadable_samples
+                            }
+                            organismNames={experiment.organism_names}
+                            platformNames={getPlatformNames()}
+                            technology={getTechnologyNames()}
+                            size="medium"
+                          />
+                        </Box>
+                      </Grid>
+                      <Box margin={{ bottom: 'medium' }}>
+                        <Heading level={4} responsive={false}>
+                          Submitter Supplied Information
                         </Heading>
-                      </Column>
-                      <Column>
-                        <SamplesTableAction
-                          accessionCode={accessionCode}
-                          downloadableSamples={
-                            experiment.num_downloadable_samples
+                      </Box>
+                      <InformationList>
+                        <InformationItem
+                          field="Description"
+                          value={
+                            <TextHighlight>
+                              {experiment.description}
+                            </TextHighlight>
+                          }
+                          margin={{ left: '-32px' }}
+                          width={{ min: 'calc(100% + 64px)' }}
+                        />
+                        <InformationItemBlock
+                          condition={experiment.pubmed_id}
+                          field="PubMedID"
+                          value={
+                            <Anchor
+                              label={
+                                <TextHighlight>
+                                  {experiment.pubmed_id}
+                                </TextHighlight>
+                              }
+                              href={`${links.nih}${experiment.pubmed_id}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            />
+                          }
+                          textNull="No associated PubMed ID"
+                        />
+                        <InformationItemBlock
+                          condition={experiment.publication_title}
+                          field="Publication Title"
+                          value={
+                            <Anchor
+                              label={
+                                <TextHighlight>
+                                  {experiment.publication_title}
+                                </TextHighlight>
+                              }
+                              href={`${links.nih}${experiment.pubmed_id}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            />
+                          }
+                          textNull="No associated publication"
+                        />
+                        <InformationItem
+                          field="Total Samples"
+                          value={formatNumbers(experiment.num_total_samples)}
+                        />
+                        <InformationItemBlock
+                          condition={
+                            experiment.submitter_institution &&
+                            experiment.submitter_institution !== 'N/A'
+                          }
+                          field="Submitter’s Institution"
+                          value={
+                            <Button
+                              label={
+                                <TextHighlight>
+                                  {experiment.submitter_institution}
+                                </TextHighlight>
+                              }
+                              link
+                              linkFontSize="medium"
+                              underlineOnHover
+                              onClick={() =>
+                                navigateToSearch({
+                                  search: `submitter_institution: ${experiment.submitter_institution}`
+                                })
+                              }
+                            />
+                          }
+                          textNull="No associated institution"
+                        />
+                        <InformationItemBlock
+                          condition={experiment.publication_authors.length > 0}
+                          field="Authors"
+                          value={experiment.publication_authors.map(
+                            (author, i) => (
+                              <Fragment key={nanoid()}>
+                                {i ? ', ' : ''}
+                                <Button
+                                  display="inline-block"
+                                  label={
+                                    <TextHighlight>{author}</TextHighlight>
+                                  }
+                                  link
+                                  linkFontSize="medium"
+                                  underlineOnHover
+                                  onClick={() =>
+                                    navigateToSearch({
+                                      search: `publication_authors:${author}`
+                                    })
+                                  }
+                                />
+                              </Fragment>
+                            )
+                          )}
+                          textNull="No associated authors"
+                          direction="row"
+                        />
+                        <InformationItemBlock
+                          condition={experiment.source_database}
+                          field="Source Repositories"
+                          value={
+                            <Anchor
+                              label={
+                                <TextHighlight>
+                                  {databaseNames[experiment.source_database]}
+                                </TextHighlight>
+                              }
+                              href={experiment.source_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            />
                           }
                         />
-                      </Column>
-                    </Row>
-                    <SamplesTableManagerContextProvider>
-                      <SamplesTable
-                        allSamples={getFormattedExperiment(
-                          accessionCode,
-                          experiment.num_downloadable_samples
-                        )}
-                        sampleAccessionsInExperiment={{
-                          [experiment.accession_code]: experiment.samples.map(
-                            (sample) => sample.accession_code
-                          )
-                        }}
-                        queryToAdd={{
-                          experiment_accession_code: accessionCode
-                        }}
-                        sampleMetadataFields={experiment.sample_metadata}
-                        showOnlyAddedSamples
-                      />
-                    </SamplesTableManagerContextProvider>
-                  </Box>
-                </FixedContainer>
-              </Box>
+                        <InformationItemBlock
+                          condition={experiment.alternate_accession_code}
+                          field="Alternate Accession IDs"
+                          value={
+                            <Anchor
+                              label={
+                                <TextHighlight>
+                                  {experiment.alternate_accession_code}
+                                </TextHighlight>
+                              }
+                              href={getURLForAccessionCode(
+                                experiment.alternate_accession_code
+                              )}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            />
+                          }
+                          textNull="None"
+                        />
+                      </InformationList>
+                    </Box>
+                  </FixedContainer>
+                </Box>
+                <Box ref={tableRef}>
+                  <FixedContainer>
+                    <Box
+                      elevation="medium"
+                      pad={setResponsive('medium', 'large')}
+                      margin={{
+                        top: `${offset}px`,
+                        bottom: 'basex6'
+                      }}
+                    >
+                      <Row margin={{ bottom: 'medium' }}>
+                        <Column>
+                          <Heading
+                            level={2}
+                            margin={{ bottom: setResponsive('small', 'none') }}
+                          >
+                            Samples
+                          </Heading>
+                        </Column>
+                        <Column>
+                          <SamplesTableAction
+                            accessionCode={accessionCode}
+                            downloadableSamples={
+                              experiment.num_downloadable_samples
+                            }
+                          />
+                        </Column>
+                      </Row>
+                      <SamplesTableManagerContextProvider>
+                        <SamplesTable
+                          allSamples={getFormattedExperiment(
+                            accessionCode,
+                            experiment.num_downloadable_samples
+                          )}
+                          sampleAccessionsInExperiment={{
+                            [experiment.accession_code]: experiment.samples.map(
+                              (sample) => sample.accession_code
+                            )
+                          }}
+                          queryToAdd={{
+                            experiment_accession_code: accessionCode
+                          }}
+                          sampleMetadataFields={experiment.sample_metadata}
+                          showOnlyAddedSamples
+                        />
+                      </SamplesTableManagerContextProvider>
+                    </Box>
+                  </FixedContainer>
+                </Box>
+              </>
             )
           )}
         </Box>
