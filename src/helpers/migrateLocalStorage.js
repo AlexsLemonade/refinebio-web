@@ -5,4 +5,4 @@ export const getOldLocalStorageKey = (key) =>
   isWindow ? window.localStorage.getItem(key) : false
 
 export const removeOldLocalStorageKey = (key) =>
-  window.localStorage.removeItem(key)
+  isWindow ? window.localStorage.removeItem(key) : false
