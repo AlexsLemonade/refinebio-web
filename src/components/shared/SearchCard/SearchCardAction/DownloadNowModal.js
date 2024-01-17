@@ -69,7 +69,7 @@ export const DownloadNowModal = ({
             subscribeEmail(emailAddress)
           }
 
-          const response = await startProcessingDataset(null, values)
+          const response = await startProcessingDataset(values)
           addProcessingResource(response.id, accessionCode)
           setSubmitting(false)
         }}
