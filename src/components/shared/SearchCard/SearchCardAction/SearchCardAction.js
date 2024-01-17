@@ -16,7 +16,7 @@ export const SearchCardAction = ({
   technology
 }) => {
   const pageRendered = usePageRendered()
-  const { getProcessingResource } = usePollDatasetStatus(accessionCode, true)
+  const { getProcessingResource } = usePollDatasetStatus(accessionCode)
   const { setResponsive } = useResponsive()
   const hasMultipleOrganisms = organismNames.length > 1
   const rnaSeq = 'RNA-SEQ'

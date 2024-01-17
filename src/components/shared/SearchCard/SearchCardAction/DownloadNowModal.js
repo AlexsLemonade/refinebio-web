@@ -21,10 +21,8 @@ export const DownloadNowModal = ({
   id
 }) => {
   const { email, startProcessingDataset } = useDatasetManager()
-  const { addProcessingResource, getProcessingResource } = usePollDatasetStatus(
-    accessionCode,
-    true
-  )
+  const { addProcessingResource, getProcessingResource } =
+    usePollDatasetStatus(accessionCode)
   const { setResponsive } = useResponsive()
   const processingExperiment = getProcessingResource(accessionCode)
   const { StartProcessingFormSchema } = validationSchemas

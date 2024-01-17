@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useRefinebio } from 'hooks/useRefinebio'
+import { regex } from 'config'
+import areValidAccessionCodes from 'helpers/areValidAccessionCodes'
 
 // resourceId: a processing dataset ID || a processing experiment accession code for the one-off experiment
-export const usePollDatasetStatus = (resourceId, oneOffExperiment = false) => {
+export const usePollDatasetStatus = (resourceId) => {
   const { getDataset } = useDatasetManager()
   const { processingResources, setProcessingResources } = useRefinebio()
   const [hasError, setHasError] = useState(false)
@@ -45,7 +47,9 @@ export const usePollDatasetStatus = (resourceId, oneOffExperiment = false) => {
 
   // id: a dataset ID || an experiment accession code
   const getProcessingResource = (id) => {
-    const keyToFind = oneOffExperiment ? 'accesionCode' : 'datasetId'
+    const keyToFind = areValidAccessionCodes(resourceId, regex)
+      ? 'accesionCode'
+      : 'datasetId'
     const resource = processingResources.find((item) => item[keyToFind] === id)
 
     return resource
