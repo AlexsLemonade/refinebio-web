@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Box } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { usePageRendered } from 'hooks/usePageRendered'
-import { useResourceLoader } from 'hooks/useResourceLoader'
+import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
@@ -35,7 +35,7 @@ export const Dataset = ({ query }) => {
     isProcessingDataset,
     latestDatasetState,
     addProcessingResource
-  } = useResourceLoader(idFromQuery)
+  } = usePollDatasetStatus(idFromQuery)
   const { setResponsive } = useResponsive()
   const [selectedDataset, setSelectedDataset] = useState({})
   const isProcessed = selectedDataset?.is_processed && selectedDataset?.success

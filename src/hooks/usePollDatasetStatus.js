@@ -3,7 +3,7 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useRefinebio } from 'hooks/useRefinebio'
 
 // resourceId: a processing dataset ID || a processing experiment accession code for the one-off experiment
-export const useResourceLoader = (resourceId, oneOffExperiment = false) => {
+export const usePollDatasetStatus = (resourceId, oneOffExperiment = false) => {
   const { getDataset } = useDatasetManager()
   const { processingResources, setProcessingResources } = useRefinebio()
   const [hasError, setHasError] = useState(false)

@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { Box } from 'grommet'
 import { usePageRendered } from 'hooks/usePageRendered'
-import { useResourceLoader } from 'hooks/useResourceLoader'
+import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
 import { getFormattedExperiment } from 'helpers/formatDatasetAction'
 import { DatasetActionButton } from 'components/shared/DatasetActionButton'
@@ -16,7 +16,7 @@ export const SearchCardAction = ({
   technology
 }) => {
   const pageRendered = usePageRendered()
-  const { getProcessingResource } = useResourceLoader(accessionCode, true)
+  const { getProcessingResource } = usePollDatasetStatus(accessionCode, true)
   const { setResponsive } = useResponsive()
   const hasMultipleOrganisms = organismNames.length > 1
   const rnaSeq = 'RNA-SEQ'
