@@ -45,36 +45,46 @@ export const DatasetPageHeader = ({ dataset, hasError }) => {
   const isProcessing = dataset?.is_processing
   const isProcessingError = dataset?.success === false // 'success' may be null
 
+  if (isProcessingError || hasError) {
+    return (
+      <Block>
+        <DatasetProcessingError dataset={dataset} />
+      </Block>
+    )
+  }
+
+  if (isProcessing && !isProcessingError) {
+    return (
+      <Block>
+        <DatasetProcessing dataset={dataset} />
+      </Block>
+    )
+  }
+
+  if (isProcessed) {
+    if (isAvailable && !isExpired) {
+      return (
+        <Block>
+          <DatasetReady dataset={dataset} />
+        </Block>
+      )
+    }
+    return (
+      <Block>
+        <DatasetRegenerate dataset={dataset} />
+      </Block>
+    )
+  }
+
   return (
     <FixedContainer pad="none">
       <Box>
-        {isProcessing && !isProcessingError ? (
-          <Block>
-            <DatasetProcessing dataset={dataset} />
-          </Block>
-        ) : isProcessingError || hasError ? (
-          <Block>
-            <DatasetProcessingError dataset={dataset} />
-          </Block>
-        ) : isProcessed ? (
-          isAvailable &&
-          (!isExpired ? (
-            <Block>
-              <DatasetReady dataset={dataset} />
-            </Block>
-          ) : (
-            <Block>
-              <DatasetRegenerate dataset={dataset} />
-            </Block>
-          ))
-        ) : (
-          dataset?.data && (
-            <Box pad={{ top: 'large', bottom: 'medium' }}>
-              <Heading level={2} size={setResponsive('small', 'large')}>
-                Shared Dataset
-              </Heading>
-            </Box>
-          )
+        {dataset?.data && (
+          <Box pad={{ top: 'large', bottom: 'medium' }}>
+            <Heading level={2} size={setResponsive('small', 'large')}>
+              Shared Dataset
+            </Heading>
+          </Box>
         )}
       </Box>
     </FixedContainer>
