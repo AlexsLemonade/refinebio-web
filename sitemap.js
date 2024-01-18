@@ -42,8 +42,8 @@ const verifySitemap = async () => {
     )
     // checks if the localy copy of the resource count matches the API
     if (JSON.parse(resourceInfo).count === response.count) {
-      // checks if the run date is less than 30 days old
-      if (moment().diff(JSON.parse(resourceInfo).runAt, 'day') < 30) {
+      // TEMP checks if the run date is less than 30 days old (temporarily sets to 60 during the development)
+      if (moment().diff(JSON.parse(resourceInfo).runAt, 'day') < 60) {
         isValid = true
       }
     }
