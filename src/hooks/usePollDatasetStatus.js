@@ -36,19 +36,19 @@ export const usePollDatasetStatus = (resourceId) => {
     }
   }, [startTimer, processingResources])
 
-  // data structure {  datasetId: processingDatasetId, accesionCode: experimentAccessionCode || null }
-  const addProcessingResource = (datasetId, accesionCode = null) => {
+  // data structure {  datasetId: processingDatasetId, accessionCode: experimentAccessionCode || null }
+  const addProcessingResource = (datasetId, accessionCode = null) => {
     setProcessingResources((prev) => {
       if (prev.find((item) => item.datasetId === datasetId)) return prev
 
-      return [...processingResources, { datasetId, accesionCode }]
+      return [...processingResources, { datasetId, accessionCode }]
     })
   }
 
   // id: a dataset ID || an experiment accession code
   const getProcessingResource = (id) => {
     const keyToFind = areValidAccessionCodes(resourceId, regex)
-      ? 'accesionCode'
+      ? 'accessionCode'
       : 'datasetId'
     const resource = processingResources.find((item) => item[keyToFind] === id)
 
