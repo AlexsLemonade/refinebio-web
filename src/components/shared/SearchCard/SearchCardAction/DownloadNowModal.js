@@ -2,7 +2,7 @@ import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
 import { options, validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
-import { useResourceLoader } from 'hooks/useResourceLoader'
+import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/shared/Button'
@@ -21,10 +21,8 @@ export const DownloadNowModal = ({
   id
 }) => {
   const { email, startProcessingDataset } = useDatasetManager()
-  const { addProcessingResource, getProcessingResource } = useResourceLoader(
-    accessionCode,
-    true
-  )
+  const { addProcessingResource, getProcessingResource } =
+    usePollDatasetStatus(accessionCode)
   const { setResponsive } = useResponsive()
   const processingExperiment = getProcessingResource(accessionCode)
   const { StartProcessingFormSchema } = validationSchemas
@@ -69,7 +67,7 @@ export const DownloadNowModal = ({
             subscribeEmail(emailAddress)
           }
 
-          const response = await startProcessingDataset(null, values)
+          const response = await startProcessingDataset(values)
           addProcessingResource(response.id, accessionCode)
           setSubmitting(false)
         }}

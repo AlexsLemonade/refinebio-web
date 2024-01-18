@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useRefinebio } from 'hooks/useRefinebio'
+import { regex } from 'config'
+import areValidAccessionCodes from 'helpers/areValidAccessionCodes'
 
 // resourceId: a processing dataset ID || a processing experiment accession code for the one-off experiment
-export const useResourceLoader = (resourceId, oneOffExperiment = false) => {
+export const usePollDatasetStatus = (resourceId) => {
   const { getDataset } = useDatasetManager()
   const { processingResources, setProcessingResources } = useRefinebio()
   const [hasError, setHasError] = useState(false)
@@ -34,18 +36,20 @@ export const useResourceLoader = (resourceId, oneOffExperiment = false) => {
     }
   }, [startTimer, processingResources])
 
-  // data structure {  datasetId: processingDatasetId, accesionCode: experimentAccessionCode || null }
-  const addProcessingResource = (datasetId, accesionCode = null) => {
+  // data structure {  datasetId: processingDatasetId, accessionCode: experimentAccessionCode || null }
+  const addProcessingResource = (datasetId, accessionCode = null) => {
     setProcessingResources((prev) => {
       if (prev.find((item) => item.datasetId === datasetId)) return prev
 
-      return [...processingResources, { datasetId, accesionCode }]
+      return [...processingResources, { datasetId, accessionCode }]
     })
   }
 
   // id: a dataset ID || an experiment accession code
   const getProcessingResource = (id) => {
-    const keyToFind = oneOffExperiment ? 'accesionCode' : 'datasetId'
+    const keyToFind = areValidAccessionCodes(resourceId, regex)
+      ? 'accessionCode'
+      : 'datasetId'
     const resource = processingResources.find((item) => item[keyToFind] === id)
 
     return resource
