@@ -15,6 +15,12 @@ const moduleExports = () => {
     API_VERSION: isProduction
       ? process.env.API_VERSION
       : process.env.STAGE_API_VERSION,
+    GITHUB_TOKEN: isProduction
+      ? process.env.GITHUB_TOKEN
+      : process.env.STAGE_GITHUB_TOKEN,
+    GITHUB_ENDPOINT: isProduction
+      ? process.env.GITHUB_ENDPOINT
+      : process.env.STAGE_GITHUB_ENDPOINT,
     HUBSPOT_ACCESS_TOKEN: isProduction
       ? process.env.HUBSPOT_ACCESS_TOKEN
       : process.env.STAGE_HUBSPOT_ACCESS_TOKEN,

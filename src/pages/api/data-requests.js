@@ -1,20 +1,27 @@
+import { submitGithubDataRequest } from 'api/data-requests/github'
 import { submitHubspotDataRequest } from 'api/data-requests/hubspot'
 import { submitSlackDataRequest } from 'api/data-requests/slack'
 
 export default async (req, res) => {
   // requestValues should include form values, query/accessionCode, and the request type ('experiment' or 'search')
   const {
-    body: { requestValues },
+    body: {
+      requestValues,
+      requestValues: { request_type: requestType }
+    },
     method
   } = req
 
   switch (method) {
     case 'POST': {
       const response = { status: null }
-      const githubSuccess = false // TEMP
+      const githubSuccess = await submitGithubDataRequest(
+        requestValues,
+        requestType
+      )
       const hubspotSuccess = await submitHubspotDataRequest(
         requestValues,
-        requestValues.request_type
+        requestType
       )
 
       // requests to Slack only if requests to GitHub and/or HubSpot fail
@@ -30,7 +37,7 @@ export default async (req, res) => {
 
         const slackSuccess = await submitSlackDataRequest(
           requestValues,
-          requestValues.request_type,
+          requestType,
           failedRequest
         )
 

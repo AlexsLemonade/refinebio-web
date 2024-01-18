@@ -38,8 +38,9 @@ export const RequestExperimentForm = ({
             }
           })
 
-          // adds the experiment accession code if not 500
-          if (response.status !== 500) {
+          // adds the experiment accession code to the requested experiments if not 500
+          const isFail = JSON.parse(response).status === 500
+          if (!isFail) {
             addRequestedExperiment()
           }
 
