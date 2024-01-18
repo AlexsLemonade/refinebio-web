@@ -46,7 +46,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
             subscribeEmail(emailAddress)
           }
 
-          const response = await startProcessingDataset(dataset.id, values)
+          const response = await startProcessingDataset(values, dataset.id)
           const pathname = `/dataset/${response.id}`
           push({ pathname }, pathname)
           closeModal(id)
