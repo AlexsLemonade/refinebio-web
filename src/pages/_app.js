@@ -16,12 +16,7 @@ import { PageTitle } from 'components/shared/PageTitle'
 
 getPageLoader()
 const Fallback = () => <ErrorPage />
-// sets the correct environment's measurement ID
-const isDev = process.env.NEXT_PUBLIC_DEV
-// TEMP local.env is used for the GA4 "Development" data stream
-const GA4MeasurementID = isDev
-  ? process.env.NEXT_PUBLIC_DEV_GA4_MEASUREMENT_ID
-  : process.env.GA4_MEASUREMENT_ID
+const GA4MeasurementID = process.env.GA4_MEASUREMENT_ID
 
 const App = ({ Component, pageProps }) => {
   return (
