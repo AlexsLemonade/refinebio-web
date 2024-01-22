@@ -16,7 +16,9 @@ import { PageTitle } from 'components/shared/PageTitle'
 
 getPageLoader()
 const Fallback = () => <ErrorPage />
-const GA4MeasurementID = process.env.GA4_MEASUREMENT_ID
+const GA4MeasurementID =
+  process.env.GA4_MEASUREMENT_ID ||
+  process.env.NEXT_PUBLIC_DEV_GA4_MEASUREMENT_ID
 
 const App = ({ Component, pageProps }) => {
   return (
