@@ -1,9 +1,11 @@
 import { Fragment, useEffect, useState } from 'react'
 import { Box, Grid, Heading } from 'grommet'
+import gtag from 'api/analytics/gtag'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
+import formatFacetNames from 'helpers/formatFacetNames'
 import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
 import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
 import { Button } from 'components/shared/Button'
@@ -37,7 +39,6 @@ export const Search = ({
     search: { pageSizes, sortby }
   } = options
   const {
-    formatFacetNames,
     getSearchQueryParam,
     setConfig,
     setSearch,
@@ -78,6 +79,23 @@ export const Search = ({
       }
     }
   }, [])
+
+  useEffect(() => {
+    const {
+      downloadable_organism: organism,
+      platform,
+      technology,
+      search
+    } = query
+
+    if (search) {
+      gtag.searchTerm(userSearchTerm)
+    }
+
+    if (!!organism || !!platform || !!technology) {
+      gtag.filterCombination(facets, query)
+    }
+  }, [query])
 
   return (
     <>
