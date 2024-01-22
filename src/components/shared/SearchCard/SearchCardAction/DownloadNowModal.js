@@ -1,5 +1,6 @@
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
+import gtag from 'api/analytics/gtag'
 import { options, validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
@@ -69,6 +70,7 @@ export const DownloadNowModal = ({
 
           const response = await startProcessingDataset(values)
           addProcessingResource(response.id, accessionCode)
+          gtag.oneOffExperimentDownload(accessionCode)
           setSubmitting(false)
         }}
       >

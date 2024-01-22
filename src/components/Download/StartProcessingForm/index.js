@@ -1,10 +1,11 @@
 import { useRouter } from 'next/navigation'
 import { Formik } from 'formik'
 import { Form } from 'grommet'
+import gtag from 'api/analytics/gtag'
+import { validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
-import { validationSchemas } from 'config'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { Row } from 'components/shared/Row'
@@ -12,7 +13,7 @@ import { EmailTextInput } from './EmailTextInput'
 import { ReceiveUpdatesCheckBox } from './ReceiveUpdatesCheckBox'
 import { TermsOfUseCheckBox } from './TermsOfUseCheckBox'
 
-export const StartProcessingForm = ({ dataset }) => {
+export const StartProcessingForm = ({ dataset, downloadOptions }) => {
   const { push } = useRouter()
   const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
@@ -29,7 +30,7 @@ export const StartProcessingForm = ({ dataset }) => {
       validateOnChange={false}
       onSubmit={async (values, { setSubmitting }) => {
         const { emailAddress, receiveUpdates } = values
-        const downloadOptions = {
+        const params = {
           data: dataset.data,
           emailAddress,
           receiveUpdates
@@ -39,13 +40,15 @@ export const StartProcessingForm = ({ dataset }) => {
           subscribeEmail(emailAddress)
         }
 
-        const response = await startProcessingDataset(
-          downloadOptions,
-          dataset.id
-        )
+        const response = await startProcessingDataset(params, dataset.id)
 
         const pathname = `/dataset/${response.id}`
         push({ pathname }, pathname)
+
+        if (downloadOptions.length > 0) {
+          gtag.myDatasetDownloadOptions(downloadOptions)
+        }
+
         setSubmitting(false)
       }}
     >

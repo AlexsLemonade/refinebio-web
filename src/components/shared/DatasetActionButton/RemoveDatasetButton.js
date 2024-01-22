@@ -1,12 +1,18 @@
 import { Box } from 'grommet'
+import gtag from 'api/analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { InlineMessage } from 'components/shared/InlineMessage'
 
-export const RemoveDatasetButton = ({ dataToRemove }) => {
+export const RemoveDatasetButton = ({ dataToRemove, label = 'Remove' }) => {
   const { loading, removeSamples } = useDatasetManager()
   const { setResponsive } = useResponsive()
+
+  const handleClick = () => {
+    removeSamples(dataToRemove)
+    gtag.myDatasetAction(label)
+  }
 
   return (
     <Box align="center" direction="row" wrap>
@@ -18,12 +24,12 @@ export const RemoveDatasetButton = ({ dataToRemove }) => {
       />
       <Button
         isLoading={loading}
-        label="Remove"
+        label={label}
         link
         linkFontSize={setResponsive('medium', 'small')}
         margin={{ left: 'xsmall' }}
         width="50px"
-        onClick={() => removeSamples(dataToRemove)}
+        onClick={handleClick}
       />
     </Box>
   )
