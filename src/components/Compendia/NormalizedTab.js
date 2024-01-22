@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import { Box, Heading, Text } from 'grommet'
+import gtag from 'api/analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -8,6 +9,7 @@ import { DownloadBlock } from './DownloadBlock'
 
 export const NormalizedTab = ({ type = 'normalized' }) => {
   const { setResponsive } = useResponsive()
+  const tabName = options.compendia.heading[type]
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 350, delay: 200 }}>
@@ -37,13 +39,19 @@ export const NormalizedTab = ({ type = 'normalized' }) => {
             quantile normalization.
           </Heading>
           <Button
-            aria-label={`Go to the refinebio docs - ${options.compendia.tabs[0].label}`}
+            aria-label={`Go to the refinebio docs - ${tabName}`}
             href={links.refinebio_docs_normalized_compendia}
             label="Learn More"
             secondary
             responsive
             rel="noopener noreferrer"
             target="_blank"
+            onClick={() =>
+              gtag.outboundClick(
+                links.refinebio_docs_normalized_compendia,
+                `Learn More - ${tabName}`
+              )
+            }
           />
         </Box>
         <Box align="center">

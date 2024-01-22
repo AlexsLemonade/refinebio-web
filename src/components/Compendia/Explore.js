@@ -8,13 +8,14 @@ import { Row } from 'components/shared/Row'
 import { links } from 'config'
 
 const ListItem = ({ text, href }) => {
+  const handleGAEvents = () => {
+    gtag.exploredUsageClick(text, 'compendia')
+    gtag.outboundClick(href, `${text} - Explore Compendia`)
+  }
+
   return (
     <Box as="li" margin={{ bottom: 'small' }}>
-      <Anchor
-        href={href}
-        label={text}
-        onClick={() => gtag.exploredUsageClick(text, 'compendia')}
-      />
+      <Anchor href={href} label={text} onClick={handleGAEvents} />
     </Box>
   )
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Nav, Text } from 'grommet'
+import gtag from 'api/analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { links, options } from 'config'
@@ -133,7 +134,10 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 href={links.refinebio_docs}
                 rel="noopener noreferrer"
                 viewport={viewport}
-                onClick={handleClick}
+                onClick={() => {
+                  handleClick()
+                  gtag.outboundClick(links.refinebio_docs, 'Docs - Global Nav')
+                }}
               />
             </Box>
             <Box

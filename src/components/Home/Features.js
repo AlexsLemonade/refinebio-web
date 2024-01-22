@@ -1,4 +1,5 @@
 import { Box } from 'grommet'
+import gtag from 'api/analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -10,6 +11,8 @@ import { FeatureCard } from './FeatureCard'
 
 export const Features = () => {
   const { viewport, setResponsive } = useResponsive()
+
+  const handleGAEvent = (href, text) => gtag.outboundClick(href, text)
 
   return (
     <FixedContainer>
@@ -26,12 +29,19 @@ export const Features = () => {
                 href={links.refinebio_docs_standard_pipeline}
                 label="standardized pipelines"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  handleGAEvent(
+                    links.refinebio_docs_standard_pipeline,
+                    'standardized pipelines (text link) - Home'
+                  )
+                }
               />{' '}
               curated by the{' '}
               <Anchor
                 href={links.ccdl}
                 label="Childhood Cancer Data Lab (CCDL)"
                 rel="noopener noreferrer"
+                onClick={() => handleGAEvent(links.ccdl, 'ccdatalab.org')}
               />
             </>
           }
