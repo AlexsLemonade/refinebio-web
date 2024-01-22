@@ -37,11 +37,13 @@ export const StartProcessingForm = ({ dataset, downloadOptions }) => {
         }
 
         if (receiveUpdates) {
-          subscribeEmail(emailAddress)
+          const subscribeEmailResponse = await subscribeEmail(emailAddress)
+          if (subscribeEmailResponse.status !== 'error') {
+            gtag.emailSubscription('Start processing form')
+          }
         }
 
         const response = await startProcessingDataset(params, dataset.id)
-
         const pathname = `/dataset/${response.id}`
         push({ pathname }, pathname)
 
