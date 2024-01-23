@@ -129,7 +129,12 @@ export const options = {
       label: 'Z-score',
       value: 'STANDARD'
     }
-  ]
+  ],
+  transformationHumanReadable: {
+    NONE: 'None',
+    MINMAX: 'Zero to One',
+    STANDARD: 'Z-score'
+  }
 }
 
 export default options

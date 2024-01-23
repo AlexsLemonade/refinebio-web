@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import { SearchManagerContext } from 'contexts/SearchManagerContext'
 import { options } from 'config'
+import formatFacetNames from 'helpers/formatFacetNames'
 
 export const useSearchManager = () => {
   const {
@@ -166,21 +167,6 @@ export const useSearchManager = () => {
   }
 
   /* Other */
-  // converts the facets to API supported format
-  const formatFacetNames = (facetNames) => {
-    const formattedNames = []
-
-    for (const name of facetNames) {
-      if (Object.keys(formattedFacetNames).includes(name)) {
-        formattedNames.push(formattedFacetNames[name])
-      } else {
-        formattedNames.push(name)
-      }
-    }
-
-    return formattedNames
-  }
-
   // returns client-only query parameter from url
   const getSearchQueryParam = (queryParams) => {
     const temp = {}
