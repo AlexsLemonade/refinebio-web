@@ -2,6 +2,8 @@ import { links, options } from 'config'
 import formatFacetNames from 'helpers/formatFacetNames'
 import formatFilterName from 'helpers/formatFilterName'
 
+const { transformationHumanReadable: transformation } = options
+
 // adds a custom event to GA4
 // https://developers.google.com/analytics/devguides/collection/ga4/events?client_type=gtag
 const event = (eventName, value = {}, nonInteraction = false) => {
@@ -30,7 +32,7 @@ const myDatasetAction = (action) =>
 const myDatasetDownloadOptions = (option) => {
   event('my_dataset_download_options', {
     my_dataset_download_options: `Aggregate: ${option[0]}, Transformation: ${
-      options.transformationHumanReadable[option[1]]
+      transformation[option[1]]
     }, QN: ${option[2] === 'true' ? 'Not skipped' : 'Skipped'}
   `
   })
@@ -47,7 +49,7 @@ const regeneratedDataset = (state, defaultOptions, newOptions) => {
   // due to GA char limit, keys names are abbreviated
   const format = (option) => {
     return `A: ${option.aggregate_by}, T: ${
-      options.transformationHumanReadable[option.scale_by]
+      transformation[option.scale_by]
     }, QN: ${option.quantile_normalize ? 'Not skipped' : 'Skipped'}`
   }
 
