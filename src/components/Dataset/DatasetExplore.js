@@ -10,13 +10,14 @@ import { Row } from 'components/shared/Row'
 import { links } from 'config'
 
 const ListItem = ({ text, href }) => {
+  const handleGAEvents = () => {
+    gtag.exploredUsageClick(text)
+    gtag.outboundClick(href, `${text} - Explore Dataset`)
+  }
+
   return (
     <Box as="li" margin={{ bottom: 'small' }}>
-      <Anchor
-        href={href}
-        label={text}
-        onClick={() => gtag.exploredUsageClick(text)}
-      />
+      <Anchor href={href} label={text} onClick={handleGAEvents} />
     </Box>
   )
 }
