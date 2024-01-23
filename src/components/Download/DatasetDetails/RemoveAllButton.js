@@ -1,4 +1,5 @@
 import { Box, Heading } from 'grommet'
+import gtag from 'api/analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
@@ -6,7 +7,7 @@ import { Button } from 'components/shared/Button'
 import { Modal } from 'components/shared/Modal'
 import { Row } from 'components/shared/Row'
 
-export const RemoveAllButton = () => {
+export const RemoveAllButton = ({ label = 'Remove All' }) => {
   const { loading, clearDataset } = useDatasetManager()
   const { closeModal, openModal } = useModal()
   const { setResponsive } = useResponsive()
@@ -15,6 +16,7 @@ export const RemoveAllButton = () => {
   const handleRemoveAll = () => {
     clearDataset()
     closeModal(id)
+    gtag.myDatasetAction(label)
   }
 
   return (
@@ -23,7 +25,7 @@ export const RemoveAllButton = () => {
       button={
         <Button
           isLoading={loading}
-          label="Remove All"
+          label={label}
           tertiary
           responsive
           onClick={() => openModal(id)}

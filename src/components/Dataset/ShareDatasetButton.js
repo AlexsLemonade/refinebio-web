@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Box, Heading } from 'grommet'
+import gtag from 'api/analytics/gtag'
 import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
 import { useTimeoutInCallback } from 'hooks/useTimeoutInCallback'
@@ -10,7 +11,11 @@ import { InlineMessage } from 'components/shared/InlineMessage'
 import { Modal } from 'components/shared/Modal'
 import { TextInput } from 'components/shared/TextInput'
 
-export const ShareDatasetButton = ({ datasetId }) => {
+export const ShareDatasetButton = ({
+  datasetId,
+  label = 'Share Dataset',
+  isProcessed = false
+}) => {
   const { openModal } = useModal()
   const { setResponsive } = useResponsive()
   const { startTimer, clearTimer } = useTimeoutInCallback(() => {
@@ -21,7 +26,12 @@ export const ShareDatasetButton = ({ datasetId }) => {
   const id = `shareable-link_${datasetId}`
   const shareableLink = `${getDomain()}/dataset/${datasetId}?ref=share`
 
-  const handleClick = (link) => {
+  const handleShare = () => {
+    openModal(id)
+    gtag.sharedDataset(isProcessed ? 'Processed' : 'Unprocessed')
+  }
+
+  const handleCopy = (link) => {
     handdleCopy(link)
     setIsCopied(true)
   }
@@ -35,12 +45,7 @@ export const ShareDatasetButton = ({ datasetId }) => {
     <Modal
       id={id}
       button={
-        <Button
-          label="Share Dataset"
-          secondary
-          responsive
-          onClick={() => openModal(id)}
-        />
+        <Button label={label} secondary responsive onClick={handleShare} />
       }
       fullHeight={false}
     >
@@ -75,7 +80,7 @@ export const ShareDatasetButton = ({ datasetId }) => {
               label="Copy"
               primary
               responsive
-              onClick={() => handleClick(shareableLink)}
+              onClick={() => handleCopy(shareableLink)}
             />
           </Box>
         </Box>

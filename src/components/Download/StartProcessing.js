@@ -3,7 +3,7 @@ import { StartProcessingForm } from './StartProcessingForm'
 
 // path: /download?start=true
 // renders this component when no email in localStorage
-export const StartProcessing = ({ dataset }) => {
+export const StartProcessing = ({ dataset, downloadOptions = [] }) => {
   return (
     <Box align="center" alignSelf="center" width="640px">
       <Heading level={1} margin={{ bottom: 'medium' }}>
@@ -14,7 +14,10 @@ export const StartProcessing = ({ dataset }) => {
         are ready. It usually takes about 15-20 minutes.
       </Paragraph>
       <Box margin={{ top: 'medium' }} alignSelf="start">
-        <StartProcessingForm dataset={dataset} />
+        <StartProcessingForm
+          dataset={dataset}
+          downloadOptions={downloadOptions}
+        />
       </Box>
       <Box
         margin={{ top: 'basex8', bottom: 'xlarge' }}

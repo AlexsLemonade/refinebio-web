@@ -58,7 +58,12 @@ export const DownloadOptionsForm = ({
       {
         pathname,
         query: {
-          start: true
+          start: true,
+          downloadOptions: Object.values({
+            aggregate_by: downloadOptions.aggregate_by,
+            scale_by: downloadOptions.scale_by,
+            quantile_normalize: downloadOptions.quantile_normalize
+          })
         }
       },
       pathname

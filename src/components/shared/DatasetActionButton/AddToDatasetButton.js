@@ -1,3 +1,4 @@
+import gtag from 'api/analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { Button } from 'components/shared/Button'
 
@@ -8,6 +9,11 @@ export const AddToDatasetButton = ({
 }) => {
   const { loading, addSamples } = useDatasetManager()
 
+  const handleClick = () => {
+    addSamples(dataToAdd)
+    gtag.myDatasetAction(label)
+  }
+
   return (
     <Button
       label={label}
@@ -15,7 +21,7 @@ export const AddToDatasetButton = ({
       responsive
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
-      onClick={() => addSamples(dataToAdd)}
+      onClick={handleClick}
     />
   )
 }

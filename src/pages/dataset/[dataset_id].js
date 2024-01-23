@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import moment from 'moment'
 import { Box } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { usePageRendered } from 'hooks/usePageRendered'
@@ -44,6 +45,7 @@ export const Dataset = ({ query }) => {
   } = usePollDatasetStatus(idFromQuery)
   const { setResponsive } = useResponsive()
   const [selectedDataset, setSelectedDataset] = useState({})
+  const isExpired = moment(selectedDataset.expires_on).isBefore(Date.now())
   const isProcessed = selectedDataset?.is_processed && selectedDataset?.success
   const isUnprocessedDataset =
     !selectedDataset?.is_processing &&
@@ -122,7 +124,10 @@ export const Dataset = ({ query }) => {
                   gap={setResponsive('medium', 'small')}
                   margin={{ top: setResponsive('medium', 'none') }}
                 >
-                  <ShareDatasetButton datasetId={idFromQuery} />
+                  <ShareDatasetButton
+                    datasetId={idFromQuery}
+                    isProcessed={isProcessed}
+                  />
                   {isUnprocessedDataset && (
                     <DownloadDatasetButton dataset={selectedDataset} />
                   )}
@@ -130,6 +135,8 @@ export const Dataset = ({ query }) => {
               </Row>
               <FilesSummary
                 dataset={regeneratedDataset || selectedDataset}
+                defaultDataset={selectedDataset}
+                isExpired={isExpired}
                 isProcessed={isProcessed}
               />
               <DatasetSummary dataset={regeneratedDataset || selectedDataset} />

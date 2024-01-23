@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Heading, Paragraph } from 'grommet'
+import gtag from 'api/analytics/gtag'
+import { cache, links } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
@@ -8,7 +10,6 @@ import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
-import { cache, links } from 'config'
 
 export const DatasetRegenerate = () => {
   const {
@@ -29,6 +30,7 @@ export const DatasetRegenerate = () => {
     const response = await updateDataset(await createDataset(), params)
     const pathname = `/dataset/${response.id}`
 
+    gtag.regeneratedDataset('Expired', selectedDataset)
     push(
       {
         pathname,

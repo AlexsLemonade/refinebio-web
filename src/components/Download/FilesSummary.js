@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
+import gtag from 'api/analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { links, options } from 'config'
@@ -37,7 +38,12 @@ const Card = ({ description, format, index, title }) => {
   )
 }
 
-export const FilesSummary = ({ dataset, isProcessed }) => {
+export const FilesSummary = ({
+  dataset,
+  defaultDataset = {},
+  isExpired,
+  isProcessed
+}) => {
   const { createDataset, updateDataset, regeneratedDataset } =
     useDatasetManager()
   const { setResponsive } = useResponsive()
@@ -105,16 +111,24 @@ export const FilesSummary = ({ dataset, isProcessed }) => {
     (acc, cur) => ({ ...acc, [cur.value]: cur.label }),
     {}
   )
+
   const [openForm, setOpenForm] = useState(false)
 
   const handleRegenerateDataset = async (downloadOptions) => {
     const params = { data: dataset.data, ...downloadOptions }
-
     const response = await updateDataset(
-      regeneratedDataset.id || (await createDataset()),
+      regeneratedDataset?.id || (await createDataset()),
       params
     )
     const pathname = `/dataset/${response.id}`
+
+    gtag.regeneratedDataset(
+      isExpired && isProcessed ? 'Expired' : 'Valid',
+      defaultDataset,
+      JSON.stringify(defaultDataset) !== JSON.stringify(dataset)
+        ? dataset
+        : null
+    )
 
     return pathname
   }
