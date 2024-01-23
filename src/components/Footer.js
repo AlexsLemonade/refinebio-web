@@ -15,7 +15,7 @@ import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Icon } from 'components/shared/Icon'
 import { Row } from 'components/shared/Row'
-import { cache, contributors, links } from 'config'
+import { cache, contributors, links, options } from 'config'
 import { CoinIcon } from '../images/coin.svg'
 
 const TwitterLink = styled(Anchor)`
@@ -37,6 +37,7 @@ const GithubLink = styled(Anchor)`
 export const Footer = () => {
   const { setResponsive } = useResponsive()
   const anchorColor = 'gray-shade-40'
+  const handleGAEventNavClick = (item) => gtag.navClick(item, 'footer')
   const handleGAEventOutboundClick = (href, text) =>
     gtag.outboundClick(href, text)
 
@@ -195,22 +196,19 @@ export const Footer = () => {
           }}
         >
           <Row gap="medium">
-            <Anchor
-              color={anchorColor}
-              label="BDS 3-Clause License"
-              href="/license"
-            />
-            <Anchor color={anchorColor} label="Privacy" href="/privacy" />
-            <Anchor
-              color={anchorColor}
-              label="Terms of Use"
-              href={links.terms_of_use}
-            />
-            <Anchor
-              color={anchorColor}
-              label="Contact"
-              href={`mailto:${links.email_request_ccdl}`}
-            />
+            {options.footerNav.map(({ label, href }) => (
+              <Anchor
+                key={label}
+                color={anchorColor}
+                label={label}
+                href={href}
+                onClick={() =>
+                  handleGAEventNavClick(
+                    label === 'Contact' ? `${label} (mailTo)` : label
+                  )
+                }
+              />
+            ))}
           </Row>
           {cache.version && cache.xSourceRevision && (
             <Box margin={{ top: setResponsive('small', 'none') }}>

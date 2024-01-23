@@ -34,9 +34,12 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
     if (datasetId) getDataset()
   }, [datasetId])
 
-  const handleClick = () => {
-    if (viewport !== 'small') return
-    setToggle(!toggle)
+  const handleClick = (label) => {
+    if (viewport === 'small') {
+      setToggle(!toggle)
+    }
+
+    gtag.navClick(label)
   }
 
   return (
@@ -64,7 +67,10 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
           width={setResponsive('100vw', 'auto')}
         >
           {viewport === 'small' && (
-            <LogoAnchor margin={{ vertical: 'large' }} onClick={handleClick} />
+            <LogoAnchor
+              margin={{ vertical: 'large' }}
+              onClick={() => handleClick('Home')}
+            />
           )}
           <List
             alignItems={setResponsive('start', 'center')}
@@ -82,7 +88,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 light={light}
                 href="/search"
                 viewport={viewport}
-                onClick={handleClick}
+                onClick={() => handleClick('Search')}
               />
             </Box>
             <Box
@@ -111,7 +117,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                         light={light}
                         href={path}
                         viewport={viewport}
-                        onClick={handleClick}
+                        onClick={() => handleClick(label)}
                       />
                     ))}
                   </Box>
@@ -151,7 +157,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 label="About"
                 href="/about"
                 viewport={viewport}
-                onClick={() => handleClick()}
+                onClick={() => handleClick('About')}
               />
             </Box>
             <Box
@@ -173,6 +179,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 responsive
                 secondary
                 onClick={() => {
+                  handleClick('My Dataset')
                   push('/download')
                 }}
               />

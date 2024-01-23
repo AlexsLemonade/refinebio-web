@@ -1,3 +1,5 @@
+import { links } from './links'
+
 export const options = {
   aggregation: [
     { label: 'Experiment', value: 'EXPERIMENT' },
@@ -48,6 +50,22 @@ export const options = {
       ARRAY_EXPRESS: 'ArrayExpress'
     }
   },
+  // footer navigation
+  footerNav: [
+    {
+      label: 'BDS 3-Clause License',
+      href: '/license'
+    },
+    { label: 'Privacy', href: '/privacy' },
+    {
+      label: 'Terms of Use',
+      href: '/terms'
+    },
+    {
+      label: 'Contact',
+      href: `mailto:${links.email_request_ccdl}`
+    }
+  ],
   // setting for the request data form
   requestDataForm: {
     radioPediatricCancer: [

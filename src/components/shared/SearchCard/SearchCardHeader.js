@@ -1,4 +1,5 @@
 import { Box, Heading } from 'grommet'
+import gtag from 'api/analytics/gtag'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatURLString from 'helpers/formatURLString'
@@ -13,6 +14,11 @@ export const SearchCardHeader = ({
 }) => {
   const { search, setSearch } = useSearchManager()
   const { setResponsive } = useResponsive()
+
+  const handleClick = () => {
+    setSearch({ ...search, ref: 'search' })
+    gtag.experimentPageClick('Experiment title')
+  }
 
   return (
     <Box width="100%">
@@ -36,7 +42,7 @@ export const SearchCardHeader = ({
               pathname: `experiments/${accessionCode}/${formatURLString(title)}`
             }}
             label={<TextHighlight>{title}</TextHighlight>}
-            onClick={() => setSearch({ ...search, ref: 'search' })}
+            onClick={handleClick}
           />
         ) : (
           <TextHighlight>{title}</TextHighlight>

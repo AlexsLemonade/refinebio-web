@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { Box, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 import { options } from 'config'
+import gtag from 'api/analytics/gtag'
 import isMatchPath from 'helpers/isMatchPath'
 import { Anchor } from 'components/shared/Anchor'
 import { Button as SharedButton } from 'components/shared/Button'
@@ -58,6 +59,7 @@ const ListItem = ({ active, href, label, ...props }) => (
       label={label}
       role="menuitem"
       style={{ display: 'block', whiteSpace: 'nowrap', padding: '16px' }}
+      onClick={() => gtag.navClick(label)}
     />
   </Li>
 )
