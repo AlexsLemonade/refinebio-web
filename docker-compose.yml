@@ -5,6 +5,9 @@ services:
     image: refinebio-web
     ports:
       - ${CLIENT_PORT}:${CLIENT_PORT}
+    environment:
+      STAGE_API_HOST: '${STAGE_API_HOST}'
+      STAGE_API_VERSION: '${STAGE_API_VERSION}'
     build:
       context: .
       dockerfile: Dockerfile

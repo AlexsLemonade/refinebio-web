@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-unfetch'
 
-const host = process.env.API_HOST || 'https://api.refine.bio'
-const apiVersion = process.env.API_VERSION || 'v1'
+const host = process.env.API_HOST
+const apiVersion = process.env.API_VERSION
 
 export default async (url, params = false) => {
   const apiUrl = url.startsWith('http') ? url : `${host}/${apiVersion}/${url}`
