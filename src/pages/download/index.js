@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import scrollToTop from 'helpers/scrollToTop'
+import { Error } from 'components/shared/Error'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { Spinner } from 'components/shared/Spinner'
@@ -23,7 +24,13 @@ export const Download = () => {
     query: { start }
   } = useRouter()
 
-  const { dataset, loading, getDataset, getTotalSamples } = useDatasetManager()
+  const {
+    dataset,
+    error: { hasError, statusCode },
+    loading,
+    getDataset,
+    getTotalSamples
+  } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const [isDownloadable, setIsDownloadable] = useState()
 
@@ -40,6 +47,17 @@ export const Download = () => {
   useEffect(() => {
     setIsDownloadable(getTotalSamples(dataset.data) > 0)
   }, [dataset])
+
+  if (hasError) {
+    return (
+      <Error
+        statusCode={statusCode}
+        align="center"
+        direction="column"
+        marginTop="none"
+      />
+    )
+  }
 
   return (
     <FixedContainer>
