@@ -40,8 +40,8 @@ export const StartProcessingForm = ({ dataset }) => {
         }
 
         const response = await startProcessingDataset(
-          dataset.id,
-          downloadOptions
+          downloadOptions,
+          dataset.id
         )
 
         const pathname = `/dataset/${response.id}`

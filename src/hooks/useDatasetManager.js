@@ -88,8 +88,8 @@ export const useDatasetManager = () => {
     return formattedResponse
   }
 
-  const startProcessingDataset = async (id, options) => {
-    const isCurrentDatasetId = id === datasetId
+  const startProcessingDataset = async (options, id = null) => {
+    const isCurrentDatasetId = id && id === datasetId
     // validates the existing token or create a new token if none
     const tokenId = validateToken() ? token : await resetToken()
     const { emailAddress, receiveUpdates } = options

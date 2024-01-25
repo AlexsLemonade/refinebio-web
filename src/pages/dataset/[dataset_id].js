@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Box } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
-import { useResponsive } from 'hooks/useResponsive'
 import { usePageRendered } from 'hooks/usePageRendered'
+import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
+import { useResponsive } from 'hooks/useResponsive'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { Spinner } from 'components/shared/Spinner'
@@ -29,22 +30,35 @@ export const Dataset = ({ query }) => {
   const { dataset, datasetId, loading, getDataset, regeneratedDataset } =
     useDatasetManager()
   const pageRendered = usePageRendered()
+  const { isProcessingDataset, latestDatasetState, addProcessingResource } =
+    usePollDatasetStatus(idFromQuery)
   const { setResponsive } = useResponsive()
   const [selectedDataset, setSelectedDataset] = useState({})
-  const isProcessed = selectedDataset.is_processed && selectedDataset.success
+  const isProcessed = selectedDataset?.is_processed && selectedDataset?.success
   const isUnprocessedDataset =
-    !selectedDataset.is_processing &&
-    !selectedDataset.is_processed &&
-    selectedDataset.success !== false
+    !selectedDataset?.is_processing &&
+    !selectedDataset?.is_processed &&
+    selectedDataset?.success !== false
 
-  useEffect(() => {
-    const getSelectedDataset = async (id) => {
-      const response = await getDataset(id)
-      setSelectedDataset(response)
+  const getSelectedDataset = async (id) => {
+    const response = await getDataset(id)
+
+    if (response.is_processing) {
+      addProcessingResource(idFromQuery)
     }
 
+    setSelectedDataset(response)
+  }
+
+  useEffect(() => {
     getSelectedDataset(idFromQuery)
   }, [query])
+
+  useEffect(() => {
+    if (latestDatasetState && !isProcessingDataset) {
+      setSelectedDataset(latestDatasetState)
+    }
+  }, [isProcessingDataset, latestDatasetState])
 
   if (!pageRendered) return null
 
