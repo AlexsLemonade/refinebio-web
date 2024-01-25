@@ -8,7 +8,6 @@ import areValidAccessionCodes from 'helpers/areValidAccessionCodes'
 export const usePollDatasetStatus = (resourceId) => {
   const { getDataset } = useDatasetManager()
   const { processingResources, setProcessingResources } = useRefinebio()
-  const [hasError, setHasError] = useState(false)
   const [latestDatasetState, setLatestDatasetState] = useState(false)
   let startTimer = false
 
@@ -61,8 +60,10 @@ export const usePollDatasetStatus = (resourceId) => {
     const { datasetId } = getProcessingResource(resourceId)
     const response = await getDataset(datasetId)
 
-    setHasError(response?.ok === false)
-    setLatestDatasetState(response)
+    // TEMP: until the fetchAsync is refactored
+    if (response?.ok !== false) {
+      setLatestDatasetState(response)
+    }
 
     if (!response.is_processing) {
       setProcessingResources((prev) =>
@@ -74,7 +75,6 @@ export const usePollDatasetStatus = (resourceId) => {
   }
 
   return {
-    hasError,
     isProcessingDataset,
     latestDatasetState,
     processingResources,

@@ -36,12 +36,8 @@ export const Dataset = ({ query }) => {
     regeneratedDataset
   } = useDatasetManager()
   const pageRendered = usePageRendered()
-  const {
-    hasError,
-    isProcessingDataset,
-    latestDatasetState,
-    addProcessingResource
-  } = usePollDatasetStatus(idFromQuery)
+  const { isProcessingDataset, latestDatasetState, addProcessingResource } =
+    usePollDatasetStatus(idFromQuery)
   const { setResponsive } = useResponsive()
   const [selectedDataset, setSelectedDataset] = useState({})
   const isProcessed = selectedDataset?.is_processed && selectedDataset?.success
@@ -103,10 +99,7 @@ export const Dataset = ({ query }) => {
         <Box>
           {selectedDataset?.data && (
             <>
-              <DatasetPageHeader
-                dataset={selectedDataset}
-                hasError={hasError}
-              />
+              <DatasetPageHeader dataset={selectedDataset} />
               <Row
                 border={{ side: 'bottom' }}
                 pad={{ bottom: setResponsive('medium', 'small') }}
