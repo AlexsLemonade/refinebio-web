@@ -45,7 +45,7 @@ export const SamplesTable = ({
     loading,
     samplesTable,
     totalPages,
-    tableData,
+    samplesTableData,
     getSamplesTableData,
     updateFilterBy,
     updatePage,
@@ -56,7 +56,7 @@ export const SamplesTable = ({
   const { viewport, setResponsive } = useResponsive()
   const [tableExpanded, setTableExpanded] = useState(false)
   const tableHeight = tableExpanded ? '75vh' : '800px' // required for the table height on expanded view
-  const data = useMemo(() => tableData.results, [tableData])
+  const data = useMemo(() => samplesTableData.results, [samplesTableData])
   const columns = useMemo(() => {
     const temp = [
       {
@@ -134,7 +134,7 @@ export const SamplesTable = ({
     return temp
   }, [isImmutable, viewport])
   const totalColumns =
-    tableData && sampleMetadataFields ? columns.length - 2 : 0 // excludes add/remove and hidden cells
+    samplesTableData && sampleMetadataFields ? columns.length - 2 : 0 // excludes add/remove and hidden cells
 
   useEffect(() => {
     getSamplesTableData()

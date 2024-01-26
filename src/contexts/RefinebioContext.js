@@ -22,6 +22,7 @@ export const RefinebioContextProvider = ({ children }) => {
     'requested-experiments',
     []
   )
+  const [samplesTableData, setSamplesTableData] = useState({})
   const [token, setToken] = useLocalStorage('token', null)
   const pageRendered = usePageRendered()
 
@@ -56,6 +57,8 @@ export const RefinebioContextProvider = ({ children }) => {
       setRegeneratedDataset,
       requestedExperiments,
       setRequestedExperiments,
+      samplesTableData,
+      setSamplesTableData,
       token,
       setToken
     }),
@@ -74,6 +77,8 @@ export const RefinebioContextProvider = ({ children }) => {
       setRegeneratedDataset,
       requestedExperiments,
       setRequestedExperiments,
+      samplesTableData,
+      setSamplesTableData,
       token,
       setToken
     ]
