@@ -50,7 +50,7 @@ export const Search = ({
   const [toggleFilterList, setToggleFilterList] = useState(false)
   const [userSearchTerm, setUserSearchTerm] = useState(query.search || '')
   const [page, setPage] = useState(Number(query.p) || 1)
-  const [pageSize, setPageSize] = useState(Number(query.size) || pageSizes[0])
+  const [pageSize, setPageSize] = useState(Number(query.limit) || pageSizes[0])
   const [sortBy, setSortBy] = useState(query.sortby || sortby[0].value)
   const isResults = results?.length > 0
 
@@ -259,8 +259,8 @@ Search.getInitialProps = async (ctx) => {
   const filterOrders = query.filter_order ? query.filter_order.split(',') : []
   const queryString = {
     ...getSearchQueryForAPI(query),
-    limit: query.size || Number(limit),
-    offset: (query.p - 1 || Number(offset)) * (query.size || Number(limit)),
+    limit: query.limit || Number(limit),
+    offset: (query.p - 1 || Number(offset)) * (query.limit || Number(limit)),
     ordering: query.sortby || ordering,
     ...(query.search ? { search: query.search } : {}),
     num_downloadable_samples__gt: !query.empty

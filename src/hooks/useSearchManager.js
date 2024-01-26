@@ -48,9 +48,9 @@ export const useSearchManager = () => {
 
   const updatePageSize = (newPageSize) => {
     if (newPageSize === pageSizes[0]) {
-      delete search.size
+      delete search.limit
     } else {
-      search.size = newPageSize
+      search.limit = newPageSize
     }
 
     setSearch({ ...search })
