@@ -31,15 +31,16 @@ export const useSearchManager = () => {
 
   /* Common */
   const resetPage = () => {
-    delete search.p
+    delete search.offset
     setSearch({ ...search })
   }
 
   const updatePage = (newPage) => {
     if (newPage === 1) {
-      delete search.p
+      delete search.offset
     } else {
-      search.p = newPage
+      search.offset =
+        (newPage - 1) * (search.limit || Number(commonQueries.limit))
     }
 
     setSearch({ ...search })

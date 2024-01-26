@@ -84,7 +84,7 @@ export const options = {
       }
     },
     // client-only queries
-    clientOnlyQueries: ['empty', 'filter_order', 'p', 'sortby'],
+    clientOnlyQueries: ['empty', 'filter_order', 'sortby'],
     // client-only filter queries
     clientOnlyFilterQueries: ['empty'],
     formattedFacetNames: {
