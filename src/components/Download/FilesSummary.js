@@ -111,7 +111,7 @@ export const FilesSummary = ({ dataset, isProcessed }) => {
     const params = { data: dataset.data, ...downloadOptions }
 
     const response = await updateDataset(
-      regeneratedDataset.id || (await createDataset()),
+      regeneratedDataset?.id || (await createDataset()),
       params
     )
     const pathname = `/dataset/${response.id}`
