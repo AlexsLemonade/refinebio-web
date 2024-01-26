@@ -5,6 +5,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
 import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
+import getHumanReadablePageNumber from 'helpers/getHumanReadablePageNumber'
 import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -49,8 +50,12 @@ export const Search = ({
   const searchBoxWidth = '550px'
   const [toggleFilterList, setToggleFilterList] = useState(false)
   const [userSearchTerm, setUserSearchTerm] = useState(query.search || '')
-  const [page, setPage] = useState(Number(query.p) || 1)
-  const [pageSize, setPageSize] = useState(Number(query.size) || pageSizes[0])
+  const [page, setPage] = useState(
+    query.offset
+      ? getHumanReadablePageNumber(Number(query.offset), Number(query.limit))
+      : 1
+  )
+  const [pageSize, setPageSize] = useState(Number(query.limit) || pageSizes[0])
   const [sortBy, setSortBy] = useState(query.sortby || sortby[0].value)
   const isResults = results?.length > 0
 
@@ -259,8 +264,8 @@ Search.getInitialProps = async (ctx) => {
   const filterOrders = query.filter_order ? query.filter_order.split(',') : []
   const queryString = {
     ...getSearchQueryForAPI(query),
-    limit: query.size || Number(limit),
-    offset: (query.p - 1 || Number(offset)) * (query.size || Number(limit)),
+    limit: query.limit || Number(limit),
+    offset: query.offset || Number(offset) * (query.limit || Number(limit)),
     ordering: query.sortby || ordering,
     ...(query.search ? { search: query.search } : {}),
     num_downloadable_samples__gt: !query.empty
@@ -270,7 +275,11 @@ Search.getInitialProps = async (ctx) => {
 
   const response = await fetchSearch(
     queryString,
-    Number(query.p) || 1,
+    query.offset
+      ? getHumanReadablePageNumber(
+          Number(offset) * (query.limit || Number(limit))
+        )
+      : 1,
     filterOrders
   )
 
