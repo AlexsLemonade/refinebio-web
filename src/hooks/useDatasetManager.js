@@ -96,10 +96,8 @@ export const useDatasetManager = () => {
     return formattedResponse
   }
 
-  const startProcessingDataset = async (id, options) => {
+  const startProcessingDataset = async (options, id = null) => {
     const isCurrentDatasetId = id && id === datasetId
-    const datasetIdToUse =
-      !id || !isCurrentDatasetId ? await createDataset() : id
     // validates the existing token or create a new token if none
     const tokenId = validateToken() ? token : await resetToken()
     const { emailAddress, receiveUpdates } = options
@@ -110,7 +108,10 @@ export const useDatasetManager = () => {
       start: true,
       token_id: tokenId
     }
-    const response = await updateDataset(datasetIdToUse, params)
+    const response = await updateDataset(
+      isCurrentDatasetId ? id : await createDataset(),
+      params
+    )
     // saves the user's newly entered email or replace the existing one
     setEmail(emailAddress)
     // deletes the locally saved dataset data once it has started processing (no longer mutable)
