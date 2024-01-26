@@ -1,6 +1,8 @@
+import { useRouter } from 'next/router'
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph, Text } from 'grommet'
 import { validationSchemas } from 'config'
+import requestData from 'helpers/requestData'
 import { useResponsive } from 'hooks/useResponsive'
 import { FormField } from 'components/shared/FormField'
 import { RequestForm } from 'components/shared/RequestForm'
@@ -9,8 +11,10 @@ import { TextNull } from 'components/shared/TextNull'
 import { TextRequired } from 'components/shared/TextRequired'
 
 export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
+  const { push } = useRouter()
   const { viewport, setResponsive } = useResponsive()
   const { RequestDataFormSchema } = validationSchemas
+  const pathname = '/'
 
   return (
     <Box
@@ -25,17 +29,34 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
           pediatric_cancer: '',
           approach: '',
           email: '',
-          email_updates: false
+          email_updates: false,
+          query: queryTerm,
+          request_type: 'search'
         }}
         validationSchema={RequestDataFormSchema}
         validateOnChange={false}
         onSubmit={async (values, { setSubmitting }) => {
-          // TEMP
-          await new Promise((resolve) => {
-            setTimeout(() => resolve(values), 1000)
+          const response = await requestData({
+            requestValues: {
+              ...values
+            }
           })
-          // eslint-disable-next-line no-console
-          console.log(values)
+
+          // redirects to the homepage after submission
+          const isSuccess = response.status === 200
+          push(
+            {
+              pathname,
+              query: {
+                message: isSuccess
+                  ? 'Request for Experiment Received!'
+                  : 'There was a problem with requesting the experiment. Please try again later',
+                status: isSuccess ? 'success' : 'error'
+              }
+            },
+            pathname
+          )
+
           setSubmitting(false)
         }}
       >

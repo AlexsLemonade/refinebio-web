@@ -13,6 +13,11 @@ export const links = {
   email_request_ccdl: 'requests@ccdatalab.org',
   // refine.bio
   refinebio: 'https://www.refine.bio',
+  refinebio_data_request: {
+    experiment: 'https://www.refine.bio/experiments/',
+    search: 'https://www.refine.bio/search?search='
+  },
+  refinebio_email_logo: 'https://s3.amazonaws.com/refinebio-email/logo-2x.png',
   terms_of_use: '/terms',
   // refine.bio docs
   refinebio_api_docs: 'https://api.refine.bio/v1/#tag/compendia',

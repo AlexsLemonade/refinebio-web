@@ -20,7 +20,10 @@ const moduleExports = () => {
       : process.env.STAGE_SENTRY_DSN,
     SENTRY_ENV: isProduction
       ? process.env.SENTRY_ENV
-      : process.env.STAGE_SENTRY_ENV
+      : process.env.STAGE_SENTRY_ENV,
+    SLACK_HOOK_URL: isProduction
+      ? process.env.SLACK_HOOK_URL
+      : process.env.STAGE_SLACK_HOOK_URL
   }
 
   return {
