@@ -6,7 +6,7 @@ const apiVersion = process.env.API_VERSION || 'v1'
 export default async (url, params = false) => {
   const apiUrl = url.startsWith('http') ? url : `${host}/${apiVersion}/${url}`
   let response
-  let result
+  let results
 
   try {
     response = await (params ? fetch(apiUrl, params) : fetch(apiUrl))
@@ -38,7 +38,7 @@ export default async (url, params = false) => {
 
   // checks for parsing error (temporarily returns 500)
   try {
-    result = await response.json()
+    results = await response.json()
   } catch (e) {
     return {
       message: 'Error occurred while parsing the data',
@@ -52,9 +52,13 @@ export default async (url, params = false) => {
       ok: false,
       message: `${response.status} error occurred`,
       statusCode: response.status,
-      result
+      results
     }
   }
 
-  return result
+  return {
+    ...results,
+    ok: response.ok,
+    statusCode: response.status
+  }
 }
