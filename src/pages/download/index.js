@@ -21,7 +21,7 @@ import {
 
 export const Download = () => {
   const {
-    query: { start, downloadOptions }
+    query: { start }
   } = useRouter()
 
   const {
@@ -84,10 +84,7 @@ export const Download = () => {
               <DatasetDetails dataset={dataset} />
             </>
           ) : start ? (
-            <StartProcessing
-              dataset={dataset}
-              downloadOptions={downloadOptions}
-            />
+            <StartProcessing dataset={dataset} />
           ) : (
             <Box
               pad={{

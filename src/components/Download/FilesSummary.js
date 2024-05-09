@@ -123,7 +123,7 @@ export const FilesSummary = ({
     const pathname = `/dataset/${response.id}`
 
     gtag.regeneratedDataset(
-      isExpired && isProcessed ? 'Expired' : 'Valid',
+      isExpired && isProcessed,
       defaultDataset,
       JSON.stringify(defaultDataset) !== JSON.stringify(dataset)
         ? dataset
