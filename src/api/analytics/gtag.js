@@ -2,6 +2,8 @@ import { links, options } from 'config'
 import formatFacetNames from 'helpers/formatFacetNames'
 import formatFilterName from 'helpers/formatFilterName'
 
+const { transformationHumanReadable: transformation } = options
+
 // adds a custom event to GA4
 // https://developers.google.com/analytics/devguides/collection/ga4/events?client_type=gtag
 const event = (eventName, value = {}, nonInteraction = false) => {
@@ -24,17 +26,20 @@ const compendiaDownload = (type, organism) =>
 /* --- Datasets --- */
 const myDatasetAction = (action) =>
   event('my_dataset_action', {
-    my_dataset_action: action
+    my_dataset_action: `${action[0].toUpperCase()}${action.substring(
+      1
+    )} Samples`
   })
 
-const myDatasetDownloadOptions = (option) => {
+const myDatasetDownloadOptions = (dataset) =>
   event('my_dataset_download_options', {
-    my_dataset_download_options: `Aggregate: ${option[0]}, Transformation: ${
-      options.transformationHumanReadable[option[1]]
-    }, QN: ${option[2] === 'true' ? 'Not skipped' : 'Skipped'}
+    my_dataset_download_options: `Aggregate: ${
+      dataset.aggregate_by
+    }, Transformation: ${transformation[dataset.scale_by]}, QN: ${
+      dataset.quantile_normalize ? 'Skipped' : 'Not skipped'
+    }
   `
   })
-}
 
 const datasetDownload = (token) => event('dataset_downalod', { token })
 
@@ -47,12 +52,12 @@ const regeneratedDataset = (state, defaultOptions, newOptions) => {
   // due to GA char limit, keys names are abbreviated
   const format = (option) => {
     return `A: ${option.aggregate_by}, T: ${
-      options.transformationHumanReadable[option.scale_by]
+      transformation[option.scale_by]
     }, QN: ${option.quantile_normalize ? 'Not skipped' : 'Skipped'}`
   }
 
   event('regenerated_dataset', {
-    regenerated_state: state,
+    regenerated_state: state ? 'Expired' : 'Valid',
     regenerated_download_options: `${format(defaultOptions)} ${
       newOptions ? `(new) ${format(newOptions)}` : ''
     }`
@@ -60,7 +65,9 @@ const regeneratedDataset = (state, defaultOptions, newOptions) => {
 }
 
 const sharedDataset = (status) =>
-  event('shared_dataset', { shared_state: status })
+  event('shared_dataset', {
+    shared_state: status ? 'Processed' : 'Unprocessed'
+  })
 
 /* --- Links --- */
 const experimentPageClick = (from) =>
