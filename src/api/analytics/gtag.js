@@ -126,8 +126,10 @@ const filterCombination = (facets, query) => {
 
 const filterType = (type) => event('filter_type', { filter_type: type })
 
-const toggleFilterItem = (item) =>
-  event('toggled_filter_item', { toggled_filter_item: item })
+const toggleFilterItem = (checked, item) =>
+  event('toggled_filter_item', {
+    toggled_filter_item: `${checked ? 'Add' : 'Remove'} - ${item}`
+  })
 
 const searchTerm = (term) => event('search_text', { search_text: term })
 
