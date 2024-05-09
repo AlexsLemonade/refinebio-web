@@ -26,17 +26,20 @@ const compendiaDownload = (type, organism) =>
 /* --- Datasets --- */
 const myDatasetAction = (action) =>
   event('my_dataset_action', {
-    my_dataset_action: action
+    my_dataset_action: `${action[0].toUpperCase()}${action.substring(
+      1
+    )} Samples`
   })
 
-const myDatasetDownloadOptions = (option) => {
+const myDatasetDownloadOptions = (dataset) =>
   event('my_dataset_download_options', {
-    my_dataset_download_options: `Aggregate: ${option[0]}, Transformation: ${
-      transformation[option[1]]
-    }, QN: ${option[2] === 'true' ? 'Not skipped' : 'Skipped'}
+    my_dataset_download_options: `Aggregate: ${
+      dataset.aggregate_by
+    }, Transformation: ${transformation[dataset.scale_by]}, QN: ${
+      dataset.quantile_normalize ? 'Skipped' : 'Not skipped'
+    }
   `
   })
-}
 
 const datasetDownload = (token) => event('dataset_downalod', { token })
 
@@ -54,7 +57,7 @@ const regeneratedDataset = (state, defaultOptions, newOptions) => {
   }
 
   event('regenerated_dataset', {
-    regenerated_state: state,
+    regenerated_state: state ? 'Expired' : 'Valid',
     regenerated_download_options: `${format(defaultOptions)} ${
       newOptions ? `(new) ${format(newOptions)}` : ''
     }`
@@ -62,7 +65,9 @@ const regeneratedDataset = (state, defaultOptions, newOptions) => {
 }
 
 const sharedDataset = (status) =>
-  event('shared_dataset', { shared_state: status })
+  event('shared_dataset', {
+    shared_state: status ? 'Processed' : 'Unprocessed'
+  })
 
 /* --- Links --- */
 const experimentPageClick = (from) =>
