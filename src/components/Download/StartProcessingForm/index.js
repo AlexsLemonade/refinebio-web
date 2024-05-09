@@ -13,9 +13,9 @@ import { EmailTextInput } from './EmailTextInput'
 import { ReceiveUpdatesCheckBox } from './ReceiveUpdatesCheckBox'
 import { TermsOfUseCheckBox } from './TermsOfUseCheckBox'
 
-export const StartProcessingForm = ({ dataset, downloadOptions }) => {
+export const StartProcessingForm = ({ dataset }) => {
   const { push } = useRouter()
-  const { email, startProcessingDataset } = useDatasetManager()
+  const { datasetId, email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const { StartProcessingFormSchema } = validationSchemas
 
@@ -30,7 +30,7 @@ export const StartProcessingForm = ({ dataset, downloadOptions }) => {
       validateOnChange={false}
       onSubmit={async (values, { setSubmitting }) => {
         const { emailAddress, receiveUpdates } = values
-        const params = {
+        const downloadOptions = {
           data: dataset.data,
           emailAddress,
           receiveUpdates
@@ -43,12 +43,16 @@ export const StartProcessingForm = ({ dataset, downloadOptions }) => {
           }
         }
 
-        const response = await startProcessingDataset(params, dataset.id)
+        const response = await startProcessingDataset(
+          downloadOptions,
+          dataset.id
+        )
+
         const pathname = `/dataset/${response.id}`
         push({ pathname }, pathname)
 
-        if (downloadOptions.length > 0) {
-          gtag.myDatasetDownloadOptions(downloadOptions)
+        if (datasetId === dataset.id) {
+          gtag.myDatasetDownloadOptions(dataset)
         }
 
         setSubmitting(false)
