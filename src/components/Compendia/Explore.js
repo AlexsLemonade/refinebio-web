@@ -7,19 +7,19 @@ import { List } from 'components/shared/List'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
 
-const ListItem = ({ text, href }) => {
+const ListItem = ({ href, text, type }) => {
   return (
     <Box as="li" margin={{ bottom: 'small' }}>
       <Anchor
         href={href}
         label={text}
-        onClick={() => gtag.exploredUsageClick(text, 'compendia')}
+        onClick={() => gtag.exploredUsageClick(text, type)}
       />
     </Box>
   )
 }
 
-export const Explore = () => {
+export const Explore = ({ type = 'compendia' }) => {
   const { setResponsive } = useResponsive()
 
   const exploreLinks = [
@@ -72,7 +72,12 @@ export const Explore = () => {
         </Heading>
         <List alignItems="start" flexDirection="column">
           {exploreLinks.map((link) => (
-            <ListItem key={link.text} href={link.href} text={link.text} />
+            <ListItem
+              key={link.text}
+              href={link.href}
+              text={link.text}
+              type={type}
+            />
           ))}
         </List>
       </Column>
