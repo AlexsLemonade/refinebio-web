@@ -67,7 +67,7 @@ export const DownloadNowModal = ({
           if (receiveUpdates) {
             const subscribeEmailResponse = await subscribeEmail(emailAddress)
             if (subscribeEmailResponse.status !== 'error') {
-              gtag.emailSubscription('Download Now Modal (one-off experiment)')
+              gtag.emailSubscription(DownloadNowModal.name)
             }
           }
 

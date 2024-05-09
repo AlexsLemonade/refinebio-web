@@ -32,7 +32,7 @@ export const SignUpBlock = () => {
               setSubmitted(false)
             } else {
               setSubmitted(true)
-              gtag.emailSubscription('Sign up form')
+              gtag.emailSubscription(SignUpBlock.name)
             }
 
             setSubmitting(false)
