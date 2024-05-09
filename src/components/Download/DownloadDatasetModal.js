@@ -47,9 +47,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
           if (receiveUpdates) {
             const subscribeEmailResponse = await subscribeEmail(emailAddress)
             if (subscribeEmailResponse.status !== 'error') {
-              gtag.emailSubscription(
-                'Download Dataset Modal (shared unprocessed dataset)'
-              )
+              gtag.emailSubscription(DownloadDatasetModal.name)
             }
           }
 
