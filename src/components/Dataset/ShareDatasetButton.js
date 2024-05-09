@@ -28,7 +28,7 @@ export const ShareDatasetButton = ({
 
   const handleShare = () => {
     openModal(id)
-    gtag.sharedDataset(isProcessed ? 'Processed' : 'Unprocessed')
+    gtag.sharedDataset(isProcessed)
   }
 
   const handleCopy = (link) => {
