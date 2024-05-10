@@ -47,10 +47,7 @@ export const NormalizedTab = ({ type = 'normalized' }) => {
             rel="noopener noreferrer"
             target="_blank"
             onClick={() =>
-              gtag.outboundClick(
-                links.refinebio_docs_normalized_compendia,
-                `Learn More - ${tabName}`
-              )
+              gtag.outboundClick(links.refinebio_docs_normalized_compendia)
             }
           />
         </Box>

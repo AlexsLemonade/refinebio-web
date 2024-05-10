@@ -12,9 +12,7 @@ export const GithubAnchor = ({ light = false }) => {
       <Anchor
         color={light ? 'white' : 'alex-navy'}
         href={links.alsf_github}
-        onClick={() =>
-          gtag.outboundClick(links.alsf_github, 'Github Icon - Header')
-        }
+        onClick={() => gtag.outboundClick(links.alsf_github)}
       >
         <GithubLogoSvg role="img" title="Github ALSF Repository" />
         <SrOnly label="Go to Github ALSF Repository" />

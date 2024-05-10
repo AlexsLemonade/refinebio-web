@@ -9,10 +9,10 @@ import { List } from 'components/shared/List'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
 
-const ListItem = ({ text, href }) => {
+const ListItem = ({ href, text }) => {
   const handleGAEvents = () => {
     gtag.exploredUsageClick(text)
-    gtag.outboundClick(href, `${text} - Explore Dataset`)
+    gtag.outboundClick(href)
   }
 
   return (

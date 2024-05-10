@@ -43,12 +43,7 @@ export const Documents = () => {
                 responsive
                 rel="noopener noreferrer"
                 target="_blank"
-                onClick={() =>
-                  gtag.outboundClick(
-                    links.refinebio_docs,
-                    'Take me to the docs - Home'
-                  )
-                }
+                onClick={() => gtag.outboundClick(links.refinebio_docs)}
               />
             }
             img="undraw_files.svg"

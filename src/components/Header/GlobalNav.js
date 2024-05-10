@@ -136,7 +136,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 viewport={viewport}
                 onClick={() => {
                   handleClick()
-                  gtag.outboundClick(links.refinebio_docs, 'Docs - Global Nav')
+                  gtag.outboundClick(links.refinebio_docs)
                 }}
               />
             </Box>

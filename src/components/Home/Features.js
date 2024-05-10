@@ -12,7 +12,7 @@ import { FeatureCard } from './FeatureCard'
 export const Features = () => {
   const { viewport, setResponsive } = useResponsive()
 
-  const handleGAEvent = (href, text) => gtag.outboundClick(href, text)
+  const handleGAEvent = (href) => gtag.outboundClick(href)
 
   return (
     <FixedContainer>
@@ -30,10 +30,7 @@ export const Features = () => {
                 label="standardized pipelines"
                 rel="noopener noreferrer"
                 onClick={() =>
-                  handleGAEvent(
-                    links.refinebio_docs_standard_pipeline,
-                    'standardized pipelines (text link) - Home'
-                  )
+                  handleGAEvent(links.refinebio_docs_standard_pipeline)
                 }
               />{' '}
               curated by the{' '}
@@ -41,7 +38,7 @@ export const Features = () => {
                 href={links.ccdl}
                 label="Childhood Cancer Data Lab (CCDL)"
                 rel="noopener noreferrer"
-                onClick={() => handleGAEvent(links.ccdl, 'ccdatalab.org')}
+                onClick={() => handleGAEvent(links.ccdl)}
               />
             </>
           }

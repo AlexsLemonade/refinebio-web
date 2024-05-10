@@ -81,9 +81,7 @@ export const CCDL = () => {
             uppercase
             rel="noopener noreferrer"
             target="_blank"
-            onClick={() =>
-              gtag.outboundClick(links.ccdl_donate, 'Donate Now - About')
-            }
+            onClick={() => gtag.outboundClick(links.ccdl_donate)}
           />
         </Box>
       </Row>

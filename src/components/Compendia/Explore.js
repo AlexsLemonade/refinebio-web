@@ -10,7 +10,7 @@ import { links } from 'config'
 const ListItem = ({ href, text, type }) => {
   const handleGAEvents = () => {
     gtag.exploredUsageClick(text, type)
-    gtag.outboundClick(href, `${text} - Explore Compendia`)
+    gtag.outboundClick(href)
   }
 
   return (
