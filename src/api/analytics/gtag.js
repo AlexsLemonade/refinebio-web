@@ -83,7 +83,7 @@ const navClick = (item, type = 'global') =>
     [`${type}_nav_item`]: item
   })
 
-const outboundClick = (url, value) => {
+const outboundClick = (url) => {
   let parameter
   switch (true) {
     case url === links.alsf || url === links.ccdl:
@@ -112,7 +112,7 @@ const outboundClick = (url, value) => {
   }
 
   event('click', {
-    [parameter]: value
+    [parameter]: url
   })
 }
 
