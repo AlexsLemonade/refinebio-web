@@ -21,10 +21,10 @@ export const DownloadNowModal = ({
   id
 }) => {
   const { email, startProcessingDataset } = useDatasetManager()
-  const { addProcessingResource, getProcessingResource } =
+  const { addProcessingDataset, getProcessingDataset } =
     usePollDatasetStatus(accessionCode)
   const { setResponsive } = useResponsive()
-  const processingExperiment = getProcessingResource(accessionCode)
+  const processingExperiment = getProcessingDataset(accessionCode)
   const { StartProcessingFormSchema } = validationSchemas
 
   if (processingExperiment) {
@@ -68,7 +68,7 @@ export const DownloadNowModal = ({
           }
 
           const response = await startProcessingDataset(values)
-          addProcessingResource(response.id, accessionCode)
+          addProcessingDataset(response.id, accessionCode)
           setSubmitting(false)
         }}
       >

@@ -4,28 +4,28 @@ import { useRefinebio } from 'hooks/useRefinebio'
 import { regex } from 'config'
 import areValidAccessionCodes from 'helpers/areValidAccessionCodes'
 
-// resourceId: a processing dataset ID || a processing experiment accession code for the one-off experiment
-export const usePollDatasetStatus = (resourceId) => {
+// processingDatasetId: a processing dataset ID || a processing experiment accession code for the one-off experiment
+export const usePollDatasetStatus = (processingDatasetId) => {
   const { getDataset } = useDatasetManager()
-  const { processingResources, setProcessingResources } = useRefinebio()
-  const [latestDatasetState, setLatestDatasetState] = useState(false)
+  const { processingDatasets, setProcessingDatasets } = useRefinebio()
+  const [latestPollDatasetState, setLatestPollDatasetState] = useState(false)
   let startTimer = false
 
-  // fetches the latest state of the processing resource on mount
+  // fetches the latest state of the processing dataset on mount
   useEffect(() => {
-    if (getProcessingResource(resourceId)) {
-      refreshProcessingResource()
+    if (getProcessingDataset(processingDatasetId)) {
+      refreshProcessingDataset()
     }
   }, [])
 
-  // polls the latest state of the processing resource per minute
+  // polls the latest state of the processing dataset per minute
   // (the processing usually takes a few minutes)
   useEffect(() => {
     let timerId = null
-    if (!startTimer && getProcessingResource(resourceId)) {
+    if (!startTimer && getProcessingDataset(processingDatasetId)) {
       timerId = setInterval(() => {
         startTimer = true
-        refreshProcessingResource()
+        refreshProcessingDataset()
       }, 1000 * 60)
     }
     return () => {
@@ -33,40 +33,42 @@ export const usePollDatasetStatus = (resourceId) => {
         clearInterval(timerId)
       }
     }
-  }, [startTimer, processingResources])
+  }, [startTimer, processingDatasets])
 
   // data structure {  datasetId: processingDatasetId, accessionCode: experimentAccessionCode || null }
-  const addProcessingResource = (datasetId, accessionCode = null) => {
-    setProcessingResources((prev) => {
+  const addProcessingDataset = (datasetId, accessionCode = '') => {
+    setProcessingDatasets((prev) => {
       if (prev.find((item) => item.datasetId === datasetId)) return prev
 
-      return [...processingResources, { datasetId, accessionCode }]
+      return [...processingDatasets, { datasetId, accessionCode }]
     })
   }
 
   // id: a dataset ID || an experiment accession code
-  const getProcessingResource = (id) => {
-    const keyToFind = areValidAccessionCodes(resourceId, regex)
+  const getProcessingDataset = (id) => {
+    const keyToFind = areValidAccessionCodes(processingDatasetId, regex)
       ? 'accessionCode'
       : 'datasetId'
-    const resource = processingResources.find((item) => item[keyToFind] === id)
+    const valueToFind = processingDatasets.find(
+      (item) => item[keyToFind] === id
+    )
 
-    return resource
+    return valueToFind
   }
 
-  const isProcessingDataset = latestDatasetState?.is_processing
+  const isProcessingDataset = latestPollDatasetState?.is_processing
 
-  const refreshProcessingResource = async () => {
-    const { datasetId } = getProcessingResource(resourceId)
+  const refreshProcessingDataset = async () => {
+    const { datasetId } = getProcessingDataset(processingDatasetId)
     const response = await getDataset(datasetId)
 
     // TEMP: until the fetchAsync is refactored
     if (response?.ok !== false) {
-      setLatestDatasetState(response)
+      setLatestPollDatasetState(response)
     }
 
     if (!response.is_processing) {
-      setProcessingResources((prev) =>
+      setProcessingDatasets((prev) =>
         prev.filter((item) => item.datasetId !== response.id)
       )
     }
@@ -76,9 +78,9 @@ export const usePollDatasetStatus = (resourceId) => {
 
   return {
     isProcessingDataset,
-    latestDatasetState,
-    processingResources,
-    addProcessingResource,
-    getProcessingResource
+    latestPollDatasetState,
+    processingDatasets,
+    addProcessingDataset,
+    getProcessingDataset
   }
 }

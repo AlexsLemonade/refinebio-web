@@ -16,7 +16,7 @@ export const SearchCardAction = ({
   technology
 }) => {
   const pageRendered = usePageRendered()
-  const { getProcessingResource } = usePollDatasetStatus(accessionCode)
+  const { getProcessingDataset } = usePollDatasetStatus(accessionCode)
   const { setResponsive } = useResponsive()
   const hasMultipleOrganisms = organismNames.length > 1
   const rnaSeq = 'RNA-SEQ'
@@ -24,7 +24,7 @@ export const SearchCardAction = ({
     typeof technology === 'string'
       ? technology === rnaSeq
       : technology.find((x) => x === rnaSeq)
-  const processingExperiment = getProcessingResource(accessionCode)
+  const processingExperiment = getProcessingDataset(accessionCode)
 
   if (!pageRendered) return null
 
