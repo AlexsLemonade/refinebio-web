@@ -9,11 +9,10 @@ export const usePollDatasetStatus = (processingDatasetId) => {
   const { getDataset } = useDatasetManager()
   const { processingDatasets, setProcessingDatasets } = useRefinebio()
   const [latestPollDatasetState, setLatestPollDatasetState] = useState(false)
-  let startTimer = false
 
   // fetches the latest state of the processing dataset on mount
   useEffect(() => {
-    if (getProcessingDataset(processingDatasetId)) {
+    if (getProcessingDataset()) {
       refreshProcessingDataset()
     }
   }, [])
@@ -22,18 +21,15 @@ export const usePollDatasetStatus = (processingDatasetId) => {
   // (the processing usually takes a few minutes)
   useEffect(() => {
     let timerId = null
-    if (!startTimer && getProcessingDataset(processingDatasetId)) {
+    if (getProcessingDataset()) {
       timerId = setInterval(() => {
-        startTimer = true
         refreshProcessingDataset()
       }, 1000 * 60)
     }
     return () => {
-      if (startTimer) {
-        clearInterval(timerId)
-      }
+      clearInterval(timerId)
     }
-  }, [startTimer, processingDatasets])
+  }, [processingDatasets])
 
   // data structure {  datasetId: processingDatasetId, accessionCode: experimentAccessionCode || null }
   const addProcessingDataset = (datasetId, accessionCode = '') => {
@@ -45,21 +41,20 @@ export const usePollDatasetStatus = (processingDatasetId) => {
   }
 
   // id: a dataset ID || an experiment accession code
-  const getProcessingDataset = (id) => {
-    const keyToFind = areValidAccessionCodes(processingDatasetId, regex)
-      ? 'accessionCode'
-      : 'datasetId'
-    const valueToFind = processingDatasets.find(
-      (item) => item[keyToFind] === id
+  const getProcessingDataset = (id = processingDatasetId) =>
+    processingDatasets.find(
+      (item) =>
+        item[
+          areValidAccessionCodes(processingDatasetId, regex)
+            ? 'accessionCode'
+            : 'datasetId'
+        ] === id
     )
-
-    return valueToFind
-  }
 
   const isProcessingDataset = latestPollDatasetState?.is_processing
 
   const refreshProcessingDataset = async () => {
-    const { datasetId } = getProcessingDataset(processingDatasetId)
+    const { datasetId } = getProcessingDataset()
     const response = await getDataset(datasetId)
 
     // TEMP: until the fetchAsync is refactored

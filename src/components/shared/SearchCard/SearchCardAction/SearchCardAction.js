@@ -16,7 +16,8 @@ export const SearchCardAction = ({
   technology
 }) => {
   const pageRendered = usePageRendered()
-  const { getProcessingDataset } = usePollDatasetStatus(accessionCode)
+  const { addProcessingDataset, getProcessingDataset } =
+    usePollDatasetStatus(accessionCode)
   const { setResponsive } = useResponsive()
   const hasMultipleOrganisms = organismNames.length > 1
   const rnaSeq = 'RNA-SEQ'
@@ -52,6 +53,8 @@ export const SearchCardAction = ({
             accessionCode={accessionCode}
             hasMultipleOrganisms={hasMultipleOrganisms}
             hasRnaSeq={hasRnaSeq}
+            processingExperiment={processingExperiment}
+            addProcessingDataset={addProcessingDataset}
           />
         </Box>
       )}

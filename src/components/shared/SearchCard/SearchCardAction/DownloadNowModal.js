@@ -2,7 +2,6 @@ import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
 import { options, validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
-import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/shared/Button'
@@ -18,13 +17,12 @@ export const DownloadNowModal = ({
   accessionCode,
   hasMultipleOrganisms,
   hasRnaSeq,
-  id
+  id,
+  processingExperiment,
+  addProcessingDataset
 }) => {
   const { email, startProcessingDataset } = useDatasetManager()
-  const { addProcessingDataset, getProcessingDataset } =
-    usePollDatasetStatus(accessionCode)
   const { setResponsive } = useResponsive()
-  const processingExperiment = getProcessingDataset(accessionCode)
   const { StartProcessingFormSchema } = validationSchemas
 
   if (processingExperiment) {
