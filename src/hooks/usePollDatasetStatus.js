@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useDatasetManager } from 'hooks/useDatasetManager'
-import { useRefinebio } from 'hooks/useRefinebio'
 import { regex } from 'config'
 import areValidAccessionCodes from 'helpers/areValidAccessionCodes'
 
 // processingId: a processing dataset ID || a processing one-off experiment accession code
 export const usePollDatasetStatus = (processingId) => {
-  const { getDataset } = useDatasetManager()
-  const { processingDatasets, setProcessingDatasets } = useRefinebio()
+  const { processingDatasets, setProcessingDatasets, getDataset } =
+    useDatasetManager()
   const [latestPollDatasetState, setLatestPollDatasetState] = useState(false)
 
   // fetches the latest state of the processing dataset on mount
@@ -23,31 +22,22 @@ export const usePollDatasetStatus = (processingId) => {
     let timerId = null
     if (getProcessingDataset()) {
       timerId = setInterval(() => {
+        console.log('Pulling...', timerId, processingId)
         refreshProcessingDataset()
       }, 1000 * 60)
     }
     return () => {
+      console.log('Finished...', timerId)
       clearInterval(timerId)
     }
   }, [processingDatasets])
-
-  // { datasetId: processing dataset ID, accessionCode:  a processing one-off experiment accession code || '' }
-  const addProcessingDataset = (datasetId, accessionCode = '') => {
-    setProcessingDatasets((prev) => {
-      if (prev.find((item) => item.datasetId === datasetId)) return prev
-
-      return [...processingDatasets, { datasetId, accessionCode }]
-    })
-  }
 
   // returns a mached processing dataset using id (either dataset ID or accession code)
   const getProcessingDataset = (id = processingId) =>
     processingDatasets.find(
       (item) =>
         item[
-          areValidAccessionCodes(processingId, regex)
-            ? 'accessionCode'
-            : 'datasetId'
+          areValidAccessionCodes(processingId, regex) ? 'ac' : 'datasetId'
         ] === id
     )
 
@@ -74,8 +64,6 @@ export const usePollDatasetStatus = (processingId) => {
   return {
     isProcessingDataset,
     latestPollDatasetState,
-    processingDatasets,
-    addProcessingDataset,
     getProcessingDataset
   }
 }

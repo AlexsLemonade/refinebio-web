@@ -18,6 +18,8 @@ export const useDatasetManager = () => {
     setDownloadOptions,
     email,
     setEmail,
+    processingDatasets,
+    setProcessingDatasets,
     regeneratedDataset,
     setRegeneratedDataset,
     token
@@ -27,6 +29,16 @@ export const useDatasetManager = () => {
   const [loading, setLoading] = useState(false)
 
   /* Dataset */
+  // adds a newly processing dataset to the processingDatasets list
+  // { id: dataset ID, accessionCode: a one-off experiment accession code || '' }
+  const addDatasetToProcessingDatasets = (id, accessionCode = '') => {
+    setProcessingDatasets((prev) => {
+      if (prev.find((item) => item.datasetId === datasetId)) return prev
+
+      return [...processingDatasets, { datasetId: id, ac: accessionCode }]
+    })
+  }
+
   const clearDataset = async (id = '') => {
     setLoading(true)
     const params = { data: {} }
@@ -88,7 +100,12 @@ export const useDatasetManager = () => {
     return formattedResponse
   }
 
-  const startProcessingDataset = async (options, id = null) => {
+  // takes download options and optional dataset ID and one-off experiment accession code
+  const startProcessingDataset = async (
+    options,
+    id = null,
+    accessionCode = null
+  ) => {
     const isCurrentDatasetId = id && id === datasetId
     // validates the existing token or create a new token if none
     const tokenId = validateToken() ? token : await resetToken()
@@ -100,10 +117,11 @@ export const useDatasetManager = () => {
       start: true,
       token_id: tokenId
     }
-    const response = await updateDataset(
-      isCurrentDatasetId ? id : await createDataset(),
-      params
-    )
+
+    const datasetIdToUse = isCurrentDatasetId ? id : await createDataset()
+    const response = await updateDataset(datasetIdToUse, params)
+    // adds this processing dataset to processingDataset
+    addDatasetToProcessingDatasets(datasetIdToUse, accessionCode)
     // saves the user's newly entered email or replace the existing one
     setEmail(emailAddress)
     // deletes the locally saved dataset data once it has started processing (no longer mutable)
@@ -284,6 +302,8 @@ export const useDatasetManager = () => {
     dataset,
     datasetId,
     loading,
+    processingDatasets,
+    setProcessingDatasets,
     regeneratedDataset,
     token,
     clearDataset,

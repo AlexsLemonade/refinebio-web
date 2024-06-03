@@ -18,8 +18,7 @@ export const DownloadNowModal = ({
   hasMultipleOrganisms,
   hasRnaSeq,
   id,
-  processingExperiment,
-  addProcessingDataset
+  processingExperiment
 }) => {
   const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
@@ -65,8 +64,7 @@ export const DownloadNowModal = ({
             subscribeEmail(emailAddress)
           }
 
-          const response = await startProcessingDataset(values)
-          addProcessingDataset(response.id, accessionCode)
+          await startProcessingDataset(values, null, accessionCode)
           setSubmitting(false)
         }}
       >

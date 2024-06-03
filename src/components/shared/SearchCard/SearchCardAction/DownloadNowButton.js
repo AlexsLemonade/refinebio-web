@@ -7,8 +7,7 @@ export const DownloadNowButton = ({
   accessionCode,
   hasMultipleOrganisms,
   hasRnaSeq,
-  processingExperiment,
-  addProcessingDataset
+  processingExperiment
 }) => {
   const { openModal } = useModal()
   const id = `download-now-${accessionCode}`
@@ -33,7 +32,6 @@ export const DownloadNowButton = ({
         hasRnaSeq={hasRnaSeq}
         id={id}
         processingExperiment={processingExperiment}
-        addProcessingDataset={addProcessingDataset}
       />
     </Modal>
   )

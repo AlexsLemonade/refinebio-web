@@ -13,6 +13,8 @@ export const DatasetManagerContextProvider = ({ children }) => {
     setDatasetId: setDatasetIdState,
     email: emailState,
     setEmail: setEmailState,
+    processingDatasets: processingDatasetsState,
+    setProcessingDatasets: setProcessingDatasetsState,
     regeneratedDataset: regeneratedDatasetState,
     setRegeneratedDataset: setRegeneratedDatasetState,
     token: tokenState
@@ -26,6 +28,8 @@ export const DatasetManagerContextProvider = ({ children }) => {
   const setDatasetId = setDatasetIdState
   const email = emailState
   const setEmail = setEmailState
+  const processingDatasets = processingDatasetsState
+  const setProcessingDatasets = setProcessingDatasetsState
   const regeneratedDataset = regeneratedDatasetState
   const setRegeneratedDataset = setRegeneratedDatasetState
   const token = tokenState
@@ -40,6 +44,8 @@ export const DatasetManagerContextProvider = ({ children }) => {
       setDownloadOptions,
       email,
       setEmail,
+      processingDatasets,
+      setProcessingDatasets,
       regeneratedDataset,
       setRegeneratedDataset,
       token
@@ -53,6 +59,8 @@ export const DatasetManagerContextProvider = ({ children }) => {
       setDownloadOptions,
       email,
       setEmail,
+      processingDatasets,
+      setProcessingDatasets,
       regeneratedDataset,
       setRegeneratedDataset,
       token
