@@ -4,8 +4,8 @@ import { useRefinebio } from 'hooks/useRefinebio'
 import { regex } from 'config'
 import areValidAccessionCodes from 'helpers/areValidAccessionCodes'
 
-// processingDatasetId: a processing dataset ID || a processing experiment accession code for the one-off experiment
-export const usePollDatasetStatus = (processingDatasetId) => {
+// processingId: a processing dataset ID || a processing one-off experiment accession code
+export const usePollDatasetStatus = (processingId) => {
   const { getDataset } = useDatasetManager()
   const { processingDatasets, setProcessingDatasets } = useRefinebio()
   const [latestPollDatasetState, setLatestPollDatasetState] = useState(false)
@@ -31,7 +31,7 @@ export const usePollDatasetStatus = (processingDatasetId) => {
     }
   }, [processingDatasets])
 
-  // data structure {  datasetId: processingDatasetId, accessionCode: experimentAccessionCode || null }
+  // { datasetId: processing dataset ID, accessionCode:  a processing one-off experiment accession code || '' }
   const addProcessingDataset = (datasetId, accessionCode = '') => {
     setProcessingDatasets((prev) => {
       if (prev.find((item) => item.datasetId === datasetId)) return prev
@@ -40,12 +40,12 @@ export const usePollDatasetStatus = (processingDatasetId) => {
     })
   }
 
-  // id: a dataset ID || an experiment accession code
-  const getProcessingDataset = (id = processingDatasetId) =>
+  // returns a mached processing dataset using id (either dataset ID or accession code)
+  const getProcessingDataset = (id = processingId) =>
     processingDatasets.find(
       (item) =>
         item[
-          areValidAccessionCodes(processingDatasetId, regex)
+          areValidAccessionCodes(processingId, regex)
             ? 'accessionCode'
             : 'datasetId'
         ] === id
