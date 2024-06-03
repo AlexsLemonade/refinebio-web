@@ -100,7 +100,7 @@ export const useDatasetManager = () => {
     return formattedResponse
   }
 
-  // takes download options and optional dataset ID and one-off experiment accession code
+  // takes download options, and optional dataset ID and one-off experiment accession code
   const startProcessingDataset = async (
     options,
     id = null,
@@ -120,7 +120,7 @@ export const useDatasetManager = () => {
 
     const datasetIdToUse = isCurrentDatasetId ? id : await createDataset()
     const response = await updateDataset(datasetIdToUse, params)
-    // adds this processing dataset to processingDataset
+    // adds this processing dataset to processingDatasets
     addDatasetToProcessingDatasets(datasetIdToUse, accessionCode)
     // saves the user's newly entered email or replace the existing one
     setEmail(emailAddress)

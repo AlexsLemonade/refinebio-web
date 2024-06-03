@@ -9,25 +9,16 @@ export const usePollDatasetStatus = (processingId) => {
     useDatasetManager()
   const [latestPollDatasetState, setLatestPollDatasetState] = useState(false)
 
-  // fetches the latest state of the processing dataset on mount
-  useEffect(() => {
-    if (getProcessingDataset()) {
-      refreshProcessingDataset()
-    }
-  }, [])
-
   // polls the latest state of the processing dataset per minute
   // (the processing usually takes a few minutes)
   useEffect(() => {
     let timerId = null
     if (getProcessingDataset()) {
       timerId = setInterval(() => {
-        console.log('Pulling...', timerId, processingId)
         refreshProcessingDataset()
       }, 1000 * 60)
     }
     return () => {
-      console.log('Finished...', timerId)
       clearInterval(timerId)
     }
   }, [processingDatasets])
