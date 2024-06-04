@@ -5,6 +5,8 @@ export const useRefinebio = () => {
   const {
     dataset,
     setDataset,
+    datasetAccessions,
+    setDatasetAccessions,
     datasetId,
     setDatasetId,
     downloadOptions,
@@ -22,6 +24,8 @@ export const useRefinebio = () => {
   return {
     dataset,
     setDataset,
+    datasetAccessions,
+    setDatasetAccessions,
     datasetId,
     setDatasetId,
     downloadOptions,

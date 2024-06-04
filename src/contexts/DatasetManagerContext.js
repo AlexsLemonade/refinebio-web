@@ -7,6 +7,8 @@ export const DatasetManagerContextProvider = ({ children }) => {
   const {
     dataset: datasetState,
     setDataset: setDatasetState,
+    datasetAccessions: datasetAccessionsState,
+    setDatasetAccessions: setDatasetAccessionsState,
     datasetId: datasetIdState,
     downloadOptions: downloadOptionsState,
     setDownloadOptions: setDownloadOptionsState,
@@ -22,6 +24,8 @@ export const DatasetManagerContextProvider = ({ children }) => {
 
   const dataset = datasetState
   const setDataset = setDatasetState
+  const datasetAccessions = datasetAccessionsState
+  const setDatasetAccessions = setDatasetAccessionsState
   const datasetId = datasetIdState
   const downloadOptions = downloadOptionsState
   const setDownloadOptions = setDownloadOptionsState
@@ -38,6 +42,8 @@ export const DatasetManagerContextProvider = ({ children }) => {
     () => ({
       dataset,
       setDataset,
+      datasetAccessions,
+      setDatasetAccessions,
       datasetId,
       setDatasetId,
       downloadOptions,
@@ -53,6 +59,8 @@ export const DatasetManagerContextProvider = ({ children }) => {
     [
       dataset,
       setDataset,
+      datasetAccessions,
+      setDatasetAccessions,
       datasetId,
       setDatasetId,
       downloadOptions,

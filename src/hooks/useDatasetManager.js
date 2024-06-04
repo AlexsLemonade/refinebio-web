@@ -12,6 +12,8 @@ export const useDatasetManager = () => {
   const {
     dataset,
     setDataset,
+    datasetAccessions,
+    setDatasetAccessions,
     datasetId,
     setDatasetId,
     downloadOptions,
@@ -29,13 +31,17 @@ export const useDatasetManager = () => {
   const [loading, setLoading] = useState(false)
 
   /* Dataset */
-  // adds a newly processing dataset to the processingDatasets list
-  // { id: dataset ID, accessionCode: a one-off experiment accession code || '' }
-  const addDatasetToProcessingDatasets = (id, accessionCode = '') => {
-    setProcessingDatasets((prev) => {
-      if (prev.find((item) => item.datasetId === datasetId)) return prev
+  // dataset download: adds a dataset id to processingDatasets[]
+  // one -off download: adds an accession code and a dataset id to datasetAccessions
+  const addDatasetToProcessingDatasets = (id, accessionCode) => {
+    if (accessionCode) {
+      setDatasetAccessions({ ...datasetAccessions, [accessionCode]: id })
+    }
 
-      return [...processingDatasets, { datasetId: id, ac: accessionCode }]
+    setProcessingDatasets((prev) => {
+      if (prev.includes(id)) return prev
+
+      return [...prev, datasetId]
     })
   }
 
