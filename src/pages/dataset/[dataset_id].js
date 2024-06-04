@@ -30,7 +30,7 @@ export const Dataset = ({ query }) => {
   const { dataset, datasetId, loading, getDataset, regeneratedDataset } =
     useDatasetManager()
   const pageRendered = usePageRendered()
-  const { isProcessingDataset, latestPollDatasetState } =
+  const { isProcessingDataset, polledDatasetState } =
     usePollDatasetStatus(idFromQuery)
   const { setResponsive } = useResponsive()
   const [selectedDataset, setSelectedDataset] = useState({})
@@ -50,10 +50,10 @@ export const Dataset = ({ query }) => {
   }, [query])
 
   useEffect(() => {
-    if (latestPollDatasetState && !isProcessingDataset) {
-      setSelectedDataset(latestPollDatasetState)
+    if (polledDatasetState && !isProcessingDataset) {
+      setSelectedDataset(polledDatasetState)
     }
-  }, [isProcessingDataset, latestPollDatasetState])
+  }, [isProcessingDataset, polledDatasetState])
 
   if (!pageRendered) return null
 

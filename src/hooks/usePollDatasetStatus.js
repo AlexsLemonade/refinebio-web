@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { regex } from 'config'
 import areValidAccessionCodes from 'helpers/areValidAccessionCodes'
@@ -7,19 +7,19 @@ import areValidAccessionCodes from 'helpers/areValidAccessionCodes'
 export const usePollDatasetStatus = (processingId) => {
   const { processingDatasets, setProcessingDatasets, getDataset } =
     useDatasetManager()
-  const [latestPollDatasetState, setLatestPollDatasetState] = useState(false)
+  const [polledDatasetState, setPolledDatasetState] = useState(false)
+  const timerRef = useRef(null)
 
   // polls the latest state of the processing dataset per minute
   // (the processing usually takes a few minutes)
   useEffect(() => {
-    let timerId = null
     if (getProcessingDataset()) {
-      timerId = setInterval(() => {
+      timerRef.current = setInterval(() => {
         refreshProcessingDataset()
       }, 1000 * 60)
     }
     return () => {
-      clearInterval(timerId)
+      clearInterval(timerRef.current)
     }
   }, [processingDatasets])
 
@@ -32,7 +32,7 @@ export const usePollDatasetStatus = (processingId) => {
         ] === id
     )
 
-  const isProcessingDataset = latestPollDatasetState?.is_processing
+  const isProcessingDataset = polledDatasetState?.is_processing
 
   const refreshProcessingDataset = async () => {
     const { datasetId } = getProcessingDataset()
@@ -40,7 +40,7 @@ export const usePollDatasetStatus = (processingId) => {
 
     // TEMP: until the fetchAsync is refactored
     if (response?.ok !== false) {
-      setLatestPollDatasetState(response)
+      setPolledDatasetState(response)
     }
 
     if (!response.is_processing) {
@@ -54,7 +54,7 @@ export const usePollDatasetStatus = (processingId) => {
 
   return {
     isProcessingDataset,
-    latestPollDatasetState,
+    polledDatasetState,
     getProcessingDataset
   }
 }
