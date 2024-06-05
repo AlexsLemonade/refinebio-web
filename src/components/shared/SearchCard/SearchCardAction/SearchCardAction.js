@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useEffect } from 'react'
 import { Box } from 'grommet'
 import { usePageRendered } from 'hooks/usePageRendered'
 import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
@@ -16,7 +16,7 @@ export const SearchCardAction = ({
   technology
 }) => {
   const pageRendered = usePageRendered()
-  const { getProcessingDataset } = usePollDatasetStatus(accessionCode)
+  const { datasetAccessions, pollDatasetAccession } = usePollDatasetStatus()
   const { setResponsive } = useResponsive()
   const hasMultipleOrganisms = organismNames.length > 1
   const rnaSeq = 'RNA-SEQ'
@@ -24,7 +24,12 @@ export const SearchCardAction = ({
     typeof technology === 'string'
       ? technology === rnaSeq
       : technology.find((x) => x === rnaSeq)
-  const processingExperiment = getProcessingDataset(accessionCode)
+  const processingExperiment = datasetAccessions[accessionCode]
+
+  useEffect(() => {
+    // sets a processing datasets for polling
+    pollDatasetAccession(accessionCode)
+  }, [accessionCode, datasetAccessions])
 
   if (!pageRendered) return null
 
@@ -35,7 +40,7 @@ export const SearchCardAction = ({
     <>
       {processingExperiment && (
         <Box margin={{ bottom: 'small' }}>
-          <ProcessingDatasetPill datasetId={processingExperiment.datasetId} />
+          <ProcessingDatasetPill datasetId={processingExperiment} />
         </Box>
       )}
 

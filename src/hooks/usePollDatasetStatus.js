@@ -2,8 +2,13 @@ import { useEffect, useState, useRef } from 'react'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 
 export const usePollDatasetStatus = () => {
-  const { processingDatasets, setProcessingDatasets, getDataset } =
-    useDatasetManager()
+  const {
+    datasetAccessions,
+    setDatasetAccessions,
+    processingDatasets,
+    setProcessingDatasets,
+    getDataset
+  } = useDatasetManager()
   const [polledDatasetId, setPolledDatasetId] = useState(null)
   const [polledDatasetState, setPolledDatasetState] = useState(false)
   const timerRef = useRef(null)
@@ -21,13 +26,35 @@ export const usePollDatasetStatus = () => {
     return () => clearInterval(timerRef.current)
   }, [polledDatasetId])
 
-  // sets the mached dataset ID in processingDatasets
+  // if one-off, sets the matched accession code's dataset ID to polledDatasetId
+  const pollDatasetAccession = (accessionCode) => {
+    if (Object.hasOwn(datasetAccessions, accessionCode)) {
+      pollDatasetId(datasetAccessions[accessionCode])
+    }
+  }
+
+  // sets the mached dataset ID to polledDatasetId
   const pollDatasetId = (datasetId) => {
     if (processingDatasets.includes(datasetId)) setPolledDatasetId(datasetId)
   }
 
-  const removeProcessingDataset = (datasetId) => {
+  // removes the processing dataset ID when finish processing
+  const removeProcessingDataset = (datasetId = polledDatasetId) => {
+    // if one-off, removes the property from datasetAccessions
+    const keyToFRemove = Object.keys(datasetAccessions).find(
+      (k) => datasetAccessions[k] === datasetId
+    )
+    if (keyToFRemove) {
+      setDatasetAccessions((prev) => {
+        const temp = { ...prev }
+        delete temp[keyToFRemove]
+
+        return temp
+      })
+    }
+
     setProcessingDatasets((prev) => prev.filter((id) => id !== datasetId))
+    setPolledDatasetId(null) // removes polledDatasetId to stop the running timer
   }
 
   const refreshProcessingDataset = async () => {
@@ -38,17 +65,17 @@ export const usePollDatasetStatus = () => {
     }
 
     if (!response.is_processing) {
-      // remove polledDatasetId
-      removeProcessingDataset(polledDatasetId)
-      setPolledDatasetId(null)
+      removeProcessingDataset()
     }
 
     return response
   }
 
   return {
+    datasetAccessions,
     isProcessingDataset,
     polledDatasetState,
+    pollDatasetAccession,
     pollDatasetId
   }
 }

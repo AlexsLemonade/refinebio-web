@@ -47,7 +47,7 @@ export const Dataset = ({ query }) => {
 
   useEffect(() => {
     getSelectedDataset(idFromQuery)
-    pollDatasetId(idFromQuery)
+    pollDatasetId(idFromQuery) // sets a processing datasets for polling
   }, [query])
 
   useEffect(() => {
