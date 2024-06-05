@@ -31,17 +31,15 @@ export const useDatasetManager = () => {
   const [loading, setLoading] = useState(false)
 
   /* Dataset */
-  // dataset download: adds a dataset id to processingDatasets[]
-  // one -off download: adds an accession code and a dataset id to datasetAccessions
   const addDatasetToProcessingDatasets = (id, accessionCode) => {
+    // if one-off, adds an accession code and a dataset id to datasetAccessions
     if (accessionCode) {
       setDatasetAccessions({ ...datasetAccessions, [accessionCode]: id })
     }
-
+    // adds a dataset id to processingDatasets[] for polling
     setProcessingDatasets((prev) => {
       if (prev.includes(id)) return prev
-
-      return [...prev, datasetId]
+      return [...new Set([...prev, id])]
     })
   }
 
@@ -305,6 +303,8 @@ export const useDatasetManager = () => {
     email,
     error,
     setError,
+    datasetAccessions,
+    setDatasetAccessions,
     dataset,
     datasetId,
     loading,
