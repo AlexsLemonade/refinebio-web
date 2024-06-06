@@ -17,9 +17,15 @@ export const usePollDatasetStatus = () => {
         refreshProcessingDataset()
       }, 1000 * 60)
     }
-
-    return () => clearInterval(timerRef.current)
   }, [polledDatasetId])
+
+  // stops the running timer when finished processing
+  useEffect(() => {
+    if (polledDatasetId && !isProcessingDataset) {
+      setPolledDatasetId(null)
+      clearInterval(timerRef.current)
+    }
+  }, [isProcessingDataset])
 
   // if one-off, sets the matched accession code's dataset ID to polledDatasetId
   const pollDatasetAccession = (accessionCode) => {
@@ -44,10 +50,7 @@ export const usePollDatasetStatus = () => {
       setPolledDatasetState(response)
     }
 
-    if (!response.is_processing) {
-      setIsProcessingDataset(false) // resets isProcessingDataset to hide the processing UI in one-off experiment
-      setPolledDatasetId(null) // removes polledDatasetId to stop the running timer
-    }
+    setIsProcessingDataset(response.is_processing)
 
     return response
   }
