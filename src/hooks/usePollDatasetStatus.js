@@ -2,17 +2,12 @@ import { useEffect, useState, useRef } from 'react'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 
 export const usePollDatasetStatus = () => {
-  const {
-    datasetAccessions,
-    setDatasetAccessions,
-    processingDatasets,
-    setProcessingDatasets,
-    getDataset
-  } = useDatasetManager()
+  const { datasetAccessions, processingDatasets, getDataset } =
+    useDatasetManager()
   const [polledDatasetId, setPolledDatasetId] = useState(null)
   const [polledDatasetState, setPolledDatasetState] = useState(false)
   const timerRef = useRef(null)
-  const isProcessingDataset = polledDatasetState?.is_processing
+  const [isProcessingDataset, setIsProcessingDataset] = useState(false)
 
   // polls the latest state of the processing dataset per minute
   // (the processing usually takes a few minutes)
@@ -35,26 +30,11 @@ export const usePollDatasetStatus = () => {
 
   // sets the mached dataset ID to polledDatasetId
   const pollDatasetId = (datasetId) => {
-    if (processingDatasets.includes(datasetId)) setPolledDatasetId(datasetId)
-  }
-
-  // removes the processing dataset ID when finish processing
-  const removeProcessingDataset = (datasetId = polledDatasetId) => {
-    // if one-off, removes the property from datasetAccessions
-    const keyToFRemove = Object.keys(datasetAccessions).find(
-      (k) => datasetAccessions[k] === datasetId
-    )
-    if (keyToFRemove) {
-      setDatasetAccessions((prev) => {
-        const temp = { ...prev }
-        delete temp[keyToFRemove]
-
-        return temp
-      })
+    const isProcessing = processingDatasets.includes(datasetId)
+    if (isProcessing) {
+      setPolledDatasetId(datasetId)
     }
-
-    setProcessingDatasets((prev) => prev.filter((id) => id !== datasetId))
-    setPolledDatasetId(null) // removes polledDatasetId to stop the running timer
+    setIsProcessingDataset(isProcessing)
   }
 
   const refreshProcessingDataset = async () => {
@@ -65,7 +45,8 @@ export const usePollDatasetStatus = () => {
     }
 
     if (!response.is_processing) {
-      removeProcessingDataset()
+      setIsProcessingDataset(false) // resets isProcessingDataset to hide the processing UI in one-off experiment
+      setPolledDatasetId(null) // removes polledDatasetId to stop the running timer
     }
 
     return response

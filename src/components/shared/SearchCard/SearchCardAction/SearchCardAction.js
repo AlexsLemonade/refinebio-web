@@ -16,7 +16,8 @@ export const SearchCardAction = ({
   technology
 }) => {
   const pageRendered = usePageRendered()
-  const { datasetAccessions, pollDatasetAccession } = usePollDatasetStatus()
+  const { datasetAccessions, isProcessingDataset, pollDatasetAccession } =
+    usePollDatasetStatus()
   const { setResponsive } = useResponsive()
   const hasMultipleOrganisms = organismNames.length > 1
   const rnaSeq = 'RNA-SEQ'
@@ -24,12 +25,11 @@ export const SearchCardAction = ({
     typeof technology === 'string'
       ? technology === rnaSeq
       : technology.find((x) => x === rnaSeq)
-  const processingExperiment = datasetAccessions[accessionCode]
 
   useEffect(() => {
-    // sets a processing datasets for polling
+    // watches datasetAccessions change
     pollDatasetAccession(accessionCode)
-  }, [accessionCode, datasetAccessions])
+  }, [datasetAccessions])
 
   if (!pageRendered) return null
 
@@ -38,9 +38,9 @@ export const SearchCardAction = ({
 
   return (
     <>
-      {processingExperiment && (
+      {isProcessingDataset && (
         <Box margin={{ bottom: 'small' }}>
-          <ProcessingDatasetPill datasetId={processingExperiment} />
+          <ProcessingDatasetPill accessionCode={accessionCode} />
         </Box>
       )}
 
@@ -51,13 +51,12 @@ export const SearchCardAction = ({
         primary
       />
 
-      {!processingExperiment && (
+      {!isProcessingDataset && (
         <Box margin={{ top: 'small' }} width={setResponsive('100%', 'auto')}>
           <DownloadNowButton
             accessionCode={accessionCode}
             hasMultipleOrganisms={hasMultipleOrganisms}
             hasRnaSeq={hasRnaSeq}
-            processingExperiment={processingExperiment}
           />
         </Box>
       )}

@@ -2,13 +2,11 @@ import { useModal } from 'hooks/useModal'
 import { Button } from 'components/shared/Button'
 import { Modal } from 'components/shared/Modal'
 import { DownloadNowModal } from './DownloadNowModal'
-import { ProcessingDatasetPillModal } from './ProcessingDatasetPillModal'
 
 export const DownloadNowButton = ({
   accessionCode,
   hasMultipleOrganisms,
-  hasRnaSeq,
-  processingExperiment
+  hasRnaSeq
 }) => {
   const { openModal } = useModal()
   const id = `download-now-${accessionCode}`
@@ -27,20 +25,12 @@ export const DownloadNowButton = ({
       fullHeight={false}
       width="600px"
     >
-      {processingExperiment ? (
-        <ProcessingDatasetPillModal
-          datasetId={processingExperiment.datasetId}
-          id={id}
-        />
-      ) : (
-        <DownloadNowModal
-          accessionCode={accessionCode}
-          hasMultipleOrganisms={hasMultipleOrganisms}
-          hasRnaSeq={hasRnaSeq}
-          id={id}
-          processingExperiment={processingExperiment}
-        />
-      )}
+      <DownloadNowModal
+        accessionCode={accessionCode}
+        hasMultipleOrganisms={hasMultipleOrganisms}
+        hasRnaSeq={hasRnaSeq}
+        id={id}
+      />
     </Modal>
   )
 }
