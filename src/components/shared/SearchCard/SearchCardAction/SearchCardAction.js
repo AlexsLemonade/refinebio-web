@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { memo, useEffect } from 'react'
 import { Box } from 'grommet'
 import { usePageRendered } from 'hooks/usePageRendered'
@@ -30,7 +29,7 @@ export const SearchCardAction = ({
   useEffect(() => {
     // watches datasetAccessions change
     pollDatasetAccession(accessionCode)
-  }, []) // without watching the localStorage state, datasetAccessions
+  }, [datasetAccessions])
 
   if (!pageRendered) return null
 
