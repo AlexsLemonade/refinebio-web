@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { memo, useEffect } from 'react'
 import { Box } from 'grommet'
 import { usePageRendered } from 'hooks/usePageRendered'
@@ -26,10 +27,13 @@ export const SearchCardAction = ({
       ? technology === rnaSeq
       : technology.find((x) => x === rnaSeq)
 
-  useEffect(() => {
-    // watches datasetAccessions change
-    pollDatasetAccession(accessionCode)
-  }, [datasetAccessions])
+  // invokes pollDatasetAccession without useEffect
+  pollDatasetAccession(accessionCode)
+
+  // useEffect(() => {
+  //   // watches datasetAccessions change
+  //   pollDatasetAccession(accessionCode)
+  // }, [datasetAccessions])
 
   if (!pageRendered) return null
 
