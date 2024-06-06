@@ -27,13 +27,10 @@ export const SearchCardAction = ({
       ? technology === rnaSeq
       : technology.find((x) => x === rnaSeq)
 
-  // invokes pollDatasetAccession without useEffect
-  pollDatasetAccession(accessionCode)
-
-  // useEffect(() => {
-  //   // watches datasetAccessions change
-  //   pollDatasetAccession(accessionCode)
-  // }, [datasetAccessions])
+  useEffect(() => {
+    // watches datasetAccessions change
+    pollDatasetAccession(accessionCode)
+  }, []) // without watching the localStorage state, datasetAccessions
 
   if (!pageRendered) return null
 
