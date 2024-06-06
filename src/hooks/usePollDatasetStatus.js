@@ -22,7 +22,6 @@ export const usePollDatasetStatus = () => {
   // stops the running timer when finished processing
   useEffect(() => {
     if (polledDatasetId && !isProcessingDataset) {
-      setPolledDatasetId(null)
       clearInterval(timerRef.current)
     }
   }, [isProcessingDataset])
