@@ -31,7 +31,7 @@ export const useDatasetManager = () => {
   const [loading, setLoading] = useState(false)
 
   /* Dataset */
-  const addDatasetToProcessingDatasets = (id, accessionCode) => {
+  const addToProcessingDatasets = (id, accessionCode) => {
     // if one-off, adds an accession code and a dataset id to datasetAccessions
     if (accessionCode) {
       setDatasetAccessions({ ...datasetAccessions, [accessionCode]: id })
@@ -39,7 +39,7 @@ export const useDatasetManager = () => {
     // adds a dataset id to processingDatasets[] for polling
     setProcessingDatasets((prev) => {
       if (prev.includes(id)) return prev
-      return [...new Set([...prev, id])]
+      return [...prev, id]
     })
   }
 
@@ -125,7 +125,7 @@ export const useDatasetManager = () => {
     const datasetIdToUse = isCurrentDatasetId ? id : await createDataset()
     const response = await updateDataset(datasetIdToUse, params)
     // adds this processing dataset to processingDatasets
-    addDatasetToProcessingDatasets(datasetIdToUse, accessionCode)
+    addToProcessingDatasets(datasetIdToUse, accessionCode)
     // saves the user's newly entered email or replace the existing one
     setEmail(emailAddress)
     // deletes the locally saved dataset data once it has started processing (no longer mutable)
