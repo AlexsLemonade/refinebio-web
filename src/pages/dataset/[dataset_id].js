@@ -51,7 +51,10 @@ export const Dataset = ({ query }) => {
   }, [query])
 
   useEffect(() => {
-    if (polledDatasetState && !isProcessingDataset) {
+    // swaps selectedDataset to the last fetched polledDatasetState
+    // (only if the dataset ID in URL was being processed) to update
+    // DatasetPageHeader
+    if (!isProcessingDataset && polledDatasetState) {
       setSelectedDataset(polledDatasetState)
     }
   }, [isProcessingDataset, polledDatasetState])

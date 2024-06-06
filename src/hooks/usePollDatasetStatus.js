@@ -5,7 +5,7 @@ export const usePollDatasetStatus = () => {
   const { datasetAccessions, processingDatasets, getDataset } =
     useDatasetManager()
   const [polledDatasetId, setPolledDatasetId] = useState(null)
-  const [polledDatasetState, setPolledDatasetState] = useState(false)
+  const [polledDatasetState, setPolledDatasetState] = useState(null)
   const timerRef = useRef(null)
   const [isProcessingDataset, setIsProcessingDataset] = useState(false)
 
