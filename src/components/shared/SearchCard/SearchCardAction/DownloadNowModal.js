@@ -11,27 +11,15 @@ import { TransformationOptions } from 'components/Download/DownloadOptionsForm/T
 import { EmailTextInput } from 'components/Download/StartProcessingForm/EmailTextInput'
 import { ReceiveUpdatesCheckBox } from 'components/Download/StartProcessingForm/ReceiveUpdatesCheckBox'
 import { TermsOfUseCheckBox } from 'components/Download/StartProcessingForm/TermsOfUseCheckBox'
-import { ProcessingDatasetPillModal } from './ProcessingDatasetPillModal'
 
 export const DownloadNowModal = ({
   accessionCode,
   hasMultipleOrganisms,
-  hasRnaSeq,
-  id,
-  processingExperiment
+  hasRnaSeq
 }) => {
   const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const { StartProcessingFormSchema } = validationSchemas
-
-  if (processingExperiment) {
-    return (
-      <ProcessingDatasetPillModal
-        datasetId={processingExperiment.datasetId}
-        id={id}
-      />
-    )
-  }
 
   return (
     <Box pad={{ bottom: 'small', horizontal: 'large' }}>
