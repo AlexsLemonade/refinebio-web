@@ -108,6 +108,7 @@ export const useDatasetManager = () => {
     if (!id && !datasetId) return null
 
     setLoading(true)
+
     const headers =
       token || tokenId
         ? {
@@ -115,6 +116,7 @@ export const useDatasetManager = () => {
           }
         : {}
     const response = await api.dataset.get(id || datasetId, headers)
+    const { is_processing: isProcessing, success } = response
     const formattedResponse = {
       ...response,
       experiments: formatExperiments(response.experiments)
@@ -125,7 +127,7 @@ export const useDatasetManager = () => {
     }
 
     // removes this dataset ID from processingDatasets[] if it exists
-    if (!response.is_processing) {
+    if (!isProcessing && success !== null) {
       removeFromProcessingDatasets(response.id)
     }
 
