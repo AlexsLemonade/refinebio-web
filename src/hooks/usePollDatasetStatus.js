@@ -13,6 +13,7 @@ export const usePollDatasetStatus = () => {
   // (the processing usually takes a few minutes)
   useEffect(() => {
     if (polledDatasetId) {
+      clearInterval(timerRef.current) // clears the previous interval if any
       timerRef.current = setInterval(() => {
         refreshProcessingDataset()
       }, 1000 * 60)
