@@ -50,15 +50,15 @@ export const useDatasetManager = () => {
 
   // removes the processing dataset ID when finish processing
   const removeFromProcessingDatasets = (id) => {
-    // if one-off, removes the property from datasetAccessions
+    // if one-off, returns the matched accession code by the given dataset ID
     const accesionCode = Object.keys(datasetAccessions).find(
       (k) => datasetAccessions[k] === id
     )
+    // if found, removes it from datasetAccessions
     if (accesionCode) {
       setDatasetAccessions((prev) => {
         const temp = { ...prev }
         delete temp[accesionCode]
-
         return temp
       })
     }
