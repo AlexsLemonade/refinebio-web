@@ -152,10 +152,10 @@ export const useDatasetManager = () => {
       token_id: tokenId
     }
 
-    const datasetIdToUse = isCurrentDatasetId ? id : await createDataset()
-    const response = await updateDataset(datasetIdToUse, params)
+    const processingDatasetId = isCurrentDatasetId ? id : await createDataset()
+    const response = await updateDataset(processingDatasetId, params)
     // adds this dataset ID to processingDatasets[] for polling
-    addToProcessingDatasets(datasetIdToUse, accessionCode)
+    addToProcessingDatasets(processingDatasetId, accessionCode)
     // saves the user's newly entered email or replace the existing one
     setEmail(emailAddress)
     // deletes the locally saved dataset data once it has started processing (no longer mutable)
