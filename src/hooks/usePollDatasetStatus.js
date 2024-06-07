@@ -35,6 +35,8 @@ export const usePollDatasetStatus = () => {
 
   // sets the mached dataset ID to polledDatasetId
   const pollDatasetId = (datasetId) => {
+    if (datasetId === polledDatasetId) return
+
     const isProcessing = processingDatasets.includes(datasetId)
     if (isProcessing) {
       setPolledDatasetId(datasetId)

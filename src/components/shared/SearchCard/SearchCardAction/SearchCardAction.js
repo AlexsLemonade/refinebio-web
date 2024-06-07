@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react'
+import { memo } from 'react'
 import { Box } from 'grommet'
 import { usePageRendered } from 'hooks/usePageRendered'
 import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
@@ -16,8 +16,8 @@ export const SearchCardAction = ({
   technology
 }) => {
   const pageRendered = usePageRendered()
-  const { datasetAccessions, isProcessingDataset, pollDatasetAccession } =
-    usePollDatasetStatus()
+  const { isProcessingDataset, pollDatasetAccession } = usePollDatasetStatus()
+  pollDatasetAccession(accessionCode) // checks this accession code for polling
   const { setResponsive } = useResponsive()
   const hasMultipleOrganisms = organismNames.length > 1
   const rnaSeq = 'RNA-SEQ'
@@ -25,11 +25,6 @@ export const SearchCardAction = ({
     typeof technology === 'string'
       ? technology === rnaSeq
       : technology.find((x) => x === rnaSeq)
-
-  useEffect(() => {
-    // watches datasetAccessions change
-    pollDatasetAccession(accessionCode)
-  }, [datasetAccessions])
 
   if (!pageRendered) return null
 
