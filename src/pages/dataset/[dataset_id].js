@@ -26,16 +26,16 @@ export const getServerSideProps = ({ query }) => {
 
 // TODO: create a new issue for the error handling
 export const Dataset = ({ query }) => {
+  const pageRendered = usePageRendered()
+  const { setResponsive } = useResponsive()
   const { dataset_id: idFromQuery, start } = query
   const { dataset, datasetId, loading, getDataset, regeneratedDataset } =
     useDatasetManager()
-  const pageRendered = usePageRendered()
   const { isProcessingDataset, polledDatasetState, pollDatasetId } =
     usePollDatasetStatus()
-  const { setResponsive } = useResponsive()
-  const [selectedDataset, setSelectedDataset] = useState({})
-  const isProcessed = selectedDataset?.is_processed && selectedDataset?.success
-  const isUnprocessedDataset =
+  const [selectedDataset, setSelectedDataset] = useState({}) // stores the dataset currently displayed in the page
+  const isProcessed = selectedDataset?.is_processed && selectedDataset?.success // sets visibility of the download options in Dwonload Files Summary
+  const isUnprocessedDataset = // sets visibility of the Download Dataset button
     !selectedDataset?.is_processing &&
     !selectedDataset?.is_processed &&
     selectedDataset?.success !== false
