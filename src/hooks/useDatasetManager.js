@@ -12,12 +12,16 @@ export const useDatasetManager = () => {
   const {
     dataset,
     setDataset,
+    datasetAccessions,
+    setDatasetAccessions,
     datasetId,
     setDatasetId,
     downloadOptions,
     setDownloadOptions,
     email,
     setEmail,
+    processingDatasets,
+    setProcessingDatasets,
     regeneratedDataset,
     setRegeneratedDataset,
     token
@@ -26,7 +30,43 @@ export const useDatasetManager = () => {
   const [error, setError] = useState({})
   const [loading, setLoading] = useState(false)
 
-  /* Dataset */
+  /* --- Dataset Methods --- */
+  /* Processing Dataset */
+  const addToProcessingDatasets = (id, accessionCode) => {
+    // if one-off, adds an accession code and a dataset ID to datasetAccessions
+    if (accessionCode) {
+      setDatasetAccessions({ ...datasetAccessions, [accessionCode]: id })
+    }
+    // adds a dataset ID to processingDatasets[] for polling
+    setProcessingDatasets((prev) => {
+      if (prev.includes(id)) return prev
+      return [...prev, id]
+    })
+  }
+
+  // returns a dataset ID of the processing experiment's accession code
+  const getProcessingDatasetByAccession = (accessionCode) =>
+    datasetAccessions[accessionCode]
+
+  // removes the processing dataset ID when finish processing
+  const removeFromProcessingDatasets = (id) => {
+    // if one-off, returns the matched accession code by the given dataset ID
+    const accesionCode = Object.keys(datasetAccessions).find(
+      (k) => datasetAccessions[k] === id
+    )
+    // if found, removes it from datasetAccessions
+    if (accesionCode) {
+      setDatasetAccessions((prev) => {
+        const temp = { ...prev }
+        delete temp[accesionCode]
+        return temp
+      })
+    }
+
+    setProcessingDatasets((prev) => prev.filter((i) => i !== id))
+  }
+
+  /* Common */
   const clearDataset = async (id = '') => {
     setLoading(true)
     const params = { data: {} }
@@ -40,7 +80,7 @@ export const useDatasetManager = () => {
     const params = { data: {}, ...(email ? { email_address: email } : {}) }
     const response = await api.dataset.create(params)
 
-    // stores the newly created dataset Id to localStorge
+    // stores the newly created dataset ID to localStorge
     if (setCurrentDatasetId) {
       setDatasetId(response.id)
     }
@@ -67,6 +107,7 @@ export const useDatasetManager = () => {
     if (!id && !datasetId) return null
 
     setLoading(true)
+
     const headers =
       token || tokenId
         ? {
@@ -82,6 +123,7 @@ export const useDatasetManager = () => {
       })
     }
 
+    const { is_processing: isProcessing, success } = response
     const formattedResponse = {
       ...response,
       experiments: formatExperiments(response.experiments)
@@ -91,12 +133,22 @@ export const useDatasetManager = () => {
       setDataset(formattedResponse)
     }
 
+    // removes this dataset ID from processingDatasets[] if it exists
+    if (!isProcessing && success !== null) {
+      removeFromProcessingDatasets(response.id)
+    }
+
     setLoading(false)
 
     return formattedResponse
   }
 
-  const startProcessingDataset = async (options, id = null) => {
+  // takes download options, and optional dataset ID and one-off experiment accession code
+  const startProcessingDataset = async (
+    options,
+    id = null,
+    accessionCode = null
+  ) => {
     const isCurrentDatasetId = id && id === datasetId
     // validates the existing token or create a new token if none
     const tokenId = validateToken() ? token : await resetToken()
@@ -108,10 +160,11 @@ export const useDatasetManager = () => {
       start: true,
       token_id: tokenId
     }
-    const response = await updateDataset(
-      isCurrentDatasetId ? id : await createDataset(),
-      params
-    )
+
+    const processingDatasetId = isCurrentDatasetId ? id : await createDataset()
+    const response = await updateDataset(processingDatasetId, params)
+    // adds this dataset ID to processingDatasets[] for polling
+    addToProcessingDatasets(processingDatasetId, accessionCode)
     // saves the user's newly entered email or replace the existing one
     setEmail(emailAddress)
     // deletes the locally saved dataset data once it has started processing (no longer mutable)
@@ -137,7 +190,7 @@ export const useDatasetManager = () => {
     return response
   }
 
-  /* Download Options */
+  /* --- Download Options Methods --- */
   const getDownloadOptions = (options) => {
     const {
       dataset: { downloadOptionsKeys }
@@ -173,6 +226,7 @@ export const useDatasetManager = () => {
     setDownloadOptions(newOptions)
   }
 
+  /* --- Experiment Methods --- */
   /* Experiment */
   const getTotalExperiments = (data) =>
     isEmptyObject(data) ? 0 : Object.keys(data).length
@@ -288,19 +342,29 @@ export const useDatasetManager = () => {
   return {
     email,
     error,
+    setError,
+    datasetAccessions,
+    setDatasetAccessions,
     dataset,
     datasetId,
     loading,
+    processingDatasets,
+    setProcessingDatasets,
     regeneratedDataset,
     token,
+    // Processing Dataset
+    getProcessingDatasetByAccession,
+    // Common
     clearDataset,
     createDataset,
     downloadDataset,
     getDataset,
     startProcessingDataset,
     updateDataset,
+    // Download options
     getDownloadOptions,
     updateDownloadOptions,
+    // Experiment
     getTotalExperiments,
     removeExperiment,
     addSamples,

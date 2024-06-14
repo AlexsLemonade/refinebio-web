@@ -26,6 +26,8 @@ export const getServerSideProps = ({ query }) => {
 }
 
 export const Dataset = ({ query }) => {
+  const pageRendered = usePageRendered()
+  const { setResponsive } = useResponsive()
   const { dataset_id: idFromQuery, start } = query
   const {
     dataset,
@@ -35,36 +37,33 @@ export const Dataset = ({ query }) => {
     getDataset,
     regeneratedDataset
   } = useDatasetManager()
-  const pageRendered = usePageRendered()
-  const { isProcessingDataset, latestDatasetState, addProcessingResource } =
-    usePollDatasetStatus(idFromQuery)
-  const { setResponsive } = useResponsive()
-  const [selectedDataset, setSelectedDataset] = useState({})
-  const isProcessed = selectedDataset?.is_processed && selectedDataset?.success
-  const isUnprocessedDataset =
+  const { isProcessingDataset, polledDatasetState, pollDatasetId } =
+    usePollDatasetStatus()
+  const [selectedDataset, setSelectedDataset] = useState({}) // stores the dataset currently displayed on the page
+  const isProcessed = selectedDataset?.is_processed && selectedDataset?.success // sets visibility of the download options in Dwonload Files Summary
+  const isUnprocessedDataset = // sets visibility of the Download Dataset button
     !selectedDataset?.is_processing &&
     !selectedDataset?.is_processed &&
     selectedDataset?.success !== false
 
   const getSelectedDataset = async (id) => {
     const response = await getDataset(id)
-
-    if (response.is_processing) {
-      addProcessingResource(idFromQuery)
-    }
-
     setSelectedDataset(response)
   }
 
   useEffect(() => {
     getSelectedDataset(idFromQuery)
+    pollDatasetId(idFromQuery) // sets a processing datasets for polling
   }, [query])
 
   useEffect(() => {
-    if (latestDatasetState && !isProcessingDataset) {
-      setSelectedDataset(latestDatasetState)
+    // swaps selectedDataset to the last fetched polledDatasetState
+    // (only if the dataset ID in URL was being processed) to update
+    // DatasetPageHeader
+    if (!isProcessingDataset && polledDatasetState) {
+      setSelectedDataset(polledDatasetState)
     }
-  }, [isProcessingDataset, latestDatasetState])
+  }, [isProcessingDataset, polledDatasetState])
 
   if (!pageRendered) return null
 
