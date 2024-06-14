@@ -29,6 +29,7 @@ export const Notification = () => {
   } = useRouter()
   const { setResponsive } = useResponsive()
   const defaultStatus = 'info'
+  const { color, icon } = types[status || defaultStatus]
 
   if (!message) return null
 
@@ -37,7 +38,7 @@ export const Notification = () => {
   }
 
   return (
-    <Box background={types[status || defaultStatus].color}>
+    <Box background={color}>
       <FixedContainer
         align="center"
         direction="row"
@@ -51,11 +52,7 @@ export const Notification = () => {
           justify="center"
           width="100%"
         >
-          <Icon
-            name={types[status || defaultStatus].icon}
-            color="white"
-            size="20px"
-          />
+          <Icon name={icon} color="white" size="20px" />
           <Text
             size={setResponsive('small', 'medium')}
             color="white"
