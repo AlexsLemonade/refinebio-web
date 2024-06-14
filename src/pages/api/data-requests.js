@@ -13,7 +13,7 @@ export default async (req, res) => {
   This is a user's message if any.
   
   Refine.bio | User's IP address | Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:120.0) Gecko/20100101
-  Firefox/120.0 | This message was sent because the request to GitHub and HubSpot failed
+  Firefox/120.0 | This message was sent because the request to GitHub and HubSpot failed | Jun 14th, 2024
 
   For 'search`:
   Missing data for search term 'E-MEXP-3405' // Hyperlinked heading (e.g., https://www.refine.bio/search?search=E-MEXP-3405)
