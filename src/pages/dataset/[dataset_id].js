@@ -29,14 +29,8 @@ export const Dataset = ({ query }) => {
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
   const { dataset_id: idFromQuery, start } = query
-  const {
-    dataset,
-    datasetId,
-    error: { hasError: hasPageError, statusCode },
-    loading,
-    getDataset,
-    regeneratedDataset
-  } = useDatasetManager()
+  const { dataset, datasetId, error, loading, getDataset, regeneratedDataset } =
+    useDatasetManager()
   const { isProcessingDataset, polledDatasetState, pollDatasetId } =
     usePollDatasetStatus()
   const [selectedDataset, setSelectedDataset] = useState({}) // stores the dataset currently displayed on the page
@@ -77,10 +71,10 @@ export const Dataset = ({ query }) => {
     )
   }
 
-  if (hasPageError) {
+  if (error) {
     return (
       <Error
-        statusCode={statusCode}
+        statusCode={error}
         align="center"
         direction="column"
         marginTop="none"
