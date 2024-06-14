@@ -1,4 +1,4 @@
-import { submitSlackDataRequest } from 'api/data-requests/slack'
+import { submitSlackDataRequest } from 'data-requests/slack'
 
 export default async (req, res) => {
   // requestValues should include form values, query/accessionCode, and the request type ('experiment' or 'search')
