@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-unfetch'
-// for the reqest data form for search results and experiments with non-downloadable samples
+// for the request data form for search results and experiments with non-downloadable samples
 export default async (requestBody) => {
   const body = requestBody
   body.requestValues.navigatorUserAgent = navigator.userAgent
