@@ -27,7 +27,7 @@ export const useDatasetManager = () => {
     token
   } = useContext(DatasetManagerContext)
   const { createToken, resetToken, validateToken } = useToken()
-  const [error, setError] = useState(null) // stores an error status code, otherwise null
+  const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
 
   /* --- Dataset Methods --- */
@@ -120,11 +120,7 @@ export const useDatasetManager = () => {
     // TODO: add a check (ok && error) to default the error state
     // related created PR https://github.com/AlexsLemonade/refinebio-web/pull/337
     if (error !== statusCode) {
-      if (ok === false) {
-        setError(statusCode)
-      } else {
-        setError(null)
-      }
+      setError(ok ? null : statusCode)
     }
 
     const { is_processing: isProcessing, success } = response
