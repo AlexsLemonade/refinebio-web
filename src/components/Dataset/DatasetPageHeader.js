@@ -1,11 +1,11 @@
+/* eslint-disable no-nested-ternary */
 import moment from 'moment'
 import { Box, Heading } from 'grommet'
-import { useDatasetManager } from 'hooks/useDatasetManager'
-import { useResponsive } from 'hooks/useResponsive'
 import { usePageRendered } from 'hooks/usePageRendered'
+import { useResponsive } from 'hooks/useResponsive'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { DatasetProcessingError } from './DatasetProcessingError'
 import { DatasetProcessing } from './DatasetProcessing'
+import { DatasetProcessingError } from './DatasetProcessingError'
 import { DatasetReady } from './DatasetReady'
 import { DatasetRegenerate } from './DatasetRegenerate'
 
@@ -33,7 +33,6 @@ const Block = ({ children }) => {
 }
 
 export const DatasetPageHeader = ({ dataset }) => {
-  const { error } = useDatasetManager()
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
 
@@ -46,7 +45,7 @@ export const DatasetPageHeader = ({ dataset }) => {
   const isProcessing = dataset?.is_processing
   const isProcessingError = dataset?.success === false // 'success' may be null
 
-  if (isProcessingError || error) {
+  if (isProcessingError) {
     return (
       <Block>
         <DatasetProcessingError dataset={dataset} />

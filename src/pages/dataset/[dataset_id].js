@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Box } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
-import { useResponsive } from 'hooks/useResponsive'
 import { usePageRendered } from 'hooks/usePageRendered'
+import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
+import { useResponsive } from 'hooks/useResponsive'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { Spinner } from 'components/shared/Spinner'
@@ -25,26 +26,38 @@ export const getServerSideProps = ({ query }) => {
 
 // TODO: create a new issue for the error handling
 export const Dataset = ({ query }) => {
+  const pageRendered = usePageRendered()
+  const { setResponsive } = useResponsive()
   const { dataset_id: idFromQuery, start } = query
   const { dataset, datasetId, loading, getDataset, regeneratedDataset } =
     useDatasetManager()
-  const pageRendered = usePageRendered()
-  const { setResponsive } = useResponsive()
-  const [selectedDataset, setSelectedDataset] = useState({})
-  const isProcessed = selectedDataset.is_processed && selectedDataset.success
-  const isUnprocessedDataset =
-    !selectedDataset.is_processing &&
-    !selectedDataset.is_processed &&
-    selectedDataset.success !== false
+  const { isProcessingDataset, polledDatasetState, pollDatasetId } =
+    usePollDatasetStatus()
+  const [selectedDataset, setSelectedDataset] = useState({}) // stores the dataset currently displayed in the page
+  const isProcessed = selectedDataset?.is_processed && selectedDataset?.success // sets visibility of the download options in Dwonload Files Summary
+  const isUnprocessedDataset = // sets visibility of the Download Dataset button
+    !selectedDataset?.is_processing &&
+    !selectedDataset?.is_processed &&
+    selectedDataset?.success !== false
+
+  const getSelectedDataset = async (id) => {
+    const response = await getDataset(id)
+    setSelectedDataset(response)
+  }
 
   useEffect(() => {
-    const getSelectedDataset = async (id) => {
-      const response = await getDataset(id)
-      setSelectedDataset(response)
-    }
-
     getSelectedDataset(idFromQuery)
+    pollDatasetId(idFromQuery) // sets a processing datasets for polling
   }, [query])
+
+  useEffect(() => {
+    // swaps selectedDataset to the last fetched polledDatasetState
+    // (only if the dataset ID in URL was being processed) to update
+    // DatasetPageHeader
+    if (!isProcessingDataset && polledDatasetState) {
+      setSelectedDataset(polledDatasetState)
+    }
+  }, [isProcessingDataset, polledDatasetState])
 
   if (!pageRendered) return null
 
