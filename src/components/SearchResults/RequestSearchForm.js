@@ -43,16 +43,24 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
           })
 
           // redirects to the homepage after submission
-          const isSuccess = response.status === 200
+          const messageTypes = {
+            success: {
+              message: 'Request for Experiment Received!',
+              status: 'success'
+            },
+            error: {
+              message:
+                'There was a problem with requesting the experiment. Please try again later.',
+              status: 'error'
+            }
+          }
+          const { message, status } =
+            messageTypes[response.status === 200 ? 'success' : 'error']
+
           push(
             {
               pathname,
-              query: {
-                message: isSuccess
-                  ? 'Request for Experiment Received!'
-                  : 'There was a problem with requesting the experiment. Please try again later',
-                status: isSuccess ? 'success' : 'error'
-              }
+              query: { message, status }
             },
             pathname
           )
