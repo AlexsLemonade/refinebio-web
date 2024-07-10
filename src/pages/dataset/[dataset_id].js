@@ -4,6 +4,7 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 import { usePageRendered } from 'hooks/usePageRendered'
 import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
+import { Error } from 'components/shared/Error'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { Spinner } from 'components/shared/Spinner'
@@ -24,16 +25,15 @@ export const getServerSideProps = ({ query }) => {
   return { props: { query } }
 }
 
-// TODO: create a new issue for the error handling
 export const Dataset = ({ query }) => {
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
   const { dataset_id: idFromQuery, start } = query
-  const { dataset, datasetId, loading, getDataset, regeneratedDataset } =
+  const { dataset, datasetId, error, loading, getDataset, regeneratedDataset } =
     useDatasetManager()
   const { isProcessingDataset, polledDatasetState, pollDatasetId } =
     usePollDatasetStatus()
-  const [selectedDataset, setSelectedDataset] = useState({}) // stores the dataset currently displayed in the page
+  const [selectedDataset, setSelectedDataset] = useState({}) // stores the dataset currently displayed on the page
   const isProcessed = selectedDataset?.is_processed && selectedDataset?.success // sets visibility of the download options in Dwonload Files Summary
   const isUnprocessedDataset = // sets visibility of the Download Dataset button
     !selectedDataset?.is_processing &&
@@ -68,6 +68,17 @@ export const Dataset = ({ query }) => {
       <FixedContainer>
         <StartProcessing dataset={selectedDataset} />
       </FixedContainer>
+    )
+  }
+
+  if (error) {
+    return (
+      <Error
+        statusCode={error}
+        align="center"
+        direction="column"
+        marginTop="none"
+      />
     )
   }
 
