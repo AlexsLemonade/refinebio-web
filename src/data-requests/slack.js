@@ -4,16 +4,12 @@ import { links } from 'config'
 import getIP from 'helpers/getIP'
 
 // posts to slack (configured in CCDL channel) and returns true if 200, otherwise false
-const postToSlack = async (params) => {
+const postToSlack = async (hookUrl, params) => {
   try {
-    const res = await fetch(
-      // TEMP: usng the webhook url for the ccdl test channel for dev
-      process.env.SLACK_HOOK_URL || process.env.NEXT_PUBLIC_SLACK_HOOK_URL,
-      {
-        method: 'POST',
-        body: JSON.stringify(params)
-      }
-    )
+    const res = await fetch(hookUrl, {
+      method: 'POST',
+      body: JSON.stringify(params)
+    })
     return res.ok
   } catch {
     return false
@@ -21,6 +17,7 @@ const postToSlack = async (params) => {
 }
 
 export const submitSlackDataRequest = async (
+  hookUrl,
   requestValues,
   requestType,
   failedRequest
@@ -57,7 +54,7 @@ export const submitSlackDataRequest = async (
     }
   }
 
-  return postToSlack({
+  return postToSlack(hookUrl, {
     attachments: [
       {
         color: '#2eb886',
