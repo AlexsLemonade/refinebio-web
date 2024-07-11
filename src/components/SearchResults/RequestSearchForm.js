@@ -14,7 +14,18 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
   const { push } = useRouter()
   const { viewport, setResponsive } = useResponsive()
   const { RequestDataFormSchema } = validationSchemas
-  const pathname = '/'
+  const redirectPathname = '/'
+  const responseNotifications = {
+    success: {
+      message: 'Request for Experiment Received!',
+      status: 'success'
+    },
+    error: {
+      message:
+        'There was a problem with requesting the experiment. Please try again later.',
+      status: 'error'
+    }
+  }
 
   return (
     <Box
@@ -41,30 +52,17 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
               ...values
             }
           })
-
           // redirects to the homepage after submission
-          const messageTypes = {
-            success: {
-              message: 'Request for Experiment Received!',
-              status: 'success'
-            },
-            error: {
-              message:
-                'There was a problem with requesting the experiment. Please try again later.',
-              status: 'error'
-            }
-          }
           const { message, status } =
-            messageTypes[response.status === 200 ? 'success' : 'error']
+            responseNotifications[response.status === 200 ? 'success' : 'error']
 
           push(
             {
-              pathname,
+              redirectPathname,
               query: { message, status }
             },
-            pathname
+            redirectPathname
           )
-
           setSubmitting(false)
         }}
       >
