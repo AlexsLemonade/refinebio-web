@@ -42,6 +42,7 @@ export default async (req, res) => {
       const response = { status: null }
       const githubSuccess = false // TEMP
       const hubspotSuccess = await submitHubspotDataRequest(
+        process.env.HUBSPOT_ACCESS_TOKEN,
         requestValues,
         requestValues.request_type
       )
