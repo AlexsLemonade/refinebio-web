@@ -1,23 +1,18 @@
 // Github data request
 import fetch from 'isomorphic-unfetch'
 import { links } from 'config'
-
-// (resource) https://docs.github.com/en/rest/issues/issues#create-an-issue
-const createIssue = async (params) => {
-  // TEMP: usng local env var for env vars (temporaily the request will send to a test repo)
+// (resources)
+// https://docs.github.com/en/rest/issues/issues#create-an-issue
+// https://github.com/settings/tokens
+const createIssue = async (token, params) => {
   // API endpoint for the repo to file an issue
-  const githubUrl =
-    process.env.GITHUB_EDNPOINT || process.env.NEXT_PUBLIC_GITHUB_ENDPOINT_TEST
-  // (resource) Personal access token https://github.com/settings/tokens
-  const githubToken =
-    process.env.GITHUB_TOKEN || process.env.NEXT_PUBLIC_GITHUB_TOKEN_TEST
-
+  const endpoint = process.env.GITHUB_EDNPOINT
   try {
-    await fetch(githubUrl, {
+    await fetch(endpoint, {
       method: 'POST',
       headers: {
         Accept: 'application/vnd.github.v3+json',
-        Authorization: `Bearer ${githubToken}`,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(params)
@@ -29,7 +24,11 @@ const createIssue = async (params) => {
   }
 }
 
-export const submitGithubDataRequest = async (requestValues, requestType) => {
+export const submitGithubDataRequest = async (
+  token,
+  requestValues,
+  requestType
+) => {
   const { accession_codes: accessionCodes, query } = requestValues
   const requestUrl = links.refinebio_data_request[requestType]
   const requestBody = {
@@ -37,7 +36,7 @@ export const submitGithubDataRequest = async (requestValues, requestType) => {
     search: `### Context\r\n\r\nA user requested ${accessionCodes} for the search term ["${query}"](${requestUrl}${query})`
   }
 
-  return createIssue({
+  return createIssue(token, {
     title: `Dataset Request ${accessionCodes}`,
     body: `${requestBody[requestType]}
           \r\n\r\n### Problem or idea\r\n\r\n(Add description of experiment/problem here)

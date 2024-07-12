@@ -45,6 +45,7 @@ export default async (req, res) => {
     case 'POST': {
       const response = { status: null }
       const githubSuccess = await submitGithubDataRequest(
+        process.env.GITHUB_TOKEN,
         requestValues,
         requestType
       )
