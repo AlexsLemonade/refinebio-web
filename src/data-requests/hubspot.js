@@ -1,10 +1,10 @@
 // Hubspot data request
 import fetch from 'isomorphic-unfetch'
-import { links } from 'config'
+import { requests } from 'config'
 
 // (resouces) HubSpot CRM API v3 https://developers.hubspot.com/docs/api/overview
 const request = async (action, token, email, properties = '') => {
-  const endpointContact = `${links.webhooks.hubspot}/objects/contacts`
+  const endpointContact = `${requests.hubspot_hook}/objects/contacts`
   const endpointContactByEmail = `${endpointContact}/${email}?idProperty=email&properties=dataset_request_details`
   const actions = {
     createContact: {

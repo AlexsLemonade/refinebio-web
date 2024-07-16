@@ -86,11 +86,7 @@ export const links = {
   r_docs_tximport:
     'https://www.rdocumentation.org/packages/tximport/versions/1.0.3/topics/tximport',
   salmon: 'https://combine-lab.github.io/salmon/',
-  salmon_quant: 'https://combine-lab.github.io/salmon/',
-  webhooks: {
-    // base urls for APIs
-    hubspot: 'https://api.hubapi.com/crm/v3/'
-  }
+  salmon_quant: 'https://combine-lab.github.io/salmon/'
 }
 
 export default links

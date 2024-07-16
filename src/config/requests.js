@@ -3,5 +3,6 @@ export const requests = {
     experiment: 'https://www.refine.bio/experiments/',
     search: 'https://www.refine.bio/search?search='
   },
-  email_logo: 'https://www.refine.bio/refinebio_email_logo.png'
+  email_logo: 'https://www.refine.bio/refinebio_email_logo.png',
+  hubspot_hook: 'https://api.hubapi.com/crm/v3/'
 }
