@@ -59,6 +59,7 @@ export default async (req, res) => {
             : 'HubSpot'
 
         const slackSuccess = await submitSlackDataRequest(
+          process.env.SLACK_HOOK_URL,
           requestValues,
           requestValues.request_type,
           failedRequest

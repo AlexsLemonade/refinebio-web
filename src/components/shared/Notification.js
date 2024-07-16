@@ -5,19 +5,18 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import { Icon } from 'components/shared/Icon'
 import { SrOnly } from 'components/shared/SrOnly'
 
-// supported types: 'error', 'info', 'success'
-const types = {
+const statusConfigs = {
   error: {
-    icon: 'Warning', // icon namne
-    color: 'error' // icon color
+    iconName: 'Warning',
+    background: 'error'
   },
   info: {
-    icon: 'Info',
-    color: 'info'
+    iconName: 'Info',
+    background: 'info'
   },
   success: {
-    icon: 'Success',
-    color: 'success'
+    iconName: 'Success',
+    background: 'success'
   }
 }
 
@@ -29,7 +28,7 @@ export const Notification = () => {
   } = useRouter()
   const { setResponsive } = useResponsive()
   const defaultStatus = 'info'
-  const { color, icon } = types[status || defaultStatus]
+  const { background, iconName } = statusConfigs[status || defaultStatus]
 
   if (!message) return null
 
@@ -38,7 +37,7 @@ export const Notification = () => {
   }
 
   return (
-    <Box background={color}>
+    <Box background={background}>
       <FixedContainer
         align="center"
         direction="row"
@@ -52,7 +51,7 @@ export const Notification = () => {
           justify="center"
           width="100%"
         >
-          <Icon name={icon} color="white" size="20px" />
+          <Icon name={iconName} color="white" size="20px" />
           <Text
             size={setResponsive('small', 'medium')}
             color="white"

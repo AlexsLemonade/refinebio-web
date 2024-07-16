@@ -16,7 +16,8 @@ export const SearchCardAction = ({
   technology
 }) => {
   const pageRendered = usePageRendered()
-  const { getProcessingResource } = usePollDatasetStatus(accessionCode)
+  const { isProcessingDataset, pollDatasetAccession } = usePollDatasetStatus()
+  pollDatasetAccession(accessionCode) // checks this accession code for polling
   const { setResponsive } = useResponsive()
   const hasMultipleOrganisms = organismNames.length > 1
   const rnaSeq = 'RNA-SEQ'
@@ -24,7 +25,6 @@ export const SearchCardAction = ({
     typeof technology === 'string'
       ? technology === rnaSeq
       : technology.find((x) => x === rnaSeq)
-  const processingExperiment = getProcessingResource(accessionCode)
 
   if (!pageRendered) return null
 
@@ -33,9 +33,9 @@ export const SearchCardAction = ({
 
   return (
     <>
-      {processingExperiment && (
+      {isProcessingDataset && (
         <Box margin={{ bottom: 'small' }}>
-          <ProcessingDatasetPill datasetId={processingExperiment.datasetId} />
+          <ProcessingDatasetPill accessionCode={accessionCode} />
         </Box>
       )}
 
@@ -46,7 +46,7 @@ export const SearchCardAction = ({
         primary
       />
 
-      {!processingExperiment && (
+      {!isProcessingDataset && (
         <Box margin={{ top: 'small' }} width={setResponsive('100%', 'auto')}>
           <DownloadNowButton
             accessionCode={accessionCode}
