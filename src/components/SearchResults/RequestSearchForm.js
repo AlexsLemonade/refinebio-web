@@ -10,8 +10,11 @@ import { TextInput } from 'components/shared/TextInput'
 import { TextNull } from 'components/shared/TextNull'
 import { TextRequired } from 'components/shared/TextRequired'
 
-export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
-  const { push } = useRouter()
+export const RequestSearchForm = ({ closeForm }) => {
+  const {
+    query: { search: searchTerm },
+    push
+  } = useRouter()
   const { viewport, setResponsive } = useResponsive()
   const { RequestDataFormSchema } = validationSchemas
   const redirectPathname = '/'
@@ -41,7 +44,7 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
           approach: '',
           email: '',
           email_updates: false,
-          query: queryTerm,
+          query: searchTerm,
           request_type: 'search'
         }}
         validationSchema={RequestDataFormSchema}
@@ -87,7 +90,7 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
               <FormField>
                 <Paragraph>
                   List experiment accessions (separated by commas) you expect
-                  for search term ‘<strong>{queryTerm}</strong>’{' '}
+                  for search term ‘<strong>{searchTerm}</strong>’{' '}
                   <TextRequired />
                 </Paragraph>
                 <Text margin={{ top: 'small' }}>
