@@ -1,19 +1,15 @@
 // Slack data request
 import fetch from 'isomorphic-unfetch'
-import { links } from 'config'
+import { requests } from 'config'
 import getIP from 'helpers/getIP'
 
 // posts to slack (configured in CCDL channel) and returns true if 200, otherwise false
-const postToSlack = async (params) => {
+const postToSlack = async (hookUrl, params) => {
   try {
-    const res = await fetch(
-      // TEMP: usng the webhook url for the ccdl test channel for dev
-      process.env.SLACK_HOOK_URL || process.env.NEXT_PUBLIC_SLACK_HOOK_URL,
-      {
-        method: 'POST',
-        body: JSON.stringify(params)
-      }
-    )
+    const res = await fetch(hookUrl, {
+      method: 'POST',
+      body: JSON.stringify(params)
+    })
     return res.ok
   } catch {
     return false
@@ -21,11 +17,13 @@ const postToSlack = async (params) => {
 }
 
 export const submitSlackDataRequest = async (
+  hookUrl,
   requestValues,
   requestType,
   failedRequest
 ) => {
   const ip = await getIP()
+  const { data_request: dataRequest, email_logo: logo } = requests
   const {
     accession_codes: accessionCodes,
     approach,
@@ -36,7 +34,7 @@ export const submitSlackDataRequest = async (
     pediatric_cancer: pediatricCancer,
     query
   } = requestValues
-  const requestUrl = links.refinebio_data_request[requestType]
+  const requestUrl = dataRequest[requestType]
   const requestAttachments = {
     experiment: {
       fallback: `${accessionCodes} Experiment Requested`,
@@ -57,7 +55,7 @@ export const submitSlackDataRequest = async (
     }
   }
 
-  return postToSlack({
+  return postToSlack(hookUrl, {
     attachments: [
       {
         color: '#2eb886',
@@ -91,7 +89,7 @@ export const submitSlackDataRequest = async (
         ],
 
         footer: `Refine.bio | ${ip} | ${navigatorUserAgent} | This message was sent because the request to ${failedRequest} failed`,
-        footer_icon: links.refinebio_email_logo,
+        footer_icon: logo,
         ts: Date.now() / 1000 // unix time
       }
     ]
