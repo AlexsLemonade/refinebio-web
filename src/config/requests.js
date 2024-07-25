@@ -3,5 +3,5 @@ export const requests = {
     experiment: 'https://www.refine.bio/experiments/',
     search: 'https://www.refine.bio/search?search='
   },
-  email_logo: 'https://www.refine.bio/refinebio_email_logo.png'
+  email_logo: 'refinebio_email_logo.png'
 }

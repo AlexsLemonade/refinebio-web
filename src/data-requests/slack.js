@@ -89,7 +89,7 @@ export const submitSlackDataRequest = async (
         ],
 
         footer: `Refine.bio | ${ip} | ${navigatorUserAgent} | This message was sent because the request to ${failedRequest} failed`,
-        footer_icon: logo,
+        footer_icon: `${process.env.HOST}/${logo}`,
         ts: Date.now() / 1000 // unix time
       }
     ]

@@ -15,6 +15,7 @@ const moduleExports = () => {
     API_VERSION: isProduction
       ? process.env.API_VERSION
       : process.env.STAGE_API_VERSION,
+    HOST: isProduction ? process.env.HOST_NAME : process.env.STAGE_HOST_NAME,
     SENTRY_DSN: isProduction
       ? process.env.SENTRY_DSN
       : process.env.STAGE_SENTRY_DSN,
