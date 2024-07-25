@@ -6,7 +6,10 @@ import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
 import { RequestForm } from 'components/shared/RequestForm'
 
-export const RequestExperimentForm = ({ accessionCode, closeForm }) => {
+export const RequestExperimentForm = ({
+  accessionCode,
+  onSubmit = () => {}
+}) => {
   const { setRequestedExperiments } = useRefinebio()
   const { viewport, setResponsive } = useResponsive()
   const { RequestDataFormSchema } = validationSchemas
@@ -45,7 +48,7 @@ export const RequestExperimentForm = ({ accessionCode, closeForm }) => {
             addRequestedExperiment()
           }
 
-          closeForm()
+          onSubmit()
           setSubmitting(false)
         }}
       >
@@ -71,12 +74,12 @@ export const RequestExperimentForm = ({ accessionCode, closeForm }) => {
                 Help us prioritize your request by answering these questions.
               </Paragraph>
               <RequestForm
-                closeForm={closeForm}
                 errors={errors}
                 handleChange={handleChange}
                 isSubmitting={isSubmitting}
                 touched={touched}
                 values={values}
+                onSubmit={onSubmit}
               />
             </Box>
           </Form>

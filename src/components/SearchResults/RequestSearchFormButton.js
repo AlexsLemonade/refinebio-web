@@ -20,7 +20,7 @@ export const RequestSearchFormButton = ({ size }) => {
       }
       fullHeight={false}
     >
-      <RequestSearchForm closeForm={() => closeModal(id)} />
+      <RequestSearchForm onSubmit={() => closeModal(id)} />
     </ModalPage>
   )
 }

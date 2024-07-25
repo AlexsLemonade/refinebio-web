@@ -36,7 +36,7 @@ export const RequestExperimentFormButton = ({ accessionCode }) => {
     >
       <RequestExperimentForm
         accessionCode={accessionCode}
-        closeForm={() => closeModal(id)}
+        onSubmit={() => closeModal(id)}
       />
     </ModalPage>
   )

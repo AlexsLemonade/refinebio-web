@@ -10,7 +10,7 @@ import { TextInput } from 'components/shared/TextInput'
 import { TextNull } from 'components/shared/TextNull'
 import { TextRequired } from 'components/shared/TextRequired'
 
-export const RequestSearchForm = ({ closeForm }) => {
+export const RequestSearchForm = ({ onSubmit = () => {} }) => {
   const {
     query: { search: searchTerm },
     push
@@ -121,12 +121,12 @@ export const RequestSearchForm = ({ closeForm }) => {
                 Help us priortize your request by answering these questions
               </Heading>
               <RequestForm
-                closeForm={closeForm}
                 errors={errors}
                 handleChange={handleChange}
                 isSubmitting={isSubmitting}
                 touched={touched}
                 values={values}
+                onSubmit={onSubmit}
               />
             </Box>
           </Form>
