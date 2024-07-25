@@ -2,16 +2,21 @@ import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
 import { validationSchemas } from 'config'
 import requestData from 'helpers/requestData'
+import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
 import { RequestForm } from 'components/shared/RequestForm'
 
 export const RequestExperimentForm = ({
   accessionCode,
-  addRequestedExperiment,
-  closeForm
+  onSubmit = () => {}
 }) => {
+  const { setRequestedExperiments } = useRefinebio()
   const { viewport, setResponsive } = useResponsive()
   const { RequestDataFormSchema } = validationSchemas
+
+  const addRequestedExperiment = () => {
+    setRequestedExperiments((prev) => [...prev, accessionCode])
+  }
 
   return (
     <Box
@@ -38,12 +43,12 @@ export const RequestExperimentForm = ({
             }
           })
 
-          // adds the experiment accession code if not 500
+          // adds the requested experiment's accession code if not 500
           if (response.status !== 500) {
             addRequestedExperiment()
           }
 
-          closeForm()
+          onSubmit()
           setSubmitting(false)
         }}
       >
@@ -69,12 +74,12 @@ export const RequestExperimentForm = ({
                 Help us prioritize your request by answering these questions.
               </Paragraph>
               <RequestForm
-                closeForm={closeForm}
                 errors={errors}
                 handleChange={handleChange}
                 isSubmitting={isSubmitting}
                 touched={touched}
                 values={values}
+                onSubmit={onSubmit}
               />
             </Box>
           </Form>
