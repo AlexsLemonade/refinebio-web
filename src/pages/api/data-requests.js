@@ -50,6 +50,7 @@ export default async (req, res) => {
         requestType
       )
       const hubspotSuccess = await submitHubspotDataRequest(
+        process.env.HUBSPOT_ACCESS_TOKEN,
         requestValues,
         requestType
       )
@@ -57,15 +58,12 @@ export default async (req, res) => {
       // requests to Slack only if requests to GitHub and/or HubSpot fail
       if (!githubSuccess || !hubspotSuccess) {
         // sets failed requests' API name(s) to print
-        const failedRequest =
-          // eslint-disable-next-line no-nested-ternary
-          !githubSuccess && !hubspotSuccess
-            ? 'GitHub and HubSpot'
-            : !githubSuccess
-            ? 'GitHub'
-            : 'HubSpot'
+        const bothFailed = !githubSuccess && !hubspotSuccess
+        const oneFailed = !githubSuccess ? 'GitHub' : 'Hubspot'
+        const failedRequest = bothFailed ? 'GitHub and Hubspot' : oneFailed
 
         const slackSuccess = await submitSlackDataRequest(
+          process.env.SLACK_HOOK_URL,
           requestValues,
           requestType,
           failedRequest
