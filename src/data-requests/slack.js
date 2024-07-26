@@ -18,6 +18,7 @@ const postToSlack = async (hookUrl, params) => {
 
 export const submitSlackDataRequest = async (
   hookUrl,
+  req,
   requestValues,
   requestType,
   failedRequest
@@ -34,6 +35,7 @@ export const submitSlackDataRequest = async (
     pediatric_cancer: pediatricCancer,
     query
   } = requestValues
+  const host = new URL(req.url).hostname
   const requestUrl = dataRequest[requestType]
   const requestAttachments = {
     experiment: {
@@ -89,7 +91,7 @@ export const submitSlackDataRequest = async (
         ],
 
         footer: `Refine.bio | ${ip} | ${navigatorUserAgent} | This message was sent because the request to ${failedRequest} failed`,
-        footer_icon: `${process.env.HOST}/${logo}`,
+        footer_icon: `https://${host}/${logo}`,
         ts: Date.now() / 1000 // unix time
       }
     ]
