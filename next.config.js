@@ -21,7 +21,6 @@ const moduleExports = () => {
     GITHUB_ENDPOINT: isProduction
       ? process.env.GITHUB_ENDPOINT
       : process.env.STAGE_GITHUB_ENDPOINT,
-    HOST: isProduction ? process.env.HOST_NAME : process.env.STAGE_HOST_NAME,
     HUBSPOT_ACCESS_TOKEN: isProduction
       ? process.env.HUBSPOT_ACCESS_TOKEN
       : process.env.STAGE_HUBSPOT_ACCESS_TOKEN,

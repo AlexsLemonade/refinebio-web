@@ -64,6 +64,7 @@ export default async (req, res) => {
 
         const slackSuccess = await submitSlackDataRequest(
           process.env.SLACK_HOOK_URL,
+          req,
           requestValues,
           requestType,
           failedRequest
