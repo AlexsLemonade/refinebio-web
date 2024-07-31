@@ -1,6 +1,8 @@
+import { useRouter } from 'next/router'
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph, Text } from 'grommet'
 import { validationSchemas } from 'config'
+import requestData from 'helpers/requestData'
 import { useResponsive } from 'hooks/useResponsive'
 import { FormField } from 'components/shared/FormField'
 import { RequestForm } from 'components/shared/RequestForm'
@@ -8,9 +10,25 @@ import { TextInput } from 'components/shared/TextInput'
 import { TextNull } from 'components/shared/TextNull'
 import { TextRequired } from 'components/shared/TextRequired'
 
-export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
+export const RequestSearchForm = ({ closeForm }) => {
+  const {
+    query: { search: searchTerm },
+    push
+  } = useRouter()
   const { viewport, setResponsive } = useResponsive()
   const { RequestDataFormSchema } = validationSchemas
+  const redirectPathname = '/'
+  const responseNotifications = {
+    success: {
+      message: 'Request for Experiment Received!',
+      status: 'success'
+    },
+    error: {
+      message:
+        'There was a problem with requesting the experiment. Please try again later.',
+      status: 'error'
+    }
+  }
 
   return (
     <Box
@@ -25,17 +43,29 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
           pediatric_cancer: '',
           approach: '',
           email: '',
-          email_updates: false
+          email_updates: false,
+          query: searchTerm,
+          request_type: 'search'
         }}
         validationSchema={RequestDataFormSchema}
         validateOnChange={false}
         onSubmit={async (values, { setSubmitting }) => {
-          // TEMP
-          await new Promise((resolve) => {
-            setTimeout(() => resolve(values), 1000)
+          const response = await requestData({
+            requestValues: {
+              ...values
+            }
           })
-          // eslint-disable-next-line no-console
-          console.log(values)
+          // redirects to the homepage after submission
+          const { message, status } =
+            responseNotifications[response.status === 200 ? 'success' : 'error']
+
+          push(
+            {
+              redirectPathname,
+              query: { message, status }
+            },
+            redirectPathname
+          )
           setSubmitting(false)
         }}
       >
@@ -60,7 +90,7 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
               <FormField>
                 <Paragraph>
                   List experiment accessions (separated by commas) you expect
-                  for search term ‘<strong>{queryTerm}</strong>’{' '}
+                  for search term ‘<strong>{searchTerm}</strong>’{' '}
                   <TextRequired />
                 </Paragraph>
                 <Text margin={{ top: 'small' }}>
