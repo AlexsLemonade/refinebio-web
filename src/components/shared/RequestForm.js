@@ -9,12 +9,12 @@ import { TextInput } from 'components/shared/TextInput'
 import { TextRequired } from 'components/shared/TextRequired'
 
 export const RequestForm = ({
-  closeForm,
   errors,
   handleChange,
   isSubmitting,
   touched,
-  values
+  values,
+  onSubmit
 }) => {
   const { setResponsive } = useResponsive()
   const {
@@ -104,7 +104,7 @@ export const RequestForm = ({
         direction={setResponsive('column', 'row')}
         gap={setResponsive('small', 'xsmall')}
       >
-        <Button label="Cancel" secondary responsive onClick={closeForm} />
+        <Button label="Cancel" secondary responsive onClick={onSubmit} />
         <Button
           label="Submit"
           isLoading={isSubmitting}
