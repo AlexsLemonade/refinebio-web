@@ -1,17 +1,26 @@
 // Slack data request
 import fetch from 'isomorphic-unfetch'
-import { requests } from 'config'
+import { links, requests } from 'config'
 import getIP from 'helpers/getIP'
 
 // posts to slack (configured in CCDL channel) and returns true if 200, otherwise false
 const postToSlack = async (hookUrl, params) => {
+  if (!hookUrl) {
+    console.error('Error invalid Url:', hookUrl)
+    return false
+  }
+
   try {
     const res = await fetch(hookUrl, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(params)
     })
     return res.ok
-  } catch {
+  } catch (error) {
+    console.error('Error posting to Slack:', error)
     return false
   }
 }
@@ -35,7 +44,13 @@ export const submitSlackDataRequest = async (
     pediatric_cancer: pediatricCancer,
     query
   } = requestValues
-  const host = new URL(req.url).hostname
+  // for security reason, sets originUrl to prod or staging
+  // and footer_ico testing is done on staging, not dev
+  const {
+    headers: { origin }
+  } = req
+  const { refinebio: prod, refinebio_staging: staging } = links
+  const originUrl = origin === prod ? prod : staging
   const requestUrl = dataRequest[requestType]
   const requestAttachments = {
     experiment: {
@@ -91,7 +106,7 @@ export const submitSlackDataRequest = async (
         ],
 
         footer: `Refine.bio | ${ip} | ${navigatorUserAgent} | This message was sent because the request to ${failedRequest} failed`,
-        footer_icon: `https://${host}/${logo}`,
+        footer_icon: `${originUrl}/${logo}`,
         ts: Date.now() / 1000 // unix time
       }
     ]
