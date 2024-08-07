@@ -8,10 +8,14 @@ const postToSlack = async (hookUrl, params) => {
   try {
     const res = await fetch(hookUrl, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(params)
     })
     return res.ok
-  } catch {
+  } catch (error) {
+    console.error('Error posting to Slack:', error)
     return false
   }
 }
@@ -35,7 +39,7 @@ export const submitSlackDataRequest = async (
     pediatric_cancer: pediatricCancer,
     query
   } = requestValues
-  const host = new URL(req.url).hostname
+  const host = new URL(`http://${req.headers.host}${req.url}`).hostname
   const requestUrl = dataRequest[requestType]
   const requestAttachments = {
     experiment: {
