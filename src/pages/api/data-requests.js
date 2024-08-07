@@ -32,7 +32,7 @@ export default async (req, res) => {
   Firefox/120.0 | This message was sent because the request to GitHub failed | Jun 14th, 2024
   */
 
-  // requestValues should include form values, query/accessionCode, and the request type ('experiment' or 'search')
+  // requestValues should include form values, query/accessionCode, and request_type ('experiment' or 'search')
   const {
     body: {
       requestValues,
@@ -40,57 +40,53 @@ export default async (req, res) => {
     },
     method
   } = req
+  const allowedMethod = 'POST'
+
+  if (method !== allowedMethod) {
+    res.setHeader('Allow', [allowedMethod])
+    return res.status(405).json({ message: `Method ${method} Not Allowed` })
+  }
 
   try {
-    switch (method) {
-      case 'POST': {
-        const response = { status: null }
-        const githubSuccess = await submitGithubDataRequest(
-          process.env.GITHUB_TOKEN,
-          requestValues,
-          requestType
-        )
-        const hubspotSuccess = await submitHubspotDataRequest(
-          process.env.HUBSPOT_ACCESS_TOKEN,
-          requestValues,
-          requestType
-        )
+    const response = { status: null }
+    const githubSuccess = await submitGithubDataRequest(
+      process.env.GITHUB_TOKEN,
+      requestValues,
+      requestType
+    )
+    const hubspotSuccess = await submitHubspotDataRequest(
+      process.env.HUBSPOT_ACCESS_TOKEN,
+      requestValues,
+      requestType
+    )
+    // requests to Slack only if requests to GitHub and/or HubSpot fail
+    if (!githubSuccess || !hubspotSuccess) {
+      // sets failed requests' API name(s) to print
+      const bothFailed = !githubSuccess && !hubspotSuccess
+      const oneFailed = !githubSuccess ? 'GitHub' : 'Hubspot'
+      const failedRequest = bothFailed ? 'GitHub and Hubspot' : oneFailed
 
-        // requests to Slack only if requests to GitHub and/or HubSpot fail
-        if (!githubSuccess || !hubspotSuccess) {
-          // sets failed requests' API name(s) to print
-          const bothFailed = !githubSuccess && !hubspotSuccess
-          const oneFailed = !githubSuccess ? 'GitHub' : 'Hubspot'
-          const failedRequest = bothFailed ? 'GitHub and Hubspot' : oneFailed
+      const slackSuccess = await submitSlackDataRequest(
+        process.env.SLACK_HOOK_URL,
+        req,
+        requestValues,
+        requestType,
+        failedRequest
+      )
 
-          const slackSuccess = await submitSlackDataRequest(
-            process.env.SLACK_HOOK_URL,
-            req,
-            requestValues,
-            requestType,
-            failedRequest
-          )
-
-          if (slackSuccess) {
-            response.status = 206
-            response.message = `${failedRequest} failed, sent to Slack instead`
-          } else {
-            response.status = 500
-            response.message = `${failedRequest}, and Slack failed`
-          }
-        } else {
-          response.status = 200
-          response.message = 'GitHub and HubSpot succeeded'
-        }
-
-        res.status(response.status).json(response)
-        break
+      if (slackSuccess) {
+        response.status = 206
+        response.message = `${failedRequest} failed, sent to Slack instead`
+      } else {
+        response.status = 500
+        response.message = `${failedRequest}, and Slack failed`
       }
-      default: {
-        res.setHeader('Allow', ['POST'])
-        res.status(405).end(`Method ${method} Not Allowed`)
-      }
+    } else {
+      response.status = 200
+      response.message = 'GitHub and HubSpot succeeded'
     }
+
+    res.status(response.status).json(response)
   } catch (error) {
     console.error('Internal Server Error:', error)
     res.status(500).json({
@@ -98,5 +94,5 @@ export default async (req, res) => {
     })
   }
 
-  res.end()
+  return res.end()
 }

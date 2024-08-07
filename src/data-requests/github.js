@@ -6,7 +6,7 @@ import { requests } from 'config'
 // https://github.com/settings/tokens
 const createIssue = async (token, params) => {
   // API endpoint for the repo to file an issue
-  const endpoint = process.env.NEXT_PUBLIC_GITHUB_ENDPOINT_TEST
+  const endpoint = process.env.GITHUB_ENDPOINT
   try {
     await fetch(endpoint, {
       method: 'POST',

@@ -6,7 +6,7 @@ import getIP from 'helpers/getIP'
 // posts to slack (configured in CCDL channel) and returns true if 200, otherwise false
 const postToSlack = async (hookUrl, params) => {
   if (!hookUrl) {
-    console.error('Error invalid Url:', hookUrl)
+    console.error('Invalid URL:', hookUrl)
     return false
   }
 
