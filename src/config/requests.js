@@ -4,5 +4,5 @@ export const requests = {
     search: 'https://www.refine.bio/search?search='
   },
   email_logo: 'refinebio_email_logo.png',
-  hubspot_hook: 'https://api.hubapi.com/crm/v3/'
+  hubspot_hook: 'https://api.hubapi.com/crm/v3'
 }
