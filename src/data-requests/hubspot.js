@@ -3,49 +3,61 @@ import fetch from 'isomorphic-unfetch'
 import { requests } from 'config'
 
 // (resouces) HubSpot CRM API v3 https://developers.hubspot.com/docs/api/overview
-const request = async (action, token, email, properties = '') => {
-  const endpointContact = `${requests.hubspot_hook}/objects/contacts`
-  const endpointContactByEmail = `${endpointContact}/${email}?idProperty=email&properties=dataset_request_details`
+const request = async (action, token, properties = '') => {
+  const endpointContacts = `${requests.hubspot_hook}/objects/contacts`
+  const endpointSearchContact = `${endpointContacts}/search`
+  const endpointUpdateContactByEmail = `${endpointContacts}/${properties.email}?idProperty=email`
   const actions = {
     createContact: {
       method: 'POST',
-      url: endpointContact
+      url: endpointContacts,
+      body: { properties }
     },
-    getContact: {
-      method: 'GET',
-      url: endpointContactByEmail
+    searchContact: {
+      method: 'POST',
+      url: endpointSearchContact,
+      body: {
+        filterGroups: [
+          {
+            filters: [
+              {
+                propertyName: 'email',
+                operator: 'EQ',
+                value: properties.email
+              }
+            ]
+          }
+        ],
+        properties: ['dataset_request_details']
+      }
     },
     updateContact: {
       method: 'PATCH',
-      url: endpointContactByEmail
+      url: endpointUpdateContactByEmail,
+      body: { properties }
     }
   }
-  const isGet = actions[action].method === 'GET'
 
-  const response = await fetch(actions[action].url, {
-    method: actions[action].method,
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    },
-    ...(!isGet ? { body: JSON.stringify(properties) } : {})
-  })
+  const { method, url, body } = actions[action]
 
-  if (isGet) {
-    const { status } = response
+  try {
+    const response = await fetch(url, {
+      method,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
 
-    if (status === 200) {
-      const results = await response.json()
-
-      return { status, results }
-    }
-    return { status }
+    return response
+  } catch (error) {
+    console.error('Error requesting to HubSpot API:', error)
+    return { status: 500 } // returns 500 if an exception occurs
   }
-
-  return response
 }
 
-// updates an exsisting contact list or creates a new one and adds the requested details
+// updates the exsisting contact or creates a new one
 const updateContactList = async (token, email, newDatasetRequestDetails) => {
   let response
   const properties = {
@@ -53,25 +65,29 @@ const updateContactList = async (token, email, newDatasetRequestDetails) => {
     dataset_request_details: newDatasetRequestDetails
   }
 
-  const { status, results } = await request('getContact', token, email)
+  try {
+    // checks if the contact already exists
+    const searchResponse = await request('searchContact', token, { email })
+    const contactResponse = await searchResponse.json()
+    const { total, results } = contactResponse
 
-  // creates a new contact with dataset request details if no record
-  if (status === 404) {
-    response = await request('createContact', token, email, { properties })
-  }
-  // or updates existing contact's dataset request details
-  else {
-    const oldDatasetRequestDetails = results.properties?.dataset_request_details
-
-    // concatenates new dataset request details value to existing one
-    if (oldDatasetRequestDetails) {
-      properties.dataset_request_details = `${newDatasetRequestDetails}\n----------\n${oldDatasetRequestDetails}`
+    if (total === 1) {
+      const oldDatasetRequestDetails =
+        results[0].properties?.dataset_request_details
+      // appends the new data request details to the existing one if the contact already has the property
+      if (oldDatasetRequestDetails) {
+        properties.dataset_request_details = `${newDatasetRequestDetails}\n----------\n${oldDatasetRequestDetails}`
+      }
+      response = await request('updateContact', token, properties)
+    } else {
+      response = await request('createContact', token, properties)
     }
 
-    response = await request('updateContact', token, email, { properties })
+    return response.status >= 200 && response.status < 300
+  } catch (error) {
+    console.error('Error updating contact:', error)
+    return false
   }
-
-  return response.status >= 200 && response.status < 300
 }
 
 // returns false if any errors when updating the contact
@@ -102,8 +118,9 @@ export const submitHubspotDataRequest = async (
   \nSubmitted ${new Date().toLocaleString()}`
 
   try {
-    return updateContactList(token, email, newDatasetRequestDetails)
-  } catch {
+    return await updateContactList(token, email, newDatasetRequestDetails)
+  } catch (error) {
+    console.error('Error submitting the data request to Hubspot API:', error)
     return false
   }
 }
