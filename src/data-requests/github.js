@@ -1,12 +1,12 @@
 // Github data request
 import fetch from 'isomorphic-unfetch'
-import { links } from 'config'
+import { requests } from 'config'
 // (resources)
 // https://docs.github.com/en/rest/issues/issues#create-an-issue
 // https://github.com/settings/tokens
 const createIssue = async (token, params) => {
   // API endpoint for the repo to file an issue
-  const endpoint = process.env.GITHUB_EDNPOINT
+  const endpoint = process.env.NEXT_PUBLIC_GITHUB_ENDPOINT_TEST
   try {
     await fetch(endpoint, {
       method: 'POST',
@@ -19,7 +19,8 @@ const createIssue = async (token, params) => {
     })
 
     return true
-  } catch {
+  } catch (error) {
+    console.error('Error requesting to Github API:', error)
     return false
   }
 }
@@ -30,7 +31,7 @@ export const submitGithubDataRequest = async (
   requestType
 ) => {
   const { accession_codes: accessionCodes, query } = requestValues
-  const requestUrl = links.refinebio_data_request[requestType]
+  const requestUrl = requests.data_request[requestType]
   const requestBody = {
     experiment: `### Context\r\n\r\nA user requested [${accessionCodes}](${requestUrl}${accessionCodes})`,
     search: `### Context\r\n\r\nA user requested ${accessionCodes} for the search term ["${query}"](${requestUrl}${query})`
