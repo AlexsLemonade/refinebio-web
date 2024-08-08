@@ -1,7 +1,6 @@
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
 import { options, validationSchemas } from 'config'
-import { useOneOffExperiment } from 'hooks/useOneOffExperiment'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
@@ -12,26 +11,15 @@ import { TransformationOptions } from 'components/Download/DownloadOptionsForm/T
 import { EmailTextInput } from 'components/Download/StartProcessingForm/EmailTextInput'
 import { ReceiveUpdatesCheckBox } from 'components/Download/StartProcessingForm/ReceiveUpdatesCheckBox'
 import { TermsOfUseCheckBox } from 'components/Download/StartProcessingForm/TermsOfUseCheckBox'
-import { ProcessingDatasetPillModal } from './ProcessingDatasetPillModal'
 
 export const DownloadNowModal = ({
   accessionCode,
   hasMultipleOrganisms,
-  hasRnaSeq,
-  id
+  hasRnaSeq
 }) => {
-  const { addProcessingExperiment, getProcessingExperiment } =
-    useOneOffExperiment()
   const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const { StartProcessingFormSchema } = validationSchemas
-  const experiment = getProcessingExperiment(accessionCode)
-
-  if (experiment) {
-    return (
-      <ProcessingDatasetPillModal datasetId={experiment.datasetId} id={id} />
-    )
-  }
 
   return (
     <Box pad={{ bottom: 'small', horizontal: 'large' }}>
@@ -59,12 +47,12 @@ export const DownloadNowModal = ({
         validateOnChange={false}
         onSubmit={async (values, { setSubmitting }) => {
           const { emailAddress, receiveUpdates } = values
+
           if (receiveUpdates) {
             subscribeEmail(emailAddress)
           }
 
-          const response = await startProcessingDataset(null, values)
-          addProcessingExperiment(accessionCode, response.id)
+          await startProcessingDataset(values, null, accessionCode)
           setSubmitting(false)
         }}
       >

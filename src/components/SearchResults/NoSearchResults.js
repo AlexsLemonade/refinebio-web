@@ -4,7 +4,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { RequestSearchFormButton } from './RequestSearchFormButton'
 
-export const NoSearchResults = ({ queryTerm, setUserSearchTerm }) => {
+export const NoSearchResults = ({ setUserSearchTerm }) => {
   const { updateSearchTerm } = useSearchManager()
   const { setResponsive } = useResponsive()
   const queries = ['Notch', 'medulloblastoma', 'GSE24528']
@@ -47,10 +47,7 @@ export const NoSearchResults = ({ queryTerm, setUserSearchTerm }) => {
         <Paragraph size={setResponsive('16x', '22px')}>
           Expecting a specific experiment?{' '}
         </Paragraph>
-        <RequestSearchFormButton
-          queryTerm={queryTerm}
-          size={setResponsive('16px', '22px')}
-        />
+        <RequestSearchFormButton size={setResponsive('16px', '22px')} />
       </Box>
       <Box
         margin={{

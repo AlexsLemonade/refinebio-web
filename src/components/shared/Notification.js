@@ -5,22 +5,39 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import { Icon } from 'components/shared/Icon'
 import { SrOnly } from 'components/shared/SrOnly'
 
+const statusConfigs = {
+  error: {
+    iconName: 'Warning',
+    background: 'error'
+  },
+  info: {
+    iconName: 'Info',
+    background: 'info'
+  },
+  success: {
+    iconName: 'Success',
+    background: 'success'
+  }
+}
+
 export const Notification = () => {
   const {
     push,
+    pathname,
     query: { message, status }
   } = useRouter()
   const { setResponsive } = useResponsive()
   const defaultStatus = 'info'
+  const { background, iconName } = statusConfigs[status || defaultStatus]
 
   if (!message) return null
 
   const handleClose = () => {
-    push({}, '/download')
+    push({}, pathname)
   }
 
   return (
-    <Box background={status || defaultStatus}>
+    <Box background={background}>
       <FixedContainer
         align="center"
         direction="row"
@@ -34,14 +51,7 @@ export const Notification = () => {
           justify="center"
           width="100%"
         >
-          <Icon
-            name={`${
-              (status || defaultStatus).slice(0, 1).toUpperCase() +
-              (status || defaultStatus).slice(1)
-            }`}
-            color="white"
-            size="20px"
-          />
+          <Icon name={iconName} color="white" size="20px" />
           <Text
             size={setResponsive('small', 'medium')}
             color="white"

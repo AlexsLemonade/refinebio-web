@@ -15,12 +15,18 @@ const moduleExports = () => {
     API_VERSION: isProduction
       ? process.env.API_VERSION
       : process.env.STAGE_API_VERSION,
+    HUBSPOT_ACCESS_TOKEN: isProduction
+      ? process.env.HUBSPOT_ACCESS_TOKEN
+      : process.env.STAGE_HUBSPOT_ACCESS_TOKEN,
     SENTRY_DSN: isProduction
       ? process.env.SENTRY_DSN
       : process.env.STAGE_SENTRY_DSN,
     SENTRY_ENV: isProduction
       ? process.env.SENTRY_ENV
-      : process.env.STAGE_SENTRY_ENV
+      : process.env.STAGE_SENTRY_ENV,
+    SLACK_HOOK_URL: isProduction
+      ? process.env.SLACK_HOOK_URL
+      : process.env.STAGE_SLACK_HOOK_URL
   }
 
   return {
