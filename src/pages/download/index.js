@@ -4,7 +4,7 @@ import { Box, Heading } from 'grommet'
 import { useRouter } from 'next/router'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
-import scrollToTop from 'helpers/scrollToTop'
+import scrollTo from 'helpers/scrollTo'
 import { Error } from 'components/shared/Error'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
@@ -40,7 +40,7 @@ export const Download = () => {
 
   useEffect(() => {
     if (!isDownloadable) {
-      scrollToTop()
+      scrollTo()
     }
   }, [isDownloadable])
 
