@@ -55,17 +55,19 @@ export const RequestSearchForm = ({ onSubmit = () => {} }) => {
               ...values
             }
           })
-          // redirects to the homepage after submission
+          // redirects to the homepage after submission and disply the notification banner
           const { message, status } =
             responseNotifications[response.status === 200 ? 'success' : 'error']
 
           push(
             {
-              redirectPathname,
+              pathname: redirectPathname,
               query: { message, status }
             },
             redirectPathname
           )
+
+          onSubmit()
           setSubmitting(false)
         }}
       >
