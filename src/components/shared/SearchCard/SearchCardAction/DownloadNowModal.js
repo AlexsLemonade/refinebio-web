@@ -2,7 +2,6 @@ import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
 import { options, validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
-import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/shared/Button'
@@ -12,29 +11,15 @@ import { TransformationOptions } from 'components/Download/DownloadOptionsForm/T
 import { EmailTextInput } from 'components/Download/StartProcessingForm/EmailTextInput'
 import { ReceiveUpdatesCheckBox } from 'components/Download/StartProcessingForm/ReceiveUpdatesCheckBox'
 import { TermsOfUseCheckBox } from 'components/Download/StartProcessingForm/TermsOfUseCheckBox'
-import { ProcessingDatasetPillModal } from './ProcessingDatasetPillModal'
 
 export const DownloadNowModal = ({
   accessionCode,
   hasMultipleOrganisms,
-  hasRnaSeq,
-  id
+  hasRnaSeq
 }) => {
   const { email, startProcessingDataset } = useDatasetManager()
-  const { addProcessingResource, getProcessingResource } =
-    usePollDatasetStatus(accessionCode)
   const { setResponsive } = useResponsive()
-  const processingExperiment = getProcessingResource(accessionCode)
   const { StartProcessingFormSchema } = validationSchemas
-
-  if (processingExperiment) {
-    return (
-      <ProcessingDatasetPillModal
-        datasetId={processingExperiment.datasetId}
-        id={id}
-      />
-    )
-  }
 
   return (
     <Box pad={{ bottom: 'small', horizontal: 'large' }}>
@@ -67,8 +52,7 @@ export const DownloadNowModal = ({
             subscribeEmail(emailAddress)
           }
 
-          const response = await startProcessingDataset(values)
-          addProcessingResource(response.id, accessionCode)
+          await startProcessingDataset(values, null, accessionCode)
           setSubmitting(false)
         }}
       >
