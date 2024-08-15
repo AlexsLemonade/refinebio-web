@@ -70,9 +70,9 @@ const regeneratedDataset = (state, defaultOptions, newOptions) => {
   })
 }
 
-const sharedDataset = (status) =>
+const sharedDataset = (isProcessed) =>
   event('shared_dataset', {
-    shared_state: status ? 'Processed' : 'Unprocessed'
+    shared_state: isProcessed ? 'Processed' : 'Unprocessed'
   })
 
 /* --- Links --- */
