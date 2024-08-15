@@ -2,7 +2,13 @@ import { links, options } from 'config'
 import formatFacetNames from 'helpers/formatFacetNames'
 import formatFilterName from 'helpers/formatFilterName'
 
-const { transformationHumanReadable: transformation } = options
+const { transformation: defaultTransformation } = options
+//  converts defaultTransformation to an object with { value: label } pair for quick lookup
+// i.e., { NONE: 'None', MINMAX: 'Zero to One', STANDARD: 'Z-score' }
+const transformation = defaultTransformation.reduce((acc, { label, value }) => {
+  acc[value] = label
+  return acc
+}, {})
 
 // adds a custom event to GA4
 // https://developers.google.com/analytics/devguides/collection/ga4/events?client_type=gtag
