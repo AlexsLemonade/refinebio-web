@@ -50,7 +50,8 @@ export const links = {
     'https://docs.refine.bio/en/latest/main_text.html#transformations',
   refinebio_docs_why_can_I_add_certain_samples_to_my_dataset:
     'https://docs.refine.bio/en/latest/faq.html#why-can-t-i-add-certain-samples-to-my-dataset',
-  // refine.bio github
+  // refine.bio github io
+  refinebio_githubio: 'https://alexslemonade.github.io/',
   refinebio_github_differential_expression_rnaseq:
     'https://alexslemonade.github.io/refinebio-examples/03-rnaseq/differential-expression_rnaseq_01.html',
   refinebio_github_compendium_processing:

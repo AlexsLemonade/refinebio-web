@@ -90,32 +90,20 @@ const navClick = (item, type = 'global') =>
   })
 
 const outboundClick = (url) => {
-  let parameter
-  switch (true) {
-    case url === links.alsf || url === links.ccdl:
-      parameter = 'alsf_domain_name'
-      break
-    case url === links.ccdl_donate:
-      parameter = 'donate_click_from'
-      break
-    case url.includes(links.refinebio_githubio):
-      parameter = 'alsf_githubio_click_from'
-      break
-    case url.includes(links.alsf_github):
-      parameter = 'alsf_repo_click_from'
-      break
-    case url.includes(links.refinebio_api_docs):
-      parameter = 'api_docs_click_from'
-      break
-    case url.includes(links.refinebio_docs):
-      parameter = 'docs_click_from'
-      break
-    case url.includes(links.ccdl_twitter):
-      parameter = 'social_media'
-      break
-    default:
-      break
-  }
+  // if url starts with one of below links, sets linkName to its corresponding key
+  const specialCases = [
+    { name: 'alsf_github', value: links.alsf_github },
+    { name: 'refinebio_githubio', value: links.refinebio_githubio },
+    { name: 'refinebio_docs', value: links.refinebio_docs }
+  ]
+  const linkName =
+    specialCases.find(({ value }) => url.startsWith(value))?.name ||
+    Object.keys(links).find((key) => links[key] === url)
+
+  // no event will be sent if no match
+  if (!linkName) return
+
+  const parameter = `click_to_${linkName}`
 
   event('click', {
     [parameter]: url
