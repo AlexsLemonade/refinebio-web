@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Heading, Paragraph } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { cache, links } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'

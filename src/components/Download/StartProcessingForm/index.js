@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation'
 import { Formik } from 'formik'
 import { Form } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
