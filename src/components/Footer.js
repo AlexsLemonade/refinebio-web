@@ -7,7 +7,7 @@ import {
   Text
 } from 'grommet'
 import styled, { css } from 'styled-components'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'

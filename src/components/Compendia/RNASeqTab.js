@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { Anchor, Box, Heading, Paragraph, Text } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'

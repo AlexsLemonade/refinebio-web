@@ -1,5 +1,5 @@
 import { Box } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { FixedContainer } from 'components/shared/FixedContainer'

@@ -1,6 +1,6 @@
 import { Box, Paragraph } from 'grommet'
 import styled from 'styled-components'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
