@@ -154,16 +154,18 @@ const getSortedFilters = (facets, query) => {
           .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
       : formatFilterName(key, filter[key])
   }
-
-  const [, o, p, t] = formatFacetNames(Object.keys(facets))
+  //  the first facet item, 'has_publication', is excluded from the data collection
+  const [, organismFacet, platformFacet, technologyFacet] = formatFacetNames(
+    Object.keys(facets)
+  )
   const filters = {}
-  for (const x of [o, p, t]) {
-    if (query[x]) {
-      filters[x] = sort({ [x]: query[x] })
+  for (const item of [organismFacet, platformFacet, technologyFacet]) {
+    if (query[item]) {
+      filters[item] = sort({ [item]: query[item] })
     }
   }
 
-  return { keys: [o, p, t], filters }
+  return { keys: [organismFacet, platformFacet, technologyFacet], filters }
 }
 
 export default {
