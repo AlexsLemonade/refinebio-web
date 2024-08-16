@@ -13,14 +13,12 @@ export const links = {
   email_request_ccdl: 'requests@ccdatalab.org',
   // refine.bio
   refinebio: 'https://www.refine.bio',
-  refinebio_data_request: {
-    experiment: 'https://www.refine.bio/experiments/',
-    search: 'https://www.refine.bio/search?search='
-  },
-  refinebio_email_logo: 'https://s3.amazonaws.com/refinebio-email/logo-2x.png',
+  refinebio_staging: 'https://staging.refine.bio',
   // refine.bio API docs
   refinebio_api_docs: 'https://api.refine.bio/v1/',
   refinebio_api_docs_compendia: 'https://api.refine.bio/v1/#tag/compendia',
+  // internal route
+  terms_of_use: '/terms',
   // refine.bio docs
   refinebio_docs: 'https://docs.refine.bio',
   refinebio_docs_aggregation:
@@ -93,11 +91,7 @@ export const links = {
   r_docs_tximport:
     'https://www.rdocumentation.org/packages/tximport/versions/1.0.3/topics/tximport',
   salmon: 'https://combine-lab.github.io/salmon/',
-  salmon_quant: 'https://combine-lab.github.io/salmon/',
-  webhooks: {
-    // base urls for APIs
-    hubspot: 'https://api.hubapi.com/crm/v3/'
-  }
+  salmon_quant: 'https://combine-lab.github.io/salmon/'
 }
 
 export default links

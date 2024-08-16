@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { links, options } from 'config'

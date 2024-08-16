@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react'
 import { Box, Grid, Heading } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
@@ -250,10 +250,7 @@ export const Search = ({
             </Grid>
           )}
           {!isResults && query.search && (
-            <NoSearchResults
-              queryTerm={query.search}
-              setUserSearchTerm={setUserSearchTerm}
-            />
+            <NoSearchResults setUserSearchTerm={setUserSearchTerm} />
           )}
         </FixedContainer>
       </TextHighlightContextProvider>

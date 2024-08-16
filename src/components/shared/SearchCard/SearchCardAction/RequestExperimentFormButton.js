@@ -6,13 +6,9 @@ import { ModalPage } from 'components/shared/ModalPage'
 import { RequestExperimentForm } from './RequestExperimentForm'
 
 export const RequestExperimentFormButton = ({ accessionCode }) => {
-  const { requestedExperiments, setRequestedExperiments } = useRefinebio()
+  const { requestedExperiments } = useRefinebio()
   const { closeModal, openModal } = useModal()
   const id = `request-experiment-form-${accessionCode}`
-
-  const addRequestedExperiment = () => {
-    setRequestedExperiments([...requestedExperiments, accessionCode])
-  }
 
   if (requestedExperiments.includes(accessionCode)) {
     return (
@@ -40,8 +36,7 @@ export const RequestExperimentFormButton = ({ accessionCode }) => {
     >
       <RequestExperimentForm
         accessionCode={accessionCode}
-        addRequestedExperiment={addRequestedExperiment}
-        closeForm={() => closeModal(id)}
+        onSubmit={() => closeModal(id)}
       />
     </ModalPage>
   )
