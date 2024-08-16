@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { Box } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { useSearchManager } from 'hooks/useSearchManager'
 import formatURLString from 'helpers/formatURLString'
 import { Button } from 'components/shared/Button'

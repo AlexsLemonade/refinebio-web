@@ -1,5 +1,5 @@
 import { Box } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { Anchor } from 'components/shared/Anchor'
 import { SrOnly } from 'components/shared/SrOnly'
 import { LogoSvg } from '../../images/logo.svg'

@@ -1,5 +1,5 @@
 import { Box, Heading } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatURLString from 'helpers/formatURLString'
