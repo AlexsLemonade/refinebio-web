@@ -250,10 +250,7 @@ export const Search = ({
             </Grid>
           )}
           {!isResults && query.search && (
-            <NoSearchResults
-              queryTerm={query.search}
-              setUserSearchTerm={setUserSearchTerm}
-            />
+            <NoSearchResults setUserSearchTerm={setUserSearchTerm} />
           )}
         </FixedContainer>
       </TextHighlightContextProvider>
