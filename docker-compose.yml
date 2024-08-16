@@ -14,6 +14,7 @@ services:
       STAGE_SLACK_HOOK_URL: ${STAGE_SLACK_HOOK_URL}
       STAGE_GITHUB_TOKEN: ${STAGE_GITHUB_TOKEN}
       STAGE_GITHUB_ENDPOINT: ${STAGE_GITHUB_ENDPOINT}
+      STAGE_GA4_MEASUREMENT_ID: ${STAGE_GA4_MEASUREMENT_ID}
     build:
       context: .
       dockerfile: Dockerfile
