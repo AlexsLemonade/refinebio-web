@@ -7,7 +7,7 @@ import isEmptyObject from 'helpers/isEmptyObject'
 import unionizeArrays from 'helpers/unionizeArrays'
 import { options as configOptions } from 'config'
 import { api } from 'api'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 
 export const useDatasetManager = () => {
   const {

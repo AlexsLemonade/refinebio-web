@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Box, Heading } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { usePageRendered } from 'hooks/usePageRendered'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'

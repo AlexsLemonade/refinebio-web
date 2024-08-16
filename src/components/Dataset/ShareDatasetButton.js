@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Box, Heading } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
 import { useTimeoutInCallback } from 'hooks/useTimeoutInCallback'
