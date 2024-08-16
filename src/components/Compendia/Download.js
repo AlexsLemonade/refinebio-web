@@ -1,7 +1,7 @@
 import { useEffect, useState, memo } from 'react'
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import styled, { css } from 'styled-components'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { links, options } from 'config'
 import { useCompendia } from 'hooks/useCompendia'
 import { useResponsive } from 'hooks/useResponsive'
