@@ -87,13 +87,13 @@ const sharedDataset = (isProcessed) =>
   })
 
 /* --- Links --- */
-// tracks click-through to the experiment page from search results
+// tracks click-through to the experiment page from search results (via title and "View Samples" button)
 const experimentPageClick = (from) =>
   event('page_view', {
     experiment_page_click_from: from
   })
 
-// tracks which "Explore what you can do with your dataset" link users click on
+// tracks which "Explore what you can do with your dataset" link users click on (via dataset or compendia)
 const exploredUsageClick = (usage, type = 'dataset') =>
   event(`click`, { [`${type}_explored_usage`]: usage })
 
@@ -150,7 +150,6 @@ const searchTerm = (term) => event('search_text', { search_text: term })
 const getFilterCombination = (sortedFilters) => {
   const { keys, filters } = sortedFilters
   let formattedFilters = ''
-
   // due to GA char limit, keys names are abbreviated
   for (const x of keys) {
     if (filters[x]) {
