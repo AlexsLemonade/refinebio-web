@@ -4,15 +4,8 @@ export default (facetNames) => {
   const {
     search: { formattedFacetNames }
   } = options
-  const formattedNames = []
 
-  for (const name of facetNames) {
-    if (Object.keys(formattedFacetNames).includes(name)) {
-      formattedNames.push(formattedFacetNames[name])
-    } else {
-      formattedNames.push(name)
-    }
-  }
-
-  return formattedNames
+  return facetNames.map(
+    (facetName) => formattedFacetNames[facetName] || facetName
+  )
 }
