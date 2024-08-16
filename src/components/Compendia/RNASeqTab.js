@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { Anchor, Box, Heading, Paragraph, Text } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
@@ -33,9 +33,7 @@ const Card = ({ heading, pad, children }) => {
 
 export const RNASeqTab = ({ type = 'rnaSeq' }) => {
   const { setResponsive } = useResponsive()
-  const tabName = options.compendia.heading[type]
-  const handleGAEvent = (href, label) =>
-    gtag.outboundClick(href, `${label} - ${tabName}`)
+  const handleGAEvent = (href) => gtag.outboundClick(href)
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 350, delay: 200 }}>
@@ -88,10 +86,7 @@ export const RNASeqTab = ({ type = 'rnaSeq' }) => {
               rel="noopener noreferrer"
               target="_blank"
               onClick={() =>
-                handleGAEvent(
-                  links.refinebio_docs_rna_seq_sample_compendia,
-                  'Learn More'
-                )
+                handleGAEvent(links.refinebio_docs_rna_seq_sample_compendia)
               }
             />
           </Card>
@@ -115,12 +110,7 @@ export const RNASeqTab = ({ type = 'rnaSeq' }) => {
               responsive
               rel="noopener noreferrer"
               target="_blank"
-              onClick={() =>
-                handleGAEvent(
-                  links.refinebio_api_docs_compendia,
-                  'Read the Docs'
-                )
-              }
+              onClick={() => handleGAEvent(links.refinebio_api_docs_compendia)}
             />
           </Card>
         </Row>

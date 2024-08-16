@@ -21,16 +21,10 @@ import {
 
 export const Download = () => {
   const {
-    query: { start, downloadOptions }
+    query: { start }
   } = useRouter()
-
-  const {
-    dataset,
-    error: { hasError, statusCode },
-    loading,
-    getDataset,
-    getTotalSamples
-  } = useDatasetManager()
+  const { dataset, error, loading, getDataset, getTotalSamples } =
+    useDatasetManager()
   const { setResponsive } = useResponsive()
   const [isDownloadable, setIsDownloadable] = useState()
 
@@ -48,10 +42,10 @@ export const Download = () => {
     setIsDownloadable(getTotalSamples(dataset.data) > 0)
   }, [dataset])
 
-  if (hasError) {
+  if (error) {
     return (
       <Error
-        statusCode={statusCode}
+        statusCode={error}
         align="center"
         direction="column"
         marginTop="none"
@@ -84,10 +78,7 @@ export const Download = () => {
               <DatasetDetails dataset={dataset} />
             </>
           ) : start ? (
-            <StartProcessing
-              dataset={dataset}
-              downloadOptions={downloadOptions}
-            />
+            <StartProcessing dataset={dataset} />
           ) : (
             <Box
               pad={{

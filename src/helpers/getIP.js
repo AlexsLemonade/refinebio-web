@@ -4,7 +4,7 @@ export default async () => {
   try {
     const resp = await fetch('https://api.ipify.org?format=json')
     const json = await resp.json()
-    return 'TEST: Unknown IP' || json.ip
+    return json.ip || 'Unknown IP'
   } catch {
     return 'Unknown IP'
   }

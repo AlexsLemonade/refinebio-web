@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { links, options } from 'config'
@@ -123,7 +123,7 @@ export const FilesSummary = ({
     const pathname = `/dataset/${response.id}`
 
     gtag.regeneratedDataset(
-      isExpired && isProcessed ? 'Expired' : 'Valid',
+      isExpired && isProcessed,
       defaultDataset,
       JSON.stringify(defaultDataset) !== JSON.stringify(dataset)
         ? dataset

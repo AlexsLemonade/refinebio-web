@@ -1,5 +1,5 @@
 import { Box } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { links } from 'config'
 import { Anchor } from 'components/shared/Anchor'
 import { SrOnly } from 'components/shared/SrOnly'
@@ -12,9 +12,7 @@ export const GithubAnchor = ({ light = false }) => {
       <Anchor
         color={light ? 'white' : 'alex-navy'}
         href={links.alsf_github}
-        onClick={() =>
-          gtag.outboundClick(links.alsf_github, 'Github Icon - Header')
-        }
+        onClick={() => gtag.outboundClick(links.alsf_github)}
       >
         <GithubLogoSvg role="img" title="Github ALSF Repository" />
         <SrOnly label="Go to Github ALSF Repository" />

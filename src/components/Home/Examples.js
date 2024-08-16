@@ -1,5 +1,5 @@
 import { Box, Paragraph } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -12,8 +12,7 @@ import { ExampleCard } from './ExampleCard'
 
 export const Examples = () => {
   const { setResponsive } = useResponsive()
-  const handleGAEvent = (href, label) =>
-    gtag.outboundClick(href, `${label} - Home`)
+  const handleGAEvent = (href) => gtag.outboundClick(href)
 
   return (
     <Box
@@ -51,9 +50,7 @@ export const Examples = () => {
                 responsive
                 rel="noopener noreferrer"
                 target="_blank"
-                onClick={() =>
-                  handleGAEvent(links.refinebio_github_example, 'Get Started')
-                }
+                onClick={() => handleGAEvent(links.refinebio_github_example)}
               />
             }
             svgIcon={<WaySignsIcon />}
@@ -73,8 +70,7 @@ export const Examples = () => {
                   target="_blank"
                   onClick={() =>
                     handleGAEvent(
-                      links.refinebio_github_differential_expression_rnaseq,
-                      'Differential Expression Analysis RNA-seq Example'
+                      links.refinebio_github_differential_expression_rnaseq
                     )
                   }
                 />
@@ -90,8 +86,7 @@ export const Examples = () => {
                   target="_blank"
                   onClick={() =>
                     handleGAEvent(
-                      links.refinebio_github_differential_expression_microarray,
-                      'Differential Expression Analysis Microarray Example'
+                      links.refinebio_github_differential_expression_microarray
                     )
                   }
                 />
@@ -117,8 +112,7 @@ export const Examples = () => {
                   target="_blank"
                   onClick={() =>
                     handleGAEvent(
-                      links.refinebio_github_pathway_analysis_rnaseq,
-                      'Pathway Analysis RNA-seq Example'
+                      links.refinebio_github_pathway_analysis_rnaseq
                     )
                   }
                 />
@@ -132,8 +126,7 @@ export const Examples = () => {
                   target="_blank"
                   onClick={() =>
                     handleGAEvent(
-                      links.refinebio_github_pathway_analysis_microarray,
-                      'Pathway Analysis Microarray Example'
+                      links.refinebio_github_pathway_analysis_microarray
                     )
                   }
                 />

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import styled, { css } from 'styled-components'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
@@ -59,12 +59,7 @@ export const SearchFilter = ({
   const handleToggleFilterItem = (checked, option) => {
     toggleFilter(checked, filterOption, filterKey, option, viewport === 'large')
     gtag.filterType(filterLabel)
-    gtag.toggleFilterItem(
-      `${checked ? 'Add' : 'Remove'} - ${formatFilterName(
-        filterOption,
-        option
-      )}`
-    )
+    gtag.toggleFilterItem(checked, formatFilterName(filterOption, option))
   }
 
   useEffect(() => {

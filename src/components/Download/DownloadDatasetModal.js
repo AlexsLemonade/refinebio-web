@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation'
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
@@ -47,9 +47,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
           if (receiveUpdates) {
             const subscribeEmailResponse = await subscribeEmail(emailAddress)
             if (subscribeEmailResponse.status !== 'error') {
-              gtag.emailSubscription(
-                'Download Dataset Modal (shared unprocessed dataset)'
-              )
+              gtag.emailSubscription(DownloadDatasetModal.name)
             }
           }
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Box, Heading } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { usePageRendered } from 'hooks/usePageRendered'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
@@ -9,10 +9,10 @@ import { List } from 'components/shared/List'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
 
-const ListItem = ({ text, href }) => {
+const ListItem = ({ href, text }) => {
   const handleGAEvents = () => {
     gtag.exploredUsageClick(text)
-    gtag.outboundClick(href, `${text} - Explore Dataset`)
+    gtag.outboundClick(href)
   }
 
   return (

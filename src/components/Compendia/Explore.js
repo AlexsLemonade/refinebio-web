@@ -1,5 +1,5 @@
 import { Box, Heading } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { Column } from 'components/shared/Column'
@@ -7,10 +7,10 @@ import { List } from 'components/shared/List'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
 
-const ListItem = ({ text, href }) => {
+const ListItem = ({ href, text, type }) => {
   const handleGAEvents = () => {
-    gtag.exploredUsageClick(text, 'compendia')
-    gtag.outboundClick(href, `${text} - Explore Compendia`)
+    gtag.exploredUsageClick(text, type)
+    gtag.outboundClick(href)
   }
 
   return (
@@ -20,7 +20,7 @@ const ListItem = ({ text, href }) => {
   )
 }
 
-export const Explore = () => {
+export const Explore = ({ type = 'compendia' }) => {
   const { setResponsive } = useResponsive()
 
   const exploreLinks = [
@@ -73,7 +73,12 @@ export const Explore = () => {
         </Heading>
         <List alignItems="start" flexDirection="column">
           {exploreLinks.map((link) => (
-            <ListItem key={link.text} href={link.href} text={link.text} />
+            <ListItem
+              key={link.text}
+              href={link.href}
+              text={link.text}
+              type={type}
+            />
           ))}
         </List>
       </Column>

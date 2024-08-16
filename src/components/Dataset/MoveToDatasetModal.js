@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { Box, Heading } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
@@ -33,11 +33,8 @@ export const MoveToDatasetModal = ({
   const newDatasetTotalSamples = formatNumbers(getTotalSamples(dataset.data))
 
   const handleMoveSamples = async (action = 'append') => {
-    const GAEvent = (text) => gtag.myDatasetAction(`${text} Samples`)
-
     if (action === 'append') {
       await addSamples(dataset.data)
-      GAEvent('Append')
       push(
         {
           pathname,
@@ -50,7 +47,6 @@ export const MoveToDatasetModal = ({
       )
     } else {
       await replaceSamples(dataset.data)
-      GAEvent('Replace')
       push(
         {
           pathname,
@@ -62,6 +58,7 @@ export const MoveToDatasetModal = ({
         pathname
       )
     }
+    gtag.myDatasetAction(action)
     closeModal(id)
   }
 

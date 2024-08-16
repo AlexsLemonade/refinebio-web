@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { Box, Heading, Text } from 'grommet'
-import gtag from 'api/analytics/gtag'
+import gtag from 'analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -47,10 +47,7 @@ export const NormalizedTab = ({ type = 'normalized' }) => {
             rel="noopener noreferrer"
             target="_blank"
             onClick={() =>
-              gtag.outboundClick(
-                links.refinebio_docs_normalized_compendia,
-                `Learn More - ${tabName}`
-              )
+              gtag.outboundClick(links.refinebio_docs_normalized_compendia)
             }
           />
         </Box>
