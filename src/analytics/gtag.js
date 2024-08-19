@@ -46,12 +46,7 @@ const myDatasetAction = (action) =>
 // tracks the dataset download options selected by the user
 const myDatasetDownloadOptions = (dataset) =>
   event('my_dataset_download_options', {
-    my_dataset_download_options: `Aggregate: ${
-      dataset.aggregate_by
-    }, Transformation: ${transformation[dataset.scale_by]}, QN: ${
-      dataset.quantile_normalize ? 'Skipped' : 'Not skipped'
-    }
-  `
+    my_dataset_download_options: getFormattedDatasetOptions(dataset)
   })
 
 // tracks the number of dataset downloads associated with each token
@@ -64,19 +59,12 @@ const oneOffExperimentDownload = (accessionCode) =>
   })
 
 // tracks the dataset's state (expired or valid) and changes in download options (initial and updated)
-const regeneratedDataset = (state, defaultOptions, newOptions) => {
-  // due to GA char limit, keys names are abbreviated
-  const format = (option) => {
-    return `A: ${option.aggregate_by}, T: ${
-      transformation[option.scale_by]
-    }, QN: ${option.quantile_normalize ? 'Not skipped' : 'Skipped'}`
-  }
-
+const regeneratedDataset = (isExpired, defaultOptions, newOptions) => {
   event('regenerated_dataset', {
-    regenerated_state: state ? 'Expired' : 'Valid',
-    regenerated_download_options: `${format(defaultOptions)} ${
-      newOptions ? `(new) ${format(newOptions)}` : ''
-    }`
+    regenerated_state: isExpired ? 'Expired' : 'Valid',
+    regenerated_download_options: `${getFormattedDatasetOptions(
+      defaultOptions
+    )} ${newOptions ? `(new) ${getFormattedDatasetOptions(newOptions)}` : ''}`
   })
 }
 
@@ -86,6 +74,14 @@ const sharedDataset = (isProcessed) =>
     shared_state: isProcessed ? 'Processed' : 'Unprocessed'
   })
 
+// helper
+const getFormattedDatasetOptions = (dataset) => {
+  // due to GA char limit, keys names are abbreviated
+  return `A: ${dataset.aggregate_by}, T: ${
+    transformation[dataset.scale_by]
+  }, QN: ${dataset.quantile_normalize ? 'Not skipped' : 'Skipped'}`
+}
+
 /* --- Links --- */
 // tracks click-through to the experiment page from search results (via title and "View Samples" button)
 const experimentPageClick = (from) =>
@@ -93,7 +89,7 @@ const experimentPageClick = (from) =>
     experiment_page_click_from: from
   })
 
-// tracks which "Explore what you can do with your dataset" link users click on (via dataset or compendia)
+// tracks which "Explore what you can do with your dataset" link users click on (via dataset and compendia after download)
 const exploredUsageClick = (usage, type = 'dataset') =>
   event(`click`, { [`${type}_explored_usage`]: usage })
 
@@ -138,9 +134,9 @@ const filterCombination = (facets, query) => {
 const filterType = (type) => event('filter_type', { filter_type: type })
 
 // tracks user-interactions with toggling filters on and off
-const toggleFilterItem = (checked, item) =>
+const toggleFilterItem = (isChecked, item) =>
   event('toggled_filter_item', {
-    toggled_filter_item: `${checked ? 'Add' : 'Remove'} - ${item}`
+    toggled_filter_item: `${isChecked ? 'Add' : 'Remove'} - ${item}`
   })
 
 // tracks the user-entered search terms
