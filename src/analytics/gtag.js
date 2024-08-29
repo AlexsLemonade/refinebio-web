@@ -1,12 +1,9 @@
-import getReadable from 'helpers/getReadable'
 import {
   event,
   getDatasetOptionsChanges,
   getDatasetState,
   getFormattedDatasetOptions,
   getFilterCombination,
-  getParameterForLink,
-  getSnakeCase,
   getToggledFilterItem
 } from './helpers'
 
@@ -24,11 +21,24 @@ const trackEmailSubscription = (Component) => {
 /* --- Compendia --- */
 // tracks the compendia downloads and organism names
 const trackCompendiaDownload = (compendia) => {
-  const key = 'quant_sf_only'
-  const type = getReadable(key, compendia[key])
+  // if quant_sf_only is true, it's rna-seq, otherwise normalized compendia
+  if (compendia.quant_sf_only) {
+    trackDownloadRnaSeqCompendia(compendia)
+  } else {
+    trackDownloadNormalizedCompendia(compendia)
+  }
+}
+// for RNA-req Sample compendia
+const trackDownloadRnaSeqCompendia = (compendia) => {
   const payload = {}
-  payload[`${type}_organism`] = compendia.primary_organism_name
-  event(`compendia_${type}_download`, payload)
+  payload.rnaseq_organism = compendia.primary_organism_name
+  event(`compendia_rnaseq_download`, payload)
+}
+// for Normalized compendia
+const trackDownloadNormalizedCompendia = (compendia) => {
+  const payload = {}
+  payload.normalized_organism = compendia.primary_organism_name
+  event(`compendia_normalized_download`, payload)
 }
 
 /* --- Datasets --- */
@@ -44,11 +54,9 @@ const tracktrackDatasetDownloadOptions = (dataset) => {
   payload.my_dataset_download_options = getFormattedDatasetOptions(dataset)
   event('my_dataset_download_options', payload)
 }
-// tracks the number of dataset downloads associated with each token
-const trackDatasetDownload = (token) => {
-  const payload = {}
-  payload.token = token
-  event('dataset_downalod', token)
+// tracks the number of clicks on dataset downloads
+const trackDatasetDownload = () => {
+  event('dataset_downalod')
 }
 // tracks the number of one-off downloads associated with each accession code
 const trackOneOffExperimentDownload = (experiment) => {
@@ -73,33 +81,33 @@ const trackSharedDataset = () => {
 
 /* --- Links --- */
 // tracks click-through to the experiment page from search results
-// (via title and "View Samples" button)
+// used to create a report to differentiate which component users click
 const trackExperimentPageClick = (Component) => {
   const payload = {}
   payload.experiment_page_click_from = Component.name
   event('page_view', payload)
 }
-// tracks which "Explore what you can do with your dataset" link users click on
-const trackExploredUsageClick = (linkLabel, Component) => {
+// tracks the explore links that users click on after downloads
+const trackExploredUsageClick = (link, Component) => {
+  // sets the dimension key for dataset or compendia usage
+  const key =
+    Component.name === 'DatasetUsage'
+      ? 'dataset_explored_usage'
+      : 'compendia_explored_usage'
   const payload = {}
-  payload[`${getSnakeCase(Component.name)}_explored_usage`] = linkLabel
+  payload[key] = link
   event(`click`, payload)
 }
-// tracks the internal site navigation clicks
-const trackNavClick = (item, Component) => {
-  const payload = {}
-  payload[`${getSnakeCase(Component.name)}_nav_item`] = item
-  event(`page_view`, payload)
-}
-// tracks the outbound link clicks
-const trackOutboundClick = (url) => {
-  const linkName = getParameterForLink(url)
-  // no event will be sent if no match
-  if (!linkName) return
 
+// tracks internal and external link clicks
+const trackLinks = (link) => {
+  // sets the dimension key for internal or extrenal links
+  const key = link.startWith('http')
+    ? 'click_internal_link'
+    : 'click_external_link'
   const payload = {}
-  payload[`click_to_${linkName}`] = url
-  event('click', payload)
+  payload[key] = link
+  event(`click`, payload)
 }
 
 /* --- Search --- */
@@ -140,8 +148,7 @@ export default {
   trackSharedDataset,
   trackExperimentPageClick,
   trackExploredUsageClick,
-  trackNavClick,
-  trackOutboundClick,
+  trackLinks,
   trackFilterCombination,
   trackFilterType,
   trackToggleFilterItem,
