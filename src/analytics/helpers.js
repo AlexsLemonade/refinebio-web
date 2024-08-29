@@ -82,12 +82,13 @@ const formatFacets = (query) => {
   return [{ organisms }, { technology }, { platform }]
     .map((facet) => {
       const [key, items] = Object.entries(facet)[0]
+      if (!items) return null
 
       return Array.isArray(items)
         ? items.map((item) => formatFilterName(key, item))
         : [formatFilterName(key, items)]
     })
-    .filter(Boolean) // makes sure to exclude undefined
+    .filter(Boolean) // makes sure to exclude null
 }
 
 export const getFilterCombination = (query) => {
