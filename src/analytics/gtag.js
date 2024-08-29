@@ -46,17 +46,17 @@ const trackDownloadNormalizedCompendia = (compendia) => {
 const trackDatasetAction = (Component) => {
   const payload = {}
   payload.my_dataset_action = Component.name
-  event('my_dataset_action', payload)
+  event('dataset_action', payload)
 }
 // tracks the dataset download options selected by the user
 const tracktrackDatasetDownloadOptions = (dataset) => {
   const payload = {}
   payload.my_dataset_download_options = getFormattedDatasetOptions(dataset)
-  event('my_dataset_download_options', payload)
+  event('dataset_download_options', payload)
 }
 // tracks the number of clicks on dataset downloads
 const trackDatasetDownload = () => {
-  event('dataset_downalod')
+  event('dataset_download')
 }
 // tracks the number of one-off downloads associated with each accession code
 const trackOneOffExperimentDownload = (experiment) => {
