@@ -1,7 +1,12 @@
 export const readableAttributes = {}
 
+const readableAnalyticsBooleans = {
+  checked: ['Add - ', 'Remove - '],
+  expires_on: ['Expired', 'Valid']
+}
+
 export const readableBooleans = {
-  expires_on: ['Expired', 'Valid'],
+  ...readableAnalyticsBooleans,
   quantile_normalize: ['Not skipped', 'Skipped'],
   quant_sf_only: ['rna-seq', 'normalized']
 }
