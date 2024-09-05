@@ -27,11 +27,12 @@ const supportedEvents = [
   'search_text'
 ]
 const supportedDimensions = [
+  // Dataset
+  'dataset_id',
   // Links
   'click_external_link',
   'click_internal_link',
-  'compendia_explored_usage',
-  'dataset_explored_usage'
+  'explored_usage_link'
 ]
 export const event = (eventName, value = {}, nonInteraction = false) => {
   try {
@@ -74,21 +75,18 @@ export const getFormattedDatasetOptions = (dataset) =>
     .map((key) => `${getReadable(key, dataset[key])}`)
     .join('|')}`
 
-// formats filter names for each facet
+// formats filter names in each facet
 const formatFacets = (query) => {
   // tracks only the following items from the query
   const { downloadable_organism: organisms, technology, platform } = query
 
-  return [{ organisms }, { technology }, { platform }]
-    .map((facet) => {
-      const [key, items] = Object.entries(facet)[0]
-      if (!items) return null
-
-      return Array.isArray(items)
-        ? items.map((item) => formatFilterName(key, item))
-        : [formatFilterName(key, items)]
-    })
-    .filter(Boolean) // makes sure to exclude null
+  return Object.entries({ organisms, technology, platform })
+    .filter(([, value]) => value)
+    .map(([key, value]) =>
+      (Array.isArray(value) ? value : [value]).map((item) =>
+        formatFilterName(key, item)
+      )
+    )
 }
 
 export const getFilterCombination = (query) => {

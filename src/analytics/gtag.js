@@ -5,7 +5,7 @@ import {
   getFormattedDatasetOptions,
   getFilterCombination,
   getToggledFilterItem
-} from './helpers'
+} from 'analytics/helpers'
 
 // NOTE: User-defined event parameters must be configured as custom definitions in the GA property.
 // Please make sure they are registered if you create any new ones.
@@ -48,17 +48,19 @@ const trackDatasetAction = (Component) => {
   payload.my_dataset_action = Component.name
   event('dataset_action', payload)
 }
+// tracks the number of dataset downloads by dataset ID
+const trackDatasetDownload = (dataset) => {
+  const payload = {}
+  payload.dataset_id = dataset.dataset_id
+  event('dataset_download', payload)
+}
 // tracks the dataset download options selected by the user
-const tracktrackDatasetDownloadOptions = (dataset) => {
+const trackDatasetDownloadOptions = (dataset) => {
   const payload = {}
   payload.my_dataset_download_options = getFormattedDatasetOptions(dataset)
   event('dataset_download_options', payload)
 }
-// tracks the number of clicks on dataset downloads
-const trackDatasetDownload = () => {
-  event('dataset_download')
-}
-// tracks the number of one-off downloads associated with each accession code
+// tracks the number of one-off downloads by accession code
 const trackOneOffExperimentDownload = (experiment) => {
   const payload = {}
   payload.one_off_experiment_download = experiment.accession_code
@@ -74,9 +76,11 @@ const trackRegeneratedDataset = (dataset, regeneratedDataset) => {
   )
   event('regenerated_dataset', payload)
 }
-// tracks user clicks on the share dataset button
-const trackSharedDataset = () => {
-  event('shared_dataset')
+// tracks user clicks on the share dataset button by dataset ID
+const trackSharedDataset = (dataset) => {
+  const payload = {}
+  payload.dataset_id = dataset.dataset_id
+  event('shared_dataset', payload)
 }
 
 /* --- Links --- */
@@ -88,14 +92,10 @@ const trackExperimentPageClick = (Component) => {
   event('page_view', payload)
 }
 // tracks the explore links that users click on after downloads
-const trackExploredUsageClick = (link, Component) => {
+const trackExploredUsageClick = (link) => {
   // sets the dimension key for dataset or compendia usage
-  const key =
-    Component.name === 'DatasetUsage'
-      ? 'dataset_explored_usage'
-      : 'compendia_explored_usage'
   const payload = {}
-  payload[key] = link
+  payload.explored_usage_link = link
   event(`click`, payload)
 }
 
@@ -112,9 +112,9 @@ const trackLinks = (link) => {
 
 /* --- Search --- */
 // tracks the most used filter combinations
-const trackFilterCombination = (facets, query) => {
+const trackFilterCombination = (query) => {
   const payload = {}
-  payload.filter_combination = getFilterCombination(facets, query)
+  payload.filter_combination = getFilterCombination(query)
   event('page_view', payload)
 }
 // tracks the types of filters being used the most
@@ -141,8 +141,8 @@ export default {
   trackEmailSubscription,
   trackCompendiaDownload,
   trackDatasetAction,
-  tracktrackDatasetDownloadOptions,
   trackDatasetDownload,
+  trackDatasetDownloadOptions,
   trackOneOffExperimentDownload,
   trackRegeneratedDataset,
   trackSharedDataset,
