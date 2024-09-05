@@ -4,19 +4,13 @@ import { SamplesTableManagerContext } from 'contexts/SamplesTableManagerContext'
 
 export const useSamplesTableManager = (queryToAdd = {}) => {
   const {
-    config: configState,
-    setConfig: setConfigState,
-    samplesTable: samplesTableState,
-    setSamplesTable: setSamplesTableState,
-    samplesTableData: samplesTableDataState,
-    setSamplesTableData: setSamplesTableDataState
+    config,
+    setConfig,
+    samplesTable,
+    setSamplesTable,
+    samplesTableData,
+    setSamplesTableData
   } = useContext(SamplesTableManagerContext)
-  const config = configState
-  const setConfig = setConfigState
-  const samplesTable = samplesTableState
-  const setSamplesTable = setSamplesTableState
-  const samplesTableData = samplesTableDataState
-  const setSamplesTableData = setSamplesTableDataState
   const [loading, setLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
   const hasSamples = samplesTableData?.results?.length > 0
