@@ -51,7 +51,7 @@ const trackDatasetAction = (Component) => {
 // tracks the number of dataset downloads by dataset ID
 const trackDatasetDownload = (dataset) => {
   const payload = {}
-  payload.dataset_id = dataset.dataset_id
+  payload.dataset_id = dataset.id
   event('dataset_download', payload)
 }
 // tracks the dataset download options selected by the user
@@ -79,7 +79,7 @@ const trackRegeneratedDataset = (dataset, regeneratedDataset) => {
 // tracks user clicks on the share dataset button by dataset ID
 const trackSharedDataset = (dataset) => {
   const payload = {}
-  payload.dataset_id = dataset.dataset_id
+  payload.dataset_id = dataset.id
   event('shared_dataset', payload)
 }
 
