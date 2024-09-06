@@ -7,7 +7,6 @@ import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
 import formatFacetNames from 'helpers/formatFacetNames'
 import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
-import formatFacetNames from 'helpers/formatFacetNames'
 import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -90,11 +89,11 @@ export const Search = ({
     } = query
 
     if (search) {
-      gtag.searchTerm(userSearchTerm)
+      gtag.trackSearchTerm(userSearchTerm)
     }
 
     if (!!organism || !!platform || !!technology) {
-      gtag.filterCombination(facets, query)
+      gtag.trackFilterCombination(query)
     }
   }, [query])
 

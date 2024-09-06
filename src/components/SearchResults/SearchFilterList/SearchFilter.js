@@ -58,8 +58,8 @@ export const SearchFilter = ({
 
   const handleToggleFilterItem = (checked, option) => {
     toggleFilter(checked, filterOption, filterKey, option, viewport === 'large')
-    gtag.filterType(filterLabel)
-    gtag.toggleFilterItem(checked, formatFilterName(filterOption, option))
+    gtag.trackFilterType(filterLabel)
+    gtag.trackToggleFilterItem(checked, formatFilterName(filterOption, option))
   }
 
   useEffect(() => {
