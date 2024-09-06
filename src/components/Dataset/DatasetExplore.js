@@ -15,7 +15,7 @@ const ListItem = ({ text, href }) => {
       <Anchor
         href={href}
         label={text}
-        onClick={() => gtag.exploredUsageClick(text)}
+        onClick={() => gtag.trackExploredUsageClick(href)}
       />
     </Box>
   )

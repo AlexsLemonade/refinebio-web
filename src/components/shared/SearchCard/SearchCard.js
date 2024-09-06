@@ -57,6 +57,7 @@ export const SearchCard = ({ result = {} }) => {
           <Box align={setResponsive('start', 'end')} width="100%">
             <SearchCardAction
               accessionCode={accessionCode}
+              experiment={result}
               downloadableSamples={downloadableSamples}
               organismNames={organismNames}
               technology={technology}

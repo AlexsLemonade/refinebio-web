@@ -5,13 +5,13 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { InlineMessage } from 'components/shared/InlineMessage'
 
-export const RemoveDatasetButton = ({ dataToRemove, label = 'Remove' }) => {
+export const RemoveDatasetButton = ({ dataToRemove }) => {
   const { loading, removeSamples } = useDatasetManager()
   const { setResponsive } = useResponsive()
 
   const handleClick = () => {
     removeSamples(dataToRemove)
-    gtag.myDatasetAction(label)
+    gtag.trackDatasetAction(RemoveDatasetButton)
   }
 
   return (
@@ -24,7 +24,7 @@ export const RemoveDatasetButton = ({ dataToRemove, label = 'Remove' }) => {
       />
       <Button
         isLoading={loading}
-        label={label}
+        label="Remove"
         link
         linkFontSize={setResponsive('medium', 'small')}
         margin={{ left: 'xsmall' }}
