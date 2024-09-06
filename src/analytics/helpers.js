@@ -57,11 +57,13 @@ export const event = (eventName, value = {}, nonInteraction = false) => {
       (key) => !supportedDimensions.includes(key)
     )
     if (unsupportedDimensions.length > 0) {
-      throw new Error(`Unsupported dimensions: ${unsupportedDimensions.join()}`)
+      throw new Error(
+        `The dimension name${unsupportedDimensions.join()} is unsupported`
+      )
     }
 
     if (!supportedEvents.includes(eventName)) {
-      throw new Error(`Unsupported event: ${eventName}`)
+      throw new Error(`The event name ${eventName} is unsupported`)
     }
 
     window.gtag('event', eventName, {
@@ -69,7 +71,7 @@ export const event = (eventName, value = {}, nonInteraction = false) => {
       non_interaction: nonInteraction
     })
   } catch (error) {
-    console.error('Error sending event to GA4:', error)
+    console.error('Error sending event to GA4', error)
   }
 }
 
