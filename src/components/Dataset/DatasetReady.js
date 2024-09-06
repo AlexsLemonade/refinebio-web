@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
+import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { useToken } from 'hooks/useToken'
@@ -21,6 +22,7 @@ export const DatasetReady = ({ dataset }) => {
 
   const handleDownloadNow = async () => {
     await downloadDataset(dataset.id, dataset.download_url)
+    gtag.trackDatasetDownload(dataset)
   }
 
   return (
