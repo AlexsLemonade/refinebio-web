@@ -58,7 +58,7 @@ export const MoveToDatasetModal = ({
         pathname
       )
     }
-    gtag.myDatasetAction(action)
+    gtag.trackDatasetAction(MoveToDatasetModal)
     closeModal(id)
   }
 

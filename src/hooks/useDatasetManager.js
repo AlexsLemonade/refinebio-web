@@ -7,7 +7,6 @@ import isEmptyObject from 'helpers/isEmptyObject'
 import unionizeArrays from 'helpers/unionizeArrays'
 import { options as configOptions } from 'config'
 import { api } from 'api'
-import gtag from 'analytics/gtag'
 
 export const useDatasetManager = () => {
   const {
@@ -91,17 +90,13 @@ export const useDatasetManager = () => {
 
   const downloadDataset = async (id, downloadUrl) => {
     let href = ''
-    const GAEvent = (apiToken) => gtag.datasetDownload(apiToken)
-
     if (validateToken() && downloadUrl) {
       href = downloadUrl
-      GAEvent(token)
     } else {
       // creates a new token and requests a download url with API-Key
       const tokenId = await createToken()
       const { download_url: url } = await getDataset(id, tokenId)
       href = url
-      GAEvent(tokenId)
     }
 
     window.location.href = href

@@ -38,12 +38,7 @@ const Card = ({ description, format, index, title }) => {
   )
 }
 
-export const FilesSummary = ({
-  dataset,
-  defaultDataset = {},
-  isExpired,
-  isProcessed
-}) => {
+export const FilesSummary = ({ dataset, defaultDataset = {}, isProcessed }) => {
   const { createDataset, updateDataset, regeneratedDataset } =
     useDatasetManager()
   const { setResponsive } = useResponsive()
@@ -122,8 +117,7 @@ export const FilesSummary = ({
     )
     const pathname = `/dataset/${response.id}`
 
-    gtag.regeneratedDataset(
-      isExpired && isProcessed,
+    gtag.trackRegeneratedDataset(
       defaultDataset,
       JSON.stringify(defaultDataset) !== JSON.stringify(dataset)
         ? dataset

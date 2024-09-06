@@ -11,7 +11,6 @@ export const DatasetActionButton = ({
   data,
   downloadableSamples,
   disableAddRemaining = false,
-  label,
   ...props
 }) => {
   const { dataset } = useDatasetManager()
@@ -55,7 +54,7 @@ export const DatasetActionButton = ({
   }
 
   // eslint-disable-next-line react/jsx-props-no-spreading
-  return <AddToDatasetButton dataToAdd={data} label={label} {...props} />
+  return <AddToDatasetButton dataToAdd={data} {...props} />
 }
 
 export default DatasetActionButton
