@@ -27,12 +27,28 @@ const supportedEvents = [
   'search_text'
 ]
 const supportedDimensions = [
+  // General
+  'subscription_click_from',
+  // Compendia
+  'normalized_organism',
+  'rnaseq_organism',
   // Dataset
+  'dataset_action',
+  'dataset_download_options',
+  'dataset_download_option_changes',
   'dataset_id',
+  'one_off_experiment_download',
+  'regenerated_state',
   // Links
   'click_external_link',
   'click_internal_link',
-  'explored_usage_link'
+  'experiment_page_click_from',
+  'explored_usage_link',
+  // Search
+  'filter_combination',
+  'filter_type',
+  'toggled_filter_item',
+  'search_text'
 ]
 export const event = (eventName, value = {}, nonInteraction = false) => {
   try {
