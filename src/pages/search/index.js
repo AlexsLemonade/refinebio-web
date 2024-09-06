@@ -89,11 +89,11 @@ export const Search = ({
     } = query
 
     if (search) {
-      gtag.searchTerm(userSearchTerm)
+      gtag.trackSearchTerm(userSearchTerm)
     }
 
     if (!!organism || !!platform || !!technology) {
-      gtag.filterCombination(facets, query)
+      gtag.trackFilterCombination(query)
     }
   }, [query])
 

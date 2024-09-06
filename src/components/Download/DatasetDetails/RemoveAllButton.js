@@ -16,7 +16,7 @@ export const RemoveAllButton = ({ label = 'Remove All' }) => {
   const handleRemoveAll = () => {
     clearDataset()
     closeModal(id)
-    gtag.myDatasetAction(label)
+    gtag.trackDatasetAction(RemoveAllButton)
   }
 
   return (

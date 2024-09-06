@@ -11,7 +11,7 @@ import { Column } from 'components/shared/Column'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
 
-export const DatasetRegenerate = ({ isExpired = true }) => {
+export const DatasetRegenerate = () => {
   const {
     query: { dataset_id: idFromQuery },
     push
@@ -30,7 +30,7 @@ export const DatasetRegenerate = ({ isExpired = true }) => {
     const response = await updateDataset(await createDataset(), params)
     const pathname = `/dataset/${response.id}`
 
-    gtag.regeneratedDataset(isExpired, selectedDataset)
+    gtag.trackRegeneratedDataset(selectedDataset)
     push(
       {
         pathname,

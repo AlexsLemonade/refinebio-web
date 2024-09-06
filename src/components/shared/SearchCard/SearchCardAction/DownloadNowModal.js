@@ -14,13 +14,14 @@ import { ReceiveUpdatesCheckBox } from 'components/Download/StartProcessingForm/
 import { TermsOfUseCheckBox } from 'components/Download/StartProcessingForm/TermsOfUseCheckBox'
 
 export const DownloadNowModal = ({
-  accessionCode,
+  experiment, // For GA
   hasMultipleOrganisms,
   hasRnaSeq
 }) => {
   const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const { StartProcessingFormSchema } = validationSchemas
+  const { accession_code: accessionCode } = experiment
 
   return (
     <Box pad={{ bottom: 'small', horizontal: 'large' }}>
@@ -57,7 +58,7 @@ export const DownloadNowModal = ({
           }
 
           await startProcessingDataset(values, null, accessionCode)
-          gtag.oneOffExperimentDownload(accessionCode)
+          gtag.trackOneOffExperimentDownload(experiment)
           setSubmitting(false)
         }}
       >

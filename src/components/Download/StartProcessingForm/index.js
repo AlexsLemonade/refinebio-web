@@ -52,7 +52,7 @@ export const StartProcessingForm = ({ dataset }) => {
         push({ pathname }, pathname)
 
         if (datasetId === dataset.id) {
-          gtag.myDatasetDownloadOptions(dataset)
+          gtag.trackDatasetDownloadOptions(dataset)
         }
 
         setSubmitting(false)

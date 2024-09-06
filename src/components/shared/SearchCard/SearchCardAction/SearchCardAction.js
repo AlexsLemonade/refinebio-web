@@ -11,6 +11,7 @@ import { RequestExperimentFormButton } from './RequestExperimentFormButton'
 
 export const SearchCardAction = ({
   accessionCode,
+  experiment,
   downloadableSamples,
   organismNames,
   technology
@@ -50,6 +51,7 @@ export const SearchCardAction = ({
         <Box margin={{ top: 'small' }} width={setResponsive('100%', 'auto')}>
           <DownloadNowButton
             accessionCode={accessionCode}
+            experiment={experiment}
             hasMultipleOrganisms={hasMultipleOrganisms}
             hasRnaSeq={hasRnaSeq}
           />
