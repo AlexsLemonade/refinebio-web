@@ -2,7 +2,6 @@ import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import { SearchManagerContext } from 'contexts/SearchManagerContext'
 import { options } from 'config'
-import formatFacetNames from 'helpers/formatFacetNames'
 
 export const useSearchManager = () => {
   const {
@@ -215,7 +214,6 @@ export const useSearchManager = () => {
     config,
     setConfig,
     clearAllFilters,
-    formatFacetNames,
     getSearchQueryParam,
     hasAppliedFilters,
     isFilterChecked,

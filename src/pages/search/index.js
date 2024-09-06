@@ -5,6 +5,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
 import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
+import formatFacetNames from 'helpers/formatFacetNames'
 import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -37,7 +38,6 @@ export const Search = ({
     search: { pageSizes, sortby }
   } = options
   const {
-    formatFacetNames,
     getSearchQueryParam,
     setConfig,
     setSearch,
