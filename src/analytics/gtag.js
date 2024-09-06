@@ -3,6 +3,7 @@ import {
   getDatasetOptionsChanges,
   getDatasetState,
   getFormattedDatasetOptions,
+  getFormattedOrganismName,
   getFilterCombination,
   getToggledFilterItem
 } from 'analytics/helpers'
@@ -31,13 +32,13 @@ const trackCompendiaDownload = (compendia) => {
 // for RNA-req Sample compendia
 const trackDownloadRnaSeqCompendia = (compendia) => {
   const payload = {}
-  payload.rnaseq_organism = compendia.primary_organism_name
+  payload.rnaseq_organism = getFormattedOrganismName(compendia.organism)
   event(`compendia_rnaseq_download`, payload)
 }
 // for Normalized compendia
 const trackDownloadNormalizedCompendia = (compendia) => {
   const payload = {}
-  payload.normalized_organism = compendia.primary_organism_name
+  payload.normalized_organism = getFormattedOrganismName(compendia.organism)
   event(`compendia_normalized_download`, payload)
 }
 
