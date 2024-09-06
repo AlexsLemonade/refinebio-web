@@ -53,7 +53,7 @@ export const DownloadNowModal = ({
           if (receiveUpdates) {
             const subscribeEmailResponse = await subscribeEmail(emailAddress)
             if (subscribeEmailResponse.status !== 'error') {
-              gtag.emailSubscription(DownloadNowModal.name)
+              gtag.trackEmailSubscription(DownloadNowModal)
             }
           }
 

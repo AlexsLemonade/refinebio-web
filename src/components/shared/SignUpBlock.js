@@ -32,7 +32,7 @@ export const SignUpBlock = () => {
               setSubmitted(false)
             } else {
               setSubmitted(true)
-              gtag.emailSubscription(SignUpBlock.name)
+              gtag.trackEmailSubscription(SignUpBlock)
             }
 
             setSubmitting(false)
