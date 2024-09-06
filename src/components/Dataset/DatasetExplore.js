@@ -9,18 +9,15 @@ import { List } from 'components/shared/List'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
 
-const ListItem = ({ href, text }) => {
-  const handleGAEvents = () => {
-    gtag.exploredUsageClick(text)
-    gtag.outboundClick(href)
-  }
-
-  return (
-    <Box as="li" margin={{ bottom: 'small' }}>
-      <Anchor href={href} label={text} onClick={handleGAEvents} />
-    </Box>
-  )
-}
+const ListItem = ({ href, text }) => (
+  <Box as="li" margin={{ bottom: 'small' }}>
+    <Anchor
+      href={href}
+      label={text}
+      onClick={() => gtag.trackExploredUsageClick(href)}
+    />
+  </Box>
+)
 
 export const DatasetExplore = ({ dataset }) => {
   const pageRendered = usePageRendered()

@@ -7,20 +7,17 @@ import { List } from 'components/shared/List'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
 
-const ListItem = ({ href, text, type }) => {
-  const handleGAEvents = () => {
-    gtag.exploredUsageClick(text, type)
-    gtag.outboundClick(href)
-  }
+const ListItem = ({ href, text }) => (
+  <Box as="li" margin={{ bottom: 'small' }}>
+    <Anchor
+      href={href}
+      label={text}
+      onClick={() => gtag.trackExploredUsageClick(href)}
+    />
+  </Box>
+)
 
-  return (
-    <Box as="li" margin={{ bottom: 'small' }}>
-      <Anchor href={href} label={text} onClick={handleGAEvents} />
-    </Box>
-  )
-}
-
-export const Explore = ({ type = 'compendia' }) => {
+export const Explore = () => {
   const { setResponsive } = useResponsive()
 
   const exploreLinks = [
@@ -73,12 +70,7 @@ export const Explore = ({ type = 'compendia' }) => {
         </Heading>
         <List alignItems="start" flexDirection="column">
           {exploreLinks.map((link) => (
-            <ListItem
-              key={link.text}
-              href={link.href}
-              text={link.text}
-              type={type}
-            />
+            <ListItem key={link.text} href={link.href} text={link.text} />
           ))}
         </List>
       </Column>

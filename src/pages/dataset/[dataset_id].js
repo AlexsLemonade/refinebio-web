@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import moment from 'moment'
 import { Box } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { usePageRendered } from 'hooks/usePageRendered'
@@ -35,7 +34,6 @@ export const Dataset = ({ query }) => {
   const { isProcessingDataset, polledDatasetState, pollDatasetId } =
     usePollDatasetStatus()
   const [selectedDataset, setSelectedDataset] = useState({}) // stores the dataset currently displayed on the page
-  const isExpired = moment(selectedDataset.expires_on).isBefore(Date.now()) // checks if it's exipred
   const isProcessed = selectedDataset?.is_processed && selectedDataset?.success // sets visibility of the download options in Dwonload Files Summary
   const isUnprocessedDataset = // sets visibility of the Download Dataset button
     !selectedDataset?.is_processing &&
@@ -110,10 +108,7 @@ export const Dataset = ({ query }) => {
                   gap={setResponsive('medium', 'small')}
                   margin={{ top: setResponsive('medium', 'none') }}
                 >
-                  <ShareDatasetButton
-                    datasetId={idFromQuery}
-                    isProcessed={isProcessed}
-                  />
+                  <ShareDatasetButton dataset={selectedDataset} />
                   {isUnprocessedDataset && (
                     <DownloadDatasetButton dataset={selectedDataset} />
                   )}
@@ -122,7 +117,6 @@ export const Dataset = ({ query }) => {
               <FilesSummary
                 dataset={regeneratedDataset || selectedDataset}
                 defaultDataset={selectedDataset}
-                isExpired={isExpired}
                 isProcessed={isProcessed}
               />
               <DatasetSummary dataset={regeneratedDataset || selectedDataset} />

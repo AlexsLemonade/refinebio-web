@@ -106,10 +106,7 @@ export const Download = ({ type }) => {
 
   const handleFileDownload = async (id) => {
     const response = await downloadCompendia(id)
-    gtag.compendiaDownload(
-      type.toLowerCase(),
-      formatString(selectedOrganism.primary_organism_name)
-    )
+    gtag.trackCompendiaDownload(response)
     navigateToFileDownload(response.organism, response.url)
   }
 

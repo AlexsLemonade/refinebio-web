@@ -47,7 +47,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
           if (receiveUpdates) {
             const subscribeEmailResponse = await subscribeEmail(emailAddress)
             if (subscribeEmailResponse.status !== 'error') {
-              gtag.emailSubscription(DownloadDatasetModal.name)
+              gtag.trackEmailSubscription(DownloadDatasetModal)
             }
           }
 

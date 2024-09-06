@@ -11,11 +11,7 @@ import { InlineMessage } from 'components/shared/InlineMessage'
 import { Modal } from 'components/shared/Modal'
 import { TextInput } from 'components/shared/TextInput'
 
-export const ShareDatasetButton = ({
-  datasetId,
-  label = 'Share Dataset',
-  isProcessed = false
-}) => {
+export const ShareDatasetButton = ({ dataset }) => {
   const { openModal } = useModal()
   const { setResponsive } = useResponsive()
   const { startTimer, clearTimer } = useTimeoutInCallback(() => {
@@ -23,12 +19,13 @@ export const ShareDatasetButton = ({
   }, 3000)
   const [isCopied, setIsCopied] = useState(false)
   const [value, handdleCopy] = useCopyToClipboard(null)
+  const { id: datasetId } = dataset
   const id = `shareable-link_${datasetId}`
   const shareableLink = `${getDomain()}/dataset/${datasetId}?ref=share`
 
   const handleShare = () => {
     openModal(id)
-    gtag.sharedDataset(isProcessed)
+    gtag.trackSharedDataset(dataset)
   }
 
   const handleCopy = (link) => {
@@ -45,7 +42,12 @@ export const ShareDatasetButton = ({
     <Modal
       id={id}
       button={
-        <Button label={label} secondary responsive onClick={handleShare} />
+        <Button
+          label="Share Dataset"
+          secondary
+          responsive
+          onClick={handleShare}
+        />
       }
       fullHeight={false}
     >
