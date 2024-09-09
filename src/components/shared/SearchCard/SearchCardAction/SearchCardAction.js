@@ -1,6 +1,5 @@
 import { memo } from 'react'
 import { Box } from 'grommet'
-import { usePageRendered } from 'hooks/usePageRendered'
 import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
 import { getFormattedExperiment } from 'helpers/formatDatasetAction'
@@ -16,7 +15,6 @@ export const SearchCardAction = ({
   organismNames,
   technology
 }) => {
-  const pageRendered = usePageRendered()
   const { isProcessingDataset, pollDatasetAccession } = usePollDatasetStatus()
   pollDatasetAccession(accessionCode) // checks this accession code for polling
   const { setResponsive } = useResponsive()
@@ -27,7 +25,7 @@ export const SearchCardAction = ({
       ? technology === rnaSeq
       : technology.find((x) => x === rnaSeq)
 
-  if (!pageRendered) return null
+  if (!experiment) return null
 
   if (!downloadableSamples)
     return <RequestExperimentFormButton accessionCode={accessionCode} />
