@@ -59,12 +59,12 @@ export const event = (eventName, value = {}, nonInteraction = false) => {
     )
     if (unsupportedDimensions.length > 0) {
       throw new Error(
-        `The dimension name${unsupportedDimensions.join()} is unsupported`
+        `Unsupported dimension names: ${unsupportedDimensions.join(', ')}`
       )
     }
 
     if (!supportedEvents.includes(eventName)) {
-      throw new Error(`The event name ${eventName} is unsupported`)
+      throw new Error(`Unsupported event name: ${eventName}`)
     }
 
     window.gtag('event', eventName, {
