@@ -99,16 +99,25 @@ const trackExploredUsageClick = (link) => {
   payload.explored_usage_link = link
   event(`click`, payload)
 }
-
 // tracks internal and external link clicks
 const trackLinks = (link) => {
-  // sets the dimension key for internal or extrenal links
-  const key = link.startWith('http')
-    ? 'click_internal_link'
-    : 'click_external_link'
+  if (link?.startsWith('http')) {
+    trackExternalClick(link)
+  } else {
+    trackInternalClick()
+  }
+}
+// for outbounds
+const trackExternalClick = (link) => {
   const payload = {}
-  payload[key] = link
-  event(`click`, payload)
+  payload.external_link = link
+  event('click_external_link', payload)
+}
+// for internal navigations
+const trackInternalClick = () => {
+  const payload = {}
+  payload.internal_link = window.location.pathname
+  event('page_view', payload)
 }
 
 /* --- Search --- */

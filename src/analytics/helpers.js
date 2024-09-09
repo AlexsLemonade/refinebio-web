@@ -22,6 +22,8 @@ const supportedEvents = [
   'one_off_experiment_download',
   'regenerated_dataset',
   'shared_dataset',
+  // Links
+  'click_external_link',
   // Search
   'filter_type',
   'toggled_filter_item',
@@ -41,10 +43,10 @@ const supportedDimensions = [
   'one_off_experiment_download',
   'regenerated_state',
   // Links
-  'click_external_link',
-  'click_internal_link',
   'experiment_page_click_from',
   'explored_usage_link',
+  'external_link',
+  'internal_link',
   // Search
   'filter_combination',
   'filter_type',
