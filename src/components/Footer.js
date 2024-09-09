@@ -7,7 +7,6 @@ import {
   Text
 } from 'grommet'
 import styled, { css } from 'styled-components'
-import gtag from 'analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
@@ -37,7 +36,6 @@ const GithubLink = styled(Anchor)`
 export const Footer = () => {
   const { setResponsive } = useResponsive()
   const anchorColor = 'gray-shade-40'
-  const handleGAEventOutboundClick = (href) => gtag.outboundClick(href)
 
   return (
     <GrommentFooter
@@ -67,7 +65,6 @@ export const Footer = () => {
                   label="Childhood Cancer Data Lab (CCDL)"
                   href={links.ccdl}
                   rel="noopener noreferrer"
-                  onClick={() => handleGAEventOutboundClick(links.ccdl)}
                 />
               </Paragraph>
               <Box
@@ -86,7 +83,6 @@ export const Footer = () => {
                   primary
                   rel="noopener noreferrer"
                   target="_blank"
-                  onClick={() => handleGAEventOutboundClick(links.ccdl_donate)}
                 />
                 <Box align="center" direction="row" gap="medium">
                   <TwitterLink
@@ -96,9 +92,6 @@ export const Footer = () => {
                     margin={{ horizontal: setResponsive('xsmall', 'none') }}
                     pad="0"
                     rel="noopener noreferrer"
-                    onClick={() =>
-                      handleGAEventOutboundClick(links.ccdl_twitter)
-                    }
                   />
                   <GithubLink
                     color={anchorColor}
@@ -106,9 +99,6 @@ export const Footer = () => {
                     icon={<Icon link name="Github" />}
                     pad="0"
                     rel="noopener noreferrer"
-                    onClick={() =>
-                      handleGAEventOutboundClick(links.ccdl_github)
-                    }
                   />
                 </Box>
               </Box>
@@ -119,7 +109,6 @@ export const Footer = () => {
                     label="Childhood Cancer Data Lab"
                     href={links.ccdl}
                     rel="noopener noreferrer"
-                    onClick={() => handleGAEventOutboundClick(links.ccdl)}
                   />
                 </Text>
                 <Text>
@@ -128,7 +117,6 @@ export const Footer = () => {
                     label="Alex’s Lemonade Stand Foundation"
                     href={links.alsf}
                     rel="noopener noreferrer"
-                    onClick={() => handleGAEventOutboundClick(links.alsf)}
                   />
                 </Text>
               </Box>

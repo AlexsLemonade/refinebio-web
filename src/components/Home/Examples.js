@@ -1,5 +1,4 @@
 import { Box, Paragraph } from 'grommet'
-import gtag from 'analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -12,7 +11,6 @@ import { ExampleCard } from './ExampleCard'
 
 export const Examples = () => {
   const { setResponsive } = useResponsive()
-  const handleGAEvent = (href) => gtag.outboundClick(href)
 
   return (
     <Box
@@ -50,7 +48,6 @@ export const Examples = () => {
                 responsive
                 rel="noopener noreferrer"
                 target="_blank"
-                onClick={() => handleGAEvent(links.refinebio_github_example)}
               />
             }
             svgIcon={<WaySignsIcon />}
@@ -68,11 +65,6 @@ export const Examples = () => {
                   responsive
                   rel="noopener noreferrer"
                   target="_blank"
-                  onClick={() =>
-                    handleGAEvent(
-                      links.refinebio_github_differential_expression_rnaseq
-                    )
-                  }
                 />
                 <Button
                   href={
@@ -84,11 +76,6 @@ export const Examples = () => {
                   responsive
                   rel="noopener noreferrer"
                   target="_blank"
-                  onClick={() =>
-                    handleGAEvent(
-                      links.refinebio_github_differential_expression_microarray
-                    )
-                  }
                 />
               </>
             }
@@ -110,11 +97,6 @@ export const Examples = () => {
                   responsive
                   rel="noopener noreferrer"
                   target="_blank"
-                  onClick={() =>
-                    handleGAEvent(
-                      links.refinebio_github_pathway_analysis_rnaseq
-                    )
-                  }
                 />
                 <Button
                   href={links.refinebio_github_pathway_analysis_microarray}
@@ -124,11 +106,6 @@ export const Examples = () => {
                   responsive
                   rel="noopener noreferrer"
                   target="_blank"
-                  onClick={() =>
-                    handleGAEvent(
-                      links.refinebio_github_pathway_analysis_microarray
-                    )
-                  }
                 />
               </>
             }

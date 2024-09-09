@@ -1,6 +1,5 @@
 import { memo } from 'react'
 import { Anchor, Box, Heading, Paragraph, Text } from 'grommet'
-import gtag from 'analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
@@ -33,7 +32,6 @@ const Card = ({ heading, pad, children }) => {
 
 export const RNASeqTab = ({ type = 'rnaSeq' }) => {
   const { setResponsive } = useResponsive()
-  const handleGAEvent = (href) => gtag.outboundClick(href)
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 350, delay: 200 }}>
@@ -85,9 +83,6 @@ export const RNASeqTab = ({ type = 'rnaSeq' }) => {
               responsive
               rel="noopener noreferrer"
               target="_blank"
-              onClick={() =>
-                handleGAEvent(links.refinebio_docs_rna_seq_sample_compendia)
-              }
             />
           </Card>
           <Card
@@ -110,7 +105,6 @@ export const RNASeqTab = ({ type = 'rnaSeq' }) => {
               responsive
               rel="noopener noreferrer"
               target="_blank"
-              onClick={() => handleGAEvent(links.refinebio_api_docs_compendia)}
             />
           </Card>
         </Row>

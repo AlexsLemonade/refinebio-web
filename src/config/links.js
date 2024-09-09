@@ -15,7 +15,6 @@ export const links = {
   refinebio: 'https://www.refine.bio',
   refinebio_staging: 'https://staging.refine.bio',
   // refine.bio API docs
-  refinebio_api_docs: 'https://api.refine.bio/v1/',
   refinebio_api_docs_compendia: 'https://api.refine.bio/v1/#tag/compendia',
   // internal route
   terms_of_use: '/terms',
@@ -49,8 +48,7 @@ export const links = {
     'https://docs.refine.bio/en/latest/main_text.html#transformations',
   refinebio_docs_why_can_I_add_certain_samples_to_my_dataset:
     'https://docs.refine.bio/en/latest/faq.html#why-can-t-i-add-certain-samples-to-my-dataset',
-  // refine.bio ALSF github.io
-  refinebio_githubio: 'https://alexslemonade.github.io',
+  // refine.bio github io
   refinebio_github_differential_expression_rnaseq:
     'https://alexslemonade.github.io/refinebio-examples/03-rnaseq/differential-expression_rnaseq_01.html',
   refinebio_github_compendium_processing:
