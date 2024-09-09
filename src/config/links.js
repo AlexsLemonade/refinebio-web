@@ -2,7 +2,7 @@ export const links = {
   // ALSF
   alsf: 'https://www.alexslemonade.org/',
   email_ccdl_alsf: 'ccdl@alexslemonade.org',
-  // ALSF github account
+  // ALSF github
   alsf_github: 'https://github.com/AlexsLemonade',
   // CCDL
   ccdl: 'https://www.ccdatalab.org',
