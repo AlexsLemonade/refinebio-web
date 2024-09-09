@@ -1,5 +1,6 @@
 import { Box, Button as GrommetButton } from 'grommet'
 import styled, { css } from 'styled-components'
+import gtag from 'analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import { IconSpinner } from './IconSpinner'
 
@@ -131,9 +132,15 @@ export const Button = ({
   underlineOnHover = false,
   uppercase = false,
   width,
+  onClick = () => {},
   ...props
 }) => {
   const { viewport, setResponsive } = useResponsive()
+  const handleClick = () => {
+    onClick()
+    gtag.trackLinks(props?.href)
+  }
+
   return (
     <Box
       responsive={responsive}
@@ -165,6 +172,7 @@ export const Button = ({
             textDecoration
           }}
           underlineOnHover={underlineOnHover}
+          onClick={handleClick}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...props}
         />
@@ -201,6 +209,7 @@ export const Button = ({
               horizontal: 'medium'
             }
           )}
+          onClick={handleClick}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...props}
         />
