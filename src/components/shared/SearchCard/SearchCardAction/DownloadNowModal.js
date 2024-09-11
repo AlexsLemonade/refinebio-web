@@ -14,7 +14,7 @@ import { ReceiveUpdatesCheckBox } from 'components/Download/StartProcessingForm/
 import { TermsOfUseCheckBox } from 'components/Download/StartProcessingForm/TermsOfUseCheckBox'
 
 export const DownloadNowModal = ({
-  experiment, // For GA
+  experiment,
   hasMultipleOrganisms,
   hasRnaSeq
 }) => {

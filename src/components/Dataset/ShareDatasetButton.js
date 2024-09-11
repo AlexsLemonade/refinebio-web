@@ -18,19 +18,19 @@ export const ShareDatasetButton = ({ dataset }) => {
     setIsCopied(false)
   }, 3000)
   const [isCopied, setIsCopied] = useState(false)
-  const [value, handdleCopy] = useCopyToClipboard(null)
+  const [value, copyText] = useCopyToClipboard(null)
   const { id: datasetId } = dataset
   const id = `shareable-link_${datasetId}`
   const shareableLink = `${getDomain()}/dataset/${datasetId}?ref=share`
 
-  const handleShare = () => {
+  const onShareClick = () => {
     openModal(id)
-    gtag.trackSharedDataset(dataset)
   }
 
-  const handleCopy = (link) => {
-    handdleCopy(link)
+  const onCopyClick = () => {
+    copyText(shareableLink)
     setIsCopied(true)
+    gtag.trackSharedDataset(dataset)
   }
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export const ShareDatasetButton = ({ dataset }) => {
           label="Share Dataset"
           secondary
           responsive
-          onClick={handleShare}
+          onClick={onShareClick}
         />
       }
       fullHeight={false}
@@ -78,12 +78,7 @@ export const ShareDatasetButton = ({ dataset }) => {
             <TextInput value={shareableLink} />
           </Box>
           <Box>
-            <Button
-              label="Copy"
-              primary
-              responsive
-              onClick={() => handleCopy(shareableLink)}
-            />
+            <Button label="Copy" primary responsive onClick={onCopyClick} />
           </Box>
         </Box>
       </Box>
