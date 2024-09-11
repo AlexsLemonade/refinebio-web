@@ -81,20 +81,7 @@ export const Search = ({
   }, [])
 
   useEffect(() => {
-    const {
-      downloadable_organism: organism,
-      platform,
-      technology,
-      search
-    } = query
-
-    if (search) {
-      gtag.trackSearchTerm(userSearchTerm)
-    }
-
-    if (!!organism || !!platform || !!technology) {
-      gtag.trackFilterCombination(query)
-    }
+    gtag.trackSearchQuery(query)
   }, [query])
 
   return (

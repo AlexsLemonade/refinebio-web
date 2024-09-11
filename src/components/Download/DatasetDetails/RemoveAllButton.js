@@ -7,7 +7,7 @@ import { Button } from 'components/shared/Button'
 import { Modal } from 'components/shared/Modal'
 import { Row } from 'components/shared/Row'
 
-export const RemoveAllButton = ({ label = 'Remove All' }) => {
+export const RemoveAllButton = () => {
   const { loading, clearDataset } = useDatasetManager()
   const { closeModal, openModal } = useModal()
   const { setResponsive } = useResponsive()
@@ -25,7 +25,7 @@ export const RemoveAllButton = ({ label = 'Remove All' }) => {
       button={
         <Button
           isLoading={loading}
-          label={label}
+          label="Remove All"
           tertiary
           responsive
           onClick={() => openModal(id)}

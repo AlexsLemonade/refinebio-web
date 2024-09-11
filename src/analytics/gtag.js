@@ -1,9 +1,9 @@
+import formatString from 'helpers/formatString'
 import {
   event,
   getDatasetOptionsChanges,
   getDatasetState,
   getFormattedDatasetOptions,
-  getFormattedOrganismName,
   getFilterCombination,
   getToggledFilterItem
 } from 'analytics/helpers'
@@ -32,13 +32,13 @@ const trackCompendiaDownload = (compendia) => {
 // for RNA-req Sample compendia
 const trackDownloadRnaSeqCompendia = (compendia) => {
   const payload = {}
-  payload.rnaseq_organism = getFormattedOrganismName(compendia.organism)
+  payload.rnaseq_organism = formatString(compendia.organism)
   event(`compendia_rnaseq_download`, payload)
 }
 // for Normalized compendia
 const trackDownloadNormalizedCompendia = (compendia) => {
   const payload = {}
-  payload.normalized_organism = getFormattedOrganismName(compendia.organism)
+  payload.normalized_organism = formatString(compendia.organism)
   event(`compendia_normalized_download`, payload)
 }
 
@@ -112,12 +112,6 @@ const trackLinks = (link) => {
 }
 
 /* --- Search --- */
-// tracks the most used filter combinations
-const trackFilterCombination = (query) => {
-  const payload = {}
-  payload.filter_combination = getFilterCombination(query)
-  event('page_view', payload)
-}
 // tracks the types of filters being used the most
 // (i.e., organism, platform, technology)
 const trackFilterType = (type) => {
@@ -131,10 +125,34 @@ const trackToggleFilterItem = (isChecked, item) => {
   payload.toggled_filter_item = getToggledFilterItem(isChecked, item)
   event('toggled_filter_item', payload)
 }
-// tracks the user-entered search terms
-const trackSearchTerm = (term) => {
+
+const trackSearchQuery = (query) => {
+  // tracks only the following items from the query
+  const {
+    downloadable_organism: organisms,
+    technology,
+    platform,
+    search
+  } = query
+
+  if (search) trackSearchTermFromQuery(query)
+
+  if (organisms || technology || platform) {
+    trackFilterCombinationFromQuery(query)
+  }
+}
+
+// tracks the most used filter combinations
+const trackFilterCombinationFromQuery = (query) => {
   const payload = {}
-  payload.search_text = term
+  payload.filter_combination = getFilterCombination(query)
+  event('page_view', payload)
+}
+
+// tracks the user-entered search terms
+const trackSearchTermFromQuery = (query) => {
+  const payload = {}
+  payload.search_text = query.search
   event('search_text', payload)
 }
 
@@ -150,8 +168,7 @@ export default {
   trackExperimentPageClick,
   trackExploredUsageClick,
   trackLinks,
-  trackFilterCombination,
   trackFilterType,
   trackToggleFilterItem,
-  trackSearchTerm
+  trackSearchQuery
 }

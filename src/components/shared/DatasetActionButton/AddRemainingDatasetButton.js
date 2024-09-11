@@ -4,11 +4,7 @@ import formatNumbers from 'helpers/formatNumbers'
 import { Button } from 'components/shared/Button'
 import { InlineMessage } from 'components/shared/InlineMessage'
 
-export const AddRemainingDatasetButton = ({
-  dataToAdd,
-  samplesInDataset,
-  label = 'Add Remaining'
-}) => {
+export const AddRemainingDatasetButton = ({ dataToAdd, samplesInDataset }) => {
   const { loading, addSamples } = useDatasetManager()
 
   const handleClick = () => {
@@ -20,7 +16,7 @@ export const AddRemainingDatasetButton = ({
     <>
       <Button
         isLoading={loading}
-        label={label}
+        label="Add Remaining"
         secondary
         responsive
         onClick={handleClick}

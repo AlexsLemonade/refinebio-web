@@ -1,6 +1,5 @@
 import moment from 'moment'
 import formatFilterName from 'helpers/formatFilterName'
-import formatString from 'helpers/formatString'
 import getReadable from 'helpers/getReadable'
 
 const datasetOptionsKeys = ['aggregate_by', 'scale_by', 'quantile_normalize']
@@ -94,11 +93,8 @@ export const getFormattedDatasetOptions = (dataset) =>
     .map((key) => `${getReadable(key, dataset[key])}`)
     .join('|')}`
 
-export const getFormattedOrganismName = (organism) => formatString(organism)
-
 // formats filter names in each facet
 const formatFacets = (query) => {
-  // tracks only the following items from the query
   const { downloadable_organism: organisms, technology, platform } = query
 
   return Object.entries({ organisms, technology, platform })
