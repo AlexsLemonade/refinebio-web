@@ -15,7 +15,7 @@ import { TermsOfUseCheckBox } from './TermsOfUseCheckBox'
 
 export const StartProcessingForm = ({ dataset }) => {
   const { push } = useRouter()
-  const { datasetId, email, startProcessingDataset } = useDatasetManager()
+  const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const { StartProcessingFormSchema } = validationSchemas
 
@@ -47,11 +47,7 @@ export const StartProcessingForm = ({ dataset }) => {
 
         const pathname = `/dataset/${response.id}`
         push({ pathname }, pathname)
-
-        if (datasetId === dataset.id) {
-          gtag.trackDatasetDownloadOptions(dataset)
-        }
-
+        gtag.trackDatasetDownloadOptions(dataset)
         setSubmitting(false)
       }}
     >
