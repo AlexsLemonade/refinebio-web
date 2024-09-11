@@ -101,10 +101,10 @@ const trackExploredUsageClick = (link) => {
 }
 // tracks internal and external link clicks
 const trackLinks = (link) => {
-  if (link?.startsWith('http')) {
+  if (link.startsWith('http')) {
     trackExternalClick(link)
   } else {
-    trackInternalClick()
+    trackInternalClick(link)
   }
 }
 // for outbounds
@@ -114,10 +114,10 @@ const trackExternalClick = (link) => {
   event('click_external_link', payload)
 }
 // for internal navigations
-const trackInternalClick = () => {
+const trackInternalClick = (link) => {
   const payload = {}
-  payload.internal_link = window.location.pathname
-  event('page_view', payload)
+  payload.internal_link = link
+  event('click_internal_link', payload)
 }
 
 /* --- Search --- */

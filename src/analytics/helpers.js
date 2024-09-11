@@ -23,6 +23,7 @@ const supportedEvents = [
   'shared_dataset',
   // Links
   'click_external_link',
+  'click_internal_link',
   // Search
   'filter_type',
   'toggled_filter_item',
