@@ -37,7 +37,10 @@ export const StartProcessingForm = ({ dataset }) => {
         }
 
         if (receiveUpdates) {
-          subscribeEmail(emailAddress)
+          const subscribeEmailResponse = await subscribeEmail(emailAddress)
+          if (subscribeEmailResponse.status !== 'error') {
+            gtag.trackEmailSubscription(StartProcessingForm)
+          }
         }
 
         const response = await startProcessingDataset(

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/navigation'
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
+import gtag from 'analytics/gtag'
 import { validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
@@ -42,8 +43,12 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
         validateOnChange={false}
         onSubmit={async (values, { setSubmitting }) => {
           const { emailAddress, receiveUpdates } = values
+
           if (receiveUpdates) {
-            subscribeEmail(emailAddress)
+            const subscribeEmailResponse = await subscribeEmail(emailAddress)
+            if (subscribeEmailResponse.status !== 'error') {
+              gtag.trackEmailSubscription(DownloadDatasetModal)
+            }
           }
 
           const response = await startProcessingDataset(values, dataset.id)

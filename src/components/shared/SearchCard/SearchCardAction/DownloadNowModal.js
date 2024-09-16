@@ -51,7 +51,10 @@ export const DownloadNowModal = ({
           const { emailAddress, receiveUpdates } = values
 
           if (receiveUpdates) {
-            subscribeEmail(emailAddress)
+            const subscribeEmailResponse = await subscribeEmail(emailAddress)
+            if (subscribeEmailResponse.status !== 'error') {
+              gtag.trackEmailSubscription(DownloadNowModal)
+            }
           }
 
           await startProcessingDataset(values, null, accessionCode)
