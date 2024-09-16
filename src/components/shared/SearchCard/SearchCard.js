@@ -55,13 +55,7 @@ export const SearchCard = ({ result = {} }) => {
         </Box>
         <Box gridArea="ctas" margin={{ top: setResponsive('none', 'large') }}>
           <Box align={setResponsive('start', 'end')} width="100%">
-            <SearchCardAction
-              accessionCode={accessionCode}
-              experiment={result}
-              downloadableSamples={downloadableSamples}
-              organismNames={organismNames}
-              technology={technology}
-            />
+            <SearchCardAction experiment={result} technology={technology} />
           </Box>
         </Box>
         <Box gridArea="meta">
