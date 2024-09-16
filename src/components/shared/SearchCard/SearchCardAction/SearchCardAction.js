@@ -8,13 +8,12 @@ import { DownloadNowButton } from './DownloadNowButton'
 import { ProcessingDatasetPill } from './ProcessingDatasetPill'
 import { RequestExperimentFormButton } from './RequestExperimentFormButton'
 
-export const SearchCardAction = ({
-  accessionCode,
-  experiment,
-  downloadableSamples,
-  organismNames,
-  technology
-}) => {
+export const SearchCardAction = ({ experiment, technology }) => {
+  const {
+    accession_code: accessionCode,
+    num_downloadable_samples: downloadableSamples,
+    organism_names: organismNames
+  } = experiment
   const { isProcessingDataset, pollDatasetAccession } = usePollDatasetStatus()
   pollDatasetAccession(accessionCode) // checks this accession code for polling
   const { setResponsive } = useResponsive()
@@ -24,8 +23,6 @@ export const SearchCardAction = ({
     typeof technology === 'string'
       ? technology === rnaSeq
       : technology.find((x) => x === rnaSeq)
-
-  if (!experiment) return null
 
   if (!downloadableSamples)
     return <RequestExperimentFormButton accessionCode={accessionCode} />
