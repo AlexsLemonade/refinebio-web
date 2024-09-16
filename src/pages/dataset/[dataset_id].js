@@ -108,7 +108,7 @@ export const Dataset = ({ query }) => {
                   gap={setResponsive('medium', 'small')}
                   margin={{ top: setResponsive('medium', 'none') }}
                 >
-                  <ShareDatasetButton datasetId={idFromQuery} />
+                  <ShareDatasetButton dataset={selectedDataset} />
                   {isUnprocessedDataset && (
                     <DownloadDatasetButton dataset={selectedDataset} />
                   )}
@@ -116,6 +116,7 @@ export const Dataset = ({ query }) => {
               </Row>
               <FilesSummary
                 dataset={regeneratedDataset || selectedDataset}
+                defaultDataset={selectedDataset}
                 isProcessed={isProcessed}
               />
               <DatasetSummary dataset={regeneratedDataset || selectedDataset} />

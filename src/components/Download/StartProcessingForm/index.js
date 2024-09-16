@@ -1,10 +1,11 @@
 import { useRouter } from 'next/navigation'
 import { Formik } from 'formik'
 import { Form } from 'grommet'
+import gtag from 'analytics/gtag'
+import { validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
-import { validationSchemas } from 'config'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { Row } from 'components/shared/Row'
@@ -46,6 +47,7 @@ export const StartProcessingForm = ({ dataset }) => {
 
         const pathname = `/dataset/${response.id}`
         push({ pathname }, pathname)
+        gtag.trackDatasetDownloadOptions(dataset)
         setSubmitting(false)
       }}
     >

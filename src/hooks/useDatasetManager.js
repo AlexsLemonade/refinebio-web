@@ -90,7 +90,6 @@ export const useDatasetManager = () => {
 
   const downloadDataset = async (id, downloadUrl) => {
     let href = ''
-
     if (validateToken() && downloadUrl) {
       href = downloadUrl
     } else {

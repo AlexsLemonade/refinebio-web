@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { Box, Heading } from 'grommet'
+import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
@@ -57,6 +58,7 @@ export const MoveToDatasetModal = ({
         pathname
       )
     }
+    gtag.trackDatasetAction(MoveToDatasetModal)
     closeModal(id)
   }
 
