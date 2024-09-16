@@ -1,3 +1,4 @@
+import formatString from 'helpers/formatString'
 import {
   event,
   getDatasetOptionsChanges,
@@ -31,13 +32,13 @@ const trackCompendiaDownload = (compendia) => {
 // for RNA-req Sample compendia
 const trackDownloadRnaSeqCompendia = (compendia) => {
   const payload = {}
-  payload.rnaseq_organism = compendia.primary_organism_name
+  payload.rnaseq_organism = formatString(compendia.organism)
   event(`compendia_rnaseq_download`, payload)
 }
 // for Normalized compendia
 const trackDownloadNormalizedCompendia = (compendia) => {
   const payload = {}
-  payload.normalized_organism = compendia.primary_organism_name
+  payload.normalized_organism = formatString(compendia.organism)
   event(`compendia_normalized_download`, payload)
 }
 
