@@ -128,11 +128,7 @@ export const Experiment = () => {
                         align="end"
                       >
                         <SearchCardAction
-                          accessionCode={accessionCode}
-                          downloadableSamples={
-                            experiment.num_downloadable_samples
-                          }
-                          organismNames={experiment.organism_names}
+                          experiment={experiment}
                           technology={getTechnologyNames()}
                         />
                       </Box>
