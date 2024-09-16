@@ -7,17 +7,15 @@ import { List } from 'components/shared/List'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
 
-const ListItem = ({ href, text }) => {
-  return (
-    <Box as="li" margin={{ bottom: 'small' }}>
-      <Anchor
-        href={href}
-        label={text}
-        onClick={() => gtag.trackExploredUsageClick(href)}
-      />
-    </Box>
-  )
-}
+const ListItem = ({ href, text }) => (
+  <Box as="li" margin={{ bottom: 'small' }}>
+    <Anchor
+      href={href}
+      label={text}
+      onClick={() => gtag.trackExploredUsageClick(href)}
+    />
+  </Box>
+)
 
 export const Explore = () => {
   const { setResponsive } = useResponsive()
