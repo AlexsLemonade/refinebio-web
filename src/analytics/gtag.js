@@ -135,22 +135,22 @@ const trackSearchQuery = (query) => {
     search
   } = query
 
-  if (search) trackSearchTermFromQuery(query)
+  if (search) trackSearchQueryTerm(query)
 
   if (organisms || technology || platform) {
-    trackFilterCombinationFromQuery(query)
+    trackSearchQueryFilterCombination(query)
   }
 }
 
 // tracks the most used filter combinations
-const trackFilterCombinationFromQuery = (query) => {
+const trackSearchQueryFilterCombination = (query) => {
   const payload = {}
   payload.filter_combination = getFilterCombination(query)
   event('page_view', payload)
 }
 
 // tracks the user-entered search terms
-const trackSearchTermFromQuery = (query) => {
+const trackSearchQueryTerm = (query) => {
   const payload = {}
   payload.search_text = query.search
   event('search_text', payload)
