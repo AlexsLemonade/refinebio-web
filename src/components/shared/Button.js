@@ -138,7 +138,7 @@ export const Button = ({
   const { viewport, setResponsive } = useResponsive()
   const handleClick = () => {
     onClick()
-    if (props?.href) gtag.trackLinks(props.href)
+    if (props?.href) gtag.trackLink(props.href)
   }
 
   return (

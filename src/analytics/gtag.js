@@ -100,7 +100,7 @@ const trackExploredUsageClick = (link) => {
   event(`click`, payload)
 }
 // tracks internal and external link clicks
-const trackLinks = (link) => {
+const trackLink = (link) => {
   if (link.startsWith('http')) {
     trackExternalClick(link)
   } else {
@@ -176,7 +176,7 @@ export default {
   trackSharedDataset,
   trackExperimentPageClick,
   trackExploredUsageClick,
-  trackLinks,
+  trackLink,
   trackFilterType,
   trackToggleFilterItem,
   trackSearchQuery

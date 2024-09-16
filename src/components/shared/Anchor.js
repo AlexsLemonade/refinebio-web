@@ -24,7 +24,7 @@ export const Anchor = ({
 }) => {
   const handleClick = () => {
     onClick()
-    gtag.trackLinks(href)
+    gtag.trackLink(href)
   }
 
   return typeof href === 'string' && href.startsWith('http') ? (
