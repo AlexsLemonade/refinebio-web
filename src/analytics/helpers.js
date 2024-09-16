@@ -95,7 +95,6 @@ export const getFormattedDatasetOptions = (dataset) =>
 
 // formats filter names in each facet
 const formatFacets = (query) => {
-  // tracks only the following items from the query
   const { downloadable_organism: organisms, technology, platform } = query
 
   return Object.entries({ organisms, technology, platform })
