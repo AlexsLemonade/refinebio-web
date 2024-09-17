@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
+import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { links, options } from 'config'
@@ -115,16 +116,24 @@ export const FilesSummary = ({ dataset }) => {
     (acc, cur) => ({ ...acc, [cur.value]: cur.label }),
     {}
   )
+
   const [openForm, setOpenForm] = useState(false)
 
   const handleRegenerateDataset = async (downloadOptions) => {
     const params = { data: datasetData, ...downloadOptions }
-
     const response = await updateDataset(
       regeneratedDataset?.id || (await createDataset()),
       params
     )
     const pathname = `/dataset/${response.id}`
+    const defaultDataset = {} // TODO: This will be cleaned up in Issue #359
+
+    gtag.trackRegeneratedDataset(
+      defaultDataset,
+      JSON.stringify(defaultDataset) !== JSON.stringify(dataset)
+        ? dataset
+        : null
+    )
 
     return pathname
   }

@@ -1,3 +1,4 @@
+import formatString from 'helpers/formatString'
 import {
   event,
   getDatasetOptionsChanges,
@@ -31,13 +32,13 @@ const trackCompendiaDownload = (compendia) => {
 // for RNA-req Sample compendia
 const trackDownloadRnaSeqCompendia = (compendia) => {
   const payload = {}
-  payload.rnaseq_organism = compendia.primary_organism_name
+  payload.rnaseq_organism = formatString(compendia.organism)
   event(`compendia_rnaseq_download`, payload)
 }
 // for Normalized compendia
 const trackDownloadNormalizedCompendia = (compendia) => {
   const payload = {}
-  payload.normalized_organism = compendia.primary_organism_name
+  payload.normalized_organism = formatString(compendia.organism)
   event(`compendia_normalized_download`, payload)
 }
 
@@ -98,25 +99,28 @@ const trackExploredUsageClick = (link) => {
   payload.explored_usage_link = link
   event(`click`, payload)
 }
-
 // tracks internal and external link clicks
-const trackLinks = (link) => {
-  // sets the dimension key for internal or extrenal links
-  const key = link.startWith('http')
-    ? 'click_internal_link'
-    : 'click_external_link'
+const trackLink = (link) => {
+  if (link.startsWith('http')) {
+    trackExternalClick(link)
+  } else {
+    trackInternalClick(link)
+  }
+}
+// for outbounds
+const trackExternalClick = (link) => {
   const payload = {}
-  payload[key] = link
-  event(`click`, payload)
+  payload.external_link = link
+  event('click_external_link', payload)
+}
+// for internal navigations
+const trackInternalClick = (link) => {
+  const payload = {}
+  payload.internal_link = link
+  event('click_internal_link', payload)
 }
 
 /* --- Search --- */
-// tracks the most used filter combinations
-const trackFilterCombination = (query) => {
-  const payload = {}
-  payload.filter_combination = getFilterCombination(query)
-  event('page_view', payload)
-}
 // tracks the types of filters being used the most
 // (i.e., organism, platform, technology)
 const trackFilterType = (type) => {
@@ -130,10 +134,34 @@ const trackToggleFilterItem = (isChecked, item) => {
   payload.toggled_filter_item = getToggledFilterItem(isChecked, item)
   event('toggled_filter_item', payload)
 }
-// tracks the user-entered search terms
-const trackSearchTerm = (term) => {
+
+const trackSearchQuery = (query) => {
+  // tracks only the following items from the query
+  const {
+    downloadable_organism: organisms,
+    technology,
+    platform,
+    search
+  } = query
+
+  if (search) trackSearchQueryTerm(query)
+
+  if (organisms || technology || platform) {
+    trackSearchQueryFilterCombination(query)
+  }
+}
+
+// tracks the most used filter combinations
+const trackSearchQueryFilterCombination = (query) => {
   const payload = {}
-  payload.search_text = term
+  payload.filter_combination = getFilterCombination(query)
+  event('page_view', payload)
+}
+
+// tracks the user-entered search terms
+const trackSearchQueryTerm = (query) => {
+  const payload = {}
+  payload.search_text = query.search
   event('search_text', payload)
 }
 
@@ -148,9 +176,8 @@ export default {
   trackSharedDataset,
   trackExperimentPageClick,
   trackExploredUsageClick,
-  trackLinks,
-  trackFilterCombination,
+  trackLink,
   trackFilterType,
   trackToggleFilterItem,
-  trackSearchTerm
+  trackSearchQuery
 }

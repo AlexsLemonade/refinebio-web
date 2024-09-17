@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Anchor as GrommetAnchor } from 'grommet'
 import styled, { css } from 'styled-components'
+import gtag from 'analytics/gtag'
 
 const CustomAnchor = styled(GrommetAnchor)`
   ${({ underline, underlineOnHover }) => css`
@@ -18,8 +19,14 @@ export const Anchor = ({
   linkColor = 'brand',
   underline = false,
   underlineOnHover = true,
+  onClick = () => {},
   ...props
 }) => {
+  const handleClick = () => {
+    onClick()
+    gtag.trackLink(href)
+  }
+
   return typeof href === 'string' && href.startsWith('http') ? (
     <CustomAnchor
       href={href}
@@ -28,6 +35,7 @@ export const Anchor = ({
       underline={underline}
       underlineOnHover={underlineOnHover}
       target="_blank"
+      onClick={handleClick}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />
@@ -38,6 +46,7 @@ export const Anchor = ({
         color={linkColor}
         underline={underline}
         underlineOnHover={underlineOnHover}
+        onClick={handleClick}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       />

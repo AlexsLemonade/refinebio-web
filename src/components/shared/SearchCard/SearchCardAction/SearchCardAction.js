@@ -1,6 +1,5 @@
 import { memo } from 'react'
 import { Box } from 'grommet'
-import { usePageRendered } from 'hooks/usePageRendered'
 import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
 import { getFormattedExperiment } from 'helpers/formatDatasetAction'
@@ -9,13 +8,12 @@ import { DownloadNowButton } from './DownloadNowButton'
 import { ProcessingDatasetPill } from './ProcessingDatasetPill'
 import { RequestExperimentFormButton } from './RequestExperimentFormButton'
 
-export const SearchCardAction = ({
-  accessionCode,
-  downloadableSamples,
-  organismNames,
-  technology
-}) => {
-  const pageRendered = usePageRendered()
+export const SearchCardAction = ({ experiment, technology }) => {
+  const {
+    accession_code: accessionCode,
+    num_downloadable_samples: downloadableSamples,
+    organism_names: organismNames
+  } = experiment
   const { isProcessingDataset, pollDatasetAccession } = usePollDatasetStatus()
   pollDatasetAccession(accessionCode) // checks this accession code for polling
   const { setResponsive } = useResponsive()
@@ -25,8 +23,6 @@ export const SearchCardAction = ({
     typeof technology === 'string'
       ? technology === rnaSeq
       : technology.find((x) => x === rnaSeq)
-
-  if (!pageRendered) return null
 
   if (!downloadableSamples)
     return <RequestExperimentFormButton accessionCode={accessionCode} />
@@ -50,6 +46,7 @@ export const SearchCardAction = ({
         <Box margin={{ top: 'small' }} width={setResponsive('100%', 'auto')}>
           <DownloadNowButton
             accessionCode={accessionCode}
+            experiment={experiment}
             hasMultipleOrganisms={hasMultipleOrganisms}
             hasRnaSeq={hasRnaSeq}
           />

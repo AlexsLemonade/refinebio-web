@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Box, Form, Heading, Paragraph, Text } from 'grommet'
 import { Formik } from 'formik'
+import gtag from 'analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/shared/Button'
@@ -31,6 +32,7 @@ export const SignUpBlock = () => {
               setSubmitted(false)
             } else {
               setSubmitted(true)
+              gtag.trackEmailSubscription(SignUpBlock)
             }
 
             setSubmitting(false)

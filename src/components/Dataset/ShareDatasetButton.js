@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Box, Heading } from 'grommet'
+import gtag from 'analytics/gtag'
 import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
 import { useTimeoutInCallback } from 'hooks/useTimeoutInCallback'
@@ -18,13 +19,18 @@ export const ShareDatasetButton = ({ dataset }) => {
     setIsCopied(false)
   }, 3000)
   const [isCopied, setIsCopied] = useState(false)
-  const [value, handdleCopy] = useCopyToClipboard(null)
+  const [value, copyText] = useCopyToClipboard(null)
   const id = `shareable-link_${datasetId}`
   const shareableLink = `${getDomain()}/dataset/${datasetId}?ref=share`
 
-  const handleClick = (link) => {
-    handdleCopy(link)
+  const onShareClick = () => {
+    openModal(id)
+  }
+
+  const onCopyClick = () => {
+    copyText(shareableLink)
     setIsCopied(true)
+    gtag.trackSharedDataset(dataset)
   }
 
   useEffect(() => {
@@ -40,7 +46,7 @@ export const ShareDatasetButton = ({ dataset }) => {
           label="Share Dataset"
           secondary
           responsive
-          onClick={() => openModal(id)}
+          onClick={onShareClick}
         />
       }
       fullHeight={false}
@@ -72,12 +78,7 @@ export const ShareDatasetButton = ({ dataset }) => {
             <TextInput value={shareableLink} />
           </Box>
           <Box>
-            <Button
-              label="Copy"
-              primary
-              responsive
-              onClick={() => handleClick(shareableLink)}
-            />
+            <Button label="Copy" primary responsive onClick={onCopyClick} />
           </Box>
         </Box>
       </Box>

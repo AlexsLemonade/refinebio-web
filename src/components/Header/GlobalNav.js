@@ -16,7 +16,7 @@ import { NavIcon } from './NavIcon'
 
 export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const router = useRouter()
-  const { asPath, pathname, push } = router
+  const { asPath, pathname } = router
   const { viewport, setResponsive } = useResponsive()
   const { dataset, datasetId, getDataset, getTotalSamples } =
     useDatasetManager()
@@ -147,7 +147,7 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 label="About"
                 href="/about"
                 viewport={viewport}
-                onClick={() => handleClick()}
+                onClick={handleClick}
               />
             </Box>
             <Box
@@ -162,15 +162,13 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
                 aria-label="View My Dataset"
                 count={totalSamples || 0}
                 label="My Dataset"
+                href="/download"
                 light={viewport !== 'small' ? light : false}
                 linkFontSize={setResponsive('18px', '16px')}
                 margin={{ left: setResponsive('xlarge', 'none') }}
                 pad={setResponsive('12px 0', '4px 24px')}
                 responsive
                 secondary
-                onClick={() => {
-                  push('/download')
-                }}
               />
             </Box>
           </List>
