@@ -83,39 +83,41 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
     )
   }
 
+  if (loading) {
+    return (
+      <Box align="center" fill justify="center" margin={{ top: 'large' }}>
+        <Spinner />
+      </Box>
+    )
+  }
+
   return (
     <FixedContainer>
-      {loading ? (
-        <Box align="center" fill justify="center" margin={{ top: 'large' }}>
-          <Spinner />
-        </Box>
-      ) : (
-        <Box>
-          {dataset?.data && (
-            <>
-              <DatasetPageHeader dataset={dataset} />
+      <Box>
+        {dataset?.data && (
+          <>
+            <DatasetPageHeader dataset={dataset} />
+            <Row
+              border={{ side: 'bottom' }}
+              pad={{ bottom: setResponsive('medium', 'small') }}
+            >
+              <Box>
+                <MoveToDatasetButton dataset={dataset} />
+              </Box>
               <Row
-                border={{ side: 'bottom' }}
-                pad={{ bottom: setResponsive('medium', 'small') }}
+                gap={setResponsive('medium', 'small')}
+                margin={{ top: setResponsive('medium', 'none') }}
               >
-                <Box>
-                  <MoveToDatasetButton dataset={dataset} />
-                </Box>
-                <Row
-                  gap={setResponsive('medium', 'small')}
-                  margin={{ top: setResponsive('medium', 'none') }}
-                >
-                  <ShareDatasetButton dataset={dataset} />
-                  <DownloadDatasetButton dataset={dataset} />
-                </Row>
+                <ShareDatasetButton dataset={dataset} />
+                <DownloadDatasetButton dataset={dataset} />
               </Row>
-              <FilesSummary dataset={dataset} />
-              <DatasetSummary dataset={dataset} />
-              <DatasetDetails dataset={dataset} isImmutable />
-            </>
-          )}
-        </Box>
-      )}
+            </Row>
+            <FilesSummary dataset={dataset} />
+            <DatasetSummary dataset={dataset} />
+            <DatasetDetails dataset={dataset} isImmutable />
+          </>
+        )}
+      </Box>
     </FixedContainer>
   )
 }

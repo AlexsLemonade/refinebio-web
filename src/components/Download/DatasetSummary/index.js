@@ -36,14 +36,18 @@ const getExperimentCountBySpecies = (data, experiments) => {
 }
 
 export const DatasetSummary = ({ dataset }) => {
+  const {
+    data: datasetData,
+    experiments,
+    organism_samples: organismSamples
+  } = dataset
   const { getTotalExperiments, getTotalSamples } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const samplesBySpecies = dataset.organism_samples
-  const totalSamples = getTotalSamples(dataset.data)
-  const totalExperiments = getTotalExperiments(dataset.data)
+  const totalSamples = getTotalSamples(datasetData)
+  const totalExperiments = getTotalExperiments(datasetData)
   const experimentCountBySpecies = getExperimentCountBySpecies(
-    dataset.data,
-    dataset.experiments
+    datasetData,
+    experiments
   )
 
   return (
@@ -71,7 +75,7 @@ export const DatasetSummary = ({ dataset }) => {
           </TableHeader>
           <TableBody style={{ fontSize: setResponsive('16px', '18px') }}>
             <SpiecesRow
-              samplesBySpecies={samplesBySpecies}
+              samplesBySpecies={organismSamples}
               experimentCountBySpecies={experimentCountBySpecies}
             />
             <TotalRow totals={[totalSamples, totalExperiments]} />
