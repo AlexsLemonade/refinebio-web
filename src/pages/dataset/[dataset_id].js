@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { Box } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { usePageRendered } from 'hooks/usePageRendered'
@@ -25,48 +26,48 @@ export const getServerSideProps = ({ query }) => {
   return { props: { query } }
 }
 
-export const Dataset = ({ query }) => {
+export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
   const pageRendered = usePageRendered()
+  const { push } = useRouter()
   const { setResponsive } = useResponsive()
-  const { dataset_id: idFromQuery, start } = query
-  const { dataset, datasetId, error, loading, getDataset, regeneratedDataset } =
-    useDatasetManager()
+  const {
+    datasetId: myDatasetId,
+    error,
+    loading,
+    getDataset
+  } = useDatasetManager()
   const { isProcessingDataset, polledDatasetState, pollDatasetId } =
     usePollDatasetStatus()
-  const [selectedDataset, setSelectedDataset] = useState({}) // stores the dataset currently displayed on the page
-  const isProcessed = selectedDataset?.is_processed && selectedDataset?.success // sets visibility of the download options in Dwonload Files Summary
-  const isUnprocessedDataset = // sets visibility of the Download Dataset button
-    !selectedDataset?.is_processing &&
-    !selectedDataset?.is_processed &&
-    selectedDataset?.success !== false
+  const [dataset, setDataset] = useState({}) // dataset currently displayed on the page
 
-  const getSelectedDataset = async (id) => {
+  const getDatasetFromQuery = async (id) => {
     const response = await getDataset(id)
-    setSelectedDataset(response)
+    setDataset(response)
   }
 
   useEffect(() => {
-    getSelectedDataset(idFromQuery)
-    pollDatasetId(idFromQuery) // sets a processing datasets for polling
-  }, [query])
+    // redirects users to /download if datasetId matches My dataset ID
+    if (datasetId === myDatasetId) push('/download')
+
+    getDatasetFromQuery(datasetId)
+    pollDatasetId(datasetId) // sets a processing datasets for polling
+  }, [datasetId])
 
   useEffect(() => {
-    // swaps selectedDataset to the last fetched polledDatasetState
+    // swaps dataset to the last fetched polledDatasetState
     // (only if the dataset ID in URL was being processed) to update
     // DatasetPageHeader
     if (!isProcessingDataset && polledDatasetState) {
-      setSelectedDataset(polledDatasetState)
+      setDataset(polledDatasetState)
     }
   }, [isProcessingDataset, polledDatasetState])
 
   if (!pageRendered) return null
 
-  const isSameId = datasetId === idFromQuery
-
   if (start) {
     return (
       <FixedContainer>
-        <StartProcessing dataset={selectedDataset} />
+        <StartProcessing dataset={dataset} />
       </FixedContainer>
     )
   }
@@ -90,39 +91,27 @@ export const Dataset = ({ query }) => {
         </Box>
       ) : (
         <Box>
-          {selectedDataset?.data && (
+          {dataset?.data && (
             <>
-              <DatasetPageHeader dataset={selectedDataset} />
+              <DatasetPageHeader dataset={dataset} />
               <Row
                 border={{ side: 'bottom' }}
                 pad={{ bottom: setResponsive('medium', 'small') }}
               >
                 <Box>
-                  <MoveToDatasetButton
-                    dataset={dataset}
-                    selectedDataset={selectedDataset}
-                    disabled={isSameId}
-                  />
+                  <MoveToDatasetButton dataset={dataset} />
                 </Box>
                 <Row
                   gap={setResponsive('medium', 'small')}
                   margin={{ top: setResponsive('medium', 'none') }}
                 >
-                  <ShareDatasetButton datasetId={idFromQuery} />
-                  {isUnprocessedDataset && (
-                    <DownloadDatasetButton dataset={selectedDataset} />
-                  )}
+                  <ShareDatasetButton dataset={dataset} />
+                  <DownloadDatasetButton dataset={dataset} />
                 </Row>
               </Row>
-              <FilesSummary
-                dataset={regeneratedDataset || selectedDataset}
-                isProcessed={isProcessed}
-              />
-              <DatasetSummary dataset={regeneratedDataset || selectedDataset} />
-              <DatasetDetails
-                dataset={regeneratedDataset || selectedDataset}
-                isImmutable
-              />
+              <FilesSummary dataset={dataset} />
+              <DatasetSummary dataset={dataset} />
+              <DatasetDetails dataset={dataset} isImmutable />
             </>
           )}
         </Box>

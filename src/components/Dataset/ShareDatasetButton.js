@@ -10,7 +10,8 @@ import { InlineMessage } from 'components/shared/InlineMessage'
 import { Modal } from 'components/shared/Modal'
 import { TextInput } from 'components/shared/TextInput'
 
-export const ShareDatasetButton = ({ datasetId }) => {
+export const ShareDatasetButton = ({ dataset }) => {
+  const { id: datasetId } = dataset
   const { openModal } = useModal()
   const { setResponsive } = useResponsive()
   const { startTimer, clearTimer } = useTimeoutInCallback(() => {
