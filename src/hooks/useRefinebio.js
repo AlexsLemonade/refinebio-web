@@ -15,8 +15,7 @@ export const useRefinebio = () => {
     setEmail,
     processingDatasets,
     setProcessingDatasets,
-    regeneratedDataset,
-    setRegeneratedDataset,
+
     requestedExperiments,
     setRequestedExperiments,
     token,
@@ -36,8 +35,6 @@ export const useRefinebio = () => {
     setEmail,
     processingDatasets,
     setProcessingDatasets,
-    regeneratedDataset,
-    setRegeneratedDataset,
     requestedExperiments,
     setRequestedExperiments,
     token,
