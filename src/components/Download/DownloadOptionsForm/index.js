@@ -15,30 +15,39 @@ export const DownloadOptionsForm = ({
   dataset = null,
   buttonLabel = 'Download',
   isProcessed = false,
-  onSubmit = null
+  setDataset = null, // for the regenerate dataset local state update
+  onSubmit = null // for the regenerate dataset download
 }) => {
   const { push } = useRouter()
   const {
-    dataset: datasetState,
-    createDataset,
+    dataset: myDataset,
     updateDataset,
-    regeneratedDataset,
     getDownloadOptions,
     updateDownloadOptions
   } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const selectedDataset = dataset || datasetState
+
+  const [currentDataset, setCurrentDataset] = useState(null)
   const [toggleAdvancedOption, setToggleAdvancedOption] = useState(
-    selectedDataset.quantile_normalize
+    currentDataset?.quantile_normalize
   )
 
   useEffect(() => {
-    if (selectedDataset) {
-      updateDownloadOptions({
-        ...getDownloadOptions(selectedDataset)
-      })
-    }
-  }, [])
+    // sets the dataset either dataset via dataset/id or myDataset
+    setCurrentDataset(isProcessed ? dataset : myDataset)
+  }, [dataset])
+
+  useEffect(() => {
+    if (!currentDataset) return
+    // sets the initial download options
+    updateDownloadOptions(
+      {
+        ...getDownloadOptions(currentDataset)
+      },
+      currentDataset.id,
+      isProcessed
+    )
+  }, [currentDataset])
 
   const handleSubmitForm = async (downloadOptions) => {
     let pathname = '/download'
@@ -46,11 +55,12 @@ export const DownloadOptionsForm = ({
     if (onSubmit) {
       const response = await onSubmit(downloadOptions)
       pathname = response
-    } else {
-      const datasetToUpdate = isProcessed ? regeneratedDataset : selectedDataset
-      await updateDataset(datasetToUpdate.id, {
+    }
+    // updates only for myDataset (in /download)
+    if (!isProcessed) {
+      await updateDataset(currentDataset.id, {
         ...downloadOptions,
-        data: datasetToUpdate.data
+        data: currentDataset.data
       })
     }
 
@@ -65,80 +75,85 @@ export const DownloadOptionsForm = ({
     )
   }
 
-  const handleUpdateDownloadOptions = async (name, newValue) => {
-    // eslint-disable-next-line no-nested-ternary
-    const datasetId = isProcessed
-      ? regeneratedDataset
-        ? regeneratedDataset.id
-        : await createDataset()
-      : selectedDataset.id
+  const handleUpdateDownloadOptions = async (name, newOption) => {
+    const newDownloadOption = { [name]: newOption }
 
-    await updateDownloadOptions({ [name]: newValue }, datasetId, isProcessed)
+    if (isProcessed && setDataset) {
+      setDataset((prev) => ({ ...prev, ...newDownloadOption }))
+    }
+
+    await updateDownloadOptions(
+      newDownloadOption,
+      currentDataset.id,
+      isProcessed
+    )
   }
 
   return (
     <Box border={{ side: 'bottom' }}>
-      <Formik
-        initialValues={{
-          aggregate_by: selectedDataset.aggregate_by,
-          data: selectedDataset.data,
-          scale_by: selectedDataset.scale_by,
-          quantile_normalize: selectedDataset.quantile_normalize
-        }}
-        onSubmit={async (values, { setSubmitting }) => {
-          await handleSubmitForm(values)
-          setSubmitting(false)
-        }}
-      >
-        {({ handleChange, handleSubmit, isSubmitting, values }) => (
-          <Form onSubmit={handleSubmit}>
-            <Row direction={setResponsive('column', 'column', 'row')}>
-              <Box>
-                <Row align={setResponsive('start', 'center')} justify="start">
-                  <AggregateOptions
-                    value={values.aggregate_by}
-                    handleChange={handleChange}
-                    handleUpdateDownloadOptions={handleUpdateDownloadOptions}
-                  />
-                  <TransformationOptions
-                    value={values.scale_by}
-                    handleChange={handleChange}
-                    handleUpdateDownloadOptions={handleUpdateDownloadOptions}
-                  />
-                  <Box
-                    margin={{
-                      top: setResponsive('xsmall', 'none'),
-                      left: setResponsive('none', 'xsmall')
-                    }}
-                  >
-                    <AdvancedOptionsToggle
-                      toggle={toggleAdvancedOption}
-                      setToggle={setToggleAdvancedOption}
+      {currentDataset && (
+        <Formik
+          initialValues={{
+            aggregate_by: currentDataset.aggregate_by,
+            data: currentDataset.data,
+            scale_by: currentDataset.scale_by,
+            quantile_normalize: currentDataset.quantile_normalize
+          }}
+          onSubmit={async (values, { setSubmitting }) => {
+            await handleSubmitForm(values)
+            setSubmitting(false)
+          }}
+        >
+          {({ handleChange, handleSubmit, isSubmitting, values }) => (
+            <Form onSubmit={handleSubmit}>
+              <Row direction={setResponsive('column', 'column', 'row')}>
+                <Box>
+                  <Row align={setResponsive('start', 'center')} justify="start">
+                    <AggregateOptions
+                      value={values.aggregate_by}
+                      handleChange={handleChange}
+                      handleUpdateDownloadOptions={handleUpdateDownloadOptions}
                     />
-                  </Box>
-                </Row>
-                <AdvancedOptions
-                  id={selectedDataset.id}
-                  values={values}
-                  toggle={!toggleAdvancedOption}
-                  handleChange={handleChange}
-                  handleUpdateDownloadOptions={handleUpdateDownloadOptions}
+                    <TransformationOptions
+                      value={values.scale_by}
+                      handleChange={handleChange}
+                      handleUpdateDownloadOptions={handleUpdateDownloadOptions}
+                    />
+                    <Box
+                      margin={{
+                        top: setResponsive('xsmall', 'none'),
+                        left: setResponsive('none', 'xsmall')
+                      }}
+                    >
+                      <AdvancedOptionsToggle
+                        toggle={toggleAdvancedOption}
+                        setToggle={setToggleAdvancedOption}
+                      />
+                    </Box>
+                  </Row>
+                  <AdvancedOptions
+                    id={currentDataset.id}
+                    values={values}
+                    toggle={!toggleAdvancedOption}
+                    handleChange={handleChange}
+                    handleUpdateDownloadOptions={handleUpdateDownloadOptions}
+                  />
+                </Box>
+                <Button
+                  label={buttonLabel}
+                  isLoading={isSubmitting}
+                  primary
+                  responsive
+                  margin={{
+                    bottom: setResponsive('small', 'small', 'none')
+                  }}
+                  type="submit"
                 />
-              </Box>
-              <Button
-                label={buttonLabel}
-                isLoading={isSubmitting}
-                primary
-                responsive
-                margin={{
-                  bottom: setResponsive('small', 'small', 'none')
-                }}
-                type="submit"
-              />
-            </Row>
-          </Form>
-        )}
-      </Formik>
+              </Row>
+            </Form>
+          )}
+        </Formik>
+      )}
     </Box>
   )
 }
