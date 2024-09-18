@@ -51,7 +51,7 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
 
     getDatasetFromQuery(datasetId)
     pollDatasetId(datasetId) // sets a processing datasets for polling
-  }, [datasetId])
+  }, [datasetId, start])
 
   useEffect(() => {
     // swaps dataset to the last fetched polledDatasetState
