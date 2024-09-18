@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Heading, Paragraph } from 'grommet'
 import gtag from 'analytics/gtag'
@@ -11,26 +10,29 @@ import { Column } from 'components/shared/Column'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
 
-export const DatasetRegenerate = () => {
+export const DatasetRegenerate = ({ dataset }) => {
   const {
-    query: { dataset_id: idFromQuery },
-    push
-  } = useRouter()
-  const { createDataset, getDataset, updateDataset } = useDatasetManager()
+    data,
+    aggregate_by: aggregateBy,
+    scale_by: scaleBy,
+    quantile_normalize: quantileNormalize,
+    worker_version: workerVersion
+  } = dataset
+  const { push } = useRouter()
+  const { createDataset, updateDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const [selectedDataset, setSelectedDataset] = useState({})
 
   const handleRegenerateFiles = async () => {
     const params = {
-      data: selectedDataset.data,
-      aggregate_by: selectedDataset.aggregate_by,
-      scale_by: selectedDataset.scale_by,
-      quantile_normalize: selectedDataset.quantile_normalize
+      data,
+      aggregate_by: aggregateBy,
+      scale_by: scaleBy,
+      quantile_normalize: quantileNormalize
     }
     const response = await updateDataset(await createDataset(), params)
     const pathname = `/dataset/${response.id}`
 
-    gtag.trackRegeneratedDataset(selectedDataset)
+    gtag.trackRegeneratedDataset(dataset)
     push(
       {
         pathname,
@@ -41,16 +43,6 @@ export const DatasetRegenerate = () => {
       pathname
     )
   }
-
-  useEffect(() => {
-    const getSelectedDataset = async (id) => {
-      const response = await getDataset(id)
-      setSelectedDataset(response)
-      return response
-    }
-
-    getSelectedDataset(idFromQuery)
-  }, [idFromQuery])
 
   // returns true if there's a difference between the two minor versions given
   const isMinorVersionChange = (v1, v2) => {
@@ -84,10 +76,7 @@ export const DatasetRegenerate = () => {
               responsive
               onClick={handleRegenerateFiles}
             />
-            {isMinorVersionChange(
-              cache.xSourceRevision,
-              selectedDataset?.worker_version
-            ) && (
+            {isMinorVersionChange(cache.xSourceRevision, workerVersion) && (
               <Box margin={{ top: 'small' }}>
                 <InlineMessage
                   label={
