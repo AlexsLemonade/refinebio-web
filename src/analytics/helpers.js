@@ -79,6 +79,8 @@ export const event = (eventName, value = {}, nonInteraction = false) => {
 }
 
 export const getDatasetOptionsChanges = (dataset, regeneratedDataset) => {
+  if (!regeneratedDataset) return null
+
   const changes = datasetOptionsKeys.map((key) => {
     return `${getReadable(key, dataset[key])} -> ${getReadable(
       key,
