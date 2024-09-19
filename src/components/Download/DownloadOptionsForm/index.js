@@ -15,7 +15,7 @@ export const DownloadOptionsForm = ({
   dataset = null,
   buttonLabel = 'Download',
   isProcessed = false,
-  setDataset = null, // for the regenerate dataset local state update
+  handleDownloadOptionsChanges = null, // for the regenerate dataset local state update
   onSubmit = null // for the regenerate dataset download
 }) => {
   const { push } = useRouter()
@@ -78,8 +78,8 @@ export const DownloadOptionsForm = ({
   const handleUpdateDownloadOptions = async (name, newOption) => {
     const newDownloadOption = { [name]: newOption }
 
-    if (isProcessed && setDataset) {
-      setDataset((prev) => ({ ...prev, ...newDownloadOption }))
+    if (isProcessed && handleDownloadOptionsChanges) {
+      handleDownloadOptionsChanges(newDownloadOption)
     }
 
     await updateDownloadOptions(

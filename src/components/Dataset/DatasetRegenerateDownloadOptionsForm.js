@@ -41,6 +41,10 @@ export const DatasetRegenerateDownloadOptionsForm = ({
     return pathname
   }
 
+  const handleDownloadOptionsChanges = (newDownloadOption) => {
+    setRegeneratedDataset((prev) => ({ ...prev, ...newDownloadOption }))
+  }
+
   if (!show) return null
 
   return (
@@ -71,7 +75,7 @@ export const DatasetRegenerateDownloadOptionsForm = ({
           dataset={regeneratedDataset}
           buttonLabel="Regenerate Dataset"
           isProcessed // always true
-          setDataset={setRegeneratedDataset}
+          handleDownloadOptionsChanges={handleDownloadOptionsChanges}
           onSubmit={handleRegenerateDataset}
         />
       </ExpandableBlock>
