@@ -67,14 +67,18 @@ const trackOneOffExperimentDownload = (experiment) => {
   payload.one_off_experiment_download = experiment.accession_code
   event('one_off_experiment_download', payload)
 }
-// tracks the dataset's state (expired or valid) and changes in download options (initial and updated)
+// tracks the dataset's state (expired or valid) and download options change (initial and updated)
 const trackRegeneratedDataset = (dataset, regeneratedDataset) => {
   const payload = {}
   payload.regenerated_state = getDatasetState(dataset)
-  payload.dataset_download_option_changes = getDatasetOptionsChanges(
-    dataset,
-    regeneratedDataset
-  )
+  // sned this only if any changes are made to the download options
+  if (regeneratedDataset) {
+    payload.dataset_download_option_changes = getDatasetOptionsChanges(
+      dataset,
+      regeneratedDataset
+    )
+  }
+
   event('regenerated_dataset', payload)
 }
 // tracks user clicks on the share dataset button by dataset ID
