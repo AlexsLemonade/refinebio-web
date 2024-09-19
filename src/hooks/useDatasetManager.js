@@ -202,6 +202,8 @@ export const useDatasetManager = () => {
     return temp
   }
 
+  // sends the download options change to the API for My Dataset to preserve
+  // users' preferences, otherwise just updates DownloadOptions with new change
   const updateDownloadOptions = async (options, id, regenerate = false) => {
     const newOptions = { ...downloadOptions, ...options }
     // makes API request for My Dataset only
