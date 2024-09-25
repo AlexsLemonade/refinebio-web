@@ -35,7 +35,6 @@ export const DatasetPageHeader = ({ dataset }) => {
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
   const {
-    data,
     expires_on: expiredOn,
     is_available: isAvailable,
     is_processed: isProcessed,
@@ -81,13 +80,11 @@ export const DatasetPageHeader = ({ dataset }) => {
   return (
     <FixedContainer pad="none">
       <Box>
-        {data && (
-          <Box pad={{ top: 'large', bottom: 'medium' }}>
-            <Heading level={2} size={setResponsive('small', 'large')}>
-              Shared Dataset
-            </Heading>
-          </Box>
-        )}
+        <Box pad={{ top: 'large', bottom: 'medium' }}>
+          <Heading level={2} size={setResponsive('small', 'large')}>
+            Shared Dataset
+          </Heading>
+        </Box>
       </Box>
     </FixedContainer>
   )

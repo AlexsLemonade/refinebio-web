@@ -12,7 +12,6 @@ import { Modal } from 'components/shared/Modal'
 import { TextInput } from 'components/shared/TextInput'
 
 export const ShareDatasetButton = ({ dataset }) => {
-  const { id: datasetId } = dataset
   const { openModal } = useModal()
   const { setResponsive } = useResponsive()
   const { startTimer, clearTimer } = useTimeoutInCallback(() => {
@@ -20,8 +19,8 @@ export const ShareDatasetButton = ({ dataset }) => {
   }, 3000)
   const [isCopied, setIsCopied] = useState(false)
   const [value, copyText] = useCopyToClipboard(null)
-  const id = `shareable-link_${datasetId}`
-  const shareableLink = `${getDomain()}/dataset/${datasetId}?ref=share`
+  const id = `shareable-link_${dataset.id}`
+  const shareableLink = `${getDomain()}/dataset/${dataset.id}?ref=share`
 
   const onShareClick = () => {
     openModal(id)

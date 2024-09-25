@@ -8,13 +8,12 @@ export const DownloadDatasetButton = ({
   label = 'Download Dataset'
 }) => {
   const {
-    id: datasetId,
     is_processing: isProcessing,
     is_processed: isProcessed,
     success
   } = dataset
   const { openModal, closeModal } = useModal()
-  const id = `download-dataset_${datasetId}`
+  const id = `download-dataset_${dataset.id}`
   const isUnprocessedDataset = // sets visibility of the Download Dataset button
     !isProcessing && !isProcessed && success !== false
 
