@@ -35,18 +35,13 @@ const Card = ({ description, format, index, title }) => {
 }
 
 export const FilesSummary = ({ dataset }) => {
-  const {
-    organism_samples: organismSamples,
-    aggregate_by: aggregateBy,
-    is_processed: isProcessed,
-    success
-  } = dataset
+  const { is_processed: isProcessed, success } = dataset
 
   const { setResponsive } = useResponsive()
   const isProcessedSuccess = isProcessed && success // sets visibility of the download options form
   const [regeneratedDataset, setRegeneratedDataset] = useState(null)
   const [fileSummaries, setFileSummaries] = useState(
-    getDownloadFilesData(dataset, organismSamples, aggregateBy)
+    getDownloadFilesData(dataset)
   )
 
   useEffect(() => {
@@ -57,17 +52,9 @@ export const FilesSummary = ({ dataset }) => {
   useEffect(() => {
     // updates fileSummaries on download options change
     if (regeneratedDataset) {
-      setFileSummaries(
-        getDownloadFilesData(
-          regeneratedDataset,
-          regeneratedDataset.organism_samples,
-          regeneratedDataset.aggregate_by
-        )
-      )
+      setFileSummaries(getDownloadFilesData(regeneratedDataset))
     } else {
-      setFileSummaries(
-        getDownloadFilesData(dataset, organismSamples, aggregateBy)
-      )
+      setFileSummaries(getDownloadFilesData(dataset))
     }
   }, [dataset, regeneratedDataset])
 
