@@ -40,7 +40,6 @@ const Card = ({ description, format, index, title }) => {
 
 export const FilesSummary = ({ dataset }) => {
   const {
-    data: datasetData,
     organism_samples: organismSamples,
     aggregate_by: aggregateBy,
     scale_by: scaleBy,
@@ -108,7 +107,7 @@ export const FilesSummary = ({ dataset }) => {
   }
 
   const fileSummaries = downloadFilesData(
-    datasetData,
+    dataset.data,
     organismSamples,
     aggregateBy
   )
@@ -120,7 +119,7 @@ export const FilesSummary = ({ dataset }) => {
   const [openForm, setOpenForm] = useState(false)
 
   const handleRegenerateDataset = async (downloadOptions) => {
-    const params = { data: datasetData, ...downloadOptions }
+    const params = { data: dataset.data, ...downloadOptions }
     const response = await updateDataset(
       regeneratedDataset?.id || (await createDataset()),
       params

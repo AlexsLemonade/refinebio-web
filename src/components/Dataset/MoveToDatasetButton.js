@@ -8,7 +8,6 @@ import { Modal } from 'components/shared/Modal'
 import { MoveToDatasetModal } from './MoveToDatasetModal'
 
 export const MoveToDatasetButton = ({ dataset }) => {
-  const { data: datasetData } = dataset
   const { push } = useRouter()
   const {
     dataset: { id: myDatasetId, data: myDatasetData },
@@ -23,7 +22,7 @@ export const MoveToDatasetButton = ({ dataset }) => {
   ]
   const defaultValue = radioOptions[0].value
   const [value, setValue] = useState(defaultValue)
-  const newTotalSamples = getTotalSamples(datasetData)
+  const newTotalSamples = getTotalSamples(dataset.data)
   const totalSamples = getTotalSamples(myDatasetData)
   const pathname = '/download'
 
@@ -31,7 +30,7 @@ export const MoveToDatasetButton = ({ dataset }) => {
     if (totalSamples > 0) {
       openModal(id)
     } else {
-      await addSamples(datasetData)
+      await addSamples(dataset.data)
       push(
         {
           pathname,
