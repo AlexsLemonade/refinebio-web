@@ -12,42 +12,31 @@ import { AggregateOptions } from './AggregateOptions'
 import { TransformationOptions } from './TransformationOptions'
 
 export const DownloadOptionsForm = ({
-  dataset = null,
+  dataset,
   buttonLabel = 'Download',
-  isProcessed = false,
   handleDownloadOptionsChanges = null, // for the regenerate dataset local state update
   onSubmit = null // for the regenerate dataset download
 }) => {
   const { push } = useRouter()
-  const {
-    dataset: myDataset,
-    updateDataset,
-    getDownloadOptions,
-    updateDownloadOptions
-  } = useDatasetManager()
+  const { updateDataset, getDownloadOptions, updateDownloadOptions } =
+    useDatasetManager()
   const { setResponsive } = useResponsive()
-
-  const [currentDataset, setCurrentDataset] = useState(null)
+  const isProcessed = dataset?.is_processed
   const [toggleAdvancedOption, setToggleAdvancedOption] = useState(
-    currentDataset?.quantile_normalize
+    dataset?.quantile_normalize
   )
 
   useEffect(() => {
-    // sets the dataset either dataset via dataset/id or myDataset
-    setCurrentDataset(isProcessed ? dataset : myDataset)
-  }, [dataset])
-
-  useEffect(() => {
-    if (!currentDataset) return
+    if (!dataset) return
     // sets the initial download options
     updateDownloadOptions(
       {
-        ...getDownloadOptions(currentDataset)
+        ...getDownloadOptions(dataset)
       },
-      currentDataset.id,
+      dataset.id,
       isProcessed
     )
-  }, [currentDataset])
+  }, [])
 
   const handleSubmitForm = async (downloadOptions) => {
     let pathname = '/download'
@@ -56,11 +45,11 @@ export const DownloadOptionsForm = ({
       const response = await onSubmit(downloadOptions)
       pathname = response
     }
-    // updates only for myDataset (in /download)
+    // updates only for My Dataset (in /download)
     if (!isProcessed) {
-      await updateDataset(currentDataset.id, {
+      await updateDataset(dataset.id, {
         ...downloadOptions,
-        data: currentDataset.data
+        data: dataset.data
       })
     }
 
@@ -82,22 +71,18 @@ export const DownloadOptionsForm = ({
       handleDownloadOptionsChanges(newDownloadOption)
     }
 
-    await updateDownloadOptions(
-      newDownloadOption,
-      currentDataset.id,
-      isProcessed
-    )
+    await updateDownloadOptions(newDownloadOption, dataset.id, isProcessed)
   }
 
   return (
     <Box border={{ side: 'bottom' }}>
-      {currentDataset && (
+      {dataset && (
         <Formik
           initialValues={{
-            aggregate_by: currentDataset.aggregate_by,
-            data: currentDataset.data,
-            scale_by: currentDataset.scale_by,
-            quantile_normalize: currentDataset.quantile_normalize
+            aggregate_by: dataset.aggregate_by,
+            data: dataset.data,
+            scale_by: dataset.scale_by,
+            quantile_normalize: dataset.quantile_normalize
           }}
           onSubmit={async (values, { setSubmitting }) => {
             await handleSubmitForm(values)
@@ -132,7 +117,7 @@ export const DownloadOptionsForm = ({
                     </Box>
                   </Row>
                   <AdvancedOptions
-                    id={currentDataset.id}
+                    id={dataset.id}
                     values={values}
                     toggle={!toggleAdvancedOption}
                     handleChange={handleChange}

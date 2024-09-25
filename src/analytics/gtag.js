@@ -71,7 +71,7 @@ const trackOneOffExperimentDownload = (experiment) => {
 const trackRegeneratedDataset = (dataset, regeneratedDataset) => {
   const payload = {}
   payload.regenerated_state = getDatasetState(dataset)
-  // sned this only if any changes are made to the download options
+  // send this only if any changes are made to the download options
   if (regeneratedDataset) {
     payload.dataset_download_option_changes = getDatasetOptionsChanges(
       dataset,

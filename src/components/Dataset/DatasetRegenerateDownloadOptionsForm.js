@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { Box, Text } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
-import formatString from 'helpers/formatString'
 import gtag from 'analytics/gtag'
-import { options } from 'config'
+import getReadable from 'helpers/getReadable'
 import { Button } from 'components/shared/Button'
 import { ExpandableBlock } from 'components/shared/ExpandableBlock'
 import { DownloadOptionsForm } from 'components/Download/DownloadOptionsForm'
@@ -14,16 +13,7 @@ export const DatasetRegenerateDownloadOptionsForm = ({
   setRegeneratedDataset,
   show
 }) => {
-  const {
-    aggregate_by: aggregateBy,
-    scale_by: scaleBy,
-    quantile_normalize: quantileNormalize
-  } = dataset
   const { createDataset, updateDataset } = useDatasetManager()
-  const transformationOptions = options.transformation.reduce(
-    (acc, cur) => ({ ...acc, [cur.value]: cur.label }),
-    {}
-  )
   const [openForm, setOpenForm] = useState(false)
 
   const handleRegenerateDataset = async (newDownloadOptions) => {
@@ -51,11 +41,13 @@ export const DatasetRegenerateDownloadOptionsForm = ({
     <Box margin={{ bottom: 'small' }}>
       {!openForm && (
         <Box direction="row" gap="xlarge">
-          <Text weight="bold">Aggregate by: {formatString(aggregateBy)}</Text>
           <Text weight="bold">
-            Transformation: {transformationOptions[scaleBy]}
+            Aggregate by: {getReadable('aggregate_by', dataset.aggregate_by)}
           </Text>
-          {!quantileNormalize && (
+          <Text weight="bold">
+            Transformation: {getReadable('scale_by', dataset.scale_by)}
+          </Text>
+          {!dataset.quantile_normalize && (
             <Text weight="bold">
               Quantile Normalization Skipped for RNA-seq samples
             </Text>
@@ -74,7 +66,6 @@ export const DatasetRegenerateDownloadOptionsForm = ({
         <DownloadOptionsForm
           dataset={regeneratedDataset}
           buttonLabel="Regenerate Dataset"
-          isProcessed // always true
           handleDownloadOptionsChanges={handleDownloadOptionsChanges}
           onSubmit={handleRegenerateDataset}
         />
