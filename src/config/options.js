@@ -1,8 +1,4 @@
 export const options = {
-  aggregation: [
-    { label: 'Experiment', value: 'EXPERIMENT' },
-    { label: 'Species', value: 'SPECIES' }
-  ],
   // setting for the compendia
   compendia: {
     // default values for common queries
@@ -48,19 +44,6 @@ export const options = {
       ARRAY_EXPRESS: 'ArrayExpress'
     }
   },
-  // setting for the request data form
-  requestDataForm: {
-    radioPediatricCancer: [
-      { label: 'Yes', value: 'Yes' },
-      { label: 'No', value: 'No' }
-    ],
-    radioPrimaryApproach: [
-      { label: 'Bench Research', value: 'Bench Research' },
-      { label: 'Computational Research', value: 'Computational Research' },
-      { label: 'Clinical Research', value: 'Clinical Research' },
-      { label: 'AI/ML Research', value: 'AI/ML Research' }
-    ]
-  },
   // setting for the samples table
   samplesTable: {
     // default values for common queries
@@ -68,9 +51,10 @@ export const options = {
       offset: 0,
       limit: 10
     },
-    page: 1,
-    pageSizes: [10, 20, 50]
+    page: 1
   },
+  // setting for the page size
+  pageSizes: [10, 20, 50],
   // setting for the search manager
   search: {
     // default values for common queries
@@ -92,7 +76,6 @@ export const options = {
       platform_accession_codes: 'platform',
       technology: 'technology'
     },
-    pageSizes: [10, 20, 50],
     sortby: [
       {
         label: 'Best Match',
@@ -116,6 +99,8 @@ export const options = {
       }
     ]
   },
+  // TODO: This will be cleaned up once the following PR is merged
+  // https://github.com/AlexsLemonade/refinebio-web/pull/365
   transformation: [
     {
       label: 'None',

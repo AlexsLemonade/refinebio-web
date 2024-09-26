@@ -12,9 +12,17 @@ export const readableBooleans = {
 }
 
 export const readableValues = {
+  append: 'Append samples to My Dataset',
+  replace: 'Replace samples in My Dataset',
+  ALL: 'All Speciess',
   EXPERIMENT: 'Experiment',
   SPECIES: 'Species',
   NONE: 'None',
   MINMAX: 'Zero to One',
-  STANDARD: 'Z-score'
+  STANDARD: 'Z-score',
+  _score: 'Best Match',
+  '-num_downloadable_samples': 'Most No. of samples',
+  num_downloadable_samples: 'Least No. of samples',
+  '-source_first_published': 'Newest Experiment',
+  source_first_published: 'Oldest Experiment'
 }
