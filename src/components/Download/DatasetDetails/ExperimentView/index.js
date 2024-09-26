@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Paragraph } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
+import getReadableOptions from 'helpers/getReadableOptions'
 import { OrganismFilter } from './OrganismFilter'
 import { ViewBlock } from './ViewBlock'
 import { ViewBlocks } from '../ViewBlocks'
@@ -15,8 +16,9 @@ export const ExperimentView = ({
   isImmutable
 }) => {
   const { formatSampleMetadata } = useDatasetManager()
-  const defaultOrganismFilterOption = { label: 'All Speciess', value: 'ALL' }
-  const [organism, setOrganism] = useState(defaultOrganismFilterOption.value)
+  const defaultValue = 'ALL'
+  const defaultOrganismFilterOption = getReadableOptions([defaultValue])[0]
+  const [organism, setOrganism] = useState(defaultValue)
 
   if (!datasetData || !Object.keys(datasetData).length) {
     return <Paragraph>No samples added to download dataset.</Paragraph>
@@ -41,7 +43,7 @@ export const ExperimentView = ({
             )
 
             if (
-              organism !== 'ALL' &&
+              organism !== defaultValue &&
               !experiment.organism_names.includes(organism)
             ) {
               return null

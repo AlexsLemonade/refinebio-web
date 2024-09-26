@@ -1,6 +1,5 @@
 import { Box, Paragraph, Text, TextArea } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { options } from 'config'
 import { Button } from 'components/shared/Button'
 import { CheckBox } from 'components/shared/CheckBox'
 import { FormField } from 'components/shared/FormField'
@@ -17,10 +16,14 @@ export const RequestForm = ({
   onSubmit
 }) => {
   const { setResponsive } = useResponsive()
-  const {
-    requestDataForm: { radioPediatricCancer, radioPrimaryApproach }
-  } = options
   const maxCharsForComments = 255
+  const radioPediatricCancer = ['Yes', 'No']
+  const radioPrimaryApproach = [
+    'Bench Research',
+    'Computational Research',
+    'Clinical Research',
+    'AI/ML Research'
+  ]
 
   return (
     <Box>

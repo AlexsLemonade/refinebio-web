@@ -36,7 +36,8 @@ export const Search = ({
   statusCode
 }) => {
   const {
-    search: { pageSizes, sortby }
+    pageSizes,
+    search: { sortby }
   } = options
   const {
     getSearchQueryParam,

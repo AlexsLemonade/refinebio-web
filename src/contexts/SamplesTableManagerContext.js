@@ -5,7 +5,8 @@ export const SamplesTableManagerContext = createContext({})
 
 export const SamplesTableManagerContextProvider = ({ children }) => {
   const {
-    samplesTable: { commonQueries, page, pageSizes }
+    pageSizes,
+    samplesTable: { commonQueries, page }
   } = options
   const [config, setConfig] = useState({
     commonQueries,

@@ -13,11 +13,11 @@ export const useSearchManager = () => {
     setFilterOrders: setFilterOrdersState
   } = useContext(SearchManagerContext)
   const {
+    pageSizes,
     search: {
       clientOnlyFilterQueries,
       commonQueries,
       formattedFacetNames,
-      pageSizes,
       sortby
     }
   } = options

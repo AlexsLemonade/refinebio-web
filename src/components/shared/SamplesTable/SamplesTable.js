@@ -35,9 +35,7 @@ export const SamplesTable = ({
   modalView = false,
   showOnlyAddedSamples = false
 }) => {
-  const {
-    samplesTable: { pageSizes }
-  } = options
+  const { pageSizes } = options
   const {
     config: { defaultColumn, minColumns },
     hasError,

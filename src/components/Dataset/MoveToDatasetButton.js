@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useModal } from 'hooks/useModal'
 import formatNumbers from 'helpers/formatNumbers'
+import getReadableOptions from 'helpers/getReadableOptions'
 import { Button } from 'components/shared/Button'
 import { Modal } from 'components/shared/Modal'
 import { MoveToDatasetModal } from './MoveToDatasetModal'
@@ -12,10 +13,8 @@ export const MoveToDatasetButton = ({ dataset, disabled, selectedDataset }) => {
   const { addSamples, getTotalSamples } = useDatasetManager()
   const { openModal, closeModal } = useModal()
   const id = `move-to-dataset-${dataset?.id}`
-  const radioOptions = [
-    { label: 'Append samples to My Dataset', value: 'append' },
-    { label: 'Replace samples in My Dataset', value: 'replace' }
-  ]
+  const radioValues = ['append', 'replace']
+  const radioOptions = getReadableOptions(radioValues)
   const defaultValue = radioOptions[0].value
   const [value, setValue] = useState(defaultValue)
   const newTotalSamples = getTotalSamples(selectedDataset.data)
