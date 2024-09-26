@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Box } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
-import { usePageRendered } from 'hooks/usePageRendered'
 import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
 import { Error } from 'components/shared/Error'
@@ -27,7 +26,6 @@ export const getServerSideProps = ({ query }) => {
 }
 
 export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
-  const pageRendered = usePageRendered()
   const { push } = useRouter()
   const { setResponsive } = useResponsive()
   const {
@@ -61,8 +59,6 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
       setDataset(polledDatasetState)
     }
   }, [isProcessingDataset, polledDatasetState])
-
-  if (!pageRendered) return null
 
   if (start) {
     return (
