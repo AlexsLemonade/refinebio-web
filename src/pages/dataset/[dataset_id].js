@@ -30,12 +30,7 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
   const pageRendered = usePageRendered()
   const { push } = useRouter()
   const { setResponsive } = useResponsive()
-  const {
-    datasetId: myDatasetId,
-    error,
-    loading,
-    getDataset
-  } = useDatasetManager()
+  const { dataset: myDataset, error, loading, getDataset } = useDatasetManager()
   const { isProcessingDataset, polledDatasetState, pollDatasetId } =
     usePollDatasetStatus()
   const [dataset, setDataset] = useState({}) // dataset currently displayed on the page
@@ -47,7 +42,7 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
 
   useEffect(() => {
     // redirects users to /download if datasetId matches My dataset ID
-    if (datasetId === myDatasetId) push('/download')
+    if (datasetId === myDataset.id) push('/download')
 
     getDatasetFromQuery(datasetId)
     pollDatasetId(datasetId) // sets a processing datasets for polling
