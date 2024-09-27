@@ -4,6 +4,7 @@ import { Formik } from 'formik'
 import { Box, Form } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
+import getDatasetState from 'helpers/getDatasetState'
 import { Button } from 'components/shared/Button'
 import { Row } from 'components/shared/Row'
 import { AdvancedOptions } from './AdvancedOptions'
@@ -21,7 +22,7 @@ export const DownloadOptionsForm = ({
   const { updateDataset, getDownloadOptions, updateDownloadOptions } =
     useDatasetManager()
   const { setResponsive } = useResponsive()
-  const isProcessed = dataset?.is_processed
+  const [isRegenerate, setIsRegenerate] = useState(false)
   const [toggleAdvancedOption, setToggleAdvancedOption] = useState(
     dataset?.quantile_normalize
   )
@@ -29,12 +30,14 @@ export const DownloadOptionsForm = ({
   useEffect(() => {
     if (!dataset) return
     // sets the initial download options
+    const { isRegenerative } = getDatasetState(dataset)
+    setIsRegenerate(isRegenerative)
     updateDownloadOptions(
       {
         ...getDownloadOptions(dataset)
       },
       dataset.id,
-      isProcessed
+      isRegenerative
     )
   }, [])
 
@@ -45,8 +48,8 @@ export const DownloadOptionsForm = ({
       const response = await onSubmit(downloadOptions)
       pathname = response
     }
-    // updates only for My Dataset (in /download)
-    if (!isProcessed) {
+    // updates via API call only for My Dataset in /download (unprocessed)
+    if (!isRegenerate) {
       await updateDataset(dataset.id, {
         ...downloadOptions,
         data: dataset.data
@@ -67,11 +70,11 @@ export const DownloadOptionsForm = ({
   const handleUpdateDownloadOptions = async (name, newOption) => {
     const newDownloadOption = { [name]: newOption }
 
-    if (isProcessed && handleDownloadOptionsChanges) {
+    if (isRegenerate && handleDownloadOptionsChanges) {
       handleDownloadOptionsChanges(newDownloadOption)
     }
 
-    await updateDownloadOptions(newDownloadOption, dataset.id, isProcessed)
+    await updateDownloadOptions(newDownloadOption, dataset.id, isRegenerate)
   }
 
   return (

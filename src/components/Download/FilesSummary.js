@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { links } from 'config'
+import getDatasetState from 'helpers/getDatasetState'
 import getDownloadFilesData from 'helpers/getDownloadFilesData'
 import { Anchor } from 'components/shared/Anchor'
 import { Column } from 'components/shared/Column'
@@ -35,10 +36,8 @@ const Card = ({ description, format, index, title }) => {
 }
 
 export const FilesSummary = ({ dataset }) => {
-  const { is_processed: isProcessed, success } = dataset
-
   const { setResponsive } = useResponsive()
-  const isProcessedSuccess = isProcessed && success // sets visibility of the download options form
+  const { isRegenerative } = getDatasetState(dataset) // sets visibility of the download options form for regenaration
   const [regeneratedDataset, setRegeneratedDataset] = useState(null)
   const [fileSummaries, setFileSummaries] = useState(
     getDownloadFilesData(dataset)
@@ -46,7 +45,7 @@ export const FilesSummary = ({ dataset }) => {
 
   useEffect(() => {
     // sets successfully processed dataset as regeneratedDataset
-    if (isProcessedSuccess) setRegeneratedDataset(dataset)
+    if (isRegenerative) setRegeneratedDataset(dataset)
   }, [])
 
   useEffect(() => {
@@ -67,7 +66,7 @@ export const FilesSummary = ({ dataset }) => {
         dataset={dataset}
         regeneratedDataset={regeneratedDataset}
         setRegeneratedDataset={setRegeneratedDataset}
-        show={isProcessedSuccess}
+        show={isRegenerative}
       />
       <Row
         direction={setResponsive('column', 'column', 'row')}
