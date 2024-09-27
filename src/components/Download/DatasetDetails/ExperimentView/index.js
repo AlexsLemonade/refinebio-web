@@ -1,41 +1,35 @@
 import { useState } from 'react'
 import { Paragraph } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
+import getFormattedExperiments from 'helpers/getFormattedExperiments'
 import { OrganismFilter } from './OrganismFilter'
 import { ViewBlock } from './ViewBlock'
 import { ViewBlocks } from '../ViewBlocks'
 
-export const ExperimentView = ({
-  dataset: {
-    data: datasetData,
-    id: datasetId,
-    experiments,
-    quantile_normalize: quantileNormalize
-  },
-  isImmutable
-}) => {
+export const ExperimentView = ({ dataset, isImmutable }) => {
   const { formatSampleMetadata } = useDatasetManager()
   const defaultOrganismFilterOption = { label: 'All Speciess', value: 'ALL' }
+  const formattedExperiments = getFormattedExperiments(dataset)
   const [organism, setOrganism] = useState(defaultOrganismFilterOption.value)
 
-  if (!datasetData || !Object.keys(datasetData).length) {
+  if (!dataset.data || !Object.keys(dataset.data).length) {
     return <Paragraph>No samples added to download dataset.</Paragraph>
   }
 
   return (
     <>
       <OrganismFilter
-        datasetData={datasetData}
+        dataset={dataset}
+        experiments={formattedExperiments}
         defaultOption={defaultOrganismFilterOption}
-        experiments={experiments}
         organism={organism}
         setOrganism={setOrganism}
       />
-      {experiments && (
+      {formattedExperiments && (
         <ViewBlocks elevation="medium" pad="medium">
-          {Object.keys(datasetData).map((experimentAccessionCode) => {
-            const addedSamples = datasetData[experimentAccessionCode]
-            const experiment = experiments[experimentAccessionCode]
+          {Object.keys(dataset.data).map((experimentAccessionCode) => {
+            const addedSamples = dataset.data[experimentAccessionCode]
+            const experiment = formattedExperiments[experimentAccessionCode]
             const metadataFields = formatSampleMetadata(
               experiment.sample_metadata
             )
@@ -50,14 +44,13 @@ export const ExperimentView = ({
             return (
               <ViewBlock
                 key={experimentAccessionCode}
-                addedSamples={addedSamples}
-                datasetId={datasetId}
-                defaultOrganismFilterOption={defaultOrganismFilterOption}
+                dataset={dataset}
                 experiment={experiment}
                 experimentAccessionCode={experimentAccessionCode}
+                defaultOrganismFilterOption={defaultOrganismFilterOption}
                 metadataFields={metadataFields}
-                quantileNormalize={quantileNormalize}
                 isImmutable={isImmutable}
+                addedSamples={addedSamples}
                 setOrganism={setOrganism}
               />
             )
