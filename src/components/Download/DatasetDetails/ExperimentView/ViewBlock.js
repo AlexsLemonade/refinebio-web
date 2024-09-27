@@ -13,14 +13,13 @@ import { TextNull } from 'components/shared/TextNull'
 import { ViewSamplesButton } from '../ViewSamplesButton'
 
 export const ViewBlock = ({
-  datasetId,
-  addedSamples,
+  dataset,
   experiment,
-  defaultOrganismFilterOption,
   experimentAccessionCode,
+  defaultOrganismFilterOption,
   metadataFields,
-  quantileNormalize,
   isImmutable,
+  addedSamples,
   setOrganism
 }) => {
   const { loading, removeExperiment } = useDatasetManager()
@@ -42,7 +41,7 @@ export const ViewBlock = ({
             label={experiment.title}
           />
         </Heading>
-        {experiment.technology === 'RNA-SEQ' && !quantileNormalize && (
+        {experiment.technology === 'RNA-SEQ' && !dataset.quantile_normalize && (
           <Box margin={{ vertical: 'xsmall' }}>
             <Pill
               label="Quantile Normalization will be skipped"
@@ -94,7 +93,7 @@ export const ViewBlock = ({
             <ViewSamplesButton
               dataset={{ [experimentAccessionCode]: addedSamples }}
               params={{
-                dataset_id: datasetId,
+                dataset_id: dataset.id,
                 experiment_accession_code: experimentAccessionCode
               }}
               sampleMetadataFields={experiment.sample_metadata}

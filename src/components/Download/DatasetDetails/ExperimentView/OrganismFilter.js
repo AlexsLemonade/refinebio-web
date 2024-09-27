@@ -5,9 +5,9 @@ import unionizeArrays from 'helpers/unionizeArrays'
 import { RadioButtonGroup } from 'components/shared/RadioButtonGroup'
 
 export const OrganismFilter = ({
-  datasetData,
-  defaultOption,
+  dataset,
   experiments,
+  defaultOption,
   organism,
   setOrganism
 }) => {
@@ -16,7 +16,7 @@ export const OrganismFilter = ({
   // merges all of the organism_names arrays into a single
   // one-dimensional array containing only unique elements
   const uniqueOrganisms = unionizeArrays(
-    ...Object.keys(datasetData)
+    ...Object.keys(dataset.data)
       .map((accessionCode) => experiments[accessionCode].organism_names)
       .reduce((accumulator, organisms) => accumulator.concat(organisms), [])
   )

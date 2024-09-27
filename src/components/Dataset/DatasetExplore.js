@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Box, Heading } from 'grommet'
 import gtag from 'analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
+import getFormattedExperiments from 'helpers/getFormattedExperiments'
 import { Anchor } from 'components/shared/Anchor'
 import { Column } from 'components/shared/Column'
 import { List } from 'components/shared/List'
@@ -20,10 +21,13 @@ const ListItem = ({ href, text }) => (
 
 export const DatasetExplore = ({ dataset }) => {
   const { setResponsive } = useResponsive()
+  const formattedExperiments = getFormattedExperiments(dataset)
   const [technologies, setTechnologies] = useState(null)
 
   useEffect(() => {
-    setTechnologies(Object.values(dataset.experiments).map((e) => e.technology))
+    setTechnologies(
+      Object.values(formattedExperiments).map((e) => e.technology)
+    )
   }, [])
 
   const hasRNASeq = technologies && technologies.includes('RNA-SEQ')

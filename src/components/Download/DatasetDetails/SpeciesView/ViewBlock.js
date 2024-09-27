@@ -10,13 +10,12 @@ import { TextCapitalized } from 'components/shared/TextCapitalized'
 import { ViewSamplesButton } from '../ViewSamplesButton'
 
 export const ViewBlock = ({
-  datasetId,
+  dataset,
   specieName,
   samplesInSpecie,
-  hasRnaSeqExperiments,
-  quantileNormalize,
   sampleMetadataFields,
   specieDatasetSlice,
+  hasRnaSeqExperiments,
   isImmutable
 }) => {
   const { loading, removeSamples } = useDatasetManager()
@@ -28,7 +27,7 @@ export const ViewBlock = ({
       <Heading level={2}>
         <TextCapitalized text={<>{formatString(specieName)} Samples</>} />
       </Heading>
-      {hasRnaSeqExperiments && !quantileNormalize && (
+      {hasRnaSeqExperiments && !dataset.quantile_normalize && (
         <Box margin={{ top: 'small' }}>
           <Pill
             label="Quantile Normalization will be skipped for RNA-seq samples"
@@ -44,7 +43,7 @@ export const ViewBlock = ({
           <ViewSamplesButton
             dataset={specieDatasetSlice}
             params={{
-              dataset_id: datasetId,
+              dataset_id: dataset.id,
               organism__name: specieName
             }}
             sampleMetadataFields={sampleMetadataFields}
