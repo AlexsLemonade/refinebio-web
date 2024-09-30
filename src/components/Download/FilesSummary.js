@@ -44,7 +44,7 @@ export const FilesSummary = ({ dataset }) => {
   )
 
   useEffect(() => {
-    // sets successfully processed dataset as regeneratedDataset
+    // sets expired processed dataset as regeneratedDataset
     if (isRegenerative) setRegeneratedDataset(dataset)
   }, [])
 

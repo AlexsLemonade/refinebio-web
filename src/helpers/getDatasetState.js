@@ -10,15 +10,15 @@ export default (dataset) => {
   } = dataset
 
   const isExpired = moment(expiredOn).isBefore(Date.now())
-  const isComplete = isProcessed && isAvailable && success
-  const isProcessingError = success === false
+  const isComplete = isProcessed && isAvailable && success // successfully processed
+  const isProcessingError = success === false // failed during processing
 
   return {
     // mutable
     isNotProcessed: !isComplete && success === null, // unprocessed and editable
     // immutable
     isProcessing: isProcessing && !isProcessingError, // currently being processed
-    isProcessingError, // failed during processing
+    isProcessingError,
     isReady: isComplete && !isExpired, // available for download
     isRegenerative: isComplete && isExpired // available for regenerative download
   }
