@@ -104,9 +104,10 @@ export const Download = ({ type }) => {
     updateFilteredOptions(formatString(option.primary_organism_name))
   }
 
-  const handleFileDownload = async (id) => {
+  const handleFileDownload = async (userSelectedOrganism) => {
+    const { id } = userSelectedOrganism
     const response = await downloadCompendia(id)
-    gtag.trackCompendiaDownload(response)
+    gtag.trackCompendiaDownload(userSelectedOrganism)
     navigateToFileDownload(response.organism, response.url)
   }
 
@@ -272,7 +273,7 @@ export const Download = ({ type }) => {
                 disabled={!acceptTerms || !selectedOrganism}
                 primary
                 responsive
-                onClick={() => handleFileDownload(selectedOrganism.id)}
+                onClick={() => handleFileDownload(selectedOrganism)}
               />
             </Column>
           </Row>
