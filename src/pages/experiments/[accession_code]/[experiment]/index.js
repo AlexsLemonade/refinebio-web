@@ -2,6 +2,7 @@ import { Fragment, memo, useEffect, useRef } from 'react'
 import { nanoid } from 'nanoid'
 import { Box, Grid, Heading } from 'grommet'
 import { useRouter } from 'next/router'
+import { useLayoutRefs } from 'hooks/useLayoutRefs'
 import { useExperiments } from 'hooks/useExperiments'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
@@ -57,25 +58,19 @@ export const Experiment = () => {
     getPlatformNames,
     getTechnologyNames
   } = useExperiments()
+  const { setResponsive } = useResponsive()
   const { search, navigateToSearch } = useSearchManager()
+  const { headerRef } = useLayoutRefs()
+  const tableRef = useRef(null)
   const fromSearch = search.ref === 'search'
   const fromViewSamples = search.from === 'view-samples'
-  const { setResponsive } = useResponsive()
-  const tableRef = useRef(null)
 
-  const handleScroll = () => {
-    handleFinalScroll(
-      tableRef.current,
-      // includes sticky header height + 10 (for extra padding of dropshadow)
-      (document.querySelector('header')?.offsetHeight || 0) + 10
-    )
-  }
-
-  const handleFinalScroll = (element, offset = 0) => {
-    if (!element) return
-
+  const scrollToTable = () => {
+    const offset = (headerRef.current.offsetHeight || 0) + 10
+    const tableTop =
+      tableRef.current.getBoundingClientRect().top + window.scrollY - offset
     scrollTo({
-      top: element.getBoundingClientRect().top + window.scrollY - offset
+      top: tableTop
     })
   }
 
@@ -85,11 +80,10 @@ export const Experiment = () => {
 
   useEffect(() => {
     if (!fromViewSamples || !hasSamples || !tableRef.current) return
-
     // triggers initial scrolling
-    handleScroll()
+    scrollToTable()
     // watches layout changes and updates scroll position
-    const resizeObserver = new ResizeObserver(() => handleScroll())
+    const resizeObserver = new ResizeObserver(() => scrollToTable())
     resizeObserver.observe(document.body)
 
     // eslint-disable-next-line consistent-return

@@ -5,6 +5,7 @@ import { GlobalStyle } from 'styles/GlobalStyle'
 import { theme } from 'themes'
 import { BandContextProvider } from 'contexts/BandContext'
 import { DatasetManagerContextProvider } from 'contexts/DatasetManagerContext'
+import { LayoutRefsProvider } from 'contexts/LayoutRefsContext'
 import { ModalContextProvider } from 'contexts/ModalContext'
 import { RefinebioContextProvider } from 'contexts/RefinebioContext'
 import { SearchManagerContextProvider } from 'contexts/SearchManagerContext'
@@ -25,14 +26,16 @@ const App = ({ Component, pageProps }) => {
           <DatasetManagerContextProvider>
             <BandContextProvider>
               <PageTitle />
-              <Layout>
-                <Sentry.ErrorBoundary fallback={Fallback} showDialog>
-                  <ModalContextProvider>
-                    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-                    <Component {...pageProps} />
-                  </ModalContextProvider>
-                </Sentry.ErrorBoundary>
-              </Layout>
+              <LayoutRefsProvider>
+                <Layout>
+                  <Sentry.ErrorBoundary fallback={Fallback} showDialog>
+                    <ModalContextProvider>
+                      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+                      <Component {...pageProps} />
+                    </ModalContextProvider>
+                  </Sentry.ErrorBoundary>
+                </Layout>
+              </LayoutRefsProvider>
             </BandContextProvider>
           </DatasetManagerContextProvider>
         </SearchManagerContextProvider>
