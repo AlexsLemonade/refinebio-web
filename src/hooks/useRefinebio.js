@@ -19,8 +19,6 @@ export const useRefinebio = () => {
     setRegeneratedDataset,
     requestedExperiments,
     setRequestedExperiments,
-    samplesTableData,
-    setSamplesTableData,
     token,
     setToken
   } = useContext(RefinebioContext)
@@ -42,8 +40,6 @@ export const useRefinebio = () => {
     setRegeneratedDataset,
     requestedExperiments,
     setRequestedExperiments,
-    samplesTableData,
-    setSamplesTableData,
     token,
     setToken
   }

@@ -3,18 +3,14 @@ import { api } from 'api'
 import { SamplesTableManagerContext } from 'contexts/SamplesTableManagerContext'
 
 export const useSamplesTableManager = (queryToAdd = {}) => {
-  const {
-    config,
-    setConfig,
-    samplesTable,
-    setSamplesTable,
-    samplesTableData,
-    setSamplesTableData
-  } = useContext(SamplesTableManagerContext)
+  const { config, setConfig, samplesTable, setSamplesTable } = useContext(
+    SamplesTableManagerContext
+  )
   const [loading, setLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
-  const hasSamples = samplesTableData?.results?.length > 0
-  const totalPages = (samplesTableData && samplesTableData.count) || 0
+  const [tableData, setTableData] = useState([])
+  const hasSamples = tableData?.results?.length > 0
+  const totalPages = (tableData && tableData.count) || 0
 
   /* Common */
   const resetPage = () => {
@@ -86,7 +82,7 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
     if (!hasSamples) resetCommonQueries()
 
     setHasError(response?.ok === false)
-    setSamplesTableData(response)
+    setTableData(response)
     setLoading(false)
   }
 
@@ -119,7 +115,7 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
     hasError,
     hasSamples,
     loading,
-    samplesTableData,
+    tableData,
     totalPages,
     getSamplesTableData,
     updateFilterBy,
