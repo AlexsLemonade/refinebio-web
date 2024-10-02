@@ -1,5 +1,6 @@
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
+import gtag from 'analytics/gtag'
 import { options, validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
@@ -13,13 +14,14 @@ import { ReceiveUpdatesCheckBox } from 'components/Download/StartProcessingForm/
 import { TermsOfUseCheckBox } from 'components/Download/StartProcessingForm/TermsOfUseCheckBox'
 
 export const DownloadNowModal = ({
-  accessionCode,
+  experiment,
   hasMultipleOrganisms,
   hasRnaSeq
 }) => {
   const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const { StartProcessingFormSchema } = validationSchemas
+  const { accession_code: accessionCode } = experiment
 
   return (
     <Box pad={{ bottom: 'small', horizontal: 'large' }}>
@@ -49,10 +51,14 @@ export const DownloadNowModal = ({
           const { emailAddress, receiveUpdates } = values
 
           if (receiveUpdates) {
-            subscribeEmail(emailAddress)
+            const subscribeEmailResponse = await subscribeEmail(emailAddress)
+            if (subscribeEmailResponse.status !== 'error') {
+              gtag.trackEmailSubscription(DownloadNowModal)
+            }
           }
 
           await startProcessingDataset(values, null, accessionCode)
+          gtag.trackOneOffExperimentDownload(experiment)
           setSubmitting(false)
         }}
       >

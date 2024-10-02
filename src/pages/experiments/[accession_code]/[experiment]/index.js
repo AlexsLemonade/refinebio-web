@@ -94,11 +94,9 @@ export const Experiment = () => {
 
   return (
     <>
-      <PageTitle
-        title={`${
-          experiment ? `${accessionCode} - ${experiment.title}` : 'Loading'
-        } -`}
-      />
+      {experiment && (
+        <PageTitle title={`${`${accessionCode} - ${experiment.title}`} -`} />
+      )}
       <TextHighlightContextProvider match={fromSearch && search.search}>
         <Box height={{ min: '50%' }}>
           <FixedContainer pad="large">
@@ -158,11 +156,7 @@ export const Experiment = () => {
                         align="end"
                       >
                         <SearchCardAction
-                          accessionCode={accessionCode}
-                          downloadableSamples={
-                            experiment.num_downloadable_samples
-                          }
-                          organismNames={experiment.organism_names}
+                          experiment={experiment}
                           technology={getTechnologyNames()}
                         />
                       </Box>

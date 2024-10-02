@@ -1,3 +1,4 @@
+import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import formatNumbers from 'helpers/formatNumbers'
 import { Button } from 'components/shared/Button'
@@ -6,6 +7,11 @@ import { InlineMessage } from 'components/shared/InlineMessage'
 export const AddRemainingDatasetButton = ({ dataToAdd, samplesInDataset }) => {
   const { loading, addSamples } = useDatasetManager()
 
+  const handleClick = () => {
+    addSamples(dataToAdd)
+    gtag.trackDatasetAction(AddRemainingDatasetButton)
+  }
+
   return (
     <>
       <Button
@@ -13,7 +19,7 @@ export const AddRemainingDatasetButton = ({ dataToAdd, samplesInDataset }) => {
         label="Add Remaining"
         secondary
         responsive
-        onClick={() => addSamples(dataToAdd)}
+        onClick={handleClick}
       />
       <InlineMessage
         label={
