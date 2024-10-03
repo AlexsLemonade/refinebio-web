@@ -24,12 +24,7 @@ export const SamplesTableManagerContextProvider = ({ children }) => {
     pageSize: pageSizes[0]
   })
   const value = useMemo(
-    () => ({
-      config,
-      setConfig,
-      samplesTable,
-      setSamplesTable
-    }),
+    () => ({ config, setConfig, samplesTable, setSamplesTable }),
     [config, setConfig, samplesTable, setSamplesTable]
   )
 
