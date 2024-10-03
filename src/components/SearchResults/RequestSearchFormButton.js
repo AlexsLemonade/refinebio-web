@@ -3,7 +3,7 @@ import { Button } from 'components/shared/Button'
 import { ModalPage } from 'components/shared/ModalPage'
 import { RequestSearchForm } from './RequestSearchForm'
 
-export const RequestSearchFormButton = ({ queryTerm, size }) => {
+export const RequestSearchFormButton = ({ size }) => {
   const { closeModal, openModal } = useModal()
   const id = 'missing-results-form'
 
@@ -20,10 +20,7 @@ export const RequestSearchFormButton = ({ queryTerm, size }) => {
       }
       fullHeight={false}
     >
-      <RequestSearchForm
-        closeForm={() => closeModal(id)}
-        queryTerm={queryTerm}
-      />
+      <RequestSearchForm onSubmit={() => closeModal(id)} />
     </ModalPage>
   )
 }

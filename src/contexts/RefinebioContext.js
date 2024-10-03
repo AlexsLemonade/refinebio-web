@@ -13,8 +13,12 @@ export const RefinebioContextProvider = ({ children }) => {
   const [datasetId, setDatasetId] = useLocalStorage('datasetId', null)
   const [downloadOptions, setDownloadOptions] = useState({})
   const [email, setEmail] = useLocalStorage('email-address', null)
-  const [processingResources, setProcessingResources] = useLocalStorage(
-    'processing-resources',
+  const [datasetAccessions, setDatasetAccessions] = useLocalStorage(
+    'dataset-accessions',
+    {}
+  )
+  const [processingDatasets, setProcessingDatasets] = useLocalStorage(
+    'processing-datasets',
     []
   )
   const [regeneratedDataset, setRegeneratedDataset] = useState(null)
@@ -22,7 +26,6 @@ export const RefinebioContextProvider = ({ children }) => {
     'requested-experiments',
     []
   )
-  const [samplesTableData, setSamplesTableData] = useState({})
   const [token, setToken] = useLocalStorage('token', null)
   const pageRendered = usePageRendered()
 
@@ -45,40 +48,40 @@ export const RefinebioContextProvider = ({ children }) => {
     () => ({
       dataset,
       setDataset,
+      datasetAccessions,
+      setDatasetAccessions,
       datasetId,
       setDatasetId,
       downloadOptions,
       setDownloadOptions,
       email,
       setEmail,
-      processingResources,
-      setProcessingResources,
+      processingDatasets,
+      setProcessingDatasets,
       regeneratedDataset,
       setRegeneratedDataset,
       requestedExperiments,
       setRequestedExperiments,
-      samplesTableData,
-      setSamplesTableData,
       token,
       setToken
     }),
     [
       dataset,
       setDataset,
+      datasetAccessions,
+      setDatasetAccessions,
       datasetId,
       setDatasetId,
       downloadOptions,
       setDownloadOptions,
       email,
       setEmail,
-      processingResources,
-      setProcessingResources,
+      processingDatasets,
+      setProcessingDatasets,
       regeneratedDataset,
       setRegeneratedDataset,
       requestedExperiments,
       setRequestedExperiments,
-      samplesTableData,
-      setSamplesTableData,
       token,
       setToken
     ]

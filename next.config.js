@@ -15,6 +15,9 @@ const moduleExports = () => {
     API_VERSION: isProduction
       ? process.env.API_VERSION
       : process.env.STAGE_API_VERSION,
+    GA4_MEASUREMENT_ID: isProduction
+      ? process.env.GA4_MEASUREMENT_ID
+      : process.env.STAGE_GA4_MEASUREMENT_ID,
     GITHUB_TOKEN: isProduction
       ? process.env.GITHUB_TOKEN
       : process.env.STAGE_GITHUB_TOKEN,
@@ -24,7 +27,6 @@ const moduleExports = () => {
     HUBSPOT_ACCESS_TOKEN: isProduction
       ? process.env.HUBSPOT_ACCESS_TOKEN
       : process.env.STAGE_HUBSPOT_ACCESS_TOKEN,
-    HUBSPOT_ILS_LIST_ID: process.env.HUBSPOT_ILS_LIST_ID,
     SENTRY_DSN: isProduction
       ? process.env.SENTRY_DSN
       : process.env.STAGE_SENTRY_DSN,

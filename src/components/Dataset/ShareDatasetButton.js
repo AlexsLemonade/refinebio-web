@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Box, Heading } from 'grommet'
+import gtag from 'analytics/gtag'
 import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
 import { useTimeoutInCallback } from 'hooks/useTimeoutInCallback'
@@ -10,20 +11,26 @@ import { InlineMessage } from 'components/shared/InlineMessage'
 import { Modal } from 'components/shared/Modal'
 import { TextInput } from 'components/shared/TextInput'
 
-export const ShareDatasetButton = ({ datasetId }) => {
+export const ShareDatasetButton = ({ dataset }) => {
   const { openModal } = useModal()
   const { setResponsive } = useResponsive()
   const { startTimer, clearTimer } = useTimeoutInCallback(() => {
     setIsCopied(false)
   }, 3000)
   const [isCopied, setIsCopied] = useState(false)
-  const [value, handdleCopy] = useCopyToClipboard(null)
+  const [value, copyText] = useCopyToClipboard(null)
+  const { id: datasetId } = dataset
   const id = `shareable-link_${datasetId}`
   const shareableLink = `${getDomain()}/dataset/${datasetId}?ref=share`
 
-  const handleClick = (link) => {
-    handdleCopy(link)
+  const onShareClick = () => {
+    openModal(id)
+  }
+
+  const onCopyClick = () => {
+    copyText(shareableLink)
     setIsCopied(true)
+    gtag.trackSharedDataset(dataset)
   }
 
   useEffect(() => {
@@ -39,7 +46,7 @@ export const ShareDatasetButton = ({ datasetId }) => {
           label="Share Dataset"
           secondary
           responsive
-          onClick={() => openModal(id)}
+          onClick={onShareClick}
         />
       }
       fullHeight={false}
@@ -71,12 +78,7 @@ export const ShareDatasetButton = ({ datasetId }) => {
             <TextInput value={shareableLink} />
           </Box>
           <Box>
-            <Button
-              label="Copy"
-              primary
-              responsive
-              onClick={() => handleClick(shareableLink)}
-            />
+            <Button label="Copy" primary responsive onClick={onCopyClick} />
           </Box>
         </Box>
       </Box>
