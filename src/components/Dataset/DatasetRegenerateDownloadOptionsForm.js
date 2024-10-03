@@ -10,8 +10,7 @@ import { DownloadOptionsForm } from 'components/Download/DownloadOptionsForm'
 export const DatasetRegenerateDownloadOptionsForm = ({
   dataset,
   regeneratedDataset,
-  setRegeneratedDataset,
-  show
+  setRegeneratedDataset
 }) => {
   const { createDataset, updateDataset } = useDatasetManager()
   const [openForm, setOpenForm] = useState(false)
@@ -34,8 +33,6 @@ export const DatasetRegenerateDownloadOptionsForm = ({
   const handleDownloadOptionsChanges = (newDownloadOption) => {
     setRegeneratedDataset((prev) => ({ ...prev, ...newDownloadOption }))
   }
-
-  if (!show) return null
 
   return (
     <Box margin={{ bottom: 'small' }}>
