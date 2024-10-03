@@ -34,6 +34,8 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
   const { isProcessingDataset, polledDatasetState, pollDatasetId } =
     usePollDatasetStatus()
   const [dataset, setDataset] = useState({}) // dataset currently displayed on the page
+  const isUnprocessedDataset = // sets visibility of the Download Dataset button
+    !dataset.is_processing && !dataset.is_processed && dataset.success !== false
 
   const getDatasetFromQuery = async (id) => {
     const response = await getDataset(id)
@@ -104,7 +106,9 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
                 margin={{ top: setResponsive('medium', 'none') }}
               >
                 <ShareDatasetButton dataset={dataset} />
-                <DownloadDatasetButton dataset={dataset} />
+                {isUnprocessedDataset && (
+                  <DownloadDatasetButton dataset={dataset} />
+                )}
               </Row>
             </Row>
             <FilesSummary dataset={dataset} />
