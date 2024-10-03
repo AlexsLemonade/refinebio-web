@@ -7,8 +7,8 @@ import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { IconProcessingGears } from 'components/shared/IconProcessingGears'
 
-export const ProcessingDatasetPillModal = ({ datasetId, id }) => {
-  const { email } = useDatasetManager()
+export const ProcessingDatasetPillModal = ({ accessionCode, id }) => {
+  const { email, getProcessingDatasetByAccession } = useDatasetManager()
   const { closeModal } = useModal()
   const { setResponsive } = useResponsive()
 
@@ -29,7 +29,9 @@ export const ProcessingDatasetPillModal = ({ datasetId, id }) => {
         when the dataset is ready or you can track the status{' '}
         <Anchor
           label="here"
-          href={`${getDomain()}/dataset/${datasetId}`}
+          href={`${getDomain()}/dataset/${getProcessingDatasetByAccession(
+            accessionCode
+          )}`}
           target="_self"
         />
         .

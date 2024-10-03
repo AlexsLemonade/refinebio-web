@@ -5,9 +5,9 @@ import { Pill } from 'components/shared/Pill'
 import { ProcessingDatasetPillModal } from './ProcessingDatasetPillModal'
 
 // show the processing pill while one-off experiment is being processed
-export const ProcessingDatasetPill = ({ datasetId }) => {
+export const ProcessingDatasetPill = ({ accessionCode }) => {
   const { openModal } = useModal()
-  const id = `procecssing-dataset-${datasetId}`
+  const id = `procecssing-dataset-${accessionCode}`
 
   return (
     <Modal
@@ -20,7 +20,7 @@ export const ProcessingDatasetPill = ({ datasetId }) => {
       fullHeight={false}
       width="520px"
     >
-      <ProcessingDatasetPillModal datasetId={datasetId} id={id} />
+      <ProcessingDatasetPillModal accessionCode={accessionCode} id={id} />
     </Modal>
   )
 }

@@ -167,21 +167,6 @@ export const useSearchManager = () => {
   }
 
   /* Other */
-  // converts the facets to API supported format
-  const formatFacetNames = (facetNames) => {
-    const formattedNames = []
-
-    for (const name of facetNames) {
-      if (Object.keys(formattedFacetNames).includes(name)) {
-        formattedNames.push(formattedFacetNames[name])
-      } else {
-        formattedNames.push(name)
-      }
-    }
-
-    return formattedNames
-  }
-
   // returns client-only query parameter from url
   const getSearchQueryParam = (queryParams) => {
     const temp = {}
@@ -230,7 +215,6 @@ export const useSearchManager = () => {
     config,
     setConfig,
     clearAllFilters,
-    formatFacetNames,
     getSearchQueryParam,
     hasAppliedFilters,
     isFilterChecked,
