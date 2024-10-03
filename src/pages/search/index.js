@@ -37,7 +37,7 @@ export const Search = ({
   statusCode
 }) => {
   const {
-    search: { pageSizes, sortby }
+    search: { sortby }
   } = options
   const {
     getSearchQueryParam,
@@ -52,7 +52,7 @@ export const Search = ({
   const [toggleFilterList, setToggleFilterList] = useState(false)
   const [userSearchTerm, setUserSearchTerm] = useState(query.search || '')
   const [page, setPage] = useState(getPageNumber(query.offset, query.limit))
-  const [pageSize, setPageSize] = useState(Number(query.limit) || pageSizes[0])
+  const [pageSize, setPageSize] = useState(Number(query.limit))
   const [sortBy, setSortBy] = useState(query.sortby || sortby[0].value)
   const isResults = results?.length > 0
 
