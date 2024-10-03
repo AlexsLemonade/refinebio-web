@@ -10,11 +10,25 @@ import { TextInput } from 'components/shared/TextInput'
 import { TextNull } from 'components/shared/TextNull'
 import { TextRequired } from 'components/shared/TextRequired'
 
-export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
-  const { push } = useRouter()
+export const RequestSearchForm = ({ onSubmit = () => {} }) => {
+  const {
+    query: { search: searchTerm },
+    push
+  } = useRouter()
   const { viewport, setResponsive } = useResponsive()
   const { RequestDataFormSchema } = validationSchemas
-  const pathname = '/'
+  const redirectPathname = '/'
+  const responseNotifications = {
+    success: {
+      message: 'Request for Experiment Received!',
+      status: 'success'
+    },
+    error: {
+      message:
+        'There was a problem with requesting the experiment. Please try again later.',
+      status: 'error'
+    }
+  }
 
   return (
     <Box
@@ -30,7 +44,7 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
           approach: '',
           email: '',
           email_updates: false,
-          query: queryTerm,
+          query: searchTerm,
           request_type: 'search'
         }}
         validationSchema={RequestDataFormSchema}
@@ -41,21 +55,19 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
               ...values
             }
           })
-          // redirects to the homepage after submission
-          const isSuccess = JSON.parse(response).status === 200
+          // redirects to the homepage after submission and disply the notification banner
+          const { message, status } =
+            responseNotifications[response.status === 200 ? 'success' : 'error']
+
           push(
             {
-              pathname,
-              query: {
-                message: isSuccess
-                  ? 'Request for Experiment Received!'
-                  : 'There was a problem with requesting the experiment. Please try again later',
-                status: isSuccess ? 'success' : 'error'
-              }
+              pathname: redirectPathname,
+              query: { message, status }
             },
-            pathname
+            redirectPathname
           )
 
+          onSubmit()
           setSubmitting(false)
         }}
       >
@@ -80,7 +92,7 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
               <FormField>
                 <Paragraph>
                   List experiment accessions (separated by commas) you expect
-                  for search term ‘<strong>{queryTerm}</strong>’{' '}
+                  for search term ‘<strong>{searchTerm}</strong>’{' '}
                   <TextRequired />
                 </Paragraph>
                 <Text margin={{ top: 'small' }}>
@@ -111,12 +123,12 @@ export const RequestSearchForm = ({ closeForm, queryTerm = '' }) => {
                 Help us priortize your request by answering these questions
               </Heading>
               <RequestForm
-                closeForm={closeForm}
                 errors={errors}
                 handleChange={handleChange}
                 isSubmitting={isSubmitting}
                 touched={touched}
                 values={values}
+                onSubmit={onSubmit}
               />
             </Box>
           </Form>

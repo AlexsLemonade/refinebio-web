@@ -4,7 +4,7 @@ import { Box, Heading } from 'grommet'
 import { useRouter } from 'next/router'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
-import scrollToTop from 'helpers/scrollToTop'
+import scrollTo from 'helpers/scrollTo'
 import { Error } from 'components/shared/Error'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
@@ -23,14 +23,8 @@ export const Download = () => {
   const {
     query: { start }
   } = useRouter()
-
-  const {
-    dataset,
-    error: { hasError, statusCode },
-    loading,
-    getDataset,
-    getTotalSamples
-  } = useDatasetManager()
+  const { dataset, error, loading, getDataset, getTotalSamples } =
+    useDatasetManager()
   const { setResponsive } = useResponsive()
   const [isDownloadable, setIsDownloadable] = useState()
 
@@ -40,7 +34,7 @@ export const Download = () => {
 
   useEffect(() => {
     if (!isDownloadable) {
-      scrollToTop()
+      scrollTo()
     }
   }, [isDownloadable])
 
@@ -48,10 +42,10 @@ export const Download = () => {
     setIsDownloadable(getTotalSamples(dataset.data) > 0)
   }, [dataset])
 
-  if (hasError) {
+  if (error) {
     return (
       <Error
-        statusCode={statusCode}
+        statusCode={error}
         align="center"
         direction="column"
         marginTop="none"
@@ -76,7 +70,7 @@ export const Download = () => {
                 >
                   My Dataset
                 </Heading>
-                <ShareDatasetButton datasetId={dataset?.id} />
+                <ShareDatasetButton dataset={dataset} />
               </Row>
               <DownloadOptionsForm />
               <FilesSummary dataset={dataset} />

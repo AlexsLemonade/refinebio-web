@@ -1,4 +1,5 @@
 import { Box, Heading } from 'grommet'
+import gtag from 'analytics/gtag'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { Column } from 'components/shared/Column'
@@ -6,9 +7,13 @@ import { List } from 'components/shared/List'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
 
-const ListItem = ({ text, href }) => (
+const ListItem = ({ href, text }) => (
   <Box as="li" margin={{ bottom: 'small' }}>
-    <Anchor href={href} label={text} />
+    <Anchor
+      href={href}
+      label={text}
+      onClick={() => gtag.trackExploredUsageClick(href)}
+    />
   </Box>
 )
 
