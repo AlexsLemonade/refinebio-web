@@ -25,7 +25,7 @@ const Block = ({ children }) => {
 
 export const DatasetPageHeader = ({ dataset }) => {
   const { setResponsive } = useResponsive()
-  const { isProcessing, isProcessingError, isReady, isRegenerative } =
+  const { isProcessing, isProcessingError, isReady, isReadyExpired } =
     getDatasetState(dataset)
 
   if (isProcessing) {
@@ -52,7 +52,7 @@ export const DatasetPageHeader = ({ dataset }) => {
     )
   }
 
-  if (isRegenerative) {
+  if (isReadyExpired) {
     return (
       <Block>
         <DatasetRegenerate dataset={dataset} />

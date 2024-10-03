@@ -4,6 +4,7 @@ import { Box } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
+import getDatasetState from 'helpers/getDatasetState'
 import { Error } from 'components/shared/Error'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
@@ -37,7 +38,7 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
   const { isProcessingDataset, polledDatasetState, pollDatasetId } =
     usePollDatasetStatus()
   const [dataset, setDataset] = useState({}) // dataset currently displayed on the page
-
+  const { isNotProcessed } = getDatasetState(dataset)
   const getDatasetFromQuery = async (id) => {
     const response = await getDataset(id)
     setDataset(response)
@@ -105,7 +106,7 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
                 margin={{ top: setResponsive('medium', 'none') }}
               >
                 <ShareDatasetButton dataset={dataset} />
-                <DownloadDatasetButton dataset={dataset} />
+                {isNotProcessed && <DownloadDatasetButton dataset={dataset} />}
               </Row>
             </Row>
             <FilesSummary dataset={dataset} />

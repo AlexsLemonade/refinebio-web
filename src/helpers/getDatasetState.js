@@ -20,6 +20,6 @@ export default (dataset) => {
     isProcessing: isProcessing && !isProcessingError, // currently being processed
     isProcessingError,
     isReady: isComplete && !isExpired, // available for download
-    isRegenerative: isComplete && isExpired // available for regenerative download
+    isReadyExpired: isComplete && isExpired // available for regenerative download
   }
 }

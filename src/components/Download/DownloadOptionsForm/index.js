@@ -30,14 +30,14 @@ export const DownloadOptionsForm = ({
   useEffect(() => {
     if (!dataset) return
     // sets the initial download options
-    const { isRegenerative } = getDatasetState(dataset)
-    setIsRegenerate(isRegenerative)
+    const { isReadyExpired } = getDatasetState(dataset)
+    setIsRegenerate(isReadyExpired)
     updateDownloadOptions(
       {
         ...getDownloadOptions(dataset)
       },
       dataset.id,
-      isRegenerative
+      isReadyExpired
     )
   }, [])
 

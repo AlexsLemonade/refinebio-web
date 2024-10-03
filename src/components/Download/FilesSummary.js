@@ -37,7 +37,7 @@ const Card = ({ description, format, index, title }) => {
 
 export const FilesSummary = ({ dataset }) => {
   const { setResponsive } = useResponsive()
-  const { isRegenerative } = getDatasetState(dataset) // sets visibility of the download options form for regenaration
+  const { isReadyExpired } = getDatasetState(dataset) // sets visibility of the download options form for regenaration
   const [regeneratedDataset, setRegeneratedDataset] = useState(null)
   const [fileSummaries, setFileSummaries] = useState(
     getDownloadFilesData(dataset)
@@ -45,7 +45,7 @@ export const FilesSummary = ({ dataset }) => {
 
   useEffect(() => {
     // sets expired processed dataset as regeneratedDataset
-    if (isRegenerative) setRegeneratedDataset(dataset)
+    if (isReadyExpired) setRegeneratedDataset(dataset)
   }, [])
 
   useEffect(() => {
@@ -62,12 +62,13 @@ export const FilesSummary = ({ dataset }) => {
       <Heading level={2} margin={{ bottom: 'small' }}>
         Download Files Summary
       </Heading>
-      <DatasetRegenerateDownloadOptionsForm
-        dataset={dataset}
-        regeneratedDataset={regeneratedDataset}
-        setRegeneratedDataset={setRegeneratedDataset}
-        show={isRegenerative}
-      />
+      {isReadyExpired && (
+        <DatasetRegenerateDownloadOptionsForm
+          dataset={dataset}
+          regeneratedDataset={regeneratedDataset}
+          setRegeneratedDataset={setRegeneratedDataset}
+        />
+      )}
       <Row
         direction={setResponsive('column', 'column', 'row')}
         margin={{ bottom: 'medium' }}
