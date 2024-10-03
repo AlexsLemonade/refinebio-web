@@ -7,7 +7,7 @@ import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
 import formatFacetNames from 'helpers/formatFacetNames'
 import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
-import getHumanReadablePageNumber from 'helpers/getHumanReadablePageNumber'
+import getPageNumber from 'helpers/getPageNumber'
 import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -51,11 +51,7 @@ export const Search = ({
   const searchBoxWidth = '550px'
   const [toggleFilterList, setToggleFilterList] = useState(false)
   const [userSearchTerm, setUserSearchTerm] = useState(query.search || '')
-  const [page, setPage] = useState(
-    query.offset
-      ? getHumanReadablePageNumber(Number(query.offset), Number(query.limit))
-      : 1
-  )
+  const [page, setPage] = useState(getPageNumber(query.offset, query.limit))
   const [pageSize, setPageSize] = useState(Number(query.limit) || pageSizes[0])
   const [sortBy, setSortBy] = useState(query.sortby || sortby[0].value)
   const isResults = results?.length > 0
@@ -250,8 +246,7 @@ export const Search = ({
   )
 }
 
-Search.getInitialProps = async (ctx) => {
-  const { query } = ctx
+Search.getInitialProps = async ({ query }) => {
   const {
     search: {
       commonQueries: {
@@ -262,9 +257,8 @@ Search.getInitialProps = async (ctx) => {
       }
     }
   } = options
-
   const filterOrders = query.filter_order ? query.filter_order.split(',') : []
-  const queryString = {
+  const queryParams = {
     ...getSearchQueryForAPI(query),
     limit: query.limit || Number(limit),
     offset: query.offset || Number(offset) * (query.limit || Number(limit)),
@@ -274,19 +268,10 @@ Search.getInitialProps = async (ctx) => {
       ? Number(numDownloadableSamples.hide)
       : Number(numDownloadableSamples.show)
   }
-
-  const response = await fetchSearch(
-    queryString,
-    query.offset
-      ? getHumanReadablePageNumber(
-          Number(offset) * (query.limit || Number(limit))
-        )
-      : 1,
-    filterOrders
-  )
+  const response = await fetchSearch(queryParams, filterOrders)
 
   return {
-    query,
+    query: { ...queryParams, ...query },
     ...response
   }
 }
