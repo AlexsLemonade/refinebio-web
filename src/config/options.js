@@ -75,16 +75,14 @@ export const options = {
   search: {
     // default values for common queries
     commonQueries: {
-      offset: 0,
       ordering: '_score',
-      limit: 10,
       num_downloadable_samples__gt: {
         hide: 0,
         show: -1
       }
     },
     // client-only queries
-    clientOnlyQueries: ['empty', 'filter_order', 'p', 'size', 'sortby'],
+    clientOnlyQueries: ['empty', 'filter_order', 'sortby'],
     // client-only filter queries
     clientOnlyFilterQueries: ['empty'],
     formattedFacetNames: {
