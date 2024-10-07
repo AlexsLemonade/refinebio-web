@@ -67,7 +67,9 @@ export const SearchCardMeta = ({
           <IconBadge
             label={
               <TextHighlight>
-                {platformNames.map(formatPlatformName).join(', ')}
+                {isArray(platformNames)
+                  ? platformNames.map(formatPlatformName).join(', ')
+                  : platformNames}
               </TextHighlight>
             }
             name={

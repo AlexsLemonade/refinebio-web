@@ -15,7 +15,7 @@ export const SearchCardFooter = ({ accessionCode, title }) => {
         secondary
         onClick={() => {
           push(`/experiments/${accessionCode}/${formatURLString(title)}`)
-          setSearch({ ...search, ref: 'search' })
+          setSearch({ ...search, ref: 'search', from: 'view-samples' })
         }}
       />
     </Box>
