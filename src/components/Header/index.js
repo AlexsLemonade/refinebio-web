@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { forwardRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Header as GrommetHeader } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
@@ -8,7 +8,7 @@ import { GlobalNav } from './GlobalNav'
 import { GithubAnchor } from './GithubAnchor'
 import { LogoAnchor } from './LogoAnchor'
 
-export const Header = ({ light = false }) => {
+export const Header = forwardRef(({ light = false }, ref) => {
   const router = useRouter()
   const { viewport } = useResponsive()
   const [toggle, setToggle] = useState(false)
@@ -23,6 +23,7 @@ export const Header = ({ light = false }) => {
 
   return (
     <GrommetHeader
+      ref={ref}
       background={isStickyHeader ? 'white' : 'transparent'}
       gap="none"
       justify="center"
@@ -53,6 +54,6 @@ export const Header = ({ light = false }) => {
       {viewport === 'large' && <GithubAnchor light={light} />}
     </GrommetHeader>
   )
-}
+})
 
 export default Header
