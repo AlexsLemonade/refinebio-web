@@ -36,8 +36,7 @@ export const useSearchManager = () => {
   }
 
   const updatePage = (newPage) => {
-    search.offset =
-      (newPage - 1) * (search.limit || Number(commonQueries.limit))
+    search.offset = (newPage - 1) * search.limit
 
     setSearch({ ...search })
     updateSearchQuery()

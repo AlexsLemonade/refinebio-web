@@ -250,8 +250,6 @@ Search.getInitialProps = async ({ query }) => {
   const {
     search: {
       commonQueries: {
-        limit,
-        offset,
         ordering,
         num_downloadable_samples__gt: numDownloadableSamples
       }
@@ -260,8 +258,8 @@ Search.getInitialProps = async ({ query }) => {
   const filterOrders = query.filter_order ? query.filter_order.split(',') : []
   const queryParams = {
     ...getSearchQueryForAPI(query),
-    limit: query.limit || Number(limit),
-    offset: query.offset || Number(offset) * (query.limit || Number(limit)),
+    limit: query.limit || 10,
+    offset: query.offset * query.limit || 0,
     ordering: query.sortby || ordering,
     ...(query.search ? { search: query.search } : {}),
     num_downloadable_samples__gt: !query.empty
@@ -271,7 +269,7 @@ Search.getInitialProps = async ({ query }) => {
   const response = await fetchSearch(queryParams, filterOrders)
 
   return {
-    query: { ...queryParams, ...query },
+    query: queryParams,
     ...response
   }
 }
