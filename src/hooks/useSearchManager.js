@@ -17,7 +17,6 @@ export const useSearchManager = () => {
       clientOnlyFilterQueries,
       commonQueries,
       formattedFacetNames,
-      pageSizes,
       sortby
     }
   } = options
@@ -31,27 +30,20 @@ export const useSearchManager = () => {
 
   /* Common */
   const resetPage = () => {
-    delete search.p
+    search.offset = 0
+
     setSearch({ ...search })
   }
 
   const updatePage = (newPage) => {
-    if (newPage === 1) {
-      delete search.p
-    } else {
-      search.p = newPage
-    }
+    search.offset = (newPage - 1) * search.limit
 
     setSearch({ ...search })
     updateSearchQuery()
   }
 
   const updatePageSize = (newPageSize) => {
-    if (newPageSize === pageSizes[0]) {
-      delete search.size
-    } else {
-      search.size = newPageSize
-    }
+    search.limit = newPageSize
 
     setSearch({ ...search })
     updateSearchQuery(true)
