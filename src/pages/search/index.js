@@ -7,6 +7,7 @@ import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
 import formatFacetNames from 'helpers/formatFacetNames'
 import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
+import getPageNumber from 'helpers/getPageNumber'
 import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -36,7 +37,6 @@ export const Search = ({
   statusCode
 }) => {
   const {
-    pageSizes,
     search: { sortby }
   } = options
   const {
@@ -51,8 +51,8 @@ export const Search = ({
   const searchBoxWidth = '550px'
   const [toggleFilterList, setToggleFilterList] = useState(false)
   const [userSearchTerm, setUserSearchTerm] = useState(query.search || '')
-  const [page, setPage] = useState(Number(query.p) || 1)
-  const [pageSize, setPageSize] = useState(Number(query.size) || pageSizes[0])
+  const [page, setPage] = useState(getPageNumber(query.offset, query.limit))
+  const [pageSize, setPageSize] = useState(Number(query.limit))
   const [sortBy, setSortBy] = useState(query.sortby || sortby[0].value)
   const isResults = results?.length > 0
 
@@ -246,39 +246,30 @@ export const Search = ({
   )
 }
 
-Search.getInitialProps = async (ctx) => {
-  const { query } = ctx
+Search.getInitialProps = async ({ query }) => {
   const {
     search: {
       commonQueries: {
-        limit,
-        offset,
         ordering,
         num_downloadable_samples__gt: numDownloadableSamples
       }
     }
   } = options
-
   const filterOrders = query.filter_order ? query.filter_order.split(',') : []
-  const queryString = {
+  const queryParams = {
     ...getSearchQueryForAPI(query),
-    limit: query.size || Number(limit),
-    offset: (query.p - 1 || Number(offset)) * (query.size || Number(limit)),
+    limit: query.limit || 10,
+    offset: query.offset * query.limit || 0,
     ordering: query.sortby || ordering,
     ...(query.search ? { search: query.search } : {}),
     num_downloadable_samples__gt: !query.empty
       ? Number(numDownloadableSamples.hide)
       : Number(numDownloadableSamples.show)
   }
-
-  const response = await fetchSearch(
-    queryString,
-    Number(query.p) || 1,
-    filterOrders
-  )
+  const response = await fetchSearch(queryParams, filterOrders)
 
   return {
-    query,
+    query: queryParams,
     ...response
   }
 }
