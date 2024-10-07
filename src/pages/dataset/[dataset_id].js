@@ -90,33 +90,25 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
 
   return (
     <FixedContainer>
-      <Box>
-        {dataset?.data && (
-          <>
-            <DatasetPageHeader dataset={dataset} />
-            <Row
-              border={{ side: 'bottom' }}
-              pad={{ bottom: setResponsive('medium', 'small') }}
-            >
-              <Box>
-                <MoveToDatasetButton dataset={dataset} />
-              </Box>
-              <Row
-                gap={setResponsive('medium', 'small')}
-                margin={{ top: setResponsive('medium', 'none') }}
-              >
-                <ShareDatasetButton dataset={dataset} />
-                {isUnprocessedDataset && (
-                  <DownloadDatasetButton dataset={dataset} />
-                )}
-              </Row>
-            </Row>
-            <FilesSummary dataset={dataset} />
-            <DatasetSummary dataset={dataset} />
-            <DatasetDetails dataset={dataset} isImmutable />
-          </>
-        )}
-      </Box>
+      <DatasetPageHeader dataset={dataset} />
+      <Row
+        border={{ side: 'bottom' }}
+        pad={{ bottom: setResponsive('medium', 'small') }}
+      >
+        <Box>
+          <MoveToDatasetButton dataset={dataset} />
+        </Box>
+        <Row
+          gap={setResponsive('medium', 'small')}
+          margin={{ top: setResponsive('medium', 'none') }}
+        >
+          <ShareDatasetButton dataset={dataset} />
+          {isUnprocessedDataset && <DownloadDatasetButton dataset={dataset} />}
+        </Row>
+      </Row>
+      <FilesSummary dataset={dataset} />
+      <DatasetSummary dataset={dataset} />
+      <DatasetDetails dataset={dataset} isImmutable />
     </FixedContainer>
   )
 }
