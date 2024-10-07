@@ -1,18 +1,11 @@
 import { useContext, useState } from 'react'
-import { SamplesTableManagerContext } from 'contexts/SamplesTableManagerContext'
 import { api } from 'api'
+import { SamplesTableManagerContext } from 'contexts/SamplesTableManagerContext'
 
 export const useSamplesTableManager = (queryToAdd = {}) => {
-  const {
-    config: configState,
-    setConfig: setConfigState,
-    samplesTable: samplesTableState,
-    setSamplesTable: setSamplesTableState
-  } = useContext(SamplesTableManagerContext)
-  const config = configState
-  const setConfig = setConfigState
-  const samplesTable = samplesTableState
-  const setSamplesTable = setSamplesTableState
+  const { config, setConfig, samplesTable, setSamplesTable } = useContext(
+    SamplesTableManagerContext
+  )
   const [loading, setLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
   const [tableData, setTableData] = useState([])

@@ -30,15 +30,12 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
   const pageRendered = usePageRendered()
   const { push } = useRouter()
   const { setResponsive } = useResponsive()
-  const {
-    datasetId: myDatasetId,
-    error,
-    loading,
-    getDataset
-  } = useDatasetManager()
+  const { dataset: myDataset, error, loading, getDataset } = useDatasetManager()
   const { isProcessingDataset, polledDatasetState, pollDatasetId } =
     usePollDatasetStatus()
   const [dataset, setDataset] = useState({}) // dataset currently displayed on the page
+  const isUnprocessedDataset = // sets visibility of the Download Dataset button
+    !dataset.is_processing && !dataset.is_processed && dataset.success !== false
 
   const getDatasetFromQuery = async (id) => {
     const response = await getDataset(id)
@@ -47,11 +44,11 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
 
   useEffect(() => {
     // redirects users to /download if datasetId matches My dataset ID
-    if (datasetId === myDatasetId) push('/download')
+    if (datasetId === myDataset.id) push('/download')
 
     getDatasetFromQuery(datasetId)
     pollDatasetId(datasetId) // sets a processing datasets for polling
-  }, [datasetId, start])
+  }, [datasetId])
 
   useEffect(() => {
     // swaps dataset to the last fetched polledDatasetState
@@ -93,31 +90,25 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
 
   return (
     <FixedContainer>
-      <Box>
-        {dataset?.data && (
-          <>
-            <DatasetPageHeader dataset={dataset} />
-            <Row
-              border={{ side: 'bottom' }}
-              pad={{ bottom: setResponsive('medium', 'small') }}
-            >
-              <Box>
-                <MoveToDatasetButton dataset={dataset} />
-              </Box>
-              <Row
-                gap={setResponsive('medium', 'small')}
-                margin={{ top: setResponsive('medium', 'none') }}
-              >
-                <ShareDatasetButton dataset={dataset} />
-                <DownloadDatasetButton dataset={dataset} />
-              </Row>
-            </Row>
-            <FilesSummary dataset={dataset} />
-            <DatasetSummary dataset={dataset} />
-            <DatasetDetails dataset={dataset} isImmutable />
-          </>
-        )}
-      </Box>
+      <DatasetPageHeader dataset={dataset} />
+      <Row
+        border={{ side: 'bottom' }}
+        pad={{ bottom: setResponsive('medium', 'small') }}
+      >
+        <Box>
+          <MoveToDatasetButton dataset={dataset} />
+        </Box>
+        <Row
+          gap={setResponsive('medium', 'small')}
+          margin={{ top: setResponsive('medium', 'none') }}
+        >
+          <ShareDatasetButton dataset={dataset} />
+          {isUnprocessedDataset && <DownloadDatasetButton dataset={dataset} />}
+        </Row>
+      </Row>
+      <FilesSummary dataset={dataset} />
+      <DatasetSummary dataset={dataset} />
+      <DatasetDetails dataset={dataset} isImmutable />
     </FixedContainer>
   )
 }
