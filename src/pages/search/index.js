@@ -1,11 +1,13 @@
 import { Fragment, useEffect, useState } from 'react'
 import { Box, Grid, Heading } from 'grommet'
+import gtag from 'analytics/gtag'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
+import formatFacetNames from 'helpers/formatFacetNames'
 import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
-import getHumanReadablePageNumber from 'helpers/getHumanReadablePageNumber'
+import getPageNumber from 'helpers/getPageNumber'
 import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -35,10 +37,9 @@ export const Search = ({
   statusCode
 }) => {
   const {
-    search: { pageSizes, sortby }
+    search: { sortby }
   } = options
   const {
-    formatFacetNames,
     getSearchQueryParam,
     setConfig,
     setSearch,
@@ -50,12 +51,8 @@ export const Search = ({
   const searchBoxWidth = '550px'
   const [toggleFilterList, setToggleFilterList] = useState(false)
   const [userSearchTerm, setUserSearchTerm] = useState(query.search || '')
-  const [page, setPage] = useState(
-    query.offset
-      ? getHumanReadablePageNumber(Number(query.offset), Number(query.limit))
-      : 1
-  )
-  const [pageSize, setPageSize] = useState(Number(query.limit) || pageSizes[0])
+  const [page, setPage] = useState(getPageNumber(query.offset, query.limit))
+  const [pageSize, setPageSize] = useState(Number(query.limit))
   const [sortBy, setSortBy] = useState(query.sortby || sortby[0].value)
   const isResults = results?.length > 0
 
@@ -83,6 +80,10 @@ export const Search = ({
       }
     }
   }, [])
+
+  useEffect(() => {
+    gtag.trackSearchQuery(query)
+  }, [query])
 
   return (
     <>
@@ -237,10 +238,7 @@ export const Search = ({
             </Grid>
           )}
           {!isResults && query.search && (
-            <NoSearchResults
-              queryTerm={query.search}
-              setUserSearchTerm={setUserSearchTerm}
-            />
+            <NoSearchResults setUserSearchTerm={setUserSearchTerm} />
           )}
         </FixedContainer>
       </TextHighlightContextProvider>
@@ -248,43 +246,30 @@ export const Search = ({
   )
 }
 
-Search.getInitialProps = async (ctx) => {
-  const { query } = ctx
+Search.getInitialProps = async ({ query }) => {
   const {
     search: {
       commonQueries: {
-        limit,
-        offset,
         ordering,
         num_downloadable_samples__gt: numDownloadableSamples
       }
     }
   } = options
-
   const filterOrders = query.filter_order ? query.filter_order.split(',') : []
-  const queryString = {
+  const queryParams = {
     ...getSearchQueryForAPI(query),
-    limit: query.limit || Number(limit),
-    offset: query.offset || Number(offset) * (query.limit || Number(limit)),
+    limit: query.limit || 10,
+    offset: query.offset * query.limit || 0,
     ordering: query.sortby || ordering,
     ...(query.search ? { search: query.search } : {}),
     num_downloadable_samples__gt: !query.empty
       ? Number(numDownloadableSamples.hide)
       : Number(numDownloadableSamples.show)
   }
-
-  const response = await fetchSearch(
-    queryString,
-    query.offset
-      ? getHumanReadablePageNumber(
-          Number(offset) * (query.limit || Number(limit))
-        )
-      : 1,
-    filterOrders
-  )
+  const response = await fetchSearch(queryParams, filterOrders)
 
   return {
-    query,
+    query: queryParams,
     ...response
   }
 }

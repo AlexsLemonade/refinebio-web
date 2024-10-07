@@ -17,7 +17,6 @@ export const useSearchManager = () => {
       clientOnlyFilterQueries,
       commonQueries,
       formattedFacetNames,
-      pageSizes,
       sortby
     }
   } = options
@@ -31,28 +30,20 @@ export const useSearchManager = () => {
 
   /* Common */
   const resetPage = () => {
-    delete search.offset
+    search.offset = 0
+
     setSearch({ ...search })
   }
 
   const updatePage = (newPage) => {
-    if (newPage === 1) {
-      delete search.offset
-    } else {
-      search.offset =
-        (newPage - 1) * (search.limit || Number(commonQueries.limit))
-    }
+    search.offset = (newPage - 1) * search.limit
 
     setSearch({ ...search })
     updateSearchQuery()
   }
 
   const updatePageSize = (newPageSize) => {
-    if (newPageSize === pageSizes[0]) {
-      delete search.limit
-    } else {
-      search.limit = newPageSize
-    }
+    search.limit = newPageSize
 
     setSearch({ ...search })
     updateSearchQuery(true)
@@ -167,21 +158,6 @@ export const useSearchManager = () => {
   }
 
   /* Other */
-  // converts the facets to API supported format
-  const formatFacetNames = (facetNames) => {
-    const formattedNames = []
-
-    for (const name of facetNames) {
-      if (Object.keys(formattedFacetNames).includes(name)) {
-        formattedNames.push(formattedFacetNames[name])
-      } else {
-        formattedNames.push(name)
-      }
-    }
-
-    return formattedNames
-  }
-
   // returns client-only query parameter from url
   const getSearchQueryParam = (queryParams) => {
     const temp = {}
@@ -230,7 +206,6 @@ export const useSearchManager = () => {
     config,
     setConfig,
     clearAllFilters,
-    formatFacetNames,
     getSearchQueryParam,
     hasAppliedFilters,
     isFilterChecked,

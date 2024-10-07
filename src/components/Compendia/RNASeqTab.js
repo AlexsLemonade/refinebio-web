@@ -98,7 +98,7 @@ export const RNASeqTab = ({ type = 'rnaSeq' }) => {
             </Paragraph>
             <Button
               aria-label="Go to the refinebio API docs"
-              href={links.refinebio_api_docs}
+              href={links.refinebio_api_docs_compendia}
               label="Read the Docs"
               margin={{ top: 'small' }}
               secondary

@@ -3,9 +3,8 @@ import { useRouter } from 'next/router'
 import { nanoid } from 'nanoid'
 import { Box, Form, Text } from 'grommet'
 import styled, { css } from 'styled-components'
-import { options } from 'config'
 import { useResponsive } from 'hooks/useResponsive'
-import getHumanReadablePageNumber from 'helpers/getHumanReadablePageNumber'
+import getPageNumber from 'helpers/getPageNumber'
 import makePagination from 'helpers/makePagination'
 import { Button } from 'components/shared/Button'
 import { Icon } from 'components/shared/Icon'
@@ -92,14 +91,7 @@ export const Pagination = ({
   useEffect(() => {
     if (!isReady) return
 
-    setCurrentPage(
-      query.offset
-        ? getHumanReadablePageNumber(
-            Number(query.offset),
-            Number(query.limit) || options.search.pageSizes[0]
-          )
-        : 1
-    )
+    setCurrentPage(getPageNumber(query.offset, query.limit))
   }, [isReady, query])
 
   // resets the current page to match the newly updated page number

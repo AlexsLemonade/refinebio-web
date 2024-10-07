@@ -1,6 +1,7 @@
 import { useEffect, useState, memo } from 'react'
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import styled, { css } from 'styled-components'
+import gtag from 'analytics/gtag'
 import { links, options } from 'config'
 import { useCompendia } from 'hooks/useCompendia'
 import { useResponsive } from 'hooks/useResponsive'
@@ -105,6 +106,7 @@ export const Download = ({ type }) => {
 
   const handleFileDownload = async (id) => {
     const response = await downloadCompendia(id)
+    gtag.trackCompendiaDownload(response)
     navigateToFileDownload(response.organism, response.url)
   }
 
