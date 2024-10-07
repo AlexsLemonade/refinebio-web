@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import moment from 'moment'
 import { Box, Heading } from 'grommet'
 import { usePageRendered } from 'hooks/usePageRendered'
@@ -35,15 +34,17 @@ const Block = ({ children }) => {
 export const DatasetPageHeader = ({ dataset }) => {
   const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
+  const {
+    expires_on: expiredOn,
+    is_available: isAvailable,
+    is_processed: isProcessed,
+    is_processing: isProcessing,
+    success
+  } = dataset
+  const isExpired = moment(expiredOn).isBefore(Date.now())
+  const isProcessingError = success === false // 'success' may be null
 
   if (!pageRendered) return null
-
-  const expiredOn = dataset?.expires_on
-  const isAvailable = dataset?.is_available
-  const isExpired = moment(expiredOn).isBefore(Date.now())
-  const isProcessed = dataset?.is_processed
-  const isProcessing = dataset?.is_processing
-  const isProcessingError = dataset?.success === false // 'success' may be null
 
   if (isProcessingError) {
     return (
@@ -79,13 +80,11 @@ export const DatasetPageHeader = ({ dataset }) => {
   return (
     <FixedContainer pad="none">
       <Box>
-        {dataset?.data && (
-          <Box pad={{ top: 'large', bottom: 'medium' }}>
-            <Heading level={2} size={setResponsive('small', 'large')}>
-              Shared Dataset
-            </Heading>
-          </Box>
-        )}
+        <Box pad={{ top: 'large', bottom: 'medium' }}>
+          <Heading level={2} size={setResponsive('small', 'large')}>
+            Shared Dataset
+          </Heading>
+        </Box>
       </Box>
     </FixedContainer>
   )

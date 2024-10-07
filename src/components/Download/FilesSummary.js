@@ -38,12 +38,22 @@ const Card = ({ description, format, index, title }) => {
   )
 }
 
-export const FilesSummary = ({ dataset, defaultDataset = {}, isProcessed }) => {
+export const FilesSummary = ({ dataset }) => {
+  const {
+    organism_samples: organismSamples,
+    aggregate_by: aggregateBy,
+    scale_by: scaleBy,
+    quantile_normalize: quantileNormalize,
+    is_processed: isProcessed,
+    success
+  } = dataset
   const { createDataset, updateDataset, regeneratedDataset } =
     useDatasetManager()
   const { setResponsive } = useResponsive()
+  const isDownloadOptions = isProcessed && success // sets visibility of the download options
+
   // returns the file size estimates of the given dataset and its aggregate_by value (either 'EXPERIMENT' or 'SPECIES')
-  const downloadFilesData = (data, samplesBySpecies, aggregateBy) => {
+  const downloadFilesData = (data, samplesBySpecies, aggregateByOption) => {
     const totalExperiments = Object.keys(data).length
     // metadata info of a download https://github.com/AlexsLemonade/refinebio-frontend/issues/25#issuecomment-395870627
     // the samples aggregated by 'EXPERIMENT'
@@ -91,16 +101,15 @@ export const FilesSummary = ({ dataset, defaultDataset = {}, isProcessed }) => {
       }
     }
 
-    return aggregateBy === 'SPECIES'
+    return aggregateByOption === 'SPECIES'
       ? aggregatedBySpecies(dataset, samplesBySpecies)
       : aggregatedByExperiment(dataset)
   }
 
-  const samplesBySpecies = dataset.organism_samples
   const fileSummaries = downloadFilesData(
     dataset.data,
-    samplesBySpecies,
-    dataset.aggregate_by
+    organismSamples,
+    aggregateBy
   )
   const transformationOptions = options.transformation.reduce(
     (acc, cur) => ({ ...acc, [cur.value]: cur.label }),
@@ -116,6 +125,7 @@ export const FilesSummary = ({ dataset, defaultDataset = {}, isProcessed }) => {
       params
     )
     const pathname = `/dataset/${response.id}`
+    const defaultDataset = {} // TODO: This will be cleaned up in Issue #359
 
     gtag.trackRegeneratedDataset(
       defaultDataset,
@@ -133,17 +143,17 @@ export const FilesSummary = ({ dataset, defaultDataset = {}, isProcessed }) => {
         Download Files Summary
       </Heading>
 
-      {isProcessed && (
+      {isDownloadOptions && (
         <Box margin={{ bottom: 'small' }}>
           {!openForm && (
             <Box direction="row" gap="xlarge">
               <Text weight="bold">
-                Aggregate by: {formatString(dataset.aggregate_by)}
+                Aggregate by: {formatString(aggregateBy)}
               </Text>
               <Text weight="bold">
-                Transformation: {transformationOptions[dataset.scale_by]}
+                Transformation: {transformationOptions[scaleBy]}
               </Text>
-              {!dataset.quantile_normalize && (
+              {!quantileNormalize && (
                 <Text weight="bold">
                   Quantile Normalization Skipped for RNA-seq samples
                 </Text>
@@ -162,7 +172,7 @@ export const FilesSummary = ({ dataset, defaultDataset = {}, isProcessed }) => {
             <DownloadOptionsForm
               dataset={dataset}
               buttonLabel="Regenerate Dataset"
-              isProcessed={isProcessed}
+              isProcessed={isDownloadOptions}
               onSubmit={handleRegenerateDataset}
             />
           </ExpandableBlock>
