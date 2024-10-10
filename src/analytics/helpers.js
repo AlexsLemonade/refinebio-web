@@ -85,8 +85,8 @@ export const getDatasetOptionsChanges = (dataset, regeneratedDataset) => {
 
   const changes = datasetOptionsKeys
     .map((key) => {
-      const initialOption = getReadable(key, dataset[key])
-      const regeneratedOption = getReadable(key, regeneratedDataset[key])
+      const initialOption = getReadable(dataset[key])
+      const regeneratedOption = getReadable(regeneratedDataset[key])
 
       return initialOption !== regeneratedOption
         ? `${initialOption} -> ${regeneratedOption}`
@@ -101,9 +101,7 @@ export const getDatasetState = (dataset) =>
   getReadable('expires_on', moment(dataset.expires_on).isBefore(Date.now()))
 
 export const getFormattedDatasetOptions = (dataset) =>
-  `${datasetOptionsKeys
-    .map((key) => `${getReadable(key, dataset[key])}`)
-    .join('|')}`
+  `${datasetOptionsKeys.map((key) => `${getReadable(dataset[key])}`).join('|')}`
 
 // formats filter names in each facet
 const formatFacets = (query) => {
