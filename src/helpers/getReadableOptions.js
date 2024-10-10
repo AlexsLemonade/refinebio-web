@@ -7,6 +7,6 @@ import uniqueArray from './uniqueArray'
 // [ { label: 'Experiment', value: 'EXPERIMENT'}, { label: 'Species', value: 'SPECIES'}]
 export default (options = []) =>
   uniqueArray(options).map((option) => ({
-    label: getReadable(null, option), // no key required
+    label: getReadable(option),
     value: option
   }))

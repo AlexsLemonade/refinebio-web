@@ -12,8 +12,6 @@ export const readableBooleans = {
 }
 
 export const readableValues = {
-  append: 'Append samples to My Dataset',
-  replace: 'Replace samples in My Dataset',
   ALL: 'All Speciess',
   EXPERIMENT: 'Experiment',
   SPECIES: 'Species',
