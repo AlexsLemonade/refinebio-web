@@ -11,23 +11,17 @@ import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
 
 export const DatasetRegenerate = ({ dataset }) => {
-  const {
-    data,
-    aggregate_by: aggregateBy,
-    scale_by: scaleBy,
-    quantile_normalize: quantileNormalize,
-    worker_version: workerVersion
-  } = dataset
+  const { worker_version: workerVersion } = dataset
   const { push } = useRouter()
   const { createDataset, updateDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
 
   const handleRegenerateFiles = async () => {
     const params = {
-      data,
-      aggregate_by: aggregateBy,
-      scale_by: scaleBy,
-      quantile_normalize: quantileNormalize
+      data: dataset.data,
+      aggregate_by: dataset.aggregate_by,
+      scale_by: dataset.scale_by,
+      quantile_normalize: dataset.quantile_normalize
     }
     const response = await updateDataset(await createDataset(), params)
     const pathname = `/dataset/${response.id}`

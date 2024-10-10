@@ -71,14 +71,10 @@ const trackOneOffExperimentDownload = (experiment) => {
 const trackRegeneratedDataset = (dataset, regeneratedDataset) => {
   const payload = {}
   payload.regenerated_state = getDatasetState(dataset)
-  // send this only if any changes are made to the download options
-  if (regeneratedDataset) {
-    payload.dataset_download_option_changes = getDatasetOptionsChanges(
-      dataset,
-      regeneratedDataset
-    )
-  }
-
+  payload.dataset_download_option_changes = getDatasetOptionsChanges(
+    dataset,
+    regeneratedDataset
+  )
   event('regenerated_dataset', payload)
 }
 // tracks user clicks on the share dataset button by dataset ID
