@@ -21,7 +21,7 @@ export const DatasetRegenerateDownloadOptionsForm = ({
     const response = await updateDataset(await createDataset(), params)
     const pathname = `/dataset/${response.id}`
 
-    gtag.trackRegeneratedDataset(dataset, regeneratedDataset)
+    gtag.trackRegeneratedDataset(dataset, response)
 
     return pathname
   }
