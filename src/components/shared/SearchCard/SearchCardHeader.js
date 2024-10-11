@@ -6,11 +6,8 @@ import { IconBadge } from 'components/shared/IconBadge'
 import { Anchor } from 'components/shared/Anchor'
 import { TextHighlight } from 'components/shared/TextHighlight'
 
-export const SearchCardHeader = ({
-  accessionCode = '',
-  isLinked = true,
-  title = ''
-}) => {
+export const SearchCardHeader = ({ experiment, isLinked = false }) => {
+  const { accession_code: accessionCode, title } = experiment
   const { search, setSearch } = useSearchManager()
   const { setResponsive } = useResponsive()
 

@@ -12,23 +12,31 @@ export const useExperiments = () => {
   const [loading, setLoading] = useState(false)
   const hasSamples = experiment?.samples?.length > 0
 
+  const getPlatformNames = (samples) => {
+    return unionizeArrays(...samples.map((sample) => sample.pretty_platform))
+  }
+
+  const getTechnologyNames = (samples) => {
+    return unionizeArrays(
+      ...samples.map((sample) => sample.technology.toUpperCase())
+    )
+  }
+
   const getExperiment = async (param) => {
     setLoading(true)
     const response = await api.experiments.get(param)
-    setExperiment(response)
+    const platformNames = getPlatformNames(response.samples)
+    const technology = getTechnologyNames(response.samples)
+    // adds platform_names and technology fields from samples
+    // matching experiment results in the search results
+    const formattedResponse = {
+      ...response,
+      platform_names: platformNames,
+      technology
+    }
+
+    setExperiment(formattedResponse)
     setLoading(false)
-  }
-
-  const getPlatformNames = () => {
-    return unionizeArrays(
-      ...experiment.samples.map((sample) => sample.pretty_platform)
-    )
-  }
-
-  const getTechnologyNames = () => {
-    return unionizeArrays(
-      ...experiment.samples.map((sample) => sample.technology.toUpperCase())
-    )
   }
 
   return {
@@ -36,8 +44,6 @@ export const useExperiments = () => {
     experiment,
     loading,
     hasSamples,
-    getExperiment,
-    getPlatformNames,
-    getTechnologyNames
+    getExperiment
   }
 }
