@@ -12,15 +12,11 @@ export const useExperiments = () => {
   const [loading, setLoading] = useState(false)
   const hasSamples = experiment?.samples?.length > 0
 
-  const getPlatformNames = (samples) => {
-    return unionizeArrays(...samples.map((sample) => sample.pretty_platform))
-  }
+  const getPlatformNames = (samples) =>
+    unionizeArrays(...samples.map((sample) => sample.pretty_platform))
 
-  const getTechnologyNames = (samples) => {
-    return unionizeArrays(
-      ...samples.map((sample) => sample.technology.toUpperCase())
-    )
-  }
+  const getTechnologyNames = (samples) =>
+    unionizeArrays(...samples.map((sample) => sample.technology.toUpperCase()))
 
   const getExperiment = async (param) => {
     setLoading(true)
