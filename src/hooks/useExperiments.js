@@ -15,14 +15,14 @@ export const useExperiments = () => {
   const getPlatformNames = (samples) =>
     unionizeArrays(...samples.map((sample) => sample.pretty_platform))
 
-  const getTechnologyNames = (samples) =>
+  const getTechnology = (samples) =>
     unionizeArrays(...samples.map((sample) => sample.technology.toUpperCase()))
 
   const getExperiment = async (param) => {
     setLoading(true)
     const response = await api.experiments.get(param)
     const platformNames = getPlatformNames(response.samples)
-    const technology = getTechnologyNames(response.samples)
+    const technology = getTechnology(response.samples)
     // adds platform_names and technology fields from samples
     // matching experiment results in the search results
     const formattedResponse = {
