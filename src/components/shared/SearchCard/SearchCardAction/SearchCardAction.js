@@ -14,9 +14,9 @@ export const SearchCardAction = ({ experiment, technology }) => {
     num_downloadable_samples: downloadableSamples,
     organism_names: organismNames
   } = experiment
-  const { isProcessingDataset, pollDatasetAccession } = usePollDatasetStatus()
-  pollDatasetAccession(accessionCode) // checks this accession code for polling
+  const { datasetAccessions } = usePollDatasetStatus(accessionCode)
   const { setResponsive } = useResponsive()
+  const isProcessingOneOff = accessionCode in datasetAccessions
   const hasMultipleOrganisms = organismNames.length > 1
   const rnaSeq = 'RNA-SEQ'
   const hasRnaSeq =
@@ -29,7 +29,7 @@ export const SearchCardAction = ({ experiment, technology }) => {
 
   return (
     <>
-      {isProcessingDataset && (
+      {isProcessingOneOff && (
         <Box margin={{ bottom: 'small' }}>
           <ProcessingDatasetPill accessionCode={accessionCode} />
         </Box>
@@ -42,7 +42,7 @@ export const SearchCardAction = ({ experiment, technology }) => {
         primary
       />
 
-      {!isProcessingDataset && (
+      {!isProcessingOneOff && (
         <Box margin={{ top: 'small' }} width={setResponsive('100%', 'auto')}>
           <DownloadNowButton
             accessionCode={accessionCode}

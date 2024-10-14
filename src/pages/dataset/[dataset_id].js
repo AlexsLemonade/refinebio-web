@@ -31,8 +31,8 @@ export const Dataset = ({ query }) => {
   const { dataset_id: idFromQuery, start } = query
   const { dataset, datasetId, error, loading, getDataset, regeneratedDataset } =
     useDatasetManager()
-  const { isProcessingDataset, polledDatasetState, pollDatasetId } =
-    usePollDatasetStatus()
+  const { isProcessingDataset, polledDatasetState } =
+    usePollDatasetStatus(idFromQuery)
   const [selectedDataset, setSelectedDataset] = useState({}) // stores the dataset currently displayed on the page
   const isProcessed = selectedDataset?.is_processed && selectedDataset?.success // sets visibility of the download options in Dwonload Files Summary
   const isUnprocessedDataset = // sets visibility of the Download Dataset button
@@ -47,7 +47,6 @@ export const Dataset = ({ query }) => {
 
   useEffect(() => {
     getSelectedDataset(idFromQuery)
-    pollDatasetId(idFromQuery) // sets a processing datasets for polling
   }, [query])
 
   useEffect(() => {

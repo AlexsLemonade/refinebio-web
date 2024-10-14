@@ -1,13 +1,19 @@
 import { useEffect, useState, useRef } from 'react'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 
-export const usePollDatasetStatus = () => {
+// takes either an accession code (one-off) or a dataset ID
+export const usePollDatasetStatus = (accessionCodeOrDatasetId) => {
   const { datasetAccessions, processingDatasets, getDataset } =
     useDatasetManager()
   const [polledDatasetId, setPolledDatasetId] = useState(null)
   const [polledDatasetState, setPolledDatasetState] = useState(null)
   const timerRef = useRef(null)
   const [isProcessingDataset, setIsProcessingDataset] = useState(false)
+
+  // starts polling the dataset status
+  useEffect(() => {
+    pollDatasetStatus()
+  }, [])
 
   // polls the latest state of the processing dataset per minute
   // (the processing usually takes a few minutes)
@@ -27,9 +33,15 @@ export const usePollDatasetStatus = () => {
     }
   }, [isProcessingDataset])
 
+  // sets the dataset ID via the given accessionCodeOrDatasetId
+  const pollDatasetStatus = () => {
+    pollDatasetAccession(accessionCodeOrDatasetId)
+    pollDatasetId(accessionCodeOrDatasetId)
+  }
+
   // if one-off, sets the matched accession code's dataset ID to polledDatasetId
   const pollDatasetAccession = (accessionCode) => {
-    if (Object.hasOwn(datasetAccessions, accessionCode)) {
+    if (accessionCode in datasetAccessions) {
       pollDatasetId(datasetAccessions[accessionCode])
     }
   }
@@ -47,8 +59,8 @@ export const usePollDatasetStatus = () => {
 
   const refreshProcessingDataset = async () => {
     const response = await getDataset(polledDatasetId)
-    // TEMP: until the fetchAsync is refactored
-    if (response?.ok !== false) {
+
+    if (response.ok) {
       setPolledDatasetState(response)
     }
 
