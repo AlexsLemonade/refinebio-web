@@ -1,6 +1,5 @@
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useDatasetAction } from 'hooks/useDatasetAction'
-import { usePageRendered } from 'hooks/usePageRendered'
 import { Button } from 'components/shared/Button'
 import { AddRemainingDatasetButton } from './AddRemainingDatasetButton'
 import { AddToDatasetButton } from './AddToDatasetButton'
@@ -14,9 +13,6 @@ export const DatasetActionButton = ({
   ...props
 }) => {
   const { dataset } = useDatasetManager()
-  const pageRendered = usePageRendered()
-
-  if (!pageRendered) return null
 
   const {
     getHasAllProcessed,
