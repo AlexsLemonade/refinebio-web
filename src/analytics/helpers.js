@@ -79,10 +79,6 @@ export const event = (eventName, value = {}, nonInteraction = false) => {
 }
 
 export const getDatasetOptionsChanges = (dataset, regeneratedDataset) => {
-  const noChange = 'No change'
-
-  if (!regeneratedDataset) return noChange
-
   const changes = datasetOptionsKeys
     .map((key) => {
       const initialOption = getReadable(dataset[key])
@@ -94,7 +90,7 @@ export const getDatasetOptionsChanges = (dataset, regeneratedDataset) => {
     })
     .filter(Boolean)
 
-  return changes.length > 0 ? changes.join('|') : noChange
+  return changes.length > 0 ? changes.join('|') : 'No change'
 }
 
 export const getDatasetState = (dataset) =>
