@@ -15,8 +15,7 @@ export const SearchCardAction = ({ experiment }) => {
     organism_names: organismNames,
     technology
   } = experiment
-  const { isProcessingDataset, pollDatasetAccession } = usePollDatasetStatus()
-  pollDatasetAccession(accessionCode) // checks this accession code for polling
+  const { isProcessingDataset } = usePollDatasetStatus(accessionCode)
   const { setResponsive } = useResponsive()
   const hasMultipleOrganisms = organismNames.length > 1
   const rnaSeq = 'RNA-SEQ'
