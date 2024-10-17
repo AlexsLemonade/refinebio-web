@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from 'react'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 
-// takes either an accession code (one-off) or a dataset ID
-export const usePollDatasetStatus = (accessionCodeOrDatasetId) => {
+// takes either an accession code or a dataset ID to poll / check status
+export const usePollDatasetStatus = (accessionOrId) => {
   const { datasetAccessions, processingDatasets, getDataset } =
     useDatasetManager()
   const [polledDatasetId, setPolledDatasetId] = useState(null)
@@ -12,8 +12,13 @@ export const usePollDatasetStatus = (accessionCodeOrDatasetId) => {
 
   // starts polling the dataset status
   useEffect(() => {
-    pollDatasetStatus()
-  }, [])
+    if (accessionOrId in datasetAccessions) {
+      pollDatasetId(datasetAccessions[accessionOrId])
+    }
+    if (processingDatasets.includes(accessionOrId)) {
+      pollDatasetId(accessionOrId)
+    }
+  }, [accessionOrId, processingDatasets])
 
   // polls the latest state of the processing dataset per minute
   // (the processing usually takes a few minutes)
@@ -33,23 +38,8 @@ export const usePollDatasetStatus = (accessionCodeOrDatasetId) => {
     }
   }, [isProcessingDataset])
 
-  // sets the dataset ID via the given accessionCodeOrDatasetId
-  const pollDatasetStatus = () => {
-    pollDatasetAccession(accessionCodeOrDatasetId)
-    pollDatasetId(accessionCodeOrDatasetId)
-  }
-
-  // if one-off, sets the matched accession code's dataset ID to polledDatasetId
-  const pollDatasetAccession = (accessionCode) => {
-    if (accessionCode in datasetAccessions) {
-      pollDatasetId(datasetAccessions[accessionCode])
-    }
-  }
-
   // sets the mached dataset ID to polledDatasetId
   const pollDatasetId = (datasetId) => {
-    if (datasetId === polledDatasetId) return
-
     const isProcessing = processingDatasets.includes(datasetId)
     if (isProcessing) {
       setPolledDatasetId(datasetId)
@@ -70,10 +60,7 @@ export const usePollDatasetStatus = (accessionCodeOrDatasetId) => {
   }
 
   return {
-    datasetAccessions,
     isProcessingDataset,
-    polledDatasetState,
-    pollDatasetAccession,
-    pollDatasetId
+    polledDatasetState
   }
 }
