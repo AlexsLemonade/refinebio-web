@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import { memo, useEffect, useMemo, useState } from 'react'
 import { Box, Spinner, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
@@ -39,7 +38,6 @@ export const SamplesTable = ({
     samplesTable: { pageSizes }
   } = options
   const {
-    config: { defaultColumn, minColumns },
     hasError,
     hasSamples,
     loading,
@@ -55,7 +53,12 @@ export const SamplesTable = ({
   } = useSamplesTableManager(queryToAdd)
   const { viewport, setResponsive } = useResponsive()
   const [tableExpanded, setTableExpanded] = useState(false)
-  const tableHeight = tableExpanded ? '75vh' : '800px' // required for the table height on expanded view
+
+  // for react-table
+  const defaultColumn = useMemo(
+    () => ({ minWidth: 60, width: 160, maxWidth: 250 }),
+    []
+  )
   const data = useMemo(() => tableData.results, [tableData])
   const columns = useMemo(() => {
     const temp = [
@@ -133,8 +136,13 @@ export const SamplesTable = ({
 
     return temp
   }, [isImmutable, viewport])
+
+  // for the expand table button
   const totalColumns =
-    tableData && sampleMetadataFields ? columns.length - 2 : 0 // excludes add/remove and hidden cells
+    tableData && sampleMetadataFields ? columns.length - 2 : 0 // excludes the add/remove and hidden cells
+  const isTableExpandable =
+    !modalView && viewport === 'large' && totalColumns > 5 // sets the button visivility
+  const tableHeight = tableExpanded ? '75vh' : '800px' // toggles the table height on expanded view
 
   useEffect(() => {
     getSamplesTableData()
@@ -201,14 +209,12 @@ export const SamplesTable = ({
                 placeholder="Filter samples"
               />
             </Box>
-            {!modalView &&
-              viewport === 'large' &&
-              totalColumns > minColumns && (
-                <ExpandTableButton
-                  tableExpanded={tableExpanded}
-                  setTableExpanded={setTableExpanded}
-                />
-              )}
+            {!isTableExpandable && (
+              <ExpandTableButton
+                tableExpanded={tableExpanded}
+                setTableExpanded={setTableExpanded}
+              />
+            )}
           </Box>
         </Row>
         <BoxBlock>

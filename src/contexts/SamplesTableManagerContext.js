@@ -9,13 +9,6 @@ export const SamplesTableManagerContextProvider = ({ children }) => {
   } = options
   const [config, setConfig] = useState({
     commonQueries,
-    // the default column size
-    defaultColumn: useMemo(
-      () => ({ minWidth: 60, width: 160, maxWidth: 250 }),
-      []
-    ),
-    // the default number of columns to display
-    minColumns: 5,
     page,
     pageSize: pageSizes[0]
   })

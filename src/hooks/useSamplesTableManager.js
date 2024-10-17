@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { api } from 'api'
 import { SamplesTableManagerContext } from 'contexts/SamplesTableManagerContext'
 
@@ -11,6 +11,11 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
   const [tableData, setTableData] = useState([])
   const hasSamples = tableData?.results?.length > 0
   const totalPages = (tableData && tableData.count) || 0
+
+  // fetches the table data on samplesTable changes
+  useEffect(() => {
+    getSamplesTableData()
+  }, [samplesTable])
 
   /* Common */
   const resetPage = () => {
@@ -97,14 +102,10 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
   }
 
   const updateSamplesTableQuery = (reset = false) => {
-    if (reset) {
-      resetPage()
-    }
+    if (reset) resetPage()
 
     samplesTable.reset = reset
-
     setSamplesTable({ ...samplesTable })
-    getSamplesTableData()
   }
 
   return {
