@@ -19,6 +19,7 @@ export default (dataset) => {
     // immutable
     isProcessing: isProcessing && !isProcessingError, // currently being processed
     isProcessingError,
+    isProcessed: isComplete,
     isReady: isComplete && !isExpired, // available for download
     isReadyExpired: isComplete && isExpired // available for regenerative download
   }
