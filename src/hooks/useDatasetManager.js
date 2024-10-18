@@ -22,8 +22,6 @@ export const useDatasetManager = () => {
     setEmail,
     processingDatasets,
     setProcessingDatasets,
-    regeneratedDataset,
-    setRegeneratedDataset,
     token
   } = useContext(DatasetManagerContext)
   const { createToken, resetToken, validateToken } = useToken()
@@ -145,10 +143,10 @@ export const useDatasetManager = () => {
   // takes download options, and optional dataset ID and one-off experiment accession code
   const startProcessingDataset = async (
     options,
-    id = null,
+    id = null, // no dataset ID initially for one-off download
     accessionCode = null
   ) => {
-    const isCurrentDatasetId = id && id === datasetId
+    const isMyDatasetId = id && id === datasetId
     // validates the existing token or create a new token if none
     const tokenId = validateToken() ? token : await resetToken()
     const { emailAddress, receiveUpdates } = options
@@ -159,15 +157,14 @@ export const useDatasetManager = () => {
       start: true,
       token_id: tokenId
     }
-
-    const processingDatasetId = isCurrentDatasetId ? id : await createDataset()
+    const processingDatasetId = id || (await createDataset()) // creates new dataset ID for one-off download
     const response = await updateDataset(processingDatasetId, params)
     // adds this dataset ID to processingDatasets[] for polling
     addToProcessingDatasets(processingDatasetId, accessionCode)
     // saves the user's newly entered email or replace the existing one
     setEmail(emailAddress)
     // deletes the locally saved dataset data once it has started processing (no longer mutable)
-    if (isCurrentDatasetId) {
+    if (isMyDatasetId) {
       setDataset({})
       setDatasetId(null)
     }
@@ -176,10 +173,10 @@ export const useDatasetManager = () => {
   }
 
   const updateDataset = async (id, params) => {
-    const isCurrentDatasetId = id === datasetId
+    const isMyDatasetId = id === datasetId
     const response = await api.dataset.update(id, params)
 
-    if (isCurrentDatasetId) {
+    if (isMyDatasetId) {
       setDataset({
         ...response,
         experiments: formatExperiments(response.experiments)
@@ -205,23 +202,12 @@ export const useDatasetManager = () => {
     return temp
   }
 
-  const updateDownloadOptions = async (
-    options,
-    id = '',
-    regenerate = false
-  ) => {
+  // sends the download options change to the API for My Dataset to preserve
+  // users' preferences, otherwise just updates DownloadOptions with new change
+  const updateDownloadOptions = async (options, id, regenerate = false) => {
     const newOptions = { ...downloadOptions, ...options }
-
-    if (id) {
-      const response = await updateDataset(id, newOptions)
-      if (regenerate) {
-        setRegeneratedDataset({
-          ...response,
-          experiments: formatExperiments(response.experiments)
-        })
-      }
-    }
-
+    // makes API request for My Dataset only
+    if (!regenerate) await updateDataset(id, newOptions)
     setDownloadOptions(newOptions)
   }
 
@@ -349,7 +335,6 @@ export const useDatasetManager = () => {
     loading,
     processingDatasets,
     setProcessingDatasets,
-    regeneratedDataset,
     token,
     // Processing Dataset
     getProcessingDatasetByAccession,
