@@ -101,7 +101,7 @@ const trackExploredUsageClick = (link) => {
 }
 // tracks internal and external link clicks
 const trackLink = (link) => {
-  if (typeof link === 'string' && link.startsWith('http')) {
+  if (link.startsWith('http')) {
     trackExternalClick(link)
   } else {
     trackInternalClick(link)
