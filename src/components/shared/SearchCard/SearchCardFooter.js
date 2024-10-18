@@ -1,18 +1,20 @@
+import { useRouter } from 'next/router'
 import { Box } from 'grommet'
 import { useSearchManager } from 'hooks/useSearchManager'
 import formatURLString from 'helpers/formatURLString'
 import { Button } from 'components/shared/Button'
 
 export const SearchCardFooter = ({ accessionCode, title }) => {
+  const { push } = useRouter()
   const { search, setSearch } = useSearchManager()
 
   return (
     <Box>
       <Button
         label="View Samples"
-        href={`/experiments/${accessionCode}/${formatURLString(title)}`}
         secondary
         onClick={() => {
+          push(`/experiments/${accessionCode}/${formatURLString(title)}`)
           setSearch({ ...search, ref: 'search', from: 'view-samples' })
         }}
       />
