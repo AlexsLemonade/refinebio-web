@@ -32,13 +32,13 @@ const trackCompendiaDownload = (compendia) => {
 // for RNA-req Sample compendia
 const trackDownloadRnaSeqCompendia = (compendia) => {
   const payload = {}
-  payload.rnaseq_organism = formatString(compendia.organism)
+  payload.rnaseq_organism = formatString(compendia.primary_organism_name)
   event(`compendia_rnaseq_download`, payload)
 }
 // for Normalized compendia
 const trackDownloadNormalizedCompendia = (compendia) => {
   const payload = {}
-  payload.normalized_organism = formatString(compendia.organism)
+  payload.normalized_organism = formatString(compendia.primary_organism_name)
   event(`compendia_normalized_download`, payload)
 }
 
@@ -67,11 +67,12 @@ const trackOneOffExperimentDownload = (experiment) => {
   payload.one_off_experiment_download = experiment.accession_code
   event('one_off_experiment_download', payload)
 }
-// tracks the dataset's state (expired or valid) and changes in download options (initial and updated)
+// tracks the dataset's state (expired or valid) and changes in download options
+// (initial and updated) if any, otherwise send initial
 const trackRegeneratedDataset = (dataset, regeneratedDataset) => {
   const payload = {}
   payload.regenerated_state = getDatasetState(dataset)
-  payload.dataset_download_option_changes = getDatasetOptionsChanges(
+  payload.regenerated_download_options_change = getDatasetOptionsChanges(
     dataset,
     regeneratedDataset
   )
@@ -80,7 +81,7 @@ const trackRegeneratedDataset = (dataset, regeneratedDataset) => {
 // tracks user clicks on the share dataset button by dataset ID
 const trackSharedDataset = (dataset) => {
   const payload = {}
-  payload.dataset_id = dataset.id
+  payload.shared_dataset_id = dataset.id
   event('shared_dataset', payload)
 }
 
@@ -101,7 +102,7 @@ const trackExploredUsageClick = (link) => {
 }
 // tracks internal and external link clicks
 const trackLink = (link) => {
-  if (link.startsWith('http')) {
+  if (typeof link === 'string' && link.startsWith('http')) {
     trackExternalClick(link)
   } else {
     trackInternalClick(link)
