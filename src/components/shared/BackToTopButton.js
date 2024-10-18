@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Box, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 import { useResponsive } from 'hooks/useResponsive'
-import scrollToTop from 'helpers/scrollToTop'
+import scrollTo from 'helpers/scrollTo'
 import isWindow from 'helpers/isWindow'
 
 const ArrowIcon = styled(Box)`
@@ -29,8 +29,7 @@ export const BackToTopButton = () => {
   const offset = 1200
   const [show, setShow] = useState(false)
 
-  const handleClick = () => scrollToTop()
-
+  const handleClick = () => scrollTo()
   const handleKeyDown = (event) => {
     event.preventDefault()
     if (event.key === 'Enter' || event.key === ' ') {

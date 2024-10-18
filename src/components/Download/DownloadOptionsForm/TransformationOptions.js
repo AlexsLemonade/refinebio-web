@@ -1,8 +1,9 @@
 import { Box, Select, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
+import getReadableOptions from 'helpers/getReadableOptions'
 import { Anchor } from 'components/shared/Anchor'
 import { Icon } from 'components/shared/Icon'
-import { links, options } from 'config'
+import { links } from 'config'
 
 export const TransformationOptions = ({
   value,
@@ -12,6 +13,7 @@ export const TransformationOptions = ({
   column = false
 }) => {
   const { setResponsive } = useResponsive()
+  const scaleByValues = ['NONE', 'MINMAX', 'STANDARD']
 
   return (
     <>
@@ -43,7 +45,7 @@ export const TransformationOptions = ({
         <Select
           labelKey="label"
           name={name}
-          options={Object.values(options.transformation)}
+          options={getReadableOptions(scaleByValues)}
           value={value}
           valueKey={{ key: 'value', reduce: true }}
           margin={{ horizontal: 'xxsmall' }}

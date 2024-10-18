@@ -1,23 +1,21 @@
-import { useContext, useState } from 'react'
-import { SamplesTableManagerContext } from 'contexts/SamplesTableManagerContext'
+import { useContext, useEffect, useState } from 'react'
 import { api } from 'api'
+import { SamplesTableManagerContext } from 'contexts/SamplesTableManagerContext'
 
 export const useSamplesTableManager = (queryToAdd = {}) => {
-  const {
-    config: configState,
-    setConfig: setConfigState,
-    samplesTable: samplesTableState,
-    setSamplesTable: setSamplesTableState
-  } = useContext(SamplesTableManagerContext)
-  const config = configState
-  const setConfig = setConfigState
-  const samplesTable = samplesTableState
-  const setSamplesTable = setSamplesTableState
+  const { config, setConfig, samplesTable, setSamplesTable } = useContext(
+    SamplesTableManagerContext
+  )
   const [loading, setLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
   const [tableData, setTableData] = useState([])
   const hasSamples = tableData?.results?.length > 0
   const totalPages = (tableData && tableData.count) || 0
+
+  // fetches the table data on samplesTable changes
+  useEffect(() => {
+    getSamplesTableData()
+  }, [samplesTable])
 
   /* Common */
   const resetPage = () => {
@@ -104,14 +102,10 @@ export const useSamplesTableManager = (queryToAdd = {}) => {
   }
 
   const updateSamplesTableQuery = (reset = false) => {
-    if (reset) {
-      resetPage()
-    }
+    if (reset) resetPage()
 
     samplesTable.reset = reset
-
     setSamplesTable({ ...samplesTable })
-    getSamplesTableData()
   }
 
   return {
