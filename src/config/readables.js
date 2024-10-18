@@ -1,4 +1,7 @@
-export const readableAttributes = {}
+export const readableAttributes = {
+  normalized: 'Normalized Compendia',
+  'rna-seq': 'RNA-seq Sample Compendia'
+}
 
 const readableAnalyticsBooleans = {
   checked: ['Add - ', 'Remove - '],
