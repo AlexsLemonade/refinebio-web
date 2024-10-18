@@ -29,9 +29,7 @@ export const SearchCardHeader = ({ experiment, isLinked = false }) => {
       >
         {isLinked ? (
           <Anchor
-            href={{
-              pathname: `experiments/${accessionCode}/${formatURLString(title)}`
-            }}
+            href={`experiments/${accessionCode}/${formatURLString(title)}`}
             label={<TextHighlight>{title}</TextHighlight>}
             onClick={() => setSearch({ ...search, ref: 'search' })}
           />
