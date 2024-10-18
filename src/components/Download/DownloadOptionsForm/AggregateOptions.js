@@ -1,8 +1,9 @@
 import { Box, Select, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
+import getReadableOptions from 'helpers/getReadableOptions'
 import { Anchor } from 'components/shared/Anchor'
 import { Icon } from 'components/shared/Icon'
-import { links, options } from 'config'
+import { links } from 'config'
 
 export const AggregateOptions = ({
   value,
@@ -12,6 +13,7 @@ export const AggregateOptions = ({
   column = false
 }) => {
   const { setResponsive } = useResponsive()
+  const aggreteByValues = ['EXPERIMENT', 'SPECIES']
 
   return (
     <>
@@ -35,7 +37,7 @@ export const AggregateOptions = ({
         <Select
           labelKey="label"
           name={name}
-          options={Object.values(options.aggregation)}
+          options={getReadableOptions(aggreteByValues)}
           value={value}
           valueKey={{ key: 'value', reduce: true }}
           margin={{ horizontal: 'xxsmall' }}

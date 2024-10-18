@@ -8,14 +8,14 @@ import { DownloadNowButton } from './DownloadNowButton'
 import { ProcessingDatasetPill } from './ProcessingDatasetPill'
 import { RequestExperimentFormButton } from './RequestExperimentFormButton'
 
-export const SearchCardAction = ({ experiment, technology }) => {
+export const SearchCardAction = ({ experiment }) => {
   const {
     accession_code: accessionCode,
     num_downloadable_samples: downloadableSamples,
-    organism_names: organismNames
+    organism_names: organismNames,
+    technology
   } = experiment
-  const { isProcessingDataset, pollDatasetAccession } = usePollDatasetStatus()
-  pollDatasetAccession(accessionCode) // checks this accession code for polling
+  const { isProcessingDataset } = usePollDatasetStatus(accessionCode)
   const { setResponsive } = useResponsive()
   const hasMultipleOrganisms = organismNames.length > 1
   const rnaSeq = 'RNA-SEQ'
