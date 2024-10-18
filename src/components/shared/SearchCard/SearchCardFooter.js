@@ -4,7 +4,8 @@ import { useSearchManager } from 'hooks/useSearchManager'
 import formatURLString from 'helpers/formatURLString'
 import { Button } from 'components/shared/Button'
 
-export const SearchCardFooter = ({ accessionCode, title }) => {
+export const SearchCardFooter = ({ experiment }) => {
+  const { accession_code: accessionCode, title } = experiment
   const { push } = useRouter()
   const { search, setSearch } = useSearchManager()
 

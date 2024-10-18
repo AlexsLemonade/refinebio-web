@@ -49,15 +49,8 @@ export const Experiment = () => {
     isReady,
     query: { accession_code: accessionCode }
   } = useRouter()
-  const {
-    databaseNames,
-    experiment,
-    loading,
-    hasSamples,
-    getExperiment,
-    getPlatformNames,
-    getTechnologyNames
-  } = useExperiments()
+  const { databaseNames, experiment, loading, hasSamples, getExperiment } =
+    useExperiments()
   const { setResponsive } = useResponsive()
   const { search, navigateToSearch } = useSearchManager()
   const { headerRef } = useLayoutRefs()
@@ -144,32 +137,17 @@ export const Experiment = () => {
                       margin={{ bottom: 'medium' }}
                     >
                       <Box gridArea="header">
-                        <SearchCardHeader
-                          accessionCode={accessionCode}
-                          title={experiment.title}
-                          isLinked={false}
-                        />
+                        <SearchCardHeader experiment={experiment} />
                       </Box>
                       <Box
                         gridArea="ctas"
                         margin={{ top: setResponsive('none', 'large') }}
                         align="end"
                       >
-                        <SearchCardAction
-                          experiment={experiment}
-                          technology={getTechnologyNames()}
-                        />
+                        <SearchCardAction experiment={experiment} />
                       </Box>
                       <Box gridArea="meta">
-                        <SearchCardMeta
-                          downloadableSamples={
-                            experiment.num_downloadable_samples
-                          }
-                          organismNames={experiment.organism_names}
-                          platformNames={getPlatformNames()}
-                          technology={getTechnologyNames()}
-                          size="medium"
-                        />
+                        <SearchCardMeta experiment={experiment} size="medium" />
                       </Box>
                     </Grid>
                     <Box margin={{ bottom: 'medium' }}>

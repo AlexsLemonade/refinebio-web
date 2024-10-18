@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import { Box, Grid } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import formatString from 'helpers/formatString'
 import { SearchCardHeader } from './SearchCardHeader'
 import { SearchCardBody } from './SearchCardBody'
 import { SearchCardFooter } from './SearchCardFooter'
@@ -10,18 +9,6 @@ import { SearchCardMeta } from './SearchCardMeta'
 
 export const SearchCard = ({ result = {} }) => {
   const { viewport, setResponsive } = useResponsive()
-  const {
-    accession_code: accessionCode,
-    alternate_accession_code: alternateAccessionCode,
-    description,
-    num_downloadable_samples: downloadableSamples,
-    organism_names: organismNames,
-    platform_names: platformNames,
-    publication_title: publicationTitle,
-    sample_metadata_fields: sampleMetadataFields,
-    technology,
-    title
-  } = result
 
   return (
     <Box
@@ -51,34 +38,21 @@ export const SearchCard = ({ result = {} }) => {
         }}
       >
         <Box gridArea="header">
-          <SearchCardHeader accessionCode={accessionCode} title={title} />
+          <SearchCardHeader experiment={result} isLinked />
         </Box>
         <Box gridArea="ctas" margin={{ top: setResponsive('none', 'large') }}>
           <Box align={setResponsive('start', 'end')} width="100%">
-            <SearchCardAction experiment={result} technology={technology} />
+            <SearchCardAction experiment={result} />
           </Box>
         </Box>
         <Box gridArea="meta">
-          <SearchCardMeta
-            downloadableSamples={downloadableSamples}
-            organismNames={organismNames}
-            platformNames={platformNames}
-            technology={technology}
-          />
+          <SearchCardMeta experiment={result} />
         </Box>
       </Grid>
       {viewport !== 'small' && (
         <>
-          <SearchCardBody
-            alternateAccessionCode={alternateAccessionCode}
-            description={description}
-            publicationTitle={publicationTitle}
-            sampleMetadataFields={sampleMetadataFields}
-          />
-          <SearchCardFooter
-            accessionCode={accessionCode}
-            title={formatString(title)}
-          />
+          <SearchCardBody experiment={result} />
+          <SearchCardFooter experiment={result} />
         </>
       )}
     </Box>
