@@ -1,6 +1,7 @@
 import { Box, Grid, Select } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { useSearchManager } from 'hooks/useSearchManager'
+import getReadableOptions from 'helpers/getReadableOptions'
 import { PageSizes } from 'components/shared/PageSizes'
 import { options } from 'config'
 import { AddPageToDatasetButton } from './AddPageToDatasetButton'
@@ -14,11 +15,16 @@ export const SearchBulkActions = ({
   setSortBy,
   totalResults
 }) => {
-  const {
-    search: { pageSizes, sortby }
-  } = options
+  const { pageSizes } = options
   const { updatePageSize, updateSortBy } = useSearchManager()
   const { getForBreakpoint, setResponsive } = useResponsive()
+  const sortByValues = [
+    '_score',
+    '-num_downloadable_samples',
+    'num_downloadable_samples',
+    '-source_first_published',
+    'source_first_published'
+  ]
 
   const handleChageSort = (newOrder) => {
     setSortBy(newOrder)
@@ -120,7 +126,7 @@ export const SearchBulkActions = ({
             Sort by
             <Box width="208px">
               <Select
-                options={Object.values(sortby)}
+                options={getReadableOptions(sortByValues)}
                 labelKey="label"
                 value={sortBy}
                 valueKey={{ key: 'value', reduce: true }}

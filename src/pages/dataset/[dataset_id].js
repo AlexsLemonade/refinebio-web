@@ -28,15 +28,12 @@ export const getServerSideProps = ({ query }) => {
 export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
   const { push } = useRouter()
   const { setResponsive } = useResponsive()
-  const {
-    datasetId: myDatasetId,
-    error,
-    loading,
-    getDataset
-  } = useDatasetManager()
-  const { isProcessingDataset, polledDatasetState, pollDatasetId } =
-    usePollDatasetStatus()
+  const { dataset: myDataset, error, loading, getDataset } = useDatasetManager()
+  const { isProcessingDataset, polledDatasetState } =
+    usePollDatasetStatus(datasetId)
   const [dataset, setDataset] = useState({}) // dataset currently displayed on the page
+  const isUnprocessedDataset = // sets visibility of the Download Dataset button
+    !dataset.is_processing && !dataset.is_processed && dataset.success !== false
 
   const getDatasetFromQuery = async (id) => {
     const response = await getDataset(id)
@@ -45,10 +42,8 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
 
   useEffect(() => {
     // redirects users to /download if datasetId matches My dataset ID
-    if (datasetId === myDatasetId) push('/download')
-
+    if (datasetId === myDataset.id) push('/download')
     getDatasetFromQuery(datasetId)
-    pollDatasetId(datasetId) // sets a processing datasets for polling
   }, [datasetId, start])
 
   useEffect(() => {
@@ -105,7 +100,9 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
                 margin={{ top: setResponsive('medium', 'none') }}
               >
                 <ShareDatasetButton dataset={dataset} />
-                <DownloadDatasetButton dataset={dataset} />
+                {isUnprocessedDataset && (
+                  <DownloadDatasetButton dataset={dataset} />
+                )}
               </Row>
             </Row>
             <FilesSummary dataset={dataset} />

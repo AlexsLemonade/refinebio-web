@@ -9,6 +9,7 @@ import { ViewBlocks } from '../ViewBlocks'
 export const ExperimentView = ({ dataset, isImmutable }) => {
   const { formatSampleMetadata } = useDatasetManager()
   const defaultOrganismFilterOption = { label: 'All Speciess', value: 'ALL' }
+  const defaultValue = 'ALL'
   const formattedExperiments = getFormattedExperiments(dataset)
   const [organism, setOrganism] = useState(defaultOrganismFilterOption.value)
 
@@ -35,7 +36,7 @@ export const ExperimentView = ({ dataset, isImmutable }) => {
             )
 
             if (
-              organism !== 'ALL' &&
+              organism !== defaultValue &&
               !experiment.organism_names.includes(organism)
             ) {
               return null

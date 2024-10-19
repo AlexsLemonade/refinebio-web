@@ -1,7 +1,7 @@
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
 import gtag from 'analytics/gtag'
-import { options, validationSchemas } from 'config'
+import { validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
@@ -37,9 +37,9 @@ export const DownloadNowModal = ({
       </Heading>
       <Formik
         initialValues={{
-          aggregate_by: options.aggregation[0].value,
+          aggregate_by: 'EXPERIMENT',
           data: { [accessionCode]: ['ALL'] },
-          scale_by: options.transformation[0].value,
+          scale_by: 'NONE',
           quantile_normalize: true,
           emailAddress: email || '',
           receiveUpdates: true,

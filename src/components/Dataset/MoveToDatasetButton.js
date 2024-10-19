@@ -10,12 +10,12 @@ import { MoveToDatasetModal } from './MoveToDatasetModal'
 export const MoveToDatasetButton = ({ dataset }) => {
   const { push } = useRouter()
   const {
-    dataset: { id: myDatasetId, data: myDatasetData },
+    dataset: myDataset,
     addSamples,
     getTotalSamples
   } = useDatasetManager()
   const { openModal, closeModal } = useModal()
-  const id = `move-to-dataset-${myDatasetId}`
+  const id = `move-to-dataset-${myDataset.id}`
   const radioOptions = [
     { label: 'Append samples to My Dataset', value: 'append' },
     { label: 'Replace samples in My Dataset', value: 'replace' }
@@ -23,7 +23,7 @@ export const MoveToDatasetButton = ({ dataset }) => {
   const defaultValue = radioOptions[0].value
   const [value, setValue] = useState(defaultValue)
   const newTotalSamples = getTotalSamples(dataset.data)
-  const totalSamples = getTotalSamples(myDatasetData)
+  const totalSamples = getTotalSamples(myDataset.data)
   const pathname = '/download'
 
   const handleMoveToDataset = async () => {

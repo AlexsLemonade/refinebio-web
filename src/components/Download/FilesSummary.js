@@ -36,7 +36,6 @@ const Card = ({ description, format, index, title }) => {
 
 export const FilesSummary = ({ dataset }) => {
   const { is_processed: isProcessed, success } = dataset
-
   const { setResponsive } = useResponsive()
   const isProcessedSuccess = isProcessed && success // sets visibility of the download options form
   const [regeneratedDataset, setRegeneratedDataset] = useState(null)

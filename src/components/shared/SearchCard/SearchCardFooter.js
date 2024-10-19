@@ -4,7 +4,8 @@ import { useSearchManager } from 'hooks/useSearchManager'
 import formatURLString from 'helpers/formatURLString'
 import { Button } from 'components/shared/Button'
 
-export const SearchCardFooter = ({ accessionCode, title }) => {
+export const SearchCardFooter = ({ experiment }) => {
+  const { accession_code: accessionCode, title } = experiment
   const { push } = useRouter()
   const { search, setSearch } = useSearchManager()
 
@@ -15,7 +16,7 @@ export const SearchCardFooter = ({ accessionCode, title }) => {
         secondary
         onClick={() => {
           push(`/experiments/${accessionCode}/${formatURLString(title)}`)
-          setSearch({ ...search, ref: 'search' })
+          setSearch({ ...search, ref: 'search', from: 'view-samples' })
         }}
       />
     </Box>

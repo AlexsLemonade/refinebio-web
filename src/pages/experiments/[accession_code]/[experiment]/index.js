@@ -1,7 +1,8 @@
-import { Fragment, memo, useEffect } from 'react'
+import { Fragment, memo, useEffect, useRef } from 'react'
 import { nanoid } from 'nanoid'
 import { Box, Grid, Heading } from 'grommet'
 import { useRouter } from 'next/router'
+import { useLayoutRefs } from 'hooks/useLayoutRefs'
 import { useExperiments } from 'hooks/useExperiments'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
@@ -9,6 +10,7 @@ import { SamplesTableManagerContextProvider } from 'contexts/SamplesTableManager
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import { links } from 'config'
 import formatNumbers from 'helpers/formatNumbers'
+import scrollTo from 'helpers/scrollTo'
 import { getFormattedExperiment } from 'helpers/formatDatasetAction'
 import getURLForAccessionCode from 'helpers/getURLForAccessionCode'
 import { Anchor } from 'components/shared/Anchor'
@@ -47,22 +49,41 @@ export const Experiment = () => {
     isReady,
     query: { accession_code: accessionCode }
   } = useRouter()
-  const {
-    databaseNames,
-    experiment,
-    loading,
-    hasSamples,
-    getExperiment,
-    getPlatformNames,
-    getTechnologyNames
-  } = useExperiments()
-  const { search, navigateToSearch } = useSearchManager()
-  const fromSearch = search.ref === 'search'
+  const { databaseNames, experiment, loading, hasSamples, getExperiment } =
+    useExperiments()
   const { setResponsive } = useResponsive()
+  const { search, navigateToSearch } = useSearchManager()
+  const { headerRef } = useLayoutRefs()
+  const tableRef = useRef(null)
+  const fromSearch = search.ref === 'search'
+  const fromViewSamples = search.from === 'view-samples'
+
+  const scrollToTable = () => {
+    const offset = (headerRef.current.offsetHeight || 0) + 10
+    const tableTop =
+      tableRef.current.getBoundingClientRect().top + window.scrollY - offset
+    scrollTo({
+      top: tableTop
+    })
+  }
 
   useEffect(() => {
     if (isReady) getExperiment(accessionCode)
   }, [isReady])
+
+  useEffect(() => {
+    if (!fromViewSamples || !hasSamples || !tableRef.current) return
+    // triggers initial scrolling
+    scrollToTable()
+    // watches layout changes and updates scroll position
+    const resizeObserver = new ResizeObserver(() => scrollToTable())
+    resizeObserver.observe(document.body)
+
+    // eslint-disable-next-line consistent-return
+    return () => {
+      resizeObserver.disconnect()
+    }
+  }, [fromViewSamples, hasSamples])
 
   return (
     <>
@@ -87,7 +108,7 @@ export const Experiment = () => {
             </Box>
           ) : (
             hasSamples && (
-              <Box>
+              <>
                 <FixedContainer>
                   <Box
                     elevation="medium"
@@ -116,32 +137,17 @@ export const Experiment = () => {
                       margin={{ bottom: 'medium' }}
                     >
                       <Box gridArea="header">
-                        <SearchCardHeader
-                          accessionCode={accessionCode}
-                          title={experiment.title}
-                          isLinked={false}
-                        />
+                        <SearchCardHeader experiment={experiment} />
                       </Box>
                       <Box
                         gridArea="ctas"
                         margin={{ top: setResponsive('none', 'large') }}
                         align="end"
                       >
-                        <SearchCardAction
-                          experiment={experiment}
-                          technology={getTechnologyNames()}
-                        />
+                        <SearchCardAction experiment={experiment} />
                       </Box>
                       <Box gridArea="meta">
-                        <SearchCardMeta
-                          downloadableSamples={
-                            experiment.num_downloadable_samples
-                          }
-                          organismNames={experiment.organism_names}
-                          platformNames={getPlatformNames()}
-                          technology={getTechnologyNames()}
-                          size="medium"
-                        />
+                        <SearchCardMeta experiment={experiment} size="medium" />
                       </Box>
                     </Grid>
                     <Box margin={{ bottom: 'medium' }}>
@@ -286,51 +292,54 @@ export const Experiment = () => {
                     </InformationList>
                   </Box>
                 </FixedContainer>
-                <FixedContainer>
-                  <Box
-                    elevation="medium"
-                    pad={setResponsive('medium', 'large')}
-                    margin={{ bottom: 'basex6' }}
-                  >
-                    <Row margin={{ bottom: 'medium' }}>
-                      <Column>
-                        <Heading
-                          level={2}
-                          margin={{ bottom: setResponsive('small', 'none') }}
-                        >
-                          Samples
-                        </Heading>
-                      </Column>
-                      <Column>
-                        <SamplesTableAction
-                          accessionCode={accessionCode}
-                          downloadableSamples={
+
+                <Box ref={tableRef}>
+                  <FixedContainer>
+                    <Box
+                      elevation="medium"
+                      pad={setResponsive('medium', 'large')}
+                      margin={{ bottom: 'basex6' }}
+                    >
+                      <Row margin={{ bottom: 'medium' }}>
+                        <Column>
+                          <Heading
+                            level={2}
+                            margin={{ bottom: setResponsive('small', 'none') }}
+                          >
+                            Samples
+                          </Heading>
+                        </Column>
+                        <Column>
+                          <SamplesTableAction
+                            accessionCode={accessionCode}
+                            downloadableSamples={
+                              experiment.num_downloadable_samples
+                            }
+                          />
+                        </Column>
+                      </Row>
+                      <SamplesTableManagerContextProvider>
+                        <SamplesTable
+                          allSamples={getFormattedExperiment(
+                            accessionCode,
                             experiment.num_downloadable_samples
-                          }
+                          )}
+                          sampleAccessionsInExperiment={{
+                            [experiment.accession_code]: experiment.samples.map(
+                              (sample) => sample.accession_code
+                            )
+                          }}
+                          queryToAdd={{
+                            experiment_accession_code: accessionCode
+                          }}
+                          sampleMetadataFields={experiment.sample_metadata}
+                          showOnlyAddedSamples
                         />
-                      </Column>
-                    </Row>
-                    <SamplesTableManagerContextProvider>
-                      <SamplesTable
-                        allSamples={getFormattedExperiment(
-                          accessionCode,
-                          experiment.num_downloadable_samples
-                        )}
-                        sampleAccessionsInExperiment={{
-                          [experiment.accession_code]: experiment.samples.map(
-                            (sample) => sample.accession_code
-                          )
-                        }}
-                        queryToAdd={{
-                          experiment_accession_code: accessionCode
-                        }}
-                        sampleMetadataFields={experiment.sample_metadata}
-                        showOnlyAddedSamples
-                      />
-                    </SamplesTableManagerContextProvider>
-                  </Box>
-                </FixedContainer>
-              </Box>
+                      </SamplesTableManagerContextProvider>
+                    </Box>
+                  </FixedContainer>
+                </Box>
+              </>
             )
           )}
         </Box>
