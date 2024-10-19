@@ -1,6 +1,5 @@
 import moment from 'moment'
 import { Box, Heading } from 'grommet'
-import { usePageRendered } from 'hooks/usePageRendered'
 import { useResponsive } from 'hooks/useResponsive'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { DatasetProcessing } from './DatasetProcessing'
@@ -32,7 +31,6 @@ const Block = ({ children }) => {
 }
 
 export const DatasetPageHeader = ({ dataset }) => {
-  const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
   const {
     expires_on: expiredOn,
@@ -43,8 +41,6 @@ export const DatasetPageHeader = ({ dataset }) => {
   } = dataset
   const isExpired = moment(expiredOn).isBefore(Date.now())
   const isProcessingError = success === false // 'success' may be null
-
-  if (!pageRendered) return null
 
   if (isProcessingError) {
     return (

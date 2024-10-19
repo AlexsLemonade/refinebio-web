@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Box, Heading } from 'grommet'
 import gtag from 'analytics/gtag'
-import { usePageRendered } from 'hooks/usePageRendered'
 import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/shared/Anchor'
 import { Column } from 'components/shared/Column'
@@ -20,17 +19,12 @@ const ListItem = ({ href, text }) => (
 )
 
 export const DatasetExplore = ({ dataset }) => {
-  const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
   const [technologies, setTechnologies] = useState(null)
 
   useEffect(() => {
-    if (pageRendered) {
-      setTechnologies(
-        Object.values(dataset.experiments).map((e) => e.technology)
-      )
-    }
-  }, [pageRendered])
+    setTechnologies(Object.values(dataset.experiments).map((e) => e.technology))
+  }, [])
 
   const hasRNASeq = technologies && technologies.includes('RNA-SEQ')
   const hasMicroarray = technologies && technologies.includes('MICROARRAY')
