@@ -25,6 +25,7 @@ export const OrganismFilter = ({
     return null
   }
 
+  // dynamic radio options based on the user's selection
   const radioOptions = [
     { label: defaultOption.label, value: defaultOption.value },
     ...uniqueOrganisms.map((uniqueOrganism) => ({

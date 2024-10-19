@@ -20,12 +20,7 @@ export const DatasetRegenerateDownloadOptionsForm = ({
     const response = await updateDataset(await createDataset(), params)
     const pathname = `/dataset/${response.id}`
 
-    gtag.trackRegeneratedDataset(
-      dataset,
-      JSON.stringify(dataset) !== JSON.stringify(regeneratedDataset)
-        ? dataset
-        : null
-    )
+    gtag.trackRegeneratedDataset(dataset, response)
 
     return pathname
   }
@@ -39,10 +34,10 @@ export const DatasetRegenerateDownloadOptionsForm = ({
       {!openForm && (
         <Box direction="row" gap="xlarge">
           <Text weight="bold">
-            Aggregate by: {getReadable('aggregate_by', dataset.aggregate_by)}
+            Aggregate by: {getReadable(dataset.aggregate_by)}
           </Text>
           <Text weight="bold">
-            Transformation: {getReadable('scale_by', dataset.scale_by)}
+            Transformation: {getReadable(dataset.scale_by)}
           </Text>
           {!dataset.quantile_normalize && (
             <Text weight="bold">

@@ -29,16 +29,12 @@ export const getServerSideProps = ({ query }) => {
 export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
   const { push } = useRouter()
   const { setResponsive } = useResponsive()
-  const {
-    datasetId: myDatasetId,
-    error,
-    loading,
-    getDataset
-  } = useDatasetManager()
-  const { isProcessingDataset, polledDatasetState, pollDatasetId } =
-    usePollDatasetStatus()
+  const { dataset: myDataset, error, loading, getDataset } = useDatasetManager()
+  const { isProcessingDataset, polledDatasetState } =
+    usePollDatasetStatus(datasetId)
   const [dataset, setDataset] = useState({}) // dataset currently displayed on the page
   const { isNotProcessed } = getDatasetState(dataset)
+
   const getDatasetFromQuery = async (id) => {
     const response = await getDataset(id)
     setDataset(response)
@@ -46,10 +42,8 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
 
   useEffect(() => {
     // redirects users to /download if datasetId matches My dataset ID
-    if (datasetId === myDatasetId) push('/download')
-
+    if (datasetId === myDataset.id) push('/download')
     getDatasetFromQuery(datasetId)
-    pollDatasetId(datasetId) // sets a processing datasets for polling
   }, [datasetId, start])
 
   useEffect(() => {
