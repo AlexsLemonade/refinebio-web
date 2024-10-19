@@ -39,7 +39,7 @@ export const DownloadOptionsForm = ({
       dataset.id,
       isProcessed
     )
-  }, [])
+  }, [dataset])
 
   const handleSubmitForm = async (downloadOptions) => {
     let pathname = '/download'
