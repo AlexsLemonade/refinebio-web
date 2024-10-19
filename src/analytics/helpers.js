@@ -80,19 +80,18 @@ export const event = (eventName, value = {}, nonInteraction = false) => {
 }
 
 export const getDatasetOptionsChanges = (dataset, regeneratedDataset) => {
-  const initial = datasetOptionsKeys
-    .map((key) => `${getReadable(key, dataset[key])}`)
-    .join('|')
+  const changes = datasetOptionsKeys
+    .map((key) => {
+      const initialOption = getReadable(dataset[key])
+      const regeneratedOption = getReadable(regeneratedDataset[key])
 
-  if (regeneratedDataset) {
-    const changes = datasetOptionsKeys
-      .map((key) => `${getReadable(key, regeneratedDataset[key])}`)
-      .join('|')
+      return initialOption !== regeneratedOption
+        ? `${initialOption} -> ${regeneratedOption}`
+        : null
+    })
+    .filter(Boolean)
 
-    return `${initial} -> ${changes}`
-  }
-
-  return initial
+  return changes.length > 0 ? changes.join('|') : 'No change'
 }
 
 export const getDatasetState = (dataset) =>

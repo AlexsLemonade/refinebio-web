@@ -117,12 +117,7 @@ export const FilesSummary = ({ dataset, defaultDataset = {}, isProcessed }) => {
     )
     const pathname = `/dataset/${response.id}`
 
-    gtag.trackRegeneratedDataset(
-      defaultDataset,
-      JSON.stringify(defaultDataset) !== JSON.stringify(dataset)
-        ? dataset
-        : null
-    )
+    gtag.trackRegeneratedDataset(defaultDataset, response)
 
     return pathname
   }
