@@ -30,7 +30,7 @@ export const DatasetRegenerate = () => {
     const response = await updateDataset(await createDataset(), params)
     const pathname = `/dataset/${response.id}`
 
-    gtag.trackRegeneratedDataset(selectedDataset)
+    gtag.trackRegeneratedDataset(selectedDataset, response)
     push(
       {
         pathname,
