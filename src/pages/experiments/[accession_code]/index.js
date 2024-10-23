@@ -8,13 +8,11 @@ export const AccessionCode = ({ experiment }) => {
   const { push } = useRouter()
 
   useEffect(() => {
-    if (experiment) {
-      push(
-        `/experiments/${experiment.accession_code}/${formatURLString(
-          experiment.title
-        )}`
-      )
-    }
+    push(
+      `/experiments/${experiment.accession_code}/${formatURLString(
+        experiment.title
+      )}`
+    )
   }, [experiment])
 }
 
