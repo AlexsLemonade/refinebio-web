@@ -66,9 +66,10 @@ export const Experiment = ({ experiment }) => {
     })
   }
 
+  // prevents hydration error on page load for SamplesTable
   useEffect(() => {
-    setHasSamples(experiment.samples && experiment.samples.length > 0)
-  }, [experiment, hasSamples])
+    setHasSamples(experiment.samples.length > 0)
+  }, [hasSamples])
 
   useEffect(() => {
     if (!fromViewSamples || !hasSamples || !tableRef.current) return
@@ -83,10 +84,6 @@ export const Experiment = ({ experiment }) => {
       resizeObserver.disconnect()
     }
   }, [fromViewSamples, hasSamples])
-
-  if (!hasSamples) {
-    return <Spinner />
-  }
 
   return (
     <>
@@ -299,24 +296,28 @@ export const Experiment = ({ experiment }) => {
                     />
                   </Column>
                 </Row>
-                <SamplesTableManagerContextProvider>
-                  <SamplesTable
-                    allSamples={getFormattedExperiment(
-                      accessionCode,
-                      experiment.num_downloadable_samples
-                    )}
-                    sampleAccessionsInExperiment={{
-                      [experiment.accession_code]: experiment.samples.map(
-                        (sample) => sample.accession_code
-                      )
-                    }}
-                    queryToAdd={{
-                      experiment_accession_code: accessionCode
-                    }}
-                    sampleMetadataFields={experiment.sample_metadata}
-                    showOnlyAddedSamples
-                  />
-                </SamplesTableManagerContextProvider>
+                {hasSamples ? (
+                  <SamplesTableManagerContextProvider>
+                    <SamplesTable
+                      allSamples={getFormattedExperiment(
+                        accessionCode,
+                        experiment.num_downloadable_samples
+                      )}
+                      sampleAccessionsInExperiment={{
+                        [experiment.accession_code]: experiment.samples.map(
+                          (sample) => sample.accession_code
+                        )
+                      }}
+                      queryToAdd={{
+                        experiment_accession_code: accessionCode
+                      }}
+                      sampleMetadataFields={experiment.sample_metadata}
+                      showOnlyAddedSamples
+                    />
+                  </SamplesTableManagerContextProvider>
+                ) : (
+                  <Spinner />
+                )}
               </Box>
             </FixedContainer>
           </Box>

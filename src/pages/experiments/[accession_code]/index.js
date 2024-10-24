@@ -13,7 +13,7 @@ export const AccessionCode = ({ experiment }) => {
         experiment.title
       )}`
     )
-  }, [experiment])
+  }, [])
 }
 
 export const getServerSideProps = async ({ query }) => {
