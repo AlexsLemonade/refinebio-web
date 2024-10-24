@@ -42,6 +42,7 @@ export const Tabs = () => {
     <SharedTabs activeIndex={activeIndex} text onActive={handleActive}>
       {tabs.map((tab) => (
         <Tab
+          key={tab.type}
           title={getReadable(tab.type)}
           onClick={() => clickHandle(tab.type)}
         >
