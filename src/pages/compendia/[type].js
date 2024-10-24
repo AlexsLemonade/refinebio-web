@@ -1,34 +1,27 @@
-import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Box } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
+import getReadable from 'helpers/getReadable'
 import { FileDownload, Hero, Tabs } from 'components/Compendia'
 import { PageTitle } from 'components/shared/PageTitle'
 import { SignUpBlock } from 'components/shared/SignUpBlock'
 
 export const Compendia = () => {
-  const { asPath, isReady } = useRouter()
   const { setResponsive } = useResponsive()
-  const [tabName, setTabName] = useState('')
+  const {
+    asPath,
+    query: { type: currentType }
+  } = useRouter()
 
-  useEffect(() => {
-    if (!isReady) return
-    setTabName(
-      `${
-        // eslint-disable-next-line no-nested-ternary
-        asPath.includes('normalized')
-          ? 'Normalized'
-          : asPath.includes('rna-seq')
-          ? 'RNA-seq'
-          : 'Download'
-      } Compendia -`
-    )
-  }, [asPath, isReady])
+  const isDownload = asPath.includes('download')
+  const titlePrefix = `${
+    isDownload ? 'Download Compendia' : getReadable(currentType)
+  } -`
 
   return (
     <>
-      <PageTitle title={tabName} />
-      {asPath.includes('download') ? (
+      <PageTitle title={titlePrefix} />
+      {isDownload ? (
         <FileDownload />
       ) : (
         <Box
@@ -37,7 +30,7 @@ export const Compendia = () => {
           }}
         >
           <Hero />
-          <Tabs />
+          <Tabs type={currentType} />
           <SignUpBlock />
         </Box>
       )}
