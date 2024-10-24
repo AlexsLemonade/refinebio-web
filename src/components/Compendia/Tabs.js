@@ -1,29 +1,39 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Tab } from 'grommet'
-import { options } from 'config'
+import getReadable from 'helpers/getReadable'
 import { Tabs as SharedTabs } from 'components/shared/Tabs'
 import { NormalizedTab } from './NormalizedTab'
 import { RNASeqTab } from './RNASeqTab'
 
 export const Tabs = () => {
   const {
-    compendia: { tabs }
-  } = options
-  const { isReady, pathname, query, replace } = useRouter()
+    isReady,
+    pathname,
+    query: { type },
+    replace
+  } = useRouter()
   const [activeIndex, setActiveIndex] = useState(0)
   const handleActive = (nextIndex) => setActiveIndex(nextIndex)
+  const tabs = [
+    {
+      type: 'normalized',
+      Component: NormalizedTab
+    },
+    {
+      type: 'rna-seq',
+      Component: RNASeqTab
+    }
+  ]
 
   useEffect(() => {
     if (!isReady) return
 
-    setActiveIndex(query.type === 'rna-seq' ? 1 : 0)
-  }, [isReady, query])
+    setActiveIndex(type === 'rna-seq' ? 1 : 0)
+  }, [isReady, type])
 
   const clickHandle = (tabType) => {
-    const tabName = tabType === 'rnaSeq' ? 'rna-seq' : tabType
-
-    replace({ pathname, query: { type: tabType } }, `/compendia/${tabName}`, {
+    replace({ pathname, query: { type: tabType } }, `/compendia/${tabType}`, {
       shallow: true
     })
   }
@@ -33,14 +43,11 @@ export const Tabs = () => {
       {tabs.map((tab) => (
         <Tab
           key={tab.type}
-          title={tab.label}
+          title={getReadable(tab.type)}
           onClick={() => clickHandle(tab.type)}
         >
-          {tab.type === tabs[0].type ? (
-            <NormalizedTab type={tab.type} />
-          ) : (
-            <RNASeqTab type={tab.type} />
-          )}
+          {/* TEMP: camelCase to prevent sub-comonents from breaking (will update in a later stacked issue) */}
+          <tab.Component type={tab.type === 'rna-seq' ? 'rnaSeq' : tab.type} />
         </Tab>
       ))}
     </SharedTabs>
