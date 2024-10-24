@@ -15,7 +15,7 @@ export const Header = forwardRef(({ light = false }, ref) => {
   const stickyHeaderPages = [
     '/dataset/[dataset_id]',
     '/download',
-    '/experiments/[accession_code]/[experiment]',
+    '/experiments/[accession_code]/[title]',
     '/search'
   ]
 

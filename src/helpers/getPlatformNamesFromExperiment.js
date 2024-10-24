@@ -1,0 +1,5 @@
+import unionizeArrays from 'helpers/unionizeArrays'
+// Returns the platform_names field from the samples array that matches
+// the experiment data structure of the search endpoint
+export default (samples) =>
+  unionizeArrays(...samples.map((sample) => sample.pretty_platform))

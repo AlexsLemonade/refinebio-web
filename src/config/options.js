@@ -36,14 +36,6 @@ export const options = {
       'quantile_normalize'
     ]
   },
-  // setting for the experiment hook
-  experiment: {
-    databaseNames: {
-      GEO: 'Gene Expression Omnibus (GEO)',
-      SRA: 'Sequence Read Archive (SRA)',
-      ARRAY_EXPRESS: 'ArrayExpress'
-    }
-  },
   // setting for the samples table
   samplesTable: {
     // default values for common queries
