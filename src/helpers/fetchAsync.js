@@ -56,5 +56,9 @@ export default async (url, params = false) => {
     }
   }
 
-  return result
+  return {
+    ...result,
+    ok: response.ok,
+    statusCode: response.status
+  }
 }

@@ -10,13 +10,13 @@ import { Row } from 'components/shared/Row'
 import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
 
-export const SearchCardMeta = ({
-  downloadableSamples,
-  organismNames,
-  platformNames,
-  technology,
-  size = 'small'
-}) => {
+export const SearchCardMeta = ({ experiment, size = 'small' }) => {
+  const {
+    num_downloadable_samples: downloadableSamples,
+    organism_names: organismNames,
+    platform_names: platformNames,
+    technology
+  } = experiment
   const { setResponsive } = useResponsive()
   const technologyName = isArray(technology) ? technology.join('') : technology
 

@@ -7,13 +7,13 @@ import { Anchor } from 'components/shared/Anchor'
 import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
 
-export const SearchCardBody = ({
-  alternateAccessionCode = '',
-  description = '',
-  publicationTitle = '',
-  sampleMetadataFields = [],
-  charLimit = 300
-}) => {
+export const SearchCardBody = ({ experiment, charLimit = 300 }) => {
+  const {
+    alternate_accession_code: alternateAccessionCode,
+    description,
+    publication_title: publicationTitle,
+    sample_metadata_fields: sampleMetadataFields
+  } = experiment
   const { formatSampleMetadata } = useDatasetManager()
   const [toggleDesciption, setToggleDescription] = useState(
     description.length > charLimit

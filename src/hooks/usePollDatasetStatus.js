@@ -1,13 +1,24 @@
 import { useEffect, useState, useRef } from 'react'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 
-export const usePollDatasetStatus = () => {
+// takes either an accession code or a dataset ID to poll / check status
+export const usePollDatasetStatus = (accessionOrId) => {
   const { datasetAccessions, processingDatasets, getDataset } =
     useDatasetManager()
   const [polledDatasetId, setPolledDatasetId] = useState(null)
   const [polledDatasetState, setPolledDatasetState] = useState(null)
   const timerRef = useRef(null)
   const [isProcessingDataset, setIsProcessingDataset] = useState(false)
+
+  // starts polling the dataset status
+  useEffect(() => {
+    if (accessionOrId in datasetAccessions) {
+      pollDatasetId(datasetAccessions[accessionOrId])
+    }
+    if (processingDatasets.includes(accessionOrId)) {
+      pollDatasetId(accessionOrId)
+    }
+  }, [accessionOrId, processingDatasets])
 
   // polls the latest state of the processing dataset per minute
   // (the processing usually takes a few minutes)
@@ -27,17 +38,8 @@ export const usePollDatasetStatus = () => {
     }
   }, [isProcessingDataset])
 
-  // if one-off, sets the matched accession code's dataset ID to polledDatasetId
-  const pollDatasetAccession = (accessionCode) => {
-    if (Object.hasOwn(datasetAccessions, accessionCode)) {
-      pollDatasetId(datasetAccessions[accessionCode])
-    }
-  }
-
   // sets the mached dataset ID to polledDatasetId
   const pollDatasetId = (datasetId) => {
-    if (datasetId === polledDatasetId) return
-
     const isProcessing = processingDatasets.includes(datasetId)
     if (isProcessing) {
       setPolledDatasetId(datasetId)
@@ -47,8 +49,8 @@ export const usePollDatasetStatus = () => {
 
   const refreshProcessingDataset = async () => {
     const response = await getDataset(polledDatasetId)
-    // TEMP: until the fetchAsync is refactored
-    if (response?.ok !== false) {
+
+    if (response.ok) {
       setPolledDatasetState(response)
     }
 
@@ -58,10 +60,7 @@ export const usePollDatasetStatus = () => {
   }
 
   return {
-    datasetAccessions,
     isProcessingDataset,
-    polledDatasetState,
-    pollDatasetAccession,
-    pollDatasetId
+    polledDatasetState
   }
 }
