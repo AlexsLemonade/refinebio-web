@@ -1,12 +1,13 @@
-import { useEffect, useState, memo } from 'react'
+import { useState, memo } from 'react'
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 import gtag from 'analytics/gtag'
-import { links, options } from 'config'
+import { links } from 'config'
 import { useCompendia } from 'hooks/useCompendia'
 import { useResponsive } from 'hooks/useResponsive'
 import formatBytes from 'helpers/formatBytes'
 import formatString from 'helpers/formatString'
+import getReadable from 'helpers/getReadable'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { CheckBox } from 'components/shared/CheckBox'
@@ -16,7 +17,6 @@ import { Icon } from 'components/shared/Icon'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
 import { SearchBox } from 'components/shared/SearchBox'
-import { Spinner } from 'components/shared/Spinner'
 
 const DropDown = styled(Box)`
   > div:nth-child(2) {
@@ -69,26 +69,27 @@ const ListItem = ({ label, selectedOrganism, ...props }) => {
   )
 }
 
-export const Download = ({ type }) => {
+export const Download = ({ compendia }) => {
   const {
-    compendia: { heading }
-  } = options
-  const {
-    compendia,
     hasError,
-    loading,
     downloadCompendia,
-    getCompendia,
+    getCompediaType,
     navigateToFileDownload
   } = useCompendia()
+  const type = getCompediaType(compendia)
   const { setResponsive } = useResponsive()
-  const [filteredOptions, setFilteredOptions] = useState([])
+  const compendiaOptions = compendia.results
+  const [filteredOptions, setFilteredOptions] = useState([...compendiaOptions])
   const [selectedOrganism, setSelectedOrganism] = useState(null)
   const [showOptions, setShowOptions] = useState(false)
   const [userInput, setUserInput] = useState('')
   const [acceptTerms, setAcceptTerms] = useState(false)
 
-  const handleChange = (val) => {
+  const handleFocusShowOptions = () => {
+    setShowOptions(true)
+  }
+
+  const handleChangeSelectedOption = (val) => {
     if (val.trim() === '' || val !== userInput) {
       setSelectedOrganism(null)
     }
@@ -97,11 +98,25 @@ export const Download = ({ type }) => {
     updateFilteredOptions(val)
   }
 
-  const handleClick = (option) => {
+  const handleClickSelectedOption = (option) => {
     setSelectedOrganism(option)
     setUserInput(formatString(option.primary_organism_name))
     setShowOptions(false)
     updateFilteredOptions(formatString(option.primary_organism_name))
+  }
+
+  const updateFilteredOptions = (val) => {
+    if (val.trim() !== '') {
+      setFilteredOptions(() =>
+        compendiaOptions.filter((organism) =>
+          formatString(organism.primary_organism_name)
+            .toLowerCase()
+            .includes(val.toLowerCase())
+        )
+      )
+    } else {
+      setFilteredOptions(compendiaOptions)
+    }
   }
 
   const handleFileDownload = async (id) => {
@@ -109,32 +124,6 @@ export const Download = ({ type }) => {
     gtag.trackCompendiaDownload(response)
     navigateToFileDownload(response.organism, response.url)
   }
-
-  const handleFocus = () => {
-    setShowOptions(true)
-  }
-
-  const updateFilteredOptions = (val) => {
-    if (val.trim() !== '') {
-      setFilteredOptions(() =>
-        compendia.filter((organism) =>
-          formatString(organism.primary_organism_name)
-            .toLowerCase()
-            .includes(val.toLowerCase())
-        )
-      )
-    } else {
-      setFilteredOptions(compendia)
-    }
-  }
-
-  useEffect(() => {
-    getCompendia(type === 'rnaSeq')
-  }, [])
-
-  useEffect(() => {
-    setFilteredOptions(compendia)
-  }, [compendia])
 
   return (
     <Box background="white" pad={setResponsive('medium', 'large', 'xlarge')}>
@@ -149,7 +138,7 @@ export const Download = ({ type }) => {
             margin={{ bottom: 'medium' }}
             size={setResponsive('small', 'large')}
           >
-            Download the {heading[type]}
+            Download the {getReadable(type)}
           </Heading>
           <Box
             as="label"
@@ -169,63 +158,59 @@ export const Download = ({ type }) => {
                 zIndex: 1
               }}
             >
-              {!loading && <Icon name="ChevronDown" size="xsmall" />}
+              <Icon name="ChevronDown" size="xsmall" />
             </Box>
-            {loading ? (
-              <Spinner />
-            ) : (
-              <DropDown style={{ position: 'relative' }}>
-                <SearchBox
-                  padding="16px 32px"
-                  placeholder="Search for an organism"
-                  size="small"
-                  reverse={false}
-                  responsive
-                  value={userInput}
-                  onChange={(e) => handleChange(e.target.value)}
-                  onFocus={handleFocus}
-                />
-                {showOptions && filteredOptions.length > 0 && (
-                  <Box
-                    animation={{ type: 'zoomIn', duration: 50 }}
-                    background="white"
-                    border={{ color: 'brand', size: 'medium' }}
-                    margin={{ top: 'xlarge' }}
-                    height={{ max: '200px' }}
-                    width="100%"
-                    style={{
-                      overflowY: 'scroll',
-                      position: 'absolute',
-                      zIndex: 1
-                    }}
-                  >
-                    <List flexDirection="column">
-                      {filteredOptions.map((option) => (
-                        <ListItem
-                          key={option.primary_organism_name}
-                          label={formatString(option.primary_organism_name)}
-                          selectedOrganism={
-                            selectedOrganism
-                              ? formatString(
-                                  selectedOrganism.primary_organism_name
-                                )
-                              : null
-                          }
-                          onClick={() => handleClick(option)}
-                        />
-                      ))}
-                    </List>
-                  </Box>
-                )}
-              </DropDown>
-            )}
+            <DropDown style={{ position: 'relative' }}>
+              <SearchBox
+                padding="16px 32px"
+                placeholder="Search for an organism"
+                size="small"
+                reverse={false}
+                responsive
+                value={userInput}
+                onChange={(e) => handleChangeSelectedOption(e.target.value)}
+                onFocus={handleFocusShowOptions}
+              />
+              {showOptions && filteredOptions.length > 0 && (
+                <Box
+                  animation={{ type: 'zoomIn', duration: 50 }}
+                  background="white"
+                  border={{ color: 'brand', size: 'medium' }}
+                  margin={{ top: 'xlarge' }}
+                  height={{ max: '200px' }}
+                  width="100%"
+                  style={{
+                    overflowY: 'scroll',
+                    position: 'absolute',
+                    zIndex: 1
+                  }}
+                >
+                  <List flexDirection="column">
+                    {filteredOptions.map((option) => (
+                      <ListItem
+                        key={option.primary_organism_name}
+                        label={formatString(option.primary_organism_name)}
+                        selectedOrganism={
+                          selectedOrganism
+                            ? formatString(
+                                selectedOrganism.primary_organism_name
+                              )
+                            : null
+                        }
+                        onClick={() => handleClickSelectedOption(option)}
+                      />
+                    ))}
+                  </List>
+                </Box>
+              )}
+            </DropDown>
           </Box>
           {type === 'rnaSeq' && (
             <Box margin={{ top: setResponsive('small', 'medium') }}>
               <InlineMessage label="Data is not normalized or aggregated." />
             </Box>
           )}
-          {selectedOrganism && selectedOrganism.organism_names.length > 1 && (
+          {selectedOrganism?.organism_names?.length > 1 && (
             <Box margin={{ top: 'large' }}>
               <InlineMessage
                 label={

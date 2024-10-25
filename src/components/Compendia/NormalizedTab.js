@@ -3,16 +3,15 @@ import { Box, Heading, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { links, options } from 'config'
+import { links } from 'config'
 import { DownloadBlock } from './DownloadBlock'
 
-export const NormalizedTab = ({ type = 'normalized' }) => {
+export const NormalizedTab = ({ compendia }) => {
   const { setResponsive } = useResponsive()
-  const tabName = options.compendia.heading[type]
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 350, delay: 200 }}>
-      <DownloadBlock type={type} />
+      <DownloadBlock compendia={compendia} />
       <FixedContainer
         pad={{
           horizontal: setResponsive('large', 'medium', 'basex15'),
@@ -38,7 +37,7 @@ export const NormalizedTab = ({ type = 'normalized' }) => {
             quantile normalization.
           </Heading>
           <Button
-            aria-label={`Go to the refinebio docs - ${tabName}`}
+            aria-label="Go to the refinebio docs - Normalized Compendia"
             href={links.refinebio_docs_normalized_compendia}
             label="Learn More"
             secondary

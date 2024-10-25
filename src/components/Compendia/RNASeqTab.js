@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import { Anchor, Box, Heading, Paragraph, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import getReadable from 'helpers/getReadable'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -31,12 +30,12 @@ const Card = ({ heading, pad, children }) => {
   )
 }
 
-export const RNASeqTab = ({ type = 'rnaSeq' }) => {
+export const RNASeqTab = ({ compendia }) => {
   const { setResponsive } = useResponsive()
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 350, delay: 200 }}>
-      <DownloadBlock type={type} />
+      <DownloadBlock compendia={compendia} />
       <FixedContainer>
         <Row
           direction={setResponsive('column', 'column', 'row')}
@@ -76,9 +75,7 @@ export const RNASeqTab = ({ type = 'rnaSeq' }) => {
               Note: This compendia is not normalized or aggregated.
             </Paragraph>
             <Button
-              aria-label={`Go to the refinebio docs - ${getReadable(
-                'rna-seq'
-              )}`}
+              aria-label="Go to the refinebio docs - RNA-seq Sample Compendia"
               href={links.refinebio_docs_rna_seq_sample_compendia}
               label="Learn More"
               margin={{ top: 'small' }}
