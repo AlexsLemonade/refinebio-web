@@ -2,12 +2,8 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { useToken } from 'hooks/useToken'
 import { api } from 'api'
-import { options } from 'config'
 
 export const useCompendia = () => {
-  const {
-    compendia: { commonQueries }
-  } = options
   const { push } = useRouter()
   const {
     token: tokenState,
@@ -15,22 +11,28 @@ export const useCompendia = () => {
     resetToken,
     validateToken
   } = useToken()
-  const [compendia, setCompendia] = useState()
   const [loading, setLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
 
-  const getCompendia = async (quantSfOnly = false) => {
+  const getCompendia = async (type) => {
     const compendiaQuery = {
-      ...commonQueries,
-      quant_sf_only: quantSfOnly
+      latest_version: true,
+      limit: 1000,
+      quant_sf_only: type === 'rna-seq'
     }
 
     setLoading(true)
     const response = await api.compendia.get(compendiaQuery, tokenState)
-    setHasError(response?.ok === false)
-    setCompendia(response.results)
+    setHasError(!response.ok)
     setLoading(false)
+
+    return response
   }
+
+  const getCompediaType = (compendiaResource) =>
+    compendiaResource.results.some((result) => result.quant_sf_only === true)
+      ? 'rna-seq'
+      : 'normalized'
 
   const downloadCompendia = async (compendiaId) => {
     const token = !validateToken()
@@ -55,11 +57,11 @@ export const useCompendia = () => {
   }
 
   return {
-    compendia,
     hasError,
     loading,
     downloadCompendia,
     getCompendia,
+    getCompediaType,
     navigateToFileDownload
   }
 }
