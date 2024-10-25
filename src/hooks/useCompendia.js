@@ -29,8 +29,8 @@ export const useCompendia = () => {
     return response
   }
 
-  const getCompediaType = (compendiaResource) =>
-    compendiaResource.results.some((result) => result.quant_sf_only === true)
+  const getCompediaType = (compendia) =>
+    compendia.results.some((result) => result.quant_sf_only === true)
       ? 'rna-seq'
       : 'normalized'
 
