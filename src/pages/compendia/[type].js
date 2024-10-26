@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { Box } from 'grommet'
+import { Box, Paragraph } from 'grommet'
 import { useCompendia } from 'hooks/useCompendia'
 import { useResponsive } from 'hooks/useResponsive'
 import getReadable from 'helpers/getReadable'
@@ -15,7 +15,7 @@ export const Compendia = () => {
     asPath,
     query: { type: currentType }
   } = useRouter()
-  const { loading, getCompendia } = useCompendia()
+  const { hasError, loading, getCompendia } = useCompendia()
   const [compendia, setCompendia] = useState(null)
   const isLoading = loading || !compendia
   const isDownload = asPath.includes('download')
@@ -45,18 +45,15 @@ export const Compendia = () => {
       <PageTitle title={titlePrefix} />
       {isDownload && <FileDownload />}
       {!isDownload && (
-        <Box
-          pad={{
-            top: setResponsive('basex7', 'basex7', 'basex10')
-          }}
-        >
+        <Box pad={{ top: setResponsive('basex7', 'basex7', 'basex10') }}>
           <Hero />
-          {isLoading ? (
-            <Box
-              pad={{
-                bottom: setResponsive('basex7', 'basex7', 'basex10')
-              }}
-            >
+          {/* eslint-disable-next-line no-nested-ternary */}
+          {hasError ? (
+            <Paragraph>
+              Download unavailable at this time. Please check again soon!
+            </Paragraph>
+          ) : isLoading ? (
+            <Box pad={{ bottom: setResponsive('basex7', 'basex7', 'basex10') }}>
               <Spinner />
             </Box>
           ) : (
