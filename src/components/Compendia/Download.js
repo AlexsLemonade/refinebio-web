@@ -2,12 +2,11 @@ import { useState, memo } from 'react'
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 import gtag from 'analytics/gtag'
-import { links } from 'config'
+import { links, options } from 'config'
 import { useCompendia } from 'hooks/useCompendia'
 import { useResponsive } from 'hooks/useResponsive'
 import formatBytes from 'helpers/formatBytes'
 import formatString from 'helpers/formatString'
-import getReadable from 'helpers/getReadable'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
 import { CheckBox } from 'components/shared/CheckBox'
@@ -70,6 +69,9 @@ const ListItem = ({ label, selectedOrganism, ...props }) => {
 }
 
 export const Download = ({ compendia }) => {
+  const {
+    compendia: { heading }
+  } = options
   const {
     hasError,
     downloadCompendia,
@@ -138,7 +140,7 @@ export const Download = ({ compendia }) => {
             margin={{ bottom: 'medium' }}
             size={setResponsive('small', 'large')}
           >
-            Download the {getReadable(type)}
+            Download the {heading[type]}
           </Heading>
           <Box
             as="label"
