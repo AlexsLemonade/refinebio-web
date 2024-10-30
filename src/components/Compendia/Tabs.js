@@ -6,48 +6,37 @@ import { Tabs as SharedTabs } from 'components/shared/Tabs'
 import { NormalizedTab } from './NormalizedTab'
 import { RNASeqTab } from './RNASeqTab'
 
-export const Tabs = () => {
-  const {
-    isReady,
-    pathname,
-    query: { type },
-    replace
-  } = useRouter()
+export const Tabs = ({ type }) => {
+  const { pathname, replace } = useRouter()
   const [activeIndex, setActiveIndex] = useState(0)
-  const handleActive = (nextIndex) => setActiveIndex(nextIndex)
-  const tabs = [
+  const tabConfigs = [
     {
-      type: 'normalized',
+      id: 'normalized',
       Component: NormalizedTab
     },
     {
-      type: 'rna-seq',
+      id: 'rna-seq',
       Component: RNASeqTab
     }
   ]
 
-  useEffect(() => {
-    if (!isReady) return
-
-    setActiveIndex(type === 'rna-seq' ? 1 : 0)
-  }, [isReady, type])
-
-  const clickHandle = (tabType) => {
-    replace({ pathname, query: { type: tabType } }, `/compendia/${tabType}`, {
+  const handleClick = (tabId) => {
+    replace({ pathname, query: { type: tabId } }, `/compendia/${tabId}`, {
       shallow: true
     })
   }
 
+  // sets the active tab index based on the current tab
+  useEffect(() => {
+    setActiveIndex(tabConfigs.findIndex(({ id }) => id === type))
+  }, [type])
+
   return (
-    <SharedTabs activeIndex={activeIndex} text onActive={handleActive}>
-      {tabs.map((tab) => (
-        <Tab
-          key={tab.type}
-          title={getReadable(tab.type)}
-          onClick={() => clickHandle(tab.type)}
-        >
+    <SharedTabs activeIndex={activeIndex} text>
+      {tabConfigs.map(({ id, Component }) => (
+        <Tab key={id} title={getReadable(id)} onClick={() => handleClick(id)}>
           {/* TEMP: camelCase to prevent sub-comonents from breaking (will update in a later stacked issue) */}
-          <tab.Component type={tab.type === 'rna-seq' ? 'rnaSeq' : tab.type} />
+          <Component type={id === 'rna-seq' ? 'rnaSeq' : id} />
         </Tab>
       ))}
     </SharedTabs>
