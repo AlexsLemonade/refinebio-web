@@ -46,7 +46,7 @@ export const DownloadBlock = ({ compendia }) => {
         <FixedContainer>
           <Box
             background={{
-              image: `url(/${getReadable(type, svgs)})`,
+              image: `url(/${svgs[type]})`,
               position: 'center',
               repeat: 'no-repeat',
               size: '100%'
