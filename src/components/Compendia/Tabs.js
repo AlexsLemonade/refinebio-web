@@ -6,7 +6,7 @@ import { Tabs as SharedTabs } from 'components/shared/Tabs'
 import { NormalizedTab } from './NormalizedTab'
 import { RNASeqTab } from './RNASeqTab'
 
-export const Tabs = ({ type }) => {
+export const Tabs = ({ compendia, type }) => {
   const { pathname, replace } = useRouter()
   const [activeIndex, setActiveIndex] = useState(0)
   const tabConfigs = [
@@ -35,8 +35,7 @@ export const Tabs = ({ type }) => {
     <SharedTabs activeIndex={activeIndex} text>
       {tabConfigs.map(({ id, Component }) => (
         <Tab key={id} title={getReadable(id)} onClick={() => handleClick(id)}>
-          {/* TEMP: camelCase to prevent sub-comonents from breaking (will update in a later stacked issue) */}
-          <Component type={id === 'rna-seq' ? 'rnaSeq' : id} />
+          <Component compendia={compendia[id]} />
         </Tab>
       ))}
     </SharedTabs>
