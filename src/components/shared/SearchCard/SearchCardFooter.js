@@ -11,9 +11,9 @@ export const SearchCardFooter = ({ experiment }) => {
   const { search, setSearch } = useSearchManager()
 
   const handleClick = () => {
-    push(`/experiments/${accessionCode}/${formatURLString(title)}`)
     setSearch({ ...search, ref: 'search' })
     gtag.trackExperimentPageClick(SearchCardFooter)
+    push(`/experiments/${accessionCode}/${formatURLString(title)}`)
   }
 
   return (
