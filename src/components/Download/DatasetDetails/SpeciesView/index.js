@@ -43,7 +43,7 @@ export const SpeciesView = ({ dataset, isImmutable }) => {
   return (
     <ViewBlocks elevation="medium" pad="medium">
       {organismsNames.map((organismName) => {
-        // get the accession codes associated with organismName
+        // get the sample accession codes associated with organismName
         const samplesInOrganism = organismSamples[organismName]
         const organismDataSlice = getDataSlice(samplesInOrganism)
         const sampleMetadataFields = getSampleMetadata(organismDataSlice)
