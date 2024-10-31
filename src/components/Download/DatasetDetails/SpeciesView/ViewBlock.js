@@ -11,21 +11,21 @@ import { ViewSamplesButton } from '../ViewSamplesButton'
 
 export const ViewBlock = ({
   dataset,
-  specieName,
-  samplesInSpecie,
+  organismName,
+  samplesInOrganism,
   sampleMetadataFields,
-  specieDatasetSlice,
+  organismDataSlice,
   hasRnaSeqExperiments,
   isImmutable
 }) => {
   const { loading, removeSamples } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const totalSamples = formatNumbers(samplesInSpecie.length)
+  const totalSamples = formatNumbers(samplesInOrganism.length)
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 800 }}>
       <Heading level={2}>
-        <TextCapitalized text={<>{formatString(specieName)} Samples</>} />
+        <TextCapitalized text={<>{formatString(organismName)} Samples</>} />
       </Heading>
       {hasRnaSeqExperiments && !dataset.quantile_normalize && (
         <Box margin={{ top: 'small' }}>
@@ -38,13 +38,13 @@ export const ViewBlock = ({
       <Row margin={{ top: 'small' }}>
         <Box>
           <Text margin={{ bottom: 'small' }}>
-            {totalSamples} {samplesInSpecie.length > 1 ? 'Samples' : 'Sample'}
+            {totalSamples} {samplesInOrganism.length > 1 ? 'Samples' : 'Sample'}
           </Text>
           <ViewSamplesButton
-            dataset={specieDatasetSlice}
+            dataset={organismDataSlice}
             params={{
               dataset_id: dataset.id,
-              organism__name: specieName
+              organism__name: organismName
             }}
             sampleMetadataFields={sampleMetadataFields}
             isImmutable={isImmutable}
@@ -57,7 +57,7 @@ export const ViewBlock = ({
             margin={{ top: setResponsive('small', 'none') }}
             responsive
             tertiary
-            onClick={() => removeSamples(specieDatasetSlice, true)}
+            onClick={() => removeSamples(organismDataSlice, true)}
           />
         )}
       </Row>

@@ -1,33 +1,35 @@
-import getFormattedExperiments from 'helpers/getFormattedExperiments'
 import unionizeArrays from 'helpers/unionizeArrays'
 import { ViewBlock } from './ViewBlock'
 import { ViewBlocks } from '../ViewBlocks'
 
 export const SpeciesView = ({ dataset, isImmutable }) => {
-  const { organism_samples: samplesBySpecies } = dataset
-  const formattedExperiments = getFormattedExperiments(dataset)
+  const { organism_samples: organismSamples, experiments } = dataset
+  // format experiments into an object with accession codes as ksey
+  const formattedExperiments = Object.fromEntries(
+    experiments.map((experiment) => [experiment.accession_code, experiment])
+  )
 
   return (
     <ViewBlocks elevation="medium" pad="medium">
-      {Object.keys(samplesBySpecies).map((specieName) => {
-        // get the accession codes accosiated with the specieName
-        const samplesInSpecie = samplesBySpecies[specieName]
-        // filter the dataset to only include the experiments containing the samplesInSpecie
-        const specieDatasetSlice = Object.entries(dataset.data).reduce(
+      {Object.keys(organismSamples).map((organismName) => {
+        // get the accession codes accosiated with the organismName
+        const samplesInOrganism = organismSamples[organismName]
+        // filter the dataset to only include the experiments containing the samplesInOrganism
+        const organismDataSlice = Object.entries(dataset.data).reduce(
           (accumulator, [key, value]) => {
             accumulator[key] = value.filter((accessionCode) =>
-              samplesInSpecie.includes(accessionCode)
+              samplesInOrganism.includes(accessionCode)
             )
             return accumulator
           },
           {}
         )
-        // merge all the sample metadata fields of all experiments containing the specieDatasetSlice
+        // merge all the sample metadata fields of all experiments containing the organismDataSlice
         // in order to display all possible values of these samples
         const sampleMetadataFields = unionizeArrays(
-          ...Object.keys(specieDatasetSlice)
+          ...Object.keys(organismDataSlice)
             .filter(
-              (accessionCode) => specieDatasetSlice[accessionCode].length > 0
+              (accessionCode) => organismDataSlice[accessionCode].length > 0
             )
             .map((accessionCode) => {
               return (
@@ -36,22 +38,21 @@ export const SpeciesView = ({ dataset, isImmutable }) => {
               )
             })
         )
-        // NOTE: if some of the experiments have samples of the same organism and it's also rna seq,
+        // if some of the experiments have samples of the same organism and it's also rna seq,
         // then we can deduce there're rna seq samples for this organism
         const hasRnaSeqExperiments = Object.values(formattedExperiments).some(
-          (experiment) =>
-            experiment.technology === 'RNA-SEQ' &&
-            experiment.organism_names.includes(specieName)
+          ({ technology, organism_names: name }) =>
+            technology === 'RNA-SEQ' && technology.includes(name)
         )
 
         return (
           <ViewBlock
-            key={specieName}
+            key={organismName}
             dataset={dataset}
             sampleMetadataFields={sampleMetadataFields}
-            samplesInSpecie={samplesInSpecie}
-            specieDatasetSlice={specieDatasetSlice}
-            specieName={specieName}
+            samplesInOrganism={samplesInOrganism}
+            organismDataSlice={organismDataSlice}
+            organismName={organismName}
             hasRnaSeqExperiments={hasRnaSeqExperiments}
             isImmutable={isImmutable}
           />
