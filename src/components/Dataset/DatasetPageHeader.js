@@ -25,7 +25,7 @@ const Block = ({ children }) => {
 
 export const DatasetPageHeader = ({ dataset }) => {
   const { setResponsive } = useResponsive()
-  const { isProcessing, isProcessingError, isReady, isReadyExpired } =
+  const { isFailed, isProcessing, isReady, isReadyExpired } =
     getDatasetState(dataset)
 
   if (isProcessing) {
@@ -36,7 +36,7 @@ export const DatasetPageHeader = ({ dataset }) => {
     )
   }
 
-  if (isProcessingError) {
+  if (isFailed) {
     return (
       <Block>
         <DatasetProcessingError dataset={dataset} />

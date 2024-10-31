@@ -22,7 +22,7 @@ export const DownloadOptionsForm = ({
   const { updateDataset, getDownloadOptions, updateDownloadOptions } =
     useDatasetManager()
   const { setResponsive } = useResponsive()
-  const [isRegenerate, setIsRegenerate] = useState(false)
+  const [canRegenerate, setCanRegenerate] = useState(false)
   const [toggleAdvancedOption, setToggleAdvancedOption] = useState(
     dataset?.quantile_normalize
   )
@@ -31,7 +31,7 @@ export const DownloadOptionsForm = ({
     if (!dataset) return
     // sets the initial download options
     const { isProcessed } = getDatasetState(dataset)
-    setIsRegenerate(isProcessed)
+    setCanRegenerate(isProcessed)
     updateDownloadOptions(
       {
         ...getDownloadOptions(dataset)
@@ -49,7 +49,7 @@ export const DownloadOptionsForm = ({
       pathname = response
     }
     // updates via API call only for My Dataset in /download (unprocessed)
-    if (!isRegenerate) {
+    if (!canRegenerate) {
       await updateDataset(dataset.id, {
         ...downloadOptions,
         data: dataset.data
@@ -70,11 +70,11 @@ export const DownloadOptionsForm = ({
   const handleUpdateDownloadOptions = async (name, newOption) => {
     const newDownloadOption = { [name]: newOption }
 
-    if (isRegenerate && handleDownloadOptionsChanges) {
+    if (canRegenerate && handleDownloadOptionsChanges) {
       handleDownloadOptionsChanges(newDownloadOption)
     }
 
-    await updateDownloadOptions(newDownloadOption, dataset.id, isRegenerate)
+    await updateDownloadOptions(newDownloadOption, dataset.id, canRegenerate)
   }
 
   return (
