@@ -15,19 +15,19 @@ import { ViewSamplesButton } from '../ViewSamplesButton'
 export const ViewBlock = ({
   dataset,
   experiment,
-  experimentAccessionCode,
   defaultOrganismFilterOption,
-  metadataFields,
   isImmutable,
-  addedSamples,
   setOrganism
 }) => {
-  const { loading, removeExperiment } = useDatasetManager()
+  const { loading, formatSampleMetadata, removeExperiment } =
+    useDatasetManager()
   const { setResponsive } = useResponsive()
   const handleRemoveExperiment = (datasetSlice) => {
     removeExperiment(datasetSlice, true)
     setOrganism(defaultOrganismFilterOption.value)
   }
+  const { accession_code: accessionCode } = experiment
+  const addedSamples = dataset.data[accessionCode]
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 800 }}>
@@ -35,7 +35,7 @@ export const ViewBlock = ({
       <Box margin={{ bottom: 'xsmall' }} width={{ max: '640px' }}>
         <Heading level={5} responsive={false} weight="700">
           <Anchor
-            href={`experiments/${experimentAccessionCode}/${formatURLString(
+            href={`experiments/${accessionCode}/${formatURLString(
               experiment.title
             )}`}
             label={experiment.title}
@@ -57,11 +57,7 @@ export const ViewBlock = ({
             gap={setResponsive('small', 'small', 'xlarge')}
             margin={{ top: setResponsive('xsmall', 'none') }}
           >
-            <IconBadge
-              name="Accession"
-              label={experiment.accession_code}
-              size="medium"
-            />
+            <IconBadge name="Accession" label={accessionCode} size="medium" />
             <IconBadge
               label={`${formatNumbers(addedSamples.length)} Downloadable ${
                 addedSamples.length > 1 ? 'Samples' : 'Sample'
@@ -83,7 +79,9 @@ export const ViewBlock = ({
             </Heading>
             <Box direction="row" margin={{ top: 'xsmall' }}>
               {experiment.sample_metadata.length > 0 ? (
-                <Text>{metadataFields.join(', ')}</Text>
+                <Text>
+                  {formatSampleMetadata(experiment.sample_metadata).join(', ')}
+                </Text>
               ) : (
                 <TextNull text="No sample metadata fields" />
               )}
@@ -91,10 +89,10 @@ export const ViewBlock = ({
           </Box>
           {addedSamples.length > 0 && (
             <ViewSamplesButton
-              dataset={{ [experimentAccessionCode]: addedSamples }}
+              dataset={{ [accessionCode]: addedSamples }}
               params={{
                 dataset_id: dataset.id,
-                experiment_accession_code: experimentAccessionCode
+                experiment_accession_code: accessionCode
               }}
               sampleMetadataFields={experiment.sample_metadata}
               isImmutable={isImmutable}
@@ -108,7 +106,7 @@ export const ViewBlock = ({
             margin={{ top: setResponsive('small', 'none') }}
             responsive
             tertiary
-            onClick={() => handleRemoveExperiment([experiment.accession_code])}
+            onClick={() => handleRemoveExperiment([accessionCode])}
           />
         )}
       </Row>

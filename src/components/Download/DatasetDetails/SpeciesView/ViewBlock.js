@@ -11,10 +11,10 @@ import { ViewSamplesButton } from '../ViewSamplesButton'
 
 export const ViewBlock = ({
   dataset,
-  organismName,
   samplesInOrganism,
   sampleMetadataFields,
   organismDataSlice,
+  organismName,
   hasRnaSeqExperiments,
   isImmutable
 }) => {
