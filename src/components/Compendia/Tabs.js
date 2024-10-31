@@ -1,46 +1,41 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Tab } from 'grommet'
-import { options } from 'config'
+import getReadable from 'helpers/getReadable'
 import { Tabs as SharedTabs } from 'components/shared/Tabs'
 import { NormalizedTab } from './NormalizedTab'
 import { RNASeqTab } from './RNASeqTab'
 
-export const Tabs = () => {
-  const {
-    compendia: { tabs }
-  } = options
-  const { isReady, pathname, query, replace } = useRouter()
+export const Tabs = ({ compendia, type }) => {
+  const { pathname, replace } = useRouter()
   const [activeIndex, setActiveIndex] = useState(0)
-  const handleActive = (nextIndex) => setActiveIndex(nextIndex)
+  const tabConfigs = [
+    {
+      id: 'normalized',
+      Component: NormalizedTab
+    },
+    {
+      id: 'rna-seq',
+      Component: RNASeqTab
+    }
+  ]
 
-  useEffect(() => {
-    if (!isReady) return
-
-    setActiveIndex(query.type === 'rna-seq' ? 1 : 0)
-  }, [isReady, query])
-
-  const clickHandle = (tabType) => {
-    const tabName = tabType === 'rnaSeq' ? 'rna-seq' : tabType
-
-    replace({ pathname, query: { type: tabType } }, `/compendia/${tabName}`, {
+  const handleClick = (tabId) => {
+    replace({ pathname, query: { type: tabId } }, `/compendia/${tabId}`, {
       shallow: true
     })
   }
 
+  // sets the active tab index based on the current tab
+  useEffect(() => {
+    setActiveIndex(tabConfigs.findIndex(({ id }) => id === type))
+  }, [type])
+
   return (
-    <SharedTabs activeIndex={activeIndex} text onActive={handleActive}>
-      {tabs.map((tab) => (
-        <Tab
-          key={tab.type}
-          title={tab.label}
-          onClick={() => clickHandle(tab.type)}
-        >
-          {tab.type === tabs[0].type ? (
-            <NormalizedTab type={tab.type} />
-          ) : (
-            <RNASeqTab type={tab.type} />
-          )}
+    <SharedTabs activeIndex={activeIndex} text>
+      {tabConfigs.map(({ id, Component }) => (
+        <Tab key={id} title={getReadable(id)} onClick={() => handleClick(id)}>
+          <Component compendia={compendia[id]} />
         </Tab>
       ))}
     </SharedTabs>

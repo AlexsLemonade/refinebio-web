@@ -8,11 +8,11 @@ export const options = {
     },
     heading: {
       normalized: 'Normalized Compendia',
-      rnaSeq: 'RNA-seq Sample Compendia'
+      'rna-seq': 'RNA-seq Sample Compendia'
     },
     svg: {
       normalized: 'normalizaed-curve.svg',
-      rnaSeq: 'gene-expression-matrix.svg'
+      'rna-seq': 'gene-expression-matrix.svg'
     },
     tabs: [
       {

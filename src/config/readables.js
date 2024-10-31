@@ -22,5 +22,7 @@ export const readableValues = {
   '-num_downloadable_samples': 'Most No. of samples',
   num_downloadable_samples: 'Least No. of samples',
   '-source_first_published': 'Newest Experiment',
-  source_first_published: 'Oldest Experiment'
+  source_first_published: 'Oldest Experiment',
+  normalized: 'Normalized Compendia',
+  'rna-seq': 'RNA-seq Sample Compendia'
 }
