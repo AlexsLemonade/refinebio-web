@@ -26,5 +26,7 @@ export const readableValues = {
   // database names
   ARRAY_EXPRESS: 'ArrayExpress',
   GEO: 'Gene Expression Omnibus (GEO)',
-  SRA: 'Sequence Read Archive (SRA)'
+  SRA: 'Sequence Read Archive (SRA)',
+  normalized: 'Normalized Compendia',
+  'rna-seq': 'RNA-seq Sample Compendia'
 }
