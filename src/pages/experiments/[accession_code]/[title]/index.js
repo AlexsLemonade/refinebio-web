@@ -12,8 +12,6 @@ import { links } from 'config'
 import formatNumbers from 'helpers/formatNumbers'
 import scrollTo from 'helpers/scrollTo'
 import { getFormattedExperiment } from 'helpers/formatDatasetAction'
-import getPlatformNamesFromExperiment from 'helpers/getPlatformNamesFromExperiment'
-import getTechnologyFromExperiment from 'helpers/getTechnologyFromExperiment'
 import getReadable from 'helpers/getReadable'
 import getURLForAccessionCode from 'helpers/getURLForAccessionCode'
 import { Anchor } from 'components/shared/Anchor'
@@ -336,12 +334,8 @@ export const getServerSideProps = async ({ query }) => {
     }
   }
 
-  const platformNames = getPlatformNamesFromExperiment(response.samples)
-  const technology = getTechnologyFromExperiment(response.samples)
-  const experiment = { ...response, platform_names: platformNames, technology }
-
   return {
-    props: { experiment }
+    props: { experiment: response }
   }
 }
 

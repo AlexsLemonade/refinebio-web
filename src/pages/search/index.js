@@ -194,7 +194,7 @@ export const Search = ({
                   {results.map((result, i) =>
                     result.isMatchedAccessionCode ? (
                       <Fragment key={result.id}>
-                        <SearchCard key={result.id} result={result} />
+                        <SearchCard key={result.id} experiment={result} />
                         {results[i + 1] &&
                           !results[i + 1].isMatchedAccessionCode && (
                             <Box
@@ -212,7 +212,7 @@ export const Search = ({
                           )}
                       </Fragment>
                     ) : (
-                      <SearchCard key={result.id} result={result} />
+                      <SearchCard key={result.id} experiment={result} />
                     )
                   )}
                   {(results.length < 10 ||

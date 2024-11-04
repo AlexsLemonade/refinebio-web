@@ -5,19 +5,28 @@ import formatNumbers from 'helpers/formatNumbers'
 import formatString from 'helpers/formatString'
 import isArray from 'helpers/isArray'
 import formatPlatformName from 'helpers/formatPlatformName'
+import getPlatformNamesFromExperiment from 'helpers/getPlatformNamesFromExperiment'
+import getTechnologyFromExperiment from 'helpers/getTechnologyFromExperiment'
 import { IconBadge } from 'components/shared/IconBadge'
 import { Row } from 'components/shared/Row'
 import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
 
 export const SearchCardMeta = ({ experiment, size = 'small' }) => {
+  const { setResponsive } = useResponsive()
   const {
     num_downloadable_samples: downloadableSamples,
     organism_names: organismNames,
-    platform_names: platformNames,
-    technology
+    samples
   } = experiment
-  const { setResponsive } = useResponsive()
+  // gets the platform names from the samples array if it exists
+  const platformNames = samples
+    ? getPlatformNamesFromExperiment(samples)
+    : experiment.platform_names
+  // gets the technology from the samples array if it exists
+  const technology = samples
+    ? getTechnologyFromExperiment(samples)
+    : experiment.technology
   const technologyName = isArray(technology) ? technology.join('') : technology
 
   return (
