@@ -30,13 +30,10 @@ export const useToken = () => {
     return id
   }
 
-  const validateToken = () => {
-    // regex for uuid
-    // (resource) https://ihateregex.io/expr/uuid/
-    const re =
-      /^[0-9a-f]{8}\b-[0-9a-f]{4}\b-[0-9a-f]{4}\b-[0-9a-f]{4}\b-[0-9a-f]{12}$/
+  const validateToken = async () => {
+    const response = await api.token.get(token)
 
-    return re.test(tokenState)
+    return response.is_activated
   }
 
   return {
