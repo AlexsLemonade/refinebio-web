@@ -6,7 +6,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
-import { Download } from './Download'
+import { DownloadBlockForm } from './DownloadBlockForm'
 
 export const DownloadBlock = ({ compendia }) => {
   const {
@@ -82,7 +82,7 @@ export const DownloadBlock = ({ compendia }) => {
               }}
               width="100%"
             >
-              <Download compendia={compendia} />
+              <DownloadBlockForm compendia={compendia} />
             </Column>
           </Row>
         </FixedContainer>

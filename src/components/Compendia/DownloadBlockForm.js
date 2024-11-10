@@ -1,7 +1,6 @@
 import { useState, memo } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import styled, { css } from 'styled-components'
-import gtag from 'analytics/gtag'
 import { links, options } from 'config'
 import { useCompendia } from 'hooks/useCompendia'
 import { useResponsive } from 'hooks/useResponsive'
@@ -44,7 +43,7 @@ const DropDownButton = styled(Button)`
   `}
 `
 
-const ListItem = ({ label, selectedOrganism, ...props }) => {
+const ListItem = ({ label, selectedOrganism, onClick }) => {
   const selected = selectedOrganism === label
 
   return (
@@ -61,19 +60,17 @@ const ListItem = ({ label, selectedOrganism, ...props }) => {
           padding: '8px 16px',
           textAlign: 'left'
         }}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...props}
+        onClick={onClick}
       />
     </Box>
   )
 }
 
-export const Download = ({ compendia }) => {
+export const DownloadBlockForm = ({ compendia }) => {
   const {
     compendia: { heading }
   } = options
-  const { downloadCompendia, getCompediaType, navigateToFileDownload } =
-    useCompendia()
+  const { getCompediaType, goToDownloadPage } = useCompendia()
   const type = getCompediaType(compendia)
   const { setResponsive } = useResponsive()
   const compendiaOptions = compendia.results
@@ -117,10 +114,8 @@ export const Download = ({ compendia }) => {
     }
   }
 
-  const handleFileDownload = async (id) => {
-    const response = await downloadCompendia(id)
-    gtag.trackCompendiaDownload(response)
-    navigateToFileDownload(response.organism, response.url)
+  const handleFileDownload = async () => {
+    goToDownloadPage(selectedOrganism)
   }
 
   return (
@@ -245,7 +240,7 @@ export const Download = ({ compendia }) => {
             disabled={!acceptTerms || !selectedOrganism}
             primary
             responsive
-            onClick={() => handleFileDownload(selectedOrganism.id)}
+            onClick={handleFileDownload}
           />
         </Column>
       </Row>
@@ -253,4 +248,4 @@ export const Download = ({ compendia }) => {
   )
 }
 
-export default memo(Download)
+export default memo(DownloadBlockForm)
