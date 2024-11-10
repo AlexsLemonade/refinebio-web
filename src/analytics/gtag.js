@@ -32,13 +32,13 @@ const trackCompendiaDownload = (compendia) => {
 // for RNA-req Sample compendia
 const trackDownloadRnaSeqCompendia = (compendia) => {
   const payload = {}
-  payload.rnaseq_organism = formatString(compendia.organism)
+  payload.rnaseq_organism = formatString(compendia.primary_organism_name)
   event(`compendia_rnaseq_download`, payload)
 }
 // for Normalized compendia
 const trackDownloadNormalizedCompendia = (compendia) => {
   const payload = {}
-  payload.normalized_organism = formatString(compendia.organism)
+  payload.normalized_organism = formatString(compendia.primary_organism_name)
   event(`compendia_normalized_download`, payload)
 }
 

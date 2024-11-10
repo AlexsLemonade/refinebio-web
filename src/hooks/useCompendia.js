@@ -40,18 +40,16 @@ export const useCompendia = () => {
       : tokenState || (await createToken())
     const response = await api.compendia.download(compendiaId, token)
 
-    return {
-      organism: response.primary_organism_name,
-      url: response.computed_file.download_url
-    }
+    return response
   }
 
-  const navigateToFileDownload = (organism, url) => {
+  const goToDownloadPage = (compendia) => {
+    const type = compendia.quant_sf_only ? 'rna-seq' : 'normalized'
+
     push({
-      pathname: '/compendia/download',
+      pathname: `/compendia/${type}/download/${compendia.primary_organism_name}`,
       query: {
-        organism,
-        url
+        id: compendia.id
       }
     })
   }
@@ -62,6 +60,6 @@ export const useCompendia = () => {
     downloadCompendia,
     getCompendia,
     getCompediaType,
-    navigateToFileDownload
+    goToDownloadPage
   }
 }
