@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Box, Heading } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import getDatasetState from 'helpers/getDatasetState'
@@ -7,68 +8,46 @@ import { DatasetProcessingError } from './DatasetProcessingError'
 import { DatasetReady } from './DatasetReady'
 import { DatasetRegenerate } from './DatasetRegenerate'
 
-const Block = ({ children }) => {
-  const { setResponsive } = useResponsive()
-
-  return (
-    <FixedContainer>
-      <Box
-        pad={{
-          vertical: setResponsive('basex6', 'basex8', 'basex14')
-        }}
-      >
-        {children}
-      </Box>
-    </FixedContainer>
-  )
-}
-
 export const DatasetPageHeader = ({ dataset }) => {
   const { setResponsive } = useResponsive()
-  const { isFailed, isProcessing, isReady, isReadyExpired } =
-    getDatasetState(dataset)
+  const [datasetStates, setDatasetStates] = useState({})
 
-  if (isProcessing) {
-    return (
-      <Block>
-        <DatasetProcessing dataset={dataset} />
-      </Block>
-    )
+  useEffect(() => {
+    setDatasetStates(getDatasetState(dataset))
+  }, [dataset])
+
+  // maps dataset states to their corresponding component
+  const statusHeaders = {
+    isProcessing: DatasetProcessing,
+    isFailed: DatasetProcessingError,
+    isReady: DatasetReady,
+    isReadyExpired: DatasetRegenerate
   }
 
-  if (isFailed) {
-    return (
-      <Block>
-        <DatasetProcessingError dataset={dataset} />
-      </Block>
-    )
-  }
-
-  if (isReady) {
-    return (
-      <Block>
-        <DatasetReady dataset={dataset} />
-      </Block>
-    )
-  }
-
-  if (isReadyExpired) {
-    return (
-      <Block>
-        <DatasetRegenerate dataset={dataset} />
-      </Block>
-    )
-  }
+  // finds the current dataset state
+  const currentState = Object.keys(statusHeaders).find(
+    (state) => datasetStates[state]
+  )
+  // gets the corresponding component for the current dataset state
+  const Component = currentState ? statusHeaders[currentState] : null
 
   return (
     <FixedContainer pad="none">
-      <Box>
+      {Component ? (
+        <Box
+          pad={{
+            vertical: setResponsive('basex6', 'basex8', 'basex14')
+          }}
+        >
+          <Component dataset={dataset} />
+        </Box>
+      ) : (
         <Box pad={{ top: 'large', bottom: 'medium' }}>
           <Heading level={2} size={setResponsive('small', 'large')}>
             Shared Dataset
           </Heading>
         </Box>
-      </Box>
+      )}
     </FixedContainer>
   )
 }

@@ -55,12 +55,14 @@ export const DatasetRegenerateDownloadOptionsForm = ({
         </Box>
       )}
       <ExpandableBlock duration="1.2s" expand={openForm}>
-        <DownloadOptionsForm
-          dataset={regeneratedDataset}
-          buttonLabel="Regenerate Dataset"
-          handleDownloadOptionsChanges={handleDownloadOptionsChanges}
-          onSubmit={handleRegenerateDataset}
-        />
+        {regeneratedDataset && (
+          <DownloadOptionsForm
+            dataset={regeneratedDataset}
+            buttonLabel="Regenerate Dataset"
+            handleDownloadOptionsChanges={handleDownloadOptionsChanges}
+            onSubmit={handleRegenerateDataset}
+          />
+        )}
       </ExpandableBlock>
     </Box>
   )

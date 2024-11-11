@@ -13,7 +13,7 @@ export const ExperimentView = ({ dataset, isImmutable }) => {
   const formattedExperiments = getFormattedExperiments(dataset)
   const [organism, setOrganism] = useState(defaultOrganismFilterOption.value)
 
-  if (!dataset.data || !Object.keys(dataset.data).length) {
+  if (!Object.keys(dataset.data).length) {
     return <Paragraph>No samples added to download dataset.</Paragraph>
   }
 
