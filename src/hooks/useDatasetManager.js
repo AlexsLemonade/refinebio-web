@@ -3,9 +3,9 @@ import { DatasetManagerContext } from 'contexts/DatasetManagerContext'
 import { useToken } from 'hooks/useToken'
 import differenceOfArrays from 'helpers/differenceOfArrays'
 import formatString from 'helpers/formatString'
+import getDatasetState from 'helpers/getDatasetState'
 import isEmptyObject from 'helpers/isEmptyObject'
 import unionizeArrays from 'helpers/unionizeArrays'
-import { options as configOptions } from 'config'
 import { api } from 'api'
 
 export const useDatasetManager = () => {
@@ -113,21 +113,17 @@ export const useDatasetManager = () => {
         : {}
     const response = await api.dataset.get(id || datasetId, headers)
     const { ok, statusCode } = response
-    // sets the error if any, otherwise resets it
-    // TODO: add a check (ok && error) to default the error state
-    // related created PR https://github.com/AlexsLemonade/refinebio-web/pull/337
-    if (error !== statusCode) {
-      setError(ok ? null : statusCode)
-    }
 
-    const { is_processing: isProcessing, success } = response
-
-    if (!id && datasetId) {
+    if (ok && isMyDatasetId(id)) {
       setDataset(response)
     }
 
-    // removes this dataset ID from processingDatasets[] if it exists
-    if (!isProcessing && success !== null) {
+    // sets the error if any, otherwise resets it
+    setError(!ok ? statusCode : null)
+
+    const { isProcessing } = getDatasetState(response)
+    // removes the dataset ID from processingDatasets[] once it finishes processing
+    if (!isProcessing) {
       removeFromProcessingDatasets(response.id)
     }
 
@@ -136,13 +132,15 @@ export const useDatasetManager = () => {
     return response
   }
 
+  // checks if the given dataset ID is My dataset ID
+  const isMyDatasetId = (id) => id === datasetId
+
   // takes download options, and optional dataset ID and one-off experiment accession code
   const startProcessingDataset = async (
     options,
     id = null, // no dataset ID initially for one-off download
     accessionCode = null
   ) => {
-    const isMyDatasetId = id && id === datasetId
     // validates the existing token or create a new token if none
     const tokenId = validateToken() ? token : await resetToken()
     const { emailAddress, receiveUpdates } = options
@@ -160,7 +158,7 @@ export const useDatasetManager = () => {
     // saves the user's newly entered email or replace the existing one
     setEmail(emailAddress)
     // deletes the locally saved dataset data once it has started processing (no longer mutable)
-    if (isMyDatasetId) {
+    if (id && isMyDatasetId(id)) {
       setDataset({})
       setDatasetId(null)
     }
@@ -169,10 +167,9 @@ export const useDatasetManager = () => {
   }
 
   const updateDataset = async (id, params) => {
-    const isMyDatasetId = id === datasetId
     const response = await api.dataset.update(id, params)
 
-    if (isMyDatasetId) {
+    if (isMyDatasetId(id)) {
       setDataset(response)
     }
 
@@ -181,9 +178,12 @@ export const useDatasetManager = () => {
 
   /* --- Download Options Methods --- */
   const getDownloadOptions = (options) => {
-    const {
-      dataset: { downloadOptionsKeys }
-    } = configOptions
+    const downloadOptionsKeys = [
+      'aggregate_by',
+      'data',
+      'scale_by',
+      'quantile_normalize'
+    ]
     const temp = {}
 
     Object.keys(options).forEach((key) => {
@@ -307,6 +307,7 @@ export const useDatasetManager = () => {
     createDataset,
     downloadDataset,
     getDataset,
+    isMyDatasetId,
     startProcessingDataset,
     updateDataset,
     // Download options

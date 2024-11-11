@@ -27,15 +27,6 @@ export const options = {
       }
     ]
   },
-  // setting for the dataset manager
-  dataset: {
-    downloadOptionsKeys: [
-      'aggregate_by',
-      'data',
-      'scale_by',
-      'quantile_normalize'
-    ]
-  },
   // setting for the experiment hook
   experiment: {
     databaseNames: {
