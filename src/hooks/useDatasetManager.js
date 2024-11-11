@@ -195,6 +195,32 @@ export const useDatasetManager = () => {
     return temp
   }
 
+  // copies the specified properties from the given dataset
+  // for dataset regeneration
+  const getDatasetPropertiesFrom = (sourceDataset) => {
+    // TODO: options.downloadOptionsKeys will be removed once PR #411 is merged
+    const {
+      dataset: { downloadOptionsKeys }
+    } = configOptions
+    const includeKeys = [
+      ...downloadOptionsKeys,
+      'is_processed',
+      'is_available',
+      'success',
+      'organism_samples' // for the download files summary UI change
+    ]
+
+    const temp = {}
+
+    includeKeys.forEach((key) => {
+      if (key in sourceDataset) {
+        temp[key] = structuredClone(sourceDataset[key])
+      }
+    })
+
+    return temp
+  }
+
   // sends the download options change to the API for My Dataset to preserve
   // users' preferences, otherwise just updates DownloadOptions with new change
   const updateDownloadOptions = async (options, id, regenerate = false) => {
@@ -311,6 +337,7 @@ export const useDatasetManager = () => {
     updateDataset,
     // Download options
     getDownloadOptions,
+    getDatasetPropertiesFrom,
     updateDownloadOptions,
     // Experiment
     getTotalExperiments,
