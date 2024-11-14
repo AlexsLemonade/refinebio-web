@@ -1,65 +1,62 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { CompendiaContext } from 'contexts/CompendiaContext'
 import { useToken } from 'hooks/useToken'
 import { api } from 'api'
 
-export const useCompendia = () => {
-  const { push } = useRouter()
+// compendia prop is passed only from the page components
+export const useCompendia = (compendiaProp) => {
+  const { compendia, setCompendia, type, error, setError } =
+    useContext(CompendiaContext)
   const {
-    token: tokenState,
-    createToken,
-    resetToken,
-    validateToken
-  } = useToken()
-  const [loading, setLoading] = useState(false)
-  const [hasError, setHasError] = useState(false)
+    push,
+    query: { organism_name: organismName }
+  } = useRouter()
 
-  const getCompendia = async (type) => {
-    const compendiaQuery = {
-      latest_version: true,
-      limit: 1000,
-      quant_sf_only: type === 'rna-seq'
+  const { token, resetToken, validateToken } = useToken()
+  const [compendium, setCompendium] = useState()
+
+  // sets the given compendia prop to compendia
+  useEffect(() => {
+    if (compendiaProp) setCompendia(compendiaProp)
+  }, [compendiaProp])
+
+  // fetchs the compedium based on the organism name from the URL query
+  useEffect(() => {
+    if (!compendia || !organismName) return
+
+    const fetchCompendium = async () => {
+      const compendiaId = compendia.results.find(
+        (c) => c.primary_organism_name === organismName
+      ).id
+
+      const tokenToUse = !validateToken() ? await resetToken() : token
+      const response = await api.compendia.download(compendiaId, tokenToUse)
+      const { ok, statusCode } = response
+      setError(!ok ? statusCode : null)
+
+      if (ok) {
+        setCompendium(response)
+      }
+
+      return response
     }
 
-    setLoading(true)
-    const response = await api.compendia.get(compendiaQuery, tokenState)
-    setHasError(!response.ok)
-    setLoading(false)
+    fetchCompendium(compendia)
+  }, [compendia, organismName])
 
-    return response
-  }
-
-  const getCompediaType = (compendia) =>
-    compendia.results.some((result) => result.quant_sf_only === true)
-      ? 'rna-seq'
-      : 'normalized'
-
-  const downloadCompendia = async (compendiaId) => {
-    const token = !validateToken()
-      ? await resetToken()
-      : tokenState || (await createToken())
-    const response = await api.compendia.download(compendiaId, token)
-
-    return response
-  }
-
-  const goToDownloadPage = (compendia) => {
-    const type = compendia.quant_sf_only ? 'rna-seq' : 'normalized'
-
+  const navigateToDownload = (selectedOrganism) => {
     push({
-      pathname: `/compendia/${type}/download/${compendia.primary_organism_name}`,
-      query: {
-        id: compendia.id
-      }
+      pathname: `/compendia/${type}/download/${selectedOrganism.primary_organism_name}`
     })
   }
 
   return {
-    hasError,
-    loading,
-    downloadCompendia,
-    getCompendia,
-    getCompediaType,
-    goToDownloadPage
+    error,
+    compendia,
+    token,
+    type,
+    compendium,
+    navigateToDownload
   }
 }
