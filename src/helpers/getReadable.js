@@ -1,17 +1,9 @@
 import { readableAttributes, readableBooleans, readableValues } from 'config'
-// Returns the human-readable format of the given attributeKey and an optional attributeValue
-// attributeValue can be either a boolean or an object containing values associated with attributeKey
-export default (attributeKey, attributeValue = null) => {
-  if (typeof attributeValue === 'boolean') {
-    return readableBooleans[attributeKey]
-      ? readableBooleans[attributeKey][attributeValue ? 0 : 1]
-      : attributeValue
+// Returns the human-readable format of the given key or value
+export default (key, value) => {
+  if (typeof value === 'boolean') {
+    return readableBooleans[key] ? readableBooleans[key][value ? 0 : 1] : value
   }
 
-  return (
-    attributeValue?.[attributeKey] ||
-    readableAttributes[attributeKey] ||
-    readableValues[attributeKey] ||
-    attributeKey
-  )
+  return readableAttributes[key] || readableValues[key] || key
 }

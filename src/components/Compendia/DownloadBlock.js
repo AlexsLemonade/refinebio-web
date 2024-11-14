@@ -73,7 +73,7 @@ export const DownloadBlock = ({ compendia }) => {
           <Row direction={setResponsive('column', 'column', 'row')}>
             <Column margin={{ right: setResponsive('none', 'none', 'xlarge') }}>
               <Paragraph color="white" size="xlarge">
-                {getReadable(type, texts)}
+                {texts[type]}
               </Paragraph>
             </Column>
             <Column
