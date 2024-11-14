@@ -30,12 +30,12 @@ const Card = ({ heading, pad, children }) => {
   )
 }
 
-export const RNASeqTab = ({ compendia }) => {
+export const RNASeqTab = () => {
   const { setResponsive } = useResponsive()
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 350, delay: 200 }}>
-      <DownloadBlock compendia={compendia} />
+      <DownloadBlock />
       <FixedContainer>
         <Row
           direction={setResponsive('column', 'column', 'row')}

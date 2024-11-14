@@ -1,20 +1,21 @@
 import { memo } from 'react'
 import { Box, Heading, Paragraph, Text } from 'grommet'
-import { options } from 'config'
 import { useCompendia } from 'hooks/useCompendia'
+import { options } from 'config'
 import { useResponsive } from 'hooks/useResponsive'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { DownloadBlockForm } from './DownloadBlockForm'
 
-export const DownloadBlock = ({ compendia }) => {
+export const DownloadBlock = () => {
+  // TODO: Clean up options.compendia after PR #402 is merged
   const {
     compendia: { heading, svg }
   } = options
   const { setResponsive } = useResponsive()
-  const { getCompediaType } = useCompendia()
-  const type = getCompediaType(compendia)
+  const { type } = useCompendia()
+
   const paragraph = (
     <Paragraph color="white" size="xlarge">
       {type === 'normalized' ? (
@@ -82,7 +83,7 @@ export const DownloadBlock = ({ compendia }) => {
               }}
               width="100%"
             >
-              <DownloadBlockForm compendia={compendia} />
+              <DownloadBlockForm />
             </Column>
           </Row>
         </FixedContainer>

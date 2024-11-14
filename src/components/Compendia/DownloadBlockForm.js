@@ -1,9 +1,10 @@
 import { useState, memo } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import styled, { css } from 'styled-components'
-import { links, options } from 'config'
 import { useCompendia } from 'hooks/useCompendia'
+import { links, options } from 'config'
 import { useResponsive } from 'hooks/useResponsive'
+import { useToken } from 'hooks/useToken'
 import formatBytes from 'helpers/formatBytes'
 import formatString from 'helpers/formatString'
 import { Anchor } from 'components/shared/Anchor'
@@ -66,23 +67,23 @@ const ListItem = ({ label, selectedOrganism, onClick }) => {
   )
 }
 
-export const DownloadBlockForm = ({ compendia }) => {
+export const DownloadBlockForm = () => {
+  // TODO: Clean up options.compendia after PR #402 is merged
   const {
     compendia: { heading }
   } = options
-  const { getCompediaType, goToDownloadPage } = useCompendia()
-  const type = getCompediaType(compendia)
+
   const { setResponsive } = useResponsive()
+  const { compendia, type, navigateToDownload } = useCompendia()
   const compendiaOptions = compendia.results
+  // TODO: Temporarily added - Token validation flow will be changed in a future issue
+  const { validateToken } = useToken()
+  const hasToken = validateToken()
+  const [acceptTerms, setAcceptTerms] = useState(hasToken)
   const [filteredOptions, setFilteredOptions] = useState([...compendiaOptions])
   const [selectedOrganism, setSelectedOrganism] = useState(null)
   const [showOptions, setShowOptions] = useState(false)
   const [userInput, setUserInput] = useState('')
-  const [acceptTerms, setAcceptTerms] = useState(false)
-
-  const handleFocusShowOptions = () => {
-    setShowOptions(true)
-  }
 
   const handleChangeSelectedOption = (val) => {
     if (val.trim() === '' || val !== userInput) {
@@ -112,10 +113,6 @@ export const DownloadBlockForm = ({ compendia }) => {
     } else {
       setFilteredOptions(compendiaOptions)
     }
-  }
-
-  const handleFileDownload = async () => {
-    goToDownloadPage(selectedOrganism)
   }
 
   return (
@@ -156,7 +153,7 @@ export const DownloadBlockForm = ({ compendia }) => {
             responsive
             value={userInput}
             onChange={(e) => handleChangeSelectedOption(e.target.value)}
-            onFocus={handleFocusShowOptions}
+            onFocus={() => setShowOptions(true)}
           />
           {showOptions && filteredOptions.length > 0 && (
             <Box
@@ -190,7 +187,7 @@ export const DownloadBlockForm = ({ compendia }) => {
           )}
         </DropDown>
       </Box>
-      {type === 'rnaSeq' && (
+      {type === 'rna-seq' && (
         <Box margin={{ top: setResponsive('small', 'medium') }}>
           <InlineMessage label="Data is not normalized or aggregated." />
         </Box>
@@ -213,15 +210,17 @@ export const DownloadBlockForm = ({ compendia }) => {
         </Box>
       )}
       <Box margin={{ vertical: setResponsive('small', 'medium') }}>
-        <CheckBox
-          label={
-            <Text>
-              I agree to the{' '}
-              <Anchor href={links.terms_of_use}>Terms of Use</Anchor>
-            </Text>
-          }
-          onClick={() => setAcceptTerms(!acceptTerms)}
-        />
+        {!hasToken && (
+          <CheckBox
+            label={
+              <Text>
+                I agree to the{' '}
+                <Anchor href={links.terms_of_use}>Terms of Use</Anchor>
+              </Text>
+            }
+            onClick={() => setAcceptTerms(!acceptTerms)}
+          />
+        )}
       </Box>
       <Row>
         <Column margin={{ bottom: setResponsive('small', 'small', 'none') }}>
@@ -240,7 +239,7 @@ export const DownloadBlockForm = ({ compendia }) => {
             disabled={!acceptTerms || !selectedOrganism}
             primary
             responsive
-            onClick={handleFileDownload}
+            onClick={() => navigateToDownload(selectedOrganism)}
           />
         </Column>
       </Row>
