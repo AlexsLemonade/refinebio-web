@@ -4,8 +4,9 @@ import { CompendiaContext } from 'contexts/CompendiaContext'
 import { useToken } from 'hooks/useToken'
 import { api } from 'api'
 
-// compendia prop is passed only from the page components
-export const useCompendia = (compendiaProp) => {
+// the server-side prop should be passed from the page component
+// either compendia or compendium
+export const useCompendia = (prop) => {
   const { compendia, setCompendia, type, error, setError } =
     useContext(CompendiaContext)
   const {
@@ -14,36 +15,28 @@ export const useCompendia = (compendiaProp) => {
   } = useRouter()
 
   const { token, resetToken, validateToken } = useToken()
-  const [compendium, setCompendium] = useState()
+  const [downloadUrl, setDownloadUrl] = useState('')
 
   // sets the given compendia prop to compendia
   useEffect(() => {
-    if (compendiaProp) setCompendia(compendiaProp)
-  }, [compendiaProp])
+    if (prop) setCompendia(prop)
+  }, [prop])
 
-  // fetchs the compedium based on the organism name from the URL query
+  // fetchs the download URL for the selected compendium with the valid token
   useEffect(() => {
-    if (!compendia || !organismName) return
+    if (!organismName) return
 
-    const fetchCompendium = async () => {
-      const compendiaId = compendia.results.find(
-        (c) => c.primary_organism_name === organismName
-      ).id
-
+    const fetchDownloadUrl = async () => {
       const tokenToUse = !validateToken() ? await resetToken() : token
-      const response = await api.compendia.download(compendiaId, tokenToUse)
+      const response = await api.compendia.download(prop.id, tokenToUse)
       const { ok, statusCode } = response
       setError(!ok ? statusCode : null)
 
-      if (ok) {
-        setCompendium(response)
-      }
-
-      return response
+      setDownloadUrl(ok ? response.computed_file.download_url : null)
     }
 
-    fetchCompendium(compendia)
-  }, [compendia, organismName])
+    fetchDownloadUrl(compendia)
+  }, [organismName])
 
   const navigateToDownload = (selectedOrganism) => {
     push({
@@ -54,9 +47,9 @@ export const useCompendia = (compendiaProp) => {
   return {
     error,
     compendia,
+    downloadUrl,
     token,
     type,
-    compendium,
     navigateToDownload
   }
 }

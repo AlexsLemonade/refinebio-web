@@ -71,12 +71,10 @@ const ListItem = ({ label, selectedOrganism, onClick }) => {
 export const DownloadBlockForm = () => {
   const { setResponsive } = useResponsive()
   const { compendia, type, navigateToDownload } = useCompendia()
-  const compendiaOptions = compendia.results
-  // TODO: Temporarily added - Token validation flow will be changed in a future issue
   const { validateToken } = useToken()
   const hasToken = validateToken()
   const [acceptTerms, setAcceptTerms] = useState(hasToken)
-  const [filteredOptions, setFilteredOptions] = useState([...compendiaOptions])
+  const [filteredOptions, setFilteredOptions] = useState([...compendia])
   const [selectedOrganism, setSelectedOrganism] = useState(null)
   const [showOptions, setShowOptions] = useState(false)
   const [userInput, setUserInput] = useState('')
@@ -100,14 +98,14 @@ export const DownloadBlockForm = () => {
   const updateFilteredOptions = (val) => {
     if (val.trim() !== '') {
       setFilteredOptions(() =>
-        compendiaOptions.filter((organism) =>
+        compendia.filter((organism) =>
           formatString(organism.primary_organism_name)
             .toLowerCase()
             .includes(val.toLowerCase())
         )
       )
     } else {
-      setFilteredOptions(compendiaOptions)
+      setFilteredOptions(compendia)
     }
   }
 
@@ -205,8 +203,8 @@ export const DownloadBlockForm = () => {
           />
         </Box>
       )}
-      <Box margin={{ vertical: setResponsive('small', 'medium') }}>
-        {!hasToken && (
+      {!hasToken && (
+        <Box margin={{ vertical: 'small' }}>
           <CheckBox
             label={
               <Text>
@@ -216,9 +214,9 @@ export const DownloadBlockForm = () => {
             }
             onClick={() => setAcceptTerms(!acceptTerms)}
           />
-        )}
-      </Box>
-      <Row>
+        </Box>
+      )}
+      <Row margin={{ top: 'small' }}>
         <Column margin={{ bottom: setResponsive('small', 'small', 'none') }}>
           {selectedOrganism && (
             <Box animation={{ type: 'fadeIn', duration: 800 }}>

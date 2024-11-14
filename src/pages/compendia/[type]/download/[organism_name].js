@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Box, Heading, Paragraph } from 'grommet'
 import { useCompendia } from 'hooks/useCompendia'
 import { useResponsive } from 'hooks/useResponsive'
 import { api } from 'api'
 import gtag from 'analytics/gtag'
-import { Anchor } from 'components/shared/Anchor'
+import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { Error } from 'components/shared/Error'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -13,30 +13,24 @@ import { Row } from 'components/shared/Row'
 import { Explore } from 'components/Compendia/Explore'
 import formatString from 'helpers/formatString'
 
-export const DownloadFile = ({ compendia: compendiaProp }) => {
+export const DownloadFile = ({ compendium }) => {
   const { setResponsive } = useResponsive()
-  const { error, compendium } = useCompendia(compendiaProp)
-  const [computedFile, setComputedFile] = useState(null)
+  const { error, downloadUrl } = useCompendia(compendium)
 
-  const startFileDownload = (downloadUrl) => {
+  const startFileDownload = () => {
     window.location.href = downloadUrl
   }
 
-  const handleFileDownload = () => {
-    startFileDownload(computedFile.computed_file.download_url)
-  }
-
+  // triggers a file download on page load
   useEffect(() => {
-    if (!compendium) return
-
-    startFileDownload(compendium.computed_file.download_url)
+    if (!downloadUrl) return
+    startFileDownload()
     gtag.trackCompendiaDownload(compendium)
-    setComputedFile(compendium)
-  }, [compendium])
+  }, [downloadUrl])
 
   return (
     <FixedContainer>
-      {error ? (
+      {!compendium || error ? (
         <Error
           statusCode={error}
           align="center"
@@ -57,20 +51,21 @@ export const DownloadFile = ({ compendia: compendiaProp }) => {
                 <Box direction="row" gap="xxsmall" margin={{ bottom: 'small' }}>
                   <Heading level={1}>
                     <Icon color="success" name="Success" /> Downloading{' '}
-                    {formatString(computedFile?.primary_organism_name || '')}{' '}
+                    {formatString(compendium.primary_organism_name || '')}{' '}
                     compendium...
                   </Heading>
                 </Box>
-                <Paragraph>
-                  If the download did not start,{' '}
-                  <Anchor
-                    href="#"
-                    label="click here"
-                    rel="noopener noreferrer"
-                    onClick={handleFileDownload}
-                  />
-                  .
-                </Paragraph>
+                <Box direction="start" gap="xsmall">
+                  <Paragraph>If the download did not start,</Paragraph>
+                  {downloadUrl && (
+                    <Button
+                      label="click here"
+                      link
+                      linkFontSize="16px"
+                      onClick={startFileDownload}
+                    />
+                  )}
+                </Box>
               </Column>
               <Column
                 align="center"
@@ -105,7 +100,15 @@ export const DownloadFile = ({ compendia: compendiaProp }) => {
 }
 
 export const getServerSideProps = async ({ query }) => {
-  const { type } = query
+  const { type, organism_name: organismName } = query
+
+  // The routes path must be one of the following
+  const validTypes = ['normalized', 'rna-seq']
+  if (!validTypes.includes(type)) {
+    return {
+      notFound: true
+    }
+  }
 
   const compendiaQuery = {
     latest_version: true,
@@ -115,15 +118,15 @@ export const getServerSideProps = async ({ query }) => {
 
   const response = await api.compendia.get(compendiaQuery)
 
-  if (!response) {
-    return {
-      notFound: true
-    }
-  }
+  // finds the compendium based on the organism name
+  const compendium = response.results.find(
+    (organism) => organism.primary_organism_name === organismName
+  )
 
   return {
     props: {
-      compendia: response
+      compendium: compendium || {},
+      notFound: !compendium
     }
   }
 }
