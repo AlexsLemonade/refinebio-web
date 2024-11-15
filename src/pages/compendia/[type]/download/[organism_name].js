@@ -1,9 +1,8 @@
-import { useEffect } from 'react'
 import { Box, Heading, Paragraph } from 'grommet'
-import { useCompendia } from 'hooks/useCompendia'
+import { useDownloadCompendium } from 'hooks/useDownloadCompendium'
 import { useResponsive } from 'hooks/useResponsive'
 import { api } from 'api'
-import gtag from 'analytics/gtag'
+import { compendia } from 'config'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
 import { Error } from 'components/shared/Error'
@@ -12,99 +11,93 @@ import { Icon } from 'components/shared/Icon'
 import { Row } from 'components/shared/Row'
 import { Explore } from 'components/Compendia/Explore'
 import formatString from 'helpers/formatString'
+import { Spinner } from 'components/shared/Spinner'
 
-export const DownloadFile = ({ compendium }) => {
+export const DownloadCompendium = ({ compendium }) => {
   const { setResponsive } = useResponsive()
-  const { error, downloadUrl } = useCompendia(compendium)
+  const { error, downloadUrl, startFileDownload } =
+    useDownloadCompendium(compendium)
 
-  const startFileDownload = () => {
-    window.location.href = downloadUrl
-  }
-
-  // triggers a file download on page load
-  useEffect(() => {
-    if (!downloadUrl) return
-    startFileDownload()
-    gtag.trackCompendiaDownload(compendium)
-  }, [downloadUrl])
-
-  return (
-    <FixedContainer>
-      {!compendium || error ? (
+  if (error) {
+    return (
+      <FixedContainer>
         <Error
           statusCode={error}
           align="center"
           direction="column"
           marginTop="none"
         />
-      ) : (
-        <>
-          <Box
+      </FixedContainer>
+    )
+  }
+
+  // shows Spinner until the download URL is ready
+  if (!downloadUrl) return <Spinner />
+
+  return (
+    <FixedContainer>
+      <Box
+        align="center"
+        pad={{
+          top: 'large',
+          bottom: 'xlarge'
+        }}
+      >
+        <Row justify="center" width={setResponsive('100%', '70%')}>
+          <Column align={setResponsive('center', 'start')}>
+            <Box direction="row" gap="xxsmall" margin={{ bottom: 'small' }}>
+              <Heading level={1}>
+                <Icon color="success" name="Success" /> Downloading{' '}
+                {formatString(compendium.primary_organism_name || '')}{' '}
+                compendium...
+              </Heading>
+            </Box>
+            <Box direction="start" gap="xsmall">
+              <Paragraph>If the download did not start,</Paragraph>
+              {downloadUrl && (
+                <Button
+                  label="click here."
+                  link
+                  linkFontSize="16px"
+                  onClick={startFileDownload}
+                />
+              )}
+            </Box>
+          </Column>
+          <Column
             align="center"
-            pad={{
-              top: 'large',
-              bottom: 'xlarge'
+            margin={{
+              top: setResponsive('large', 'none'),
+              bottom: setResponsive('large', 'none'),
+              left: setResponsive('none', 'medium', 'basex13')
             }}
           >
-            <Row justify="center" width={setResponsive('100%', '70%')}>
-              <Column align={setResponsive('center', 'start')}>
-                <Box direction="row" gap="xxsmall" margin={{ bottom: 'small' }}>
-                  <Heading level={1}>
-                    <Icon color="success" name="Success" /> Downloading{' '}
-                    {formatString(compendium.primary_organism_name || '')}{' '}
-                    compendium...
-                  </Heading>
-                </Box>
-                <Box direction="start" gap="xsmall">
-                  <Paragraph>If the download did not start,</Paragraph>
-                  {downloadUrl && (
-                    <Button
-                      label="click here"
-                      link
-                      linkFontSize="16px"
-                      onClick={startFileDownload}
-                    />
-                  )}
-                </Box>
-              </Column>
-              <Column
-                align="center"
-                margin={{
-                  top: setResponsive('large', 'none'),
-                  bottom: setResponsive('large', 'none'),
-                  left: setResponsive('none', 'medium', 'basex13')
-                }}
-              >
-                <Box
-                  aria-hidden
-                  background={{
-                    image: "url('/illustration-dataset.svg')",
-                    position: 'center',
-                    repeat: 'no-repeat',
-                    size: 'contain'
-                  }}
-                  // to preserve the dimension of SVG image
-                  height={setResponsive('169px', '169px', '169px')}
-                  width={setResponsive('250px', '210px')}
-                />
-              </Column>
-            </Row>
-          </Box>
-          <Box>
-            <Explore />
-          </Box>
-        </>
-      )}
+            <Box
+              aria-hidden
+              background={{
+                image: "url('/illustration-dataset.svg')",
+                position: 'center',
+                repeat: 'no-repeat',
+                size: 'contain'
+              }}
+              // to preserve the dimension of SVG image
+              height={setResponsive('169px', '169px', '169px')}
+              width={setResponsive('250px', '210px')}
+            />
+          </Column>
+        </Row>
+      </Box>
+      <Box>
+        <Explore />
+      </Box>
     </FixedContainer>
   )
 }
 
 export const getServerSideProps = async ({ query }) => {
   const { type, organism_name: organismName } = query
-
-  // The routes path must be one of the following
-  const validTypes = ['normalized', 'rna-seq']
-  if (!validTypes.includes(type)) {
+  // The routes must be the valid compendia types
+  if (!compendia.types.includes(type)) {
     return {
       notFound: true
     }
@@ -118,7 +111,7 @@ export const getServerSideProps = async ({ query }) => {
 
   const response = await api.compendia.get(compendiaQuery)
 
-  // finds the compendium based on the organism name
+  // finds the compendium that matches organismName
   const compendium = response.results.find(
     (organism) => organism.primary_organism_name === organismName
   )
@@ -131,4 +124,4 @@ export const getServerSideProps = async ({ query }) => {
   }
 }
 
-export default DownloadFile
+export default DownloadCompendium

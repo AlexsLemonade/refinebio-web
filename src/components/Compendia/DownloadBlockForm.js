@@ -1,7 +1,7 @@
 import { useState, memo } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import styled, { css } from 'styled-components'
-import { useCompendia } from 'hooks/useCompendia'
+import { useCompendiaContext } from 'hooks/useCompendiaContext'
 import { useResponsive } from 'hooks/useResponsive'
 import { useToken } from 'hooks/useToken'
 import formatBytes from 'helpers/formatBytes'
@@ -45,8 +45,8 @@ const DropDownButton = styled(Button)`
   `}
 `
 
-const ListItem = ({ label, selectedOrganism, onClick }) => {
-  const selected = selectedOrganism === label
+const ListItem = ({ label, compendium, onClick }) => {
+  const selected = compendium === label
 
   return (
     <Box as="li" style={{ listStyle: 'none', width: '100%' }}>
@@ -70,18 +70,18 @@ const ListItem = ({ label, selectedOrganism, onClick }) => {
 
 export const DownloadBlockForm = () => {
   const { setResponsive } = useResponsive()
-  const { compendia, type, navigateToDownload } = useCompendia()
+  const { compendia, type, goToDownloadCompendium } = useCompendiaContext()
   const { validateToken } = useToken()
   const hasToken = validateToken()
   const [acceptTerms, setAcceptTerms] = useState(hasToken)
   const [filteredOptions, setFilteredOptions] = useState([...compendia])
-  const [selectedOrganism, setSelectedOrganism] = useState(null)
+  const [compendium, setCompendium] = useState(null) // stores the user selected compendium
   const [showOptions, setShowOptions] = useState(false)
   const [userInput, setUserInput] = useState('')
 
   const handleChangeSelectedOption = (val) => {
     if (val.trim() === '' || val !== userInput) {
-      setSelectedOrganism(null)
+      setCompendium(null)
     }
 
     setUserInput(val)
@@ -89,7 +89,7 @@ export const DownloadBlockForm = () => {
   }
 
   const handleClickSelectedOption = (option) => {
-    setSelectedOrganism(option)
+    setCompendium(option)
     setUserInput(formatString(option.primary_organism_name))
     setShowOptions(false)
     updateFilteredOptions(formatString(option.primary_organism_name))
@@ -168,9 +168,9 @@ export const DownloadBlockForm = () => {
                   <ListItem
                     key={option.primary_organism_name}
                     label={formatString(option.primary_organism_name)}
-                    selectedOrganism={
-                      selectedOrganism
-                        ? formatString(selectedOrganism.primary_organism_name)
+                    compendium={
+                      compendium
+                        ? formatString(compendium.primary_organism_name)
                         : null
                     }
                     onClick={() => handleClickSelectedOption(option)}
@@ -186,7 +186,7 @@ export const DownloadBlockForm = () => {
           <InlineMessage label="Data is not normalized or aggregated." />
         </Box>
       )}
-      {selectedOrganism?.organism_names?.length > 1 && (
+      {compendium?.organism_names?.length > 1 && (
         <Box margin={{ top: 'large' }}>
           <InlineMessage
             label={
@@ -218,11 +218,11 @@ export const DownloadBlockForm = () => {
       )}
       <Row margin={{ top: 'small' }}>
         <Column margin={{ bottom: setResponsive('small', 'small', 'none') }}>
-          {selectedOrganism && (
+          {compendium && (
             <Box animation={{ type: 'fadeIn', duration: 800 }}>
               <Text>
                 Download Size:{' '}
-                {formatBytes(selectedOrganism.computed_file.size_in_bytes)}
+                {formatBytes(compendium.computed_file.size_in_bytes)}
               </Text>
             </Box>
           )}
@@ -230,10 +230,10 @@ export const DownloadBlockForm = () => {
         <Column align={setResponsive('start', 'end')}>
           <Button
             label="Download Now"
-            disabled={!acceptTerms || !selectedOrganism}
+            disabled={!acceptTerms || !compendium}
             primary
             responsive
-            onClick={() => navigateToDownload(selectedOrganism)}
+            onClick={() => goToDownloadCompendium(compendium)}
           />
         </Column>
       </Row>

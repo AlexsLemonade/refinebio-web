@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { Box, Heading, Paragraph, Text } from 'grommet'
-import { useCompendia } from 'hooks/useCompendia'
+import { useCompendiaContext } from 'hooks/useCompendiaContext'
 import { useResponsive } from 'hooks/useResponsive'
 import getReadable from 'helpers/getReadable'
 import { Column } from 'components/shared/Column'
@@ -10,7 +10,7 @@ import { DownloadBlockForm } from './DownloadBlockForm'
 
 export const DownloadBlock = () => {
   const { setResponsive } = useResponsive()
-  const { type } = useCompendia()
+  const { type } = useCompendiaContext()
 
   const texts = {
     normalized:

@@ -3,6 +3,7 @@ export { contributors } from './contributors'
 export { default as hubspotForms } from './hubspotForms'
 export { links } from './links'
 export { options } from './options'
+export { compendia } from './compendia'
 export {
   readableAttributes,
   readableBooleans,

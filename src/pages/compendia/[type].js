@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router'
 import { Box, Tab } from 'grommet'
-import { useCompendia } from 'hooks/useCompendia'
+import { useCompendiaContext } from 'hooks/useCompendiaContext'
 import { useResponsive } from 'hooks/useResponsive'
 import { api } from 'api'
+import { compendia as CompendiaConfig } from 'config'
 import getReadable from 'helpers/getReadable'
 import { SignUpBlock } from 'components/shared/SignUpBlock'
 import { Tabs } from 'components/shared/Tabs'
@@ -10,10 +11,11 @@ import { Hero } from 'components/Compendia/Hero'
 import { NormalizedTab } from 'components/Compendia/NormalizedTab'
 import { RNASeqTab } from 'components/Compendia/RNASeqTab'
 
-export const Compendia = ({ compendia }) => {
+export const Compendia = ({ compendia, type }) => {
   const { setResponsive } = useResponsive()
   const { push } = useRouter()
-  const { type } = useCompendia(compendia)
+  // initializes the compendia contexts
+  useCompendiaContext(compendia, type)
 
   const tabConfigs = [
     {
@@ -51,10 +53,8 @@ export const Compendia = ({ compendia }) => {
 
 export const getServerSideProps = async ({ query }) => {
   const { type } = query
-
-  // The routes path must be one of the following
-  const validTypes = ['normalized', 'rna-seq']
-  if (!validTypes.includes(type)) {
+  // The routes must be the valid compendia types
+  if (!CompendiaConfig.types.includes(type)) {
     return {
       notFound: true
     }
@@ -71,6 +71,7 @@ export const getServerSideProps = async ({ query }) => {
   return {
     props: {
       compendia: response.results,
+      type,
       notFound: !response.ok
     }
   }
