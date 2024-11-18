@@ -6,20 +6,26 @@ export const SpeciesView = ({ dataset, isImmutable }) => {
   const { organism_samples: organismSamples, experiments } = dataset
   const organismsNames = Object.keys(organismSamples)
 
+  // filter dataset.data to include experiments with common samples
+  const getFilteredDataSlice = (samples) => {
+    return Object.entries(dataset.data).filter(
+      ([, experimentSamples]) =>
+        intersectArrays(samples, experimentSamples).length > 0
+    )
+  }
+
   // merge all the sample metadata fields from experiments in the organism data slice
   // to display all possible values of these samples in the samples table
   const getSamplesMetadata = (samples) => {
-    return Object.entries(dataset.data)
-      .filter(
-        ([, experimentSamples]) =>
-          intersectArrays(samples, experimentSamples).length > 0
-      )
+    const filteredDataSlice = getFilteredDataSlice(samples)
+
+    return filteredDataSlice
       .map(
         ([accession]) =>
           dataset.experiments.find((e) => e.accession_code === accession)
             ?.sample_metadata || []
       )
-      .reduce((acc, metadata) => acc.concat(metadata), [])
+      .flat()
   }
 
   // map the organism samples to their corresponding metadata
