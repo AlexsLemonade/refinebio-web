@@ -13,14 +13,28 @@ export const ViewBlock = ({
   dataset,
   samplesInOrganism,
   sampleMetadataFields,
-  organismDataSlice,
   organismName,
   hasRnaSeqExperiments,
   isImmutable
 }) => {
   const { loading, removeSamples } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const totalSamples = formatNumbers(samplesInOrganism.length)
+  const samplesCount = samplesInOrganism.length
+  const totalSamples = formatNumbers(samplesCount)
+
+  // filter the dataset.data to only include the experiments containing given samples
+  const organismDataSlice = Object.entries(dataset.data).reduce(
+    (accumulator, [key, value]) => {
+      const filteredSamples = value.filter((accessionCode) =>
+        samplesInOrganism.includes(accessionCode)
+      )
+      if (filteredSamples.length) {
+        accumulator[key] = filteredSamples
+      }
+      return accumulator
+    },
+    {}
+  )
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 800 }}>
@@ -38,7 +52,7 @@ export const ViewBlock = ({
       <Row margin={{ top: 'small' }}>
         <Box>
           <Text margin={{ bottom: 'small' }}>
-            {totalSamples} {samplesInOrganism.length > 1 ? 'Samples' : 'Sample'}
+            {totalSamples} {samplesCount > 1 ? 'Samples' : 'Sample'}
           </Text>
           <ViewSamplesButton
             dataset={organismDataSlice}

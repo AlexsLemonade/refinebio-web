@@ -1,41 +1,38 @@
-import unionizeArrays from 'helpers/unionizeArrays'
+import intersectArrays from 'helpers/intersectArrays'
 import { ViewBlock } from './ViewBlock'
 import { ViewBlocks } from '../ViewBlocks'
 
 export const SpeciesView = ({ dataset, isImmutable }) => {
   const { organism_samples: organismSamples, experiments } = dataset
   const organismsNames = Object.keys(organismSamples)
-  // format experiments into an object with accession codes as ksey
-  const formattedExperiments = Object.fromEntries(
-    experiments.map((experiment) => [experiment.accession_code, experiment])
-  )
-
-  // filter the dataset.data to only include the experiments containing given samples
-  const getDataSlice = (samples) => {
-    return Object.entries(dataset.data).reduce((accumulator, [key, value]) => {
-      const filteredSamples = value.filter((accessionCode) =>
-        samples.includes(accessionCode)
-      )
-      if (filteredSamples.length) {
-        accumulator[key] = filteredSamples
-      }
-      return accumulator
-    }, {})
-  }
 
   // merge all the sample metadata fields from experiments in the organism data slice
   // to display all possible values of these samples in the samples table
-  const getSampleMetadata = (dataSlice) => {
-    return unionizeArrays(
-      ...Object.keys(dataSlice).map(
-        (accessionCode) =>
-          formattedExperiments[accessionCode]?.sample_metadata || []
+  const getSamplesMetadata = (samples) => {
+    return Object.entries(dataset.data)
+      .filter(
+        ([, experimentSamples]) =>
+          intersectArrays(samples, experimentSamples).length > 0
       )
-    )
+      .map(
+        ([accession]) =>
+          dataset.experiments.find((e) => e.accession_code === accession)
+            ?.sample_metadata || []
+      )
+      .reduce((acc, metadata) => acc.concat(metadata), [])
   }
-  // chceks if RNA-Seq experiments exist for a give organism
+
+  // map the organism samples to their corresponding metadata
+  const organismMetadata = Object.fromEntries(
+    organismsNames.map((organismName) => {
+      const samplesInOrganism = organismSamples[organismName]
+      return [organismName, getSamplesMetadata(samplesInOrganism)]
+    })
+  )
+
+  // chcek if RNA-Seq experiments exist for a give organism
   const hasRnaSeq = (organismName) =>
-    Object.values(formattedExperiments).some(
+    experiments.some(
       ({ technology, organism_names: name }) =>
         technology === 'RNA-SEQ' && name.includes(organismName)
     )
@@ -43,21 +40,14 @@ export const SpeciesView = ({ dataset, isImmutable }) => {
   return (
     <ViewBlocks elevation="medium" pad="medium">
       {organismsNames.map((organismName) => {
-        // get the sample accession codes associated with organismName
-        const samplesInOrganism = organismSamples[organismName]
-        const organismDataSlice = getDataSlice(samplesInOrganism)
-        const sampleMetadataFields = getSampleMetadata(organismDataSlice)
-        const hasRnaSeqExperiments = hasRnaSeq(organismName)
-
         return (
           <ViewBlock
             key={organismName}
             dataset={dataset}
-            samplesInOrganism={samplesInOrganism}
-            sampleMetadataFields={sampleMetadataFields}
-            organismDataSlice={organismDataSlice}
+            samplesInOrganism={organismSamples[organismName]}
+            sampleMetadataFields={organismMetadata[organismName]}
             organismName={organismName}
-            hasRnaSeqExperiments={hasRnaSeqExperiments}
+            hasRnaSeqExperiments={hasRnaSeq(organismName)}
             isImmutable={isImmutable}
           />
         )
