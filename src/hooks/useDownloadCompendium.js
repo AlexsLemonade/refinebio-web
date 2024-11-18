@@ -24,18 +24,13 @@ export const useDownloadCompendium = (compendium) => {
   // triggers the file download once the download URL is available
   useEffect(() => {
     if (downloadUrl) {
-      startFileDownload()
+      window.open(downloadUrl, '_self')
       gtag.trackCompendiaDownload(compendium)
     }
   }, [compendium, downloadUrl])
 
-  const startFileDownload = () => {
-    if (downloadUrl) window.open(downloadUrl, '_self')
-  }
-
   return {
     error,
-    downloadUrl,
-    startFileDownload
+    downloadUrl
   }
 }

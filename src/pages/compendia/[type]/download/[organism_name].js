@@ -15,8 +15,7 @@ import { Spinner } from 'components/shared/Spinner'
 
 export const DownloadCompendium = ({ compendium }) => {
   const { setResponsive } = useResponsive()
-  const { error, downloadUrl, startFileDownload } =
-    useDownloadCompendium(compendium)
+  const { error, downloadUrl } = useDownloadCompendium(compendium)
 
   if (error) {
     return (
@@ -57,9 +56,9 @@ export const DownloadCompendium = ({ compendium }) => {
               {downloadUrl && (
                 <Button
                   label="click here."
+                  href={downloadUrl}
                   link
                   linkFontSize="16px"
-                  onClick={startFileDownload}
                 />
               )}
             </Box>
