@@ -12,19 +12,12 @@ import { Row } from 'components/shared/Row'
 import { TextNull } from 'components/shared/TextNull'
 import { ViewSamplesButton } from '../ViewSamplesButton'
 
-export const ViewBlock = ({
-  dataset,
-  experiment,
-  defaultOrganismFilterOption,
-  isImmutable,
-  setOrganism
-}) => {
+export const ViewBlock = ({ dataset, experiment, isImmutable }) => {
   const { loading, formatSampleMetadata, removeExperiment } =
     useDatasetManager()
   const { setResponsive } = useResponsive()
   const handleRemoveExperiment = (datasetSlice) => {
     removeExperiment(datasetSlice, true)
-    setOrganism(defaultOrganismFilterOption.value)
   }
   const { accession_code: accessionCode } = experiment
   const addedSamples = dataset.data[accessionCode]

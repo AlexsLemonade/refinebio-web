@@ -3,45 +3,45 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
 import formatString from 'helpers/formatString'
+import uniqueArray from 'helpers/uniqueArray'
 import { Button } from 'components/shared/Button'
 import { Pill } from 'components/shared/Pill'
 import { Row } from 'components/shared/Row'
 import { TextCapitalized } from 'components/shared/TextCapitalized'
 import { ViewSamplesButton } from '../ViewSamplesButton'
 
-export const ViewBlock = ({
-  dataset,
-  samplesInOrganism,
-  sampleMetadataFields,
-  organismName,
-  hasRnaSeqExperiments,
-  isImmutable
-}) => {
+export const ViewBlock = ({ dataset, organismName, isImmutable }) => {
   const { loading, removeSamples } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const samplesCount = samplesInOrganism.length
-  const totalSamples = formatNumbers(samplesCount)
 
-  // filter the dataset.data to only include the experiments containing given samples
-  const organismDataSlice = Object.entries(dataset.data).reduce(
-    (accumulator, [key, value]) => {
-      const filteredSamples = value.filter((accessionCode) =>
-        samplesInOrganism.includes(accessionCode)
-      )
-      if (filteredSamples.length) {
-        accumulator[key] = filteredSamples
-      }
-      return accumulator
-    },
-    {}
+  const samplesCount = dataset.organism_samples[organismName].length
+  const totalSamples = formatNumbers(samplesCount)
+  const { experiments } = dataset
+
+  const organismExperiments = experiments.filter((e) =>
+    e.organism_names.includes(organismName)
   )
+
+  // merge all the sample metadata from experiments for this organism
+  const organismMetadata = uniqueArray(
+    organismExperiments.map((e) => e.sample_metadata).flat()
+  )
+
+  // chcek if any RNA-Seq experiments available for this organism
+  const hasRnaSeq = organismExperiments.some(
+    ({ technology }) => technology === 'RNA-SEQ'
+  )
+
+  const organismSamples = organismExperiments
+    .map((e) => dataset.data[e.accession_code])
+    .flat()
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 800 }}>
       <Heading level={2}>
         <TextCapitalized text={<>{formatString(organismName)} Samples</>} />
       </Heading>
-      {hasRnaSeqExperiments && !dataset.quantile_normalize && (
+      {hasRnaSeq && !dataset.quantile_normalize && (
         <Box margin={{ top: 'small' }}>
           <Pill
             label="Quantile Normalization will be skipped for RNA-seq samples"
@@ -55,12 +55,12 @@ export const ViewBlock = ({
             {totalSamples} {samplesCount > 1 ? 'Samples' : 'Sample'}
           </Text>
           <ViewSamplesButton
-            dataset={organismDataSlice}
+            dataset={organismSamples}
             params={{
               dataset_id: dataset.id,
               organism__name: organismName
             }}
-            sampleMetadataFields={sampleMetadataFields}
+            sampleMetadataFields={organismMetadata}
             isImmutable={isImmutable}
           />
         </Box>
@@ -71,7 +71,7 @@ export const ViewBlock = ({
             margin={{ top: setResponsive('small', 'none') }}
             responsive
             tertiary
-            onClick={() => removeSamples(organismDataSlice, true)}
+            onClick={() => removeSamples(organismSamples, true)}
           />
         )}
       </Row>
