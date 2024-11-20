@@ -1,29 +1,26 @@
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import { useExperiments } from 'hooks/useExperiments'
+import { api } from 'api'
 import formatURLString from 'helpers/formatURLString'
 
-// uses the query parameter 'accession code' to redirect to an experiment page with its title
 export const AccessionCode = () => {
-  const {
-    query: { accession_code: accessionCode },
-    isReady,
-    push
-  } = useRouter()
+  return null
+}
 
-  const { experiment, getExperiment } = useExperiments()
-
-  useEffect(() => {
-    if (isReady) {
-      getExperiment(accessionCode)
-
-      if (experiment) {
-        push(
-          `/experiments/${accessionCode}/${formatURLString(experiment.title)}`
-        )
-      }
+export const getServerSideProps = async ({ query }) => {
+  const experiment = await api.experiments.get(query.accession_code)
+  // returns 404
+  if (!experiment) {
+    return {
+      notFound: true
     }
-  }, [isReady, experiment])
+  }
+  // redirects to the experiment page
+  return {
+    redirect: {
+      destination: `/experiments/${experiment.accession_code}/${formatURLString(
+        experiment.title
+      )}`
+    }
+  }
 }
 
 export default AccessionCode

@@ -22,5 +22,11 @@ export const readableValues = {
   '-num_downloadable_samples': 'Most No. of samples',
   num_downloadable_samples: 'Least No. of samples',
   '-source_first_published': 'Newest Experiment',
-  source_first_published: 'Oldest Experiment'
+  source_first_published: 'Oldest Experiment',
+  // database names
+  ARRAY_EXPRESS: 'ArrayExpress',
+  GEO: 'Gene Expression Omnibus (GEO)',
+  SRA: 'Sequence Read Archive (SRA)',
+  normalized: 'Normalized Compendia',
+  'rna-seq': 'RNA-seq Sample Compendia'
 }

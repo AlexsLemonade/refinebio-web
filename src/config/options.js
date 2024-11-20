@@ -1,40 +1,4 @@
 export const options = {
-  // setting for the compendia
-  compendia: {
-    // default values for common queries
-    commonQueries: {
-      latest_version: true,
-      limit: 1000
-    },
-    heading: {
-      normalized: 'Normalized Compendia',
-      rnaSeq: 'RNA-seq Sample Compendia'
-    },
-    svg: {
-      normalized: 'normalizaed-curve.svg',
-      rnaSeq: 'gene-expression-matrix.svg'
-    },
-    tabs: [
-      {
-        type: 'normalized',
-        label: 'Normalized Compendia',
-        path: '/compendia/normalized'
-      },
-      {
-        type: 'rnaSeq',
-        label: 'RNA-seq Sample Compendia',
-        path: '/compendia/rna-seq'
-      }
-    ]
-  },
-  // setting for the experiment hook
-  experiment: {
-    databaseNames: {
-      GEO: 'Gene Expression Omnibus (GEO)',
-      SRA: 'Sequence Read Archive (SRA)',
-      ARRAY_EXPRESS: 'ArrayExpress'
-    }
-  },
   // setting for the samples table
   samplesTable: {
     // default values for common queries
@@ -87,23 +51,7 @@ export const options = {
         value: 'source_first_published'
       }
     ]
-  },
-  // TODO: This will be cleaned up once the following PR is merged
-  // https://github.com/AlexsLemonade/refinebio-web/pull/365
-  transformation: [
-    {
-      label: 'None',
-      value: 'NONE'
-    },
-    {
-      label: 'Zero to One',
-      value: 'MINMAX'
-    },
-    {
-      label: 'Z-score',
-      value: 'STANDARD'
-    }
-  ]
+  }
 }
 
 export default options
