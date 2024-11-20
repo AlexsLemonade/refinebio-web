@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { links } from 'config'
+import getDatasetState from 'helpers/getDatasetState'
 import getDownloadFilesData from 'helpers/getDownloadFilesData'
 import { Anchor } from 'components/shared/Anchor'
 import { Column } from 'components/shared/Column'
@@ -35,17 +36,16 @@ const Card = ({ description, format, index, title }) => {
 }
 
 export const FilesSummary = ({ dataset }) => {
-  const { is_processed: isProcessed, success } = dataset
   const { setResponsive } = useResponsive()
-  const isProcessedSuccess = isProcessed && success // sets visibility of the download options form
+  const { isProcessed } = getDatasetState(dataset) // sets visibility of the download options form for regenaration
   const [regeneratedDataset, setRegeneratedDataset] = useState(null)
   const [fileSummaries, setFileSummaries] = useState(
     getDownloadFilesData(dataset)
   )
 
   useEffect(() => {
-    // sets successfully processed dataset as regeneratedDataset
-    if (isProcessedSuccess) setRegeneratedDataset(dataset)
+    // sets expired processed dataset as regeneratedDataset
+    if (isProcessed) setRegeneratedDataset(dataset)
   }, [])
 
   useEffect(() => {
@@ -62,12 +62,13 @@ export const FilesSummary = ({ dataset }) => {
       <Heading level={2} margin={{ bottom: 'small' }}>
         Download Files Summary
       </Heading>
-      <DatasetRegenerateDownloadOptionsForm
-        dataset={dataset}
-        regeneratedDataset={regeneratedDataset}
-        setRegeneratedDataset={setRegeneratedDataset}
-        show={isProcessedSuccess}
-      />
+      {isProcessed && (
+        <DatasetRegenerateDownloadOptionsForm
+          dataset={dataset}
+          regeneratedDataset={regeneratedDataset}
+          setRegeneratedDataset={setRegeneratedDataset}
+        />
+      )}
       <Row
         direction={setResponsive('column', 'column', 'row')}
         margin={{ bottom: 'medium' }}
