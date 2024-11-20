@@ -3,20 +3,22 @@ import { Box } from 'grommet'
 import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
 import { getFormattedExperiment } from 'helpers/formatDatasetAction'
+import getTechnologyFromExperiment from 'helpers/getTechnologyFromExperiment'
 import { DatasetActionButton } from 'components/shared/DatasetActionButton'
 import { DownloadNowButton } from './DownloadNowButton'
 import { ProcessingDatasetPill } from './ProcessingDatasetPill'
 import { RequestExperimentFormButton } from './RequestExperimentFormButton'
 
 export const SearchCardAction = ({ experiment }) => {
+  const { setResponsive } = useResponsive()
   const {
     accession_code: accessionCode,
     num_downloadable_samples: downloadableSamples,
-    organism_names: organismNames,
-    technology
+    organism_names: organismNames
   } = experiment
   const { isProcessingDataset } = usePollDatasetStatus(accessionCode)
-  const { setResponsive } = useResponsive()
+  // gets the technology from the samples array if it exists
+  const technology = getTechnologyFromExperiment(experiment)
   const hasMultipleOrganisms = organismNames.length > 1
   const rnaSeq = 'RNA-SEQ'
   const hasRnaSeq =

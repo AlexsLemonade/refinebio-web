@@ -38,9 +38,9 @@ const supportedDimensions = [
   // Dataset
   'dataset_action',
   'dataset_download_options',
-  'dataset_download_option_changes',
   'dataset_id',
   'one_off_experiment_download',
+  'regenerated_download_options_change',
   'regenerated_state',
   // Links
   'experiment_page_click_from',
@@ -51,6 +51,7 @@ const supportedDimensions = [
   'filter_combination',
   'filter_type',
   'toggled_filter_item',
+  'shared_dataset_id',
   'search_text'
 ]
 export const event = (eventName, value = {}, nonInteraction = false) => {
@@ -79,22 +80,25 @@ export const event = (eventName, value = {}, nonInteraction = false) => {
 }
 
 export const getDatasetOptionsChanges = (dataset, regeneratedDataset) => {
-  const changes = datasetOptionsKeys.map((key) => {
-    return `${getReadable(key, dataset[key])} -> ${getReadable(
-      key,
-      regeneratedDataset[key]
-    )}`
-  })
-  return changes.join('|')
+  const changes = datasetOptionsKeys
+    .map((key) => {
+      const initialOption = getReadable(dataset[key])
+      const regeneratedOption = getReadable(regeneratedDataset[key])
+
+      return initialOption !== regeneratedOption
+        ? `${initialOption} -> ${regeneratedOption}`
+        : null
+    })
+    .filter(Boolean)
+
+  return changes.length > 0 ? changes.join('|') : 'No change'
 }
 
 export const getDatasetState = (dataset) =>
   getReadable('expires_on', moment(dataset.expires_on).isBefore(Date.now()))
 
 export const getFormattedDatasetOptions = (dataset) =>
-  `${datasetOptionsKeys
-    .map((key) => `${getReadable(key, dataset[key])}`)
-    .join('|')}`
+  `${datasetOptionsKeys.map((key) => `${getReadable(dataset[key])}`).join('|')}`
 
 // formats filter names in each facet
 const formatFacets = (query) => {

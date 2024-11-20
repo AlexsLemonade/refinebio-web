@@ -7,7 +7,7 @@ import { SearchCardFooter } from './SearchCardFooter'
 import { SearchCardAction } from './SearchCardAction'
 import { SearchCardMeta } from './SearchCardMeta'
 
-export const SearchCard = ({ result = {} }) => {
+export const SearchCard = ({ experiment }) => {
   const { viewport, setResponsive } = useResponsive()
 
   return (
@@ -38,21 +38,21 @@ export const SearchCard = ({ result = {} }) => {
         }}
       >
         <Box gridArea="header">
-          <SearchCardHeader experiment={result} isLinked />
+          <SearchCardHeader experiment={experiment} isLinked />
         </Box>
         <Box gridArea="ctas" margin={{ top: setResponsive('none', 'large') }}>
           <Box align={setResponsive('start', 'end')} width="100%">
-            <SearchCardAction experiment={result} />
+            <SearchCardAction experiment={experiment} />
           </Box>
         </Box>
         <Box gridArea="meta">
-          <SearchCardMeta experiment={result} />
+          <SearchCardMeta experiment={experiment} />
         </Box>
       </Grid>
       {viewport !== 'small' && (
         <>
-          <SearchCardBody experiment={result} />
-          <SearchCardFooter experiment={result} />
+          <SearchCardBody experiment={experiment} />
+          <SearchCardFooter experiment={experiment} />
         </>
       )}
     </Box>
