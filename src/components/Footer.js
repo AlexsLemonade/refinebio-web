@@ -144,7 +144,12 @@ export const Footer = () => {
               </Text>
               <Text>
                 URL:{' '}
-                <Anchor color="black" label={links.refinebio} rel="nofollow" />
+                <Anchor
+                  color="black"
+                  label={links.refinebio}
+                  href={links.refinebio}
+                  rel="nofollow"
+                />
               </Text>
               <Paragraph margin={{ top: 'small' }}>
                 <i>
