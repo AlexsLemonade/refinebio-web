@@ -1,32 +1,4 @@
 export const options = {
-  // setting for the compendia
-  compendia: {
-    // default values for common queries
-    commonQueries: {
-      latest_version: true,
-      limit: 1000
-    },
-    heading: {
-      normalized: 'Normalized Compendia',
-      'rna-seq': 'RNA-seq Sample Compendia'
-    },
-    svg: {
-      normalized: 'normalizaed-curve.svg',
-      'rna-seq': 'gene-expression-matrix.svg'
-    },
-    tabs: [
-      {
-        type: 'normalized',
-        label: 'Normalized Compendia',
-        path: '/compendia/normalized'
-      },
-      {
-        type: 'rnaSeq',
-        label: 'RNA-seq Sample Compendia',
-        path: '/compendia/rna-seq'
-      }
-    ]
-  },
   // setting for the dataset manager
   dataset: {
     downloadOptionsKeys: [
@@ -35,14 +7,6 @@ export const options = {
       'scale_by',
       'quantile_normalize'
     ]
-  },
-  // setting for the experiment hook
-  experiment: {
-    databaseNames: {
-      GEO: 'Gene Expression Omnibus (GEO)',
-      SRA: 'Sequence Read Archive (SRA)',
-      ARRAY_EXPRESS: 'ArrayExpress'
-    }
   },
   // setting for the samples table
   samplesTable: {

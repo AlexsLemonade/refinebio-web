@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Box, Heading } from 'grommet'
 import gtag from 'analytics/gtag'
-import { usePageRendered } from 'hooks/usePageRendered'
 import { useResponsive } from 'hooks/useResponsive'
+import getFormattedExperiments from 'helpers/getFormattedExperiments'
 import { Anchor } from 'components/shared/Anchor'
 import { Column } from 'components/shared/Column'
 import { List } from 'components/shared/List'
@@ -20,17 +20,15 @@ const ListItem = ({ href, text }) => (
 )
 
 export const DatasetExplore = ({ dataset }) => {
-  const pageRendered = usePageRendered()
   const { setResponsive } = useResponsive()
+  const formattedExperiments = getFormattedExperiments(dataset)
   const [technologies, setTechnologies] = useState(null)
 
   useEffect(() => {
-    if (pageRendered) {
-      setTechnologies(
-        Object.values(dataset.experiments).map((e) => e.technology)
-      )
-    }
-  }, [pageRendered])
+    setTechnologies(
+      Object.values(formattedExperiments).map((e) => e.technology)
+    )
+  }, [])
 
   const hasRNASeq = technologies && technologies.includes('RNA-SEQ')
   const hasMicroarray = technologies && technologies.includes('MICROARRAY')

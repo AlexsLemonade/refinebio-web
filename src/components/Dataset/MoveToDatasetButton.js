@@ -7,26 +7,30 @@ import { Button } from 'components/shared/Button'
 import { Modal } from 'components/shared/Modal'
 import { MoveToDatasetModal } from './MoveToDatasetModal'
 
-export const MoveToDatasetButton = ({ dataset, disabled, selectedDataset }) => {
+export const MoveToDatasetButton = ({ dataset }) => {
   const { push } = useRouter()
-  const { addSamples, getTotalSamples } = useDatasetManager()
+  const {
+    dataset: myDataset,
+    addSamples,
+    getTotalSamples
+  } = useDatasetManager()
   const { openModal, closeModal } = useModal()
-  const id = `move-to-dataset-${dataset?.id}`
+  const id = `move-to-dataset-${myDataset.id}`
   const radioOptions = [
     { label: 'Append samples to My Dataset', value: 'append' },
     { label: 'Replace samples in My Dataset', value: 'replace' }
   ]
   const defaultValue = radioOptions[0].value
   const [value, setValue] = useState(defaultValue)
-  const newTotalSamples = getTotalSamples(selectedDataset.data)
-  const totalSamples = getTotalSamples(dataset.data)
+  const newTotalSamples = getTotalSamples(dataset.data)
+  const totalSamples = getTotalSamples(myDataset.data)
   const pathname = '/download'
 
   const handleMoveToDataset = async () => {
     if (totalSamples > 0) {
       openModal(id)
     } else {
-      await addSamples(selectedDataset.data)
+      await addSamples(dataset.data)
       push(
         {
           pathname,
@@ -47,7 +51,6 @@ export const MoveToDatasetButton = ({ dataset, disabled, selectedDataset }) => {
       id={id}
       button={
         <Button
-          disabled={disabled}
           label="Move to Dataset"
           secondary
           responsive
@@ -61,7 +64,7 @@ export const MoveToDatasetButton = ({ dataset, disabled, selectedDataset }) => {
         id={id}
         closeModal={closeModal}
         defaultValue={defaultValue}
-        dataset={selectedDataset}
+        dataset={dataset}
         pathname={pathname}
         radioOptions={radioOptions}
         value={value}

@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { Box } from 'grommet'
 import { useSearchManager } from 'hooks/useSearchManager'
 import formatURLString from 'helpers/formatURLString'
+import gtag from 'analytics/gtag'
 import { Button } from 'components/shared/Button'
 
 export const SearchCardFooter = ({ experiment }) => {
@@ -9,16 +10,15 @@ export const SearchCardFooter = ({ experiment }) => {
   const { push } = useRouter()
   const { search, setSearch } = useSearchManager()
 
+  const handleClick = () => {
+    setSearch({ ...search, ref: 'search' })
+    gtag.trackExperimentPageClick(SearchCardFooter)
+    push(`/experiments/${accessionCode}/${formatURLString(title)}`)
+  }
+
   return (
     <Box>
-      <Button
-        label="View Samples"
-        secondary
-        onClick={() => {
-          push(`/experiments/${accessionCode}/${formatURLString(title)}`)
-          setSearch({ ...search, ref: 'search', from: 'view-samples' })
-        }}
-      />
+      <Button label="View Samples" secondary onClick={handleClick} />
     </Box>
   )
 }
