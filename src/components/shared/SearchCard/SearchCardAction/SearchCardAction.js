@@ -14,14 +14,11 @@ export const SearchCardAction = ({ experiment }) => {
   const {
     accession_code: accessionCode,
     num_downloadable_samples: downloadableSamples,
-    organism_names: organismNames,
-    samples
+    organism_names: organismNames
   } = experiment
   const { isProcessingDataset } = usePollDatasetStatus(accessionCode)
   // gets the technology from the samples array if it exists
-  const technology = samples
-    ? getTechnologyFromExperiment(samples)
-    : experiment.technology
+  const technology = getTechnologyFromExperiment(experiment)
   const hasMultipleOrganisms = organismNames.length > 1
   const rnaSeq = 'RNA-SEQ'
   const hasRnaSeq =

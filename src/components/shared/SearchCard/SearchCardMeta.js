@@ -16,17 +16,12 @@ export const SearchCardMeta = ({ experiment, size = 'small' }) => {
   const { setResponsive } = useResponsive()
   const {
     num_downloadable_samples: downloadableSamples,
-    organism_names: organismNames,
-    samples
+    organism_names: organismNames
   } = experiment
   // gets the platform names from the samples array if it exists
-  const platformNames = samples
-    ? getPlatformNamesFromExperiment(samples)
-    : experiment.platform_names
+  const platformNames = getPlatformNamesFromExperiment(experiment)
   // gets the technology from the samples array if it exists
-  const technology = samples
-    ? getTechnologyFromExperiment(samples)
-    : experiment.technology
+  const technology = getTechnologyFromExperiment(experiment)
   const technologyName = isArray(technology) ? technology.join('') : technology
 
   return (
