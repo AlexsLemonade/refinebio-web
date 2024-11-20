@@ -23,7 +23,7 @@ export const DatasetExplore = ({ dataset }) => {
   const [technologies, setTechnologies] = useState(null)
 
   useEffect(() => {
-    setTechnologies(Object.values(dataset.experiments).map((e) => e.technology))
+    setTechnologies(dataset.experiments.map((e) => e.technology))
   }, [])
 
   const hasRNASeq = technologies && technologies.includes('RNA-SEQ')

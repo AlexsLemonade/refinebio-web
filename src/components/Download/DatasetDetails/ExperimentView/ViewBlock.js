@@ -12,23 +12,15 @@ import { Row } from 'components/shared/Row'
 import { TextNull } from 'components/shared/TextNull'
 import { ViewSamplesButton } from '../ViewSamplesButton'
 
-export const ViewBlock = ({
-  datasetId,
-  addedSamples,
-  experiment,
-  defaultOrganismFilterOption,
-  experimentAccessionCode,
-  metadataFields,
-  quantileNormalize,
-  isImmutable,
-  setOrganism
-}) => {
-  const { loading, removeExperiment } = useDatasetManager()
+export const ViewBlock = ({ dataset, experiment, isImmutable }) => {
+  const { loading, formatSampleMetadata, removeExperiment } =
+    useDatasetManager()
   const { setResponsive } = useResponsive()
   const handleRemoveExperiment = (datasetSlice) => {
     removeExperiment(datasetSlice, true)
-    setOrganism(defaultOrganismFilterOption.value)
   }
+  const { accession_code: accessionCode } = experiment
+  const addedSamples = dataset.data[accessionCode]
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 800 }}>
@@ -36,13 +28,13 @@ export const ViewBlock = ({
       <Box margin={{ bottom: 'xsmall' }} width={{ max: '640px' }}>
         <Heading level={5} responsive={false} weight="700">
           <Anchor
-            href={`experiments/${experimentAccessionCode}/${formatURLString(
+            href={`experiments/${accessionCode}/${formatURLString(
               experiment.title
             )}`}
             label={experiment.title}
           />
         </Heading>
-        {experiment.technology === 'RNA-SEQ' && !quantileNormalize && (
+        {experiment.technology === 'RNA-SEQ' && !dataset.quantile_normalize && (
           <Box margin={{ vertical: 'xsmall' }}>
             <Pill
               label="Quantile Normalization will be skipped"
@@ -58,11 +50,7 @@ export const ViewBlock = ({
             gap={setResponsive('small', 'small', 'xlarge')}
             margin={{ top: setResponsive('xsmall', 'none') }}
           >
-            <IconBadge
-              name="Accession"
-              label={experiment.accession_code}
-              size="medium"
-            />
+            <IconBadge name="Accession" label={accessionCode} size="medium" />
             <IconBadge
               label={`${formatNumbers(addedSamples.length)} Downloadable ${
                 addedSamples.length > 1 ? 'Samples' : 'Sample'
@@ -84,7 +72,9 @@ export const ViewBlock = ({
             </Heading>
             <Box direction="row" margin={{ top: 'xsmall' }}>
               {experiment.sample_metadata.length > 0 ? (
-                <Text>{metadataFields.join(', ')}</Text>
+                <Text>
+                  {formatSampleMetadata(experiment.sample_metadata).join(', ')}
+                </Text>
               ) : (
                 <TextNull text="No sample metadata fields" />
               )}
@@ -92,10 +82,10 @@ export const ViewBlock = ({
           </Box>
           {addedSamples.length > 0 && (
             <ViewSamplesButton
-              dataset={{ [experimentAccessionCode]: addedSamples }}
+              dataset={{ [accessionCode]: addedSamples }}
               params={{
-                dataset_id: datasetId,
-                experiment_accession_code: experimentAccessionCode
+                dataset_id: dataset.id,
+                experiment_accession_code: accessionCode
               }}
               sampleMetadataFields={experiment.sample_metadata}
               isImmutable={isImmutable}
@@ -109,7 +99,7 @@ export const ViewBlock = ({
             margin={{ top: setResponsive('small', 'none') }}
             responsive
             tertiary
-            onClick={() => handleRemoveExperiment([experiment.accession_code])}
+            onClick={() => handleRemoveExperiment([accessionCode])}
           />
         )}
       </Row>
