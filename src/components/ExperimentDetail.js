@@ -15,19 +15,9 @@ import {
   InformationItem
 } from 'components/shared/InformationList'
 import { TextHighlight } from 'components/shared/TextHighlight'
-import { TextNull } from 'components/shared/TextNull'
 import { SearchCardHeader } from 'components/shared/SearchCard/SearchCardHeader'
 import { SearchCardAction } from 'components/shared/SearchCard/SearchCardAction'
 import { SearchCardMeta } from 'components/shared/SearchCard/SearchCardMeta'
-
-const InformationItemBlock = ({ condition, field, value, textNull = '' }) => (
-  <InformationItem
-    field={field}
-    value={condition ? value : <TextNull text={textNull} />}
-    margin={{ left: '-32px' }}
-    width={{ min: 'calc(100% + 64px)' }}
-  />
-)
 
 export const ExperimentDetail = ({ experiment }) => {
   const { setResponsive } = useResponsive()
@@ -76,129 +66,130 @@ export const ExperimentDetail = ({ experiment }) => {
             Submitter Supplied Information
           </Heading>
         </Box>
-        <InformationList>
-          <InformationItem
-            field="Description"
-            value={<TextHighlight>{experiment.description}</TextHighlight>}
-            margin={{ left: '-32px' }}
-            width={{ min: 'calc(100% + 64px)' }}
-          />
-          <InformationItemBlock
-            condition={experiment.pubmed_id}
-            field="PubMedID"
-            value={
-              <Anchor
-                label={<TextHighlight>{experiment.pubmed_id}</TextHighlight>}
-                href={`${links.nih}${experiment.pubmed_id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              />
-            }
-            textNull="No associated PubMed ID"
-          />
-          <InformationItemBlock
-            condition={experiment.publication_title}
-            field="Publication Title"
-            value={
-              <Anchor
-                label={
-                  <TextHighlight>{experiment.publication_title}</TextHighlight>
-                }
-                href={`${links.nih}${experiment.pubmed_id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              />
-            }
-            textNull="No associated publication"
-          />
-          <InformationItem
-            field="Total Samples"
-            value={formatNumbers(experiment.num_total_samples)}
-          />
-          <InformationItemBlock
-            condition={
-              experiment.submitter_institution &&
-              experiment.submitter_institution !== 'N/A'
-            }
-            field="Submitter’s Institution"
-            value={
-              <Button
-                label={
-                  <TextHighlight>
-                    {experiment.submitter_institution}
-                  </TextHighlight>
-                }
-                link
-                linkFontSize="medium"
-                underlineOnHover
-                onClick={() =>
-                  navigateToSearch({
-                    search: `submitter_institution: ${experiment.submitter_institution}`
-                  })
-                }
-              />
-            }
-            textNull="No associated institution"
-          />
-          <InformationItemBlock
-            condition={experiment.publication_authors.length > 0}
-            field="Authors"
-            value={experiment.publication_authors.map((author, i) => (
-              <Fragment key={nanoid()}>
-                {i ? ', ' : ''}
+        <Box margin={{ left: '-32px' }} width={{ min: 'calc(100% + 64px)' }}>
+          <InformationList>
+            <InformationItem
+              field="Description"
+              value={experiment.description}
+            />
+            <InformationItem
+              field="PubMedID"
+              value={
+                <Anchor
+                  label={<TextHighlight>{experiment.pubmed_id}</TextHighlight>}
+                  href={`${links.nih}${experiment.pubmed_id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              }
+              fallback="No associated PubMed ID"
+              forceFallback={!experiment.pubmed_id}
+            />
+            <InformationItem
+              field="Publication Title"
+              value={
+                <Anchor
+                  label={
+                    <TextHighlight>
+                      {experiment.publication_title}
+                    </TextHighlight>
+                  }
+                  href={`${links.nih}${experiment.pubmed_id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              }
+              fallback="No associated publication"
+              forceFallback={!experiment.publication_title}
+            />
+            <InformationItem
+              field="Total Samples"
+              value={formatNumbers(experiment.num_total_samples)}
+            />
+            <InformationItem
+              field="Submitter’s Institution"
+              value={
                 <Button
-                  display="inline-block"
-                  label={<TextHighlight>{author}</TextHighlight>}
+                  label={
+                    <TextHighlight>
+                      {experiment.submitter_institution}
+                    </TextHighlight>
+                  }
                   link
                   linkFontSize="medium"
                   underlineOnHover
                   onClick={() =>
                     navigateToSearch({
-                      search: `publication_authors:${author}`
+                      search: `submitter_institution: ${experiment.submitter_institution}`
                     })
                   }
                 />
-              </Fragment>
-            ))}
-            textNull="No associated authors"
-            direction="row"
-          />
-          <InformationItemBlock
-            condition={experiment.source_database}
-            field="Source Repositories"
-            value={
-              <Anchor
-                label={
-                  <TextHighlight>
-                    {getReadable(experiment.source_database)}
-                  </TextHighlight>
-                }
-                href={experiment.source_url}
-                target="_blank"
-                rel="noopener noreferrer"
-              />
-            }
-          />
-          <InformationItemBlock
-            condition={experiment.alternate_accession_code}
-            field="Alternate Accession IDs"
-            value={
-              <Anchor
-                label={
-                  <TextHighlight>
-                    {experiment.alternate_accession_code}
-                  </TextHighlight>
-                }
-                href={getURLForAccessionCode(
-                  experiment.alternate_accession_code
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-              />
-            }
-            textNull="None"
-          />
-        </InformationList>
+              }
+              fallback="No associated institution"
+              forceFallback={
+                !experiment.submitter_institution ||
+                experiment.submitter_institution === 'N/A'
+              }
+            />
+            <InformationItem
+              field="Authors"
+              value={experiment.publication_authors.map((author, i) => (
+                <Fragment key={nanoid()}>
+                  {i ? ', ' : ''}
+                  <Button
+                    display="inline-block"
+                    label={<TextHighlight>{author}</TextHighlight>}
+                    link
+                    linkFontSize="medium"
+                    underlineOnHover
+                    onClick={() =>
+                      navigateToSearch({
+                        search: `publication_authors:${author}`
+                      })
+                    }
+                  />
+                </Fragment>
+              ))}
+              fallback="No associated authors"
+              forceFallback={experiment.publication_authors.length === 0}
+            />
+            <InformationItem
+              field="Source Repositories"
+              value={
+                <Anchor
+                  label={
+                    <TextHighlight>
+                      {getReadable(experiment.source_database)}
+                    </TextHighlight>
+                  }
+                  href={experiment.source_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              }
+              forceFallback={!experiment.source_database}
+            />
+            <InformationItem
+              field="Alternate Accession IDs"
+              value={
+                <Anchor
+                  label={
+                    <TextHighlight>
+                      {experiment.alternate_accession_code}
+                    </TextHighlight>
+                  }
+                  href={getURLForAccessionCode(
+                    experiment.alternate_accession_code
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              }
+              fallback="None"
+              forceFallback={!experiment.alternate_accession_code}
+            />
+          </InformationList>
+        </Box>
       </Box>
     </FixedContainer>
   )
