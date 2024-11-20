@@ -98,9 +98,7 @@ export const getDatasetState = (dataset) =>
   getReadable('expires_on', moment(dataset.expires_on).isBefore(Date.now()))
 
 export const getFormattedDatasetOptions = (dataset) =>
-  `${datasetOptionsKeys
-    .map((key) => `${getReadable(key, dataset[key])}`)
-    .join('|')}`
+  `${datasetOptionsKeys.map((key) => `${getReadable(dataset[key])}`).join('|')}`
 
 // formats filter names in each facet
 const formatFacets = (query) => {

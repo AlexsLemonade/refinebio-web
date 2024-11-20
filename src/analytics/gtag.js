@@ -67,8 +67,7 @@ const trackOneOffExperimentDownload = (experiment) => {
   payload.one_off_experiment_download = experiment.accession_code
   event('one_off_experiment_download', payload)
 }
-// tracks the dataset's state (expired or valid) and changes in download options
-// (initial and updated) if any, otherwise send initial
+// tracks the dataset's state (expired or valid) and download options change (initial and updated)
 const trackRegeneratedDataset = (dataset, regeneratedDataset) => {
   const payload = {}
   payload.regenerated_state = getDatasetState(dataset)
