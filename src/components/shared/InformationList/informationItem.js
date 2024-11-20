@@ -1,12 +1,13 @@
 import { Box, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Row } from 'components/shared/Row'
+import { TextNull } from 'components/shared/TextNull'
 
 export const InformationItem = ({
   field,
   value,
-  width = { min: 'calc(100% + 48px)', max: 'none' },
-  margin = { left: '-24px' }
+  fallback = 'N/A',
+  forceFallback = false // sets to true when you want to ignore the value prop
 }) => {
   const { setResponsive } = useResponsive()
 
@@ -14,12 +15,10 @@ export const InformationItem = ({
     <Row
       direction={setResponsive('column', 'column', 'row')}
       justify="start"
-      margin={margin}
       pad={{
         horizontal: setResponsive('basex7', 'basex7', 'basex12'),
         vertical: 'small'
       }}
-      width={width}
     >
       <Box margin={{ right: 'medium' }} width={{ min: '192px' }}>
         <Text
@@ -31,7 +30,11 @@ export const InformationItem = ({
         </Text>
       </Box>
       <Box>
-        <Text style={{ overflowWrap: 'break-word' }}>{value}</Text>
+        {value && !forceFallback ? (
+          <Text style={{ overflowWrap: 'break-word' }}>{value}</Text>
+        ) : (
+          <TextNull text={fallback} />
+        )}
       </Box>
     </Row>
   )
