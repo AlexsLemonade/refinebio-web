@@ -19,9 +19,8 @@ export const ShareDatasetButton = ({ dataset }) => {
   }, 3000)
   const [isCopied, setIsCopied] = useState(false)
   const [value, copyText] = useCopyToClipboard(null)
-  const { id: datasetId } = dataset
-  const id = `shareable-link_${datasetId}`
-  const shareableLink = `${getDomain()}/dataset/${datasetId}?ref=share`
+  const id = `shareable-link_${dataset.id}`
+  const shareableLink = `${getDomain()}/dataset/${dataset.id}?ref=share`
 
   const onShareClick = () => {
     openModal(id)
