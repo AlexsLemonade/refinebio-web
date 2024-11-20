@@ -193,8 +193,11 @@ export const Search = ({
                 <Box animation={{ type: 'fadeIn', duration: 300 }}>
                   {results.map((result, i) =>
                     result.isMatchedAccessionCode ? (
-                      <Fragment key={result.id}>
-                        <SearchCard key={result.id} experiment={result} />
+                      <Fragment key={result.accession_code}>
+                        <SearchCard
+                          key={result.accession_code}
+                          experiment={result}
+                        />
                         {results[i + 1] &&
                           !results[i + 1].isMatchedAccessionCode && (
                             <Box
@@ -212,7 +215,10 @@ export const Search = ({
                           )}
                       </Fragment>
                     ) : (
-                      <SearchCard key={result.id} experiment={result} />
+                      <SearchCard
+                        key={result.accession_code}
+                        experiment={result}
+                      />
                     )
                   )}
                   {(results.length < 10 ||
@@ -220,6 +226,7 @@ export const Search = ({
                     <RequestSearchFormAlert />
                   )}
                 </Box>
+
                 <Box
                   align="center"
                   direction="row"
