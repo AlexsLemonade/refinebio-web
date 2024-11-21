@@ -14,25 +14,17 @@ import { SpiecesRow } from './SpeciesRow'
 import { TotalRow } from './TotalRow'
 
 // returns the experiment count per organism
-const getExperimentCountByOrganisms = (data, experiments) => {
-  if (!data || !experiments) return {}
-
+const getExperimentCountByOrganisms = ({ experiments }) => {
   const experimentCounts = {}
 
-  for (const accessionCode of Object.keys(data)) {
-    const experiment = experiments.find(
-      (e) => e.accession_code === accessionCode
-    )
-
-    if (!experiment) return {}
-
-    const { organism_names: organismNames } = experiment
-
-    for (const organism of organismNames) {
-      if (!experimentCounts[organism]) experimentCounts[organism] = 0
+  experiments.forEach(({ organism_names: organismNames }) => {
+    organismNames.forEach((organism) => {
+      if (!experimentCounts[organism]) {
+        experimentCounts[organism] = 0
+      }
       experimentCounts[organism] += 1
-    }
-  }
+    })
+  })
 
   return experimentCounts
 }
@@ -42,10 +34,7 @@ export const DatasetSummary = ({ dataset }) => {
   const { setResponsive } = useResponsive()
   const totalSamples = getTotalSamples(dataset.data)
   const totalExperiments = getTotalExperiments(dataset.data)
-  const experimentCountBySpecies = getExperimentCountByOrganisms(
-    dataset.data,
-    dataset.experiments
-  )
+  const experimentCountBySpecies = getExperimentCountByOrganisms(dataset)
 
   return (
     <Box margin={{ top: 'large' }}>
