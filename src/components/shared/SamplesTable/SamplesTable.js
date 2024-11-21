@@ -32,7 +32,7 @@ export const SamplesTable = ({
   allSamples,
   isImmutable = false,
   modalView = false,
-  showOnlyAddedSamples = false
+  showOnlyFilter = false // sets visibility of ShowOnlyAddedSamplesFilter
 }) => {
   const { pageSizes } = options
   const {
@@ -180,11 +180,10 @@ export const SamplesTable = ({
                 top: setResponsive('small', 'xsmall', 'none')
               }}
             >
-              {showOnlyAddedSamples && (
+              {showOnlyFilter && (
                 <ShowOnlyAddedSamplesFilter
                   data={allSamples}
                   queryToAdd={queryToAdd}
-                  showOnlyAddedSamples
                   updateDatasetId={updateDatasetId}
                 />
               )}
