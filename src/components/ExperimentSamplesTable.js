@@ -1,5 +1,5 @@
 import { Heading } from 'grommet'
-import { SamplesTableManagerContextProvider } from 'contexts/SamplesTableManagerContext'
+import { SamplesContextProvider } from 'contexts/SamplesContext'
 import { useResponsive } from 'hooks/useResponsive'
 import { Column } from 'components/shared/Column'
 import { Row } from 'components/shared/Row'
@@ -19,7 +19,7 @@ export const ExperimentSamplesTable = ({ experiment }) => {
   const { setResponsive } = useResponsive()
 
   return (
-    <SamplesTableManagerContextProvider>
+    <SamplesContextProvider>
       <Row margin={{ bottom: 'medium' }}>
         <Column>
           <Heading
@@ -47,7 +47,7 @@ export const ExperimentSamplesTable = ({ experiment }) => {
         sampleMetadataFields={sampleMetadata}
         showOnlyAddedSamples
       />
-    </SamplesTableManagerContextProvider>
+    </SamplesContextProvider>
   )
 }
 

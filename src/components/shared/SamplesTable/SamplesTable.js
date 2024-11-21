@@ -1,7 +1,7 @@
-import { memo, useEffect, useMemo, useState } from 'react'
+import { memo, useMemo, useState } from 'react'
 import { Box, Spinner, Text } from 'grommet'
+import { useSamplesContext } from 'hooks/useSamplesContext'
 import { useResponsive } from 'hooks/useResponsive'
-import { useSamplesTableManager } from 'hooks/useSamplesTableManager'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import formatString from 'helpers/formatString'
 import { Anchor } from 'components/shared/Anchor'
@@ -39,16 +39,16 @@ export const SamplesTable = ({
     hasError,
     hasSamples,
     loading,
-    samplesTable,
+    samplesQuery,
     totalPages,
-    tableData,
-    getSamplesTableData,
+    samples,
+    getSamples,
     updateFilterBy,
     updatePage,
     updatePageSize,
     updateDatasetId,
     updateSortBy
-  } = useSamplesTableManager(queryToAdd)
+  } = useSamplesContext(queryToAdd)
   const { viewport, setResponsive } = useResponsive()
   const [tableExpanded, setTableExpanded] = useState(false)
 
@@ -57,7 +57,7 @@ export const SamplesTable = ({
     () => ({ minWidth: 60, width: 160, maxWidth: 250 }),
     []
   )
-  const data = useMemo(() => tableData.results, [tableData])
+  const data = useMemo(() => samples.results, [samples])
   const columns = useMemo(() => {
     const temp = [
       {
@@ -136,15 +136,10 @@ export const SamplesTable = ({
   }, [isImmutable, viewport])
 
   // for the expand table button
-  const totalColumns =
-    tableData && sampleMetadataFields ? columns.length - 2 : 0 // excludes the add/remove and hidden cells
+  const totalColumns = samples && sampleMetadataFields ? columns.length - 2 : 0 // excludes the add/remove and hidden cells
   const isTableExpandable =
     !modalView && viewport === 'large' && totalColumns > 5 // sets the button visivility
   const tableHeight = tableExpanded ? '75vh' : '800px' // toggles the table height on expanded view
-
-  useEffect(() => {
-    getSamplesTableData()
-  }, [])
 
   return (
     <>
@@ -174,7 +169,7 @@ export const SamplesTable = ({
             margin={{ bottom: setResponsive('medium', 'none') }}
           >
             <PageSizes
-              pageSize={samplesTable.pageSize}
+              pageSize={samplesQuery.pageSize}
               pageSizes={pageSizes}
               totalPages={totalPages}
               setPageSize={updatePageSize}
@@ -202,7 +197,7 @@ export const SamplesTable = ({
               align={setResponsive('start', 'center')}
             >
               <FilterTextInput
-                filter={samplesTable.filterBy}
+                filter={samplesQuery.filterBy}
                 setFilter={updateFilterBy}
                 placeholder="Filter samples"
               />
@@ -216,7 +211,7 @@ export const SamplesTable = ({
           </Box>
         </Row>
         <BoxBlock>
-          <TextHighlightContextProvider match={samplesTable.filterBy}>
+          <TextHighlightContextProvider match={samplesQuery.filterBy}>
             <DataTable
               columns={columns}
               data={data || []}
@@ -231,7 +226,7 @@ export const SamplesTable = ({
               tableExpanded={tableExpanded}
               updateSortBy={updateSortBy}
             />
-            {!hasSamples && samplesTable.filterBy && (
+            {!hasSamples && samplesQuery.filterBy && (
               <SamplesTableEmpty>
                 <TextNull
                   text={
@@ -242,7 +237,7 @@ export const SamplesTable = ({
                         style={{ fontStyle: 'normal' }}
                         margin={{ left: 'xsmall' }}
                       >
-                        <strong>"{samplesTable.filterBy}"</strong>
+                        <strong>"{samplesQuery.filterBy}"</strong>
                       </Text>
                     </>
                   }
@@ -261,7 +256,7 @@ export const SamplesTable = ({
               />
             </SamplesTableEmpty>
           )}
-          {hasError && <SamplesTableError onClick={getSamplesTableData} />}
+          {hasError && <SamplesTableError onClick={getSamples} />}
         </BoxBlock>
         {hasSamples && (
           <Box>
@@ -292,9 +287,9 @@ export const SamplesTable = ({
               margin={{ top: 'medium' }}
             >
               <Pagination
-                page={samplesTable.page}
-                pageSize={samplesTable.pageSize}
-                reset={samplesTable.reset}
+                page={samplesQuery.page}
+                pageSize={samplesQuery.pageSize}
+                reset={samplesQuery.reset}
                 totalPages={totalPages}
                 setPage={updatePage}
               />
