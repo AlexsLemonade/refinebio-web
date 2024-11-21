@@ -7,34 +7,13 @@ import {
   TableHeader,
   TableRow
 } from 'grommet'
-import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Row } from 'components/shared/Row'
 import { SpiecesRow } from './SpeciesRow'
 import { TotalRow } from './TotalRow'
 
-// returns the experiment count per organism
-const getExperimentCountByOrganisms = ({ experiments }) => {
-  const experimentCounts = {}
-
-  experiments.forEach(({ organism_names: organismNames }) => {
-    organismNames.forEach((organism) => {
-      if (!experimentCounts[organism]) {
-        experimentCounts[organism] = 0
-      }
-      experimentCounts[organism] += 1
-    })
-  })
-
-  return experimentCounts
-}
-
 export const DatasetSummary = ({ dataset }) => {
-  const { getTotalExperiments, getTotalSamples } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const totalSamples = getTotalSamples(dataset.data)
-  const totalExperiments = getTotalExperiments(dataset.data)
-  const experimentCountBySpecies = getExperimentCountByOrganisms(dataset)
 
   return (
     <Box margin={{ top: 'large' }}>
@@ -60,11 +39,8 @@ export const DatasetSummary = ({ dataset }) => {
             </TableRow>
           </TableHeader>
           <TableBody style={{ fontSize: setResponsive('16px', '18px') }}>
-            <SpiecesRow
-              samplesBySpecies={dataset.organism_samples}
-              experimentCountBySpecies={experimentCountBySpecies}
-            />
-            <TotalRow totals={[totalSamples, totalExperiments]} />
+            <SpiecesRow dataset={dataset} />
+            <TotalRow dataset={dataset} />
           </TableBody>
         </Table>
       </Row>
