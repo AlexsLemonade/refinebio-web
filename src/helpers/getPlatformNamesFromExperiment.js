@@ -6,7 +6,7 @@ export default ({
   pretty_platforms: prettyPlatforms = [],
   platform_names: platformNames = []
 }) => {
-  if (prettyPlatforms) return prettyPlatforms
+  if (prettyPlatforms.length) return prettyPlatforms
 
   if (samples.length) {
     return unionizeArrays(...samples.map((sample) => sample.pretty_platform))
