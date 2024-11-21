@@ -13,26 +13,28 @@ import { Row } from 'components/shared/Row'
 import { SpiecesRow } from './SpeciesRow'
 import { TotalRow } from './TotalRow'
 
-// returns the count of expriment by spcecies
-const getExperimentCountBySpecies = (data, experiments) => {
+// returns the experiment count per organism
+const getExperimentCountByOrganisms = (data, experiments) => {
   if (!data || !experiments) return {}
 
-  const species = {}
+  const experimentCounts = {}
 
   for (const accessionCode of Object.keys(data)) {
-    const experimentInfo = experiments[accessionCode]
+    const experiment = experiments.find(
+      (e) => e.accession_code === accessionCode
+    )
 
-    if (!experimentInfo) return {}
+    if (!experiment) return {}
 
-    const { organism_names: organismNames } = experimentInfo
+    const { organism_names: organismNames } = experiment
 
     for (const organism of organismNames) {
-      if (!species[organism]) species[organism] = 0
-      species[organism] += 1
+      if (!experimentCounts[organism]) experimentCounts[organism] = 0
+      experimentCounts[organism] += 1
     }
   }
 
-  return species
+  return experimentCounts
 }
 
 export const DatasetSummary = ({ dataset }) => {
@@ -40,7 +42,7 @@ export const DatasetSummary = ({ dataset }) => {
   const { setResponsive } = useResponsive()
   const totalSamples = getTotalSamples(dataset.data)
   const totalExperiments = getTotalExperiments(dataset.data)
-  const experimentCountBySpecies = getExperimentCountBySpecies(
+  const experimentCountBySpecies = getExperimentCountByOrganisms(
     dataset.data,
     dataset.experiments
   )
