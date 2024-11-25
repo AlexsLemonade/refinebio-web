@@ -289,7 +289,6 @@ export const SamplesTable = ({
               <Pagination
                 page={samplesQuery.page}
                 pageSize={samplesQuery.pageSize}
-                reset={samplesQuery.reset}
                 totalPages={totalPages}
                 setPage={updatePage}
               />

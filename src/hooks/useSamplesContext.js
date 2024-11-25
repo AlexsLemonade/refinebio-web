@@ -18,25 +18,31 @@ export const useSamplesContext = (initialQueries, defaultConfig) => {
 
   /* Common */
   const resetPage = () => {
-    samplesQuery.page = defaultConfig.page
-    setSamplesQuery({ ...samplesQuery })
+    setSamplesQuery((prev) => ({
+      ...prev,
+      page: defaultConfig.page
+    }))
   }
 
   const updatePage = (newPage) => {
-    samplesQuery.page = newPage
-
-    updateSamplesQuery()
+    setSamplesQuery((prev) => ({
+      ...prev,
+      page: newPage
+    }))
   }
 
   const restPageSize = () => {
-    samplesQuery.pageSize = defaultConfig.pageSize
-    setSamplesQuery({ ...samplesQuery })
+    setSamplesQuery((prev) => ({
+      ...prev,
+      pageSize: defaultConfig.pageSize
+    }))
   }
 
   const updatePageSize = (newPageSize) => {
-    samplesQuery.pageSize = newPageSize
-
-    updateSamplesQuery(true)
+    setSamplesQuery((prev) => ({
+      ...prev,
+      pageSize: newPageSize
+    }))
   }
 
   const resetCommonQueries = () => {
@@ -46,24 +52,36 @@ export const useSamplesContext = (initialQueries, defaultConfig) => {
 
   /* Filter Term */
   const updateFilterBy = (newFilterTerm) => {
-    if (newFilterTerm === '') {
-      delete samplesQuery.filterBy
-    } else {
-      samplesQuery.filterBy = newFilterTerm
-    }
+    setSamplesQuery((prev) => {
+      const updatedQuery = { ...prev }
 
-    updateSamplesQuery(true)
+      if (newFilterTerm === '') {
+        delete updatedQuery.filterBy
+      } else {
+        updatedQuery.filterBy = newFilterTerm
+      }
+      // reset the page on filter term change
+      updatedQuery.page = defaultConfig.page
+
+      return updatedQuery
+    })
   }
 
   /* Sort Order */
   const updateSortBy = (newSortBy) => {
-    if (newSortBy === '') {
-      delete samplesQuery.sortBy
-    } else {
-      samplesQuery.sortBy = newSortBy
-    }
+    setSamplesQuery((prev) => {
+      const updatedQuery = { ...prev }
 
-    updateSamplesQuery(true)
+      if (newSortBy === '') {
+        delete updatedQuery.sortBy
+      } else {
+        updatedQuery.sortBy = newSortBy
+      }
+      // reset the page on sorting change
+      updatedQuery.page = defaultConfig.page
+
+      return updatedQuery
+    })
   }
 
   /* Other */
@@ -90,20 +108,19 @@ export const useSamplesContext = (initialQueries, defaultConfig) => {
   }
 
   const updateDatasetId = (newDatasetId) => {
-    if (!newDatasetId) {
-      delete samplesQuery.datasetId
-    } else {
-      samplesQuery.datasetId = newDatasetId
-    }
+    setSamplesQuery((prev) => {
+      const updatedQuery = { ...prev }
 
-    updateSamplesQuery(true)
-  }
+      if (!newDatasetId) {
+        delete updatedQuery.datasetId
+      } else {
+        updatedQuery.datasetId = newDatasetId
+      }
+      // reset the page on dataset ID change
+      updatedQuery.page = defaultConfig.page
 
-  const updateSamplesQuery = (reset = false) => {
-    if (reset) resetPage()
-
-    samplesQuery.reset = reset
-    setSamplesQuery({ ...samplesQuery })
+      return updatedQuery
+    })
   }
 
   return {
@@ -118,7 +135,6 @@ export const useSamplesContext = (initialQueries, defaultConfig) => {
     updatePage,
     updatePageSize,
     updateDatasetId,
-    updateSamplesQuery,
     updateSortBy
   }
 }
