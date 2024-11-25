@@ -34,7 +34,9 @@ export const SamplesTable = ({
   modalView = false,
   showOnlyFilter = false // sets visibility of ShowOnlyAddedSamplesFilter
 }) => {
-  const { pageSizes } = options
+  // the default queries for the API requests
+  const defaultQueries = { offset: 0, limit: 10 }
+  const defaultConfig = { page: 1, pageSize: options.pageSizes[0] }
   const {
     hasError,
     hasSamples,
@@ -48,7 +50,7 @@ export const SamplesTable = ({
     updatePageSize,
     updateDatasetId,
     updateSortBy
-  } = useSamplesContext(queryToAdd)
+  } = useSamplesContext({ ...defaultQueries, ...queryToAdd }, defaultConfig)
   const { viewport, setResponsive } = useResponsive()
   const [tableExpanded, setTableExpanded] = useState(false)
 
@@ -170,7 +172,6 @@ export const SamplesTable = ({
           >
             <PageSizes
               pageSize={samplesQuery.pageSize}
-              pageSizes={pageSizes}
               totalPages={totalPages}
               setPageSize={updatePageSize}
             />

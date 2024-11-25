@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
 import { api } from 'api'
+// import { options } from 'config'
 import { SamplesContext } from 'contexts/SamplesContext'
 
-export const useSamplesContext = (initialQueries) => {
-  const { config, setConfig, samplesQuery, setSamplesQuery } =
-    useContext(SamplesContext)
+export const useSamplesContext = (initialQueries, defaultConfig) => {
+  const { samplesQuery, setSamplesQuery } = useContext(SamplesContext)
   const [loading, setLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
   const [samples, setSamples] = useState([])
@@ -18,7 +18,7 @@ export const useSamplesContext = (initialQueries) => {
 
   /* Common */
   const resetPage = () => {
-    samplesQuery.page = config.page
+    samplesQuery.page = defaultConfig.page
     setSamplesQuery({ ...samplesQuery })
   }
 
@@ -29,7 +29,7 @@ export const useSamplesContext = (initialQueries) => {
   }
 
   const restPageSize = () => {
-    samplesQuery.pageSize = config.pageSize
+    samplesQuery.pageSize = defaultConfig.pageSize
     setSamplesQuery({ ...samplesQuery })
   }
 
@@ -68,13 +68,12 @@ export const useSamplesContext = (initialQueries) => {
 
   /* Other */
   const getSamples = async () => {
-    const {
-      commonQueries: { offset, limit }
-    } = config
     const params = {
       ...initialQueries,
-      offset: (samplesQuery.page - 1) * samplesQuery.pageSize || offset,
-      limit: samplesQuery.pageSize || limit,
+      offset:
+        (samplesQuery.page - 1) * samplesQuery.pageSize ||
+        initialQueries.offset,
+      limit: samplesQuery.pageSize || initialQueries.limit,
       ...(samplesQuery.datasetId ? { dataset_id: samplesQuery.datasetId } : {}),
       ...(samplesQuery.filterBy ? { filter_by: samplesQuery.filterBy } : {}),
       ...(samplesQuery.sortBy ? { ordering: samplesQuery.sortBy } : {})
@@ -108,11 +107,8 @@ export const useSamplesContext = (initialQueries) => {
   }
 
   return {
-    config,
-    setConfig,
     samples,
     samplesQuery,
-    setSamplesQuery,
     hasError,
     hasSamples,
     loading,
