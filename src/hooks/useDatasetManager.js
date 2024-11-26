@@ -210,15 +210,13 @@ export const useDatasetManager = () => {
       'organism_samples' // for the download files summary UI change
     ]
 
-    const temp = {}
-
-    includeKeys.forEach((key) => {
-      if (key in sourceDataset) {
-        temp[key] = structuredClone(sourceDataset[key])
-      }
-    })
-
-    return temp
+    return includeKeys.reduce(
+      (acc, key) =>
+        key in sourceDataset
+          ? { ...acc, [key]: structuredClone(sourceDataset[key]) }
+          : acc,
+      {}
+    )
   }
 
   // sends the download options change to the API for My Dataset to preserve
