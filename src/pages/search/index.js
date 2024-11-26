@@ -20,6 +20,7 @@ import { Pagination } from 'components/shared/Pagination'
 import { SearchBox } from 'components/shared/SearchBox'
 import { SearchInfoBanner } from 'components/SearchResults/SearchInfoBanner'
 import { SearchCard } from 'components/shared/SearchCard'
+import { Spinner } from 'components/shared/Spinner'
 import {
   RequestSearchFormAlert,
   NoSearchResults,
@@ -56,6 +57,9 @@ export const Search = ({
   const [sortBy, setSortBy] = useState(query.sortby || sortby[0].value)
   const isResults = results?.length > 0
 
+  // TODO: Remove when refactring search in a future issue (prevent hydration error)
+  const [isPageReady, setIsPageReady] = useState(false)
+
   const handleClearSearchTerm = () => {
     setUserSearchTerm('')
   }
@@ -64,6 +68,9 @@ export const Search = ({
     e.preventDefault()
     updateSearchTerm(userSearchTerm)
   }
+  useEffect(() => {
+    setIsPageReady(true)
+  }, [])
 
   useEffect(() => {
     if (facets) {
@@ -79,11 +86,14 @@ export const Search = ({
         })
       }
     }
-  }, [])
+  }, [facets, query])
 
   useEffect(() => {
     gtag.trackSearchQuery(query)
   }, [query])
+
+  // TODO: Remove when refactring search in a future issue
+  if (!isPageReady) return <Spinner />
 
   return (
     <>
@@ -193,8 +203,11 @@ export const Search = ({
                 <Box animation={{ type: 'fadeIn', duration: 300 }}>
                   {results.map((result, i) =>
                     result.isMatchedAccessionCode ? (
-                      <Fragment key={result.id}>
-                        <SearchCard key={result.id} result={result} />
+                      <Fragment key={result.accession_code}>
+                        <SearchCard
+                          key={result.accession_code}
+                          experiment={result}
+                        />
                         {results[i + 1] &&
                           !results[i + 1].isMatchedAccessionCode && (
                             <Box
@@ -212,7 +225,10 @@ export const Search = ({
                           )}
                       </Fragment>
                     ) : (
-                      <SearchCard key={result.id} result={result} />
+                      <SearchCard
+                        key={result.accession_code}
+                        experiment={result}
+                      />
                     )
                   )}
                   {(results.length < 10 ||
@@ -220,6 +236,7 @@ export const Search = ({
                     <RequestSearchFormAlert />
                   )}
                 </Box>
+
                 <Box
                   align="center"
                   direction="row"

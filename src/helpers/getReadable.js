@@ -5,5 +5,5 @@ export default (key, value) => {
     return readableBooleans[key] ? readableBooleans[key][value ? 0 : 1] : value
   }
 
-  return readableValues[key] || readableAttributes[key] || key
+  return readableAttributes[key] || readableValues[key] || key
 }
