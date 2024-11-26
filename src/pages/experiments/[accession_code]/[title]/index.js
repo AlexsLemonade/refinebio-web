@@ -55,6 +55,8 @@ export const Experiment = ({ experiment }) => {
     }
   }, [fromViewSamples, hasSamples])
 
+  if (!hasSamples) return <Spinner />
+
   return (
     <>
       <PageTitle title={`${`${accessionCode} - ${experiment.title}`} -`} />
@@ -78,11 +80,7 @@ export const Experiment = ({ experiment }) => {
                 pad={setResponsive('medium', 'large')}
                 margin={{ bottom: 'basex6' }}
               >
-                {hasSamples ? (
-                  <ExperimentSamplesTable experiment={experiment} />
-                ) : (
-                  <Spinner />
-                )}
+                <ExperimentSamplesTable experiment={experiment} />
               </Box>
             </FixedContainer>
           </Box>
