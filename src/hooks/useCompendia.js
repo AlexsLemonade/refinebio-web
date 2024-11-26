@@ -5,12 +5,7 @@ import { api } from 'api'
 
 export const useCompendia = () => {
   const { push } = useRouter()
-  const {
-    token: tokenState,
-    createToken,
-    resetToken,
-    validateToken
-  } = useToken()
+  const { token, resetToken, validateToken } = useToken()
   const [loading, setLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
 
@@ -22,7 +17,7 @@ export const useCompendia = () => {
     }
 
     setLoading(true)
-    const response = await api.compendia.get(compendiaQuery, tokenState)
+    const response = await api.compendia.get(compendiaQuery, token)
     setHasError(!response.ok)
     setLoading(false)
 
@@ -35,10 +30,9 @@ export const useCompendia = () => {
       : 'normalized'
 
   const downloadCompendia = async (compendiaId) => {
-    const token = !validateToken()
-      ? await resetToken()
-      : tokenState || (await createToken())
-    const response = await api.compendia.download(compendiaId, token)
+    // validates the existing token or create a new one
+    const tokenToUse = (await validateToken()) ? token : await resetToken()
+    const response = await api.compendia.download(compendiaId, tokenToUse)
 
     return {
       organism: response.primary_organism_name,
@@ -46,7 +40,7 @@ export const useCompendia = () => {
     }
   }
 
-  const navigateToFileDownload = (organism, url) => {
+  const navigateToFileDownload = async (organism, url) => {
     push({
       pathname: '/compendia/download',
       query: {

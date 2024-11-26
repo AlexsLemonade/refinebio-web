@@ -88,7 +88,7 @@ export const useDatasetManager = () => {
 
   const downloadDataset = async (id, downloadUrl) => {
     let href = ''
-    if (validateToken() && downloadUrl) {
+    if ((await validateToken()) && downloadUrl) {
       href = downloadUrl
     } else {
       // creates a new token and requests a download url with API-Key
@@ -143,8 +143,8 @@ export const useDatasetManager = () => {
     accessionCode = null
   ) => {
     const isMyDatasetId = id && id === datasetId
-    // validates the existing token or create a new token if none
-    const tokenId = validateToken() ? token : await resetToken()
+    // validates the existing token or create a new one
+    const tokenId = (await validateToken()) ? token : await resetToken()
     const { emailAddress, receiveUpdates } = options
     const params = {
       ...getDownloadOptions(options),
