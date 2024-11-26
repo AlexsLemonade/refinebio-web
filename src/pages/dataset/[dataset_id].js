@@ -1,15 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Box } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
-import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
 import { api } from 'api'
 import getDatasetState from 'helpers/getDatasetState'
 import { Error } from 'components/shared/Error'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
-import { Spinner } from 'components/shared/Spinner'
 import {
   DatasetPageHeader,
   MoveToDatasetButton,
@@ -23,31 +21,19 @@ import {
   StartProcessing
 } from 'components/Download'
 
-export const Dataset = ({ dataset: datasetProps }) => {
+export const Dataset = ({ dataset }) => {
   const {
     push,
     query: { start }
   } = useRouter()
   const { setResponsive } = useResponsive()
   const { error, isMyDatasetId } = useDatasetManager()
-  const { isProcessingDataset, polledDatasetState } = usePollDatasetStatus(
-    datasetProps.id
-  )
-  const [dataset, setDataset] = useState(datasetProps) // dataset currently displayed on the page
-  const { isNotProcessed } = getDatasetState(datasetProps)
+  const { isNotProcessed } = getDatasetState(dataset)
 
   useEffect(() => {
     // redirects users to /download if datasetId matches My dataset ID
     if (isMyDatasetId(dataset.id)) push('/download')
   }, [dataset, start])
-
-  useEffect(() => {
-    // update the dataset with the latest polledDatasetState
-    // once processing is complate to re-render DatasetPageHeader
-    if (!isProcessingDataset && polledDatasetState) {
-      setDataset(polledDatasetState)
-    }
-  }, [isProcessingDataset, polledDatasetState])
 
   if (start) {
     return (
@@ -67,8 +53,6 @@ export const Dataset = ({ dataset: datasetProps }) => {
       />
     )
   }
-
-  if (!dataset.data) return <Spinner />
 
   return (
     <FixedContainer>
@@ -100,17 +84,15 @@ export const Dataset = ({ dataset: datasetProps }) => {
 export const getServerSideProps = async ({ query }) => {
   const response = await api.dataset.get(query.dataset_id)
 
-  if (!response) {
+  if (response.ok && response) {
     return {
-      notFound: true
+      props: {
+        dataset: response
+      }
     }
   }
 
-  return {
-    props: {
-      dataset: response
-    }
-  }
+  return { notFound: true }
 }
 
 export default Dataset

@@ -15,7 +15,7 @@ export default (dataset) => {
 
   return {
     // mutable
-    isNotProcessed: !isComplete && success === null, // unprocessed and editable
+    isNotProcessed: !isProcessing && !isComplete && success === null, // unprocessed and editable
     // immutable
     isProcessing: isProcessing && !isFailed, // currently being processed
     isFailed,

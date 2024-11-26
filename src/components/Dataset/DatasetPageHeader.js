@@ -1,53 +1,47 @@
-import { useEffect, useState } from 'react'
-import { Box, Heading } from 'grommet'
+import dynamic from 'next/dynamic'
+import { Box } from 'grommet'
+import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
 import getDatasetState from 'helpers/getDatasetState'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { DatasetProcessing } from './DatasetProcessing'
+import { DatasetNotProcessed } from './DatasetNotProcessed'
 import { DatasetProcessingError } from './DatasetProcessingError'
 import { DatasetReady } from './DatasetReady'
 import { DatasetRegenerate } from './DatasetRegenerate'
 
+const DatasetProcessing = dynamic(() => import('./DatasetProcessing'), {
+  ssr: false
+})
+
 export const DatasetPageHeader = ({ dataset }) => {
   const { setResponsive } = useResponsive()
-  const [datasetStates, setDatasetStates] = useState({})
+  const { polledDatasetState } = usePollDatasetStatus(dataset.id)
+  const currentDataset = polledDatasetState || dataset
+  const currentDatasetState = getDatasetState(currentDataset)
+  const vPad = !currentDatasetState.isNotProcessed
+    ? setResponsive('basex6', 'basex8', 'basex14')
+    : 'none'
 
-  useEffect(() => {
-    setDatasetStates(getDatasetState(dataset))
-  }, [dataset])
-
-  // maps dataset states to their corresponding component
-  const statusHeaders = {
+  const datasetStateComponents = {
+    isNotProcessed: DatasetNotProcessed,
     isProcessing: DatasetProcessing,
     isFailed: DatasetProcessingError,
     isReady: DatasetReady,
     isReadyExpired: DatasetRegenerate
   }
 
-  // finds the current dataset state
-  const currentState = Object.keys(statusHeaders).find(
-    (state) => datasetStates[state]
-  )
-  // gets the corresponding component for the current dataset state
-  const Component = currentState ? statusHeaders[currentState] : null
+  const Component =
+    datasetStateComponents[
+      Object.keys(datasetStateComponents).find(
+        (state) => currentDatasetState[state]
+      )
+    ]
 
   return (
     <FixedContainer pad="none">
-      {Component ? (
-        <Box
-          pad={{
-            vertical: setResponsive('basex6', 'basex8', 'basex14')
-          }}
-        >
-          <Component dataset={dataset} />
-        </Box>
-      ) : (
-        <Box pad={{ top: 'large', bottom: 'medium' }}>
-          <Heading level={2} size={setResponsive('small', 'large')}>
-            Shared Dataset
-          </Heading>
-        </Box>
-      )}
+      <Box pad={{ vertical: vPad }}>
+        <Component dataset={dataset} />
+      </Box>
     </FixedContainer>
   )
 }
