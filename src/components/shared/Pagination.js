@@ -35,7 +35,7 @@ export const Pagination = ({
   pageSize,
   totalPages,
   setPage,
-  updatePage = () => {} // for updateing a page url with selected page number
+  updatePage = () => {} // updates page with the selected number
 }) => {
   const { query, isReady } = useRouter()
   const { setResponsive } = useResponsive()

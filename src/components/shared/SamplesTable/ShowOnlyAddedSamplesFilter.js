@@ -10,9 +10,10 @@ export const ShowOnlyAddedSamplesFilter = ({ data, updateDatasetId }) => {
   const [showOnly, setShowOnly] = useState(false)
 
   useEffect(() => {
-    if (!samplesInMyDataset) return
-    // updates the dataset ID on checkbox toggle
-    updateDatasetId(showOnly ? dataset.id : null)
+    if (samplesInMyDataset) {
+      // updates the dataset ID on checkbox toggle
+      updateDatasetId(showOnly ? dataset.id : null)
+    }
   }, [showOnly, samplesInMyDataset])
 
   return (

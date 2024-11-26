@@ -3,7 +3,14 @@ import { createContext, useMemo, useState } from 'react'
 export const SamplesContext = createContext({})
 
 export const SamplesContextProvider = ({ children }) => {
-  const [samplesQuery, setSamplesQuery] = useState({})
+  const [samplesQuery, setSamplesQuery] = useState({
+    // default, unless overridden by caller
+    offset: 0,
+    limit: 10,
+    datasetId: null,
+    filterBy: '',
+    ordering: ''
+  })
 
   const value = useMemo(
     () => ({ samplesQuery, setSamplesQuery }),

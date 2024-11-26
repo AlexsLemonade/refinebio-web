@@ -4,6 +4,7 @@ import { useSamplesContext } from 'hooks/useSamplesContext'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import formatString from 'helpers/formatString'
+import getPageNumber from 'helpers/getPageNumber'
 import { Anchor } from 'components/shared/Anchor'
 import { BoxBlock } from 'components/shared/BoxBlock'
 import { DataTable, ExpandTableButton } from 'components/shared/DataTable'
@@ -14,7 +15,7 @@ import { PageSizes } from 'components/shared/PageSizes'
 import { Pagination } from 'components/shared/Pagination'
 import { Row } from 'components/shared/Row'
 import { TextNull } from 'components/shared/TextNull'
-import { links, options } from 'config'
+import { links } from 'config'
 import { SamplesTableEmpty } from './SamplesTableEmpty'
 import { SamplesTableError } from './SamplesTableError'
 import { AccessionCodeCell } from './AccessionCodeCell'
@@ -34,15 +35,14 @@ export const SamplesTable = ({
   modalView = false,
   showOnlyFilter = false // sets visibility of ShowOnlyAddedSamplesFilter
 }) => {
-  // the default queries for the API requests
-  const defaultQueries = { offset: 0, limit: 10 }
-  const defaultConfig = { page: 1, pageSize: options.pageSizes[0] }
+  // initial queries for API requests
+  const initialQueries = { offset: 0, limit: 10, ...queryToAdd }
   const {
     hasError,
     hasSamples,
     loading,
     samplesQuery,
-    totalPages,
+    totalSamples,
     samples,
     getSamples,
     updateFilterBy,
@@ -50,7 +50,7 @@ export const SamplesTable = ({
     updatePageSize,
     updateDatasetId,
     updateSortBy
-  } = useSamplesContext({ ...defaultQueries, ...queryToAdd }, defaultConfig)
+  } = useSamplesContext(initialQueries)
   const { viewport, setResponsive } = useResponsive()
   const [tableExpanded, setTableExpanded] = useState(false)
 
@@ -171,8 +171,8 @@ export const SamplesTable = ({
             margin={{ bottom: setResponsive('medium', 'none') }}
           >
             <PageSizes
-              pageSize={samplesQuery.pageSize}
-              totalPages={totalPages}
+              pageSize={samplesQuery.limit}
+              totalPages={totalSamples}
               setPageSize={updatePageSize}
             />
             <Box
@@ -287,9 +287,9 @@ export const SamplesTable = ({
               margin={{ top: 'medium' }}
             >
               <Pagination
-                page={samplesQuery.page}
-                pageSize={samplesQuery.pageSize}
-                totalPages={totalPages}
+                page={getPageNumber(samplesQuery.offset, samplesQuery.limit)}
+                pageSize={samplesQuery.limit}
+                totalPages={totalSamples}
                 setPage={updatePage}
               />
             </Box>
