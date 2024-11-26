@@ -117,8 +117,7 @@ export const getServerSideProps = async ({ query }) => {
 
   return {
     props: {
-      compendium: compendium || {},
-      notFound: !compendium
+      compendium
     }
   }
 }

@@ -1,10 +1,19 @@
-import { createContext, useMemo, useState } from 'react'
+import { createContext, useEffect, useMemo, useState } from 'react'
 
 export const CompendiaContext = createContext({})
 
-export const CompendiaContextProvider = ({ children }) => {
-  const [compendia, setCompendia] = useState(null)
-  const [type, setType] = useState('')
+export const CompendiaContextProvider = ({
+  children,
+  initialCompendia = null,
+  initialType = ''
+}) => {
+  const [compendia, setCompendia] = useState(initialCompendia)
+  const [type, setType] = useState(initialType)
+
+  useEffect(() => {
+    setCompendia(initialCompendia)
+    setType(initialType)
+  }, [initialCompendia, initialType])
 
   const value = useMemo(
     () => ({

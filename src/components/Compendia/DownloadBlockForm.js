@@ -45,28 +45,24 @@ const DropDownButton = styled(Button)`
   `}
 `
 
-const ListItem = ({ label, compendium, onClick }) => {
-  const selected = compendium === label
-
-  return (
-    <Box as="li" style={{ listStyle: 'none', width: '100%' }}>
-      <DropDownButton
-        color={selected ? 'white' : 'black'}
-        selected={selected}
-        label={label}
-        width="100%"
-        style={{
-          borderRadius: '0',
-          display: 'block',
-          whiteSpace: 'nowrap',
-          padding: '8px 16px',
-          textAlign: 'left'
-        }}
-        onClick={onClick}
-      />
-    </Box>
-  )
-}
+const ListItem = ({ label, selected, onClick }) => (
+  <Box as="li" style={{ listStyle: 'none', width: '100%' }}>
+    <DropDownButton
+      color={selected ? 'white' : 'black'}
+      selected={selected}
+      label={label}
+      width="100%"
+      style={{
+        borderRadius: '0',
+        display: 'block',
+        whiteSpace: 'nowrap',
+        padding: '8px 16px',
+        textAlign: 'left'
+      }}
+      onClick={onClick}
+    />
+  </Box>
+)
 
 export const DownloadBlockForm = () => {
   const { setResponsive } = useResponsive()
@@ -168,10 +164,9 @@ export const DownloadBlockForm = () => {
                   <ListItem
                     key={option.primary_organism_name}
                     label={formatString(option.primary_organism_name)}
-                    compendium={
-                      compendium
-                        ? formatString(compendium.primary_organism_name)
-                        : null
+                    selected={
+                      compendium?.primary_organism_name ===
+                      option.primary_organism_name
                     }
                     onClick={() => handleClickSelectedOption(option)}
                   />

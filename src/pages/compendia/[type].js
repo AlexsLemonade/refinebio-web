@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { Box, Tab } from 'grommet'
-import { useCompendiaContext } from 'hooks/useCompendiaContext'
+import { CompendiaContextProvider } from 'contexts/CompendiaContext'
 import { useResponsive } from 'hooks/useResponsive'
 import { api } from 'api'
 import { compendia as CompendiaConfig } from 'config'
@@ -14,38 +14,29 @@ import { RNASeqTab } from 'components/Compendia/RNASeqTab'
 export const Compendia = ({ compendia, type }) => {
   const { setResponsive } = useResponsive()
   const { push } = useRouter()
-  // initializes the compendia contexts
-  useCompendiaContext(compendia, type)
 
   const tabConfigs = [
-    {
-      id: 'normalized',
-      Component: NormalizedTab
-    },
-    {
-      id: 'rna-seq',
-      Component: RNASeqTab
-    }
+    { tab: 'normalized', Component: NormalizedTab },
+    { tab: 'rna-seq', Component: RNASeqTab }
   ]
-  // sets the active tab index based on the selected type
-  const activeIndex = tabConfigs.findIndex(({ id }) => id === type)
+  const activeIndex = tabConfigs.findIndex(({ tab }) => tab === type)
 
   return (
     <Box pad={{ top: setResponsive('basex7', 'basex7', 'basex10') }}>
       <Hero />
-
-      <Tabs activeIndex={activeIndex} text>
-        {tabConfigs.map(({ id, Component }) => (
-          <Tab
-            key={id}
-            title={getReadable(id)}
-            onClick={() => push(`/compendia/${id}`)}
-          >
-            <Component />
-          </Tab>
-        ))}
-      </Tabs>
-
+      <CompendiaContextProvider initialCompendia={compendia} initialType={type}>
+        <Tabs activeIndex={activeIndex} text>
+          {tabConfigs.map(({ tab, Component }) => (
+            <Tab
+              key={tab}
+              title={getReadable(tab)}
+              onClick={() => push(`/compendia/${tab}`)}
+            >
+              <Component />
+            </Tab>
+          ))}
+        </Tabs>
+      </CompendiaContextProvider>
       <SignUpBlock />
     </Box>
   )
@@ -71,8 +62,7 @@ export const getServerSideProps = async ({ query }) => {
   return {
     props: {
       compendia: response.results,
-      type,
-      notFound: !response.ok
+      type
     }
   }
 }
