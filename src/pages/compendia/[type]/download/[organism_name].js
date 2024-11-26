@@ -96,11 +96,7 @@ export const DownloadCompendium = ({ compendium }) => {
 export const getServerSideProps = async ({ query }) => {
   const { type, organism_name: organismName } = query
   // The routes must be the valid compendia types
-  if (!compendia.types.includes(type)) {
-    return {
-      notFound: true
-    }
-  }
+  if (!compendia.types.includes(type)) return { notFound: true }
 
   const compendiaQuery = {
     latest_version: true,
@@ -110,16 +106,20 @@ export const getServerSideProps = async ({ query }) => {
 
   const response = await api.compendia.get(compendiaQuery)
 
-  // finds the compendium that matches organismName
-  const compendium = response.results.find(
-    (organism) => organism.primary_organism_name === organismName
-  )
+  if (response.ok && response.results) {
+    // finds the compendium that matches organismName
+    const compendium = response.results.find(
+      (organism) => organism.primary_organism_name === organismName
+    )
 
-  return {
-    props: {
-      compendium
+    return {
+      props: {
+        compendium
+      }
     }
   }
+
+  return { notFound: true }
 }
 
 export default DownloadCompendium

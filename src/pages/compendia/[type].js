@@ -45,11 +45,7 @@ export const Compendia = ({ compendia, type }) => {
 export const getServerSideProps = async ({ query }) => {
   const { type } = query
   // The routes must be the valid compendia types
-  if (!CompendiaConfig.types.includes(type)) {
-    return {
-      notFound: true
-    }
-  }
+  if (!CompendiaConfig.types.includes(type)) return { notFound: true }
 
   const compendiaQuery = {
     latest_version: true,
@@ -59,12 +55,16 @@ export const getServerSideProps = async ({ query }) => {
 
   const response = await api.compendia.get(compendiaQuery)
 
-  return {
-    props: {
-      compendia: response.results,
-      type
+  if (response.ok && response.results) {
+    return {
+      props: {
+        compendia: response.results,
+        type
+      }
     }
   }
+
+  return { notFound: true }
 }
 
 export default Compendia
