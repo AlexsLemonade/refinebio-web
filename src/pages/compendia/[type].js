@@ -16,23 +16,23 @@ export const Compendia = ({ compendia, type }) => {
   const { push } = useRouter()
 
   const tabConfigs = [
-    { tab: 'normalized', Component: NormalizedTab },
-    { tab: 'rna-seq', Component: RNASeqTab }
+    { type: 'normalized', Component: NormalizedTab },
+    { type: 'rna-seq', Component: RNASeqTab }
   ]
-  const activeIndex = tabConfigs.findIndex(({ tab }) => tab === type)
+  const activeIndex = tabConfigs.findIndex((config) => config.type === type)
 
   return (
     <Box pad={{ top: setResponsive('basex7', 'basex7', 'basex10') }}>
       <Hero />
       <CompendiaContextProvider initialCompendia={compendia} initialType={type}>
         <Tabs activeIndex={activeIndex} text>
-          {tabConfigs.map(({ tab, Component }) => (
+          {tabConfigs.map((config) => (
             <Tab
-              key={tab}
-              title={getReadable(tab)}
-              onClick={() => push(`/compendia/${tab}`)}
+              key={config.type}
+              title={getReadable(config.type)}
+              onClick={() => push(`/compendia/${config.type}`)}
             >
-              <Component />
+              <config.Component />
             </Tab>
           ))}
         </Tabs>
