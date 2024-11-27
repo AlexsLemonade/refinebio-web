@@ -1,34 +1,25 @@
-import { useState, memo } from 'react'
+import { useRef, useState, memo } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import styled, { css } from 'styled-components'
-import gtag from 'analytics/gtag'
-import { links } from 'config'
-import { useCompendia } from 'hooks/useCompendia'
+import { useCompendiaContext } from 'hooks/useCompendiaContext'
 import { useResponsive } from 'hooks/useResponsive'
+import { useToken } from 'hooks/useToken'
 import formatBytes from 'helpers/formatBytes'
 import formatString from 'helpers/formatString'
+import fuzzyFilterOnKey from 'helpers/fuzzyFilterOnKey'
 import getReadable from 'helpers/getReadable'
+import { links } from 'config'
 import { Anchor } from 'components/shared/Anchor'
+import { BoxBlock } from 'components/shared/BoxBlock'
 import { Button } from 'components/shared/Button'
 import { CheckBox } from 'components/shared/CheckBox'
 import { Column } from 'components/shared/Column'
-import { List } from 'components/shared/List'
 import { Icon } from 'components/shared/Icon'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
 import { SearchBox } from 'components/shared/SearchBox'
 
-const DropDown = styled(Box)`
-  > div:nth-child(2) {
-    display: none;
-  }
-  &:focus-within > div:nth-child(2) {
-    display: block;
-    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
-  }
-`
-
-const DropDownButton = styled(Button)`
+const DropdownButton = styled(Button)`
   ${({ theme, selected }) => css`
     background: ${selected
       ? theme.global.colors.brand
@@ -45,81 +36,50 @@ const DropDownButton = styled(Button)`
   `}
 `
 
-const ListItem = ({ label, selectedOrganism, ...props }) => {
-  const selected = selectedOrganism === label
+const DropdownOption = ({ label, selected, onClick }) => (
+  <DropdownButton
+    color={selected ? 'white' : 'black'}
+    selected={selected}
+    label={label}
+    width="100%"
+    style={{
+      borderRadius: '0',
+      display: 'block',
+      whiteSpace: 'nowrap',
+      padding: '8px 16px',
+      textAlign: 'left'
+    }}
+    onClick={onClick}
+  />
+)
 
-  return (
-    <Box as="li" style={{ listStyle: 'none', width: '100%' }}>
-      <DropDownButton
-        color={selected ? 'white' : 'black'}
-        selected={selected}
-        label={label}
-        width="100%"
-        style={{
-          borderRadius: '0',
-          display: 'block',
-          whiteSpace: 'nowrap',
-          padding: '8px 16px',
-          textAlign: 'left'
-        }}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...props}
-      />
-    </Box>
-  )
-}
-
-export const Download = ({ compendia }) => {
-  const { downloadCompendia, getCompediaType, navigateToFileDownload } =
-    useCompendia()
-  const type = getCompediaType(compendia)
+export const DownloadBlockForm = () => {
   const { setResponsive } = useResponsive()
-  const compendiaOptions = compendia.results
-  const [filteredOptions, setFilteredOptions] = useState([...compendiaOptions])
-  const [selectedOrganism, setSelectedOrganism] = useState(null)
+  const { validateToken } = useToken()
+  const hasToken = validateToken()
+  const [acceptTerms, setAcceptTerms] = useState(hasToken)
+  const { compendia, type, goToDownloadCompendium } = useCompendiaContext()
+  const [compendium, setCompendium] = useState(null)
   const [showOptions, setShowOptions] = useState(false)
   const [userInput, setUserInput] = useState('')
-  const [acceptTerms, setAcceptTerms] = useState(false)
 
-  const handleFocusShowOptions = () => {
-    setShowOptions(true)
-  }
+  const dropdownRef = useRef(null)
 
-  const handleChangeSelectedOption = (val) => {
-    if (val.trim() === '' || val !== userInput) {
-      setSelectedOrganism(null)
-    }
+  const filteredOptions =
+    userInput.trim() !== ''
+      ? fuzzyFilterOnKey(compendia, 'primary_organism_name', userInput)
+      : compendia
 
-    setUserInput(val)
-    updateFilteredOptions(val)
-  }
-
-  const handleClickSelectedOption = (option) => {
-    setSelectedOrganism(option)
+  const handleSelectOption = (option) => {
+    setCompendium(option)
     setUserInput(formatString(option.primary_organism_name))
     setShowOptions(false)
-    updateFilteredOptions(formatString(option.primary_organism_name))
   }
 
-  const updateFilteredOptions = (val) => {
-    if (val.trim() !== '') {
-      setFilteredOptions(() =>
-        compendiaOptions.filter((organism) =>
-          formatString(organism.primary_organism_name)
-            .toLowerCase()
-            .includes(val.toLowerCase())
-        )
-      )
-    } else {
-      setFilteredOptions(compendiaOptions)
+  const handleHideOptions = ({ relatedTarget }) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(relatedTarget)) {
+      setShowOptions(false)
     }
-  }
-
-  const handleFileDownload = async (userSelectedOrganism) => {
-    const { id } = userSelectedOrganism
-    const response = await downloadCompendia(id)
-    gtag.trackCompendiaDownload(userSelectedOrganism)
-    navigateToFileDownload(response.organism, response.url)
   }
 
   return (
@@ -134,9 +94,7 @@ export const Download = ({ compendia }) => {
       <Box
         as="label"
         margin={{ bottom: 'medium' }}
-        style={{
-          font: `${setResponsive('18px', '22px')} 'Rubik', sans-serif`
-        }}
+        style={{ font: `${setResponsive('18px', '22px')} 'Rubik', sans-serif` }}
       >
         Choose Organism
       </Box>
@@ -151,7 +109,7 @@ export const Download = ({ compendia }) => {
         >
           <Icon name="ChevronDown" size="xsmall" />
         </Box>
-        <DropDown style={{ position: 'relative' }}>
+        <Box onFocus={() => setShowOptions(true)} onBlur={handleHideOptions}>
           <SearchBox
             padding="16px 32px"
             placeholder="Search for an organism"
@@ -159,47 +117,49 @@ export const Download = ({ compendia }) => {
             reverse={false}
             responsive
             value={userInput}
-            onChange={(e) => handleChangeSelectedOption(e.target.value)}
-            onFocus={handleFocusShowOptions}
+            onChange={(e) => setUserInput(e.target.value)}
           />
           {showOptions && filteredOptions.length > 0 && (
             <Box
+              ref={dropdownRef}
               animation={{ type: 'zoomIn', duration: 50 }}
+              as="label"
               background="white"
               border={{ color: 'brand', size: 'medium' }}
-              margin={{ top: 'xlarge' }}
+              elevation="xlarge"
+              margin={{ top: '36px' }}
               height={{ max: '200px' }}
               width="100%"
               style={{
+                display: showOptions ? 'block' : 'none',
                 overflowY: 'scroll',
                 position: 'absolute',
                 zIndex: 1
               }}
             >
-              <List flexDirection="column">
+              <BoxBlock>
                 {filteredOptions.map((option) => (
-                  <ListItem
+                  <DropdownOption
                     key={option.primary_organism_name}
                     label={formatString(option.primary_organism_name)}
-                    selectedOrganism={
-                      selectedOrganism
-                        ? formatString(selectedOrganism.primary_organism_name)
-                        : null
+                    selected={
+                      option.primary_organism_name ===
+                      compendium?.primary_organism_name
                     }
-                    onClick={() => handleClickSelectedOption(option)}
+                    onClick={() => handleSelectOption(option)}
                   />
                 ))}
-              </List>
+              </BoxBlock>
             </Box>
           )}
-        </DropDown>
+        </Box>
       </Box>
-      {type === 'rnaSeq' && (
+      {type === 'rna-seq' && (
         <Box margin={{ top: setResponsive('small', 'medium') }}>
           <InlineMessage label="Data is not normalized or aggregated." />
         </Box>
       )}
-      {selectedOrganism?.organism_names?.length > 1 && (
+      {compendium?.organism_names?.length > 1 && (
         <Box margin={{ top: 'large' }}>
           <InlineMessage
             label={
@@ -216,24 +176,26 @@ export const Download = ({ compendia }) => {
           />
         </Box>
       )}
-      <Box margin={{ vertical: setResponsive('small', 'medium') }}>
-        <CheckBox
-          label={
-            <Text>
-              I agree to the{' '}
-              <Anchor href={links.terms_of_use}>Terms of Use</Anchor>
-            </Text>
-          }
-          onClick={() => setAcceptTerms(!acceptTerms)}
-        />
-      </Box>
-      <Row>
+      {!hasToken && (
+        <Box margin={{ vertical: 'small' }}>
+          <CheckBox
+            label={
+              <Text>
+                I agree to the{' '}
+                <Anchor href={links.terms_of_use}>Terms of Use</Anchor>
+              </Text>
+            }
+            onClick={() => setAcceptTerms(!acceptTerms)}
+          />
+        </Box>
+      )}
+      <Row margin={{ top: 'small' }}>
         <Column margin={{ bottom: setResponsive('small', 'small', 'none') }}>
-          {selectedOrganism && (
+          {compendium && (
             <Box animation={{ type: 'fadeIn', duration: 800 }}>
               <Text>
                 Download Size:{' '}
-                {formatBytes(selectedOrganism.computed_file.size_in_bytes)}
+                {formatBytes(compendium.computed_file.size_in_bytes)}
               </Text>
             </Box>
           )}
@@ -241,10 +203,10 @@ export const Download = ({ compendia }) => {
         <Column align={setResponsive('start', 'end')}>
           <Button
             label="Download Now"
-            disabled={!acceptTerms || !selectedOrganism}
+            disabled={!acceptTerms || !compendium}
             primary
             responsive
-            onClick={() => handleFileDownload(selectedOrganism)}
+            onClick={() => goToDownloadCompendium(compendium)}
           />
         </Column>
       </Row>
@@ -252,4 +214,4 @@ export const Download = ({ compendia }) => {
   )
 }
 
-export default memo(Download)
+export default memo(DownloadBlockForm)
