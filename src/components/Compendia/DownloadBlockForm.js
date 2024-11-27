@@ -124,11 +124,11 @@ export const DownloadBlockForm = () => {
               animation={{ type: 'zoomIn', duration: 50 }}
               as="label"
               background="white"
+              border={{ color: 'brand', size: 'medium' }}
               elevation="xlarge"
               margin={{ top: '36px' }}
               height={{ max: '200px' }}
               width="100%"
-              border={{ color: 'brand', size: 'medium' }}
               style={{
                 display: showOptions ? 'block' : 'none',
                 overflowY: 'scroll',
