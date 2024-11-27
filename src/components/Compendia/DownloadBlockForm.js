@@ -6,6 +6,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { useToken } from 'hooks/useToken'
 import formatBytes from 'helpers/formatBytes'
 import formatString from 'helpers/formatString'
+import fuzzyFilterOnKey from 'helpers/fuzzyFilterOnKey'
 import getReadable from 'helpers/getReadable'
 import { links } from 'config'
 import { Anchor } from 'components/shared/Anchor'
@@ -66,43 +67,24 @@ const ListItem = ({ label, selected, onClick }) => (
 
 export const DownloadBlockForm = () => {
   const { setResponsive } = useResponsive()
-  const { compendia, type, goToDownloadCompendium } = useCompendiaContext()
+  /* TODO: Token validation related logic will be removed in #413 */
   const { validateToken } = useToken()
   const hasToken = validateToken()
   const [acceptTerms, setAcceptTerms] = useState(hasToken)
-  const [filteredOptions, setFilteredOptions] = useState([...compendia])
-  const [compendium, setCompendium] = useState(null) // stores the user selected compendium
+  const { compendia, type, goToDownloadCompendium } = useCompendiaContext()
+  const [compendium, setCompendium] = useState(null)
   const [showOptions, setShowOptions] = useState(false)
   const [userInput, setUserInput] = useState('')
 
-  const handleChangeSelectedOption = (val) => {
-    if (val.trim() === '' || val !== userInput) {
-      setCompendium(null)
-    }
+  const filteredOptions =
+    userInput.trim() !== ''
+      ? fuzzyFilterOnKey(compendia, 'primary_organism_name', userInput)
+      : compendia
 
-    setUserInput(val)
-    updateFilteredOptions(val)
-  }
-
-  const handleClickSelectedOption = (option) => {
+  const handleSelectOption = (option) => {
     setCompendium(option)
-    setUserInput(formatString(option.primary_organism_name))
+    setUserInput(option.primary_organism_name)
     setShowOptions(false)
-    updateFilteredOptions(formatString(option.primary_organism_name))
-  }
-
-  const updateFilteredOptions = (val) => {
-    if (val.trim() !== '') {
-      setFilteredOptions(() =>
-        compendia.filter((organism) =>
-          formatString(organism.primary_organism_name)
-            .toLowerCase()
-            .includes(val.toLowerCase())
-        )
-      )
-    } else {
-      setFilteredOptions(compendia)
-    }
   }
 
   return (
@@ -141,8 +123,8 @@ export const DownloadBlockForm = () => {
             size="small"
             reverse={false}
             responsive
-            value={userInput}
-            onChange={(e) => handleChangeSelectedOption(e.target.value)}
+            value={formatString(userInput)}
+            onChange={(e) => setUserInput(e.target.value)}
             onFocus={() => setShowOptions(true)}
           />
           {showOptions && filteredOptions.length > 0 && (
@@ -164,11 +146,8 @@ export const DownloadBlockForm = () => {
                   <ListItem
                     key={option.primary_organism_name}
                     label={formatString(option.primary_organism_name)}
-                    selected={
-                      compendium?.primary_organism_name ===
-                      option.primary_organism_name
-                    }
-                    onClick={() => handleClickSelectedOption(option)}
+                    selected={option.primary_organism_name === userInput}
+                    onClick={() => handleSelectOption(option)}
                   />
                 ))}
               </List>
