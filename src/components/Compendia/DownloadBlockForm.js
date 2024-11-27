@@ -123,7 +123,7 @@ export const DownloadBlockForm = () => {
             size="small"
             reverse={false}
             responsive
-            value={formatString(userInput)}
+            value={formatString(userInput) || ''}
             onChange={(e) => setUserInput(e.target.value)}
             onFocus={() => setShowOptions(true)}
           />
