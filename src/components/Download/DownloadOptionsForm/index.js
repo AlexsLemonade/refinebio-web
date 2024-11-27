@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Formik } from 'formik'
 import { Box, Form } from 'grommet'
@@ -15,30 +15,17 @@ import { TransformationOptions } from './TransformationOptions'
 export const DownloadOptionsForm = ({
   dataset,
   buttonLabel = 'Download',
-  handleDownloadOptionsChanges = null, // for the regenerate dataset local state update
-  onSubmit = null // for the regenerate dataset download
+  handleDownloadOptionsChanges = null, // handles the local state update for processed datasets
+  onSubmit = null // handles the regenerate dataset download
 }) => {
   const { push } = useRouter()
-  const { updateDataset, getDownloadOptions, updateDownloadOptions } =
-    useDatasetManager()
+  const { updateDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const [canRegenerate, setCanRegenerate] = useState(false)
+  const { isProcessed } = getDatasetState(dataset)
+
   const [toggleAdvancedOption, setToggleAdvancedOption] = useState(
     dataset?.quantile_normalize
   )
-
-  useEffect(() => {
-    const { isProcessed } = getDatasetState(dataset)
-    // sets the initial download options
-    updateDownloadOptions(
-      {
-        ...getDownloadOptions(dataset)
-      },
-      dataset.id,
-      isProcessed
-    )
-    setCanRegenerate(isProcessed)
-  }, [])
 
   const handleSubmitForm = async (downloadOptions) => {
     let pathname = '/download'
@@ -48,11 +35,8 @@ export const DownloadOptionsForm = ({
       pathname = response
     }
     // updates via API call only for My Dataset in /download (unprocessed)
-    if (!canRegenerate) {
-      await updateDataset(dataset.id, {
-        ...downloadOptions,
-        data: dataset.data
-      })
+    if (!isProcessed) {
+      await updateDataset(dataset.id, { ...dataset, ...downloadOptions })
     }
 
     push(
@@ -69,11 +53,11 @@ export const DownloadOptionsForm = ({
   const handleUpdateDownloadOptions = async (name, newOption) => {
     const newDownloadOption = { [name]: newOption }
 
-    if (canRegenerate && handleDownloadOptionsChanges) {
+    if (handleDownloadOptionsChanges) {
       handleDownloadOptionsChanges(newDownloadOption)
+    } else {
+      await updateDataset(dataset.id, { ...dataset, ...newDownloadOption })
     }
-
-    await updateDownloadOptions(newDownloadOption, dataset.id, canRegenerate)
   }
 
   return (

@@ -16,8 +16,6 @@ export const useDatasetManager = () => {
     setDatasetAccessions,
     datasetId,
     setDatasetId,
-    downloadOptions,
-    setDownloadOptions,
     email,
     setEmail,
     processingDatasets,
@@ -195,15 +193,6 @@ export const useDatasetManager = () => {
     return temp
   }
 
-  // sends the download options change to the API for My Dataset to preserve
-  // users' preferences, otherwise just updates DownloadOptions with new change
-  const updateDownloadOptions = async (options, id, regenerate = false) => {
-    const newOptions = { ...downloadOptions, ...options }
-    // makes API request for My Dataset only
-    if (!regenerate) await updateDataset(id, newOptions)
-    setDownloadOptions(newOptions)
-  }
-
   /* --- Experiment Methods --- */
   /* Experiment */
   const getTotalExperiments = (data) =>
@@ -312,7 +301,6 @@ export const useDatasetManager = () => {
     updateDataset,
     // Download options
     getDownloadOptions,
-    updateDownloadOptions,
     // Experiment
     getTotalExperiments,
     removeExperiment,

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { links } from 'config'
@@ -37,25 +37,11 @@ const Card = ({ description, format, index, title }) => {
 
 export const FilesSummary = ({ dataset }) => {
   const { setResponsive } = useResponsive()
-  const { isProcessed } = getDatasetState(dataset) // sets visibility of the download options form for regenaration
-  const [regeneratedDataset, setRegeneratedDataset] = useState(null)
-  const [fileSummaries, setFileSummaries] = useState(
-    getDownloadFilesData(dataset)
+  const { isProcessed } = getDatasetState(dataset) // sets visibility of the download options form for processed datasets
+  const [regeneratedDataset, setRegeneratedDataset] = useState(
+    isProcessed ? dataset : null
   )
-
-  useEffect(() => {
-    // sets expired processed dataset as regeneratedDataset
-    if (isProcessed) setRegeneratedDataset(dataset)
-  }, [])
-
-  useEffect(() => {
-    // updates fileSummaries on download options change
-    if (regeneratedDataset) {
-      setFileSummaries(getDownloadFilesData(regeneratedDataset))
-    } else {
-      setFileSummaries(getDownloadFilesData(dataset))
-    }
-  }, [dataset, regeneratedDataset])
+  const fileSummaries = getDownloadFilesData(regeneratedDataset || dataset)
 
   return (
     <Box margin={{ top: 'large' }}>

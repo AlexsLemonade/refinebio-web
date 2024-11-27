@@ -15,8 +15,8 @@ export const DatasetRegenerateDownloadOptionsForm = ({
   const { createDataset, updateDataset } = useDatasetManager()
   const [openForm, setOpenForm] = useState(false)
 
-  const handleRegenerateDataset = async (newDownloadOptions) => {
-    const params = { data: regeneratedDataset.data, ...newDownloadOptions }
+  const handleRegenerateDatasetDownload = async (newDownloadOptions) => {
+    const params = { ...regeneratedDataset, ...newDownloadOptions }
     const response = await updateDataset(await createDataset(), params)
     const pathname = `/dataset/${response.id}`
 
@@ -55,14 +55,12 @@ export const DatasetRegenerateDownloadOptionsForm = ({
         </Box>
       )}
       <ExpandableBlock duration="1.2s" expand={openForm}>
-        {regeneratedDataset && (
-          <DownloadOptionsForm
-            dataset={regeneratedDataset}
-            buttonLabel="Regenerate Dataset"
-            handleDownloadOptionsChanges={handleDownloadOptionsChanges}
-            onSubmit={handleRegenerateDataset}
-          />
-        )}
+        <DownloadOptionsForm
+          dataset={regeneratedDataset}
+          buttonLabel="Regenerate Dataset"
+          handleDownloadOptionsChanges={handleDownloadOptionsChanges}
+          onSubmit={handleRegenerateDatasetDownload}
+        />
       </ExpandableBlock>
     </Box>
   )
