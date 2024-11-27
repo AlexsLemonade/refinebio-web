@@ -72,7 +72,8 @@ export const DownloadBlockForm = () => {
 
   const handleSelectOption = (option) => {
     setCompendium(option)
-    setUserInput(option.primary_organism_name)
+    setUserInput(formatString(option.primary_organism_name))
+    setShowOptions(false)
   }
 
   const handleHideOptions = ({ relatedTarget }) => {
@@ -115,7 +116,7 @@ export const DownloadBlockForm = () => {
             size="small"
             reverse={false}
             responsive
-            value={formatString(userInput) || ''}
+            value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
           />
           {showOptions && filteredOptions.length > 0 && (
@@ -141,7 +142,10 @@ export const DownloadBlockForm = () => {
                   <DropdownOption
                     key={option.primary_organism_name}
                     label={formatString(option.primary_organism_name)}
-                    selected={option.primary_organism_name === userInput}
+                    selected={
+                      option.primary_organism_name ===
+                      compendium?.primary_organism_name
+                    }
                     onClick={() => handleSelectOption(option)}
                   />
                 ))}
