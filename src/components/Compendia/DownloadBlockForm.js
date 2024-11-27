@@ -1,4 +1,4 @@
-import { useState, memo } from 'react'
+import { useRef, useState, memo } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 import { useCompendiaContext } from 'hooks/useCompendiaContext'
@@ -10,26 +10,16 @@ import fuzzyFilterOnKey from 'helpers/fuzzyFilterOnKey'
 import getReadable from 'helpers/getReadable'
 import { links } from 'config'
 import { Anchor } from 'components/shared/Anchor'
+import { BoxBlock } from 'components/shared/BoxBlock'
 import { Button } from 'components/shared/Button'
 import { CheckBox } from 'components/shared/CheckBox'
 import { Column } from 'components/shared/Column'
-import { List } from 'components/shared/List'
 import { Icon } from 'components/shared/Icon'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { Row } from 'components/shared/Row'
 import { SearchBox } from 'components/shared/SearchBox'
 
-const DropDown = styled(Box)`
-  > div:nth-child(2) {
-    display: none;
-  }
-  &:focus-within > div:nth-child(2) {
-    display: block;
-    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
-  }
-`
-
-const DropDownButton = styled(Button)`
+const DropdownButton = styled(Button)`
   ${({ theme, selected }) => css`
     background: ${selected
       ? theme.global.colors.brand
@@ -46,28 +36,25 @@ const DropDownButton = styled(Button)`
   `}
 `
 
-const ListItem = ({ label, selected, onClick }) => (
-  <Box as="li" style={{ listStyle: 'none', width: '100%' }}>
-    <DropDownButton
-      color={selected ? 'white' : 'black'}
-      selected={selected}
-      label={label}
-      width="100%"
-      style={{
-        borderRadius: '0',
-        display: 'block',
-        whiteSpace: 'nowrap',
-        padding: '8px 16px',
-        textAlign: 'left'
-      }}
-      onClick={onClick}
-    />
-  </Box>
+const DropdownOption = ({ label, selected, onClick }) => (
+  <DropdownButton
+    color={selected ? 'white' : 'black'}
+    selected={selected}
+    label={label}
+    width="100%"
+    style={{
+      borderRadius: '0',
+      display: 'block',
+      whiteSpace: 'nowrap',
+      padding: '8px 16px',
+      textAlign: 'left'
+    }}
+    onClick={onClick}
+  />
 )
 
 export const DownloadBlockForm = () => {
   const { setResponsive } = useResponsive()
-  /* TODO: Token validation related logic will be removed in #413 */
   const { validateToken } = useToken()
   const hasToken = validateToken()
   const [acceptTerms, setAcceptTerms] = useState(hasToken)
@@ -75,6 +62,8 @@ export const DownloadBlockForm = () => {
   const [compendium, setCompendium] = useState(null)
   const [showOptions, setShowOptions] = useState(false)
   const [userInput, setUserInput] = useState('')
+
+  const dropdownRef = useRef(null)
 
   const filteredOptions =
     userInput.trim() !== ''
@@ -84,7 +73,12 @@ export const DownloadBlockForm = () => {
   const handleSelectOption = (option) => {
     setCompendium(option)
     setUserInput(option.primary_organism_name)
-    setShowOptions(false)
+  }
+
+  const handleHideOptions = ({ relatedTarget }) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(relatedTarget)) {
+      setShowOptions(false)
+    }
   }
 
   return (
@@ -99,9 +93,7 @@ export const DownloadBlockForm = () => {
       <Box
         as="label"
         margin={{ bottom: 'medium' }}
-        style={{
-          font: `${setResponsive('18px', '22px')} 'Rubik', sans-serif`
-        }}
+        style={{ font: `${setResponsive('18px', '22px')} 'Rubik', sans-serif` }}
       >
         Choose Organism
       </Box>
@@ -116,7 +108,7 @@ export const DownloadBlockForm = () => {
         >
           <Icon name="ChevronDown" size="xsmall" />
         </Box>
-        <DropDown style={{ position: 'relative' }}>
+        <Box onFocus={() => setShowOptions(true)} onBlur={handleHideOptions}>
           <SearchBox
             padding="16px 32px"
             placeholder="Search for an organism"
@@ -125,35 +117,38 @@ export const DownloadBlockForm = () => {
             responsive
             value={formatString(userInput) || ''}
             onChange={(e) => setUserInput(e.target.value)}
-            onFocus={() => setShowOptions(true)}
           />
           {showOptions && filteredOptions.length > 0 && (
             <Box
+              ref={dropdownRef}
               animation={{ type: 'zoomIn', duration: 50 }}
+              as="label"
               background="white"
-              border={{ color: 'brand', size: 'medium' }}
-              margin={{ top: 'xlarge' }}
+              elevation="xlarge"
+              margin={{ top: '36px' }}
               height={{ max: '200px' }}
               width="100%"
+              border={{ color: 'brand', size: 'medium' }}
               style={{
+                display: showOptions ? 'block' : 'none',
                 overflowY: 'scroll',
                 position: 'absolute',
                 zIndex: 1
               }}
             >
-              <List flexDirection="column">
+              <BoxBlock>
                 {filteredOptions.map((option) => (
-                  <ListItem
+                  <DropdownOption
                     key={option.primary_organism_name}
                     label={formatString(option.primary_organism_name)}
                     selected={option.primary_organism_name === userInput}
                     onClick={() => handleSelectOption(option)}
                   />
                 ))}
-              </List>
+              </BoxBlock>
             </Box>
           )}
-        </DropDown>
+        </Box>
       </Box>
       {type === 'rna-seq' && (
         <Box margin={{ top: setResponsive('small', 'medium') }}>
