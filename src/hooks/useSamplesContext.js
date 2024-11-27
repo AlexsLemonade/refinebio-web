@@ -31,15 +31,19 @@ export const useSamplesContext = (initialQueries) => {
       ...initialQueries,
       offset,
       limit,
-      ...(datasetId ? { dataset_id: datasetId } : {}),
-      ...(filterBy ? { filter_by: filterBy } : {}),
-      ...(ordering ? { ordering } : {})
+      ...(datasetId && { dataset_id: datasetId }),
+      ...(filterBy && { filter_by: filterBy }),
+      ...(ordering && { ordering })
     }
 
     setLoading(true)
     const response = await api.samples.get(params)
 
-    if (!hasSamples) resetCommonQueries()
+    // resets the page and the page size if no samples
+    if (!hasSamples) {
+      updatePage()
+      updatePageSize()
+    }
 
     setHasError(response?.ok === false)
     setSamples(response)
@@ -52,14 +56,7 @@ export const useSamplesContext = (initialQueries) => {
   )
 
   /* Page */
-  const resetPage = () => {
-    setSamplesQuery((prev) => ({
-      ...prev,
-      offset: initialQueries.offset
-    }))
-  }
-
-  const updatePage = (newPage) => {
+  const updatePage = (newPage = 1) => {
     setSamplesQuery((prev) => ({
       ...prev,
       offset: (newPage - 1) * samplesQuery.limit
@@ -67,14 +64,7 @@ export const useSamplesContext = (initialQueries) => {
   }
 
   /* Page Size */
-  const restPageSize = () => {
-    setSamplesQuery((prev) => ({
-      ...prev,
-      limit: initialQueries.limit
-    }))
-  }
-
-  const updatePageSize = (newPageSize) => {
+  const updatePageSize = (newPageSize = initialQueries.limit || 10) => {
     setSamplesQuery((prev) => {
       const updatedQuery = { ...prev }
       updatedQuery.limit = newPageSize
@@ -85,13 +75,8 @@ export const useSamplesContext = (initialQueries) => {
     })
   }
 
-  const resetCommonQueries = () => {
-    resetPage()
-    restPageSize()
-  }
-
   /* Filter Term */
-  const updateFilterBy = (newFilterTerm) => {
+  const updateFilterBy = (newFilterTerm = '') => {
     setSamplesQuery((prev) => {
       const updatedQuery = { ...prev }
       updatedQuery.filterBy = newFilterTerm
@@ -103,7 +88,7 @@ export const useSamplesContext = (initialQueries) => {
   }
 
   /* Sort Order */
-  const updateSortBy = (newSortBy) => {
+  const updateSortBy = (newSortBy = '') => {
     setSamplesQuery((prev) => {
       const updatedQuery = { ...prev }
       updatedQuery.ordering = newSortBy
@@ -115,7 +100,7 @@ export const useSamplesContext = (initialQueries) => {
   }
 
   /* Dataset ID */
-  const updateDatasetId = (newDatasetId) => {
+  const updateDatasetId = (newDatasetId = null) => {
     setSamplesQuery((prev) => {
       const updatedQuery = { ...prev }
       updatedQuery.datasetId = newDatasetId
