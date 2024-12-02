@@ -4,6 +4,7 @@ import { useToken } from 'hooks/useToken'
 import differenceOfArrays from 'helpers/differenceOfArrays'
 import formatString from 'helpers/formatString'
 import getDatasetState from 'helpers/getDatasetState'
+import filterObjectByKeys from 'helpers/filterObjectByKeys'
 import isEmptyObject from 'helpers/isEmptyObject'
 import unionizeArrays from 'helpers/unionizeArrays'
 import { api } from 'api'
@@ -142,8 +143,14 @@ export const useDatasetManager = () => {
     // validates the existing token or create a new one
     const tokenId = (await validateToken()) ? token : await resetToken()
     const { emailAddress, receiveUpdates } = options
+    const downloadOptionsKeys = [
+      'aggregate_by',
+      'data',
+      'scale_by',
+      'quantile_normalize'
+    ]
     const params = {
-      ...getDownloadOptions(options),
+      ...filterObjectByKeys(options, downloadOptionsKeys),
       email_address: emailAddress,
       ...(receiveUpdates ? { email_ccdl_ok: true } : {}),
       start: true,
@@ -172,25 +179,6 @@ export const useDatasetManager = () => {
     }
 
     return response
-  }
-
-  /* --- Download Options Methods --- */
-  const getDownloadOptions = (options) => {
-    const downloadOptionsKeys = [
-      'aggregate_by',
-      'data',
-      'scale_by',
-      'quantile_normalize'
-    ]
-    const temp = {}
-
-    Object.keys(options).forEach((key) => {
-      if (downloadOptionsKeys.includes(key)) {
-        temp[key] = options[key]
-      }
-    })
-
-    return temp
   }
 
   /* --- Experiment Methods --- */
@@ -299,8 +287,6 @@ export const useDatasetManager = () => {
     isMyDatasetId,
     startProcessingDataset,
     updateDataset,
-    // Download options
-    getDownloadOptions,
     // Experiment
     getTotalExperiments,
     removeExperiment,
