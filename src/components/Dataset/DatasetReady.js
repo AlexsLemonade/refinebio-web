@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
+import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
-import { useToken } from 'hooks/useToken'
 import formatBytes from 'helpers/formatBytes'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
@@ -14,25 +14,15 @@ import { links } from 'config'
 import { DatasetExplore } from './DatasetExplore'
 
 export const DatasetReady = ({ dataset }) => {
-  const { downloadDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const { validateToken } = useToken()
-  const [acceptedTerms, setAcceptedTerms] = useState(false)
+  const { downloadDataset } = useDatasetManager()
+  const { acceptedTerms } = useRefinebio()
+  const [acceptTerms, setAcceptTerms] = useState(acceptedTerms)
 
   const handleDownloadNow = async () => {
     await downloadDataset(dataset.id, dataset.download_url)
     gtag.trackDatasetDownload(dataset)
   }
-
-  const getTokenStatus = async () => {
-    const isActivated = await validateToken()
-    setAcceptedTerms(isActivated)
-  }
-
-  // sets acceptedTerms based on the token validity
-  useEffect(() => {
-    getTokenStatus()
-  }, [])
 
   return (
     <>
@@ -72,7 +62,7 @@ export const DatasetReady = ({ dataset }) => {
                           />
                         </Text>
                       }
-                      onClick={() => setAcceptedTerms(!acceptedTerms)}
+                      onClick={() => setAcceptTerms(!acceptTerms)}
                     />
                   </Column>
                 )}
@@ -87,7 +77,7 @@ export const DatasetReady = ({ dataset }) => {
                 >
                   <Button
                     label="Download Now"
-                    disabled={!acceptedTerms}
+                    disabled={!acceptTerms}
                     primary
                     responsive
                     onClick={handleDownloadNow}

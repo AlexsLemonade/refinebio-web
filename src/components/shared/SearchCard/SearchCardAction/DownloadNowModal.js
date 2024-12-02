@@ -3,6 +3,7 @@ import { Box, Form, Heading, Paragraph } from 'grommet'
 import gtag from 'analytics/gtag'
 import { validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
+import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/shared/Button'
@@ -20,6 +21,7 @@ export const DownloadNowModal = ({
 }) => {
   const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
+  const { acceptedTerms } = useRefinebio()
   const { StartProcessingFormSchema } = validationSchemas
   const { accession_code: accessionCode } = experiment
 
@@ -43,7 +45,7 @@ export const DownloadNowModal = ({
           quantile_normalize: true,
           emailAddress: email || '',
           receiveUpdates: true,
-          termsOfUse: false
+          termsOfUse: acceptedTerms
         }}
         validationSchema={StartProcessingFormSchema}
         validateOnChange={false}
@@ -112,16 +114,20 @@ export const DownloadNowModal = ({
                   value={values.emailAddress}
                   handleChange={handleChange}
                 />
-                <TermsOfUseCheckBox
-                  error={errors.termsOfUse}
-                  touched={touched.termsOfUse}
-                  value={values.termsOfUse}
-                  handleChange={handleChange}
-                />
-                <ReceiveUpdatesCheckBox
-                  value={values.receiveUpdates}
-                  handleChange={handleChange}
-                />
+                <Box pad={{ top: 'small' }}>
+                  {!acceptedTerms && (
+                    <TermsOfUseCheckBox
+                      error={errors.termsOfUse}
+                      touched={touched.termsOfUse}
+                      value={values.termsOfUse}
+                      handleChange={handleChange}
+                    />
+                  )}
+                  <ReceiveUpdatesCheckBox
+                    value={values.receiveUpdates}
+                    handleChange={handleChange}
+                  />
+                </Box>
               </Box>
             </Box>
             <Box align="end">

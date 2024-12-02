@@ -2,8 +2,8 @@ import { useRef, useState, memo } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 import { useCompendiaContext } from 'hooks/useCompendiaContext'
+import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
-import { useToken } from 'hooks/useToken'
 import formatBytes from 'helpers/formatBytes'
 import formatString from 'helpers/formatString'
 import fuzzyFilterOnKey from 'helpers/fuzzyFilterOnKey'
@@ -55,9 +55,8 @@ const DropdownOption = ({ label, selected, onClick }) => (
 
 export const DownloadBlockForm = () => {
   const { setResponsive } = useResponsive()
-  const { validateToken } = useToken()
-  const hasToken = validateToken()
-  const [acceptTerms, setAcceptTerms] = useState(hasToken)
+  const { acceptedTerms } = useRefinebio()
+  const [acceptTerms, setAcceptTerms] = useState(acceptedTerms)
   const { compendia, type, goToDownloadCompendium } = useCompendiaContext()
   const [compendium, setCompendium] = useState(null)
   const [showOptions, setShowOptions] = useState(false)
@@ -176,7 +175,7 @@ export const DownloadBlockForm = () => {
           />
         </Box>
       )}
-      {!hasToken && (
+      {!acceptedTerms && (
         <Box margin={{ vertical: 'small' }}>
           <CheckBox
             label={
