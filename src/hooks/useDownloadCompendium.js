@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react'
-import { useToken } from 'hooks/useToken'
+import { useRefinebio } from 'hooks/useRefinebio'
 import { api } from 'api'
 import gtag from 'analytics/gtag'
 
 export const useDownloadCompendium = (compendium) => {
-  const { token, resetToken, validateToken } = useToken()
+  const { token, createToken } = useRefinebio()
   const [error, setError] = useState(null)
   const [downloadUrl, setDownloadUrl] = useState('')
 
   // fetchs the download URL for the selected compendium with a valid token
   useEffect(() => {
     const fetchDownloadUrl = async () => {
-      const tokenToUse = !validateToken() ? await resetToken() : token
-      const response = await api.compendia.download(compendium.id, tokenToUse)
+      const response = await api.compendia.download(
+        compendium.id,
+        token || (await createToken())
+      )
       const { ok, statusCode } = response
       setError(!ok ? statusCode : null)
       setDownloadUrl(ok ? response.computed_file.download_url : null)

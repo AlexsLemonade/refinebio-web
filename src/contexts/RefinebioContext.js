@@ -4,6 +4,7 @@ import {
   getOldLocalStorageKey,
   removeOldLocalStorageKey
 } from 'helpers/migrateLocalStorage'
+import { api } from 'api'
 
 export const RefinebioContext = createContext({})
 
@@ -24,7 +25,27 @@ export const RefinebioContextProvider = ({ children }) => {
     'requested-experiments',
     []
   )
+  const [acceptedTerms, setAcceptedTerms] = useLocalStorage(
+    'accepted-terms',
+    false
+  )
   const [token, setToken] = useLocalStorage('token', null)
+
+  const createToken = async () => {
+    const { id } = await api.token.create()
+    await api.token.update(id, { is_activated: true })
+    setToken(id)
+    setAcceptedTerms(true)
+
+    return id
+  }
+
+  const validateToken = async () => {
+    const response = await api.token.get(token)
+    // create a new token if validation fails
+    // (e.g., a corrupted token value, API version changes)
+    if (!response.ok) await createToken()
+  }
 
   // NOTE: migration support is removed 12 months after the site swap
   useEffect(() => {
@@ -38,6 +59,13 @@ export const RefinebioContextProvider = ({ children }) => {
       removeOldLocalStorageKey(oldKey)
     }
   }, [])
+
+  // validates the stored token only if the user has accepted the terms
+  useEffect(() => {
+    if (acceptedTerms && token) {
+      validateToken()
+    }
+  }, [acceptedTerms, token])
 
   const value = useMemo(
     () => ({
@@ -55,8 +83,9 @@ export const RefinebioContextProvider = ({ children }) => {
       setProcessingDatasets,
       requestedExperiments,
       setRequestedExperiments,
+      acceptedTerms,
       token,
-      setToken
+      createToken
     }),
     [
       dataset,
@@ -73,8 +102,9 @@ export const RefinebioContextProvider = ({ children }) => {
       setProcessingDatasets,
       requestedExperiments,
       setRequestedExperiments,
+      acceptedTerms,
       token,
-      setToken
+      createToken
     ]
   )
 

@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { DatasetManagerContext } from 'contexts/DatasetManagerContext'
-import { useToken } from 'hooks/useToken'
+import { useRefinebio } from 'hooks/useRefinebio'
 import differenceOfArrays from 'helpers/differenceOfArrays'
 import formatString from 'helpers/formatString'
 import isEmptyObject from 'helpers/isEmptyObject'
@@ -21,10 +21,9 @@ export const useDatasetManager = () => {
     email,
     setEmail,
     processingDatasets,
-    setProcessingDatasets,
-    token
+    setProcessingDatasets
   } = useContext(DatasetManagerContext)
-  const { createToken, resetToken, validateToken } = useToken()
+  const { token, createToken } = useRefinebio()
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
 
@@ -88,12 +87,11 @@ export const useDatasetManager = () => {
 
   const downloadDataset = async (id, downloadUrl) => {
     let href = ''
-    if ((await validateToken()) && downloadUrl) {
+    if (token && downloadUrl) {
       href = downloadUrl
     } else {
       // creates a new token and requests a download url with API-Key
-      const tokenId = await createToken()
-      const { download_url: url } = await getDataset(id, tokenId)
+      const { download_url: url } = await getDataset(id, await createToken())
       href = url
     }
 
@@ -143,15 +141,13 @@ export const useDatasetManager = () => {
     accessionCode = null
   ) => {
     const isMyDatasetId = id && id === datasetId
-    // validates the existing token or create a new one
-    const tokenId = (await validateToken()) ? token : await resetToken()
     const { emailAddress, receiveUpdates } = options
     const params = {
       ...getDownloadOptions(options),
       email_address: emailAddress,
       ...(receiveUpdates ? { email_ccdl_ok: true } : {}),
       start: true,
-      token_id: tokenId
+      token_id: token || (await createToken())
     }
     const processingDatasetId = id || (await createDataset()) // creates new dataset ID for one-off download
     const response = await updateDataset(processingDatasetId, params)
@@ -299,7 +295,6 @@ export const useDatasetManager = () => {
     loading,
     processingDatasets,
     setProcessingDatasets,
-    token,
     // Processing Dataset
     getProcessingDatasetByAccession,
     // Common

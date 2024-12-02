@@ -16,8 +16,7 @@ export const DatasetManagerContextProvider = ({ children }) => {
     email,
     setEmail,
     processingDatasets,
-    setProcessingDatasets,
-    token
+    setProcessingDatasets
   } = useRefinebio()
 
   const value = useMemo(
@@ -33,8 +32,7 @@ export const DatasetManagerContextProvider = ({ children }) => {
       email,
       setEmail,
       processingDatasets,
-      setProcessingDatasets,
-      token
+      setProcessingDatasets
     }),
     [
       dataset,
@@ -48,8 +46,7 @@ export const DatasetManagerContextProvider = ({ children }) => {
       email,
       setEmail,
       processingDatasets,
-      setProcessingDatasets,
-      token
+      setProcessingDatasets
     ]
   )
 

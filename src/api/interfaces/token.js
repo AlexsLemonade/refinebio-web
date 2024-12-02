@@ -7,13 +7,13 @@ export default {
     return http.post(url)
   },
   get: (id) => {
-    const path = `${url}${id}`
+    const path = `${url}${id}/`
 
     return http.get(path)
   },
   update: (id, params) => {
     const path = `${url}${id}`
 
-    return http.put(path, params || { is_activated: true })
+    return http.put(path, params)
   }
 }
