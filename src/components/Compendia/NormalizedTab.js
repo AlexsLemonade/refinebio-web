@@ -6,12 +6,12 @@ import { FixedContainer } from 'components/shared/FixedContainer'
 import { links } from 'config'
 import { DownloadBlock } from './DownloadBlock'
 
-export const NormalizedTab = ({ compendia }) => {
+export const NormalizedTab = () => {
   const { setResponsive } = useResponsive()
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 350, delay: 200 }}>
-      <DownloadBlock compendia={compendia} />
+      <DownloadBlock />
       <FixedContainer
         pad={{
           horizontal: setResponsive('large', 'medium', 'basex15'),

@@ -24,6 +24,15 @@ export const PageTitle = ({ title = '' }) => {
     case /\/about$/.test(path):
       pageTitle = `About`
       break
+    case /\/compendia/.test(path):
+      if (path.includes('download')) {
+        pageTitle = 'Download Compendia -'
+      } else if (path.includes('normalized')) {
+        pageTitle = 'Normalized Compendia'
+      } else if (path.includes('rna-seq')) {
+        pageTitle = 'RNA-seq Sample Compendia'
+      }
+      break
     case /\/dataset/.test(path):
       pageTitle = `Dataset -`
       break
