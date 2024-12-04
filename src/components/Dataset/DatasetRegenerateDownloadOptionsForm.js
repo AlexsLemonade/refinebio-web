@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import { Box, Text } from 'grommet'
-import { useDatasetManager } from 'hooks/useDatasetManager'
-import gtag from 'analytics/gtag'
 import getReadable from 'helpers/getReadable'
 import { Button } from 'components/shared/Button'
 import { ExpandableBlock } from 'components/shared/ExpandableBlock'
@@ -12,20 +10,9 @@ export const DatasetRegenerateDownloadOptionsForm = ({
   regeneratedDataset,
   setRegeneratedDataset
 }) => {
-  const { createDataset, updateDataset } = useDatasetManager()
   const [openForm, setOpenForm] = useState(false)
 
-  const handleRegenerateDatasetDownload = async (newDownloadOptions) => {
-    const params = { ...regeneratedDataset, ...newDownloadOptions }
-    const response = await updateDataset(await createDataset(), params)
-    const pathname = `/dataset/${response.id}`
-
-    gtag.trackRegeneratedDataset(dataset, response)
-
-    return pathname
-  }
-
-  const handleDownloadOptionsChanges = (newDownloadOption) => {
+  const changeDownloadOptions = (newDownloadOption) => {
     setRegeneratedDataset((prev) => ({ ...prev, ...newDownloadOption }))
   }
 
@@ -58,8 +45,7 @@ export const DatasetRegenerateDownloadOptionsForm = ({
         <DownloadOptionsForm
           dataset={regeneratedDataset}
           buttonLabel="Regenerate Dataset"
-          handleDownloadOptionsChanges={handleDownloadOptionsChanges}
-          onSubmit={handleRegenerateDatasetDownload}
+          onOptionsChange={changeDownloadOptions}
         />
       </ExpandableBlock>
     </Box>

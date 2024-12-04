@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 import { Box, Form } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
-import getDatasetState from 'helpers/getDatasetState'
+import gtag from 'analytics/gtag'
 import { Button } from 'components/shared/Button'
 import { Row } from 'components/shared/Row'
 import { AdvancedOptions } from './AdvancedOptions'
@@ -15,29 +15,25 @@ import { TransformationOptions } from './TransformationOptions'
 export const DownloadOptionsForm = ({
   dataset,
   buttonLabel = 'Download',
-  handleDownloadOptionsChanges = null, // handles the local state update for processed datasets
-  onSubmit = null // handles the regenerate dataset download
+  onOptionsChange = null // if not defined dataset changes will persist on the API
 }) => {
   const { push } = useRouter()
-  const { updateDataset } = useDatasetManager()
+  const { createDataset, updateDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const { isProcessed } = getDatasetState(dataset)
 
   const [toggleAdvancedOption, setToggleAdvancedOption] = useState(
     dataset?.quantile_normalize
   )
 
   const handleSubmitForm = async (downloadOptions) => {
-    let pathname = '/download'
+    const params = { ...dataset, ...downloadOptions }
+    const response = await updateDataset(
+      onOptionsChange ? await createDataset() : dataset.id,
+      params
+    )
+    const pathname = onOptionsChange ? `/dataset/${response.id}` : '/download'
 
-    if (onSubmit) {
-      const response = await onSubmit(downloadOptions)
-      pathname = response
-    }
-    // updates via API call only for My Dataset in /download (unprocessed)
-    if (!isProcessed) {
-      await updateDataset(dataset.id, { ...dataset, ...downloadOptions })
-    }
+    if (onOptionsChange) gtag.trackRegeneratedDataset(dataset, response)
 
     push(
       {
@@ -53,8 +49,8 @@ export const DownloadOptionsForm = ({
   const handleUpdateDownloadOptions = async (name, newOption) => {
     const newDownloadOption = { [name]: newOption }
 
-    if (handleDownloadOptionsChanges) {
-      handleDownloadOptionsChanges(newDownloadOption)
+    if (onOptionsChange) {
+      onOptionsChange(newDownloadOption)
     } else {
       await updateDataset(dataset.id, { ...dataset, ...newDownloadOption })
     }
