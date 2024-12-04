@@ -198,12 +198,7 @@ export const useDatasetManager = () => {
   // copies the specified properties from the given dataset
   // for dataset regeneration
   const getDatasetPropertiesFrom = (sourceDataset) => {
-    // TODO: options.downloadOptionsKeys will be removed once PR #411 is merged
-    const {
-      dataset: { downloadOptionsKeys }
-    } = configOptions
     const includeKeys = [
-      ...downloadOptionsKeys,
       'is_processed',
       'is_available',
       'success',
