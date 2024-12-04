@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { links } from 'config'
 import getDatasetState from 'helpers/getDatasetState'
@@ -37,6 +38,7 @@ const Card = ({ description, format, index, title }) => {
 
 export const FilesSummary = ({ dataset }) => {
   const { setResponsive } = useResponsive()
+  const { getDatasetPropertiesFrom } = useDatasetManager()
   const { isProcessed } = getDatasetState(dataset) // sets visibility of the download options form for regenaration
   const [regeneratedDataset, setRegeneratedDataset] = useState(null)
   const [fileSummaries, setFileSummaries] = useState(
@@ -44,8 +46,9 @@ export const FilesSummary = ({ dataset }) => {
   )
 
   useEffect(() => {
-    // sets expired processed dataset as regeneratedDataset
-    if (isProcessed) setRegeneratedDataset(dataset)
+    // sets properties of a processed dataset to regeneratedDataset
+    // for DatasetRegenerateDownloadOptionsForm
+    if (isProcessed) setRegeneratedDataset(getDatasetPropertiesFrom(dataset))
   }, [])
 
   useEffect(() => {

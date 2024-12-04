@@ -88,7 +88,7 @@ export const useDatasetManager = () => {
 
   const downloadDataset = async (id, downloadUrl) => {
     let href = ''
-    if (validateToken() && downloadUrl) {
+    if ((await validateToken()) && downloadUrl) {
       href = downloadUrl
     } else {
       // creates a new token and requests a download url with API-Key
@@ -143,8 +143,8 @@ export const useDatasetManager = () => {
     accessionCode = null
   ) => {
     const isMyDatasetId = id && id === datasetId
-    // validates the existing token or create a new token if none
-    const tokenId = validateToken() ? token : await resetToken()
+    // validates the existing token or create a new one
+    const tokenId = (await validateToken()) ? token : await resetToken()
     const { emailAddress, receiveUpdates } = options
     const params = {
       ...getDownloadOptions(options),
@@ -193,6 +193,25 @@ export const useDatasetManager = () => {
     })
 
     return temp
+  }
+
+  // copies the specified properties from the given dataset
+  // for dataset regeneration
+  const getDatasetPropertiesFrom = (sourceDataset) => {
+    const includeKeys = [
+      'is_processed',
+      'is_available',
+      'success',
+      'organism_samples' // for the download files summary UI change
+    ]
+
+    return includeKeys.reduce(
+      (acc, key) =>
+        key in sourceDataset
+          ? { ...acc, [key]: structuredClone(sourceDataset[key]) }
+          : acc,
+      {}
+    )
   }
 
   // sends the download options change to the API for My Dataset to preserve
@@ -311,6 +330,7 @@ export const useDatasetManager = () => {
     updateDataset,
     // Download options
     getDownloadOptions,
+    getDatasetPropertiesFrom,
     updateDownloadOptions,
     // Experiment
     getTotalExperiments,

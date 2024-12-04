@@ -1,69 +1,70 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { Box, Paragraph } from 'grommet'
-import { useCompendia } from 'hooks/useCompendia'
+import { Box, Tab } from 'grommet'
+import { CompendiaContextProvider } from 'contexts/CompendiaContext'
 import { useResponsive } from 'hooks/useResponsive'
+import { api } from 'api'
+import { compendia as CompendiaConfig } from 'config'
 import getReadable from 'helpers/getReadable'
-import { FileDownload, Hero, Tabs } from 'components/Compendia'
-import { PageTitle } from 'components/shared/PageTitle'
 import { SignUpBlock } from 'components/shared/SignUpBlock'
-import { Spinner } from 'components/shared/Spinner'
+import { Tabs } from 'components/shared/Tabs'
+import { Hero } from 'components/Compendia/Hero'
+import { NormalizedTab } from 'components/Compendia/NormalizedTab'
+import { RNASeqTab } from 'components/Compendia/RNASeqTab'
 
-export const Compendia = () => {
+export const Compendia = ({ compendia, type }) => {
   const { setResponsive } = useResponsive()
-  const {
-    asPath,
-    query: { type: currentType }
-  } = useRouter()
-  const { hasError, loading, getCompendia } = useCompendia()
-  const [compendia, setCompendia] = useState(null)
-  const isLoading = loading || !compendia
-  const isDownload = asPath.includes('download')
-  const titlePrefix = `${
-    isDownload ? 'Download Compendia' : getReadable(currentType)
-  } -`
+  const { push } = useRouter()
 
-  // fetches both compendia on page load
-  useEffect(() => {
-    const fetchCompendia = async () => {
-      const [normalizedResponse, rnaSeqResponse] = await Promise.all([
-        getCompendia('normalized'),
-        getCompendia('rna-seq')
-      ])
-
-      setCompendia({
-        normalized: normalizedResponse,
-        'rna-seq': rnaSeqResponse
-      })
-    }
-
-    fetchCompendia()
-  }, [])
+  const tabConfigs = [
+    { type: 'normalized', Component: NormalizedTab },
+    { type: 'rna-seq', Component: RNASeqTab }
+  ]
+  const activeIndex = tabConfigs.findIndex((config) => config.type === type)
 
   return (
-    <>
-      <PageTitle title={titlePrefix} />
-      {isDownload && <FileDownload />}
-      {!isDownload && (
-        <Box pad={{ top: setResponsive('basex7', 'basex7', 'basex10') }}>
-          <Hero />
-          {/* eslint-disable-next-line no-nested-ternary */}
-          {hasError ? (
-            <Paragraph>
-              Download unavailable at this time. Please check again soon!
-            </Paragraph>
-          ) : isLoading ? (
-            <Box pad={{ bottom: setResponsive('basex7', 'basex7', 'basex10') }}>
-              <Spinner />
-            </Box>
-          ) : (
-            <Tabs compendia={compendia} type={currentType} />
-          )}
-          <SignUpBlock />
-        </Box>
-      )}
-    </>
+    <Box pad={{ top: setResponsive('basex7', 'basex7', 'basex10') }}>
+      <Hero />
+      <CompendiaContextProvider initialCompendia={compendia} initialType={type}>
+        <Tabs activeIndex={activeIndex} text>
+          {tabConfigs.map((config) => (
+            <Tab
+              key={config.type}
+              title={getReadable(config.type)}
+              onClick={() => push(`/compendia/${config.type}`)}
+            >
+              <config.Component />
+            </Tab>
+          ))}
+        </Tabs>
+      </CompendiaContextProvider>
+      <SignUpBlock />
+    </Box>
   )
+}
+
+export const getServerSideProps = async ({ query }) => {
+  const { type } = query
+  // The routes must be the valid compendia types
+  if (!CompendiaConfig.types.includes(type)) return { notFound: true }
+
+  const compendiaQuery = {
+    latest_version: true,
+    limit: 1000,
+    quant_sf_only: type === 'rna-seq'
+  }
+
+  const response = await api.compendia.get(compendiaQuery)
+
+  if (response.ok && response.results) {
+    return {
+      props: {
+        compendia: response.results,
+        type
+      }
+    }
+  }
+
+  return { notFound: true }
 }
 
 export default Compendia

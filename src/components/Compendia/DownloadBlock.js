@@ -1,17 +1,17 @@
 import { memo } from 'react'
 import { Box, Heading, Paragraph, Text } from 'grommet'
-import { useCompendia } from 'hooks/useCompendia'
+import { useCompendiaContext } from 'hooks/useCompendiaContext'
 import { useResponsive } from 'hooks/useResponsive'
 import getReadable from 'helpers/getReadable'
 import { Column } from 'components/shared/Column'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
-import { Download } from './Download'
+import { DownloadBlockForm } from './DownloadBlockForm'
 
-export const DownloadBlock = ({ compendia }) => {
+export const DownloadBlock = () => {
   const { setResponsive } = useResponsive()
-  const { getCompediaType } = useCompendia()
-  const type = getCompediaType(compendia)
+  const { type } = useCompendiaContext()
+
   const texts = {
     normalized:
       'Normalized Compendia are the collection of all the samples available on refine.bio, aggregated and normalized by species.',
@@ -83,7 +83,7 @@ export const DownloadBlock = ({ compendia }) => {
               }}
               width="100%"
             >
-              <Download compendia={compendia} />
+              <DownloadBlockForm />
             </Column>
           </Row>
         </FixedContainer>

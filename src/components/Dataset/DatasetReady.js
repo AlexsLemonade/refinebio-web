@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
@@ -17,13 +17,22 @@ export const DatasetReady = ({ dataset }) => {
   const { downloadDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
   const { validateToken } = useToken()
-  const hasToken = validateToken()
-  const [termsOfUse, setTermsOfUse] = useState(hasToken)
+  const [acceptedTerms, setAcceptedTerms] = useState(false)
 
   const handleDownloadNow = async () => {
     await downloadDataset(dataset.id, dataset.download_url)
     gtag.trackDatasetDownload(dataset)
   }
+
+  const getTokenStatus = async () => {
+    const isActivated = await validateToken()
+    setAcceptedTerms(isActivated)
+  }
+
+  // sets acceptedTerms based on the token validity
+  useEffect(() => {
+    getTokenStatus()
+  }, [])
 
   return (
     <>
@@ -49,7 +58,7 @@ export const DatasetReady = ({ dataset }) => {
                 }}
                 fill
               >
-                {!hasToken && (
+                {!acceptedTerms && (
                   <Column align={setResponsive('center', 'start')}>
                     <CheckBox
                       label={
@@ -63,7 +72,7 @@ export const DatasetReady = ({ dataset }) => {
                           />
                         </Text>
                       }
-                      onClick={() => setTermsOfUse(!termsOfUse)}
+                      onClick={() => setAcceptedTerms(!acceptedTerms)}
                     />
                   </Column>
                 )}
@@ -71,14 +80,14 @@ export const DatasetReady = ({ dataset }) => {
                   align={setResponsive('center', 'start')}
                   margin={{
                     top: setResponsive('medium', 'small', 'none'),
-                    left: hasToken
+                    left: acceptedTerms
                       ? 'none'
                       : setResponsive('none', 'none', 'medium')
                   }}
                 >
                   <Button
                     label="Download Now"
-                    disabled={!termsOfUse}
+                    disabled={!acceptedTerms}
                     primary
                     responsive
                     onClick={handleDownloadNow}
