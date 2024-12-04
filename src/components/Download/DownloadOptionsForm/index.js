@@ -28,7 +28,6 @@ export const DownloadOptionsForm = ({
   )
 
   useEffect(() => {
-    if (!dataset) return
     // sets the initial download options
     const { isProcessed } = getDatasetState(dataset)
     setCanRegenerate(isProcessed)
