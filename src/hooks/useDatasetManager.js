@@ -181,6 +181,25 @@ export const useDatasetManager = () => {
     return response
   }
 
+  // copies the specified properties from the given dataset
+  // for dataset regeneration
+  const getDatasetPropertiesFrom = (sourceDataset) => {
+    const includeKeys = [
+      'is_processed',
+      'is_available',
+      'success',
+      'organism_samples' // for the download files summary UI change
+    ]
+
+    return includeKeys.reduce(
+      (acc, key) =>
+        key in sourceDataset
+          ? { ...acc, [key]: structuredClone(sourceDataset[key]) }
+          : acc,
+      {}
+    )
+  }
+
   /* --- Experiment Methods --- */
   /* Experiment */
   const getTotalExperiments = (data) =>
@@ -284,6 +303,7 @@ export const useDatasetManager = () => {
     createDataset,
     downloadDataset,
     getDataset,
+    getDatasetPropertiesFrom,
     isMyDatasetId,
     startProcessingDataset,
     updateDataset,

@@ -41,13 +41,16 @@ export const DatasetRegenerateDownloadOptionsForm = ({
           </Text>
         </Box>
       )}
-      <ExpandableBlock duration="1.2s" expand={openForm}>
-        <DownloadOptionsForm
-          dataset={regeneratedDataset}
-          buttonLabel="Regenerate Dataset"
-          onOptionsChange={changeDownloadOptions}
-        />
-      </ExpandableBlock>
+
+      {regeneratedDataset && (
+        <ExpandableBlock duration="1.2s" expand={openForm}>
+          <DownloadOptionsForm
+            dataset={regeneratedDataset}
+            buttonLabel="Regenerate Dataset"
+            onOptionsChange={changeDownloadOptions}
+          />
+        </ExpandableBlock>
+      )}
     </Box>
   )
 }
