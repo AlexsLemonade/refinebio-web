@@ -22,7 +22,7 @@ export const DownloadOptionsForm = ({
   const { setResponsive } = useResponsive()
 
   const [toggleAdvancedOption, setToggleAdvancedOption] = useState(
-    dataset?.quantile_normalize
+    dataset.quantile_normalize
   )
 
   const handleSubmitForm = async (downloadOptions) => {

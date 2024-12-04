@@ -39,7 +39,11 @@ export const Download = () => {
   }, [isDownloadable])
 
   useEffect(() => {
-    setIsDownloadable(getTotalSamples(dataset?.data) > 0)
+    if (dataset) {
+      setIsDownloadable(getTotalSamples(dataset.data) > 0)
+    } else {
+      setIsDownloadable(false)
+    }
   }, [dataset])
 
   if (error) {
