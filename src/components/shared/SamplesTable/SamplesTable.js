@@ -33,10 +33,10 @@ export const SamplesTable = ({
   allSamples,
   isImmutable = false,
   modalView = false,
-  showOnlyFilter = false // sets visibility of ShowOnlyAddedSamplesFilter
+  showMyDatasetFilter = false // sets visibility of ShowOnlyAddedSamplesFilter
 }) => {
   // initial queries for API requests
-  const initialQueries = { offset: 0, limit: 10, ...queryToAdd }
+  const initalQuery = { offset: 0, limit: 10, ...queryToAdd }
   const {
     hasError,
     hasSamples,
@@ -50,7 +50,7 @@ export const SamplesTable = ({
     updatePageSize,
     updateDatasetId,
     updateSortBy
-  } = useSamplesContext(initialQueries)
+  } = useSamplesContext(initalQuery)
   const { viewport, setResponsive } = useResponsive()
   const [tableExpanded, setTableExpanded] = useState(false)
 
@@ -181,7 +181,7 @@ export const SamplesTable = ({
                 top: setResponsive('small', 'xsmall', 'none')
               }}
             >
-              {showOnlyFilter && (
+              {showMyDatasetFilter && (
                 <ShowOnlyAddedSamplesFilter
                   data={allSamples}
                   queryToAdd={queryToAdd}
@@ -197,7 +197,7 @@ export const SamplesTable = ({
               align={setResponsive('start', 'center')}
             >
               <FilterTextInput
-                filter={samplesQuery.filterBy}
+                filter={samplesQuery.filter_by}
                 setFilter={updateFilterBy}
                 placeholder="Filter samples"
               />
@@ -211,7 +211,7 @@ export const SamplesTable = ({
           </Box>
         </Row>
         <BoxBlock>
-          <TextHighlightContextProvider match={samplesQuery.filterBy}>
+          <TextHighlightContextProvider match={samplesQuery.filter_by}>
             <DataTable
               columns={columns}
               data={data || []}
@@ -226,7 +226,7 @@ export const SamplesTable = ({
               tableExpanded={tableExpanded}
               updateSortBy={updateSortBy}
             />
-            {!hasSamples && samplesQuery.filterBy && (
+            {!hasSamples && samplesQuery.filter_by && (
               <SamplesTableEmpty>
                 <TextNull
                   text={
@@ -237,7 +237,7 @@ export const SamplesTable = ({
                         style={{ fontStyle: 'normal' }}
                         margin={{ left: 'xsmall' }}
                       >
-                        <strong>"{samplesQuery.filterBy}"</strong>
+                        <strong>"{samplesQuery.filter_by}"</strong>
                       </Text>
                     </>
                   }

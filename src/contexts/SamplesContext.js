@@ -7,8 +7,8 @@ export const SamplesContextProvider = ({ children }) => {
     // default, unless overridden by caller
     offset: 0,
     limit: 10,
-    datasetId: null,
-    filterBy: '',
+    dataset_id: null,
+    filter_by: '',
     ordering: ''
   })
 

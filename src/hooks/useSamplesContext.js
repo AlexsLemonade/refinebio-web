@@ -1,8 +1,9 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import { api } from 'api'
 import { SamplesContext } from 'contexts/SamplesContext'
+import filterNullFromObject from 'helpers/filterNullFromObject'
 
-export const useSamplesContext = (initialQueries) => {
+export const useSamplesContext = (initialQuery) => {
   const { samplesQuery, setSamplesQuery } = useContext(SamplesContext)
   const prevQueryRef = useRef(samplesQuery) // previous samplesQuery reference
   const [loading, setLoading] = useState(false)
@@ -26,14 +27,9 @@ export const useSamplesContext = (initialQueries) => {
 
   /* Common */
   const getSamples = async () => {
-    const { offset, limit, datasetId, filterBy, ordering } = samplesQuery
     const params = {
-      ...initialQueries,
-      offset,
-      limit,
-      ...(datasetId && { dataset_id: datasetId }),
-      ...(filterBy && { filter_by: filterBy }),
-      ...(ordering && { ordering })
+      ...initialQuery,
+      ...filterNullFromObject(samplesQuery)
     }
 
     setLoading(true)
@@ -64,36 +60,36 @@ export const useSamplesContext = (initialQueries) => {
   }
 
   /* Page Size */
-  const updatePageSize = (newPageSize = initialQueries.limit || 10) => {
+  const updatePageSize = (newPageSize = initialQuery.limit || 10) => {
     setSamplesQuery((prev) => {
       const updatedQuery = { ...prev }
       updatedQuery.limit = newPageSize
       // resets page on page size changes
-      updatedQuery.offset = initialQueries.offset
+      updatedQuery.offset = initialQuery.offset
 
       return updatedQuery
     })
   }
 
   /* Filter Term */
-  const updateFilterBy = (newFilterTerm = '') => {
+  const updateFilterBy = (newFilterTerm = null) => {
     setSamplesQuery((prev) => {
       const updatedQuery = { ...prev }
-      updatedQuery.filterBy = newFilterTerm
+      updatedQuery.filter_by = newFilterTerm
       // resets page on filter changes
-      updatedQuery.offset = initialQueries.offset
+      updatedQuery.offset = initialQuery.offset
 
       return updatedQuery
     })
   }
 
   /* Sort Order */
-  const updateSortBy = (newSortBy = '') => {
+  const updateSortBy = (newSortBy = null) => {
     setSamplesQuery((prev) => {
       const updatedQuery = { ...prev }
       updatedQuery.ordering = newSortBy
       // resets page on sorting changes
-      updatedQuery.offset = initialQueries.offset
+      updatedQuery.offset = initialQuery.offset
 
       return updatedQuery
     })
@@ -103,9 +99,9 @@ export const useSamplesContext = (initialQueries) => {
   const updateDatasetId = (newDatasetId = null) => {
     setSamplesQuery((prev) => {
       const updatedQuery = { ...prev }
-      updatedQuery.datasetId = newDatasetId
+      updatedQuery.dataset_id = newDatasetId
       // resets page on dataset ID changes
-      updatedQuery.offset = initialQueries.offset
+      updatedQuery.offset = initialQuery.offset
 
       return updatedQuery
     })

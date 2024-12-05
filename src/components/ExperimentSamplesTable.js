@@ -45,7 +45,7 @@ export const ExperimentSamplesTable = ({ experiment }) => {
           experiment_accession_code: accesionCode
         }}
         sampleMetadataFields={sampleMetadata}
-        showOnlyFilter
+        showMyDatasetFilter
       />
     </SamplesContextProvider>
   )
