@@ -31,9 +31,13 @@ export const RefinebioContextProvider = ({ children }) => {
   )
   const [token, setToken] = useLocalStorage('token', null)
 
+  const activateToken = async (id) => {
+    await api.token.update(id, { is_activated: true })
+  }
+
   const createToken = async () => {
     const { id } = await api.token.create()
-    await api.token.update(id, { is_activated: true })
+    await activateToken(id)
     setToken(id)
     setAcceptedTerms(true)
 
@@ -41,10 +45,9 @@ export const RefinebioContextProvider = ({ children }) => {
   }
 
   const validateToken = async () => {
-    const response = await api.token.get(token)
-    // create a new token if validation fails
-    // (e.g., a corrupted token value, API version changes)
-    if (!response.ok) await createToken()
+    const { ok, statusCode } = await api.token.get(token)
+    // create a new token if 404 (e.g., a corrupted token value, API version changes)
+    if (!ok && statusCode === 404) await createToken()
   }
 
   // NOTE: migration support is removed 12 months after the site swap
@@ -62,10 +65,10 @@ export const RefinebioContextProvider = ({ children }) => {
 
   // validates the stored token only if the user has accepted the terms
   useEffect(() => {
-    if (acceptedTerms && token) {
+    if (acceptedTerms) {
       validateToken()
     }
-  }, [acceptedTerms, token])
+  }, [acceptedTerms])
 
   const value = useMemo(
     () => ({
