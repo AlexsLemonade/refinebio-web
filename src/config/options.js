@@ -1,13 +1,4 @@
 export const options = {
-  // setting for the dataset manager
-  dataset: {
-    downloadOptionsKeys: [
-      'aggregate_by',
-      'data',
-      'scale_by',
-      'quantile_normalize'
-    ]
-  },
   // setting for the page size
   pageSizes: [10, 20, 50],
   // setting for the search manager

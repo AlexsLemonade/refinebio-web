@@ -15,7 +15,7 @@ export const MoveToDatasetButton = ({ dataset }) => {
     getTotalSamples
   } = useDatasetManager()
   const { openModal, closeModal } = useModal()
-  const id = `move-to-dataset-${myDataset.id}`
+  const id = `move-to-dataset-${dataset.id}`
   const radioOptions = [
     { label: 'Append samples to My Dataset', value: 'append' },
     { label: 'Replace samples in My Dataset', value: 'replace' }
@@ -23,7 +23,7 @@ export const MoveToDatasetButton = ({ dataset }) => {
   const defaultValue = radioOptions[0].value
   const [value, setValue] = useState(defaultValue)
   const newTotalSamples = getTotalSamples(dataset.data)
-  const totalSamples = getTotalSamples(myDataset.data)
+  const totalSamples = getTotalSamples(myDataset?.data)
   const pathname = '/download'
 
   const handleMoveToDataset = async () => {
