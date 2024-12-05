@@ -45,14 +45,16 @@ export const SamplesTable = ({
     totalSamples,
     samples,
     getSamples,
+    updateDatasetId,
     updateFilterBy,
     updatePage,
     updatePageSize,
-    updateDatasetId,
     updateSortBy
   } = useSamplesContext(initialSamplesQuery)
   const { viewport, setResponsive } = useResponsive()
   const [tableExpanded, setTableExpanded] = useState(false)
+
+  const { filter_by: filterBy } = samplesQuery // convert to cameCase for reference
 
   // for react-table
   const defaultColumn = useMemo(
@@ -181,8 +183,7 @@ export const SamplesTable = ({
             >
               {showMyDatasetFilter && (
                 <ShowOnlyAddedSamplesFilter
-                  data={allSamples}
-                  queryToAdd={queryToAdd}
+                  samples={allSamples}
                   updateDatasetId={updateDatasetId}
                 />
               )}
@@ -195,7 +196,7 @@ export const SamplesTable = ({
               align={setResponsive('start', 'center')}
             >
               <FilterTextInput
-                filter={samplesQuery.filter_by}
+                filter={filterBy}
                 setFilter={updateFilterBy}
                 placeholder="Filter samples"
               />
@@ -209,7 +210,7 @@ export const SamplesTable = ({
           </Box>
         </Row>
         <BoxBlock>
-          <TextHighlightContextProvider match={samplesQuery.filter_by}>
+          <TextHighlightContextProvider match={filterBy}>
             <DataTable
               columns={columns}
               data={data || []}
@@ -224,7 +225,7 @@ export const SamplesTable = ({
               tableExpanded={tableExpanded}
               updateSortBy={updateSortBy}
             />
-            {!hasSamples && samplesQuery.filter_by && (
+            {!hasSamples && filterBy && (
               <SamplesTableEmpty>
                 <TextNull
                   text={
@@ -235,7 +236,7 @@ export const SamplesTable = ({
                         style={{ fontStyle: 'normal' }}
                         margin={{ left: 'xsmall' }}
                       >
-                        <strong>"{samplesQuery.filter_by}"</strong>
+                        <strong>"{filterBy}"</strong>
                       </Text>
                     </>
                   }

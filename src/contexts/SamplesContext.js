@@ -6,10 +6,7 @@ export const SamplesContextProvider = ({ children }) => {
   const [samplesQuery, setSamplesQuery] = useState({
     // default, unless overridden by caller
     offset: 0,
-    limit: 10,
-    dataset_id: null,
-    filter_by: '',
-    ordering: ''
+    limit: 10
   })
 
   const value = useMemo(

@@ -3,9 +3,9 @@ import { useDatasetAction } from 'hooks/useDatasetAction'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { CheckBox } from 'components/shared/CheckBox'
 
-export const ShowOnlyAddedSamplesFilter = ({ data, updateDatasetId }) => {
+export const ShowOnlyAddedSamplesFilter = ({ samples, updateDatasetId }) => {
   const { dataset } = useDatasetManager()
-  const { getAnyProcessedInDataset } = useDatasetAction(dataset?.data, data)
+  const { getAnyProcessedInDataset } = useDatasetAction(dataset?.data, samples)
   const samplesInMyDataset = getAnyProcessedInDataset()
   const [showOnly, setShowOnly] = useState(false)
 
