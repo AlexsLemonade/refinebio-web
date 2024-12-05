@@ -191,6 +191,25 @@ export const useDatasetManager = () => {
     return temp
   }
 
+  // copies the specified properties from the given dataset
+  // for dataset regeneration
+  const getDatasetPropertiesFrom = (sourceDataset) => {
+    const includeKeys = [
+      'is_processed',
+      'is_available',
+      'success',
+      'organism_samples' // for the download files summary UI change
+    ]
+
+    return includeKeys.reduce(
+      (acc, key) =>
+        key in sourceDataset
+          ? { ...acc, [key]: structuredClone(sourceDataset[key]) }
+          : acc,
+      {}
+    )
+  }
+
   // sends the download options change to the API for My Dataset to preserve
   // users' preferences, otherwise just updates DownloadOptions with new change
   const updateDownloadOptions = async (options, id, regenerate = false) => {
@@ -306,6 +325,7 @@ export const useDatasetManager = () => {
     updateDataset,
     // Download options
     getDownloadOptions,
+    getDatasetPropertiesFrom,
     updateDownloadOptions,
     // Experiment
     getTotalExperiments,
