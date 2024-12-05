@@ -1,13 +1,4 @@
 export const options = {
-  // setting for the dataset manager
-  dataset: {
-    downloadOptionsKeys: [
-      'aggregate_by',
-      'data',
-      'scale_by',
-      'quantile_normalize'
-    ]
-  },
   // setting for the samples table
   samplesTable: {
     // default values for common queries
@@ -60,23 +51,7 @@ export const options = {
         value: 'source_first_published'
       }
     ]
-  },
-  // TODO: This will be cleaned up once the following PR is merged
-  // https://github.com/AlexsLemonade/refinebio-web/pull/365
-  transformation: [
-    {
-      label: 'None',
-      value: 'NONE'
-    },
-    {
-      label: 'Zero to One',
-      value: 'MINMAX'
-    },
-    {
-      label: 'Z-score',
-      value: 'STANDARD'
-    }
-  ]
+  }
 }
 
 export default options

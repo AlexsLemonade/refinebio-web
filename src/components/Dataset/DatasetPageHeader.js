@@ -1,73 +1,46 @@
-import { Box, Heading } from 'grommet'
+import dynamic from 'next/dynamic'
+import { Box } from 'grommet'
+import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
 import getDatasetState from 'helpers/getDatasetState'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { DatasetProcessing } from './DatasetProcessing'
+import { DatasetNotProcessed } from './DatasetNotProcessed'
 import { DatasetProcessingError } from './DatasetProcessingError'
 import { DatasetReady } from './DatasetReady'
 import { DatasetRegenerate } from './DatasetRegenerate'
 
-const Block = ({ children }) => {
-  const { setResponsive } = useResponsive()
-
-  return (
-    <FixedContainer>
-      <Box
-        pad={{
-          vertical: setResponsive('basex6', 'basex8', 'basex14')
-        }}
-      >
-        {children}
-      </Box>
-    </FixedContainer>
-  )
-}
+const DatasetProcessing = dynamic(() => import('./DatasetProcessing'), {
+  ssr: false
+})
 
 export const DatasetPageHeader = ({ dataset }) => {
   const { setResponsive } = useResponsive()
-  const { isFailed, isProcessing, isReady, isReadyExpired } =
-    getDatasetState(dataset)
+  const { polledDatasetState } = usePollDatasetStatus(dataset.id)
+  const currentDataset = polledDatasetState || dataset
+  const currentDatasetState = getDatasetState(currentDataset)
+  const vPad = !currentDatasetState.isNotProcessed
+    ? setResponsive('basex6', 'basex8', 'basex14')
+    : 'none'
 
-  if (isProcessing) {
-    return (
-      <Block>
-        <DatasetProcessing dataset={dataset} />
-      </Block>
-    )
+  const datasetStateComponents = {
+    isNotProcessed: DatasetNotProcessed,
+    isProcessing: DatasetProcessing,
+    isFailed: DatasetProcessingError,
+    isReady: DatasetReady,
+    isReadyExpired: DatasetRegenerate
   }
 
-  if (isFailed) {
-    return (
-      <Block>
-        <DatasetProcessingError dataset={dataset} />
-      </Block>
-    )
-  }
-
-  if (isReady) {
-    return (
-      <Block>
-        <DatasetReady dataset={dataset} />
-      </Block>
-    )
-  }
-
-  if (isReadyExpired) {
-    return (
-      <Block>
-        <DatasetRegenerate dataset={dataset} />
-      </Block>
-    )
-  }
+  const Component =
+    datasetStateComponents[
+      Object.keys(datasetStateComponents).find(
+        (state) => currentDatasetState[state]
+      )
+    ]
 
   return (
     <FixedContainer pad="none">
-      <Box>
-        <Box pad={{ top: 'large', bottom: 'medium' }}>
-          <Heading level={2} size={setResponsive('small', 'large')}>
-            Shared Dataset
-          </Heading>
-        </Box>
+      <Box pad={{ vertical: vPad }}>
+        <Component dataset={dataset} />
       </Box>
     </FixedContainer>
   )

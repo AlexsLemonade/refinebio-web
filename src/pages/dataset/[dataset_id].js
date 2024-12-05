@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Box } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
-import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
+import { api } from 'api'
 import getDatasetState from 'helpers/getDatasetState'
 import { Error } from 'components/shared/Error'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
-import { Spinner } from 'components/shared/Spinner'
 import {
   DatasetPageHeader,
   MoveToDatasetButton,
@@ -22,38 +21,19 @@ import {
   StartProcessing
 } from 'components/Download'
 
-export const getServerSideProps = ({ query }) => {
-  return { props: { query } }
-}
-
-export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
-  const { push } = useRouter()
+export const Dataset = ({ dataset }) => {
+  const {
+    push,
+    query: { start }
+  } = useRouter()
   const { setResponsive } = useResponsive()
-  const { dataset: myDataset, error, loading, getDataset } = useDatasetManager()
-  const { isProcessingDataset, polledDatasetState } =
-    usePollDatasetStatus(datasetId)
-  const [dataset, setDataset] = useState({}) // dataset currently displayed on the page
+  const { error, isMyDatasetId } = useDatasetManager()
   const { isNotProcessed } = getDatasetState(dataset)
-
-  const getDatasetFromQuery = async (id) => {
-    const response = await getDataset(id)
-    setDataset(response)
-  }
 
   useEffect(() => {
     // redirects users to /download if datasetId matches My dataset ID
-    if (datasetId === myDataset.id) push('/download')
-    getDatasetFromQuery(datasetId)
-  }, [datasetId, start])
-
-  useEffect(() => {
-    // swaps dataset to the last fetched polledDatasetState
-    // (only if the dataset ID in URL was being processed) to update
-    // DatasetPageHeader
-    if (!isProcessingDataset && polledDatasetState) {
-      setDataset(polledDatasetState)
-    }
-  }, [isProcessingDataset, polledDatasetState])
+    if (isMyDatasetId(dataset.id)) push('/download')
+  }, [dataset, start])
 
   if (start) {
     return (
@@ -74,43 +54,45 @@ export const Dataset = ({ query: { dataset_id: datasetId, start } }) => {
     )
   }
 
-  if (loading) {
-    return (
-      <Box align="center" fill justify="center" margin={{ top: 'large' }}>
-        <Spinner />
-      </Box>
-    )
-  }
-
   return (
     <FixedContainer>
       <Box>
-        {dataset?.data && (
-          <>
-            <DatasetPageHeader dataset={dataset} />
-            <Row
-              border={{ side: 'bottom' }}
-              pad={{ bottom: setResponsive('medium', 'small') }}
-            >
-              <Box>
-                <MoveToDatasetButton dataset={dataset} />
-              </Box>
-              <Row
-                gap={setResponsive('medium', 'small')}
-                margin={{ top: setResponsive('medium', 'none') }}
-              >
-                <ShareDatasetButton dataset={dataset} />
-                {isNotProcessed && <DownloadDatasetButton dataset={dataset} />}
-              </Row>
-            </Row>
-            <FilesSummary dataset={dataset} />
-            <DatasetSummary dataset={dataset} />
-            <DatasetDetails dataset={dataset} isImmutable />
-          </>
-        )}
+        <DatasetPageHeader dataset={dataset} />
+        <Row
+          border={{ side: 'bottom' }}
+          pad={{ bottom: setResponsive('medium', 'small') }}
+        >
+          <Box>
+            <MoveToDatasetButton dataset={dataset} />
+          </Box>
+          <Row
+            gap={setResponsive('medium', 'small')}
+            margin={{ top: setResponsive('medium', 'none') }}
+          >
+            <ShareDatasetButton dataset={dataset} />
+            {isNotProcessed && <DownloadDatasetButton dataset={dataset} />}
+          </Row>
+        </Row>
+        <FilesSummary dataset={dataset} />
+        <DatasetSummary dataset={dataset} />
+        <DatasetDetails dataset={dataset} isImmutable />
       </Box>
     </FixedContainer>
   )
+}
+
+export const getServerSideProps = async ({ query }) => {
+  const response = await api.dataset.get(query.dataset_id)
+
+  if (response.ok && response) {
+    return {
+      props: {
+        dataset: response
+      }
+    }
+  }
+
+  return { notFound: true }
 }
 
 export default Dataset
