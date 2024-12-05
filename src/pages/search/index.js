@@ -38,15 +38,10 @@ export const Search = ({
   statusCode
 }) => {
   const {
-    search: { sortby }
+    search: { defaultOrdering }
   } = options
-  const {
-    getSearchQueryParam,
-    setConfig,
-    setSearch,
-    updatePage,
-    updateSearchTerm
-  } = useSearchManager()
+  const { setFacetNames, setSearch, updatePage, updateSearchTerm } =
+    useSearchManager()
   const { viewport, setResponsive } = useResponsive()
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
@@ -54,7 +49,7 @@ export const Search = ({
   const [userSearchTerm, setUserSearchTerm] = useState(query.search || '')
   const [page, setPage] = useState(getPageNumber(query.offset, query.limit))
   const [pageSize, setPageSize] = useState(Number(query.limit))
-  const [sortBy, setSortBy] = useState(query.sortby || sortby[0].value)
+  const [sortBy, setSortBy] = useState(query.ordering || defaultOrdering)
   const isResults = results?.length > 0
 
   // TODO: Remove when refactring search in a future issue (prevent hydration error)
@@ -73,24 +68,12 @@ export const Search = ({
   }, [])
 
   useEffect(() => {
-    if (facets) {
-      const facetNames = formatFacetNames(Object.keys(facets))
-
-      setConfig({
-        filterOptions: facetNames
-      })
-
-      if (query) {
-        setSearch({
-          ...getSearchQueryParam(query)
-        })
-      }
+    if (facets) setFacetNames(formatFacetNames(Object.keys(facets)))
+    if (query) {
+      setSearch(query)
+      gtag.trackSearchQuery(query)
     }
   }, [facets, query])
-
-  useEffect(() => {
-    gtag.trackSearchQuery(query)
-  }, [query])
 
   // TODO: Remove when refactring search in a future issue
   if (!isPageReady) return <Spinner />
@@ -266,10 +249,8 @@ export const Search = ({
 Search.getInitialProps = async ({ query }) => {
   const {
     search: {
-      commonQueries: {
-        ordering,
-        num_downloadable_samples__gt: numDownloadableSamples
-      }
+      defaultOrdering,
+      numDownloadableSamples: { key, exclude }
     }
   } = options
   const filterOrders = query.filter_order ? query.filter_order.split(',') : []
@@ -277,11 +258,9 @@ Search.getInitialProps = async ({ query }) => {
     ...getSearchQueryForAPI(query),
     limit: query.limit || 10,
     offset: query.offset * query.limit || 0,
-    ordering: query.sortby || ordering,
+    ordering: query.ordering || defaultOrdering,
     ...(query.search ? { search: query.search } : {}),
-    num_downloadable_samples__gt: !query.empty
-      ? Number(numDownloadableSamples.hide)
-      : Number(numDownloadableSamples.show)
+    [key]: query[key] || exclude
   }
   const response = await fetchSearch(queryParams, filterOrders)
 

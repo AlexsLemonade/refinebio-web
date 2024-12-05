@@ -1,25 +1,34 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment } from 'react'
 import { Box, Heading } from 'grommet'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import isEmptyObject from 'helpers/isEmptyObject'
 import isLastIndex from 'helpers/isLastIndex'
+import { options } from 'config'
 import { Button } from 'components/shared/Button'
 import { SearchFilter } from './SearchFilter'
 import { IncludePublication } from './IncludePublication'
 
 export const SearchFilterList = ({ facets, setToggle }) => {
-  const { clearAllFilters, hasAppliedFilters, updateSearchQuery } =
-    useSearchManager()
   const { viewport } = useResponsive()
-  const [filterGroup, setFilterGroup] = useState({})
+  const { search, facetNames, clearAllFilters, updateSearchQuery } =
+    useSearchManager()
+
+  const {
+    search: { numDownloadableSamples }
+  } = options
+  const hasNonDownloadableSamples =
+    Number(search[numDownloadableSamples.key]) ===
+    numDownloadableSamples.include
+  const hasSelectedFacets =
+    facetNames.filter((facetName) => facetName in search).length > 0
 
   const filterIncludePublication = {
     label: 'Includes Publication',
     key: 'has_publication',
     option: 'has_publication'
   }
-  // The order of the filters to render in UI
+  // The order of the facets to render in UI
   const filterOrder = [
     {
       label: 'Organism',
@@ -35,14 +44,12 @@ export const SearchFilterList = ({ facets, setToggle }) => {
     filterIncludePublication
   ]
 
+  const filterGroup = filterOrder.map((f) => facets[f.key])
+
   const handleApplyFilters = () => {
     setToggle(false)
     updateSearchQuery(true)
   }
-
-  useEffect(() => {
-    setFilterGroup(() => filterOrder.map((f) => facets[f.key]))
-  }, [facets])
 
   return (
     <Box>
@@ -57,7 +64,7 @@ export const SearchFilterList = ({ facets, setToggle }) => {
           Filters
         </Heading>
         <Button
-          disabled={!hasAppliedFilters()}
+          disabled={!hasSelectedFacets && !hasNonDownloadableSamples}
           label="Clear All"
           link
           linkFontSize="medium"

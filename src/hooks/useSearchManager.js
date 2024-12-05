@@ -5,24 +5,17 @@ import { options } from 'config'
 
 export const useSearchManager = () => {
   const {
-    config: configState,
-    setConfig: setConfigState,
+    facetNames,
+    setFacetNames,
     search: searchState,
     setSearch: setSearchState,
     filterOrders: filterOrdersState,
     setFilterOrders: setFilterOrdersState
   } = useContext(SearchManagerContext)
   const {
-    search: {
-      clientOnlyFilterQueries,
-      commonQueries,
-      formattedFacetNames,
-      sortby
-    }
+    search: { numDownloadableSamples, defaultOrdering }
   } = options
   const router = useRouter()
-  const config = configState
-  const setConfig = setConfigState
   const filterOrders = filterOrdersState
   const setFilterOrders = setFilterOrdersState
   const search = searchState
@@ -50,10 +43,10 @@ export const useSearchManager = () => {
   }
 
   const updateSortBy = (newSortOrder) => {
-    if (newSortOrder === sortby[0].value) {
-      delete search.sortby
+    if (newSortOrder === defaultOrdering) {
+      delete search.ordering
     } else {
-      search.sortby = newSortOrder
+      search.ordering = newSortOrder
     }
 
     setSearch({ ...search })
@@ -61,26 +54,22 @@ export const useSearchManager = () => {
   }
 
   /* Filters */
-  // removes all the applied filtes except for the 'empty'
+  // removes all the applied filters
   const clearAllFilters = () => {
-    ;(config.filterOptions || []).forEach((key) => {
+    if (
+      Number(search[numDownloadableSamples.key]) ===
+      numDownloadableSamples.include
+    ) {
+      search[numDownloadableSamples.key] = numDownloadableSamples.exclude
+    }
+
+    facetNames.forEach((key) => {
       if (key in search) delete search[key]
     })
 
     updateFilterOrders(true)
     setSearch({ ...search })
     updateSearchQuery(true)
-  }
-
-  // returns true if any filters that are applied, otherwise false
-  const hasAppliedFilters = () => {
-    if (!search) return false
-
-    return (
-      (config.filterOptions || []).filter(
-        (filterOption) => filterOption in search
-      ).length > 0
-    )
   }
 
   const isFilterChecked = (key, val) => {
@@ -93,13 +82,13 @@ export const useSearchManager = () => {
     return key in search
   }
 
-  // toggles a filter option in facets
+  // toggles a filter option in facetNames
   const toggleFilter = (checked, option, key, val, updateQuery = true) => {
-    if (clientOnlyFilterQueries.includes(option)) {
+    if (option === numDownloadableSamples.key) {
       if (checked) {
-        delete search[option]
+        search[option] = numDownloadableSamples.exclude
       } else {
-        search[option] = true
+        search[option] = numDownloadableSamples.include
       }
     } else {
       // eslint-disable-next-line no-lonely-if
@@ -158,26 +147,6 @@ export const useSearchManager = () => {
   }
 
   /* Other */
-  // returns client-only query parameter from url
-  const getSearchQueryParam = (queryParams) => {
-    const temp = {}
-    Object.keys(queryParams).forEach((key) => {
-      if (!Object.keys(commonQueries).includes(key)) {
-        if (Object.values(formattedFacetNames).includes(key)) {
-          if (typeof queryParams[key] === 'string') {
-            temp[key] = [queryParams[key]]
-          } else {
-            temp[key] = queryParams[key]
-          }
-        } else {
-          temp[key] = queryParams[key]
-        }
-      }
-    })
-
-    return temp
-  }
-
   // handles search requests from non-search page and
   // navigates a user to the search page
   const navigateToSearch = (newQuery) => {
@@ -201,13 +170,11 @@ export const useSearchManager = () => {
   }
 
   return {
+    facetNames,
+    setFacetNames,
     search,
     setSearch,
-    config,
-    setConfig,
     clearAllFilters,
-    getSearchQueryParam,
-    hasAppliedFilters,
     isFilterChecked,
     navigateToSearch,
     toggleFilter,

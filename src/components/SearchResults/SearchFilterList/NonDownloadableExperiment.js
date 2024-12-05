@@ -1,16 +1,16 @@
 import { useSearchManager } from 'hooks/useSearchManager'
 import { CheckBox } from 'components/shared/CheckBox'
+import { options } from 'config'
 
-// the special quary string '?empty=true' is used in FE-only to toggle the `num_downloadable_samples__gt` value
-// - its value is 0 by default which excludes non-doownloadable samples from API results
-// - when it sets to -1, it includes non-doownloadable samples
-export const NonDownloadableExperiment = ({ key = 'empty' }) => {
+export const NonDownloadableExperiment = () => {
   const { search, toggleFilter } = useSearchManager()
+  const { key } = options.search.numDownloadableSamples
+  const checked = Number(search[key]) === 0
 
   return (
     <CheckBox
       label="Hide non-downloadable experiments"
-      checked={!search[key]}
+      checked={checked}
       onChange={(e) => toggleFilter(e.target.checked, key)}
     />
   )
