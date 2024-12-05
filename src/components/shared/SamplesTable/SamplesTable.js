@@ -36,7 +36,7 @@ export const SamplesTable = ({
   showMyDatasetFilter = false // sets visibility of ShowOnlyAddedSamplesFilter
 }) => {
   // initial queries for API requests
-  const initalQuery = { offset: 0, limit: 10, ...queryToAdd }
+  const initialSamplesQuery = { offset: 0, limit: 10, ...queryToAdd }
   const {
     hasError,
     hasSamples,
@@ -50,7 +50,7 @@ export const SamplesTable = ({
     updatePageSize,
     updateDatasetId,
     updateSortBy
-  } = useSamplesContext(initalQuery)
+  } = useSamplesContext(initialSamplesQuery)
   const { viewport, setResponsive } = useResponsive()
   const [tableExpanded, setTableExpanded] = useState(false)
 
@@ -59,7 +59,7 @@ export const SamplesTable = ({
     () => ({ minWidth: 60, width: 160, maxWidth: 250 }),
     []
   )
-  const data = useMemo(() => samples.results, [samples])
+  const data = useMemo(() => samples, [samples])
   const columns = useMemo(() => {
     const temp = [
       {
@@ -137,10 +137,8 @@ export const SamplesTable = ({
     return temp
   }, [isImmutable, viewport])
 
-  // for the expand table button
-  const totalColumns = samples && sampleMetadataFields ? columns.length - 2 : 0 // excludes the add/remove and hidden cells
-  const isTableExpandable =
-    !modalView && viewport === 'large' && totalColumns > 5 // sets the button visivility
+  const showExpandTableButton =
+    !modalView && viewport === 'large' && Math.max(columns.length - 2, 0) > 5 // excludes the add/remove and hidden cells
   const tableHeight = tableExpanded ? '75vh' : '800px' // toggles the table height on expanded view
 
   return (
@@ -202,7 +200,7 @@ export const SamplesTable = ({
                 placeholder="Filter samples"
               />
             </Box>
-            {!isTableExpandable && (
+            {showExpandTableButton && (
               <ExpandTableButton
                 tableExpanded={tableExpanded}
                 setTableExpanded={setTableExpanded}

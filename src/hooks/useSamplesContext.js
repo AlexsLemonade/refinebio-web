@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import { api } from 'api'
 import { SamplesContext } from 'contexts/SamplesContext'
-import filterNullFromObject from 'helpers/filterNullFromObject'
+import filterNullAndEmptyFromObject from 'helpers/filterNullAndEmptyFromObject'
 
 export const useSamplesContext = (initialQuery) => {
   const { samplesQuery, setSamplesQuery } = useContext(SamplesContext)
@@ -9,8 +9,8 @@ export const useSamplesContext = (initialQuery) => {
   const [loading, setLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
   const [samples, setSamples] = useState([])
-  const hasSamples = samples?.results?.length > 0
-  const totalSamples = (samples && samples.count) || 0
+  const [totalSamples, setTotalSamples] = useState(0)
+  const hasSamples = samples?.length > 0
 
   // initial fetch on page load
   useEffect(() => {
@@ -29,7 +29,7 @@ export const useSamplesContext = (initialQuery) => {
   const getSamples = async () => {
     const params = {
       ...initialQuery,
-      ...filterNullFromObject(samplesQuery)
+      ...filterNullAndEmptyFromObject(samplesQuery)
     }
 
     setLoading(true)
@@ -42,7 +42,8 @@ export const useSamplesContext = (initialQuery) => {
     }
 
     setHasError(response?.ok === false)
-    setSamples(response)
+    setSamples(response.results)
+    setTotalSamples(response.count)
     setLoading(false)
   }
 
@@ -72,7 +73,7 @@ export const useSamplesContext = (initialQuery) => {
   }
 
   /* Filter Term */
-  const updateFilterBy = (newFilterTerm = null) => {
+  const updateFilterBy = (newFilterTerm = '') => {
     setSamplesQuery((prev) => {
       const updatedQuery = { ...prev }
       updatedQuery.filter_by = newFilterTerm
@@ -84,7 +85,7 @@ export const useSamplesContext = (initialQuery) => {
   }
 
   /* Sort Order */
-  const updateSortBy = (newSortBy = null) => {
+  const updateSortBy = (newSortBy = '') => {
     setSamplesQuery((prev) => {
       const updatedQuery = { ...prev }
       updatedQuery.ordering = newSortBy
