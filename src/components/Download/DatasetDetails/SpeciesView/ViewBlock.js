@@ -1,4 +1,5 @@
 import { Box, Heading, Text } from 'grommet'
+import { SamplesContextProvider } from 'contexts/SamplesContext'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
@@ -54,15 +55,18 @@ export const ViewBlock = ({ dataset, organismName, isImmutable }) => {
           <Text margin={{ bottom: 'small' }}>
             {totalSamples} {samplesCount > 1 ? 'Samples' : 'Sample'}
           </Text>
-          <ViewSamplesButton
-            dataset={organismSamples}
-            params={{
+          <SamplesContextProvider
+            query={{
               dataset_id: dataset.id,
               organism__name: organismName
             }}
-            sampleMetadataFields={organismMetadata}
-            isImmutable={isImmutable}
-          />
+          >
+            <ViewSamplesButton
+              dataset={organismSamples}
+              sampleMetadataFields={organismMetadata}
+              isImmutable={isImmutable}
+            />
+          </SamplesContextProvider>
         </Box>
         {!isImmutable && (
           <Button

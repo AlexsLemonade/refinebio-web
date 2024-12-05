@@ -19,7 +19,11 @@ export const ExperimentSamplesTable = ({ experiment }) => {
   const { setResponsive } = useResponsive()
 
   return (
-    <SamplesContextProvider>
+    <SamplesContextProvider
+      query={{
+        experiment_accession_code: accesionCode
+      }}
+    >
       <Row margin={{ bottom: 'medium' }}>
         <Column>
           <Heading
@@ -40,9 +44,6 @@ export const ExperimentSamplesTable = ({ experiment }) => {
         allSamples={getFormattedExperiment(accesionCode, downloadableSamples)}
         sampleAccessionsInExperiment={{
           [accesionCode]: samples.map((sample) => sample.accession_code)
-        }}
-        queryToAdd={{
-          experiment_accession_code: accesionCode
         }}
         sampleMetadataFields={sampleMetadata}
         showMyDatasetFilter
