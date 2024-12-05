@@ -118,7 +118,7 @@ export const useDatasetManager = () => {
     }
 
     // sets the error if any, otherwise resets it
-    setError(!ok ? statusCode : null)
+    setError(ok ? null : statusCode)
 
     const { isProcessing } = getDatasetState(response)
     // removes the dataset ID from processingDatasets[] once it finishes processing
