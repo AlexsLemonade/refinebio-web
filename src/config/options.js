@@ -1,13 +1,4 @@
 export const options = {
-  // setting for the dataset manager
-  dataset: {
-    downloadOptionsKeys: [
-      'aggregate_by',
-      'data',
-      'scale_by',
-      'quantile_normalize'
-    ]
-  },
   // setting for the samples table
   samplesTable: {
     // default values for common queries
