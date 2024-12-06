@@ -133,8 +133,9 @@ export const SamplesTable = ({
     return temp
   }, [isImmutable, viewport])
 
+  const isExpandableColumns = columns.length - 2 > 5 // ignores AddRemoveCell and hidden columns
   const showExpandTableButton =
-    !modalView && viewport === 'large' && Math.max(columns.length - 2, 0) > 5 // excludes the add/remove and hidden cells
+    !modalView && viewport === 'large' && isExpandableColumns
   const tableHeight = tableExpanded ? '75vh' : '800px' // toggles the table height on expanded view
 
   return (
