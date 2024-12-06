@@ -1,88 +1,52 @@
-import { useContext, useEffect, useRef, useState } from 'react'
-import { api } from 'api'
+import { useContext } from 'react'
+
 import { SamplesContext } from 'contexts/SamplesContext'
 
-export const useSamplesContext = (initialQuery) => {
-  const { samplesQuery, setSamplesQuery } = useContext(SamplesContext)
-  const prevQueryRef = useRef(samplesQuery) // previous samplesQuery reference
-  const [loading, setLoading] = useState(false)
-  const [hasError, setHasError] = useState(false)
-  const [samples, setSamples] = useState([])
-  const [totalSamples, setTotalSamples] = useState(0)
-  const hasSamples = samples?.length > 0
-
-  // initial fetch on page load
-  useEffect(() => {
-    getSamples()
-  }, [])
-
-  // refetches on samplesQuery changes
-  useEffect(() => {
-    if (isQueryChanged()) {
-      prevQueryRef.current = samplesQuery
-      getSamples()
-    }
-  }, [samplesQuery])
-
-  /* Common */
-  const getSamples = async () => {
-    const params = {
-      ...initialQuery,
-      ...samplesQuery
-    }
-
-    setLoading(true)
-    const response = await api.samples.get(params)
-
-    // resets the page and the page size if no samples
-    if (!hasSamples) {
-      updatePage()
-      updatePageSize()
-    }
-
-    setHasError(response?.ok === false)
-    setSamples(response.results)
-    setTotalSamples(response.count)
-    setLoading(false)
-  }
-
-  // detects changes in samplesQuery
-  const isQueryChanged = () => {
-    const prevKeys = Object.keys(prevQueryRef.current)
-    const newKeys = Object.keys(samplesQuery)
-
-    if (prevKeys.length !== newKeys.length) {
-      return true
-    }
-
-    return !prevKeys.every(
-      (key) => prevQueryRef.current[key] === samplesQuery[key]
-    )
-  }
+export const useSamplesContext = () => {
+  const {
+    loading,
+    hasError,
+    samples,
+    samplesQuery,
+    hasSamples,
+    totalSamples,
+    setSamplesQuery,
+    getSamples
+  } = useContext(SamplesContext)
 
   /* Page */
-  const updatePage = (newPage = 1) => {
-    setSamplesQuery((prev) => ({
-      ...prev,
-      offset: (newPage - 1) * samplesQuery.limit
-    }))
+  const updatePage = (newPage) => {
+    const newOffset = (newPage - 1) * samplesQuery.limit
+
+    setSamplesQuery((prev) => {
+      if (newOffset === prev.offset) return prev
+
+      const updatedQuery = { ...prev }
+      updatedQuery.offset = newOffset
+
+      return updatedQuery
+    })
   }
 
   /* Page Size */
-  const updatePageSize = (newPageSize = initialQuery.limit) => {
+  const updatePageSize = (newPageSize) => {
     setSamplesQuery((prev) => {
+      if (newPageSize === prev.limit) return prev
+
       const updatedQuery = { ...prev }
       updatedQuery.limit = newPageSize
       // resets page on page size changes
-      updatedQuery.offset = initialQuery.offset
+      updatedQuery.offset = 0
 
       return updatedQuery
     })
   }
 
   /* Filter Term */
-  const updateFilterBy = (newFilterTerm = '') => {
+  const updateFilterBy = (newFilterTerm) => {
     setSamplesQuery((prev) => {
+      if (newFilterTerm === prev.filter_by) return prev
+
       const updatedQuery = { ...prev }
 
       if (newFilterTerm) {
@@ -91,15 +55,17 @@ export const useSamplesContext = (initialQuery) => {
         delete updatedQuery.filter_by
       }
       // resets page on filter changes
-      updatedQuery.offset = initialQuery.offset
+      updatedQuery.offset = 0
 
       return updatedQuery
     })
   }
 
   /* Sort Order */
-  const updateSortBy = (newSortBy = '') => {
+  const updateSortBy = (newSortBy) => {
     setSamplesQuery((prev) => {
+      if (newSortBy !== prev.ordering) return prev
+
       const updatedQuery = { ...prev }
 
       if (newSortBy) {
@@ -107,15 +73,13 @@ export const useSamplesContext = (initialQuery) => {
       } else {
         delete updatedQuery.ordering
       }
-      // resets page on sorting changes
-      updatedQuery.offset = initialQuery.offset
 
       return updatedQuery
     })
   }
 
   /* Dataset ID */
-  const updateDatasetId = (newDatasetId = null) => {
+  const updateDatasetId = (newDatasetId) => {
     setSamplesQuery((prev) => {
       const updatedQuery = { ...prev }
 
@@ -125,18 +89,18 @@ export const useSamplesContext = (initialQuery) => {
         delete updatedQuery.dataset_id
       }
       // resets page on dataset ID changes
-      updatedQuery.offset = initialQuery.offset
+      updatedQuery.offset = 0
 
       return updatedQuery
     })
   }
 
   return {
+    loading,
+    hasError,
     samples,
     samplesQuery,
-    hasError,
     hasSamples,
-    loading,
     totalSamples,
     getSamples,
     updateFilterBy,
