@@ -120,7 +120,7 @@ export const SamplesTable = ({
     if (viewport === 'large') {
       let stickyColumns = 3
       let i = 0
-      // removes the add/remove button if the dataset is immutable
+      // removes AddRemoveCell if the dataset is immutable
       if (isImmutable) {
         temp.shift()
         stickyColumns = 2
@@ -133,7 +133,7 @@ export const SamplesTable = ({
     return temp
   }, [isImmutable, viewport])
 
-  const isExpandableColumns = columns.length - 2 > 5 // We ignores AddRemoveCell and hidden columns
+  const isExpandableColumns = columns.length - 2 > 5 // We ignore AddRemoveCell and hidden columns
   const showExpandTableButton =
     !modalView && viewport === 'large' && isExpandableColumns
   const tableHeight = tableExpanded ? '75vh' : '800px' // toggles the table height on expanded view
