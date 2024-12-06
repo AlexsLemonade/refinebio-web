@@ -28,33 +28,27 @@ import { TitleCell } from './TitleCell'
 
 export const SamplesTable = ({
   sampleAccessionsInExperiment,
-  queryToAdd,
   sampleMetadataFields,
   allSamples,
   isImmutable = false,
   modalView = false,
   showMyDatasetFilter = false // sets visibility of ShowOnlyAddedSamplesFilter
 }) => {
-  // initial queries for API requests
-  const initialSamplesQuery = { offset: 0, limit: 10, ...queryToAdd }
   const {
-    hasError,
-    hasSamples,
     loading,
-    samplesQuery,
-    totalSamples,
+    hasError,
     samples,
+    samplesQuery,
+    hasSamples,
+    totalSamples,
     getSamples,
-    updateDatasetId,
     updateFilterBy,
     updatePage,
     updatePageSize,
     updateSortBy
-  } = useSamplesContext(initialSamplesQuery)
+  } = useSamplesContext()
   const { viewport, setResponsive } = useResponsive()
   const [tableExpanded, setTableExpanded] = useState(false)
-
-  const { filter_by: filterBy } = samplesQuery // convert to cameCase for reference
 
   // for react-table
   const defaultColumn = useMemo(
@@ -182,10 +176,7 @@ export const SamplesTable = ({
               }}
             >
               {showMyDatasetFilter && (
-                <ShowOnlyAddedSamplesFilter
-                  samples={allSamples}
-                  updateDatasetId={updateDatasetId}
-                />
+                <ShowOnlyAddedSamplesFilter samples={allSamples} />
               )}
             </Box>
           </Box>
@@ -196,7 +187,7 @@ export const SamplesTable = ({
               align={setResponsive('start', 'center')}
             >
               <FilterTextInput
-                filter={filterBy}
+                filter={samplesQuery.filter_by}
                 setFilter={updateFilterBy}
                 placeholder="Filter samples"
               />
@@ -210,7 +201,7 @@ export const SamplesTable = ({
           </Box>
         </Row>
         <BoxBlock>
-          <TextHighlightContextProvider match={filterBy}>
+          <TextHighlightContextProvider match={samplesQuery.filter_by}>
             <DataTable
               columns={columns}
               data={data || []}
@@ -225,7 +216,7 @@ export const SamplesTable = ({
               tableExpanded={tableExpanded}
               updateSortBy={updateSortBy}
             />
-            {!hasSamples && filterBy && (
+            {!hasSamples && samplesQuery.filter_by && (
               <SamplesTableEmpty>
                 <TextNull
                   text={
@@ -236,7 +227,7 @@ export const SamplesTable = ({
                         style={{ fontStyle: 'normal' }}
                         margin={{ left: 'xsmall' }}
                       >
-                        <strong>"{filterBy}"</strong>
+                        <strong>"{samplesQuery.filter_by}"</strong>
                       </Text>
                     </>
                   }
