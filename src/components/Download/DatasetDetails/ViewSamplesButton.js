@@ -32,6 +32,7 @@ export const ViewSamplesButton = ({
     >
       <ViewSamplesModal
         dataset={dataset}
+        params={params}
         sampleMetadataFields={sampleMetadataFields}
         isImmutable={isImmutable}
       />
