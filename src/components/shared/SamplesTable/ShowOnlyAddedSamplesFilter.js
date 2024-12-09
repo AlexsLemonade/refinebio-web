@@ -1,44 +1,27 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useDatasetAction } from 'hooks/useDatasetAction'
 import { useDatasetManager } from 'hooks/useDatasetManager'
+import { useSamplesContext } from 'hooks/useSamplesContext'
 import { CheckBox } from 'components/shared/CheckBox'
 
-export const ShowOnlyAddedSamplesFilter = ({
-  data,
-  showOnlyAddedSamples,
-  updateDatasetId
-}) => {
+export const ShowOnlyAddedSamplesFilter = ({ samples }) => {
   const { dataset } = useDatasetManager()
-  const { getHasAllProcessed, getAnyProcessedInDataset } = useDatasetAction(
-    dataset?.data,
-    data
-  )
-
+  const { updateDatasetId } = useSamplesContext()
+  const { getAnyProcessedInDataset } = useDatasetAction(dataset?.data, samples)
+  const samplesInMyDataset = getAnyProcessedInDataset()
   const [showOnly, setShowOnly] = useState(false)
 
   const handleToggle = () => {
-    if (!getHasAllProcessed()) {
-      if (!showOnly) {
-        setShowOnly(true)
-        updateDatasetId(dataset.id)
-      } else {
-        setShowOnly(false)
-        updateDatasetId()
-      }
-    }
+    const newShowOnly = !showOnly
+    updateDatasetId(newShowOnly ? dataset.id : null)
+    setShowOnly(newShowOnly)
   }
-
-  useEffect(() => {
-    if (!showOnlyAddedSamples) return
-
-    if (dataset) setShowOnly(getHasAllProcessed())
-  }, [dataset])
 
   return (
     <CheckBox
-      checked={showOnly || getHasAllProcessed()}
+      checked={showOnly}
       label="Show only samples in current dataset"
-      disabled={!getAnyProcessedInDataset()}
+      disabled={!samplesInMyDataset}
       onChange={handleToggle}
     />
   )

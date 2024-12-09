@@ -20,27 +20,26 @@ export const usePollDatasetStatus = (accessionOrId) => {
     }
   }, [accessionOrId, processingDatasets])
 
-  // polls the latest state of the processing dataset per minute
+  // polls the latest dataset status per minute
   // (the processing usually takes a few minutes)
   useEffect(() => {
-    if (polledDatasetId) {
+    if (polledDatasetId && isProcessingDataset) {
       clearInterval(timerRef.current) // clears the previous interval if any
       timerRef.current = setInterval(() => {
         refreshProcessingDataset()
       }, 1000 * 60)
-    }
-  }, [polledDatasetId])
-
-  // stops the running timer when finished processing
-  useEffect(() => {
-    if (polledDatasetId && !isProcessingDataset) {
+    } else {
+      //  stops the interval when processing is finished
       clearInterval(timerRef.current)
     }
-  }, [isProcessingDataset])
+
+    return () => clearInterval(timerRef.current)
+  }, [polledDatasetId, isProcessingDataset, processingDatasets])
 
   // sets the mached dataset ID to polledDatasetId
   const pollDatasetId = (datasetId) => {
     const isProcessing = processingDatasets.includes(datasetId)
+
     if (isProcessing) {
       setPolledDatasetId(datasetId)
     }
@@ -49,11 +48,7 @@ export const usePollDatasetStatus = (accessionOrId) => {
 
   const refreshProcessingDataset = async () => {
     const response = await getDataset(polledDatasetId)
-
-    if (response.ok) {
-      setPolledDatasetState(response)
-    }
-
+    setPolledDatasetState(response)
     setIsProcessingDataset(response.is_processing)
 
     return response

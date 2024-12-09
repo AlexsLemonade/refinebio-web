@@ -1,4 +1,4 @@
-import { createContext, useMemo, useState, useEffect } from 'react'
+import { createContext, useMemo, useEffect } from 'react'
 import { useLocalStorage } from 'hooks/useLocalStorage'
 import {
   getOldLocalStorageKey,
@@ -11,7 +11,6 @@ export const RefinebioContext = createContext({})
 export const RefinebioContextProvider = ({ children }) => {
   const [dataset, setDataset] = useLocalStorage('dataset', {})
   const [datasetId, setDatasetId] = useLocalStorage('datasetId', null)
-  const [downloadOptions, setDownloadOptions] = useState({})
   const [email, setEmail] = useLocalStorage('email-address', null)
   const [datasetAccessions, setDatasetAccessions] = useLocalStorage(
     'dataset-accessions',
@@ -78,8 +77,6 @@ export const RefinebioContextProvider = ({ children }) => {
       setDatasetAccessions,
       datasetId,
       setDatasetId,
-      downloadOptions,
-      setDownloadOptions,
       email,
       setEmail,
       processingDatasets,
@@ -97,8 +94,6 @@ export const RefinebioContextProvider = ({ children }) => {
       setDatasetAccessions,
       datasetId,
       setDatasetId,
-      downloadOptions,
-      setDownloadOptions,
       email,
       setEmail,
       processingDatasets,

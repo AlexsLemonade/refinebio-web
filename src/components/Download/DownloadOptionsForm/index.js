@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Formik } from 'formik'
 import { Box, Form } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
-import getDatasetState from 'helpers/getDatasetState'
+import gtag from 'analytics/gtag'
 import { Button } from 'components/shared/Button'
 import { Row } from 'components/shared/Row'
 import { AdvancedOptions } from './AdvancedOptions'
@@ -15,45 +15,25 @@ import { TransformationOptions } from './TransformationOptions'
 export const DownloadOptionsForm = ({
   dataset,
   buttonLabel = 'Download',
-  handleDownloadOptionsChanges = null, // for the regenerate dataset local state update
-  onSubmit = null // for the regenerate dataset download
+  onOptionsChange = null // if not defined dataset changes will persist on the API
 }) => {
   const { push } = useRouter()
-  const { updateDataset, getDownloadOptions, updateDownloadOptions } =
-    useDatasetManager()
+  const { createDataset, updateDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const [canRegenerate, setCanRegenerate] = useState(false)
+
   const [toggleAdvancedOption, setToggleAdvancedOption] = useState(
-    dataset?.quantile_normalize
+    dataset.quantile_normalize
   )
 
-  useEffect(() => {
-    // sets the initial download options
-    const { isProcessed } = getDatasetState(dataset)
-    setCanRegenerate(isProcessed)
-    updateDownloadOptions(
-      {
-        ...getDownloadOptions(dataset)
-      },
-      dataset.id,
-      isProcessed
-    )
-  }, [])
-
   const handleSubmitForm = async (downloadOptions) => {
-    let pathname = '/download'
+    const params = { ...dataset, ...downloadOptions }
+    const response = await updateDataset(
+      onOptionsChange ? await createDataset() : dataset.id,
+      params
+    )
+    const pathname = onOptionsChange ? `/dataset/${response.id}` : '/download'
 
-    if (onSubmit) {
-      const response = await onSubmit(downloadOptions)
-      pathname = response
-    }
-    // updates via API call only for My Dataset in /download (unprocessed)
-    if (!canRegenerate) {
-      await updateDataset(dataset.id, {
-        ...downloadOptions,
-        data: dataset.data
-      })
-    }
+    if (onOptionsChange) gtag.trackRegeneratedDataset(dataset, response)
 
     push(
       {
@@ -69,11 +49,11 @@ export const DownloadOptionsForm = ({
   const handleUpdateDownloadOptions = async (name, newOption) => {
     const newDownloadOption = { [name]: newOption }
 
-    if (canRegenerate && handleDownloadOptionsChanges) {
-      handleDownloadOptionsChanges(newDownloadOption)
+    if (onOptionsChange) {
+      onOptionsChange(newDownloadOption)
+    } else {
+      await updateDataset(dataset.id, { ...dataset, ...newDownloadOption })
     }
-
-    await updateDownloadOptions(newDownloadOption, dataset.id, canRegenerate)
   }
 
   return (
