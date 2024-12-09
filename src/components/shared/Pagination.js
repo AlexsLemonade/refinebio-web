@@ -35,8 +35,7 @@ export const Pagination = ({
   pageSize,
   totalPages,
   setPage,
-  updatePage = () => {}, // for updateing a page url with selected page number
-  reset = false
+  updatePage = () => {} // updates page with the selected number
 }) => {
   const { query, isReady } = useRouter()
   const { setResponsive } = useResponsive()
@@ -94,13 +93,9 @@ export const Pagination = ({
     setCurrentPage(getPageNumber(query.offset, query.limit))
   }, [isReady, query])
 
-  // resets the current page to match the newly updated page number
-  // in the samlles table
   useEffect(() => {
-    if (!reset) return
-
     setCurrentPage(page)
-  }, [reset])
+  }, [page])
 
   useEffect(() => {
     setPage(currentPage)

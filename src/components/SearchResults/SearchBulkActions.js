@@ -3,7 +3,6 @@ import { useResponsive } from 'hooks/useResponsive'
 import { useSearchManager } from 'hooks/useSearchManager'
 import getReadableOptions from 'helpers/getReadableOptions'
 import { PageSizes } from 'components/shared/PageSizes'
-import { options } from 'config'
 import { AddPageToDatasetButton } from './AddPageToDatasetButton'
 import { NonDownloadableExperiment } from './SearchFilterList'
 
@@ -15,7 +14,6 @@ export const SearchBulkActions = ({
   setSortBy,
   totalResults
 }) => {
-  const { pageSizes } = options
   const { updatePageSize, updateSortBy } = useSearchManager()
   const { getForBreakpoint, setResponsive } = useResponsive()
   const sortByValues = [
@@ -115,7 +113,6 @@ export const SearchBulkActions = ({
               pageSizeLabel="Total Samples"
               pageSize={pageSize}
               setPageSize={setPageSize}
-              pageSizes={pageSizes}
               totalPages={totalResults}
               updatePageSize={updatePageSize}
             />

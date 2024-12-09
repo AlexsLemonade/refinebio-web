@@ -1,13 +1,4 @@
 export const options = {
-  // setting for the samples table
-  samplesTable: {
-    // default values for common queries
-    commonQueries: {
-      offset: 0,
-      limit: 10
-    },
-    page: 1
-  },
   // setting for the page size
   pageSizes: [10, 20, 50],
   // setting for the search manager
