@@ -11,7 +11,6 @@ import getPageNumber from 'helpers/getPageNumber'
 import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
-import { Error } from 'components/shared/Error'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { LayerResponsive } from 'components/shared/LayerResponsive'
 import { Icon } from 'components/shared/Icon'
@@ -29,14 +28,7 @@ import {
 } from 'components/SearchResults'
 import { options } from 'config'
 
-export const Search = ({
-  query,
-  facets,
-  hasError,
-  results,
-  totalResults,
-  statusCode
-}) => {
+export const Search = ({ query, response }) => {
   const {
     search: { defaultOrdering }
   } = options
@@ -50,6 +42,7 @@ export const Search = ({
   const [page, setPage] = useState(getPageNumber(query.offset, query.limit))
   const [pageSize, setPageSize] = useState(Number(query.limit))
   const [sortBy, setSortBy] = useState(query.ordering || defaultOrdering)
+  const { facets, results, totalResults } = response
   const isResults = results?.length > 0
 
   // TODO: Remove when refactring search in a future issue (prevent hydration error)
@@ -106,14 +99,6 @@ export const Search = ({
               onSubmit={handleSubmit}
             />
           </Box>
-          {hasError && (
-            <Error
-              statusCode={statusCode}
-              align="center"
-              direction="column"
-              marginTop="none"
-            />
-          )}
           {isResults && (
             <Grid
               areas={[
@@ -246,7 +231,7 @@ export const Search = ({
   )
 }
 
-Search.getInitialProps = async ({ query }) => {
+export const getServerSideProps = async ({ query }) => {
   const {
     search: {
       defaultOrdering,
@@ -264,10 +249,16 @@ Search.getInitialProps = async ({ query }) => {
   }
   const response = await fetchSearch(queryParams, filterOrders)
 
-  return {
-    query: queryParams,
-    ...response
+  if (response.ok && response) {
+    return {
+      props: {
+        query: queryParams,
+        response
+      }
+    }
   }
+
+  return { notFound: true }
 }
 
 export default Search

@@ -59,9 +59,9 @@ export default async (queryParams, filterOrders) => {
 
   return {
     facets,
-    hasError: !response.ok,
     results,
     totalResults,
+    ok: response.ok,
     statusCode: response.statusCode
   }
 }
