@@ -4,23 +4,20 @@ import { api } from 'api'
 import gtag from 'analytics/gtag'
 
 export const useDownloadCompendium = (compendium) => {
-  const { token, createToken } = useRefinebio()
+  const { token } = useRefinebio()
   const [error, setError] = useState(null)
   const [downloadUrl, setDownloadUrl] = useState('')
 
-  // fetchs the download URL for the selected compendium with a valid token
+  // fetchs the download URL for the selected compendium
   useEffect(() => {
     const fetchDownloadUrl = async () => {
-      const response = await api.compendia.download(
-        compendium.id,
-        token || (await createToken())
-      )
+      const response = await api.compendia.download(compendium.id, token)
       const { ok, statusCode } = response
       setError(!ok ? statusCode : null)
       setDownloadUrl(ok ? response.computed_file.download_url : null)
     }
 
-    fetchDownloadUrl()
+    if (token) fetchDownloadUrl()
   }, [compendium, token])
 
   // triggers the file download once the download URL is available

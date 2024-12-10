@@ -7,7 +7,8 @@ const url = 'dataset/'
 // 'details': https://github.com/AlexsLemonade/refinebio-frontend/pull/485
 
 export default {
-  create: (params) => http.post(url, params),
+  create: (body) => http.post(url, body),
   get: (id, headers) => http.get(`${url}${id}/`, { details: true }, headers),
-  update: (id, params) => http.put(`${url}${id}/?details=true`, params)
+  update: (id, body, headers) =>
+    http.put(`${url}${id}/?details=true`, body, headers)
 }

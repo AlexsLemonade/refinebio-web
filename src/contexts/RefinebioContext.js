@@ -24,29 +24,33 @@ export const RefinebioContextProvider = ({ children }) => {
     'requested-experiments',
     []
   )
+
+  // For user token
   const [acceptedTerms, setAcceptedTerms] = useLocalStorage(
     'accepted-terms',
     false
   )
   const [token, setToken] = useLocalStorage('token', null)
+  const [validToken, setValidToken] = useLocalStorage('valid-token', null)
 
-  const activateToken = async (id) => {
-    await api.token.update(id, { is_activated: true })
+  // triggers the token activation for a file download
+  const applyAcceptedTerms = () => {
+    setAcceptedTerms((prev) => prev || true)
+  }
+
+  const activateToken = async () => {
+    const response = await api.token.update(token, {
+      is_activated: acceptedTerms
+    })
+
+    return response
   }
 
   const createToken = async () => {
     const { id } = await api.token.create()
-    await activateToken(id)
     setToken(id)
-    setAcceptedTerms(true)
 
     return id
-  }
-
-  const validateToken = async () => {
-    const { ok, statusCode } = await api.token.get(token)
-    // create a new token if 404 (e.g., a corrupted token value, API version changes)
-    if (!ok && statusCode === 404) await createToken()
   }
 
   // NOTE: migration support is removed 12 months after the site swap
@@ -62,12 +66,30 @@ export const RefinebioContextProvider = ({ children }) => {
     }
   }, [])
 
-  // validates the stored token only if the user has accepted the terms
+  // creates the application token per user on initial visit
   useEffect(() => {
-    if (acceptedTerms) {
-      validateToken()
+    if (!token) {
+      createToken()
     }
-  }, [acceptedTerms])
+  }, [token])
+
+  // sync user's token with acceptedTerms
+  useEffect(() => {
+    const syncToken = async () => {
+      if (token) {
+        const { ok, statusCode } = await activateToken()
+        const badRequest = !ok && statusCode >= 400 && statusCode < 500
+
+        if (badRequest) {
+          setToken(null)
+        } else {
+          setValidToken(acceptedTerms ? token : null)
+        }
+      }
+    }
+
+    syncToken()
+  }, [acceptedTerms, token])
 
   const value = useMemo(
     () => ({
@@ -84,8 +106,8 @@ export const RefinebioContextProvider = ({ children }) => {
       requestedExperiments,
       setRequestedExperiments,
       acceptedTerms,
-      token,
-      createToken
+      token: validToken,
+      applyAcceptedTerms
     }),
     [
       dataset,
@@ -101,8 +123,8 @@ export const RefinebioContextProvider = ({ children }) => {
       requestedExperiments,
       setRequestedExperiments,
       acceptedTerms,
-      token,
-      createToken
+      validToken,
+      applyAcceptedTerms
     ]
   )
 
