@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
@@ -17,10 +18,39 @@ import { TermsOfUseCheckBox } from 'components/Download/StartProcessingForm/Term
 
 export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
   const { push } = useRouter()
-  const { email, startProcessingDataset } = useDatasetManager()
-  const { acceptedTerms } = useRefinebio()
   const { setResponsive } = useResponsive()
+  const { email, startProcessingDataset } = useDatasetManager()
+  const { token, applyAcceptedTerms } = useRefinebio()
+  const hasToken = !!token
   const { StartProcessingFormSchema } = validationSchemas
+  const [downloadOptions, setDownloadOptions] = useState(null)
+
+  const handleStartProcessing = (formValues) => {
+    applyAcceptedTerms()
+    setDownloadOptions(formValues)
+  }
+
+  const submit = async () => {
+    const { emailAddress, receiveUpdates } = downloadOptions
+
+    if (receiveUpdates) {
+      const subscribeEmailResponse = await subscribeEmail(emailAddress)
+      if (subscribeEmailResponse.status !== 'error') {
+        gtag.trackEmailSubscription(DownloadDatasetModal)
+      }
+    }
+    const response = await startProcessingDataset(downloadOptions, dataset.id)
+    const pathname = `/dataset/${response.id}`
+    push({ pathname }, pathname)
+    closeModal(id)
+  }
+
+  // makes sure the token is activated before submission
+  useEffect(() => {
+    if (downloadOptions && token) {
+      submit()
+    }
+  }, [downloadOptions, token])
 
   return (
     <Box
@@ -39,24 +69,12 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
           quantile_normalize: dataset.quantile_normalize,
           emailAddress: email || '',
           receiveUpdates: true,
-          termsOfUse: acceptedTerms
+          termsOfUse: hasToken
         }}
         validationSchema={StartProcessingFormSchema}
         validateOnChange={false}
         onSubmit={async (values, { setSubmitting }) => {
-          const { emailAddress, receiveUpdates } = values
-
-          if (receiveUpdates) {
-            const subscribeEmailResponse = await subscribeEmail(emailAddress)
-            if (subscribeEmailResponse.status !== 'error') {
-              gtag.trackEmailSubscription(DownloadDatasetModal)
-            }
-          }
-
-          const response = await startProcessingDataset(values, dataset.id)
-          const pathname = `/dataset/${response.id}`
-          push({ pathname }, pathname)
-          closeModal(id)
+          handleStartProcessing(values)
           setSubmitting(false)
         }}
       >
@@ -107,7 +125,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
                   handleChange={handleChange}
                 />
                 <Box pad={{ top: 'small' }}>
-                  {!acceptedTerms && (
+                  {!hasToken && (
                     <TermsOfUseCheckBox
                       error={errors.termsOfUse}
                       touched={touched.termsOfUse}

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
@@ -16,13 +16,25 @@ import { DatasetExplore } from './DatasetExplore'
 export const DatasetReady = ({ dataset }) => {
   const { setResponsive } = useResponsive()
   const { downloadDataset } = useDatasetManager()
-  const { acceptedTerms } = useRefinebio()
-  const [acceptTerms, setAcceptTerms] = useState(acceptedTerms)
+  const { token, applyAcceptedTerms } = useRefinebio()
+  const hasToken = !!token
+  const [acceptTerms, setAcceptTerms] = useState(hasToken)
+  const [triggerDownload, setTriggerDownload] = useState(false)
 
-  const handleDownloadNow = async () => {
+  const handleDownloadNow = () => {
+    applyAcceptedTerms() // makes sure the token is activated
+    setTriggerDownload(true)
+  }
+
+  const submit = async () => {
     await downloadDataset(dataset.id, dataset.download_url)
     gtag.trackDatasetDownload(dataset)
+    setTriggerDownload(false)
   }
+
+  useEffect(() => {
+    if (triggerDownload && token) submit()
+  }, [triggerDownload, token])
 
   return (
     <>
@@ -48,7 +60,7 @@ export const DatasetReady = ({ dataset }) => {
                 }}
                 fill
               >
-                {!acceptedTerms && (
+                {!hasToken && (
                   <Column align={setResponsive('center', 'start')}>
                     <CheckBox
                       label={
@@ -70,14 +82,14 @@ export const DatasetReady = ({ dataset }) => {
                   align={setResponsive('center', 'start')}
                   margin={{
                     top: setResponsive('medium', 'small', 'none'),
-                    left: acceptedTerms
+                    left: hasToken
                       ? 'none'
                       : setResponsive('none', 'none', 'medium')
                   }}
                 >
                   <Button
                     label="Download Now"
-                    disabled={!acceptTerms}
+                    disabled={!token}
                     primary
                     responsive
                     onClick={handleDownloadNow}
