@@ -64,15 +64,18 @@ export const useDatasetAction = (datasetData = {}, datasetDataChanges = {}) => {
         continue
       }
 
-      const filteredDataOne = dataOne.filter((item) => item.length > 0)
-      const filteredDataTwo = dataTwo.filter((item) => item.length > 0)
+      // for samples grouped by organisms
+      if (dataOne.length === 0) {
+        const filteredDataOne = dataOne.filter((item) => item.length > 0)
+        const filteredDataTwo = dataTwo.filter((item) => item.length > 0)
 
-      // skips the comparison for accessions grouped by organisms that have no samples
-      if (filteredDataOne.length === 0) {
+        if (!hasSameElements(filteredDataOne, filteredDataTwo)) {
+          return false
+        }
         continue
       }
 
-      if (!hasSameElements(filteredDataOne, filteredDataTwo)) {
+      if (!hasSameElements(dataOne, dataTwo)) {
         return false
       }
     }
