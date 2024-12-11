@@ -3,8 +3,12 @@ import { useResponsive } from 'hooks/useResponsive'
 import { getFormattedExperiment } from 'helpers/formatDatasetAction'
 import { DatasetActionButton } from 'components/shared/DatasetActionButton'
 
-export const SamplesTableAction = ({ accessionCode, downloadableSamples }) => {
+export const SamplesTableAction = ({ experiment }) => {
   const { setResponsive } = useResponsive()
+  const {
+    accession_code: accessionCode,
+    num_downloadable_samples: downloadableSamples
+  } = experiment
 
   if (!downloadableSamples) return null
 

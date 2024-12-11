@@ -1,5 +1,6 @@
 import { memo, useMemo, useState } from 'react'
 import { Box, Spinner, Text } from 'grommet'
+import uniqueArray from 'helpers/uniqueArray'
 import { useSamplesContext } from 'hooks/useSamplesContext'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
@@ -27,9 +28,8 @@ import { ShowOnlyAddedSamplesFilter } from './ShowOnlyAddedSamplesFilter'
 import { TitleCell } from './TitleCell'
 
 export const SamplesTable = ({
-  sampleAccessionsInExperiment,
-  sampleMetadataFields,
-  allSamples,
+  dataset, // for the download and dataset pages
+  experiment, // for the experiment page
   isImmutable = false,
   modalView = false,
   showMyDatasetFilter = false // sets visibility of ShowOnlyAddedSamplesFilter
@@ -50,6 +50,47 @@ export const SamplesTable = ({
   const { viewport, setResponsive } = useResponsive()
   const [tableExpanded, setTableExpanded] = useState(false)
 
+  const getSamplesDetails = () => {
+    const {
+      organism__name: organismName,
+      experiment_accession_code: experimentAccessionCode
+    } = samplesQuery
+
+    const samplesDetails = {
+      experimentAccessionCodes: [],
+      sampleMetadata: []
+    }
+
+    if (experimentAccessionCode) {
+      const matchedExperiment = dataset?.experiments.find(
+        (e) => e.accession_code === experimentAccessionCode
+      )
+
+      samplesDetails.experimentAccessionCodes = [experimentAccessionCode]
+
+      samplesDetails.sampleMetadata =
+        matchedExperiment?.sample_metadata || experiment.sample_metadata
+    } else {
+      const { experiments } = dataset
+
+      const organismExperiments = experiments.filter((e) =>
+        e.organism_names.includes(organismName)
+      )
+
+      samplesDetails.experimentAccessionCodes = organismExperiments
+        .map((e) => dataset.data[e.accession_code])
+        .flat()
+
+      samplesDetails.sampleMetadata = uniqueArray(
+        organismExperiments.map((e) => e.sample_metadata).flat()
+      )
+    }
+
+    return samplesDetails
+  }
+
+  const { experimentAccessionCodes, sampleMetadata } = getSamplesDetails()
+
   // for react-table
   const defaultColumn = useMemo(
     () => ({ minWidth: 60, width: 160, maxWidth: 250 }),
@@ -63,13 +104,7 @@ export const SamplesTable = ({
         // eslint-disable-next-line react/no-unstable-nested-components
         Cell: ({ row: { original: sample } }) => (
           <AddRemoveCell
-            experimentAccessionCodes={Object.keys(
-              sampleAccessionsInExperiment
-            ).filter((accession) =>
-              sampleAccessionsInExperiment[accession].includes(
-                sample.accession_code
-              )
-            )}
+            experimentAccessionCodes={experimentAccessionCodes}
             sample={sample}
           />
         ),
@@ -95,7 +130,7 @@ export const SamplesTable = ({
         isVisible: false
       },
       // maps the available columns in the experiment.sample_metadata
-      ...sampleMetadataFields.map((column) => ({
+      ...sampleMetadata.map((column) => ({
         id: column,
         accessor: column,
         Header: formatString(column),
@@ -177,7 +212,7 @@ export const SamplesTable = ({
               }}
             >
               {showMyDatasetFilter && (
-                <ShowOnlyAddedSamplesFilter samples={allSamples} />
+                <ShowOnlyAddedSamplesFilter experiment={experiment} />
               )}
             </Box>
           </Box>
