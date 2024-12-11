@@ -58,7 +58,7 @@ export const SamplesTable = ({
 
     const samplesDetails = {
       experimentAccessionCodes: [],
-      sampleMetadata: []
+      samplesMetadata: []
     }
 
     if (experimentAccessionCode) {
@@ -68,20 +68,18 @@ export const SamplesTable = ({
 
       samplesDetails.experimentAccessionCodes = [experimentAccessionCode]
 
-      samplesDetails.sampleMetadata =
+      samplesDetails.samplesMetadata =
         matchedExperiment?.sample_metadata || experiment.sample_metadata
     } else {
-      const { experiments } = dataset
-
-      const organismExperiments = experiments.filter((e) =>
+      const organismExperiments = dataset.experiments.filter((e) =>
         e.organism_names.includes(organismName)
       )
 
-      samplesDetails.experimentAccessionCodes = organismExperiments
-        .map((e) => dataset.data[e.accession_code])
-        .flat()
+      samplesDetails.experimentAccessionCodes = organismExperiments.map(
+        (e) => e.accession_code
+      )
 
-      samplesDetails.sampleMetadata = uniqueArray(
+      samplesDetails.samplesMetadata = uniqueArray(
         organismExperiments.map((e) => e.sample_metadata).flat()
       )
     }
@@ -89,7 +87,7 @@ export const SamplesTable = ({
     return samplesDetails
   }
 
-  const { experimentAccessionCodes, sampleMetadata } = getSamplesDetails()
+  const { experimentAccessionCodes, samplesMetadata } = getSamplesDetails()
 
   // for react-table
   const defaultColumn = useMemo(
@@ -130,7 +128,7 @@ export const SamplesTable = ({
         isVisible: false
       },
       // maps the available columns in the experiment.sample_metadata
-      ...sampleMetadata.map((column) => ({
+      ...samplesMetadata.map((column) => ({
         id: column,
         accessor: column,
         Header: formatString(column),

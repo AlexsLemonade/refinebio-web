@@ -47,25 +47,32 @@ export const useDatasetAction = (datasetData = {}, datasetDataChanges = {}) => {
     }
 
     for (const accession of datasetDataOneKeys) {
-      if (datasetDataOne[accession].all) {
-        if (
-          datasetDataOne[accession].total !== datasetDataTwo[accession].length
-        ) {
+      const dataOne = datasetDataOne[accession]
+      const dataTwo = datasetDataTwo[accession]
+
+      if (dataOne.all) {
+        if (dataOne.total !== dataTwo.length) {
           return false
         }
         continue
       }
-      if (datasetDataTwo[accession].all) {
-        if (
-          datasetDataTwo[accession].total !== datasetDataOne[accession].length
-        ) {
+
+      if (dataTwo.all) {
+        if (dataTwo.total !== dataOne.length) {
           return false
         }
         continue
       }
-      if (
-        !hasSameElements(datasetDataOne[accession], datasetDataTwo[accession])
-      ) {
+
+      const filteredDataOne = dataOne.filter((item) => item.length > 0)
+      const filteredDataTwo = dataTwo.filter((item) => item.length > 0)
+
+      // skips the comparison for accessions grouped by organisms that have no samples
+      if (filteredDataOne.length === 0) {
+        continue
+      }
+
+      if (!hasSameElements(filteredDataOne, filteredDataTwo)) {
         return false
       }
     }

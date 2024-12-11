@@ -6,9 +6,9 @@ import { DatasetActionButton } from 'components/shared/DatasetActionButton'
 import { Icon } from 'components/shared/Icon'
 
 export const AddRemoveCell = ({ experimentAccessionCodes, sample }) => {
-  // creates an object with the experiment that containe this sample
-  // in order to update it when it's added or removed
-  // e.g., { experimentAccession: [ sampleAccessions ]}
+  // maps the experiment accession codes to the sample accession codes
+  // to perform add or remove actions
+  // e.g., { experimentAccession: [ sampleAccession ]}
   const data = experimentAccessionCodes.reduce((acc, accessionCode) => {
     acc[accessionCode] = [sample.accession_code]
 
@@ -38,14 +38,7 @@ export const AddRemoveCell = ({ experimentAccessionCodes, sample }) => {
     )
   }
 
-  return (
-    <DatasetActionButton
-      btnType="secondary"
-      data={data}
-      label="Add"
-      secondary
-    />
-  )
+  return <DatasetActionButton data={data} label="Add" secondary />
 }
 
 export default memo(AddRemoveCell)
