@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-
 import { SamplesContext } from 'contexts/SamplesContext'
 
 export const useSamplesContext = () => {
@@ -10,9 +9,12 @@ export const useSamplesContext = () => {
     samplesQuery,
     hasSamples,
     totalSamples,
-    setSamplesQuery,
-    getSamples
+    setSamplesQuery
   } = useContext(SamplesContext)
+
+  const refreshSamples = () => {
+    setSamplesQuery({ ...samplesQuery })
+  }
 
   /* Page */
   const updatePage = (newPage) => {
@@ -95,6 +97,40 @@ export const useSamplesContext = () => {
     })
   }
 
+  const getSamplesMetadata = () => {
+    const metadataKeys = [
+      'age',
+      'cell_line',
+      'compound',
+      'developmental_stage',
+      'disease',
+      'disease_stage',
+      'genetic_information',
+      'race',
+      'sex',
+      'specimen_part',
+      'subject',
+      'treatment'
+    ]
+
+    return metadataKeys.filter((k) =>
+      samples.some((s) => s[k] !== '' && s[k] !== null)
+    )
+  }
+
+  const getExperimentAccessionCodes = (dataset) => {
+    const {
+      experiment_accession_code: experimentAccessionCode,
+      organism__name: organismName
+    } = samplesQuery
+
+    return experimentAccessionCode
+      ? [experimentAccessionCode]
+      : dataset.experiments
+          .filter((e) => e.organism_names.includes(organismName))
+          .map((e) => e.accession_code)
+  }
+
   return {
     loading,
     hasError,
@@ -102,7 +138,9 @@ export const useSamplesContext = () => {
     samplesQuery,
     hasSamples,
     totalSamples,
-    getSamples,
+    getExperimentAccessionCodes,
+    getSamplesMetadata,
+    refreshSamples,
     updateFilterBy,
     updatePage,
     updatePageSize,

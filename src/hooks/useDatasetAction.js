@@ -42,9 +42,7 @@ export const useDatasetAction = (datasetData = {}, datasetDataChanges = {}) => {
     const datasetDataOneKeys = Object.keys(datasetDataOne)
     const datasetDataTwoKeys = Object.keys(datasetDataTwo)
 
-    if (!hasSameElements(datasetDataOneKeys, datasetDataTwoKeys)) {
-      return false
-    }
+    if (!hasSameElements(datasetDataOneKeys, datasetDataTwoKeys)) return false
 
     for (const accession of datasetDataOneKeys) {
       const dataOne = datasetDataOne[accession]
@@ -59,17 +57,6 @@ export const useDatasetAction = (datasetData = {}, datasetDataChanges = {}) => {
 
       if (dataTwo.all) {
         if (dataTwo.total !== dataOne.length) {
-          return false
-        }
-        continue
-      }
-
-      // for samples grouped by organisms
-      if (dataOne.length === 0) {
-        const filteredDataOne = dataOne.filter((item) => item.length > 0)
-        const filteredDataTwo = dataTwo.filter((item) => item.length > 0)
-
-        if (!hasSameElements(filteredDataOne, filteredDataTwo)) {
           return false
         }
         continue

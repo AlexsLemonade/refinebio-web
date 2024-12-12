@@ -7,14 +7,15 @@ import { CheckBox } from 'components/shared/CheckBox'
 
 export const ShowOnlyAddedSamplesFilter = ({ experiment }) => {
   const { dataset } = useDatasetManager()
-  const { updateDatasetId } = useSamplesContext()
+  const { updateDatasetId, samplesQuery } = useSamplesContext()
   const { getAnyProcessedInDataset } = useDatasetAction(
-    dataset?.data,
+    dataset.data,
     getFormattedExperiment(
-      experiment.accession_code,
+      samplesQuery.experiment_accession_code,
       experiment.num_downloadable_samples
     )
   )
+
   const samplesInMyDataset = getAnyProcessedInDataset()
   const [showOnly, setShowOnly] = useState(false)
 

@@ -27,9 +27,10 @@ export const ViewBlock = ({ dataset, organismName, isImmutable }) => {
     ({ technology }) => technology === 'RNA-SEQ'
   )
 
-  const organismSamples = organismExperiments
-    .map((e) => dataset.data[e.accession_code])
-    .flat()
+  // samples accession code by organism names
+  const organismSamples = organismExperiments.map(
+    (e) => dataset.data[e.accession_code]
+  )
 
   return (
     <SamplesContextProvider

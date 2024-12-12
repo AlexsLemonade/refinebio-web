@@ -17,16 +17,16 @@ export const SamplesContextProvider = ({ query: initialQuery, children }) => {
   const hasSamples = samples.length > 0
   const totalSamples = response.count
 
-  const getSamples = async () => {
-    setLoading(true)
-    const samplesResponse = await api.samples.get(samplesQuery)
-    setHasError(samplesResponse?.ok === false)
-    setReponse(samplesResponse)
-    setLoading(false)
-  }
-
   useEffect(() => {
-    getSamples()
+    const fetchSamples = async () => {
+      setLoading(true)
+      const samplesResponse = await api.samples.get(samplesQuery)
+      setHasError(samplesResponse?.ok === false)
+      setReponse(samplesResponse)
+      setLoading(false)
+    }
+
+    fetchSamples()
   }, [samplesQuery])
 
   const value = useMemo(
@@ -37,8 +37,7 @@ export const SamplesContextProvider = ({ query: initialQuery, children }) => {
       samplesQuery,
       hasSamples,
       totalSamples,
-      setSamplesQuery,
-      getSamples
+      setSamplesQuery
     }),
     [
       loading,
@@ -47,8 +46,7 @@ export const SamplesContextProvider = ({ query: initialQuery, children }) => {
       samplesQuery,
       hasSamples,
       totalSamples,
-      setSamplesQuery,
-      getSamples
+      setSamplesQuery
     ]
   )
 
