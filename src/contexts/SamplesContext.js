@@ -1,9 +1,11 @@
 import { createContext, useMemo, useState, useEffect } from 'react'
 import { api } from 'api'
+import { useDatasetManager } from 'hooks/useDatasetManager'
 
 export const SamplesContext = createContext({})
 
 export const SamplesContextProvider = ({ query: initialQuery, children }) => {
+  const { dataset } = useDatasetManager()
   const [response, setReponse] = useState({})
   const [loading, setLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
@@ -27,7 +29,7 @@ export const SamplesContextProvider = ({ query: initialQuery, children }) => {
     }
 
     fetchSamples()
-  }, [samplesQuery])
+  }, [dataset?.data, samplesQuery]) // if My Dataset exists, refetch samples on change
 
   const value = useMemo(
     () => ({
