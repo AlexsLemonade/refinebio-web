@@ -7,21 +7,20 @@ import { DatasetActionButton } from 'components/shared/DatasetActionButton'
 import { Icon } from 'components/shared/Icon'
 
 export const AddRemoveCell = ({ experimentAccessionCodes, sample }) => {
-  // maps the sample accession code to the corresponding experiment accession codes and
-  // returns the data structure (dataset.data) to support adding/removing samples via API
+  // maps the given sample accession code to its corresponding experiment accession code
+  // (as the dataset.data structure) to support adding/removing samples via API
   // e.g., { experimentAccession: [ sampleAccession ]}
-  const getDatasetData = () =>
-    experimentAccessionCodes
-      .filter((experimentAccessionCode) =>
-        sample.experiment_accession_codes.includes(experimentAccessionCode)
-      )
-      .reduce(
-        (acc, experimentAccessionCode) => ({
-          ...acc,
-          [experimentAccessionCode]: [sample.accession_code]
-        }),
-        {}
-      )
+  const datasetData = experimentAccessionCodes
+    .filter((experimentAccessionCode) =>
+      sample.experiment_accession_codes.includes(experimentAccessionCode)
+    )
+    .reduce(
+      (acc, experimentAccessionCode) => ({
+        ...acc,
+        [experimentAccessionCode]: [sample.accession_code]
+      }),
+      {}
+    )
 
   // ensures the samples have qn targets associated
   if (
@@ -46,7 +45,7 @@ export const AddRemoveCell = ({ experimentAccessionCodes, sample }) => {
     )
   }
 
-  return <DatasetActionButton data={getDatasetData()} label="Add" secondary />
+  return <DatasetActionButton data={datasetData} label="Add" secondary />
 }
 
 export default memo(AddRemoveCell)

@@ -118,7 +118,7 @@ export const useSamplesContext = () => {
     )
   }
 
-  const getExperimentAccessionCodes = (dataset) => {
+  const getExperimentAccessionCodes = (dataset = {}) => {
     const {
       experiment_accession_code: experimentAccessionCode,
       organism__name: organismName

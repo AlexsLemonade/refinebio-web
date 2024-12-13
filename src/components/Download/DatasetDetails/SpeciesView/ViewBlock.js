@@ -27,9 +27,17 @@ export const ViewBlock = ({ dataset, organismName, isImmutable }) => {
     ({ technology }) => technology === 'RNA-SEQ'
   )
 
-  // samples accession code by organism names
-  const organismSamples = organismExperiments.map(
-    (e) => dataset.data[e.accession_code]
+  // maps the sample accession codes (by organism) to the corresponding experiment accession code
+  // (as the dataset.data structure) to support adding/removing samples via API
+  // e.g., { experimentAccession: [ sampleAccessions ]}
+  const organismDatasetData = organismExperiments.reduce(
+    (acc, { accession_code: ac }) => {
+      if (dataset.data[ac]) {
+        acc[ac] = dataset.data[ac]
+      }
+      return acc
+    },
+    {}
   )
 
   return (
@@ -70,7 +78,7 @@ export const ViewBlock = ({ dataset, organismName, isImmutable }) => {
               margin={{ top: setResponsive('small', 'none') }}
               responsive
               tertiary
-              onClick={() => removeSamples(organismSamples, true)}
+              onClick={() => removeSamples(organismDatasetData, true)}
             />
           )}
         </Row>
