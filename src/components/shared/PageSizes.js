@@ -1,17 +1,18 @@
 import { memo } from 'react'
 import { Box, Select, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
+import { options } from 'config'
 import formatNumbers from 'helpers/formatNumbers'
 
 export const PageSizes = ({
   textPrepend = 'Show',
   textAppended = 'Total Samples',
   pageSize,
-  pageSizes,
   totalPages,
   updatePageSize
 }) => {
   const { viewport } = useResponsive()
+  const { pageSizes } = options
   const isSinglePage = totalPages < pageSizes[0]
 
   // syncs the search page url with selected page size
