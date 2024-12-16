@@ -56,10 +56,7 @@ export const useSearchManager = () => {
   /* Filters */
   // removes all the applied filters
   const clearAllFilters = () => {
-    if (
-      Number(search[numDownloadableSamples.key]) ===
-      numDownloadableSamples.include
-    ) {
+    if (hasNonDownloadableSamples) {
       search[numDownloadableSamples.key] = numDownloadableSamples.exclude
     }
 
