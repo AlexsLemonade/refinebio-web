@@ -4,24 +4,18 @@ import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import isEmptyObject from 'helpers/isEmptyObject'
 import isLastIndex from 'helpers/isLastIndex'
-import { options } from 'config'
 import { Button } from 'components/shared/Button'
 import { SearchFilter } from './SearchFilter'
 import { IncludePublication } from './IncludePublication'
 
 export const SearchFilterList = ({ facets, setToggle }) => {
   const { viewport } = useResponsive()
-  const { search, facetNames, clearAllFilters, updateSearchQuery } =
-    useSearchManager()
-
   const {
-    search: { numDownloadableSamples }
-  } = options
-  const hasNonDownloadableSamples =
-    Number(search[numDownloadableSamples.key]) ===
-    numDownloadableSamples.include
-  const hasSelectedFacets =
-    facetNames.filter((facetName) => facetName in search).length > 0
+    clearAllFilters,
+    hasNonDownloadableSamples,
+    hasSelectedFacets,
+    updateSearchQuery
+  } = useSearchManager()
 
   const filterIncludePublication = {
     label: 'Includes Publication',

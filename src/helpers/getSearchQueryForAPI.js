@@ -1,19 +1,27 @@
 import { options } from 'config'
-import getQueryParam from 'helpers/getQueryParam'
 
 export default (query) => {
   const {
-    search: { clientOnlyQueries }
+    search: { clientOnlyQueries, defaultOrdering, numDownloadableSamples }
   } = options
-  const queryParam = getQueryParam(query)
 
-  const temp = {}
+  const queryParams = {}
 
-  Object.keys(queryParam).forEach((key) => {
+  Object.keys(query).forEach((key) => {
     if (!clientOnlyQueries.includes(key)) {
-      temp[key] = queryParam[key]
+      queryParams[key] = query[key]
     }
   })
 
-  return temp
+  // sets default query parameters
+  if (query.offset === undefined) queryParams.offset = 0
+
+  if (query.limit === undefined) queryParams.limit = 10
+
+  if (query.ordering === undefined) queryParams.ordering = defaultOrdering
+
+  if (query[numDownloadableSamples.key] === undefined)
+    queryParams[numDownloadableSamples.key] = numDownloadableSamples.exclude
+
+  return queryParams
 }

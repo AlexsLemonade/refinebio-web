@@ -10,7 +10,6 @@ import { NonDownloadableExperiment } from './SearchFilterList'
 export const SearchBulkActions = ({
   results,
   pageSize,
-  setPageSize,
   sortBy,
   setSortBy,
   totalResults
@@ -114,7 +113,6 @@ export const SearchBulkActions = ({
               textAppended="results"
               pageSizeLabel="Total Samples"
               pageSize={pageSize}
-              setPageSize={setPageSize}
               pageSizes={pageSizes}
               totalPages={totalResults}
               updatePageSize={updatePageSize}

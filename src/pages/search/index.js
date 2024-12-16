@@ -38,9 +38,10 @@ export const Search = ({ query, response }) => {
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
   const [toggleFilterList, setToggleFilterList] = useState(false)
-  const [userSearchTerm, setUserSearchTerm] = useState(query.search || '')
-  const [page, setPage] = useState(getPageNumber(query.offset, query.limit))
-  const [pageSize, setPageSize] = useState(Number(query.limit))
+  const queryLimit = Number(query.limit)
+  const querySearch = query.search
+  const [userSearchTerm, setUserSearchTerm] = useState(querySearch || '')
+  const [page, setPage] = useState(getPageNumber(query.offset, queryLimit))
   const [sortBy, setSortBy] = useState(query.ordering || defaultOrdering)
   const { facets, results, totalResults } = response
   const isResults = results?.length > 0
@@ -73,9 +74,9 @@ export const Search = ({ query, response }) => {
 
   return (
     <>
-      <PageTitle title={`${query.search ? query.search : ''} Results -`} />
+      <PageTitle title={`${querySearch || ''} Results -`} />
       <TextHighlightContextProvider
-        match={[query.search, ...getAccessionCodesQueryParam(query.search)]}
+        match={[querySearch, ...getAccessionCodesQueryParam(querySearch)]}
       >
         <FixedContainer pad={{ horizontal: 'large', bottom: 'large' }}>
           <SearchInfoBanner />
@@ -162,8 +163,7 @@ export const Search = ({ query, response }) => {
                 )}
                 <SearchBulkActions
                   results={results}
-                  pageSize={pageSize}
-                  setPageSize={setPageSize}
+                  pageSize={queryLimit}
                   sortBy={sortBy}
                   setSortBy={setSortBy}
                   totalResults={totalResults}
@@ -187,7 +187,7 @@ export const Search = ({ query, response }) => {
                                 level={3}
                                 style={{ position: 'absolute', top: '-12px' }}
                               >
-                                Related Results for '{query.search}'
+                                Related Results for '{querySearch}'
                               </Heading>
                             </Box>
                           )}
@@ -200,7 +200,7 @@ export const Search = ({ query, response }) => {
                     )
                   )}
                   {(results.length < 10 ||
-                    page === Math.ceil(totalResults / pageSize)) && (
+                    page === Math.ceil(totalResults / queryLimit)) && (
                     <RequestSearchFormAlert />
                   )}
                 </Box>
@@ -213,7 +213,7 @@ export const Search = ({ query, response }) => {
                 >
                   <Pagination
                     page={page}
-                    pageSize={pageSize}
+                    pageSize={queryLimit}
                     totalPages={totalResults}
                     setPage={setPage}
                     updatePage={updatePage}
@@ -222,7 +222,7 @@ export const Search = ({ query, response }) => {
               </Box>
             </Grid>
           )}
-          {!isResults && query.search && (
+          {!isResults && querySearch && (
             <NoSearchResults setUserSearchTerm={setUserSearchTerm} />
           )}
         </FixedContainer>
@@ -232,21 +232,9 @@ export const Search = ({ query, response }) => {
 }
 
 export const getServerSideProps = async ({ query }) => {
-  const {
-    search: {
-      defaultOrdering,
-      numDownloadableSamples: { key, exclude }
-    }
-  } = options
+  const queryParams = getSearchQueryForAPI(query)
   const filterOrders = query.filter_order ? query.filter_order.split(',') : []
-  const queryParams = {
-    ...getSearchQueryForAPI(query),
-    limit: query.limit || 10,
-    offset: query.offset * query.limit || 0,
-    ordering: query.ordering || defaultOrdering,
-    ...(query.search ? { search: query.search } : {}),
-    [key]: query[key] || exclude
-  }
+
   const response = await fetchSearch(queryParams, filterOrders)
 
   if (response.ok && response) {

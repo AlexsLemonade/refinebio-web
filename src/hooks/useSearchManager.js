@@ -72,6 +72,10 @@ export const useSearchManager = () => {
     updateSearchQuery(true)
   }
 
+  const hasNonDownloadableSamples =
+    Number(search[numDownloadableSamples.key]) ===
+    numDownloadableSamples.include
+
   const isFilterChecked = (key, val) => {
     if (!(key in search)) return false
 
@@ -81,6 +85,9 @@ export const useSearchManager = () => {
 
     return key in search
   }
+
+  const hasSelectedFacets =
+    facetNames.filter((facetName) => facetName in search).length > 0
 
   // toggles a filter option in facetNames
   const toggleFilter = (checked, option, key, val, updateQuery = true) => {
@@ -175,6 +182,8 @@ export const useSearchManager = () => {
     search,
     setSearch,
     clearAllFilters,
+    hasNonDownloadableSamples,
+    hasSelectedFacets,
     isFilterChecked,
     navigateToSearch,
     toggleFilter,

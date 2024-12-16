@@ -7,7 +7,6 @@ export const PageSizes = ({
   textPrepend = 'Show',
   textAppended = 'Total Samples',
   pageSize,
-  setPageSize,
   pageSizes,
   totalPages,
   updatePageSize
@@ -23,7 +22,6 @@ export const PageSizes = ({
   }
 
   const handleChange = (newPageSize) => {
-    setPageSize(newPageSize)
     updateQueryForPageSize(newPageSize)
   }
 
