@@ -6,6 +6,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
 import formatFacetNames from 'helpers/formatFacetNames'
+import formatFacetQueryParams from 'helpers/formatFacetQueryParams'
 import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
 import getPageNumber from 'helpers/getPageNumber'
 import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
@@ -240,7 +241,10 @@ export const getServerSideProps = async ({ query }) => {
   if (response.ok && response) {
     return {
       props: {
-        query: queryParams,
+        query: formatFacetQueryParams(
+          Object.keys(response.facets),
+          queryParams
+        ),
         response
       }
     }

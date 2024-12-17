@@ -13,7 +13,7 @@ export const useSearchManager = () => {
     setFilterOrders: setFilterOrdersState
   } = useContext(SearchManagerContext)
   const {
-    search: { numDownloadableSamples, defaultOrdering }
+    search: { defaultOrdering, hasPublication, numDownloadableSamples }
   } = options
   const router = useRouter()
   const filterOrders = filterOrdersState
@@ -88,28 +88,25 @@ export const useSearchManager = () => {
 
   // toggles a filter option in facetNames
   const toggleFilter = (checked, option, key, val, updateQuery = true) => {
+    const isHasPublication = option === hasPublication.key
+
     if (option === numDownloadableSamples.key) {
+      search[option] = checked
+        ? numDownloadableSamples.exclude
+        : numDownloadableSamples.include
+    } else if (isHasPublication) {
       if (checked) {
-        search[option] = numDownloadableSamples.exclude
+        search[option] = hasPublication.include
       } else {
-        search[option] = numDownloadableSamples.include
+        delete search[option]
       }
+    } else if (checked) {
+      search[option] = search[option] ? [...search[option], val] : [val]
+      addFilterOrder(key)
     } else {
-      // eslint-disable-next-line no-lonely-if
-      if (checked) {
-        if (search[option] !== undefined) {
-          search[option].push(val)
-        } else {
-          search[option] = [val]
-        }
-        addFilterOrder(key)
-      } else {
-        if (search[option].length > 0) {
-          search[option] = search[option].filter((item) => item !== val)
-          if (search[option].length === 0) delete search[option]
-        }
-        removeFilterOrder(key)
-      }
+      search[option] = search[option].filter((item) => item !== val)
+      if (!search[option].length) delete search[option]
+      removeFilterOrder(key)
     }
 
     updateFilterOrders()
