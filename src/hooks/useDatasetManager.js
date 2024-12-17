@@ -144,7 +144,8 @@ export const useDatasetManager = () => {
       ...filterObjectByKeys(options, downloadOptionsKeys),
       email_address: emailAddress,
       ...(receiveUpdates && { email_ccdl_ok: true }),
-      start: true
+      start: true,
+      token_id: token
     }
 
     const processingDatasetId = id || (await createDataset()) // creates new dataset ID for one-off download

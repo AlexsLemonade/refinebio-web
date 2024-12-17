@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
@@ -7,6 +7,7 @@ import { validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
+import { useTriggerSubmit } from 'hooks/useTriggerSubmit'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/shared/Button'
 import { AdvancedOptions } from 'components/Download/DownloadOptionsForm/AdvancedOptions'
@@ -20,13 +21,12 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
   const { push } = useRouter()
   const { setResponsive } = useResponsive()
   const { email, startProcessingDataset } = useDatasetManager()
-  const { token, applyAcceptedTerms } = useRefinebio()
-  const hasToken = !!token
+  const { acceptedTerms, setAcceptedTerms } = useRefinebio()
   const { StartProcessingFormSchema } = validationSchemas
   const [downloadOptions, setDownloadOptions] = useState(null)
 
   const handleStartProcessing = (formValues) => {
-    applyAcceptedTerms()
+    setAcceptedTerms(formValues.termsOfUse)
     setDownloadOptions(formValues)
   }
 
@@ -45,12 +45,8 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
     closeModal(id)
   }
 
-  // makes sure the token is activated before submission
-  useEffect(() => {
-    if (downloadOptions && token) {
-      submit()
-    }
-  }, [downloadOptions, token])
+  // trigers dataset processing on form submission
+  useTriggerSubmit(downloadOptions, submit)
 
   return (
     <Box
@@ -69,7 +65,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
           quantile_normalize: dataset.quantile_normalize,
           emailAddress: email || '',
           receiveUpdates: true,
-          termsOfUse: hasToken
+          termsOfUse: acceptedTerms
         }}
         validationSchema={StartProcessingFormSchema}
         validateOnChange={false}
@@ -125,7 +121,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
                   handleChange={handleChange}
                 />
                 <Box pad={{ top: 'small' }}>
-                  {!hasToken && (
+                  {!acceptedTerms && (
                     <TermsOfUseCheckBox
                       error={errors.termsOfUse}
                       touched={touched.termsOfUse}

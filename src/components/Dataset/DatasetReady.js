@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
+import { useTriggerSubmit } from 'hooks/useTriggerSubmit'
 import formatBytes from 'helpers/formatBytes'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
@@ -16,13 +17,12 @@ import { DatasetExplore } from './DatasetExplore'
 export const DatasetReady = ({ dataset }) => {
   const { setResponsive } = useResponsive()
   const { downloadDataset } = useDatasetManager()
-  const { token, applyAcceptedTerms } = useRefinebio()
-  const hasToken = !!token
-  const [acceptTerms, setAcceptTerms] = useState(hasToken)
+  const { acceptedTerms, setAcceptedTerms } = useRefinebio()
+  const [isTermsChecked, setIsTermsChecked] = useState(acceptedTerms)
   const [triggerDownload, setTriggerDownload] = useState(false)
 
   const handleDownloadNow = () => {
-    applyAcceptedTerms() // makes sure the token is activated
+    setAcceptedTerms(isTermsChecked)
     setTriggerDownload(true)
   }
 
@@ -32,9 +32,8 @@ export const DatasetReady = ({ dataset }) => {
     setTriggerDownload(false)
   }
 
-  useEffect(() => {
-    if (triggerDownload && token) submit()
-  }, [triggerDownload, token])
+  // trigers file download on download button click
+  useTriggerSubmit(triggerDownload, submit)
 
   return (
     <>
@@ -60,7 +59,7 @@ export const DatasetReady = ({ dataset }) => {
                 }}
                 fill
               >
-                {!hasToken && (
+                {!acceptedTerms && (
                   <Column align={setResponsive('center', 'start')}>
                     <CheckBox
                       label={
@@ -74,7 +73,7 @@ export const DatasetReady = ({ dataset }) => {
                           />
                         </Text>
                       }
-                      onClick={() => setAcceptTerms(!acceptTerms)}
+                      onClick={() => setIsTermsChecked(!isTermsChecked)}
                     />
                   </Column>
                 )}
@@ -82,14 +81,14 @@ export const DatasetReady = ({ dataset }) => {
                   align={setResponsive('center', 'start')}
                   margin={{
                     top: setResponsive('medium', 'small', 'none'),
-                    left: hasToken
+                    left: acceptedTerms
                       ? 'none'
                       : setResponsive('none', 'none', 'medium')
                   }}
                 >
                   <Button
                     label="Download Now"
-                    disabled={!token}
+                    disabled={!isTermsChecked}
                     primary
                     responsive
                     onClick={handleDownloadNow}

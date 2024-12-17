@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Formik } from 'formik'
 import { Box, Form } from 'grommet'
@@ -7,6 +7,7 @@ import { validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
+import { useTriggerSubmit } from 'hooks/useTriggerSubmit'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
@@ -19,13 +20,12 @@ export const StartProcessingForm = ({ dataset }) => {
   const { setResponsive } = useResponsive()
   const { push } = useRouter()
   const { email, startProcessingDataset } = useDatasetManager()
-  const { token, applyAcceptedTerms } = useRefinebio()
-  const hasToken = !!token
+  const { acceptedTerms, setAcceptedTerms } = useRefinebio()
   const { StartProcessingFormSchema } = validationSchemas
   const [downloadOptions, setDownloadOptions] = useState(null)
 
   const handleStartProcessing = (formValues) => {
-    applyAcceptedTerms()
+    setAcceptedTerms(formValues.termsOfUse)
     setDownloadOptions(formValues)
   }
 
@@ -45,12 +45,8 @@ export const StartProcessingForm = ({ dataset }) => {
     gtag.trackDatasetDownloadOptions(dataset)
   }
 
-  // makes sure the token is activated before submission
-  useEffect(() => {
-    if (downloadOptions && token) {
-      submit()
-    }
-  }, [downloadOptions, token])
+  // trigers dataset processing on form submission
+  useTriggerSubmit(downloadOptions, submit)
 
   return (
     <Formik
@@ -58,7 +54,7 @@ export const StartProcessingForm = ({ dataset }) => {
         data: dataset.data,
         emailAddress: email || '',
         receiveUpdates: true,
-        termsOfUse: hasToken
+        termsOfUse: acceptedTerms
       }}
       validationSchema={StartProcessingFormSchema}
       validateOnChange={false}
@@ -98,7 +94,7 @@ export const StartProcessingForm = ({ dataset }) => {
             />
           </Row>
           <Box margin={{ top: 'small' }}>
-            {!hasToken && (
+            {!acceptedTerms && (
               <TermsOfUseCheckBox
                 error={errors.termsOfUse}
                 touched={touched.termsOfUse}

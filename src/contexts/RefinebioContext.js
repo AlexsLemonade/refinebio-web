@@ -33,11 +33,6 @@ export const RefinebioContextProvider = ({ children }) => {
   const [token, setToken] = useLocalStorage('token', null)
   const [validToken, setValidToken] = useLocalStorage('valid-token', null)
 
-  // triggers the token activation for a file download
-  const applyAcceptedTerms = () => {
-    setAcceptedTerms((prev) => prev || true)
-  }
-
   const activateToken = async () => {
     const response = await api.token.update(token, {
       is_activated: acceptedTerms
@@ -107,7 +102,7 @@ export const RefinebioContextProvider = ({ children }) => {
       setRequestedExperiments,
       acceptedTerms,
       token: validToken,
-      applyAcceptedTerms
+      setAcceptedTerms
     }),
     [
       dataset,
@@ -124,7 +119,7 @@ export const RefinebioContextProvider = ({ children }) => {
       setRequestedExperiments,
       acceptedTerms,
       validToken,
-      applyAcceptedTerms
+      setAcceptedTerms
     ]
   )
 

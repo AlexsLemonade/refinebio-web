@@ -55,9 +55,8 @@ const DropdownOption = ({ label, selected, onClick }) => (
 
 export const DownloadBlockForm = () => {
   const { setResponsive } = useResponsive()
-  const { token, applyAcceptedTerms } = useRefinebio()
-  const hasToken = !!token
-  const [acceptTerms, setAcceptTerms] = useState(hasToken)
+  const { acceptedTerms, setAcceptedTerms } = useRefinebio()
+  const [isTermsChecked, setIsTermsChecked] = useState(acceptedTerms)
   const { compendia, type, goToDownloadCompendium } = useCompendiaContext()
   const [compendium, setCompendium] = useState(null)
   const [showOptions, setShowOptions] = useState(false)
@@ -83,7 +82,7 @@ export const DownloadBlockForm = () => {
   }
 
   const handleDownloadNow = () => {
-    applyAcceptedTerms() // makes sure to activate the application token
+    setAcceptedTerms(isTermsChecked)
     goToDownloadCompendium(compendium)
   }
 
@@ -181,7 +180,7 @@ export const DownloadBlockForm = () => {
           />
         </Box>
       )}
-      {!hasToken && (
+      {!acceptedTerms && (
         <Box margin={{ vertical: 'small' }}>
           <CheckBox
             label={
@@ -190,7 +189,7 @@ export const DownloadBlockForm = () => {
                 <Anchor href={links.terms_of_use}>Terms of Use</Anchor>
               </Text>
             }
-            onClick={() => setAcceptTerms(!acceptTerms)}
+            onClick={() => setIsTermsChecked(!isTermsChecked)}
           />
         </Box>
       )}
@@ -208,7 +207,7 @@ export const DownloadBlockForm = () => {
         <Column align={setResponsive('start', 'end')}>
           <Button
             label="Download Now"
-            disabled={!acceptTerms || !compendium}
+            disabled={!isTermsChecked || !compendium}
             primary
             responsive
             onClick={handleDownloadNow}
