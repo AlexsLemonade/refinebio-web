@@ -214,7 +214,6 @@ export const SamplesTable = ({
               hiddenColumns={columns
                 .filter((column) => column.isVisible === false)
                 .map((column) => column.accessor)}
-              loading={loading}
               manualPagination
               tableHeight={tableHeight}
               tableExpanded={tableExpanded}
