@@ -26,7 +26,7 @@ export const SearchFilter = ({
   filterGroup,
   filterLabel,
   filterOption,
-  filterKey
+  filterRawKey
 }) => {
   const { viewport } = useResponsive()
   const { isFilterChecked, toggleFilter } = useSearchManager()
@@ -57,7 +57,13 @@ export const SearchFilter = ({
   }
 
   const handleToggleFilterItem = (checked, option) => {
-    toggleFilter(checked, filterOption, filterKey, option, viewport === 'large')
+    toggleFilter(
+      checked,
+      filterOption,
+      filterRawKey,
+      option,
+      viewport === 'large'
+    )
     gtag.trackFilterType(filterLabel)
     gtag.trackToggleFilterItem(checked, formatFilterName(filterOption, option))
   }

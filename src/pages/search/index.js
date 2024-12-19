@@ -5,7 +5,6 @@ import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
-import formatFacetNames from 'helpers/formatFacetNames'
 import formatFacetQueryParams from 'helpers/formatFacetQueryParams'
 import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
 import getPageNumber from 'helpers/getPageNumber'
@@ -61,7 +60,7 @@ export const Search = ({ query, response }) => {
   }, [])
 
   useEffect(() => {
-    if (facets) setFacetNames(formatFacetNames(Object.keys(facets)))
+    if (facets) setFacetNames(Object.keys(facets))
     if (query) {
       setSearch(query)
       setUserSearchTerm(search) // resets previous input value
