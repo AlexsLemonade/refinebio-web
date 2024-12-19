@@ -103,7 +103,7 @@ export const SearchBulkActions = ({ response, query }) => {
               pageSizeLabel="Total Samples"
               pageSize={Number(limit)}
               totalPages={totalResults}
-              updatePageSize={updatePageSize}
+              onPageSizeChange={updatePageSize}
             />
           </Box>
         </Box>

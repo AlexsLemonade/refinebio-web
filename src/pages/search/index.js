@@ -209,7 +209,7 @@ export const Search = ({ query, response }) => {
                     page={page}
                     pageSize={limit}
                     totalPages={totalResults}
-                    updatePage={updatePage}
+                    onPageChange={updatePage}
                   />
                 </Box>
               </Box>
