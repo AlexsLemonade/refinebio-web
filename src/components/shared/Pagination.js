@@ -30,13 +30,7 @@ const PaginationButton = styled(Button)`
   `}
 `
 
-export const Pagination = ({
-  page = 1,
-  pageSize,
-  totalPages,
-  setPage,
-  updatePage = () => {} // updates page with the selected number
-}) => {
+export const Pagination = ({ page = 1, pageSize, totalPages, updatePage }) => {
   const { query, isReady } = useRouter()
   const { setResponsive } = useResponsive()
   const pageCount = Math.ceil(totalPages / pageSize)
@@ -96,10 +90,6 @@ export const Pagination = ({
   useEffect(() => {
     setCurrentPage(page)
   }, [page])
-
-  useEffect(() => {
-    setPage(currentPage)
-  }, [currentPage])
 
   useEffect(() => {
     if (pageCount === currentPage) {
