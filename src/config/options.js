@@ -15,13 +15,7 @@ export const options = {
       include: -1
     },
     // client-only queries
-    clientOnlyQueries: ['filter_order'],
-    // client-only filter queries
-    formattedFacetNames: {
-      downloadable_organism_names: 'downloadable_organism',
-      platform_accession_codes: 'platform',
-      technology: 'technology'
-    }
+    clientOnlyQueries: ['filter_order']
   }
 }
 
