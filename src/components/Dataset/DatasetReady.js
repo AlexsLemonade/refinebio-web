@@ -4,7 +4,6 @@ import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
-import { useTriggerSubmit } from 'hooks/useTriggerSubmit'
 import formatBytes from 'helpers/formatBytes'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
@@ -19,21 +18,16 @@ export const DatasetReady = ({ dataset }) => {
   const { downloadDataset } = useDatasetManager()
   const { acceptedTerms, setAcceptedTerms } = useRefinebio()
   const [isTermsChecked, setIsTermsChecked] = useState(acceptedTerms)
-  const [triggerDownload, setTriggerDownload] = useState(false)
 
   const handleDownloadNow = () => {
     setAcceptedTerms(isTermsChecked)
-    setTriggerDownload(true)
+    submit()
   }
 
   const submit = async () => {
     await downloadDataset(dataset.id, dataset.download_url)
     gtag.trackDatasetDownload(dataset)
-    setTriggerDownload(false)
   }
-
-  // trigers file download on download button click
-  useTriggerSubmit(triggerDownload, submit)
 
   return (
     <>

@@ -22,7 +22,8 @@ export const useDatasetManager = () => {
     processingDatasets,
     setProcessingDatasets
   } = useContext(DatasetManagerContext)
-  const { token } = useRefinebio()
+  const { token, waitForToken } = useRefinebio()
+
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
 
@@ -84,24 +85,27 @@ export const useDatasetManager = () => {
     return response.id
   }
 
-  const downloadDataset = async (id, downloadUrl) => {
+  // 'promiseToken' is used for async token resolution (defaults to null)
+  // callers must pass 'null' for any optional params to indicate they are not required)
+  const downloadDataset = async (id, downloadUrl, promiseToken = null) => {
     let href = ''
     if (token && downloadUrl) {
       href = downloadUrl
     } else {
-      const { download_url: url } = await getDataset(id)
+      const { download_url: url } = await getDataset(id, promiseToken)
       href = url
     }
 
     window.location.href = href
   }
 
-  const getDataset = async (id = '') => {
+  const getDataset = async (id = '', promiseToken = null) => {
     if (!id && !datasetId) return null
 
     setLoading(true)
 
-    const headers = { ...(token && { 'API-KEY': token }) }
+    const tokenId = token || promiseToken
+    const headers = { ...(tokenId && { 'API-KEY': tokenId }) }
     const response = await api.dataset.get(id || datasetId, headers)
     const { ok, statusCode } = response
 
@@ -126,11 +130,13 @@ export const useDatasetManager = () => {
   // checks if the given dataset ID is My dataset ID
   const isMyDatasetId = (id) => id === datasetId
 
-  // takes download options, and optional dataset ID and one-off experiment accession code
+  // 'promiseToken' is used for async token resolution (defaults to null)
+  // callers must pass 'null' for any optional params to indicate they are not required
   const startProcessingDataset = async (
     options,
     id = null, // no dataset ID initially for one-off download
-    accessionCode = null
+    accessionCode = null, // for one-off download
+    promiseToken = null
   ) => {
     const { emailAddress, receiveUpdates } = options
     const downloadOptionsKeys = [
@@ -140,12 +146,13 @@ export const useDatasetManager = () => {
       'quantile_normalize'
     ]
 
+    const tokenId = token || promiseToken
     const body = {
       ...filterObjectByKeys(options, downloadOptionsKeys),
       email_address: emailAddress,
       ...(receiveUpdates && { email_ccdl_ok: true }),
       start: true,
-      token_id: token
+      token_id: tokenId
     }
 
     const processingDatasetId = id || (await createDataset()) // creates new dataset ID for one-off download
@@ -277,6 +284,7 @@ export const useDatasetManager = () => {
     setLoading(false)
   }
 
+  // wraps methods with waitForToken to ensure a valid token is available
   return {
     email,
     error,
@@ -293,11 +301,11 @@ export const useDatasetManager = () => {
     // Common
     clearDataset,
     createDataset,
-    downloadDataset,
+    downloadDataset: waitForToken(downloadDataset),
     getDataset,
     getDatasetPropertiesFrom,
     isMyDatasetId,
-    startProcessingDataset,
+    startProcessingDataset: waitForToken(startProcessingDataset),
     updateDataset,
     // Experiment
     getTotalExperiments,

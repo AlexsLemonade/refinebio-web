@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
@@ -7,7 +6,6 @@ import { validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
-import { useTriggerSubmit } from 'hooks/useTriggerSubmit'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/shared/Button'
 import { AdvancedOptions } from 'components/Download/DownloadOptionsForm/AdvancedOptions'
@@ -23,14 +21,13 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
   const { email, startProcessingDataset } = useDatasetManager()
   const { acceptedTerms, setAcceptedTerms } = useRefinebio()
   const { StartProcessingFormSchema } = validationSchemas
-  const [downloadOptions, setDownloadOptions] = useState(null)
 
   const handleStartProcessing = (formValues) => {
     setAcceptedTerms(formValues.termsOfUse)
-    setDownloadOptions(formValues)
+    submit(formValues)
   }
 
-  const submit = async () => {
+  const submit = async (downloadOptions) => {
     const { emailAddress, receiveUpdates } = downloadOptions
 
     if (receiveUpdates) {
@@ -39,14 +36,15 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
         gtag.trackEmailSubscription(DownloadDatasetModal)
       }
     }
-    const response = await startProcessingDataset(downloadOptions, dataset.id)
+    const response = await startProcessingDataset(
+      downloadOptions,
+      dataset.id,
+      null // no accession code
+    )
     const pathname = `/dataset/${response.id}`
     push({ pathname }, pathname)
     closeModal(id)
   }
-
-  // trigers dataset processing on form submission
-  useTriggerSubmit(downloadOptions, submit)
 
   return (
     <Box

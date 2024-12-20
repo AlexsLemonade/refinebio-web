@@ -4,6 +4,7 @@ import {
   getOldLocalStorageKey,
   removeOldLocalStorageKey
 } from 'helpers/migrateLocalStorage'
+import { useWaitFor } from 'hooks/useWaitFor'
 import { api } from 'api'
 
 export const RefinebioContext = createContext({})
@@ -32,6 +33,8 @@ export const RefinebioContextProvider = ({ children }) => {
   )
   const [token, setToken] = useLocalStorage('token', null)
   const [validToken, setValidToken] = useLocalStorage('valid-token', null)
+
+  const waitForToken = useWaitFor(validToken)
 
   const activateToken = async () => {
     const response = await api.token.update(token, {
@@ -102,7 +105,8 @@ export const RefinebioContextProvider = ({ children }) => {
       setRequestedExperiments,
       acceptedTerms,
       token: validToken,
-      setAcceptedTerms
+      setAcceptedTerms,
+      waitForToken
     }),
     [
       dataset,
@@ -119,7 +123,8 @@ export const RefinebioContextProvider = ({ children }) => {
       setRequestedExperiments,
       acceptedTerms,
       validToken,
-      setAcceptedTerms
+      setAcceptedTerms,
+      waitForToken
     ]
   )
 

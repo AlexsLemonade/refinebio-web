@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
 import gtag from 'analytics/gtag'
@@ -6,7 +5,6 @@ import { validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
-import { useTriggerSubmit } from 'hooks/useTriggerSubmit'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/shared/Button'
 import { AdvancedOptions } from 'components/Download/DownloadOptionsForm/AdvancedOptions'
@@ -26,14 +24,13 @@ export const DownloadNowModal = ({
   const { acceptedTerms, setAcceptedTerms } = useRefinebio()
   const { StartProcessingFormSchema } = validationSchemas
   const { accession_code: accessionCode } = experiment
-  const [downloadOptions, setDownloadOptions] = useState(null)
 
   const handleStartProcessing = (formValues) => {
     setAcceptedTerms(formValues.termsOfUse)
-    setDownloadOptions(formValues)
+    submit(formValues)
   }
 
-  const submit = async () => {
+  const submit = async (downloadOptions) => {
     const { emailAddress, receiveUpdates } = downloadOptions
 
     if (receiveUpdates) {
@@ -43,12 +40,13 @@ export const DownloadNowModal = ({
       }
     }
 
-    await startProcessingDataset(downloadOptions, null, accessionCode)
+    await startProcessingDataset(
+      downloadOptions,
+      null, // no detaset ID
+      accessionCode
+    )
     gtag.trackOneOffExperimentDownload(experiment)
   }
-
-  // trigers dataset processing on form submission
-  useTriggerSubmit(downloadOptions, submit)
 
   return (
     <Box pad={{ bottom: 'small', horizontal: 'large' }}>

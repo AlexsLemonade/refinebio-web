@@ -17,7 +17,8 @@ export const useRefinebio = () => {
     setRequestedExperiments,
     acceptedTerms,
     token,
-    setAcceptedTerms
+    setAcceptedTerms,
+    waitForToken
   } = useContext(RefinebioContext)
 
   return {
@@ -35,6 +36,7 @@ export const useRefinebio = () => {
     setRequestedExperiments,
     acceptedTerms,
     token,
-    setAcceptedTerms
+    setAcceptedTerms,
+    waitForToken
   }
 }
