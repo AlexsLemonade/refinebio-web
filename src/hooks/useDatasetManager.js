@@ -4,7 +4,6 @@ import { useRefinebio } from 'hooks/useRefinebio'
 import differenceOfArrays from 'helpers/differenceOfArrays'
 import formatString from 'helpers/formatString'
 import getDatasetState from 'helpers/getDatasetState'
-import filterObjectByKeys from 'helpers/filterObjectByKeys'
 import isEmptyObject from 'helpers/isEmptyObject'
 import unionizeArrays from 'helpers/unionizeArrays'
 import { api } from 'api'
@@ -138,19 +137,9 @@ export const useDatasetManager = () => {
     accessionCode = null, // for one-off download
     promiseToken = null
   ) => {
-    const { emailAddress, receiveUpdates } = options
-    const downloadOptionsKeys = [
-      'aggregate_by',
-      'data',
-      'scale_by',
-      'quantile_normalize'
-    ]
-
     const tokenId = token || promiseToken
     const body = {
-      ...filterObjectByKeys(options, downloadOptionsKeys),
-      email_address: emailAddress,
-      ...(receiveUpdates && { email_ccdl_ok: true }),
+      ...options,
       start: true,
       token_id: tokenId
     }
@@ -160,7 +149,7 @@ export const useDatasetManager = () => {
     // adds this dataset ID to processingDatasets[] for polling
     addToProcessingDatasets(processingDatasetId, accessionCode)
     // saves the user's newly entered email or replace the existing one
-    setEmail(emailAddress)
+    setEmail(options.email_address)
     // deletes the locally saved dataset data once it has started processing (no longer mutable)
     if (id && isMyDatasetId(id)) {
       setDataset({})
