@@ -9,11 +9,11 @@ import { TextHighlight } from 'components/shared/TextHighlight'
 
 export const SearchCardHeader = ({ experiment, isLinked = false }) => {
   const { accession_code: accessionCode, title } = experiment
-  const { search, setSearch } = useSearchManager()
+  const { setSearchParams } = useSearchManager()
   const { setResponsive } = useResponsive()
 
   const handleClick = () => {
-    setSearch({ ...search, ref: 'search' })
+    setSearchParams((prev) => ({ ...prev, ref: 'search' }))
     gtag.trackExperimentPageClick(SearchCardHeader)
   }
 

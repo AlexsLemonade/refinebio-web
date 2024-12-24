@@ -8,10 +8,10 @@ import { Button } from 'components/shared/Button'
 export const SearchCardFooter = ({ experiment }) => {
   const { accession_code: accessionCode, title } = experiment
   const { push } = useRouter()
-  const { search, setSearch } = useSearchManager()
+  const { setSearchParams } = useSearchManager()
 
   const handleClick = () => {
-    setSearch({ ...search, ref: 'search' })
+    setSearchParams((prev) => ({ ...prev, ref: 'search' }))
     gtag.trackExperimentPageClick(SearchCardFooter)
     push(`/experiments/${accessionCode}/${formatURLString(title)}`)
   }

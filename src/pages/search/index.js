@@ -28,7 +28,7 @@ import {
 } from 'components/SearchResults'
 
 export const Search = ({ query, response }) => {
-  const { setFacetNames, setSearch, updatePage, updateSearchTerm } =
+  const { setFacetNames, setSearchParams, updatePage, updateSearchTerm } =
     useSearchManager()
   const { viewport, setResponsive } = useResponsive()
   const sideWidth = '300px'
@@ -62,7 +62,7 @@ export const Search = ({ query, response }) => {
   useEffect(() => {
     if (facets) setFacetNames(Object.keys(facets))
     if (query) {
-      setSearch(query)
+      setSearchParams(query)
       setUserSearchTerm(search) // resets previous input value
       gtag.trackSearchQuery(query)
     }

@@ -3,9 +3,9 @@ import { CheckBox } from 'components/shared/CheckBox'
 import { options } from 'config'
 
 export const NonDownloadableExperiment = () => {
-  const { search, toggleFilter } = useSearchManager()
+  const { searchParams, toggleFilter } = useSearchManager()
   const { key } = options.search.numDownloadableSamples
-  const checked = Number(search[key]) === 0
+  const checked = Number(searchParams[key]) === 0
 
   return (
     <CheckBox

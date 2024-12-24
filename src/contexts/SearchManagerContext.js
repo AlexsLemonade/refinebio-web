@@ -4,7 +4,7 @@ export const SearchManagerContext = createContext({})
 
 export const SearchManagerContextProvider = ({ children }) => {
   const [facetNames, setFacetNames] = useState([])
-  const [search, setSearch] = useState({})
+  const [searchParams, setSearchParams] = useState({})
   const [filterOrders, setFilterOrders] = useState([])
 
   const value = useMemo(
@@ -13,16 +13,16 @@ export const SearchManagerContextProvider = ({ children }) => {
       setFacetNames,
       filterOrders,
       setFilterOrders,
-      search,
-      setSearch
+      searchParams,
+      setSearchParams
     }),
     [
       facetNames,
       setFacetNames,
       filterOrders,
       setFilterOrders,
-      search,
-      setSearch
+      searchParams,
+      setSearchParams
     ]
   )
 

@@ -8,49 +8,45 @@ export const useSearchManager = () => {
   const {
     facetNames,
     setFacetNames,
-    search: searchState,
-    setSearch: setSearchState,
-    filterOrders: filterOrdersState,
-    setFilterOrders: setFilterOrdersState
+    searchParams,
+    setSearchParams,
+    filterOrders,
+    setFilterOrders
   } = useContext(SearchManagerContext)
   const {
     search: { defaultOrdering, hasPublication, numDownloadableSamples }
   } = options
   const router = useRouter()
-  const filterOrders = filterOrdersState
-  const setFilterOrders = setFilterOrdersState
-  const search = searchState
-  const setSearch = setSearchState
 
   /* Common */
   const resetPage = () => {
-    search.offset = 0
+    searchParams.offset = 0
 
-    setSearch({ ...search })
+    setSearchParams({ ...searchParams })
   }
 
   const updatePage = (newPage) => {
-    search.offset = (newPage - 1) * search.limit
+    searchParams.offset = (newPage - 1) * searchParams.limit
 
-    setSearch({ ...search })
+    setSearchParams({ ...searchParams })
     updateSearchQuery()
   }
 
   const updatePageSize = (newPageSize) => {
-    search.limit = newPageSize
+    searchParams.limit = newPageSize
 
-    setSearch({ ...search })
+    setSearchParams({ ...searchParams })
     updateSearchQuery(true)
   }
 
   const updateSortBy = (newSortOrder) => {
     if (newSortOrder === defaultOrdering) {
-      delete search.ordering
+      delete searchParams.ordering
     } else {
-      search.ordering = newSortOrder
+      searchParams.ordering = newSortOrder
     }
 
-    setSearch({ ...search })
+    setSearchParams({ ...searchParams })
     updateSearchQuery()
   }
 
@@ -58,38 +54,38 @@ export const useSearchManager = () => {
   // removes all the applied filters
   const clearAllFilters = () => {
     if (hasNonDownloadableSamples) {
-      search[numDownloadableSamples.key] = numDownloadableSamples.exclude
+      searchParams[numDownloadableSamples.key] = numDownloadableSamples.exclude
     }
 
     facetNames.forEach((rawKey) => {
       const key = getTranslateFacetName(rawKey)
 
-      if (key in search) delete search[key]
+      if (key in searchParams) delete searchParams[key]
     })
 
     updateFilterOrders(true)
-    setSearch({ ...search })
+    setSearchParams({ ...searchParams })
     updateSearchQuery(true)
   }
 
   const hasNonDownloadableSamples =
-    Number(search[numDownloadableSamples.key]) ===
+    Number(searchParams[numDownloadableSamples.key]) ===
     numDownloadableSamples.include
 
   const isFilterChecked = (key, val) => {
-    if (!(key in search)) return false
+    if (!(key in searchParams)) return false
 
     if (val) {
-      return search[key].includes(val)
+      return searchParams[key].includes(val)
     }
 
-    return key in search
+    return key in searchParams
   }
 
   const hasSelectedFacets =
     facetNames.filter((rawKey) => {
       const key = getTranslateFacetName(rawKey)
-      return key in search
+      return key in searchParams
     }).length > 0
 
   // toggles a filter option in facets
@@ -98,26 +94,28 @@ export const useSearchManager = () => {
     const isHasPublication = option === hasPublication.key
 
     if (option === numDownloadableSamples.key) {
-      search[option] = checked
+      searchParams[option] = checked
         ? numDownloadableSamples.exclude
         : numDownloadableSamples.include
     } else if (isHasPublication) {
       if (checked) {
-        search[option] = hasPublication.include
+        searchParams[option] = hasPublication.include
       } else {
-        delete search[option]
+        delete searchParams[option]
       }
     } else if (checked) {
-      search[option] = search[option] ? [...search[option], val] : [val]
+      searchParams[option] = searchParams[option]
+        ? [...searchParams[option], val]
+        : [val]
       addFilterOrder(key)
     } else {
-      search[option] = search[option].filter((item) => item !== val)
-      if (!search[option].length) delete search[option]
+      searchParams[option] = searchParams[option].filter((item) => item !== val)
+      if (!searchParams[option].length) delete searchParams[option]
       removeFilterOrder(key)
     }
 
     updateFilterOrders()
-    setSearch({ ...search })
+    setSearchParams({ ...searchParams })
     // skips the query update on mobile/table devices
     if (updateQuery) {
       updateSearchQuery(true)
@@ -135,22 +133,22 @@ export const useSearchManager = () => {
 
   const updateFilterOrders = (clearAll = false) => {
     if (filterOrders.length === 0 || clearAll) {
-      delete search.filter_order
+      delete searchParams.filter_order
       setFilterOrders([])
     } else {
-      search.filter_order = filterOrders.join(',')
+      searchParams.filter_order = filterOrders.join(',')
     }
   }
 
   /* Search Term */
   const updateSearchTerm = (newSearchTerm) => {
     if (newSearchTerm === '') {
-      delete search.search
+      delete searchParams.search
     } else {
-      search.search = newSearchTerm
+      searchParams.search = newSearchTerm
     }
 
-    setSearch({ ...search })
+    setSearchParams({ ...searchParams })
     updateSearchQuery(true)
   }
 
@@ -172,7 +170,7 @@ export const useSearchManager = () => {
 
     router.push({
       query: {
-        ...search
+        ...searchParams
       }
     })
   }
@@ -180,8 +178,8 @@ export const useSearchManager = () => {
   return {
     facetNames,
     setFacetNames,
-    search,
-    setSearch,
+    searchParams,
+    setSearchParams,
     clearAllFilters,
     hasNonDownloadableSamples,
     hasSelectedFacets,
