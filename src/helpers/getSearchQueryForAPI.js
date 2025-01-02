@@ -14,14 +14,14 @@ export default (query) => {
   })
 
   // sets default values for common query parameters
-  if (query.offset === undefined) queryParams.offset = 0
-
-  if (query.limit === undefined) queryParams.limit = 10
-
-  if (query.ordering === undefined) queryParams.ordering = defaultOrdering
-
-  if (query[numDownloadableSamples.key] === undefined)
-    queryParams[numDownloadableSamples.key] = numDownloadableSamples.exclude
+  queryParams.offset = query.offset !== undefined ? Number(query.offset) : 0
+  queryParams.limit = query.limit !== undefined ? Number(query.limit) : 10
+  queryParams.ordering =
+    query.ordering !== undefined ? queryParams.ordering : defaultOrdering
+  queryParams[numDownloadableSamples.key] =
+    query[numDownloadableSamples.key] !== undefined
+      ? Number(queryParams[numDownloadableSamples.key])
+      : numDownloadableSamples.exclude
 
   return queryParams
 }

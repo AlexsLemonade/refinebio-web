@@ -34,7 +34,7 @@ export const Search = ({ query, response }) => {
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
 
-  const limit = Number(query.limit)
+  const { limit } = query
   const page = getPageNumber(query.offset, limit)
   const search = query.search || ''
   const [userSearchTerm, setUserSearchTerm] = useState(search)

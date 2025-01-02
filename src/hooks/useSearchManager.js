@@ -69,8 +69,7 @@ export const useSearchManager = () => {
   }
 
   const hasNonDownloadableSamples =
-    Number(searchParams[numDownloadableSamples.key]) ===
-    numDownloadableSamples.include
+    searchParams[numDownloadableSamples.key] === numDownloadableSamples.include
 
   const isFilterChecked = (key, val) => {
     if (!(key in searchParams)) return false
