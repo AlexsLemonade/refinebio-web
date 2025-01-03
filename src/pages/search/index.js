@@ -29,19 +29,14 @@ import {
 } from 'components/SearchResults'
 
 export const Search = ({ query, response }) => {
-  const {
-    setFacetNames,
-    searchParams,
-    setSearchParams,
-    updatePage,
-    updateSearchTerm
-  } = useSearchManager()
+  const { setFacetNames, setSearchParams, updatePage, updateSearchTerm } =
+    useSearchManager()
   const { viewport, setResponsive } = useResponsive()
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
 
   // syncs the latest search parameters with URL
-  useSyncSearhURL(query, searchParams)
+  useSyncSearhURL(query)
 
   const { limit } = query
   const page = getPageNumber(query.offset, limit)
