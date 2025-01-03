@@ -5,71 +5,82 @@ import { getTranslateFacetName } from 'helpers/facetNameTranslation'
 import { options } from 'config'
 
 export const useSearchManager = () => {
+  const { facetNames, setFacetNames, searchParams, setSearchParams } =
+    useContext(SearchManagerContext)
   const {
-    facetNames,
-    setFacetNames,
-    searchParams,
-    setSearchParams,
-    filterOrders,
-    setFilterOrders
-  } = useContext(SearchManagerContext)
-  const {
-    search: { defaultOrdering, hasPublication, numDownloadableSamples }
+    search: { hasPublication, numDownloadableSamples }
   } = options
   const router = useRouter()
 
   /* Common */
-  const resetPage = () => {
-    searchParams.offset = 0
-
-    setSearchParams({ ...searchParams })
-  }
-
   const updatePage = (newPage) => {
-    searchParams.offset = (newPage - 1) * searchParams.limit
+    const newOffset = (newPage - 1) * searchParams.limit
 
-    setSearchParams({ ...searchParams })
-    updateSearchQuery()
+    setSearchParams((prev) => {
+      if (newOffset === prev.offset) return prev
+
+      const updatedQuery = { ...prev }
+      updatedQuery.offset = newOffset
+
+      return updatedQuery
+    })
   }
 
   const updatePageSize = (newPageSize) => {
-    searchParams.limit = newPageSize
+    setSearchParams((prev) => {
+      if (newPageSize === prev.limit) return prev
 
-    setSearchParams({ ...searchParams })
-    updateSearchQuery(true)
+      const updatedQuery = { ...prev }
+      updatedQuery.limit = newPageSize
+      // resets page on page size changes
+      updatedQuery.offset = 0
+
+      return updatedQuery
+    })
   }
 
   const updateSortBy = (newSortOrder) => {
-    if (newSortOrder === defaultOrdering) {
-      delete searchParams.ordering
-    } else {
-      searchParams.ordering = newSortOrder
-    }
+    setSearchParams((prev) => {
+      if (newSortOrder === prev.ordering) return prev
 
-    setSearchParams({ ...searchParams })
-    updateSearchQuery()
+      const updatedQuery = { ...prev }
+      updatedQuery.ordering = newSortOrder
+
+      return updatedQuery
+    })
   }
 
   /* Filters */
-  // removes all the applied filters
-  const clearAllFilters = () => {
-    if (hasNonDownloadableSamples) {
-      searchParams[numDownloadableSamples.key] = numDownloadableSamples.exclude
-    }
-
-    facetNames.forEach((rawKey) => {
-      const key = getTranslateFacetName(rawKey)
-
-      if (key in searchParams) delete searchParams[key]
-    })
-
-    updateFilterOrders(true)
-    setSearchParams({ ...searchParams })
-    updateSearchQuery(true)
-  }
-
   const hasNonDownloadableSamples =
     searchParams[numDownloadableSamples.key] === numDownloadableSamples.include
+
+  const hasSelectedFacets =
+    facetNames.filter((rawKey) => {
+      const key = getTranslateFacetName(rawKey)
+      return key in searchParams
+    }).length > 0
+
+  const clearAllFilters = () => {
+    setSearchParams((prev) => {
+      const updatedQuery = { ...prev }
+
+      if (hasNonDownloadableSamples) {
+        updatedQuery[numDownloadableSamples.key] =
+          numDownloadableSamples.exclude
+      }
+
+      facetNames.forEach((rawKey) => {
+        const key = getTranslateFacetName(rawKey)
+        if (key in updatedQuery) delete updatedQuery[key]
+      })
+
+      delete updatedQuery.filter_order
+      // resets page on filter changes
+      updatedQuery.offset = 0
+
+      return updatedQuery
+    })
+  }
 
   const isFilterChecked = (key, val) => {
     if (!(key in searchParams)) return false
@@ -81,96 +92,85 @@ export const useSearchManager = () => {
     return key in searchParams
   }
 
-  const hasSelectedFacets =
-    facetNames.filter((rawKey) => {
-      const key = getTranslateFacetName(rawKey)
-      return key in searchParams
-    }).length > 0
-
   // toggles a filter option in facets
-  const toggleFilter = (checked, option, rawKey, val, updateQuery = true) => {
+  const toggleFilter = (checked, option, rawKey, val) => {
     const key = getTranslateFacetName(rawKey)
     const isHasPublication = option === hasPublication.key
 
-    if (option === numDownloadableSamples.key) {
-      searchParams[option] = checked
-        ? numDownloadableSamples.exclude
-        : numDownloadableSamples.include
-    } else if (isHasPublication) {
-      if (checked) {
-        searchParams[option] = hasPublication.include
+    setSearchParams((prev) => {
+      const updatedQuery = { ...prev }
+      const filterOrders = updatedQuery.filter_order
+        ? updatedQuery.filter_order.split(',')
+        : []
+
+      if (option === numDownloadableSamples.key) {
+        updatedQuery[option] = checked
+          ? numDownloadableSamples.exclude
+          : numDownloadableSamples.include
+      } else if (isHasPublication) {
+        if (checked) {
+          updatedQuery[option] = hasPublication.include
+        } else {
+          delete updatedQuery[option]
+        }
+      } else if (checked) {
+        updatedQuery[option] = updatedQuery[option]
+          ? [...updatedQuery[option], val]
+          : [val]
+        // adds the key to filter_order(client-only) for order tracking
+        filterOrders.push(key)
       } else {
-        delete searchParams[option]
+        updatedQuery[option] = updatedQuery[option].filter(
+          (item) => item !== val
+        )
+
+        if (!updatedQuery[option].length) delete updatedQuery[option]
+
+        // removes the key from filter_order(client-only) for order tracking
+        filterOrders.splice(filterOrders.lastIndexOf(key), 1)
       }
-    } else if (checked) {
-      searchParams[option] = searchParams[option]
-        ? [...searchParams[option], val]
-        : [val]
-      addFilterOrder(key)
-    } else {
-      searchParams[option] = searchParams[option].filter((item) => item !== val)
-      if (!searchParams[option].length) delete searchParams[option]
-      removeFilterOrder(key)
-    }
 
-    updateFilterOrders()
-    setSearchParams({ ...searchParams })
-    // skips the query update on mobile/table devices
-    if (updateQuery) {
-      updateSearchQuery(true)
-    }
-  }
+      // if no facet selected, removes filter_order(client-only) from searchParams
+      if (filterOrders.length === 0) {
+        delete updatedQuery.filter_order
+      } else {
+        // otherwise converts filter_order(client-only) to string for URL
+        updatedQuery.filter_order = filterOrders.join(',')
+      }
 
-  /* Filter Orders */
-  const addFilterOrder = (newOrder) => {
-    filterOrders.push(newOrder)
-  }
+      // resets page on on filter toggle
+      updatedQuery.offset = 0
 
-  const removeFilterOrder = (orderToRemove) => {
-    filterOrders.splice(filterOrders.lastIndexOf(orderToRemove), 1)
-  }
-
-  const updateFilterOrders = (clearAll = false) => {
-    if (filterOrders.length === 0 || clearAll) {
-      delete searchParams.filter_order
-      setFilterOrders([])
-    } else {
-      searchParams.filter_order = filterOrders.join(',')
-    }
+      return updatedQuery
+    })
   }
 
   /* Search Term */
   const updateSearchTerm = (newSearchTerm) => {
-    if (newSearchTerm === '') {
-      delete searchParams.search
-    } else {
-      searchParams.search = newSearchTerm
-    }
+    setSearchParams((prev) => {
+      if (newSearchTerm === prev.search) return prev
 
-    setSearchParams({ ...searchParams })
-    updateSearchQuery(true)
+      const updatedQuery = { ...prev }
+
+      if (newSearchTerm !== '') {
+        updatedQuery.search = newSearchTerm
+      } else {
+        delete updatedQuery.search
+      }
+
+      // resets page on search term changes
+      updatedQuery.offset = 0
+
+      return updatedQuery
+    })
   }
 
-  /* Other */
   // handles search requests from non-search page and
   // navigates a user to the search page
   const navigateToSearch = (newQuery) => {
     router.push({
       pathname: '/search',
       query: newQuery && newQuery
-    })
-  }
-
-  // updates URL query string
-  const updateSearchQuery = (reset = false) => {
-    if (reset) {
-      resetPage()
-    }
-
-    router.push({
-      query: {
-        ...searchParams
-      }
     })
   }
 
@@ -187,7 +187,6 @@ export const useSearchManager = () => {
     toggleFilter,
     updatePage,
     updatePageSize,
-    updateSearchQuery,
     updateSearchTerm,
     updateSortBy
   }

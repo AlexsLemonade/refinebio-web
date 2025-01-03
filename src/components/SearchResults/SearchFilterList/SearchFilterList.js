@@ -10,14 +10,10 @@ import { Button } from 'components/shared/Button'
 import { SearchFilter } from './SearchFilter'
 import { IncludePublication } from './IncludePublication'
 
-export const SearchFilterList = ({ facets, setToggle }) => {
+export const SearchFilterList = ({ facets, onToggle }) => {
   const { viewport } = useResponsive()
-  const {
-    clearAllFilters,
-    hasNonDownloadableSamples,
-    hasSelectedFacets,
-    updateSearchQuery
-  } = useSearchManager()
+  const { clearAllFilters, hasNonDownloadableSamples, hasSelectedFacets } =
+    useSearchManager()
 
   const {
     search: { hasPublication }
@@ -41,11 +37,6 @@ export const SearchFilterList = ({ facets, setToggle }) => {
   ]
 
   const filterGroup = filterOrder.map((f) => facets[f.rawKey])
-
-  const handleApplyFilters = () => {
-    setToggle(false)
-    updateSearchQuery(true)
-  }
 
   return (
     <Box>
@@ -107,7 +98,7 @@ export const SearchFilterList = ({ facets, setToggle }) => {
             label="Apply Filters"
             primary
             responsive
-            onClick={handleApplyFilters}
+            onClick={() => onToggle(false)}
           />
         </Box>
       )}

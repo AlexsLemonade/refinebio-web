@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from 'react'
 import { Box, Grid, Heading } from 'grommet'
+import { useSyncSearhURL } from 'hooks/useSyncSearhURL'
 import gtag from 'analytics/gtag'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
@@ -28,11 +29,19 @@ import {
 } from 'components/SearchResults'
 
 export const Search = ({ query, response }) => {
-  const { setFacetNames, setSearchParams, updatePage, updateSearchTerm } =
-    useSearchManager()
+  const {
+    setFacetNames,
+    searchParams,
+    setSearchParams,
+    updatePage,
+    updateSearchTerm
+  } = useSearchManager()
   const { viewport, setResponsive } = useResponsive()
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
+
+  // syncs the latest search parameters with URL
+  useSyncSearhURL(query, searchParams)
 
   const { limit } = query
   const page = getPageNumber(query.offset, limit)
@@ -55,6 +64,7 @@ export const Search = ({ query, response }) => {
     e.preventDefault()
     updateSearchTerm(userSearchTerm)
   }
+
   useEffect(() => {
     setIsPageReady(true)
   }, [])
@@ -62,8 +72,7 @@ export const Search = ({ query, response }) => {
   useEffect(() => {
     if (facets) setFacetNames(Object.keys(facets))
     if (query) {
-      setSearchParams(query)
-      setUserSearchTerm(search) // resets previous input value
+      setSearchParams(formatFacetQueryParams(Object.keys(facets), query))
       gtag.trackSearchQuery(query)
     }
   }, [facets, query])
@@ -145,7 +154,7 @@ export const Search = ({ query, response }) => {
                   )}
                   <SearchFilterList
                     facets={facets}
-                    setToggle={setToggleFilterList}
+                    onToggle={setToggleFilterList}
                   />
                 </BoxBlock>
               </LayerResponsive>
@@ -226,16 +235,12 @@ export const Search = ({ query, response }) => {
 export const getServerSideProps = async ({ query }) => {
   const queryParams = getSearchQueryForAPI(query)
   const filterOrders = query.filter_order ? query.filter_order.split(',') : []
-
   const response = await fetchSearch(queryParams, filterOrders)
 
   if (response.ok && response) {
     return {
       props: {
-        query: formatFacetQueryParams(
-          Object.keys(response.facets),
-          queryParams
-        ),
+        query: { ...query, ...queryParams },
         response
       }
     }
