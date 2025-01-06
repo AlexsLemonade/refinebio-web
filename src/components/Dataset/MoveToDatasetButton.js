@@ -9,11 +9,7 @@ import { MoveToDatasetModal } from './MoveToDatasetModal'
 
 export const MoveToDatasetButton = ({ dataset }) => {
   const { push } = useRouter()
-  const {
-    dataset: myDataset,
-    addSamples,
-    getTotalSamples
-  } = useDatasetManager()
+  const { myDataset, addSamples, getTotalSamples } = useDatasetManager()
   const { openModal, closeModal } = useModal()
   const id = `move-to-dataset-${dataset.id}`
   const radioOptions = [

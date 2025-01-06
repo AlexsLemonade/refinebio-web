@@ -31,7 +31,7 @@ export const Dataset = ({ dataset }) => {
   const { isNotProcessed } = getDatasetState(dataset)
 
   useEffect(() => {
-    // redirects users to /download if datasetId matches My dataset ID
+    // redirects users to /download if datasetId matches myDatasetId
     if (isMyDatasetId(dataset.id)) push('/download')
   }, [dataset, start])
 

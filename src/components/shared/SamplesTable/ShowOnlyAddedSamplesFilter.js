@@ -5,15 +5,18 @@ import { useSamplesContext } from 'hooks/useSamplesContext'
 import { CheckBox } from 'components/shared/CheckBox'
 
 export const ShowOnlyAddedSamplesFilter = ({ samples }) => {
-  const { dataset } = useDatasetManager()
+  const { myDataset } = useDatasetManager()
   const { updateDatasetId } = useSamplesContext()
-  const { getAnyProcessedInDataset } = useDatasetAction(dataset?.data, samples)
+  const { getAnyProcessedInDataset } = useDatasetAction(
+    myDataset?.data,
+    samples
+  )
   const samplesInMyDataset = getAnyProcessedInDataset()
   const [showOnly, setShowOnly] = useState(false)
 
   const handleToggle = () => {
     const newShowOnly = !showOnly
-    updateDatasetId(newShowOnly ? dataset.id : null)
+    updateDatasetId(newShowOnly ? myDataset.id : null)
     setShowOnly(newShowOnly)
   }
 

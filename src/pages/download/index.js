@@ -23,7 +23,7 @@ export const Download = () => {
   const {
     query: { start }
   } = useRouter()
-  const { dataset, error, loading, getDataset, getTotalSamples } =
+  const { myDataset, error, loading, getDataset, getTotalSamples } =
     useDatasetManager()
   const { setResponsive } = useResponsive()
   const [isDownloadable, setIsDownloadable] = useState()
@@ -39,12 +39,12 @@ export const Download = () => {
   }, [isDownloadable])
 
   useEffect(() => {
-    if (dataset) {
-      setIsDownloadable(getTotalSamples(dataset.data) > 0)
+    if (myDataset) {
+      setIsDownloadable(getTotalSamples(myDataset.data) > 0)
     } else {
       setIsDownloadable(false)
     }
-  }, [dataset])
+  }, [myDataset])
 
   if (error) {
     return (
@@ -65,7 +65,7 @@ export const Download = () => {
         </Box>
       ) : (
         <Box pad={{ top: 'basex7', bottom: 'large' }}>
-          {dataset && isDownloadable && !start ? (
+          {myDataset && isDownloadable && !start ? (
             <>
               <Row>
                 <Heading
@@ -74,15 +74,15 @@ export const Download = () => {
                 >
                   My Dataset
                 </Heading>
-                <ShareDatasetButton dataset={dataset} />
+                <ShareDatasetButton dataset={myDataset} />
               </Row>
-              <DownloadOptionsForm dataset={dataset} />
-              <FilesSummary dataset={dataset} />
-              <DatasetSummary dataset={dataset} />
-              <DatasetDetails dataset={dataset} />
+              <DownloadOptionsForm dataset={myDataset} />
+              <FilesSummary dataset={myDataset} />
+              <DatasetSummary dataset={myDataset} />
+              <DatasetDetails dataset={myDataset} />
             </>
           ) : start ? (
-            <StartProcessing dataset={dataset} />
+            <StartProcessing dataset={myDataset} />
           ) : (
             <Box
               pad={{
