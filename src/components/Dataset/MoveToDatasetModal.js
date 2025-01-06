@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { Box, Heading } from 'grommet'
 import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
@@ -10,61 +10,31 @@ import { Icon } from 'components/shared/Icon'
 import { RadioButtonGroup } from 'components/shared/RadioButtonGroup'
 import { Row } from 'components/shared/Row'
 
-export const MoveToDatasetModal = ({
-  id,
-  closeModal,
-  defaultValue,
-  dataset,
-  pathname,
-  radioOptions,
-  value,
-  setValue
-}) => {
-  const {
-    dataset: datasetState,
-    loading,
-    addSamples,
-    getTotalSamples,
-    replaceSamples
-  } = useDatasetManager()
+export const MoveToDatasetModal = ({ onAppend, onReplace, onCloseModal }) => {
   const { setResponsive } = useResponsive()
-  const { push } = useRouter()
-  const totalSamples = formatNumbers(getTotalSamples(datasetState.data))
-  const newDatasetTotalSamples = formatNumbers(getTotalSamples(dataset.data))
+  const { dataset: myDataset, loading, getTotalSamples } = useDatasetManager()
+  const myDatasetTotalSamples = formatNumbers(getTotalSamples(myDataset?.data))
 
-  const handleMoveSamples = async (action = 'append') => {
+  const radioOptions = [
+    { label: 'Append samples to My Dataset', value: 'append' },
+    { label: 'Replace samples in My Dataset', value: 'replace' }
+  ]
+  const defaultAction = radioOptions[0].value
+  const [action, setAction] = useState(defaultAction)
+
+  const handleMoveSamples = async () => {
     if (action === 'append') {
-      await addSamples(dataset.data)
-      push(
-        {
-          pathname,
-          query: {
-            message: `Appended ${newDatasetTotalSamples} samples to My Dataset`,
-            status: 'success'
-          }
-        },
-        pathname
-      )
+      onAppend()
     } else {
-      await replaceSamples(dataset.data)
-      push(
-        {
-          pathname,
-          query: {
-            message: `Moved  ${newDatasetTotalSamples} samples to My Dataset`,
-            status: 'success'
-          }
-        },
-        pathname
-      )
+      onReplace()
     }
     gtag.trackDatasetAction(MoveToDatasetModal)
-    closeModal(id)
+    onCloseModal()
   }
 
-  const handleClose = () => {
-    setValue(defaultValue)
-    closeModal(id)
+  const handleCancel = () => {
+    setAction(defaultAction)
+    onCloseModal()
   }
 
   return (
@@ -77,7 +47,7 @@ export const MoveToDatasetModal = ({
       <Box direction="row" gap="xsmall" margin={{ bottom: 'medium' }}>
         <Icon color="error" name="Warning" size="medium" />
         <Heading level={2} size="small">
-          There are {totalSamples} samples in{' '}
+          There are {myDatasetTotalSamples} samples in{' '}
           <Anchor href="/download" label="My Dataset" target="_blank" />
         </Heading>
       </Box>
@@ -88,18 +58,18 @@ export const MoveToDatasetModal = ({
         <RadioButtonGroup
           options={radioOptions}
           name="move-to-dataset"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          value={action}
+          onChange={(e) => setAction(e.target.value)}
         />
       </Box>
       <Row justify="center" gap="small" width="100%">
-        <Button label="Cancel" secondary responsive onClick={handleClose} />
+        <Button label="Cancel" secondary responsive onClick={handleCancel} />
         <Button
           label="Move Samples"
           isLoading={loading}
           primary
           responsive
-          onClick={() => handleMoveSamples(value)}
+          onClick={handleMoveSamples}
         />
       </Row>
     </Box>
