@@ -16,21 +16,22 @@ export default {
           }
         })
   },
-  put: (url, params = {}, headers = {}) =>
+  put: (url, body = {}, headers = {}) =>
     fetchAsync(url, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
         ...headers
       },
-      body: JSON.stringify(params)
+      body: JSON.stringify(body)
     }),
-  post: (url, params = {}) =>
+  post: (url, body = {}, headers = {}) =>
     fetchAsync(url, {
       method: 'POST',
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        ...headers
       },
-      body: JSON.stringify(params)
+      body: JSON.stringify(body)
     })
 }
