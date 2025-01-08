@@ -276,7 +276,6 @@ export const useDatasetManager = () => {
     setLoading(false)
   }
 
-  // wraps methods with waitForToken to ensure a valid token is available
   return {
     email,
     error,
