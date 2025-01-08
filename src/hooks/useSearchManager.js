@@ -12,6 +12,15 @@ export const useSearchManager = () => {
   } = options
   const router = useRouter()
 
+  const hasNonDownloadableSamples =
+    searchParams[numDownloadableSamples.key] === numDownloadableSamples.include
+
+  const hasSelectedFacets =
+    facetNames.filter((rawKey) => {
+      const key = getTranslateFacetName(rawKey)
+      return key in searchParams
+    }).length > 0
+
   /* Common */
   const updatePage = (newPage) => {
     const newOffset = (newPage - 1) * searchParams.limit
@@ -51,15 +60,6 @@ export const useSearchManager = () => {
   }
 
   /* Filters */
-  const hasNonDownloadableSamples =
-    searchParams[numDownloadableSamples.key] === numDownloadableSamples.include
-
-  const hasSelectedFacets =
-    facetNames.filter((rawKey) => {
-      const key = getTranslateFacetName(rawKey)
-      return key in searchParams
-    }).length > 0
-
   const clearAllFilters = () => {
     setSearchParams((prev) => {
       const updatedQuery = { ...prev }
