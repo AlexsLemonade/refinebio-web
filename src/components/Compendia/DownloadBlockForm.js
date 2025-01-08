@@ -2,8 +2,8 @@ import { useRef, useState, memo } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 import { useCompendiaContext } from 'hooks/useCompendiaContext'
+import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
-import { useToken } from 'hooks/useToken'
 import formatBytes from 'helpers/formatBytes'
 import formatString from 'helpers/formatString'
 import fuzzyFilterOnKey from 'helpers/fuzzyFilterOnKey'
@@ -55,9 +55,8 @@ const DropdownOption = ({ label, selected, onClick }) => (
 
 export const DownloadBlockForm = () => {
   const { setResponsive } = useResponsive()
-  const { validateToken } = useToken()
-  const hasToken = validateToken()
-  const [acceptTerms, setAcceptTerms] = useState(hasToken)
+  const { acceptedTerms, setAcceptedTerms } = useRefinebio()
+  const [isTermsChecked, setIsTermsChecked] = useState(acceptedTerms)
   const { compendia, type, goToDownloadCompendium } = useCompendiaContext()
   const [compendium, setCompendium] = useState(null)
   const [showOptions, setShowOptions] = useState(false)
@@ -80,6 +79,11 @@ export const DownloadBlockForm = () => {
     if (dropdownRef.current && !dropdownRef.current.contains(relatedTarget)) {
       setShowOptions(false)
     }
+  }
+
+  const handleDownloadNow = () => {
+    setAcceptedTerms(isTermsChecked)
+    goToDownloadCompendium(compendium)
   }
 
   return (
@@ -176,7 +180,7 @@ export const DownloadBlockForm = () => {
           />
         </Box>
       )}
-      {!hasToken && (
+      {!acceptedTerms && (
         <Box margin={{ vertical: 'small' }}>
           <CheckBox
             label={
@@ -185,7 +189,7 @@ export const DownloadBlockForm = () => {
                 <Anchor href={links.terms_of_use}>Terms of Use</Anchor>
               </Text>
             }
-            onClick={() => setAcceptTerms(!acceptTerms)}
+            onClick={() => setIsTermsChecked(!isTermsChecked)}
           />
         </Box>
       )}
@@ -203,10 +207,10 @@ export const DownloadBlockForm = () => {
         <Column align={setResponsive('start', 'end')}>
           <Button
             label="Download Now"
-            disabled={!acceptTerms || !compendium}
+            disabled={!isTermsChecked || !compendium}
             primary
             responsive
-            onClick={() => goToDownloadCompendium(compendium)}
+            onClick={handleDownloadNow}
           />
         </Column>
       </Row>

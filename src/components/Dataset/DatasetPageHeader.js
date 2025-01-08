@@ -6,10 +6,13 @@ import getDatasetState from 'helpers/getDatasetState'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { DatasetNotProcessed } from './DatasetNotProcessed'
 import { DatasetProcessingError } from './DatasetProcessingError'
-import { DatasetReady } from './DatasetReady'
 import { DatasetRegenerate } from './DatasetRegenerate'
 
 const DatasetProcessing = dynamic(() => import('./DatasetProcessing'), {
+  ssr: false
+})
+
+const DatasetReady = dynamic(() => import('./DatasetReady'), {
   ssr: false
 })
 
