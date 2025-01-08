@@ -23,6 +23,7 @@ export const DownloadCompendium = ({ compendium }) => {
   const { error, downloadUrl } = useDownloadCompendium(compendium)
 
   useEffect(() => {
+    // TODO: File a issue for handling shared links with no token (e.g., modal popup or pre-polulate form)
     // redirects users to the selected compendia tab if no acceptedTerms
     if (!acceptedTerms) push(`/compendia/${query.type}`)
   }, [acceptedTerms])

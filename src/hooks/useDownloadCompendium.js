@@ -4,7 +4,7 @@ import { api } from 'api'
 import gtag from 'analytics/gtag'
 
 export const useDownloadCompendium = (compendium) => {
-  const { tokenPromise } = useRefinebio()
+  const { acceptedTerms, tokenPromise } = useRefinebio()
   const [error, setError] = useState(null)
   const [downloadUrl, setDownloadUrl] = useState('')
 
@@ -20,7 +20,7 @@ export const useDownloadCompendium = (compendium) => {
       setDownloadUrl(ok ? response.computed_file.download_url : null)
     }
 
-    if (tokenPromise) fetchDownloadUrl()
+    if (acceptedTerms) fetchDownloadUrl()
   }, [compendium, tokenPromise])
 
   // triggers the file download once the download URL is available
