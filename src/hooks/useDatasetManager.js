@@ -21,7 +21,7 @@ export const useDatasetManager = () => {
     processingDatasets,
     setProcessingDatasets
   } = useContext(DatasetManagerContext)
-  const { token, waitForToken } = useRefinebio()
+  const { acceptedTerms, tokenPromise } = useRefinebio()
 
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -84,27 +84,26 @@ export const useDatasetManager = () => {
     return response.id
   }
 
-  // 'promiseToken' is used for async token resolution (defaults to null)
-  // callers must pass 'null' for any optional params to indicate they are not required)
-  const downloadDataset = async (id, downloadUrl, promiseToken = null) => {
-    let href = ''
-    if (token && downloadUrl) {
-      href = downloadUrl
-    } else {
-      const { download_url: url } = await getDataset(id, promiseToken)
-      href = url
+  const downloadDataset = async (id) => {
+    if (!acceptedTerms) {
+      throw new Error('Terms of Use must be accepted to proceed.')
     }
 
-    window.location.href = href
+    const response = await getDataset(id, await tokenPromise)
+    window.location.href = response.download_url
   }
 
-  const getDataset = async (id = '', promiseToken = null) => {
-    if (!id && !datasetId) return null
+  const getDataset = async (id) => {
+    if (!id && !datasetId) return null // TODO: Throw an error
 
     setLoading(true)
 
-    const tokenId = token || promiseToken
-    const headers = { ...(tokenId && { 'API-KEY': tokenId }) }
+    const headers = {}
+
+    if (acceptedTerms) {
+      headers['API-KEY'] = await tokenPromise
+    }
+
     const response = await api.dataset.get(id || datasetId, headers)
     const { ok, statusCode } = response
 
@@ -129,19 +128,18 @@ export const useDatasetManager = () => {
   // checks if the given dataset ID is My dataset ID
   const isMyDatasetId = (id) => id === datasetId
 
-  // 'promiseToken' is used for async token resolution (defaults to null)
-  // callers must pass 'null' for any optional params to indicate they are not required
   const startProcessingDataset = async (
     options,
     id = null, // no dataset ID initially for one-off download
-    accessionCode = null, // for one-off download
-    promiseToken = null
+    accessionCode = null // for one-off download
   ) => {
-    const tokenId = token || promiseToken
+    if (!acceptedTerms) {
+      throw new Error('Terms of Use must be accepted to proceed.')
+    }
+
     const body = {
       ...options,
-      start: true,
-      token_id: tokenId
+      start: true
     }
 
     const processingDatasetId = id || (await createDataset()) // creates new dataset ID for one-off download
@@ -160,7 +158,12 @@ export const useDatasetManager = () => {
   }
 
   const updateDataset = async (id, body) => {
-    const headers = { ...(token && { 'API-KEY': token }) }
+    const headers = {}
+
+    if (acceptedTerms) {
+      headers['API-KEY'] = await tokenPromise
+    }
+
     const response = await api.dataset.update(id, body, headers)
 
     if (isMyDatasetId(id)) {
@@ -290,11 +293,11 @@ export const useDatasetManager = () => {
     // Common
     clearDataset,
     createDataset,
-    downloadDataset: waitForToken(downloadDataset),
+    downloadDataset,
     getDataset,
     getDatasetPropertiesFrom,
     isMyDatasetId,
-    startProcessingDataset: waitForToken(startProcessingDataset),
+    startProcessingDataset,
     updateDataset,
     // Experiment
     getTotalExperiments,

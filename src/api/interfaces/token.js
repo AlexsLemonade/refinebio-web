@@ -1,9 +1,9 @@
 import http from 'helpers/http'
 
-const url = 'token/'
+const endpoint = 'token'
 
 export default {
-  create: (body) => http.post(url, body),
-  get: (id) => http.get(`${url}${id}/`),
-  update: (id, body) => http.put(`${url}${id}`, body)
+  create: (body) => http.post(`${endpoint}/`, body),
+  get: (id) => http.get(`${endpoint}/${id}/`),
+  update: (id, body) => http.put(`${endpoint}/${id}/`, body)
 }

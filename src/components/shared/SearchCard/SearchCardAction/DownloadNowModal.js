@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
 import gtag from 'analytics/gtag'
@@ -24,13 +25,9 @@ export const DownloadNowModal = ({
   const { acceptedTerms, setAcceptedTerms } = useRefinebio()
   const { StartProcessingFormSchema } = validationSchemas
   const { accession_code: accessionCode } = experiment
+  const [formValues, setFormValues] = useState(null)
 
-  const handleStartProcessing = (formValues) => {
-    setAcceptedTerms(formValues.terms)
-    submit(formValues)
-  }
-
-  const submit = async (formValues) => {
+  const submit = async () => {
     if (formValues.email_ccdl_ok) {
       const subscribeEmailResponse = await subscribeEmail(
         formValues.email_address
@@ -57,6 +54,13 @@ export const DownloadNowModal = ({
     gtag.trackOneOffExperimentDownload(experiment)
   }
 
+  useEffect(() => {
+    if (formValues) {
+      setAcceptedTerms(formValues.terms)
+      if (acceptedTerms) submit()
+    }
+  }, [acceptedTerms, formValues])
+
   return (
     <Box pad={{ bottom: 'small', horizontal: 'large' }}>
       <Box
@@ -81,7 +85,7 @@ export const DownloadNowModal = ({
         validationSchema={StartProcessingFormSchema}
         validateOnChange={false}
         onSubmit={async (values, { setSubmitting }) => {
-          handleStartProcessing(values)
+          setFormValues(values)
           setSubmitting(false)
         }}
       >
