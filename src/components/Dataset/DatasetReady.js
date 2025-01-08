@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
@@ -18,16 +18,19 @@ export const DatasetReady = ({ dataset }) => {
   const { downloadDataset } = useDatasetManager()
   const { acceptedTerms, setAcceptedTerms } = useRefinebio()
   const [isTermsChecked, setIsTermsChecked] = useState(acceptedTerms)
+  const [submitted, setSubmitted] = useState(false)
 
-  const handleDownloadNow = () => {
-    setAcceptedTerms(isTermsChecked)
-    submit()
-  }
-
-  const submit = async () => {
-    await downloadDataset(dataset.id, dataset.download_url)
+  const download = async () => {
+    await downloadDataset(dataset.id)
     gtag.trackDatasetDownload(dataset)
   }
+
+  useEffect(() => {
+    if (submitted) {
+      setAcceptedTerms(isTermsChecked)
+      if (acceptedTerms) download()
+    }
+  }, [acceptedTerms, submitted])
 
   return (
     <>
@@ -85,7 +88,7 @@ export const DatasetReady = ({ dataset }) => {
                     disabled={!isTermsChecked}
                     primary
                     responsive
-                    onClick={handleDownloadNow}
+                    onClick={() => setSubmitted(true)}
                   />
                 </Column>
               </Row>

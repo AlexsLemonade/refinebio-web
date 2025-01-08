@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Formik } from 'formik'
 import { Box, Form } from 'grommet'
@@ -20,14 +21,10 @@ export const StartProcessingForm = ({ dataset }) => {
   const { email, startProcessingDataset } = useDatasetManager()
   const { acceptedTerms, setAcceptedTerms } = useRefinebio()
   const { StartProcessingFormSchema } = validationSchemas
+  const [formValues, setFormValues] = useState(null)
 
-  const handleStartProcessing = (formValues) => {
-    setAcceptedTerms(formValues.termsOfUse)
-    submit(formValues)
-  }
-
-  const submit = async (downloadOptions) => {
-    const { emailAddress, receiveUpdates } = downloadOptions
+  const submit = async () => {
+    const { emailAddress, receiveUpdates } = formValues
 
     if (receiveUpdates) {
       const subscribeEmailResponse = await subscribeEmail(emailAddress)
@@ -36,15 +33,18 @@ export const StartProcessingForm = ({ dataset }) => {
       }
     }
 
-    const { id } = await startProcessingDataset(
-      downloadOptions,
-      dataset.id,
-      null // no accession code
-    )
+    const { id } = await startProcessingDataset(formValues, dataset.id)
     const pathname = `/dataset/${id}`
     push({ pathname }, pathname)
     gtag.trackDatasetDownloadOptions(dataset)
   }
+
+  useEffect(() => {
+    if (formValues) {
+      setAcceptedTerms(formValues.termsOfUse)
+      if (acceptedTerms) submit()
+    }
+  }, [acceptedTerms, formValues])
 
   return (
     <Formik
@@ -57,7 +57,7 @@ export const StartProcessingForm = ({ dataset }) => {
       validationSchema={StartProcessingFormSchema}
       validateOnChange={false}
       onSubmit={async (values, { setSubmitting }) => {
-        handleStartProcessing(values)
+        setFormValues(values)
         setSubmitting(false)
       }}
     >
