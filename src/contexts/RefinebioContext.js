@@ -4,6 +4,8 @@ import {
   getOldLocalStorageKey,
   removeOldLocalStorageKey
 } from 'helpers/migrateLocalStorage'
+import { usePromise } from 'hooks/usePromise'
+import { api } from 'api'
 
 export const RefinebioContext = createContext({})
 
@@ -23,7 +25,16 @@ export const RefinebioContextProvider = ({ children }) => {
     'requested-experiments',
     []
   )
+
+  // For user token
+  const [acceptedTerms, setAcceptedTerms] = useLocalStorage(
+    'accepted-terms',
+    false
+  )
   const [token, setToken] = useLocalStorage('token', null)
+  const [validToken, setValidToken] = useLocalStorage('valid-token', null)
+
+  const tokenPromise = usePromise(validToken)
 
   // NOTE: migration support is removed 12 months after the site swap
   useEffect(() => {
@@ -37,6 +48,37 @@ export const RefinebioContextProvider = ({ children }) => {
       removeOldLocalStorageKey(oldKey)
     }
   }, [])
+
+  // creates the application token per user on initial visit
+  useEffect(() => {
+    const createToken = async () => {
+      const { id } = await api.token.create()
+      setToken(id)
+    }
+    if (!token) {
+      createToken()
+    }
+  }, [token])
+
+  // sync user's token with acceptedTerms
+  useEffect(() => {
+    const syncToken = async () => {
+      if (token) {
+        const { ok, statusCode } = await api.token.update(token, {
+          is_activated: acceptedTerms
+        })
+        const badRequest = !ok && statusCode >= 400 && statusCode < 500
+
+        if (badRequest) {
+          setToken(null)
+        } else {
+          setValidToken(acceptedTerms ? token : null)
+        }
+      }
+    }
+
+    syncToken()
+  }, [acceptedTerms, token])
 
   const value = useMemo(
     () => ({
@@ -52,8 +94,10 @@ export const RefinebioContextProvider = ({ children }) => {
       setProcessingDatasets,
       requestedExperiments,
       setRequestedExperiments,
-      token,
-      setToken
+      acceptedTerms,
+      setAcceptedTerms,
+      token: validToken,
+      tokenPromise
     }),
     [
       dataset,
@@ -68,8 +112,10 @@ export const RefinebioContextProvider = ({ children }) => {
       setProcessingDatasets,
       requestedExperiments,
       setRequestedExperiments,
-      token,
-      setToken
+      acceptedTerms,
+      setAcceptedTerms,
+      tokenPromise,
+      validToken
     ]
   )
 
