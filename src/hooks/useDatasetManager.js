@@ -22,7 +22,7 @@ export const useDatasetManager = () => {
     processingDatasets,
     setProcessingDatasets
   } = useContext(DatasetManagerContext)
-  const { acceptedTerms, token, tokenPromise } = useRefinebio()
+  const { acceptedTerms, tokenPromise } = useRefinebio()
 
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -90,19 +90,19 @@ export const useDatasetManager = () => {
       throw new Error('Terms of Use must be accepted to proceed.')
     }
 
-    const response = await getDataset(id, token || (await tokenPromise))
+    const response = await getDataset(id, await tokenPromise)
     window.location.href = response.download_url
   }
 
   const getDataset = async (id) => {
-    if (!id && !datasetId) return null
+    if (!id && !datasetId) return null // TODO: Throw an error
 
     setLoading(true)
 
     const headers = {}
 
     if (acceptedTerms) {
-      headers['API-KEY'] = token || (await tokenPromise)
+      headers['API-KEY'] = await tokenPromise
     }
 
     const response = await api.dataset.get(id || datasetId, headers)
@@ -150,8 +150,7 @@ export const useDatasetManager = () => {
       ...filterObjectByKeys(options, downloadOptionsKeys),
       email_address: emailAddress,
       ...(receiveUpdates && { email_ccdl_ok: true }),
-      start: true,
-      token_id: token || (await tokenPromise)
+      start: true
     }
 
     const processingDatasetId = id || (await createDataset()) // creates new dataset ID for one-off download
@@ -170,7 +169,12 @@ export const useDatasetManager = () => {
   }
 
   const updateDataset = async (id, body) => {
-    const headers = { ...(token && { 'API-KEY': token }) }
+    const headers = {}
+
+    if (acceptedTerms) {
+      headers['API-KEY'] = await tokenPromise
+    }
+
     const response = await api.dataset.update(id, body, headers)
 
     if (isMyDatasetId(id)) {
@@ -283,7 +287,6 @@ export const useDatasetManager = () => {
     setLoading(false)
   }
 
-  // wraps methods with waitForToken to ensure a valid token is available
   return {
     email,
     error,
