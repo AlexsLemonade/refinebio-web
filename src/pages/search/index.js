@@ -7,7 +7,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
 import formatFacetQueryParams from 'helpers/formatFacetQueryParams'
-import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
+import getParsedAccessionCodes from 'helpers/getParsedAccessionCodes'
 import getPageNumber from 'helpers/getPageNumber'
 import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
 import { Button } from 'components/shared/Button'
@@ -77,9 +77,9 @@ export const Search = ({ query, response }) => {
 
   return (
     <>
-      <PageTitle title={`${search || ''} Results -`} />
+      <PageTitle title={`${search} Results -`} />
       <TextHighlightContextProvider
-        match={[search, ...getAccessionCodesQueryParam(search)]}
+        match={[search, ...getParsedAccessionCodes(search)]}
       >
         <FixedContainer pad={{ horizontal: 'large', bottom: 'large' }}>
           <SearchInfoBanner />
@@ -232,7 +232,7 @@ export const getServerSideProps = async ({ query }) => {
   const filterOrders = query.filter_order ? query.filter_order.split(',') : []
   const response = await fetchSearch(queryParams, filterOrders)
 
-  if (response.ok && response) {
+  if (response && response.ok) {
     return {
       props: {
         query: { ...query, ...queryParams },

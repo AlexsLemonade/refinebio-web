@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react'
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
 import gtag from 'analytics/gtag'
 import { validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
+import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/shared/Button'
@@ -18,10 +20,37 @@ export const DownloadNowModal = ({
   hasMultipleOrganisms,
   hasRnaSeq
 }) => {
-  const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
+  const { email, startProcessingDataset } = useDatasetManager()
+  const { acceptedTerms, setAcceptedTerms } = useRefinebio()
   const { StartProcessingFormSchema } = validationSchemas
   const { accession_code: accessionCode } = experiment
+  const [formValues, setFormValues] = useState(null)
+
+  const submit = async () => {
+    const { emailAddress, receiveUpdates } = formValues
+
+    if (receiveUpdates) {
+      const subscribeEmailResponse = await subscribeEmail(emailAddress)
+      if (subscribeEmailResponse.status !== 'error') {
+        gtag.trackEmailSubscription(DownloadNowModal)
+      }
+    }
+
+    await startProcessingDataset(
+      formValues,
+      null, // no detaset ID
+      accessionCode
+    )
+    gtag.trackOneOffExperimentDownload(experiment)
+  }
+
+  useEffect(() => {
+    if (formValues) {
+      setAcceptedTerms(formValues.termsOfUse)
+      if (acceptedTerms) submit()
+    }
+  }, [acceptedTerms, formValues])
 
   return (
     <Box pad={{ bottom: 'small', horizontal: 'large' }}>
@@ -43,22 +72,12 @@ export const DownloadNowModal = ({
           quantile_normalize: true,
           emailAddress: email || '',
           receiveUpdates: true,
-          termsOfUse: false
+          termsOfUse: acceptedTerms
         }}
         validationSchema={StartProcessingFormSchema}
         validateOnChange={false}
         onSubmit={async (values, { setSubmitting }) => {
-          const { emailAddress, receiveUpdates } = values
-
-          if (receiveUpdates) {
-            const subscribeEmailResponse = await subscribeEmail(emailAddress)
-            if (subscribeEmailResponse.status !== 'error') {
-              gtag.trackEmailSubscription(DownloadNowModal)
-            }
-          }
-
-          await startProcessingDataset(values, null, accessionCode)
-          gtag.trackOneOffExperimentDownload(experiment)
+          setFormValues(values)
           setSubmitting(false)
         }}
       >
@@ -112,16 +131,20 @@ export const DownloadNowModal = ({
                   value={values.emailAddress}
                   handleChange={handleChange}
                 />
-                <TermsOfUseCheckBox
-                  error={errors.termsOfUse}
-                  touched={touched.termsOfUse}
-                  value={values.termsOfUse}
-                  handleChange={handleChange}
-                />
-                <ReceiveUpdatesCheckBox
-                  value={values.receiveUpdates}
-                  handleChange={handleChange}
-                />
+                <Box pad={{ top: 'small' }}>
+                  {!acceptedTerms && (
+                    <TermsOfUseCheckBox
+                      error={errors.termsOfUse}
+                      touched={touched.termsOfUse}
+                      value={values.termsOfUse}
+                      handleChange={handleChange}
+                    />
+                  )}
+                  <ReceiveUpdatesCheckBox
+                    value={values.receiveUpdates}
+                    handleChange={handleChange}
+                  />
+                </Box>
               </Box>
             </Box>
             <Box align="end">

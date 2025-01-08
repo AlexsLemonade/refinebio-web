@@ -4,14 +4,17 @@ import { options } from 'config'
 
 export const NonDownloadableExperiment = () => {
   const { searchParams, toggleFilter } = useSearchManager()
-  const { key } = options.search.numDownloadableSamples
-  const checked = searchParams[key] === 0
+  const { numDownloadableSamples } = options.search
+  const checked =
+    searchParams[numDownloadableSamples.key] === numDownloadableSamples.exclude
 
   return (
     <CheckBox
       label="Hide non-downloadable experiments"
       checked={checked}
-      onChange={(e) => toggleFilter(e.target.checked, key)}
+      onChange={(e) =>
+        toggleFilter(e.target.checked, numDownloadableSamples.key)
+      }
     />
   )
 }

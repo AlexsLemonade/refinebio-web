@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
+import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
-import { useToken } from 'hooks/useToken'
 import formatBytes from 'helpers/formatBytes'
 import { Anchor } from 'components/shared/Anchor'
 import { Button } from 'components/shared/Button'
@@ -14,25 +14,23 @@ import { links } from 'config'
 import { DatasetExplore } from './DatasetExplore'
 
 export const DatasetReady = ({ dataset }) => {
-  const { downloadDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
-  const { validateToken } = useToken()
-  const [acceptedTerms, setAcceptedTerms] = useState(false)
+  const { downloadDataset } = useDatasetManager()
+  const { acceptedTerms, setAcceptedTerms } = useRefinebio()
+  const [isTermsChecked, setIsTermsChecked] = useState(acceptedTerms)
+  const [submitted, setSubmitted] = useState(false)
 
-  const handleDownloadNow = async () => {
-    await downloadDataset(dataset.id, dataset.download_url)
+  const download = async () => {
+    await downloadDataset(dataset.id)
     gtag.trackDatasetDownload(dataset)
   }
 
-  const getTokenStatus = async () => {
-    const isActivated = await validateToken()
-    setAcceptedTerms(isActivated)
-  }
-
-  // sets acceptedTerms based on the token validity
   useEffect(() => {
-    getTokenStatus()
-  }, [])
+    if (submitted) {
+      setAcceptedTerms(isTermsChecked)
+      if (acceptedTerms) download()
+    }
+  }, [acceptedTerms, submitted])
 
   return (
     <>
@@ -72,7 +70,7 @@ export const DatasetReady = ({ dataset }) => {
                           />
                         </Text>
                       }
-                      onClick={() => setAcceptedTerms(!acceptedTerms)}
+                      onClick={() => setIsTermsChecked(!isTermsChecked)}
                     />
                   </Column>
                 )}
@@ -87,10 +85,10 @@ export const DatasetReady = ({ dataset }) => {
                 >
                   <Button
                     label="Download Now"
-                    disabled={!acceptedTerms}
+                    disabled={!isTermsChecked}
                     primary
                     responsive
-                    onClick={handleDownloadNow}
+                    onClick={() => setSubmitted(true)}
                   />
                 </Column>
               </Row>

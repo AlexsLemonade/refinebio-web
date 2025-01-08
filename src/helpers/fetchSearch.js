@@ -1,6 +1,6 @@
 import { api } from 'api'
 import { getTranslateFacetName } from 'helpers/facetNameTranslation'
-import getAccessionCodesQueryParam from './getAccessionCodesQueryParam'
+import getParsedAccessionCodes from './getParsedAccessionCodes'
 import getUniqElementsBy from './getUniqElementsBy'
 
 export default async (queryParams, filterOrders) => {
@@ -28,7 +28,7 @@ export default async (queryParams, filterOrders) => {
     }
   }
   /* Accession Codes */
-  const accessionCodes = getAccessionCodesQueryParam(queryParams.search)
+  const accessionCodes = getParsedAccessionCodes(queryParams.search)
 
   // makes requests for accession codes only from the first page
   if (accessionCodes.length > 0 && queryParams.offset === 0) {
