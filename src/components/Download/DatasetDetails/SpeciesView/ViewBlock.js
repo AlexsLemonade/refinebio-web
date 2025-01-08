@@ -66,7 +66,7 @@ export const ViewBlock = ({ dataset, organismName, isImmutable }) => {
             </Text>
             <ViewSamplesButton
               dataset={dataset}
-              modalTitle={organismName}
+              modalTitle={formatString(organismName)}
               isImmutable={isImmutable}
               isSpeciesView
             />
