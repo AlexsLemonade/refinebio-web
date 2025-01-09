@@ -2,12 +2,20 @@ import { useState } from 'react'
 import { useDatasetAction } from 'hooks/useDatasetAction'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useSamplesContext } from 'hooks/useSamplesContext'
+import { getFormattedExperiment } from 'helpers/formatDatasetAction'
 import { CheckBox } from 'components/shared/CheckBox'
 
-export const ShowOnlyAddedSamplesFilter = ({ samples }) => {
+export const ShowOnlyAddedSamplesFilter = ({ experiment }) => {
   const { dataset } = useDatasetManager()
-  const { updateDatasetId } = useSamplesContext()
-  const { getAnyProcessedInDataset } = useDatasetAction(dataset?.data, samples)
+  const { updateDatasetId, samplesQuery } = useSamplesContext()
+  const { getAnyProcessedInDataset } = useDatasetAction(
+    dataset.data,
+    getFormattedExperiment(
+      samplesQuery.experiment_accession_code,
+      experiment.num_downloadable_samples
+    )
+  )
+
   const samplesInMyDataset = getAnyProcessedInDataset()
   const [showOnly, setShowOnly] = useState(false)
 

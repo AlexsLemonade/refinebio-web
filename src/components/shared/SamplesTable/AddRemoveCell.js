@@ -2,18 +2,25 @@ import { memo } from 'react'
 import { Box, Text } from 'grommet'
 import { cache, links } from 'config'
 import { Anchor } from 'components/shared/Anchor'
+
 import { DatasetActionButton } from 'components/shared/DatasetActionButton'
 import { Icon } from 'components/shared/Icon'
 
 export const AddRemoveCell = ({ experimentAccessionCodes, sample }) => {
-  // creates an object with the experiment that containe this sample
-  // in order to update it when it's added or removed
-  // e.g., { experimentAccession: [ sampleAccessions ]}
-  const data = experimentAccessionCodes.reduce((acc, accessionCode) => {
-    acc[accessionCode] = [sample.accession_code]
-
-    return acc
-  }, {})
+  // maps the given sample accession code to its corresponding experiment accession code
+  // (as the dataset.data structure) to support adding/removing samples via API
+  // e.g., { experimentAccession: [ sampleAccession ]}
+  const datasetData = experimentAccessionCodes
+    .filter((experimentAccessionCode) =>
+      sample.experiment_accession_codes.includes(experimentAccessionCode)
+    )
+    .reduce(
+      (acc, experimentAccessionCode) => ({
+        ...acc,
+        [experimentAccessionCode]: [sample.accession_code]
+      }),
+      {}
+    )
 
   // ensures the samples have qn targets associated
   if (
@@ -38,14 +45,7 @@ export const AddRemoveCell = ({ experimentAccessionCodes, sample }) => {
     )
   }
 
-  return (
-    <DatasetActionButton
-      btnType="secondary"
-      data={data}
-      label="Add"
-      secondary
-    />
-  )
+  return <DatasetActionButton data={datasetData} label="Add" secondary />
 }
 
 export default memo(AddRemoveCell)

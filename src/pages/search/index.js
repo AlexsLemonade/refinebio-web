@@ -9,6 +9,7 @@ import formatFacetQueryParams from 'helpers/formatFacetQueryParams'
 import getParsedAccessionCodes from 'helpers/getParsedAccessionCodes'
 import getPageNumber from 'helpers/getPageNumber'
 import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
+import { isLegacyUrl, getNewQueryParams } from 'helpers/supportLegacyUrl'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
 import { FixedContainer } from 'components/shared/FixedContainer'
@@ -224,6 +225,19 @@ export const Search = ({ query, response }) => {
 }
 
 export const getServerSideProps = async ({ query }) => {
+  if (isLegacyUrl(query)) {
+    const newQueryParams = getNewQueryParams(query)
+
+    return {
+      redirect: {
+        destination: `/search/?${new URLSearchParams(
+          newQueryParams
+        ).toString()}`,
+        permanent: true
+      }
+    }
+  }
+
   const queryParams = getSearchQueryForAPI(query)
   const filterOrders = query.filter_order ? query.filter_order.split(',') : []
 
