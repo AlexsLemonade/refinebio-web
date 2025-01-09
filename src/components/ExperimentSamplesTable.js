@@ -3,25 +3,18 @@ import { SamplesContextProvider } from 'contexts/SamplesContext'
 import { useResponsive } from 'hooks/useResponsive'
 import { Column } from 'components/shared/Column'
 import { Row } from 'components/shared/Row'
-import { getFormattedExperiment } from 'helpers/formatDatasetAction'
 import {
   SamplesTable,
   SamplesTableAction
 } from 'components/shared/SamplesTable'
 
 export const ExperimentSamplesTable = ({ experiment }) => {
-  const {
-    accession_code: accesionCode,
-    num_downloadable_samples: downloadableSamples,
-    sample_metadata: sampleMetadata,
-    samples
-  } = experiment
   const { setResponsive } = useResponsive()
 
   return (
     <SamplesContextProvider
       query={{
-        experiment_accession_code: accesionCode
+        experiment_accession_code: experiment.accession_code
       }}
     >
       <Row margin={{ bottom: 'medium' }}>
@@ -34,20 +27,10 @@ export const ExperimentSamplesTable = ({ experiment }) => {
           </Heading>
         </Column>
         <Column>
-          <SamplesTableAction
-            accessionCode={accesionCode}
-            downloadableSamples={downloadableSamples}
-          />
+          <SamplesTableAction experiment={experiment} />
         </Column>
       </Row>
-      <SamplesTable
-        allSamples={getFormattedExperiment(accesionCode, downloadableSamples)}
-        sampleAccessionsInExperiment={{
-          [accesionCode]: samples.map((sample) => sample.accession_code)
-        }}
-        sampleMetadataFields={sampleMetadata}
-        showMyDatasetFilter
-      />
+      <SamplesTable experiment={experiment} showMyDatasetFilter />
     </SamplesContextProvider>
   )
 }
