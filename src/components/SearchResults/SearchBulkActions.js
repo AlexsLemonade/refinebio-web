@@ -6,14 +6,9 @@ import { PageSizes } from 'components/shared/PageSizes'
 import { AddPageToDatasetButton } from './AddPageToDatasetButton'
 import { NonDownloadableExperiment } from './SearchFilterList'
 
-export const SearchBulkActions = ({
-  results,
-  pageSize,
-  setPageSize,
-  sortBy,
-  setSortBy,
-  totalResults
-}) => {
+export const SearchBulkActions = ({ response, query }) => {
+  const { results, totalResults } = response
+  const { limit, ordering } = query
   const { updatePageSize, updateSortBy } = useSearchManager()
   const { getForBreakpoint, setResponsive } = useResponsive()
   const sortByValues = [
@@ -23,11 +18,6 @@ export const SearchBulkActions = ({
     '-source_first_published',
     'source_first_published'
   ]
-
-  const handleChageSort = (newOrder) => {
-    setSortBy(newOrder)
-    updateSortBy(newOrder)
-  }
 
   return (
     <Box pad={{ bottom: 'medium' }}>
@@ -111,10 +101,9 @@ export const SearchBulkActions = ({
               textPrepend="Showing"
               textAppended="results"
               pageSizeLabel="Total Samples"
-              pageSize={pageSize}
-              setPageSize={setPageSize}
+              pageSize={Number(limit)}
               totalPages={totalResults}
-              updatePageSize={updatePageSize}
+              onPageSizeChange={updatePageSize}
             />
           </Box>
         </Box>
@@ -125,10 +114,10 @@ export const SearchBulkActions = ({
               <Select
                 options={getReadableOptions(sortByValues)}
                 labelKey="label"
-                value={sortBy}
+                value={ordering}
                 valueKey={{ key: 'value', reduce: true }}
                 margin={{ horizontal: 'xxsmall' }}
-                onChange={({ value: nextValue }) => handleChageSort(nextValue)}
+                onChange={({ value: nextValue }) => updateSortBy(nextValue)}
               />
             </Box>
           </Box>

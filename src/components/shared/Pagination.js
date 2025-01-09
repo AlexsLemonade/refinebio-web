@@ -34,8 +34,7 @@ export const Pagination = ({
   page = 1,
   pageSize,
   totalPages,
-  setPage,
-  updatePage = () => {} // updates page with the selected number
+  onPageChange
 }) => {
   const { query, isReady } = useRouter()
   const { setResponsive } = useResponsive()
@@ -48,16 +47,16 @@ export const Pagination = ({
   const [canNextPage, setCanNextPage] = useState(true)
   const nextPage = () => {
     setCurrentPage(currentPage + 1)
-    updatePage(currentPage + 1)
+    onPageChange(currentPage + 1)
   }
   const previousPage = () => {
     setCurrentPage(currentPage - 1)
-    updatePage(currentPage - 1)
+    onPageChange(currentPage - 1)
   }
 
   const gotoPage = (pageNumber) => {
     setCurrentPage(pageNumber)
-    updatePage(pageNumber)
+    onPageChange(pageNumber)
     setUserInput('')
   }
 
@@ -96,10 +95,6 @@ export const Pagination = ({
   useEffect(() => {
     setCurrentPage(page)
   }, [page])
-
-  useEffect(() => {
-    setPage(currentPage)
-  }, [currentPage])
 
   useEffect(() => {
     if (pageCount === currentPage) {
