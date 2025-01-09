@@ -86,7 +86,7 @@ export const useSearchManager = () => {
   const hasSelectedFacets =
     facetNames.filter((facetName) => facetName in search).length > 0
 
-  // toggles a filter option in facetNames
+  // toggles a filter option in facets
   const toggleFilter = (checked, option, key, val, updateQuery = true) => {
     const isHasPublication = option === hasPublication.key
 

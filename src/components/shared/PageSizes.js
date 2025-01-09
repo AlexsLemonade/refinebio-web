@@ -9,22 +9,11 @@ export const PageSizes = ({
   textAppended = 'Total Samples',
   pageSize,
   totalPages,
-  updatePageSize
+  onPageSizeChange
 }) => {
   const { viewport } = useResponsive()
   const { pageSizes } = options
   const isSinglePage = totalPages < pageSizes[0]
-
-  // syncs the search page url with selected page size
-  const updateQueryForPageSize = (newPageSize) => {
-    if (updatePageSize) {
-      updatePageSize(newPageSize)
-    }
-  }
-
-  const handleChange = (newPageSize) => {
-    updateQueryForPageSize(newPageSize)
-  }
 
   return (
     <Box align="center" direction="row">
@@ -38,7 +27,7 @@ export const PageSizes = ({
             defaultValue={pageSize}
             options={pageSizes}
             value={pageSize}
-            onChange={(e) => handleChange(Number(e.target.value))}
+            onChange={(e) => onPageSizeChange(Number(e.target.value))}
           />
         </Box>
       )}

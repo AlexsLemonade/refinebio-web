@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Formik } from 'formik'
 import { Box, Form, Heading, Paragraph } from 'grommet'
 import gtag from 'analytics/gtag'
 import { validationSchemas } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
+import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/shared/Button'
@@ -16,9 +18,32 @@ import { TermsOfUseCheckBox } from 'components/Download/StartProcessingForm/Term
 
 export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
   const { push } = useRouter()
-  const { email, startProcessingDataset } = useDatasetManager()
   const { setResponsive } = useResponsive()
+  const { email, startProcessingDataset } = useDatasetManager()
+  const { acceptedTerms, setAcceptedTerms } = useRefinebio()
   const { StartProcessingFormSchema } = validationSchemas
+  const [formValues, setFormValues] = useState(null)
+
+  const submit = async () => {
+    const { emailAddress, receiveUpdates } = formValues
+
+    if (receiveUpdates) {
+      const subscribeEmailResponse = await subscribeEmail(emailAddress)
+      if (subscribeEmailResponse.status !== 'error') {
+        gtag.trackEmailSubscription(DownloadDatasetModal)
+      }
+    }
+
+    const response = await startProcessingDataset(formValues, dataset.id)
+    const pathname = `/dataset/${response.id}`
+    push({ pathname }, pathname)
+    closeModal(id)
+  }
+
+  useEffect(() => {
+    if (formValues.termsOfUse) setAcceptedTerms(formValues.termsOfUse)
+    if (acceptedTerms && formValues) submit()
+  }, [acceptedTerms, formValues])
 
   return (
     <Box
@@ -37,24 +62,12 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
           quantile_normalize: dataset.quantile_normalize,
           emailAddress: email || '',
           receiveUpdates: true,
-          termsOfUse: false
+          termsOfUse: acceptedTerms
         }}
         validationSchema={StartProcessingFormSchema}
         validateOnChange={false}
         onSubmit={async (values, { setSubmitting }) => {
-          const { emailAddress, receiveUpdates } = values
-
-          if (receiveUpdates) {
-            const subscribeEmailResponse = await subscribeEmail(emailAddress)
-            if (subscribeEmailResponse.status !== 'error') {
-              gtag.trackEmailSubscription(DownloadDatasetModal)
-            }
-          }
-
-          const response = await startProcessingDataset(values, dataset.id)
-          const pathname = `/dataset/${response.id}`
-          push({ pathname }, pathname)
-          closeModal(id)
+          setFormValues(values)
           setSubmitting(false)
         }}
       >
@@ -104,16 +117,20 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
                   value={values.emailAddress}
                   handleChange={handleChange}
                 />
-                <TermsOfUseCheckBox
-                  error={errors.termsOfUse}
-                  touched={touched.termsOfUse}
-                  value={values.termsOfUse}
-                  handleChange={handleChange}
-                />
-                <ReceiveUpdatesCheckBox
-                  value={values.receiveUpdates}
-                  handleChange={handleChange}
-                />
+                <Box pad={{ top: 'small' }}>
+                  {!acceptedTerms && (
+                    <TermsOfUseCheckBox
+                      error={errors.termsOfUse}
+                      touched={touched.termsOfUse}
+                      value={values.termsOfUse}
+                      handleChange={handleChange}
+                    />
+                  )}
+                  <ReceiveUpdatesCheckBox
+                    value={values.receiveUpdates}
+                    handleChange={handleChange}
+                  />
+                </Box>
               </Box>
             </Box>
             <Box align="end">

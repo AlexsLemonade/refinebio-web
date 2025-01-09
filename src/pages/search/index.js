@@ -7,7 +7,7 @@ import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
 import formatFacetNames from 'helpers/formatFacetNames'
 import formatFacetQueryParams from 'helpers/formatFacetQueryParams'
-import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
+import getParsedAccessionCodes from 'helpers/getParsedAccessionCodes'
 import getPageNumber from 'helpers/getPageNumber'
 import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
 import { isLegacyUrl, getNewQueryParams } from 'helpers/supportLegacyUrl'
@@ -28,25 +28,23 @@ import {
   SearchBulkActions,
   SearchFilterList
 } from 'components/SearchResults'
-import { options } from 'config'
 
 export const Search = ({ query, response }) => {
-  const {
-    search: { defaultOrdering }
-  } = options
   const { setFacetNames, setSearch, updatePage, updateSearchTerm } =
     useSearchManager()
   const { viewport, setResponsive } = useResponsive()
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
-  const [toggleFilterList, setToggleFilterList] = useState(false)
-  const queryLimit = Number(query.limit)
-  const querySearch = query.search
-  const [userSearchTerm, setUserSearchTerm] = useState(querySearch || '')
-  const [page, setPage] = useState(getPageNumber(query.offset, queryLimit))
-  const [sortBy, setSortBy] = useState(query.ordering || defaultOrdering)
+
+  const limit = Number(query.limit)
+  const page = getPageNumber(query.offset, limit)
+  const search = query.search || ''
+  const [userSearchTerm, setUserSearchTerm] = useState(search)
+
   const { facets, results, totalResults } = response
   const isResults = results?.length > 0
+
+  const [toggleFilterList, setToggleFilterList] = useState(false) // for small devices
 
   // TODO: Remove when refactring search in a future issue (prevent hydration error)
   const [isPageReady, setIsPageReady] = useState(false)
@@ -67,6 +65,7 @@ export const Search = ({ query, response }) => {
     if (facets) setFacetNames(formatFacetNames(Object.keys(facets)))
     if (query) {
       setSearch(query)
+      setUserSearchTerm(search) // resets previous input value
       gtag.trackSearchQuery(query)
     }
   }, [facets, query])
@@ -76,9 +75,9 @@ export const Search = ({ query, response }) => {
 
   return (
     <>
-      <PageTitle title={`${querySearch || ''} Results -`} />
+      <PageTitle title={`${search} Results -`} />
       <TextHighlightContextProvider
-        match={[querySearch, ...getAccessionCodesQueryParam(querySearch)]}
+        match={[search, ...getParsedAccessionCodes(search)]}
       >
         <FixedContainer pad={{ horizontal: 'large', bottom: 'large' }}>
           <SearchInfoBanner />
@@ -163,13 +162,7 @@ export const Search = ({ query, response }) => {
                     onClick={() => setToggleFilterList(true)}
                   />
                 )}
-                <SearchBulkActions
-                  results={results}
-                  pageSize={queryLimit}
-                  sortBy={sortBy}
-                  setSortBy={setSortBy}
-                  totalResults={totalResults}
-                />
+                <SearchBulkActions response={response} query={query} />
                 <Box animation={{ type: 'fadeIn', duration: 300 }}>
                   {results.map((result, i) =>
                     result.isMatchedAccessionCode ? (
@@ -189,7 +182,7 @@ export const Search = ({ query, response }) => {
                                 level={3}
                                 style={{ position: 'absolute', top: '-12px' }}
                               >
-                                Related Results for '{querySearch}'
+                                Related Results for '{search}'
                               </Heading>
                             </Box>
                           )}
@@ -202,7 +195,7 @@ export const Search = ({ query, response }) => {
                     )
                   )}
                   {(results.length < 10 ||
-                    page === Math.ceil(totalResults / queryLimit)) && (
+                    page === Math.ceil(totalResults / limit)) && (
                     <RequestSearchFormAlert />
                   )}
                 </Box>
@@ -215,16 +208,15 @@ export const Search = ({ query, response }) => {
                 >
                   <Pagination
                     page={page}
-                    pageSize={queryLimit}
+                    pageSize={limit}
                     totalPages={totalResults}
-                    setPage={setPage}
-                    updatePage={updatePage}
+                    onPageChange={updatePage}
                   />
                 </Box>
               </Box>
             </Grid>
           )}
-          {!isResults && querySearch && (
+          {!isResults && search && (
             <NoSearchResults setUserSearchTerm={setUserSearchTerm} />
           )}
         </FixedContainer>
@@ -252,7 +244,7 @@ export const getServerSideProps = async ({ query }) => {
 
   const response = await fetchSearch(queryParams, filterOrders)
 
-  if (response.ok && response) {
+  if (response && response.ok) {
     return {
       props: {
         query: formatFacetQueryParams(

@@ -13,7 +13,7 @@ export default (query) => {
     }
   })
 
-  // sets default query parameters
+  // sets default values for common query parameters
   if (query.offset === undefined) queryParams.offset = 0
 
   if (query.limit === undefined) queryParams.limit = 10

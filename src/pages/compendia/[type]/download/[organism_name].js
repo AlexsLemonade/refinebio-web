@@ -1,4 +1,7 @@
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { Box, Heading, Paragraph } from 'grommet'
+import { useRefinebio } from 'hooks/useRefinebio'
 import { useDownloadCompendium } from 'hooks/useDownloadCompendium'
 import { useResponsive } from 'hooks/useResponsive'
 import { api } from 'api'
@@ -15,7 +18,15 @@ import { Spinner } from 'components/shared/Spinner'
 
 export const DownloadCompendium = ({ compendium }) => {
   const { setResponsive } = useResponsive()
+  const { push, query } = useRouter()
+  const { acceptedTerms } = useRefinebio()
   const { error, downloadUrl } = useDownloadCompendium(compendium)
+
+  useEffect(() => {
+    // TODO: File a issue for handling shared links with no token (e.g., modal popup or pre-polulate form)
+    // redirects users to the selected compendia tab if no acceptedTerms
+    if (!acceptedTerms) push(`/compendia/${query.type}`)
+  }, [acceptedTerms])
 
   if (error) {
     return (
