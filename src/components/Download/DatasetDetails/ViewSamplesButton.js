@@ -1,18 +1,15 @@
+import { Box, Heading } from 'grommet'
 import { useModal } from 'hooks/useModal'
+import { useResponsive } from 'hooks/useResponsive'
+import { SamplesTable } from 'components/shared/SamplesTable'
+import { TextCapitalized } from 'components/shared/TextCapitalized'
 import { Button } from 'components/shared/Button'
 import { Modal } from 'components/shared/Modal'
-import { ViewSamplesModal } from './ViewSamplesModal'
 
-export const ViewSamplesButton = ({
-  dataset,
-  params,
-  sampleMetadataFields,
-  isImmutable
-}) => {
+export const ViewSamplesButton = ({ dataset, modalTitle, isImmutable }) => {
+  const { setResponsive } = useResponsive()
   const { openModal } = useModal()
-  const id = `view-samples-${params.dataset_id}-${
-    params[Object.keys(params)[1]]
-  }`
+  const id = `view-samples-${dataset.id}-${modalTitle}`
 
   return (
     <Modal
@@ -30,12 +27,18 @@ export const ViewSamplesButton = ({
       height="98.8vh"
       width="99.2vw"
     >
-      <ViewSamplesModal
-        dataset={dataset}
-        params={params}
-        sampleMetadataFields={sampleMetadataFields}
-        isImmutable={isImmutable}
-      />
+      <Box
+        pad={{
+          horizontal: setResponsive('small', 'medium', 'large')
+        }}
+      >
+        <Box margin={{ bottom: 'medium' }}>
+          <Heading level={2} size="small">
+            My Dataset - <TextCapitalized text={modalTitle} /> Samples
+          </Heading>
+        </Box>
+        <SamplesTable dataset={dataset} modalView isImmutable={isImmutable} />
+      </Box>
     </Modal>
   )
 }
