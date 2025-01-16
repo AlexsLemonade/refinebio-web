@@ -93,27 +93,26 @@ export const useSearchManager = () => {
     }).length > 0
 
   // toggles a filter option in facets
-  const toggleFilter = (checked, option, facetKey, val, updateQuery = true) => {
-    const key = getTranslateFacetName(facetKey)
-    const isHasPublication = option === hasPublication.key
+  const toggleFilter = (checked, filter, val, updateQuery = true) => {
+    const isHasPublication = filter === hasPublication.key
 
-    if (option === numDownloadableSamples.key) {
-      search[option] = checked
+    if (filter === numDownloadableSamples.key) {
+      search[filter] = checked
         ? numDownloadableSamples.exclude
         : numDownloadableSamples.include
     } else if (isHasPublication) {
       if (checked) {
-        search[option] = hasPublication.include
+        search[filter] = hasPublication.include
       } else {
-        delete search[option]
+        delete search[filter]
       }
     } else if (checked) {
-      search[option] = search[option] ? [...search[option], val] : [val]
-      addFilterOrder(key)
+      search[filter] = search[filter] ? [...search[filter], val] : [val]
+      addFilterOrder(filter)
     } else {
-      search[option] = search[option].filter((item) => item !== val)
-      if (!search[option].length) delete search[option]
-      removeFilterOrder(key)
+      search[filter] = search[filter].filter((item) => item !== val)
+      if (!search[filter].length) delete search[filter]
+      removeFilterOrder(filter)
     }
 
     updateFilterOrders()

@@ -1,5 +1,5 @@
-// These helpers will be removed after the BE API update, which will
-// eliminate the need to rename facet keys on FE.
+// NOTE: We need to rename facet keys to match filter
+// We'll remove these helpers in the future (1/16/2025)
 
 // Returns API-supported formatted facet names and filter names for query parameters
 
@@ -18,8 +18,14 @@ export const getTranslateFacetName = (name) => {
 }
 
 // translates an array of facet names (i.e, for facets)
-export const getTranslateFacetNames = (facetNames) => {
-  return facetNames.map(
-    (facetName) => getTranslateFacetName(facetName) || facetName
+export const getTranslateFacetNames = (facetNames) =>
+  facetNames.map((facetName) => getTranslateFacetName(facetName) || facetName)
+
+// translates keys in facets to their corresponding filter names
+export const getTranslateKeysinFacets = (facets) =>
+  Object.fromEntries(
+    Object.entries(facets).map(([key, value]) => [
+      getTranslateFacetName(key),
+      value
+    ])
   )
-}
