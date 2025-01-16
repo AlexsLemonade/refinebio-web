@@ -7,13 +7,13 @@ import { useSearchManager } from 'hooks/useSearchManager'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import formatFilterName from 'helpers/formatFilterName'
 import formatNumbers from 'helpers/formatNumbers'
+import getReadable from 'helpers/getReadable'
 import isLastIndex from 'helpers/isLastIndex'
 import { Button as sharedButton } from 'components/shared/Button'
 import { CheckBox } from 'components/shared/CheckBox'
 import { SearchBox } from 'components/shared/SearchBox'
 import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
-import getReadable from 'helpers/getReadable'
 
 const ToggleButton = styled(sharedButton)`
   border-bottom: 1px solid transparent;
