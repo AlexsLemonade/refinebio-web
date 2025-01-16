@@ -3,31 +3,21 @@ import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
 import { CheckBox } from 'components/shared/CheckBox'
+import getReadable from 'helpers/getReadable'
 
-export const IncludePublication = ({
-  filterGroup,
-  filterOption,
-  filterLabel
-}) => {
+export const IncludePublication = ({ facet = {}, filter }) => {
   const { isFilterChecked, toggleFilter } = useSearchManager()
   const { viewport } = useResponsive()
-  const count = `(${
-    filterGroup && filterGroup.true ? formatNumbers(filterGroup.true) : 0
-  })`
+  const count = formatNumbers(facet.true) || 0
 
   return (
     <Box>
       <CheckBox
-        checked={isFilterChecked(filterOption)}
-        disabled={!filterGroup.true}
-        label={`${filterLabel} ${count}`}
+        checked={isFilterChecked(Object.keys(facet)[0])}
+        disabled={!facet.true}
+        label={`${getReadable(filter)} (${count})`}
         onChange={(e) =>
-          toggleFilter(
-            e.target.checked,
-            filterOption,
-            true,
-            viewport === 'large'
-          )
+          toggleFilter(e.target.checked, filter, true, viewport === 'large')
         }
       />
     </Box>

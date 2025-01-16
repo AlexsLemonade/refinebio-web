@@ -2,41 +2,27 @@ import { Fragment } from 'react'
 import { Box, Heading } from 'grommet'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
-import getReadable from 'helpers/getReadable'
-import isEmptyObject from 'helpers/isEmptyObject'
+import { getTranslateKeysinFacets } from 'helpers/facetNameTranslation'
 import isLastIndex from 'helpers/isLastIndex'
-import { options } from 'config'
 import { Button } from 'components/shared/Button'
 import { SearchFilter } from './SearchFilter'
 import { IncludePublication } from './IncludePublication'
 
-export const SearchFilterList = ({ facets, onToggle }) => {
+export const SearchFilterList = ({ facets: apiFacets, onToggle }) => {
   const { viewport } = useResponsive()
   const { clearAllFilters, hasNonDownloadableSamples, hasSelectedFacets } =
     useSearchManager()
 
-  const {
-    search: { hasPublication }
-  } = options
-
+  // NOTE: We need to rename facet keys to match filter
+  // We'll remove this in the future (1/16/2025)
+  const facets = getTranslateKeysinFacets(apiFacets)
   // The order of the facets to render in UI
   const filterOrder = [
-    {
-      rawKey: 'downloadable_organism_names',
-      option: 'downloadable_organism'
-    },
-    { rawKey: 'technology', option: 'technology' },
-    {
-      rawKey: 'platform_accession_codes',
-      option: 'platform'
-    },
-    {
-      rawKey: hasPublication.key,
-      option: hasPublication.key
-    }
+    'downloadable_organism',
+    'technology',
+    'platform',
+    'has_publication'
   ]
-
-  const filterGroup = filterOrder.map((f) => facets[f.rawKey])
 
   return (
     <Box>
@@ -58,39 +44,28 @@ export const SearchFilterList = ({ facets, onToggle }) => {
           onClick={clearAllFilters}
         />
       </Box>
-      {filterOrder.map((f, i, arr) => (
-        <Fragment key={f.rawKey}>
-          {!isEmptyObject(filterGroup[i]) && !isLastIndex(i, arr) && (
-            <Box
-              border={
-                !isLastIndex(i, arr)
-                  ? {
-                      color: 'gray-shade-40',
-                      side: 'bottom'
-                    }
-                  : null
-              }
-              margin={{ bottom: 'medium' }}
-              pad={{ bottom: !isLastIndex(i, arr) ? 'medium' : 'none' }}
-            >
-              <SearchFilter
-                filterGroup={filterGroup[i]}
-                filterLabel={getReadable(f.option)}
-                filterOption={f.option}
-                filterRawKey={f.rawKey}
-              />
-            </Box>
-          )}
+      {filterOrder.map((filter, i, arr) => (
+        <Fragment key={filter}>
+          <Box
+            border={
+              !isLastIndex(i, arr)
+                ? {
+                    color: 'gray-shade-40',
+                    side: 'bottom'
+                  }
+                : null
+            }
+            margin={{ bottom: 'medium' }}
+            pad={{ bottom: !isLastIndex(i, arr) ? 'medium' : 'none' }}
+          >
+            {filter === 'has_publication' ? (
+              <IncludePublication facet={facets[filter]} filter={filter} />
+            ) : (
+              <SearchFilter facet={facets[filter]} filter={filter} />
+            )}
+          </Box>
         </Fragment>
       ))}
-
-      {!isEmptyObject(filterGroup) && (
-        <IncludePublication
-          filterGroup={filterGroup[filterGroup.length - 1]}
-          filterOption={hasPublication.key}
-          filterLabel={`${getReadable(hasPublication.key)}`}
-        />
-      )}
 
       {viewport !== 'large' && (
         <Box margin={{ top: 'small', bottom: 'large' }} width="100%">

@@ -13,6 +13,7 @@ import { CheckBox } from 'components/shared/CheckBox'
 import { SearchBox } from 'components/shared/SearchBox'
 import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
+import getReadable from 'helpers/getReadable'
 
 const ToggleButton = styled(sharedButton)`
   border-bottom: 1px solid transparent;
@@ -22,15 +23,11 @@ const ToggleButton = styled(sharedButton)`
     }
   `}
 `
-export const SearchFilter = ({
-  filterGroup,
-  filterLabel,
-  filterOption,
-  filterRawKey
-}) => {
+export const SearchFilter = ({ facet = {}, filter }) => {
   const { viewport } = useResponsive()
   const { isFilterChecked, toggleFilter } = useSearchManager()
-  const filterList = Object.entries(filterGroup).sort((a, b) => b[1] - a[1])
+  const filterLabel = getReadable(filter)
+  const filterList = Object.entries(facet).sort((a, b) => b[1] - a[1])
   const filterListCount = filterList.length
   const maxCount = 5
   const isMoreThanMaxCount = filterListCount > maxCount
@@ -46,7 +43,7 @@ export const SearchFilter = ({
       // eslint-disable-next-line no-nested-ternary
       val.trim() !== ''
         ? filterList.filter((option) =>
-            formatFilterName(filterOption, option[0])
+            formatFilterName(filter, option[0])
               .toLowerCase()
               .includes(val.toLowerCase())
           )
@@ -57,15 +54,9 @@ export const SearchFilter = ({
   }
 
   const handleToggleFilterItem = (checked, option) => {
-    toggleFilter(
-      checked,
-      filterOption,
-      filterRawKey,
-      option,
-      viewport === 'large'
-    )
+    toggleFilter(checked, filter, option, viewport === 'large')
     gtag.trackFilterType(filterLabel)
-    gtag.trackToggleFilterItem(checked, formatFilterName(filterOption, option))
+    gtag.trackToggleFilterItem(checked, formatFilterName(filter, option))
   }
 
   useEffect(() => {
@@ -74,7 +65,7 @@ export const SearchFilter = ({
     } else {
       setFilteredResults(filterList.slice(0, maxCount))
     }
-  }, [filterGroup, open])
+  }, [facet, open])
 
   return (
     <>
@@ -104,12 +95,12 @@ export const SearchFilter = ({
                 label={
                   <Text>
                     <TextHighlight>
-                      {formatFilterName(filterOption, option[0])}
+                      {formatFilterName(filter, option[0])}
                     </TextHighlight>{' '}
                     ({formatNumbers(option[1])})
                   </Text>
                 }
-                checked={isFilterChecked(filterOption, option[0])}
+                checked={isFilterChecked(filter, option[0])}
                 onChange={(e) =>
                   handleToggleFilterItem(e.target.checked, option[0])
                 }

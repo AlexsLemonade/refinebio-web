@@ -93,9 +93,8 @@ export const useSearchManager = () => {
   }
 
   // toggles a filter option in facets
-  const toggleFilter = (checked, option, rawKey, val) => {
-    const key = getTranslateFacetName(rawKey)
-    const isHasPublication = option === hasPublication.key
+  const toggleFilter = (checked, filter, val) => {
+    const isHasPublication = filter === hasPublication.key
 
     setSearchParams((prev) => {
       const updatedQuery = { ...prev }
@@ -103,31 +102,31 @@ export const useSearchManager = () => {
         ? updatedQuery.filter_order.split(',')
         : []
 
-      if (option === numDownloadableSamples.key) {
-        updatedQuery[option] = checked
+      if (filter === numDownloadableSamples.key) {
+        updatedQuery[filter] = checked
           ? numDownloadableSamples.exclude
           : numDownloadableSamples.include
       } else if (isHasPublication) {
         if (checked) {
-          updatedQuery[option] = hasPublication.include
+          updatedQuery[filter] = hasPublication.include
         } else {
-          delete updatedQuery[option]
+          delete updatedQuery[filter]
         }
       } else if (checked) {
-        updatedQuery[option] = updatedQuery[option]
-          ? [...updatedQuery[option], val]
+        updatedQuery[filter] = updatedQuery[filter]
+          ? [...updatedQuery[filter], val]
           : [val]
         // adds the key to filter_order(client-only) for order tracking
-        filterOrders.push(key)
+        filterOrders.push(filter)
       } else {
-        updatedQuery[option] = updatedQuery[option].filter(
+        updatedQuery[filter] = updatedQuery[filter].filter(
           (item) => item !== val
         )
 
-        if (!updatedQuery[option].length) delete updatedQuery[option]
+        if (!updatedQuery[filter].length) delete updatedQuery[filter]
 
         // removes the key from filter_order(client-only) for order tracking
-        filterOrders.splice(filterOrders.lastIndexOf(key), 1)
+        filterOrders.splice(filterOrders.lastIndexOf(filter), 1)
       }
 
       // if no facet selected, removes filter_order(client-only) from searchParams
