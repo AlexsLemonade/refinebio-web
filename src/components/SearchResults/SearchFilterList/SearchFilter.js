@@ -26,7 +26,7 @@ export const SearchFilter = ({
   filterGroup,
   filterLabel,
   filterOption,
-  filterRawKey
+  facetKey
 }) => {
   const { viewport } = useResponsive()
   const { isFilterChecked, toggleFilter } = useSearchManager()
@@ -39,6 +39,8 @@ export const SearchFilter = ({
   )
   const [open, setOpen] = useState(false)
   const [userInput, setUserInput] = useState('')
+
+  // console.log(filterGroup, filterLabel, filterOption, facetKey)
 
   const handleToggleFilterList = (val) => {
     setUserInput(val)
@@ -57,13 +59,7 @@ export const SearchFilter = ({
   }
 
   const handleToggleFilterItem = (checked, option) => {
-    toggleFilter(
-      checked,
-      filterOption,
-      filterRawKey,
-      option,
-      viewport === 'large'
-    )
+    toggleFilter(checked, filterOption, facetKey, option, viewport === 'large')
     gtag.trackFilterType(filterLabel)
     gtag.trackToggleFilterItem(checked, formatFilterName(filterOption, option))
   }

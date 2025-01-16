@@ -93,8 +93,8 @@ export const useSearchManager = () => {
     }).length > 0
 
   // toggles a filter option in facets
-  const toggleFilter = (checked, option, rawKey, val, updateQuery = true) => {
-    const key = getTranslateFacetName(rawKey)
+  const toggleFilter = (checked, option, facetKey, val, updateQuery = true) => {
+    const key = getTranslateFacetName(facetKey)
     const isHasPublication = option === hasPublication.key
 
     if (option === numDownloadableSamples.key) {
