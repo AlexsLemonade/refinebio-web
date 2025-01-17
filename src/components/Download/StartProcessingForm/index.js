@@ -35,8 +35,7 @@ export const StartProcessingForm = ({ dataset }) => {
 
     const downloadOptions = {
       data: dataset.data,
-      email_address: formValues.email_address,
-      email_ccdl_ok: formValues.email_ccdl_ok
+      ...formValues
     }
 
     const { id } = await startProcessingDataset(downloadOptions, dataset.id)
@@ -62,7 +61,8 @@ export const StartProcessingForm = ({ dataset }) => {
       validationSchema={StartProcessingFormSchema}
       validateOnChange={false}
       onSubmit={async (values, { setSubmitting }) => {
-        setFormValues(values)
+        const { terms, ...rest } = values
+        setFormValues(rest)
         setSubmitting(false)
       }}
     >

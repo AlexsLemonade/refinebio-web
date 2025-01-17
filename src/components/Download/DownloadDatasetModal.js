@@ -35,12 +35,8 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
     }
 
     const downloadOptions = {
-      aggregate_by: formValues.aggregate_by,
       data: dataset.data,
-      scale_by: formValues.scale_by,
-      quantile_normalize: formValues.quantile_normalize,
-      email_address: formValues.email_address,
-      email_ccdl_ok: formValues.email_ccdl_ok
+      ...formValues
     }
 
     const response = await startProcessingDataset(downloadOptions, dataset.id)
@@ -75,7 +71,8 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
         validationSchema={StartProcessingFormSchema}
         validateOnChange={false}
         onSubmit={async (values, { setSubmitting }) => {
-          setFormValues(values)
+          const { terms, ...rest } = values
+          setFormValues(rest)
           setSubmitting(false)
         }}
       >
