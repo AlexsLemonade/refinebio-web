@@ -7,6 +7,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
 import formatFacetQueryParams from 'helpers/formatFacetQueryParams'
+import { getTranslateFacetNames } from 'helpers/facetNameTranslation'
 import getParsedAccessionCodes from 'helpers/getParsedAccessionCodes'
 import getPageNumber from 'helpers/getPageNumber'
 import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
@@ -66,7 +67,7 @@ export const Search = ({ query, response }) => {
   }, [])
 
   useEffect(() => {
-    if (facets) setFacetNames(Object.keys(facets))
+    if (facets) setFacetNames(getTranslateFacetNames(Object.keys(facets)))
     if (query) {
       setSearchParams(formatFacetQueryParams(Object.keys(facets), query))
       gtag.trackSearchQuery(query)

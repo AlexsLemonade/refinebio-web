@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import { SearchManagerContext } from 'contexts/SearchManagerContext'
-import { getTranslateFacetName } from 'helpers/facetNameTranslation'
 import { options } from 'config'
 
 export const useSearchManager = () => {
@@ -16,10 +15,7 @@ export const useSearchManager = () => {
     searchParams[numDownloadableSamples.key] === numDownloadableSamples.include
 
   const hasSelectedFacets =
-    facetNames.filter((rawKey) => {
-      const key = getTranslateFacetName(rawKey)
-      return key in searchParams
-    }).length > 0
+    facetNames.filter((facetName) => facetName in searchParams).length > 0
 
   /* Common */
   const updatePage = (newPage) => {
@@ -69,9 +65,8 @@ export const useSearchManager = () => {
           numDownloadableSamples.exclude
       }
 
-      facetNames.forEach((rawKey) => {
-        const key = getTranslateFacetName(rawKey)
-        if (key in updatedQuery) delete updatedQuery[key]
+      facetNames.forEach((facetName) => {
+        if (facetName in updatedQuery) delete updatedQuery[facetName]
       })
 
       delete updatedQuery.filter_order
@@ -92,8 +87,8 @@ export const useSearchManager = () => {
     return key in searchParams
   }
 
-  // toggles a filter option in facets
-  const toggleFilter = (checked, filter, val) => {
+  // toggles a filter item in facets
+  const toggleFilter = (checked, filter, selectedItem) => {
     const isHasPublication = filter === hasPublication.key
 
     setSearchParams((prev) => {
@@ -114,13 +109,13 @@ export const useSearchManager = () => {
         }
       } else if (checked) {
         updatedQuery[filter] = updatedQuery[filter]
-          ? [...updatedQuery[filter], val]
-          : [val]
+          ? [...updatedQuery[filter], selectedItem]
+          : [selectedItem]
         // adds the key to filter_order(client-only) for order tracking
         filterOrders.push(filter)
       } else {
         updatedQuery[filter] = updatedQuery[filter].filter(
-          (item) => item !== val
+          (item) => item !== selectedItem
         )
 
         if (!updatedQuery[filter].length) delete updatedQuery[filter]
