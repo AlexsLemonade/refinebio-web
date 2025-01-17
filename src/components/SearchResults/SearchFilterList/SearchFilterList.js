@@ -6,7 +6,7 @@ import { getTranslateKeysinFacets } from 'helpers/facetNameTranslation'
 import isLastIndex from 'helpers/isLastIndex'
 import { Button } from 'components/shared/Button'
 import { SearchFilter } from './SearchFilter'
-import { IncludePublication } from './IncludePublication'
+import { SearchBooleanFilter } from './SearchBooleanFilter'
 
 export const SearchFilterList = ({ facets: apiFacets, setToggle }) => {
   const { viewport } = useResponsive()
@@ -68,7 +68,7 @@ export const SearchFilterList = ({ facets: apiFacets, setToggle }) => {
             pad={{ bottom: !isLastIndex(i, arr) ? 'medium' : 'none' }}
           >
             {filter === 'has_publication' ? (
-              <IncludePublication facet={facets[filter]} filter={filter} />
+              <SearchBooleanFilter facet={facets[filter]} filter={filter} />
             ) : (
               <SearchFilter facet={facets[filter]} filter={filter} />
             )}
