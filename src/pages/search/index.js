@@ -67,7 +67,11 @@ export const Search = ({ query, response }) => {
   }, [])
 
   useEffect(() => {
-    if (facets) setFacetNames(getTranslateFacetNames(Object.keys(facets)))
+    if (facets) {
+      // NOTE: We need to rename facet keys to match filter
+      // We'll remove these helpers in the future (1/16/2025)
+      setFacetNames(getTranslateFacetNames(Object.keys(facets)))
+    }
     if (query) {
       setSearchParams(formatFacetQueryParams(Object.keys(facets), query))
       gtag.trackSearchQuery(query)
