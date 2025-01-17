@@ -60,8 +60,8 @@ export const useSearchManager = () => {
       search[numDownloadableSamples.key] = numDownloadableSamples.exclude
     }
 
-    facetNames.forEach((key) => {
-      if (key in search) delete search[key]
+    facetNames.forEach((facetName) => {
+      if (facetName in search) delete search[facetName]
     })
 
     updateFilterOrders(true)
@@ -86,27 +86,29 @@ export const useSearchManager = () => {
   const hasSelectedFacets =
     facetNames.filter((facetName) => facetName in search).length > 0
 
-  // toggles a filter option in facets
-  const toggleFilter = (checked, option, key, val, updateQuery = true) => {
-    const isHasPublication = option === hasPublication.key
+  // toggles a filter item in facets
+  const toggleFilter = (checked, filter, selectedItem, updateQuery = true) => {
+    const isHasPublication = filter === hasPublication.key
 
-    if (option === numDownloadableSamples.key) {
-      search[option] = checked
+    if (filter === numDownloadableSamples.key) {
+      search[filter] = checked
         ? numDownloadableSamples.exclude
         : numDownloadableSamples.include
     } else if (isHasPublication) {
       if (checked) {
-        search[option] = hasPublication.include
+        search[filter] = hasPublication.include
       } else {
-        delete search[option]
+        delete search[filter]
       }
     } else if (checked) {
-      search[option] = search[option] ? [...search[option], val] : [val]
-      addFilterOrder(key)
+      search[filter] = search[filter]
+        ? [...search[filter], selectedItem]
+        : [selectedItem]
+      addFilterOrder(filter)
     } else {
-      search[option] = search[option].filter((item) => item !== val)
-      if (!search[option].length) delete search[option]
-      removeFilterOrder(key)
+      search[filter] = search[filter].filter((item) => item !== selectedItem)
+      if (!search[filter].length) delete search[filter]
+      removeFilterOrder(filter)
     }
 
     updateFilterOrders()

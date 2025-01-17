@@ -2,13 +2,13 @@ import { Fragment } from 'react'
 import { Box, Heading } from 'grommet'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
-import isEmptyObject from 'helpers/isEmptyObject'
+import { getTranslateKeysinFacets } from 'helpers/facetNameTranslation'
 import isLastIndex from 'helpers/isLastIndex'
 import { Button } from 'components/shared/Button'
 import { SearchFilter } from './SearchFilter'
-import { IncludePublication } from './IncludePublication'
+import { SearchBooleanFilter } from './SearchBooleanFilter'
 
-export const SearchFilterList = ({ facets, setToggle }) => {
+export const SearchFilterList = ({ facets: apiFacets, setToggle }) => {
   const { viewport } = useResponsive()
   const {
     clearAllFilters,
@@ -17,28 +17,16 @@ export const SearchFilterList = ({ facets, setToggle }) => {
     updateSearchQuery
   } = useSearchManager()
 
-  const filterIncludePublication = {
-    label: 'Includes Publication',
-    key: 'has_publication',
-    option: 'has_publication'
-  }
+  // NOTE: We need to rename facet keys to match filter
+  // We'll remove this in the future (1/16/2025)
+  const facets = getTranslateKeysinFacets(apiFacets)
   // The order of the facets to render in UI
   const filterOrder = [
-    {
-      label: 'Organism',
-      key: 'downloadable_organism_names',
-      option: 'downloadable_organism'
-    },
-    { label: 'Technology', key: 'technology', option: 'technology' },
-    {
-      label: 'Platforms',
-      key: 'platform_accession_codes',
-      option: 'platform'
-    },
-    filterIncludePublication
+    'downloadable_organism',
+    'technology',
+    'platform',
+    'has_publication'
   ]
-
-  const filterGroup = filterOrder.map((f) => facets[f.key])
 
   const handleApplyFilters = () => {
     setToggle(false)
@@ -65,39 +53,28 @@ export const SearchFilterList = ({ facets, setToggle }) => {
           onClick={clearAllFilters}
         />
       </Box>
-      {filterOrder.map((f, i, arr) => (
-        <Fragment key={f.key}>
-          {!isEmptyObject(filterGroup[i]) && !isLastIndex(i, arr) && (
-            <Box
-              border={
-                !isLastIndex(i, arr)
-                  ? {
-                      color: 'gray-shade-40',
-                      side: 'bottom'
-                    }
-                  : null
-              }
-              margin={{ bottom: 'medium' }}
-              pad={{ bottom: !isLastIndex(i, arr) ? 'medium' : 'none' }}
-            >
-              <SearchFilter
-                filterGroup={filterGroup[i]}
-                filterLabel={f.label}
-                filterOption={f.option}
-                filterKey={f.key}
-              />
-            </Box>
-          )}
+      {filterOrder.map((filter, i, arr) => (
+        <Fragment key={filter}>
+          <Box
+            border={
+              !isLastIndex(i, arr)
+                ? {
+                    color: 'gray-shade-40',
+                    side: 'bottom'
+                  }
+                : null
+            }
+            margin={{ bottom: 'medium' }}
+            pad={{ bottom: !isLastIndex(i, arr) ? 'medium' : 'none' }}
+          >
+            {filter === 'has_publication' ? (
+              <SearchBooleanFilter facet={facets[filter]} filter={filter} />
+            ) : (
+              <SearchFilter facet={facets[filter]} filter={filter} />
+            )}
+          </Box>
         </Fragment>
       ))}
-
-      {!isEmptyObject(filterGroup) && (
-        <IncludePublication
-          filterGroup={filterGroup[filterGroup.length - 1]}
-          filterOption={filterIncludePublication.option}
-          filterLabel={`${filterIncludePublication.label}`}
-        />
-      )}
 
       {viewport !== 'large' && (
         <Box margin={{ top: 'small', bottom: 'large' }} width="100%">
