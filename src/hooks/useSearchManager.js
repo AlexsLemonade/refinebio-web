@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import { SearchManagerContext } from 'contexts/SearchManagerContext'
-import { getTranslateFacetName } from 'helpers/facetNameTranslation'
 import { options } from 'config'
 
 export const useSearchManager = () => {
@@ -61,10 +60,8 @@ export const useSearchManager = () => {
       search[numDownloadableSamples.key] = numDownloadableSamples.exclude
     }
 
-    facetNames.forEach((rawKey) => {
-      const key = getTranslateFacetName(rawKey)
-
-      if (key in search) delete search[key]
+    facetNames.forEach((facetName) => {
+      if (facetName in search) delete search[facetName]
     })
 
     updateFilterOrders(true)
@@ -87,10 +84,7 @@ export const useSearchManager = () => {
   }
 
   const hasSelectedFacets =
-    facetNames.filter((rawKey) => {
-      const key = getTranslateFacetName(rawKey)
-      return key in search
-    }).length > 0
+    facetNames.filter((facetName) => facetName in search).length > 0
 
   // toggles a filter item in facets
   const toggleFilter = (checked, filter, selectedItem, updateQuery = true) => {
