@@ -13,11 +13,11 @@ export const IncludePublication = ({ facet = {}, filter }) => {
   return (
     <Box>
       <CheckBox
-        checked={isFilterChecked(Object.keys(facet)[0])}
+        checked={isFilterChecked(filter)}
         disabled={!facet.true}
         label={`${getReadable(filter)} (${count})`}
         onChange={(e) =>
-          toggleFilter(e.target.checked, filter, true, viewport === 'large')
+          toggleFilter(e.target.checked, filter, null, viewport === 'large')
         }
       />
     </Box>
