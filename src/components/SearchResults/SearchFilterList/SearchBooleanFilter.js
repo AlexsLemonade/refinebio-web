@@ -5,7 +5,7 @@ import formatNumbers from 'helpers/formatNumbers'
 import { CheckBox } from 'components/shared/CheckBox'
 import getReadable from 'helpers/getReadable'
 
-export const IncludePublication = ({ facet = {}, filter }) => {
+export const SearchBooleanFilter = ({ facet = {}, filter }) => {
   const { isFilterChecked, toggleFilter } = useSearchManager()
   const { viewport } = useResponsive()
   const count = formatNumbers(facet.true) || 0
@@ -24,4 +24,4 @@ export const IncludePublication = ({ facet = {}, filter }) => {
   )
 }
 
-export default IncludePublication
+export default SearchBooleanFilter
