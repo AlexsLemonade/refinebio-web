@@ -92,8 +92,8 @@ export const useSearchManager = () => {
       return key in search
     }).length > 0
 
-  // toggles a filter option in facets
-  const toggleFilter = (checked, filter, val, updateQuery = true) => {
+  // toggles a filter item in facets
+  const toggleFilter = (checked, filter, selectedItem, updateQuery = true) => {
     const isHasPublication = filter === hasPublication.key
 
     if (filter === numDownloadableSamples.key) {
@@ -107,10 +107,12 @@ export const useSearchManager = () => {
         delete search[filter]
       }
     } else if (checked) {
-      search[filter] = search[filter] ? [...search[filter], val] : [val]
+      search[filter] = search[filter]
+        ? [...search[filter], selectedItem]
+        : [selectedItem]
       addFilterOrder(filter)
     } else {
-      search[filter] = search[filter].filter((item) => item !== val)
+      search[filter] = search[filter].filter((item) => item !== selectedItem)
       if (!search[filter].length) delete search[filter]
       removeFilterOrder(filter)
     }

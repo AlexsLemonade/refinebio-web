@@ -9,12 +9,12 @@ const facetsMap = {
 }
 
 // translates an individual facet key in the search query or within facetNames
-export const getTranslateFacetName = (name) => {
+export const getTranslateFacetName = (facetName) => {
   const entry = Object.entries(facetsMap).find(
-    ([k, v]) => k === name || v === name
+    ([k, v]) => k === facetName || v === facetName
   )
 
-  return entry ? entry[name === entry[0] ? 1 : 0] : name
+  return entry ? entry[facetName === entry[0] ? 1 : 0] : facetName
 }
 
 // translates an array of facet names (i.e, for facets)
@@ -24,8 +24,8 @@ export const getTranslateFacetNames = (facetNames) =>
 // translates keys in facets to their corresponding filter names
 export const getTranslateKeysinFacets = (facets) =>
   Object.fromEntries(
-    Object.entries(facets).map(([key, value]) => [
-      getTranslateFacetName(key),
-      value
+    Object.entries(facets).map(([facetName, v]) => [
+      getTranslateFacetName(facetName),
+      v
     ])
   )

@@ -31,7 +31,7 @@ export const SearchFilter = ({ facet = {}, filter }) => {
   const filterListCount = filterList.length
   const maxCount = 5
   const isMoreThanMaxCount = filterListCount > maxCount
-  const [filteredResults, setFilteredResults] = useState(
+  const [filteredFilterList, setFilteredFilterList] = useState(
     filterList.slice(0, maxCount)
   )
   const [open, setOpen] = useState(false)
@@ -39,11 +39,11 @@ export const SearchFilter = ({ facet = {}, filter }) => {
 
   const handleToggleFilterList = (val) => {
     setUserInput(val)
-    setFilteredResults(() =>
+    setFilteredFilterList(() =>
       // eslint-disable-next-line no-nested-ternary
       val.trim() !== ''
-        ? filterList.filter((option) =>
-            formatFilterName(filter, option[0])
+        ? filterList.filter((item) =>
+            formatFilterName(filter, item[0])
               .toLowerCase()
               .includes(val.toLowerCase())
           )
@@ -53,17 +53,17 @@ export const SearchFilter = ({ facet = {}, filter }) => {
     )
   }
 
-  const handleToggleFilterItem = (checked, option) => {
-    toggleFilter(checked, filter, option, viewport === 'large')
+  const handleToggleFilterItem = (checked, item) => {
+    toggleFilter(checked, filter, item, viewport === 'large')
     gtag.trackFilterType(filterLabel)
-    gtag.trackToggleFilterItem(checked, formatFilterName(filter, option))
+    gtag.trackToggleFilterItem(checked, formatFilterName(filter, item))
   }
 
   useEffect(() => {
     if (open && !userInput) {
-      setFilteredResults(filterList)
+      setFilteredFilterList(filterList)
     } else {
-      setFilteredResults(filterList.slice(0, maxCount))
+      setFilteredFilterList(filterList.slice(0, maxCount))
     }
   }, [facet, open])
 
@@ -86,30 +86,30 @@ export const SearchFilter = ({ facet = {}, filter }) => {
 
       <TextHighlightContextProvider match={userInput}>
         <Box animation={open ? { type: 'fadeIn', duration: 1000 } : {}}>
-          {filteredResults.map((option, i, arr) => (
+          {filteredFilterList.map((item, i, arr) => (
             <Box
-              key={option[0]}
+              key={item[0]}
               margin={{ bottom: !isLastIndex(i, arr) ? 'xsmall' : '0' }}
             >
               <CheckBox
                 label={
                   <Text>
                     <TextHighlight>
-                      {formatFilterName(filter, option[0])}
+                      {formatFilterName(filter, item[0])}
                     </TextHighlight>{' '}
-                    ({formatNumbers(option[1])})
+                    ({formatNumbers(item[1])})
                   </Text>
                 }
-                checked={isFilterChecked(filter, option[0])}
+                checked={isFilterChecked(filter, item[0])}
                 onChange={(e) =>
-                  handleToggleFilterItem(e.target.checked, option[0])
+                  handleToggleFilterItem(e.target.checked, item[0])
                 }
               />
             </Box>
           ))}
         </Box>
       </TextHighlightContextProvider>
-      {filteredResults.length === 0 && <TextNull text="No match found" />}
+      {filteredFilterList.length === 0 && <TextNull text="No match found" />}
       {isMoreThanMaxCount && (
         <ToggleButton
           label={
