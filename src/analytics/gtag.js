@@ -101,10 +101,12 @@ const trackExploredUsageClick = (link) => {
 }
 // tracks internal and external link clicks
 const trackLink = (link) => {
-  if (link.startsWith('http')) {
-    trackExternalClick(link)
+  const linkUrl = typeof link === 'object' ? link.pathname : link
+
+  if (linkUrl.startsWith('http')) {
+    trackExternalClick(linkUrl)
   } else {
-    trackInternalClick(link)
+    trackInternalClick(linkUrl)
   }
 }
 // for outbounds

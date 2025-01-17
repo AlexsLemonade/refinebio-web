@@ -16,13 +16,16 @@ import { ExperimentSamplesTable } from 'components/ExperimentSamplesTable'
 
 export const Experiment = ({ experiment }) => {
   const { accession_code: accessionCode } = experiment
-  const { back } = useRouter()
+  const {
+    back,
+    query: { ref }
+  } = useRouter()
+  const fromFooter = ref === 'view-samples'
+  const fromSearch = ref === 'search' || fromFooter
   const { setResponsive } = useResponsive()
-  const { search } = useSearchManager()
+  const { searchParams } = useSearchManager()
   const { headerRef } = useLayoutRefs()
   const tableContainerRef = useRef(null)
-  const fromSearch = search.ref === 'search'
-  const fromViewSamples = search.from === 'view-samples'
   const [hasSamples, setHasSamples] = useState(false)
 
   const scrollToTable = () => {
@@ -42,7 +45,7 @@ export const Experiment = ({ experiment }) => {
   }, [hasSamples])
 
   useEffect(() => {
-    if (!fromViewSamples || !hasSamples || !tableContainerRef.current) return
+    if (!fromFooter || !hasSamples || !tableContainerRef.current) return
     // triggers initial scrolling
     scrollToTable()
     // watches layout changes and updates scroll position
@@ -53,14 +56,14 @@ export const Experiment = ({ experiment }) => {
     return () => {
       resizeObserver.disconnect()
     }
-  }, [fromViewSamples, hasSamples])
+  }, [fromFooter, hasSamples])
 
   if (!hasSamples) return <Spinner />
 
   return (
     <>
       <PageTitle title={`${`${accessionCode} - ${experiment.title}`} -`} />
-      <TextHighlightContextProvider match={fromSearch && search.search}>
+      <TextHighlightContextProvider match={fromSearch && searchParams.search}>
         <Box height={{ min: '50%' }}>
           <FixedContainer pad="large">
             {fromSearch && (
