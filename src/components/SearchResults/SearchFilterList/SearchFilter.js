@@ -79,7 +79,7 @@ export const SearchFilter = ({ facet = {}, filter }) => {
             placeholder={`Filter ${filterLabel}`}
             value={userInput}
             size="small"
-            onChange={(e) => handleToggleFilterList(e.target.value)}
+            onChange={handleToggleFilterList}
           />
         </Box>
       )}

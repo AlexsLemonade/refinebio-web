@@ -4,13 +4,12 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
 import { RequestSearchFormButton } from './RequestSearchFormButton'
 
-export const NoSearchResults = ({ setUserSearchTerm }) => {
+export const NoSearchResults = () => {
   const { updateSearchTerm } = useSearchManager()
   const { setResponsive } = useResponsive()
   const queries = ['Notch', 'medulloblastoma', 'GSE24528']
 
   const handleClick = (newTerm) => {
-    setUserSearchTerm(newTerm)
     updateSearchTerm(newTerm)
   }
 

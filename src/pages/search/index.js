@@ -43,7 +43,6 @@ export const Search = ({ query, response }) => {
   const { limit } = query
   const page = getPageNumber(query.offset, limit)
   const search = query.search || ''
-  const [userSearchTerm, setUserSearchTerm] = useState(search)
 
   const { facets, results, totalResults } = response
   const isResults = results?.length > 0
@@ -53,13 +52,8 @@ export const Search = ({ query, response }) => {
   // TODO: Remove when refactring search in a future issue (prevent hydration error)
   const [isPageReady, setIsPageReady] = useState(false)
 
-  const handleClearSearchTerm = () => {
-    setUserSearchTerm('')
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    updateSearchTerm(userSearchTerm)
+  const handleSubmit = (val) => {
+    updateSearchTerm(val)
   }
 
   useEffect(() => {
@@ -102,10 +96,8 @@ export const Search = ({ query, response }) => {
               placeholder="Search accessions, pathways, diseases, etc.,"
               btnType="primary"
               size="large"
-              value={userSearchTerm}
+              value={search}
               responsive
-              onClick={handleClearSearchTerm}
-              onChange={(e) => setUserSearchTerm(e.target.value)}
               onSubmit={handleSubmit}
             />
           </Box>
@@ -224,9 +216,7 @@ export const Search = ({ query, response }) => {
               </Box>
             </Grid>
           )}
-          {!isResults && search && (
-            <NoSearchResults setUserSearchTerm={setUserSearchTerm} />
-          )}
+          {!isResults && search && <NoSearchResults />}
         </FixedContainer>
       </TextHighlightContextProvider>
     </>
