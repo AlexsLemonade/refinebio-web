@@ -223,7 +223,7 @@ export const SamplesTable = ({
               manualPagination
               tableHeight={tableHeight}
               tableExpanded={tableExpanded}
-              updateSortBy={updateSortBy}
+              onSortByChange={updateSortBy}
             />
             {!hasSamples && samplesQuery.filter_by && (
               <SamplesTableEmpty>
