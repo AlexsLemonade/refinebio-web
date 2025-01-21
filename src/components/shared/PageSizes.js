@@ -5,8 +5,7 @@ import { options } from 'config'
 import formatNumbers from 'helpers/formatNumbers'
 
 export const PageSizes = ({
-  textPrepend = 'Show',
-  textAppended = 'Total Samples',
+  ofLabel = 'Total Samples',
   pageSize,
   totalPages,
   onPageSizeChange
@@ -17,7 +16,7 @@ export const PageSizes = ({
 
   return (
     <Box align="center" direction="row">
-      <Text margin={{ right: 'xxsmall' }}>{textPrepend}</Text>
+      <Text margin={{ right: 'xxsmall' }}>Showing</Text>
       {isSinglePage ? (
         <Text>{totalPages}</Text>
       ) : (
@@ -32,7 +31,7 @@ export const PageSizes = ({
         </Box>
       )}
       <Text margin={{ left: 'xxsmall' }}>
-        of {formatNumbers(totalPages)} {viewport !== 'small' && textAppended}
+        of {formatNumbers(totalPages)} {viewport !== 'small' && ofLabel}
       </Text>
     </Box>
   )
