@@ -1,5 +1,6 @@
 import { memo, useMemo, useState } from 'react'
 import { Box, Spinner, Text } from 'grommet'
+import { useAsyncDebounce } from 'react-table'
 import { useSamplesContext } from 'hooks/useSamplesContext'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
@@ -8,8 +9,8 @@ import getPageNumber from 'helpers/getPageNumber'
 import { Anchor } from 'components/shared/Anchor'
 import { BoxBlock } from 'components/shared/BoxBlock'
 import { DataTable, ExpandTableButton } from 'components/shared/DataTable'
-import { FilterTextInput } from 'components/shared/FilterTextInput'
 import { InlineMessage } from 'components/shared/InlineMessage'
+import { LabelTextInput } from 'components/shared/LabelTextInput'
 import { Overlay } from 'components/shared/Ovevrlay'
 import { PageSizes } from 'components/shared/PageSizes'
 import { Pagination } from 'components/shared/Pagination'
@@ -133,6 +134,11 @@ export const SamplesTable = ({
     return temp
   }, [isImmutable, viewport, samples])
 
+  // For the filter text input field
+  const debounceInput = useAsyncDebounce((newInput) => {
+    updateFilterBy(newInput || '')
+  }, 500)
+
   const isExpandableColumns =
     columns.filter(
       (column) => column.Header !== 'Add/Remove' && column.isVisible !== false
@@ -190,10 +196,10 @@ export const SamplesTable = ({
               justify="start"
               align={setResponsive('start', 'center')}
             >
-              <FilterTextInput
+              <LabelTextInput
                 filter={samplesQuery.filter_by}
-                setFilter={updateFilterBy}
                 placeholder="Filter samples"
+                onChange={debounceInput}
               />
             </Box>
             {showExpandTableButton && (
