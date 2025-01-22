@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import { SearchManagerContext } from 'contexts/SearchManagerContext'
 import { options } from 'config'
+import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
 
 export const useSearchManager = () => {
   const { facetNames, setFacetNames, searchParams, setSearchParams } =
@@ -10,12 +11,6 @@ export const useSearchManager = () => {
     search: { hasPublication, numDownloadableSamples }
   } = options
   const router = useRouter()
-
-  const hasNonDownloadableSamples =
-    searchParams[numDownloadableSamples.key] === numDownloadableSamples.include
-
-  const hasSelectedFacets =
-    facetNames.filter((facetName) => facetName in searchParams).length > 0
 
   /* Common */
   const updatePage = (newPage) => {
@@ -56,25 +51,12 @@ export const useSearchManager = () => {
   }
 
   /* Filters */
+  const canClearFilter = Object.keys(searchParams).some(
+    (key) => key !== 'search' && !(key in getSearchQueryForAPI())
+  )
+
   const clearAllFilters = () => {
-    setSearchParams((prev) => {
-      const updatedQuery = { ...prev }
-
-      if (hasNonDownloadableSamples) {
-        updatedQuery[numDownloadableSamples.key] =
-          numDownloadableSamples.exclude
-      }
-
-      facetNames.forEach((facetName) => {
-        if (facetName in updatedQuery) delete updatedQuery[facetName]
-      })
-
-      delete updatedQuery.filter_order
-      // resets page on filter changes
-      updatedQuery.offset = 0
-
-      return updatedQuery
-    })
+    setSearchParams(() => getSearchQueryForAPI())
   }
 
   const isFilterChecked = (key, val) => {
@@ -173,9 +155,8 @@ export const useSearchManager = () => {
     setFacetNames,
     searchParams,
     setSearchParams,
+    canClearFilter,
     clearAllFilters,
-    hasNonDownloadableSamples,
-    hasSelectedFacets,
     isFilterChecked,
     navigateToSearch,
     toggleFilter,

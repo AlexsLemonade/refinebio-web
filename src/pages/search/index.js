@@ -48,7 +48,7 @@ export const Search = ({ query, response }) => {
   const { facets, results, totalResults } = response
   const isResults = results?.length > 0
 
-  const [toggleFilterList, setToggleFilterList] = useState(false) // for small devices
+  const [showMobileFilterList, setShowMobileFilterList] = useState(false) // for small devices
 
   // TODO: Remove when refactring search in a future issue (prevent hydration error)
   const [isPageReady, setIsPageReady] = useState(false)
@@ -124,7 +124,7 @@ export const Search = ({ query, response }) => {
             >
               <LayerResponsive
                 position="left"
-                show={toggleFilterList}
+                show={showMobileFilterList}
                 tabletMode
               >
                 <BoxBlock
@@ -147,7 +147,7 @@ export const Search = ({ query, response }) => {
                         role="button"
                         style={{ boxShadow: 'none' }}
                         width="max-content"
-                        onClick={() => setToggleFilterList(false)}
+                        onClick={() => setShowMobileFilterList(false)}
                       >
                         <Icon name="Close" size="large" />
                       </Box>
@@ -155,7 +155,7 @@ export const Search = ({ query, response }) => {
                   )}
                   <SearchFilterList
                     facets={facets}
-                    onToggle={setToggleFilterList}
+                    onToggle={() => setShowMobileFilterList(false)}
                   />
                 </BoxBlock>
               </LayerResponsive>
@@ -167,7 +167,7 @@ export const Search = ({ query, response }) => {
                     icon={<Icon name="Filter" size="small" />}
                     margin={{ bottom: 'medium' }}
                     secondary
-                    onClick={() => setToggleFilterList(true)}
+                    onClick={() => setShowMobileFilterList(true)}
                   />
                 )}
                 <SearchBulkActions response={response} query={query} />
