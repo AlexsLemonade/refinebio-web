@@ -1,5 +1,5 @@
 import { options } from 'config'
-
+// Returns default params if no query, else converts number strings
 export default (query = {}) => {
   const {
     search: { clientOnlyQueries, defaultOrdering, numDownloadableSamples }
@@ -18,7 +18,6 @@ export default (query = {}) => {
     }
   })
 
-  // sets default values for common query parameters
   queryParams.offset = Number(queryParams.offset)
   queryParams.limit = Number(queryParams.limit)
   queryParams[numDownloadableSamples.key] = Number(

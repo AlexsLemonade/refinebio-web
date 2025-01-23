@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import { SearchManagerContext } from 'contexts/SearchManagerContext'
 import { options } from 'config'
-import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
+import getSearchParams from 'helpers/getSearchParams'
 
 export const useSearchManager = () => {
   const { facetNames, setFacetNames, searchParams, setSearchParams } =
@@ -51,12 +51,14 @@ export const useSearchManager = () => {
   }
 
   /* Filters */
+  const defaultSearchParams = getSearchParams()
+
   const canClearFilter = Object.keys(searchParams).some(
-    (key) => key !== 'search' && !(key in getSearchQueryForAPI())
+    (key) => key !== 'search' && !(key in defaultSearchParams)
   )
 
   const clearAllFilters = () => {
-    setSearchParams(() => getSearchQueryForAPI())
+    setSearchParams(() => defaultSearchParams)
   }
 
   const isFilterChecked = (key, val) => {

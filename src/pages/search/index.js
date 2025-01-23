@@ -10,7 +10,7 @@ import formatFacetQueryParams from 'helpers/formatFacetQueryParams'
 import { getTranslateFacetNames } from 'helpers/facetNameTranslation'
 import getParsedAccessionCodes from 'helpers/getParsedAccessionCodes'
 import getPageNumber from 'helpers/getPageNumber'
-import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
+import getSearchParams from 'helpers/getSearchParams'
 import { isLegacyUrl, getNewQueryParams } from 'helpers/supportLegacyUrl'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -247,7 +247,7 @@ export const getServerSideProps = async ({ query }) => {
     }
   }
 
-  const queryParams = getSearchQueryForAPI(query)
+  const queryParams = getSearchParams(query)
   const filterOrders = query.filter_order ? query.filter_order.split(',') : []
   const response = await fetchSearch(queryParams, filterOrders)
 
