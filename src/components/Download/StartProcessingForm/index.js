@@ -24,16 +24,21 @@ export const StartProcessingForm = ({ dataset }) => {
   const [formValues, setFormValues] = useState(null)
 
   const submit = async () => {
-    const { emailAddress, receiveUpdates } = formValues
-
-    if (receiveUpdates) {
-      const subscribeEmailResponse = await subscribeEmail(emailAddress)
+    if (formValues.email_ccdl_ok) {
+      const subscribeEmailResponse = await subscribeEmail(
+        formValues.email_address
+      )
       if (subscribeEmailResponse.status !== 'error') {
         gtag.trackEmailSubscription(StartProcessingForm)
       }
     }
 
-    const { id } = await startProcessingDataset(formValues, dataset.id)
+    const downloadOptions = {
+      data: dataset.data,
+      ...formValues
+    }
+
+    const { id } = await startProcessingDataset(downloadOptions, dataset.id)
     const pathname = `/dataset/${id}`
     push({ pathname }, pathname)
     gtag.trackDatasetDownloadOptions(dataset)
@@ -41,7 +46,7 @@ export const StartProcessingForm = ({ dataset }) => {
 
   useEffect(() => {
     if (formValues) {
-      setAcceptedTerms(formValues.termsOfUse)
+      setAcceptedTerms(formValues.terms)
       if (acceptedTerms) submit()
     }
   }, [acceptedTerms, formValues])
@@ -49,15 +54,15 @@ export const StartProcessingForm = ({ dataset }) => {
   return (
     <Formik
       initialValues={{
-        data: dataset.data,
-        emailAddress: email || '',
-        receiveUpdates: true,
-        termsOfUse: acceptedTerms
+        email_address: email || '',
+        email_ccdl_ok: true,
+        terms: acceptedTerms
       }}
       validationSchema={StartProcessingFormSchema}
       validateOnChange={false}
       onSubmit={async (values, { setSubmitting }) => {
-        setFormValues(values)
+        const { terms, ...rest } = values
+        setFormValues(rest)
         setSubmitting(false)
       }}
     >
@@ -73,9 +78,9 @@ export const StartProcessingForm = ({ dataset }) => {
           <Row>
             <Column fill basis="1">
               <EmailTextInput
-                error={errors.emailAddress}
-                touched={touched.emailAddress}
-                value={values.emailAddress}
+                error={errors.email_address}
+                touched={touched.email_address}
+                value={values.email_address}
                 handleChange={handleChange}
               />
             </Column>
@@ -94,14 +99,14 @@ export const StartProcessingForm = ({ dataset }) => {
           <Box margin={{ top: 'small' }}>
             {!acceptedTerms && (
               <TermsOfUseCheckBox
-                error={errors.termsOfUse}
-                touched={touched.termsOfUse}
-                value={values.termsOfUse}
+                error={errors.terms}
+                touched={touched.terms}
+                value={values.terms}
                 handleChange={handleChange}
               />
             )}
             <ReceiveUpdatesCheckBox
-              value={values.receiveUpdates}
+              value={values.email_ccdl_ok}
               handleChange={handleChange}
             />
           </Box>

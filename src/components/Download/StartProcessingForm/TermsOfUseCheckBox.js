@@ -20,7 +20,7 @@ export const TermsOfUseCheckBox = ({ error, touched, value, handleChange }) => {
           />
         </Text>
       }
-      name="termsOfUse"
+      name="terms"
       onChange={handleChange}
     />
   )

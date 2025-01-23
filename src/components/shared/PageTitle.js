@@ -51,10 +51,11 @@ export const PageTitle = ({ title = '' }) => {
     default:
       break
   }
+  const formattedTitle = `${pageTitle} ${!home ? appName : ''}`
 
   return (
     <Head>
-      <title>{`${pageTitle} ${!home ? appName : ''}`}</title>
+      <title>{formattedTitle.trim()}</title>
     </Head>
   )
 }

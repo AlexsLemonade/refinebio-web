@@ -5,7 +5,7 @@ export const EmailTextInput = ({ error, touched, value, handleChange }) => {
     <TextInput
       error={error && touched}
       errorText={error}
-      name="emailAddress"
+      name="email_address"
       type="email"
       value={value}
       placeholder="jdoe@example.com"

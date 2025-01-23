@@ -1,31 +1,34 @@
 import { api } from 'api'
-import { options } from 'config'
-import getAccessionCodesQueryParam from './getAccessionCodesQueryParam'
+import { getTranslateFacetName } from 'helpers/facetNameTranslation'
+import getParsedAccessionCodes from './getParsedAccessionCodes'
 import getUniqElementsBy from './getUniqElementsBy'
 
 export default async (queryParams, filterOrders) => {
-  const {
-    search: { formattedFacetNames }
-  } = options
   const response = await api.search.get(queryParams)
   const { count: totalResults } = response
   let { results, facets } = response
 
   if (filterOrders.length > 0) {
     const lastFilterOrderName = filterOrders[filterOrders.length - 1]
+
     const { facets: previousFacets } = await api.search.get({
       ...queryParams,
       limit: 1,
-      [formattedFacetNames[lastFilterOrderName]]: undefined
+      [lastFilterOrderName]: undefined // We need to use 'downloadable_organism'
     })
+
+    const translatedLastFilterOrderName = getTranslateFacetName(
+      filterOrders[filterOrders.length - 1]
+    )
 
     facets = {
       ...facets,
-      [lastFilterOrderName]: previousFacets[lastFilterOrderName]
+      [translatedLastFilterOrderName]:
+        previousFacets[translatedLastFilterOrderName] // We need to use 'downloadable_organism_names'
     }
   }
   /* Accession Codes */
-  const accessionCodes = getAccessionCodesQueryParam(queryParams.search)
+  const accessionCodes = getParsedAccessionCodes(queryParams.search)
 
   // makes requests for accession codes only from the first page
   if (accessionCodes.length > 0 && queryParams.offset === 0) {
@@ -59,9 +62,9 @@ export default async (queryParams, filterOrders) => {
 
   return {
     facets,
-    hasError: !response.ok,
     results,
     totalResults,
+    ok: response.ok,
     statusCode: response.statusCode
   }
 }

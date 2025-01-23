@@ -5,7 +5,7 @@ export const ReceiveUpdatesCheckBox = ({ value, handleChange }) => {
     <CheckBox
       checked={value}
       label="I would like to receive occasional updates from the refine.bio team"
-      name="receiveUpdates"
+      name="email_ccdl_ok"
       onChange={handleChange}
     />
   )

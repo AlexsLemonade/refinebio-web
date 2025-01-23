@@ -27,9 +27,8 @@ import { ShowOnlyAddedSamplesFilter } from './ShowOnlyAddedSamplesFilter'
 import { TitleCell } from './TitleCell'
 
 export const SamplesTable = ({
-  sampleAccessionsInExperiment,
-  sampleMetadataFields,
-  allSamples,
+  experiment, // for the experiment page
+  dataset, // for dataset and download pages
   isImmutable = false,
   modalView = false,
   showMyDatasetFilter = false // sets visibility of ShowOnlyAddedSamplesFilter
@@ -41,7 +40,9 @@ export const SamplesTable = ({
     samplesQuery,
     hasSamples,
     totalSamples,
-    getSamples,
+    getSamplesMetadata,
+    getExperimentAccessionCodes,
+    refreshSamples,
     updateFilterBy,
     updatePage,
     updatePageSize,
@@ -57,19 +58,18 @@ export const SamplesTable = ({
   )
   const data = useMemo(() => samples, [samples])
   const columns = useMemo(() => {
+    if (!samples.length) return []
+
+    const experimentAccessionCodes = getExperimentAccessionCodes(dataset)
+    const samplesMetadata = getSamplesMetadata()
+
     const temp = [
       {
         Header: 'Add/Remove',
         // eslint-disable-next-line react/no-unstable-nested-components
         Cell: ({ row: { original: sample } }) => (
           <AddRemoveCell
-            experimentAccessionCodes={Object.keys(
-              sampleAccessionsInExperiment
-            ).filter((accession) =>
-              sampleAccessionsInExperiment[accession].includes(
-                sample.accession_code
-              )
-            )}
+            experimentAccessionCodes={experimentAccessionCodes}
             sample={sample}
           />
         ),
@@ -95,7 +95,7 @@ export const SamplesTable = ({
         isVisible: false
       },
       // maps the available columns in the experiment.sample_metadata
-      ...sampleMetadataFields.map((column) => ({
+      ...samplesMetadata.map((column) => ({
         id: column,
         accessor: column,
         Header: formatString(column),
@@ -131,7 +131,7 @@ export const SamplesTable = ({
     }
 
     return temp
-  }, [isImmutable, viewport])
+  }, [isImmutable, viewport, samples])
 
   const isExpandableColumns =
     columns.filter(
@@ -171,7 +171,7 @@ export const SamplesTable = ({
             <PageSizes
               pageSize={samplesQuery.limit}
               totalPages={totalSamples}
-              setPageSize={updatePageSize}
+              onPageSizeChange={updatePageSize}
             />
             <Box
               margin={{
@@ -180,7 +180,7 @@ export const SamplesTable = ({
               }}
             >
               {showMyDatasetFilter && (
-                <ShowOnlyAddedSamplesFilter samples={allSamples} />
+                <ShowOnlyAddedSamplesFilter experiment={experiment} />
               )}
             </Box>
           </Box>
@@ -214,7 +214,6 @@ export const SamplesTable = ({
               hiddenColumns={columns
                 .filter((column) => column.isVisible === false)
                 .map((column) => column.accessor)}
-              loading={loading}
               manualPagination
               tableHeight={tableHeight}
               tableExpanded={tableExpanded}
@@ -250,7 +249,7 @@ export const SamplesTable = ({
               />
             </SamplesTableEmpty>
           )}
-          {hasError && <SamplesTableError onClick={getSamples} />}
+          {hasError && <SamplesTableError onClick={refreshSamples} />}
         </BoxBlock>
         {hasSamples && (
           <Box>
@@ -284,7 +283,7 @@ export const SamplesTable = ({
                 page={getPageNumber(samplesQuery.offset, samplesQuery.limit)}
                 pageSize={samplesQuery.limit}
                 totalPages={totalSamples}
-                setPage={updatePage}
+                onPageChange={updatePage}
               />
             </Box>
           </Box>
