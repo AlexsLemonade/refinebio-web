@@ -27,7 +27,7 @@ export const MoveToDatasetButton = ({ dataset }) => {
   } = useDatasetManager()
   const myDatasetTotalSamples = getTotalSamples(myDataset?.data)
 
-  const handleRedirect = (prefix) => {
+  const getRedirect = (prefix) => {
     push({
       pathname: '/download',
       query: {
@@ -41,12 +41,12 @@ export const MoveToDatasetButton = ({ dataset }) => {
 
   const handleAppend = async () => {
     await addSamples(dataset.data)
-    handleRedirect('Appended')
+    getRedirect('Appended')
   }
 
   const handleReplace = async () => {
     await replaceSamples(dataset.data)
-    handleRedirect('Moved')
+    getRedirect('Moved')
   }
 
   // if no samples in myDataset, add shared samples on click without opening modal
