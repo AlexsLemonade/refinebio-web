@@ -22,10 +22,8 @@ export const SearchBox = ({
   const [input, setInput] = useState(value)
 
   const handleChange = (newVal) => {
-    setInput(() => {
-      onChange(newVal)
-      return newVal
-    })
+    onChange(newVal)
+    setInput(newVal)
   }
 
   const handleClear = () => {
