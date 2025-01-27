@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import { useRouter } from 'next/router'
+import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useModal } from 'hooks/useModal'
 import formatNumbers from 'helpers/formatNumbers'
@@ -26,8 +28,10 @@ export const MoveToDatasetButton = ({ dataset }) => {
     replaceSamples
   } = useDatasetManager()
   const myDatasetTotalSamples = getTotalSamples(myDataset?.data)
+  const defaultAction = 'append'
+  const [action, setAction] = useState(defaultAction)
 
-  const getRedirect = (prefix) => {
+  const downloadRedirectWithPrefix = (prefix) => {
     push({
       pathname: '/download',
       query: {
@@ -39,19 +43,31 @@ export const MoveToDatasetButton = ({ dataset }) => {
     })
   }
 
-  const handleAppend = async () => {
-    await addSamples(dataset.data)
-    getRedirect('Appended')
+  const handlers = {
+    append: async () => {
+      await addSamples(dataset.data)
+      downloadRedirectWithPrefix('Appended')
+    },
+    replace: async () => {
+      await replaceSamples(dataset.data)
+      downloadRedirectWithPrefix('Moved')
+    }
   }
 
-  const handleReplace = async () => {
-    await replaceSamples(dataset.data)
-    getRedirect('Moved')
+  const handleReset = () => {
+    setAction(defaultAction)
+    closeModal(modalId)
+  }
+
+  const handleSubmit = async () => {
+    await handlers[action]()
+    gtag.trackDatasetAction(MoveToDatasetModal)
+    handleReset()
   }
 
   // if no samples in myDataset, add shared samples on click without opening modal
   if (myDatasetTotalSamples === 0) {
-    return <Button onClick={handleAppend} />
+    return <Button onClick={handleSubmit} />
   }
 
   return (
@@ -61,9 +77,10 @@ export const MoveToDatasetButton = ({ dataset }) => {
       fullHeight={false}
     >
       <MoveToDatasetModal
-        onAppend={handleAppend}
-        onReplace={handleReplace}
-        onCloseModal={() => closeModal(modalId)}
+        value={action}
+        onChange={setAction}
+        onReset={handleReset}
+        onSubmit={handleSubmit}
       />
     </Modal>
   )
