@@ -2,13 +2,13 @@ import { options } from 'config'
 // Returns default params if no query, else converts number strings
 export default (query = {}) => {
   const {
-    search: { clientOnlyQueries, defaultOrdering, numDownloadableSamples }
+    search: { clientOnlyQueries, numDownloadableSamples }
   } = options
 
   const queryParams = {
     offset: 0,
     limit: 10,
-    ordering: defaultOrdering,
+    ordering: '_score',
     [numDownloadableSamples.key]: numDownloadableSamples.exclude
   }
 

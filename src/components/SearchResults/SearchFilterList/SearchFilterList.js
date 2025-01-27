@@ -5,6 +5,8 @@ import { useResponsive } from 'hooks/useResponsive'
 import { getTranslateKeysinFacets } from 'helpers/facetNameTranslation'
 import isLastIndex from 'helpers/isLastIndex'
 import { Button } from 'components/shared/Button'
+import getReadable from 'helpers/getReadable'
+import formatNumbers from 'helpers/formatNumbers'
 import { SearchFilter } from './SearchFilter'
 import { SearchBooleanFilter } from './SearchBooleanFilter'
 
@@ -61,7 +63,13 @@ export const SearchFilterList = ({
             pad={{ bottom: !isLastIndex(i, arr) ? 'medium' : 'none' }}
           >
             {filter === 'has_publication' ? (
-              <SearchBooleanFilter facet={facets[filter]} filter={filter} />
+              <SearchBooleanFilter
+                facet={facets[filter]}
+                filter={filter}
+                label={`${getReadable(filter)} (${
+                  formatNumbers(facets[filter].true) || 0
+                })`}
+              />
             ) : (
               <SearchFilter facet={facets[filter]} filter={filter} />
             )}

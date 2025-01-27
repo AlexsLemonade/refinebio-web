@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { useSearchManager } from 'hooks/useSearchManager'
 
-export const useSyncSearhURL = (query) => {
+export const useSyncSearchURL = (query) => {
   const router = useRouter()
   const { searchParams } = useSearchManager()
   const hasMounted = useRef(false)

@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react'
 import { Box, Grid, Heading } from 'grommet'
-import { useSyncSearhURL } from 'hooks/useSyncSearhURL'
+import { useSyncSearchURL } from 'hooks/useSyncSearchURL'
 import gtag from 'analytics/gtag'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
@@ -10,7 +10,7 @@ import formatFacetQueryParams from 'helpers/formatFacetQueryParams'
 import { getTranslateFacetNames } from 'helpers/facetNameTranslation'
 import getParsedAccessionCodes from 'helpers/getParsedAccessionCodes'
 import getPageNumber from 'helpers/getPageNumber'
-import getSearchParams from 'helpers/getSearchParams'
+import parseDefaultSearchParams from 'helpers/parseDefaultSearchParams'
 import { isLegacyUrl, getNewQueryParams } from 'helpers/supportLegacyUrl'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -38,7 +38,7 @@ export const Search = ({ query, response }) => {
   const searchBoxWidth = '550px'
 
   // syncs the latest search parameters with URL
-  useSyncSearhURL(query)
+  useSyncSearchURL(query)
 
   const { limit } = query
   const page = getPageNumber(query.offset, limit)
@@ -247,7 +247,7 @@ export const getServerSideProps = async ({ query }) => {
     }
   }
 
-  const queryParams = getSearchParams(query)
+  const queryParams = parseDefaultSearchParams(query)
   const filterOrders = query.filter_order ? query.filter_order.split(',') : []
   const response = await fetchSearch(queryParams, filterOrders)
 

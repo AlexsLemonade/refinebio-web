@@ -4,7 +4,7 @@ import { useSearchManager } from 'hooks/useSearchManager'
 import getReadableOptions from 'helpers/getReadableOptions'
 import { PageSizes } from 'components/shared/PageSizes'
 import { AddPageToDatasetButton } from './AddPageToDatasetButton'
-import { NonDownloadableExperiment } from './SearchFilterList'
+import { HideNonDownloadableExperiments } from './SearchFilterList'
 
 export const SearchBulkActions = ({ response, query }) => {
   const { results, totalResults } = response
@@ -132,7 +132,7 @@ export const SearchBulkActions = ({ response, query }) => {
           </Box>
         </Box>
         <Box gridArea="hide-non-downloadble">
-          <NonDownloadableExperiment />
+          <HideNonDownloadableExperiments />
         </Box>
       </Grid>
     </Box>
