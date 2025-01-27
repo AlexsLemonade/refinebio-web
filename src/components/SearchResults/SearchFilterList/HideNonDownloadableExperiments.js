@@ -3,7 +3,7 @@ import { CheckBox } from 'components/shared/CheckBox'
 import { options } from 'config'
 
 export const HideNonDownloadableExperiments = () => {
-  const { searchParams, updateParamValue } = useSearchManager()
+  const { searchParams, updateSearchParam } = useSearchManager()
   const { numDownloadableSamples } = options.search
   const values = {
     checked: numDownloadableSamples.exclude,
@@ -16,7 +16,7 @@ export const HideNonDownloadableExperiments = () => {
       label="Hide non-downloadable experiments"
       checked={checked}
       onChange={(e) =>
-        updateParamValue(
+        updateSearchParam(
           numDownloadableSamples.key,
           e.target.checked ? values.checked : values.unchecked
         )

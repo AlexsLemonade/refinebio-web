@@ -43,8 +43,7 @@ export const useSearchManager = () => {
     })
   }
 
-  // update a single parameter value
-  const updateParamValue = (paramName, newValue) => {
+  const updateSearchParam = (paramName, newValue) => {
     setSearchParams({
       ...searchParams,
       [paramName]: newValue
@@ -163,7 +162,7 @@ export const useSearchManager = () => {
     clearAllFilters,
     isFilterChecked,
     navigateToSearch,
-    updateParamValue,
+    updateSearchParam,
     toggleFilter,
     updatePage,
     updatePageSize,
