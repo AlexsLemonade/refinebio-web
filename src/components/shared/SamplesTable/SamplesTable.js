@@ -171,7 +171,7 @@ export const SamplesTable = ({
             <PageSizes
               pageSize={samplesQuery.limit}
               totalPages={totalSamples}
-              setPageSize={updatePageSize}
+              onPageSizeChange={updatePageSize}
             />
             <Box
               margin={{
@@ -283,7 +283,7 @@ export const SamplesTable = ({
                 page={getPageNumber(samplesQuery.offset, samplesQuery.limit)}
                 pageSize={samplesQuery.limit}
                 totalPages={totalSamples}
-                setPage={updatePage}
+                onPageChange={updatePage}
               />
             </Box>
           </Box>

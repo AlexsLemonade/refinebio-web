@@ -5,13 +5,14 @@ import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
-import formatFacetNames from 'helpers/formatFacetNames'
-import getAccessionCodesQueryParam from 'helpers/getAccessionCodesQueryParam'
+import formatFacetQueryParams from 'helpers/formatFacetQueryParams'
+import { getTranslateFacetNames } from 'helpers/facetNameTranslation'
+import getParsedAccessionCodes from 'helpers/getParsedAccessionCodes'
 import getPageNumber from 'helpers/getPageNumber'
 import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
+import { isLegacyUrl, getNewQueryParams } from 'helpers/supportLegacyUrl'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
-import { Error } from 'components/shared/Error'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { LayerResponsive } from 'components/shared/LayerResponsive'
 import { Icon } from 'components/shared/Icon'
@@ -27,35 +28,23 @@ import {
   SearchBulkActions,
   SearchFilterList
 } from 'components/SearchResults'
-import { options } from 'config'
 
-export const Search = ({
-  query,
-  facets,
-  hasError,
-  results,
-  totalResults,
-  statusCode
-}) => {
-  const {
-    search: { sortby }
-  } = options
-  const {
-    getSearchQueryParam,
-    setConfig,
-    setSearch,
-    updatePage,
-    updateSearchTerm
-  } = useSearchManager()
+export const Search = ({ query, response }) => {
+  const { setFacetNames, setSearch, updatePage, updateSearchTerm } =
+    useSearchManager()
   const { viewport, setResponsive } = useResponsive()
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
-  const [toggleFilterList, setToggleFilterList] = useState(false)
-  const [userSearchTerm, setUserSearchTerm] = useState(query.search || '')
-  const [page, setPage] = useState(getPageNumber(query.offset, query.limit))
-  const [pageSize, setPageSize] = useState(Number(query.limit))
-  const [sortBy, setSortBy] = useState(query.sortby || sortby[0].value)
+
+  const limit = Number(query.limit)
+  const page = getPageNumber(query.offset, limit)
+  const search = query.search || ''
+  const [userSearchTerm, setUserSearchTerm] = useState(search)
+
+  const { facets, results, totalResults } = response
   const isResults = results?.length > 0
+
+  const [toggleFilterList, setToggleFilterList] = useState(false) // for small devices
 
   // TODO: Remove when refactring search in a future issue (prevent hydration error)
   const [isPageReady, setIsPageReady] = useState(false)
@@ -73,33 +62,22 @@ export const Search = ({
   }, [])
 
   useEffect(() => {
-    if (facets) {
-      const facetNames = formatFacetNames(Object.keys(facets))
-
-      setConfig({
-        filterOptions: facetNames
-      })
-
-      if (query) {
-        setSearch({
-          ...getSearchQueryParam(query)
-        })
-      }
+    if (facets) setFacetNames(getTranslateFacetNames(Object.keys(facets)))
+    if (query) {
+      setSearch(query)
+      setUserSearchTerm(search) // resets previous input value
+      gtag.trackSearchQuery(query)
     }
   }, [facets, query])
-
-  useEffect(() => {
-    gtag.trackSearchQuery(query)
-  }, [query])
 
   // TODO: Remove when refactring search in a future issue
   if (!isPageReady) return <Spinner />
 
   return (
     <>
-      <PageTitle title={`${query.search ? query.search : ''} Results -`} />
+      <PageTitle title={`${search} Results -`} />
       <TextHighlightContextProvider
-        match={[query.search, ...getAccessionCodesQueryParam(query.search)]}
+        match={[search, ...getParsedAccessionCodes(search)]}
       >
         <FixedContainer pad={{ horizontal: 'large', bottom: 'large' }}>
           <SearchInfoBanner />
@@ -123,14 +101,6 @@ export const Search = ({
               onSubmit={handleSubmit}
             />
           </Box>
-          {hasError && (
-            <Error
-              statusCode={statusCode}
-              align="center"
-              direction="column"
-              marginTop="none"
-            />
-          )}
           {isResults && (
             <Grid
               areas={[
@@ -192,14 +162,7 @@ export const Search = ({
                     onClick={() => setToggleFilterList(true)}
                   />
                 )}
-                <SearchBulkActions
-                  results={results}
-                  pageSize={pageSize}
-                  setPageSize={setPageSize}
-                  sortBy={sortBy}
-                  setSortBy={setSortBy}
-                  totalResults={totalResults}
-                />
+                <SearchBulkActions response={response} query={query} />
                 <Box animation={{ type: 'fadeIn', duration: 300 }}>
                   {results.map((result, i) =>
                     result.isMatchedAccessionCode ? (
@@ -219,7 +182,7 @@ export const Search = ({
                                 level={3}
                                 style={{ position: 'absolute', top: '-12px' }}
                               >
-                                Related Results for '{query.search}'
+                                Related Results for '{search}'
                               </Heading>
                             </Box>
                           )}
@@ -232,7 +195,7 @@ export const Search = ({
                     )
                   )}
                   {(results.length < 10 ||
-                    page === Math.ceil(totalResults / pageSize)) && (
+                    page === Math.ceil(totalResults / limit)) && (
                     <RequestSearchFormAlert />
                   )}
                 </Box>
@@ -245,16 +208,15 @@ export const Search = ({
                 >
                   <Pagination
                     page={page}
-                    pageSize={pageSize}
+                    pageSize={limit}
                     totalPages={totalResults}
-                    setPage={setPage}
-                    updatePage={updatePage}
+                    onPageChange={updatePage}
                   />
                 </Box>
               </Box>
             </Grid>
           )}
-          {!isResults && query.search && (
+          {!isResults && search && (
             <NoSearchResults setUserSearchTerm={setUserSearchTerm} />
           )}
         </FixedContainer>
@@ -263,32 +225,38 @@ export const Search = ({
   )
 }
 
-Search.getInitialProps = async ({ query }) => {
-  const {
-    search: {
-      commonQueries: {
-        ordering,
-        num_downloadable_samples__gt: numDownloadableSamples
+export const getServerSideProps = async ({ query }) => {
+  if (isLegacyUrl(query)) {
+    const newQueryParams = getNewQueryParams(query)
+
+    return {
+      redirect: {
+        destination: `/search/?${new URLSearchParams(
+          newQueryParams
+        ).toString()}`,
+        permanent: true
       }
     }
-  } = options
-  const filterOrders = query.filter_order ? query.filter_order.split(',') : []
-  const queryParams = {
-    ...getSearchQueryForAPI(query),
-    limit: query.limit || 10,
-    offset: query.offset * query.limit || 0,
-    ordering: query.sortby || ordering,
-    ...(query.search ? { search: query.search } : {}),
-    num_downloadable_samples__gt: !query.empty
-      ? Number(numDownloadableSamples.hide)
-      : Number(numDownloadableSamples.show)
   }
+
+  const queryParams = getSearchQueryForAPI(query)
+  const filterOrders = query.filter_order ? query.filter_order.split(',') : []
+
   const response = await fetchSearch(queryParams, filterOrders)
 
-  return {
-    query: queryParams,
-    ...response
+  if (response && response.ok) {
+    return {
+      props: {
+        query: formatFacetQueryParams(
+          Object.keys(response.facets),
+          queryParams
+        ),
+        response
+      }
+    }
   }
+
+  return { notFound: true }
 }
 
 export default Search

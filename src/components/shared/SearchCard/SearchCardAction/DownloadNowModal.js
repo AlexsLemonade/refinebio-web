@@ -28,17 +28,22 @@ export const DownloadNowModal = ({
   const [formValues, setFormValues] = useState(null)
 
   const submit = async () => {
-    const { emailAddress, receiveUpdates } = formValues
-
-    if (receiveUpdates) {
-      const subscribeEmailResponse = await subscribeEmail(emailAddress)
+    if (formValues.email_ccdl_ok) {
+      const subscribeEmailResponse = await subscribeEmail(
+        formValues.email_address
+      )
       if (subscribeEmailResponse.status !== 'error') {
         gtag.trackEmailSubscription(DownloadNowModal)
       }
     }
 
+    const downloadOptions = {
+      data: { [accessionCode]: ['ALL'] },
+      ...formValues
+    }
+
     await startProcessingDataset(
-      formValues,
+      downloadOptions,
       null, // no detaset ID
       accessionCode
     )
@@ -47,7 +52,7 @@ export const DownloadNowModal = ({
 
   useEffect(() => {
     if (formValues) {
-      setAcceptedTerms(formValues.termsOfUse)
+      setAcceptedTerms(formValues.terms)
       if (acceptedTerms) submit()
     }
   }, [acceptedTerms, formValues])
@@ -67,17 +72,17 @@ export const DownloadNowModal = ({
       <Formik
         initialValues={{
           aggregate_by: 'EXPERIMENT',
-          data: { [accessionCode]: ['ALL'] },
           scale_by: 'NONE',
           quantile_normalize: true,
-          emailAddress: email || '',
-          receiveUpdates: true,
-          termsOfUse: acceptedTerms
+          email_address: email || '',
+          email_ccdl_ok: true,
+          terms: acceptedTerms
         }}
         validationSchema={StartProcessingFormSchema}
         validateOnChange={false}
         onSubmit={async (values, { setSubmitting }) => {
-          setFormValues(values)
+          const { terms, ...rest } = values
+          setFormValues(rest)
           setSubmitting(false)
         }}
       >
@@ -126,22 +131,22 @@ export const DownloadNowModal = ({
               </Paragraph>
               <Box pad={{ top: 'small' }}>
                 <EmailTextInput
-                  error={errors.emailAddress}
-                  touched={touched.emailAddress}
-                  value={values.emailAddress}
+                  error={errors.email_address}
+                  touched={touched.email_address}
+                  value={values.email_address}
                   handleChange={handleChange}
                 />
                 <Box pad={{ top: 'small' }}>
                   {!acceptedTerms && (
                     <TermsOfUseCheckBox
-                      error={errors.termsOfUse}
-                      touched={touched.termsOfUse}
-                      value={values.termsOfUse}
+                      error={errors.terms}
+                      touched={touched.terms}
+                      value={values.terms}
                       handleChange={handleChange}
                     />
                   )}
                   <ReceiveUpdatesCheckBox
-                    value={values.receiveUpdates}
+                    value={values.email_ccdl_ok}
                     handleChange={handleChange}
                   />
                 </Box>
