@@ -4,11 +4,10 @@ import { useSearchManager } from 'hooks/useSearchManager'
 import getReadableOptions from 'helpers/getReadableOptions'
 import { PageSizes } from 'components/shared/PageSizes'
 import { AddPageToDatasetButton } from './AddPageToDatasetButton'
-import { NonDownloadableExperiment } from './SearchFilterList'
+import { HideNonDownloadableExperiments } from './SearchFilterList'
 
 export const SearchBulkActions = ({ response, query }) => {
   const { results, totalResults } = response
-  const { limit, ordering } = query
   const { updatePageSize, updateSortBy } = useSearchManager()
   const { getForBreakpoint, setResponsive } = useResponsive()
   const sortByValues = [
@@ -101,7 +100,7 @@ export const SearchBulkActions = ({ response, query }) => {
               textPrepend="Showing"
               textAppended="results"
               pageSizeLabel="Total Samples"
-              pageSize={Number(limit)}
+              pageSize={query.limit}
               totalPages={totalResults}
               onPageSizeChange={updatePageSize}
             />
@@ -114,7 +113,7 @@ export const SearchBulkActions = ({ response, query }) => {
               <Select
                 options={getReadableOptions(sortByValues)}
                 labelKey="label"
-                value={ordering}
+                value={query.ordering}
                 valueKey={{ key: 'value', reduce: true }}
                 margin={{ horizontal: 'xxsmall' }}
                 onChange={({ value: nextValue }) => updateSortBy(nextValue)}
@@ -133,7 +132,7 @@ export const SearchBulkActions = ({ response, query }) => {
           </Box>
         </Box>
         <Box gridArea="hide-non-downloadble">
-          <NonDownloadableExperiment />
+          <HideNonDownloadableExperiments />
         </Box>
       </Grid>
     </Box>

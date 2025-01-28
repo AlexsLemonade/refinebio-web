@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 import gtag from 'analytics/gtag'
-import { useResponsive } from 'hooks/useResponsive'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import formatFilterName from 'helpers/formatFilterName'
 import formatNumbers from 'helpers/formatNumbers'
+import getReadable from 'helpers/getReadable'
 import isLastIndex from 'helpers/isLastIndex'
 import { Button as sharedButton } from 'components/shared/Button'
 import { CheckBox } from 'components/shared/CheckBox'
@@ -22,19 +22,14 @@ const ToggleButton = styled(sharedButton)`
     }
   `}
 `
-export const SearchFilter = ({
-  filterGroup,
-  filterLabel,
-  filterOption,
-  filterKey
-}) => {
-  const { viewport } = useResponsive()
+export const SearchFilter = ({ facet = {}, filter }) => {
   const { isFilterChecked, toggleFilter } = useSearchManager()
-  const filterList = Object.entries(filterGroup).sort((a, b) => b[1] - a[1])
+  const filterLabel = getReadable(filter)
+  const filterList = Object.entries(facet).sort((a, b) => b[1] - a[1])
   const filterListCount = filterList.length
   const maxCount = 5
   const isMoreThanMaxCount = filterListCount > maxCount
-  const [filteredResults, setFilteredResults] = useState(
+  const [filteredFilterList, setFilteredFilterList] = useState(
     filterList.slice(0, maxCount)
   )
   const [open, setOpen] = useState(false)
@@ -42,11 +37,11 @@ export const SearchFilter = ({
 
   const handleToggleFilterList = (val) => {
     setUserInput(val)
-    setFilteredResults(() =>
+    setFilteredFilterList(() =>
       // eslint-disable-next-line no-nested-ternary
       val.trim() !== ''
-        ? filterList.filter((option) =>
-            formatFilterName(filterOption, option[0])
+        ? filterList.filter((item) =>
+            formatFilterName(filter, item[0])
               .toLowerCase()
               .includes(val.toLowerCase())
           )
@@ -56,19 +51,19 @@ export const SearchFilter = ({
     )
   }
 
-  const handleToggleFilterItem = (checked, option) => {
-    toggleFilter(checked, filterOption, filterKey, option, viewport === 'large')
+  const handleToggleFilterItem = (checked, item) => {
+    toggleFilter(filter, item)
     gtag.trackFilterType(filterLabel)
-    gtag.trackToggleFilterItem(checked, formatFilterName(filterOption, option))
+    gtag.trackToggleFilterItem(checked, formatFilterName(filter, item))
   }
 
   useEffect(() => {
     if (open && !userInput) {
-      setFilteredResults(filterList)
+      setFilteredFilterList(filterList)
     } else {
-      setFilteredResults(filterList.slice(0, maxCount))
+      setFilteredFilterList(filterList.slice(0, maxCount))
     }
-  }, [filterGroup, open])
+  }, [facet, open])
 
   return (
     <>
@@ -89,30 +84,30 @@ export const SearchFilter = ({
 
       <TextHighlightContextProvider match={userInput}>
         <Box animation={open ? { type: 'fadeIn', duration: 1000 } : {}}>
-          {filteredResults.map((option, i, arr) => (
+          {filteredFilterList.map((item, i, arr) => (
             <Box
-              key={option[0]}
+              key={item[0]}
               margin={{ bottom: !isLastIndex(i, arr) ? 'xsmall' : '0' }}
             >
               <CheckBox
                 label={
                   <Text>
                     <TextHighlight>
-                      {formatFilterName(filterOption, option[0])}
+                      {formatFilterName(filter, item[0])}
                     </TextHighlight>{' '}
-                    ({formatNumbers(option[1])})
+                    ({formatNumbers(item[1])})
                   </Text>
                 }
-                checked={isFilterChecked(filterOption, option[0])}
+                checked={isFilterChecked(filter, item[0])}
                 onChange={(e) =>
-                  handleToggleFilterItem(e.target.checked, option[0])
+                  handleToggleFilterItem(e.target.checked, item[0])
                 }
               />
             </Box>
           ))}
         </Box>
       </TextHighlightContextProvider>
-      {filteredResults.length === 0 && <TextNull text="No match found" />}
+      {filteredFilterList.length === 0 && <TextNull text="No match found" />}
       {isMoreThanMaxCount && (
         <ToggleButton
           label={

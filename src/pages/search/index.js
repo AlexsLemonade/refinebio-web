@@ -1,15 +1,16 @@
 import { Fragment, useEffect, useState } from 'react'
 import { Box, Grid, Heading } from 'grommet'
+import { useSyncSearchURL } from 'hooks/useSyncSearchURL'
 import gtag from 'analytics/gtag'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import fetchSearch from 'helpers/fetchSearch'
-import formatFacetNames from 'helpers/formatFacetNames'
 import formatFacetQueryParams from 'helpers/formatFacetQueryParams'
+import { getTranslateFacetNames } from 'helpers/facetNameTranslation'
 import getParsedAccessionCodes from 'helpers/getParsedAccessionCodes'
 import getPageNumber from 'helpers/getPageNumber'
-import getSearchQueryForAPI from 'helpers/getSearchQueryForAPI'
+import parseDefaultSearchParams from 'helpers/parseDefaultSearchParams'
 import { isLegacyUrl, getNewQueryParams } from 'helpers/supportLegacyUrl'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
@@ -30,13 +31,16 @@ import {
 } from 'components/SearchResults'
 
 export const Search = ({ query, response }) => {
-  const { setFacetNames, setSearch, updatePage, updateSearchTerm } =
+  const { setFacetNames, setSearchParams, updatePage, updateSearchTerm } =
     useSearchManager()
   const { viewport, setResponsive } = useResponsive()
   const sideWidth = '300px'
   const searchBoxWidth = '550px'
 
-  const limit = Number(query.limit)
+  // syncs the latest search parameters with URL
+  useSyncSearchURL(query)
+
+  const { limit } = query
   const page = getPageNumber(query.offset, limit)
   const search = query.search || ''
   const [userSearchTerm, setUserSearchTerm] = useState(search)
@@ -44,7 +48,7 @@ export const Search = ({ query, response }) => {
   const { facets, results, totalResults } = response
   const isResults = results?.length > 0
 
-  const [toggleFilterList, setToggleFilterList] = useState(false) // for small devices
+  const [showMobileFilterList, setShowMobileFilterList] = useState(false) // for small devices
 
   // TODO: Remove when refactring search in a future issue (prevent hydration error)
   const [isPageReady, setIsPageReady] = useState(false)
@@ -57,15 +61,19 @@ export const Search = ({ query, response }) => {
     e.preventDefault()
     updateSearchTerm(userSearchTerm)
   }
+
   useEffect(() => {
     setIsPageReady(true)
   }, [])
 
   useEffect(() => {
-    if (facets) setFacetNames(formatFacetNames(Object.keys(facets)))
+    if (facets) {
+      // NOTE: We need to rename facet keys to match filter
+      // We'll remove these helpers in the future (1/16/2025)
+      setFacetNames(getTranslateFacetNames(Object.keys(facets)))
+    }
     if (query) {
-      setSearch(query)
-      setUserSearchTerm(search) // resets previous input value
+      setSearchParams(formatFacetQueryParams(Object.keys(facets), query))
       gtag.trackSearchQuery(query)
     }
   }, [facets, query])
@@ -116,7 +124,7 @@ export const Search = ({ query, response }) => {
             >
               <LayerResponsive
                 position="left"
-                show={toggleFilterList}
+                show={showMobileFilterList}
                 tabletMode
               >
                 <BoxBlock
@@ -139,7 +147,7 @@ export const Search = ({ query, response }) => {
                         role="button"
                         style={{ boxShadow: 'none' }}
                         width="max-content"
-                        onClick={() => setToggleFilterList(false)}
+                        onClick={() => setShowMobileFilterList(false)}
                       >
                         <Icon name="Close" size="large" />
                       </Box>
@@ -147,7 +155,7 @@ export const Search = ({ query, response }) => {
                   )}
                   <SearchFilterList
                     facets={facets}
-                    setToggle={setToggleFilterList}
+                    onToggle={() => setShowMobileFilterList(false)}
                   />
                 </BoxBlock>
               </LayerResponsive>
@@ -159,7 +167,7 @@ export const Search = ({ query, response }) => {
                     icon={<Icon name="Filter" size="small" />}
                     margin={{ bottom: 'medium' }}
                     secondary
-                    onClick={() => setToggleFilterList(true)}
+                    onClick={() => setShowMobileFilterList(true)}
                   />
                 )}
                 <SearchBulkActions response={response} query={query} />
@@ -239,18 +247,14 @@ export const getServerSideProps = async ({ query }) => {
     }
   }
 
-  const queryParams = getSearchQueryForAPI(query)
+  const queryParams = parseDefaultSearchParams(query)
   const filterOrders = query.filter_order ? query.filter_order.split(',') : []
-
   const response = await fetchSearch(queryParams, filterOrders)
 
   if (response && response.ok) {
     return {
       props: {
-        query: formatFacetQueryParams(
-          Object.keys(response.facets),
-          queryParams
-        ),
+        query: { ...query, ...queryParams },
         response
       }
     }

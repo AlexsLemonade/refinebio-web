@@ -22,11 +22,10 @@ export const SignUpBlock = () => {
       <FixedContainer align="center">
         <Formik
           initialValues={{
-            emailAddress: ''
+            email_address: ''
           }}
           onSubmit={async (values, { setSubmitting }) => {
-            const { emailAddress } = values
-            const response = await subscribeEmail(emailAddress)
+            const response = await subscribeEmail(values.email_address)
 
             if (response.status === 'error') {
               setSubmitted(false)
@@ -54,7 +53,7 @@ export const SignUpBlock = () => {
                       <strong>
                         Thank you for subscribing. Updates will be sent to{' '}
                         <Text color="alex-yellow-base" size="inherit">
-                          {values.emailAddress}
+                          {values.email_address}
                         </Text>
                       </strong>
                     </Paragraph>
@@ -81,9 +80,9 @@ export const SignUpBlock = () => {
                     <Row width="500px">
                       <Column fill basis="1">
                         <TextInput
-                          name="emailAddress"
+                          name="email_address"
                           type="email"
-                          value={values.emailAddress}
+                          value={values.email_address}
                           onChange={handleChange}
                           placeholder="jdoe@example.com"
                         />
