@@ -2,6 +2,10 @@ import { useContext, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { SearchManagerContext } from 'contexts/SearchManagerContext'
 import { options } from 'config'
+import {
+  getQueryParamValueWith,
+  getQueryParamValueWithout
+} from 'helpers/getQueryParamValue'
 import parseDefaultSearchParams from 'helpers/parseDefaultSearchParams'
 
 export const useSearchManager = () => {
@@ -15,6 +19,7 @@ export const useSearchManager = () => {
   /* Common */
   const updatePage = (page) => {
     const offset = (page - 1) * searchParams.limit
+
     if (offset === searchParams.offset) return
 
     setSearchParams({
@@ -23,14 +28,13 @@ export const useSearchManager = () => {
     })
   }
 
-  // resets page on page size changes
   const updatePageSize = (limit) => {
     if (limit === searchParams.limit) return
 
     setSearchParams({
       ...searchParams,
       limit,
-      offset: 0
+      offset: 0 // resets page on page size changes
     })
   }
 
@@ -73,55 +77,70 @@ export const useSearchManager = () => {
   const clearAllFilters = () =>
     setSearchParams(parseDefaultSearchParams(keepAfterClear))
 
-  const isFilterChecked = (key, val) => {
+  const isFilterChecked = (key, value) => {
     if (!(key in searchParams)) return false
 
-    if (val) {
-      return searchParams[key].includes(val)
+    if (value) {
+      return searchParams[key].includes(value)
     }
 
     return true
   }
 
-  // toggles a filter in facets
-  // resets page on filter toggle
-  const toggleFilter = (filter, selectedValue) => {
-    const isBooleanValue = typeof selectedValue === 'boolean'
+  // removes a filter if the given value is undefined, otherwise adds it
+  // supports three states for a boolean filter (e.g., true, false, null)
+  const updateFilterValue = (filter, value) => {
+    setSearchParams((prev) => {
+      const updatedQuery = { ...prev }
+
+      if (value === undefined) {
+        delete updatedQuery[filter]
+      } else {
+        updatedQuery[filter] = value
+      }
+
+      // resets page on filter toggle
+      updatedQuery.offset = 0
+
+      return updatedQuery
+    })
+  }
+
+  // toggles a facet filter and tracks its order for the API call
+  // removes a filter if the given value is undefined, otherwise adds it
+  const toggleFilter = (filter, value) => {
+    const filterOrders = searchParams.filter_order
+      ? searchParams.filter_order.split(',')
+      : []
 
     setSearchParams((prev) => {
       const updatedQuery = { ...prev }
-      const filterOrders = updatedQuery.filter_order
-        ? updatedQuery.filter_order.split(',')
-        : []
+      const prevFilterValue = searchParams[filter]
 
-      // handles boolean values - sets if true, set, otherwise remove
-      if (isBooleanValue) {
-        if (selectedValue) {
-          updatedQuery[filter] = selectedValue
-        } else {
+      // adds value if not already checked, otherwise removes it
+      if (!isFilterChecked(filter, value)) {
+        updatedQuery[filter] = getQueryParamValueWith(prevFilterValue, value)
+        // adds the filter to filter_order(client-only) for tracking
+        filterOrders.push(filter)
+      } else {
+        updatedQuery[filter] = getQueryParamValueWithout(prevFilterValue, value)
+        // removes the filter from filter_order(client-only) for tracking
+        filterOrders.splice(filterOrders.lastIndexOf(filter), 1)
+
+        if (updatedQuery[filter] === undefined) {
           delete updatedQuery[filter]
         }
-      } else {
-        const filterValues = updatedQuery[filter] || []
-        // adds selectedValue if not checked, otherwise removes it
-        if (!isFilterChecked(filter, selectedValue)) {
-          updatedQuery[filter] = [...filterValues, selectedValue]
-          filterOrders.push(filter)
-        } else {
-          updatedQuery[filter] = filterValues.filter(
-            (item) => item !== selectedValue
-          )
-          if (!updatedQuery[filter].length) delete updatedQuery[filter]
-          // removes the key from filter_order(client-only) for order tracking
-          filterOrders.splice(filterOrders.lastIndexOf(filter), 1)
-        }
       }
-      // if no facet selected, removes filter_order(client-only) from searchParams
-      // otherwise converts filter_order(client-only) to string for URL
-      updatedQuery.filter_order = filterOrders.length
-        ? filterOrders.join(',')
-        : delete updatedQuery.filter_order
 
+      // removes filter_order(client-only) if empty
+      if (filterOrders.length === 0) {
+        delete updatedQuery.filter_order
+      } else {
+        // otherwise converts to string for URL
+        updatedQuery.filter_order = filterOrders.join(',')
+      }
+
+      // resets page on filter toggle
       updatedQuery.offset = 0
 
       return updatedQuery
@@ -129,17 +148,17 @@ export const useSearchManager = () => {
   }
 
   /* Search Term */
-  // resets page on search term changes
   const updateSearchTerm = (search) => {
     if (search === searchParams.search) return
 
     setSearchParams((prev) => {
-      const updatedQuery = { ...prev, search, offset: 0 }
-
-      if (search === '') {
-        delete updatedQuery.search
+      const updatedQuery = {
+        ...prev,
+        search,
+        offset: 0 // resets page on search term changes
       }
 
+      if (search === '') delete updatedQuery.search
       return updatedQuery
     })
   }
@@ -164,6 +183,7 @@ export const useSearchManager = () => {
     navigateToSearch,
     updateSearchParam,
     toggleFilter,
+    updateFilterValue,
     updatePage,
     updatePageSize,
     updateSearchTerm,

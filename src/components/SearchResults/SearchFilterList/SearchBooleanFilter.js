@@ -11,7 +11,7 @@ export const SearchBooleanFilter = ({
     unchecked: false
   }
 }) => {
-  const { isFilterChecked, toggleFilter } = useSearchManager()
+  const { isFilterChecked, updateFilterValue } = useSearchManager()
 
   return (
     <Box>
@@ -20,7 +20,7 @@ export const SearchBooleanFilter = ({
         disabled={!facet.true}
         label={label}
         onChange={(e) =>
-          toggleFilter(
+          updateFilterValue(
             filter,
             e.target.checked ? values.checked : values.unchecked
           )

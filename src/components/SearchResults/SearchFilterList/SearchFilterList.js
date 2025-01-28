@@ -69,6 +69,7 @@ export const SearchFilterList = ({
                 label={`${getReadable(filter)} (${
                   formatNumbers(facets[filter].true) || 0
                 })`}
+                values={{ checked: true, unchecked: undefined }}
               />
             ) : (
               <SearchFilter facet={facets[filter]} filter={filter} />
