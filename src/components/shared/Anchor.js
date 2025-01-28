@@ -1,4 +1,7 @@
+import Router from 'next/router'
 import Link from 'next/link'
+import { resolveHref } from 'next/dist/shared/lib/router/utils/resolve-href'
+// import { resolveHref } from 'next/dist/client/resolve-href' (Next v14)
 import { Anchor as GrommetAnchor } from 'grommet'
 import styled, { css } from 'styled-components'
 import gtag from 'analytics/gtag'
@@ -22,14 +25,16 @@ export const Anchor = ({
   onClick = () => {},
   ...props
 }) => {
+  // No official support for this yet, converts href to string
+  const [link] = resolveHref(Router, href, true)
   const handleClick = () => {
     onClick()
-    gtag.trackLink(href)
+    gtag.trackLink(link)
   }
 
-  return typeof href === 'string' && href.startsWith('http') ? (
+  return link && link.startsWith('http') ? (
     <CustomAnchor
-      href={href}
+      href={link}
       icon={icon}
       color={linkColor}
       underline={underline}

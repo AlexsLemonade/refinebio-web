@@ -1,2 +1,2 @@
-export { NonDownloadableExperiment } from './NonDownloadableExperiment'
+export { HideNonDownloadableExperiments } from './HideNonDownloadableExperiments'
 export { SearchFilterList } from './SearchFilterList'
