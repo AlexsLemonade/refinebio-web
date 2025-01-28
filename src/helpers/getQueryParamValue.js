@@ -11,15 +11,18 @@ export const getQueryParamValueWith = (prev, toAdd) => {
 
 // Removes 'toRemove' from the array if 'prev' is an array
 // Returns undefined if:
-// - the array becomes empty after removal
 // - 'prev' is equal to 'toRemove'
-// Otherwise, return 'prev' unchanged
+// - the array becomes empty after removal
+// Otherwise, returns the updated array, its first item, or 'prev' unchanged
 export const getQueryParamValueWithout = (prev, toRemove) => {
   if (prev === toRemove) return undefined
 
   if (Array.isArray(prev)) {
     const updatedPrev = prev.filter((v) => v !== toRemove)
-    return updatedPrev.length === 0 ? undefined : updatedPrev
+
+    if (updatedPrev.length === 0) return undefined
+
+    return updatedPrev.length === 1 ? updatedPrev[0] : updatedPrev
   }
 
   return prev
