@@ -5,12 +5,12 @@ export const DatasetManagerContext = createContext({})
 
 export const DatasetManagerContextProvider = ({ children }) => {
   const {
-    dataset,
-    setDataset,
+    myDataset,
+    setMyDataset,
     datasetAccessions,
     setDatasetAccessions,
-    datasetId,
-    setDatasetId,
+    myDatasetId,
+    setMyDatasetId,
     email,
     setEmail,
     processingDatasets,
@@ -19,24 +19,24 @@ export const DatasetManagerContextProvider = ({ children }) => {
 
   const value = useMemo(
     () => ({
-      dataset,
-      setDataset,
+      myDataset,
+      setMyDataset,
       datasetAccessions,
       setDatasetAccessions,
-      datasetId,
-      setDatasetId,
+      myDatasetId,
+      setMyDatasetId,
       email,
       setEmail,
       processingDatasets,
       setProcessingDatasets
     }),
     [
-      dataset,
-      setDataset,
+      myDataset,
+      setMyDataset,
       datasetAccessions,
       setDatasetAccessions,
-      datasetId,
-      setDatasetId,
+      myDatasetId,
+      setMyDatasetId,
       email,
       setEmail,
       processingDatasets,

@@ -10,12 +10,12 @@ import { api } from 'api'
 
 export const useDatasetManager = () => {
   const {
-    dataset,
-    setDataset,
+    myDataset,
+    setMyDataset,
     datasetAccessions,
     setDatasetAccessions,
-    datasetId,
-    setDatasetId,
+    myDatasetId,
+    setMyDatasetId,
     email,
     setEmail,
     processingDatasets,
@@ -66,9 +66,9 @@ export const useDatasetManager = () => {
   const clearDataset = async (id = '') => {
     setLoading(true)
     const body = { data: {} }
-    const response = await updateDataset(id || datasetId, body)
+    const response = await updateDataset(id || myDatasetId, body)
 
-    setDataset(response)
+    setMyDataset(response)
     setLoading(false)
   }
 
@@ -78,7 +78,7 @@ export const useDatasetManager = () => {
 
     // stores the newly created dataset ID to localStorge
     if (setCurrentDatasetId) {
-      setDatasetId(response.id)
+      setMyDatasetId(response.id)
     }
 
     return response.id
@@ -94,7 +94,7 @@ export const useDatasetManager = () => {
   }
 
   const getDataset = async (id) => {
-    if (!id && !datasetId) return null // TODO: Throw an error
+    if (!id && !myDatasetId) return null // TODO: Throw an error
 
     setLoading(true)
 
@@ -104,11 +104,11 @@ export const useDatasetManager = () => {
       headers['API-KEY'] = await tokenPromise
     }
 
-    const response = await api.dataset.get(id || datasetId, headers)
+    const response = await api.dataset.get(id || myDatasetId, headers)
     const { ok, statusCode } = response
 
     if (ok && isMyDatasetId(id)) {
-      setDataset(response)
+      setMyDataset(response)
     }
 
     // sets the error if any, otherwise resets it
@@ -125,8 +125,8 @@ export const useDatasetManager = () => {
     return response
   }
 
-  // checks if the given dataset ID is My dataset ID
-  const isMyDatasetId = (id) => id === datasetId
+  // checks if the given dataset ID is myDatasetId
+  const isMyDatasetId = (id) => id === myDatasetId
 
   const startProcessingDataset = async (
     options,
@@ -150,8 +150,8 @@ export const useDatasetManager = () => {
     setEmail(options.email_address)
     // deletes the locally saved dataset data once it has started processing (no longer mutable)
     if (id && isMyDatasetId(id)) {
-      setDataset({})
-      setDatasetId(null)
+      setMyDataset({})
+      setMyDatasetId(null)
     }
 
     return response
@@ -167,7 +167,7 @@ export const useDatasetManager = () => {
     const response = await api.dataset.update(id, body, headers)
 
     if (isMyDatasetId(id)) {
-      setDataset(response)
+      setMyDataset(response)
     }
 
     return response
@@ -201,20 +201,20 @@ export const useDatasetManager = () => {
     setLoading(true)
     const body = { data: {} }
 
-    for (const experiment in dataset.data) {
+    for (const experiment in myDataset.data) {
       if (experimentAccessionCode.includes(experiment)) continue
-      body.data[experiment] = dataset.data[experiment]
+      body.data[experiment] = myDataset.data[experiment]
     }
 
-    const response = await updateDataset(datasetId, body)
-    setDataset(response)
+    const response = await updateDataset(myDatasetId, body)
+    setMyDataset(response)
     setLoading(false)
   }
 
   /* Sample */
   const addSamples = async (data) => {
     setLoading(true)
-    const body = { data: dataset ? { ...dataset.data } : {} }
+    const body = { data: myDataset ? { ...myDataset.data } : {} }
 
     for (const accessionCode of Object.keys(data)) {
       if (data[accessionCode].all) {
@@ -230,10 +230,10 @@ export const useDatasetManager = () => {
     }
 
     const response = await updateDataset(
-      datasetId || (await createDataset(true)),
+      myDatasetId || (await createDataset(true)),
       body
     )
-    setDataset(response)
+    setMyDataset(response)
     setLoading(false)
 
     return response
@@ -246,7 +246,7 @@ export const useDatasetManager = () => {
     isEmptyObject(data) ? 0 : unionizeArrays(...Object.values(data)).length
 
   const removeSamples = async (data) => {
-    const body = { data: { ...dataset.data } }
+    const body = { data: { ...myDataset.data } }
 
     for (const accessionCode of Object.keys(data)) {
       if (!body.data[accessionCode]) continue
@@ -264,15 +264,15 @@ export const useDatasetManager = () => {
     }
 
     setLoading(true)
-    const response = await updateDataset(datasetId, body)
-    setDataset(response)
+    const response = await updateDataset(myDatasetId, body)
+    setMyDataset(response)
     setLoading(false)
   }
 
   const replaceSamples = async (data) => {
     setLoading(true)
-    const response = await updateDataset(datasetId, { data })
-    setDataset(response)
+    const response = await updateDataset(myDatasetId, { data })
+    setMyDataset(response)
     setLoading(false)
   }
 
@@ -282,8 +282,8 @@ export const useDatasetManager = () => {
     setError,
     datasetAccessions,
     setDatasetAccessions,
-    dataset,
-    datasetId,
+    myDataset,
+    myDatasetId,
     loading,
     processingDatasets,
     setProcessingDatasets,

@@ -20,16 +20,11 @@ export const MoveToDatasetModal = ({
   value,
   setValue
 }) => {
-  const {
-    dataset: datasetState,
-    loading,
-    addSamples,
-    getTotalSamples,
-    replaceSamples
-  } = useDatasetManager()
+  const { myDataset, loading, addSamples, getTotalSamples, replaceSamples } =
+    useDatasetManager()
   const { setResponsive } = useResponsive()
   const { push } = useRouter()
-  const totalSamples = formatNumbers(getTotalSamples(datasetState.data))
+  const totalSamples = formatNumbers(getTotalSamples(myDataset.data))
   const newDatasetTotalSamples = formatNumbers(getTotalSamples(dataset.data))
 
   const handleMoveSamples = async (action = 'append') => {
