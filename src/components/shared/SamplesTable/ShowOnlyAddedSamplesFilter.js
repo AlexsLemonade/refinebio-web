@@ -6,10 +6,10 @@ import { getFormattedExperiment } from 'helpers/formatDatasetAction'
 import { CheckBox } from 'components/shared/CheckBox'
 
 export const ShowOnlyAddedSamplesFilter = ({ experiment }) => {
-  const { dataset } = useDatasetManager()
+  const { myDataset } = useDatasetManager()
   const { updateDatasetId, samplesQuery } = useSamplesContext()
   const { getAnyProcessedInDataset } = useDatasetAction(
-    dataset.data,
+    myDataset.data,
     getFormattedExperiment(
       samplesQuery.experiment_accession_code,
       experiment.num_downloadable_samples
@@ -21,7 +21,7 @@ export const ShowOnlyAddedSamplesFilter = ({ experiment }) => {
 
   const handleToggle = () => {
     const newShowOnly = !showOnly
-    updateDatasetId(newShowOnly ? dataset.id : null)
+    updateDatasetId(newShowOnly ? myDataset.id : null)
     setShowOnly(newShowOnly)
   }
 

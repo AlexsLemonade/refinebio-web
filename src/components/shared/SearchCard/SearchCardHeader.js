@@ -1,5 +1,4 @@
 import { Box, Heading } from 'grommet'
-import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatURLString from 'helpers/formatURLString'
 import gtag from 'analytics/gtag'
@@ -9,11 +8,9 @@ import { TextHighlight } from 'components/shared/TextHighlight'
 
 export const SearchCardHeader = ({ experiment, isLinked = false }) => {
   const { accession_code: accessionCode, title } = experiment
-  const { search, setSearch } = useSearchManager()
   const { setResponsive } = useResponsive()
 
   const handleClick = () => {
-    setSearch({ ...search, ref: 'search' })
     gtag.trackExperimentPageClick(SearchCardHeader)
   }
 
@@ -35,7 +32,12 @@ export const SearchCardHeader = ({ experiment, isLinked = false }) => {
       >
         {isLinked ? (
           <Anchor
-            href={`experiments/${accessionCode}/${formatURLString(title)}`}
+            href={{
+              pathname: `experiments/${accessionCode}/${formatURLString(
+                title
+              )}`,
+              query: { ref: 'search' }
+            }}
             label={<TextHighlight>{title}</TextHighlight>}
             onClick={handleClick}
           />

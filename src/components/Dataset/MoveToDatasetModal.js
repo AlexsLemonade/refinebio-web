@@ -11,9 +11,9 @@ import { Row } from 'components/shared/Row'
 
 export const MoveToDatasetModal = ({ value, onChange, onReset, onSubmit }) => {
   const { setResponsive } = useResponsive()
-  const { dataset: myDataset, loading, getTotalSamples } = useDatasetManager()
+  const { myDataset, loading, getTotalSamples } = useDatasetManager()
 
-  const myDatasetTotalSamples = formatNumbers(getTotalSamples(myDataset?.data))
+  const myDatasetTotalSamples = formatNumbers(getTotalSamples(myDataset.data))
   const radioOptions = [
     { label: 'Append samples to My Dataset', value: 'append' },
     { label: 'Replace samples in My Dataset', value: 'replace' }

@@ -21,13 +21,9 @@ export const MoveToDatasetButton = ({ dataset }) => {
   const { push } = useRouter()
   const { openModal, closeModal } = useModal()
   const modalId = `move-to-dataset-${dataset.id}`
-  const {
-    dataset: myDataset,
-    addSamples,
-    getTotalSamples,
-    replaceSamples
-  } = useDatasetManager()
-  const myDatasetTotalSamples = getTotalSamples(myDataset?.data)
+  const { myDataset, addSamples, getTotalSamples, replaceSamples } =
+    useDatasetManager()
+  const myDatasetTotalSamples = getTotalSamples(myDataset.data)
   const defaultAction = 'append'
   const [action, setAction] = useState(defaultAction)
 

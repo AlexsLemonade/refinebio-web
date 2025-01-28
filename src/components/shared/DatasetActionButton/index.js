@@ -12,14 +12,14 @@ export const DatasetActionButton = ({
   disableAddRemaining = false,
   ...props
 }) => {
-  const { dataset } = useDatasetManager()
+  const { myDataset } = useDatasetManager()
 
   const {
     getHasAllProcessed,
     anyProcessedSamples,
     getAddedSamples,
     getTotalSamplesInDataset
-  } = useDatasetAction(dataset?.data, data)
+  } = useDatasetAction(myDataset?.data, data)
 
   // shows the disabled add button if no processed samples
   if (!anyProcessedSamples()) {
@@ -27,16 +27,16 @@ export const DatasetActionButton = ({
     return <Button disabled {...props} />
   }
 
-  // shows the remvove from button if all processed samples are in my dataset
+  // shows the remvove from button if all processed samples are in myDataset
   if (getHasAllProcessed()) {
     return <RemoveDatasetButton dataToRemove={getAddedSamples()} />
   }
 
-  // shows the add remaming button if some of the processed samples are in my dataset
+  // shows the add remaming button if some of the processed samples are in myDataset
   if (
     !disableAddRemaining &&
-    dataset?.data &&
-    dataset.data[accessionCode]?.length < downloadableSamples &&
+    myDataset?.data &&
+    myDataset.data[accessionCode]?.length < downloadableSamples &&
     getTotalSamplesInDataset() > 0
   ) {
     return (
