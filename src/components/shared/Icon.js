@@ -14,6 +14,7 @@ import { Info } from '../../images/info.svg'
 import { Search } from '../../images/search.svg'
 import { Success } from '../../images/success.svg'
 import { Sync } from '../../images/sync.svg'
+import { Bluesky } from '../../images/bluesky.svg'
 import { Twitter } from '../../images/twitter.svg'
 import { Warning } from '../../images/warning.svg'
 
@@ -32,12 +33,14 @@ const SVGs = {
   Search,
   Success,
   Sync,
+  Bluesky,
   Twitter,
   Warning
 }
 
 const titles = {
   Github: 'View our refine.bio Github repository',
+  Bluesky: 'Follow us on Bluesky',
   Twitter: 'Follow us on Twitter'
 }
 

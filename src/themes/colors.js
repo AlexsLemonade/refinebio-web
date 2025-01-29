@@ -101,6 +101,7 @@ export const colors = {
   rgba6: 'rgba(0, 0, 0, 0.6)',
   rgba3: 'rgba(0, 0, 0, 0.3)',
   // Social Media
+  bluesky: '#1185FE',
   twitter: '#55acee',
   // default font color
   text: {
