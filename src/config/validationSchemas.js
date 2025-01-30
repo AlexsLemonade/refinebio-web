@@ -29,11 +29,11 @@ const RequestDataFormSchema = yup.object().shape({
 })
 
 const StartProcessingFormSchema = yup.object().shape({
-  emailAddress: yup
+  email_address: yup
     .string()
     .email('Please enter a vaild email')
     .required('Please enter your email address'),
-  termsOfUse: yup
+  terms: yup
     .boolean()
     .oneOf(
       [true],

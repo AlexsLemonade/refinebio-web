@@ -18,17 +18,17 @@ export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const router = useRouter()
   const { asPath, pathname } = router
   const { viewport, setResponsive } = useResponsive()
-  const { dataset, datasetId, getDataset, getTotalSamples } =
+  const { myDataset, myDatasetId, getDataset, getTotalSamples } =
     useDatasetManager()
   const [totalSamples, setTotalSamples] = useState()
 
   useEffect(() => {
-    if (dataset) setTotalSamples(getTotalSamples(dataset.data))
-  }, [dataset])
+    if (myDataset) setTotalSamples(getTotalSamples(myDataset.data))
+  }, [myDataset])
 
   useEffect(() => {
-    if (datasetId) getDataset()
-  }, [datasetId])
+    if (myDatasetId) getDataset()
+  }, [myDatasetId])
 
   const handleClick = () => {
     if (viewport !== 'small') return

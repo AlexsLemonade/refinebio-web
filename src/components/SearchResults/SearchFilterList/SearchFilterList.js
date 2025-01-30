@@ -5,13 +5,17 @@ import { useResponsive } from 'hooks/useResponsive'
 import { getTranslateKeysinFacets } from 'helpers/facetNameTranslation'
 import isLastIndex from 'helpers/isLastIndex'
 import { Button } from 'components/shared/Button'
+import getReadable from 'helpers/getReadable'
+import formatNumbers from 'helpers/formatNumbers'
 import { SearchFilter } from './SearchFilter'
-import { IncludePublication } from './IncludePublication'
+import { SearchBooleanFilter } from './SearchBooleanFilter'
 
-export const SearchFilterList = ({ facets: apiFacets, onToggle }) => {
+export const SearchFilterList = ({
+  facets: apiFacets,
+  onToggle = () => {}
+}) => {
   const { viewport } = useResponsive()
-  const { clearAllFilters, hasNonDownloadableSamples, hasSelectedFacets } =
-    useSearchManager()
+  const { canClearFilter, clearAllFilters } = useSearchManager()
 
   // NOTE: We need to rename facet keys to match filter
   // We'll remove this in the future (1/16/2025)
@@ -37,7 +41,7 @@ export const SearchFilterList = ({ facets: apiFacets, onToggle }) => {
           Filters
         </Heading>
         <Button
-          disabled={!hasSelectedFacets && !hasNonDownloadableSamples}
+          disabled={!canClearFilter}
           label="Clear All"
           link
           linkFontSize="medium"
@@ -59,7 +63,14 @@ export const SearchFilterList = ({ facets: apiFacets, onToggle }) => {
             pad={{ bottom: !isLastIndex(i, arr) ? 'medium' : 'none' }}
           >
             {filter === 'has_publication' ? (
-              <IncludePublication facet={facets[filter]} filter={filter} />
+              <SearchBooleanFilter
+                facet={facets[filter]}
+                filter={filter}
+                label={`${getReadable(filter)} (${
+                  formatNumbers(facets[filter].true) || 0
+                })`}
+                values={{ checked: true, unchecked: undefined }}
+              />
             ) : (
               <SearchFilter facet={facets[filter]} filter={filter} />
             )}
@@ -69,12 +80,7 @@ export const SearchFilterList = ({ facets: apiFacets, onToggle }) => {
 
       {viewport !== 'large' && (
         <Box margin={{ top: 'small', bottom: 'large' }} width="100%">
-          <Button
-            label="Apply Filters"
-            primary
-            responsive
-            onClick={() => onToggle(false)}
-          />
+          <Button label="Apply Filters" primary responsive onClick={onToggle} />
         </Box>
       )}
     </Box>

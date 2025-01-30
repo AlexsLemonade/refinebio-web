@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 import gtag from 'analytics/gtag'
-import { useResponsive } from 'hooks/useResponsive'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import formatFilterName from 'helpers/formatFilterName'
@@ -24,7 +23,6 @@ const ToggleButton = styled(sharedButton)`
   `}
 `
 export const SearchFilter = ({ facet = {}, filter }) => {
-  const { viewport } = useResponsive()
   const { isFilterChecked, toggleFilter } = useSearchManager()
   const filterLabel = getReadable(filter)
   const filterList = Object.entries(facet).sort((a, b) => b[1] - a[1])
@@ -54,7 +52,7 @@ export const SearchFilter = ({ facet = {}, filter }) => {
   }
 
   const handleToggleFilterItem = (checked, item) => {
-    toggleFilter(checked, filter, item, viewport === 'large')
+    toggleFilter(filter, item)
     gtag.trackFilterType(filterLabel)
     gtag.trackToggleFilterItem(checked, formatFilterName(filter, item))
   }

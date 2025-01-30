@@ -10,8 +10,8 @@ import { api } from 'api'
 export const RefinebioContext = createContext({})
 
 export const RefinebioContextProvider = ({ children }) => {
-  const [dataset, setDataset] = useLocalStorage('dataset', {})
-  const [datasetId, setDatasetId] = useLocalStorage('datasetId', null)
+  const [myDataset, setMyDataset] = useLocalStorage('dataset', {})
+  const [myDatasetId, setMyDatasetId] = useLocalStorage('datasetId', null)
   const [email, setEmail] = useLocalStorage('email-address', null)
   const [datasetAccessions, setDatasetAccessions] = useLocalStorage(
     'dataset-accessions',
@@ -44,7 +44,7 @@ export const RefinebioContextProvider = ({ children }) => {
     const oldKeyValue = getOldLocalStorageKey(oldKey)
 
     if (oldKeyValue) {
-      setDatasetId(getOldLocalStorageKey(oldKeyValue))
+      setMyDatasetId(getOldLocalStorageKey(oldKeyValue))
       removeOldLocalStorageKey(oldKey)
     }
   }, [])
@@ -82,12 +82,12 @@ export const RefinebioContextProvider = ({ children }) => {
 
   const value = useMemo(
     () => ({
-      dataset,
-      setDataset,
+      myDataset,
+      setMyDataset,
       datasetAccessions,
       setDatasetAccessions,
-      datasetId,
-      setDatasetId,
+      myDatasetId,
+      setMyDatasetId,
       email,
       setEmail,
       processingDatasets,
@@ -100,12 +100,12 @@ export const RefinebioContextProvider = ({ children }) => {
       tokenPromise
     }),
     [
-      dataset,
-      setDataset,
+      myDataset,
+      setMyDataset,
       datasetAccessions,
       setDatasetAccessions,
-      datasetId,
-      setDatasetId,
+      myDatasetId,
+      setMyDatasetId,
       email,
       setEmail,
       processingDatasets,
