@@ -9,6 +9,7 @@ export const links = {
   ccdl_donate: 'https://www.ccdatalab.org/donate-link',
   ccdl_privacy_policy: 'https://www.ccdatalab.org/privacy-policy',
   ccdl_github: 'https://github.com/AlexsLemonade/refinebio',
+  ccdl_bluesky: 'https://bsky.app/profile/cancerdatalab.bsky.social',
   ccdl_twitter: 'https://twitter.com/CancerDataLab',
   email_request_ccdl: 'requests@ccdatalab.org',
   // refine.bio

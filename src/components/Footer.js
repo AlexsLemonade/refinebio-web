@@ -17,6 +17,14 @@ import { Row } from 'components/shared/Row'
 import { cache, contributors, links } from 'config'
 import { CoinIcon } from '../images/coin.svg'
 
+const BlueskyLink = styled(Anchor)`
+  ${({ theme }) => css`
+    &:hover {
+      color: ${theme.global.colors.bluesky};
+    }
+  `}
+`
+
 const TwitterLink = styled(Anchor)`
   ${({ theme }) => css`
     &:hover {
@@ -85,11 +93,18 @@ export const Footer = () => {
                   target="_blank"
                 />
                 <Box align="center" direction="row" gap="medium">
+                  <BlueskyLink
+                    color={anchorColor}
+                    href={links.ccdl_bluesky}
+                    icon={<Icon link name="Bluesky" />}
+                    size="18px"
+                    pad="0"
+                    rel="noopener noreferrer"
+                  />
                   <TwitterLink
                     color={anchorColor}
                     href={links.ccdl_twitter}
                     icon={<Icon link name="Twitter" />}
-                    margin={{ horizontal: setResponsive('xsmall', 'none') }}
                     pad="0"
                     rel="noopener noreferrer"
                   />
