@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 import { Box, Heading, Text } from 'grommet'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import { useResponsive } from 'hooks/useResponsive'
-import { FilterTextInput } from 'components/shared/FilterTextInput'
+import { LabelTextInput } from 'components/shared/LabelTextInput'
 import {
   InformationList,
   InformationItem
@@ -60,9 +60,10 @@ export const ModalContent = ({ annotations }) => {
             margin={{ bottom: setResponsive('small', 'none') }}
             width={setResponsive('100%', 'auto')}
           >
-            <FilterTextInput
-              setFilter={setFilter}
+            <LabelTextInput
+              value={filter}
               placeholder="Filter metadata"
+              onChange={setFilter}
             />
           </Box>
           <InlineMessage

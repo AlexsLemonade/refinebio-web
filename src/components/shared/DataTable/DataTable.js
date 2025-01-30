@@ -25,7 +25,7 @@ export const DataTable = ({
   manualPagination = false,
   tableExpanded,
   tableHeight, // required for the expanded table view
-  updateSortBy
+  onSortByChange = () => {}
 }) => {
   const tableRef = useRef(null)
   const firstCellRef = useRef(null)
@@ -76,15 +76,13 @@ export const DataTable = ({
   }, [columnWidths])
 
   useEffect(() => {
-    if (updateSortBy) {
-      updateSortBy(
-        sortBy.length > 0
-          ? sortBy[0].desc
-            ? `-${sortBy[0].id}`
-            : sortBy[0].id
-          : ''
-      )
-    }
+    onSortByChange(
+      sortBy.length > 0
+        ? sortBy[0].desc
+          ? `-${sortBy[0].id}`
+          : sortBy[0].id
+        : ''
+    )
   }, [sortBy])
 
   return (

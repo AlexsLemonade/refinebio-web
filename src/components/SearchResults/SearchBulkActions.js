@@ -97,8 +97,7 @@ export const SearchBulkActions = ({ response, query }) => {
         <Box gridArea="page-display" justify="center">
           <Box align="center" direction="row">
             <PageSizes
-              textPrepend="Showing"
-              textAppended="results"
+              ofLabel="results"
               pageSizeLabel="Total Samples"
               pageSize={query.limit}
               totalPages={totalResults}
