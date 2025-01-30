@@ -121,7 +121,7 @@ export const DownloadBlockForm = () => {
             reverse={false}
             responsive
             value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
+            onChange={setUserInput}
           />
           {showOptions && filteredOptions.length > 0 && (
             <Box

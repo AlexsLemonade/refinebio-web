@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Box, Form } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/shared/Button'
@@ -14,13 +15,25 @@ export const SearchBox = ({
   reverse = true,
   size = 'medium',
   value = '',
-  onBlur,
-  onChange,
-  onClick,
-  onFocus,
-  onSubmit
+  onChange = () => {},
+  onSubmit = () => {}
 }) => {
   const { viewport, setResponsive } = useResponsive()
+  const [input, setInput] = useState(value)
+
+  const handleChange = (newVal) => {
+    onChange(newVal)
+    setInput(newVal)
+  }
+
+  const handleClear = () => {
+    setInput('')
+  }
+
+  useEffect(() => {
+    setInput(value)
+  }, [value])
+
   return (
     <Box
       direction={responsive && viewport === 'small' ? 'column' : 'row'}
@@ -34,7 +47,7 @@ export const SearchBox = ({
         htmlFor="search"
         role="search"
         style={{ width: '100%' }}
-        onSubmit={onSubmit}
+        onSubmit={() => onSubmit(input)}
       >
         <Box
           direction={responsive && viewport === 'small' ? 'column' : 'row'}
@@ -56,10 +69,8 @@ export const SearchBox = ({
                 style={{ padding }}
                 type="search"
                 reverse={reverse}
-                value={value}
-                onBlur={onBlur}
-                onChange={onChange}
-                onFocus={onFocus}
+                value={input}
+                onChange={(e) => handleChange(e.target.value)}
               />
             ) : (
               <TextInput
@@ -70,13 +81,11 @@ export const SearchBox = ({
                   fontSize: size === 'large' ? '22px' : '16px',
                   padding: size === 'large' ? '22px' : '16px'
                 }}
-                value={value}
-                onBlur={onBlur}
-                onChange={onChange}
-                onFocus={onFocus}
+                value={input}
+                onChange={(e) => handleChange(e.target.value)}
               />
             )}
-            {value && size === 'large' && (
+            {input && size === 'large' && (
               <Box
                 role="button"
                 style={{
@@ -85,7 +94,7 @@ export const SearchBox = ({
                   right: setResponsive('16px', '16px'),
                   top: '16px'
                 }}
-                onClick={onClick}
+                onClick={handleClear}
               >
                 <Icon name="Close" size="16px" />
                 <SrOnly>Clear text</SrOnly>

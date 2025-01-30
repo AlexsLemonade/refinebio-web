@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
@@ -8,14 +7,11 @@ import { SearchBox } from 'components/shared/SearchBox'
 export const HeroBody = () => {
   const { setResponsive } = useResponsive()
   const { navigateToSearch } = useSearchManager()
-  const [userInput, setUserInput] = useState()
   const queries = ['Notch', 'medulloblastoma', 'GSE24528']
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    navigateToSearch(userInput && { search: userInput })
+  const handleSubmit = (val) => {
+    navigateToSearch((val && { search: val }) || '')
   }
-
   return (
     <>
       <Heading
@@ -31,12 +27,9 @@ export const HeroBody = () => {
           'Search accessions, pathways, etc.,',
           'Search accessions, pathways, diseases, etc.,'
         )}
-        value={userInput}
         size="large"
         primary
         responsive
-        onClick={() => setUserInput('')}
-        onChange={(e) => setUserInput(e.target.value)}
         onSubmit={handleSubmit}
       />
       <Box
