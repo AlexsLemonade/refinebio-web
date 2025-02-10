@@ -1,5 +1,6 @@
 import { Heading, Box, Paragraph } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
+import formatBytes from 'helpers/formatBytes'
 import formatString from 'helpers/formatString'
 import { Button } from 'components/shared/Button'
 import { Column } from 'components/shared/Column'
@@ -16,7 +17,10 @@ export const FileDownloadReady = ({ compendium, downloadUrl }) => {
           {formatString(compendium.primary_organism_name)} compendium...
         </Heading>
       </Box>
-      <Box direction="row" gap="xsmall">
+      <Paragraph>
+        Download size: {formatBytes(compendium.computed_file.size_in_bytes)}
+      </Paragraph>
+      <Box direction="row" gap="xsmall" margin={{ top: 'xsmall' }}>
         <Paragraph>If the download did not start,</Paragraph>
         {downloadUrl && (
           <Button
