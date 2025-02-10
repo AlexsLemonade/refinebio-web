@@ -20,8 +20,10 @@ export const useDownloadCompendium = (compendium) => {
       setDownloadUrl(ok ? response.computed_file.download_url : null)
     }
 
-    if (acceptedTerms) fetchDownloadUrl()
-  }, [compendium, tokenPromise])
+    if (acceptedTerms && tokenPromise) {
+      fetchDownloadUrl()
+    }
+  }, [acceptedTerms, compendium, tokenPromise])
 
   // triggers the file download once the download URL is available
   useEffect(() => {
