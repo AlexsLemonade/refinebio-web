@@ -11,9 +11,10 @@ export const useDownloadCompendium = (compendium) => {
   // fetchs the download URL for the selected compendium
   useEffect(() => {
     const fetchDownloadUrl = async () => {
+      const resolvedToken = await tokenPromise
       const response = await api.compendia.download(
         compendium.id,
-        await tokenPromise
+        resolvedToken
       )
       const { ok, statusCode } = response
       setError(!ok ? statusCode : null)
