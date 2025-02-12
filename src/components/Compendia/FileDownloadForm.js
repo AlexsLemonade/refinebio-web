@@ -54,7 +54,8 @@ export const FileDownloadForm = ({ compendium }) => {
                   />
                 </Text>
               }
-              onClick={() => setIsTermsChecked(!isTermsChecked)}
+              checked={isTermsChecked}
+              onClick={(e) => setIsTermsChecked(e.target.checked)}
             />
           </Column>
           <Column
