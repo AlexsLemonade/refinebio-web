@@ -82,7 +82,7 @@ export const Dataset = ({ dataset }) => {
 }
 
 export const getServerSideProps = async ({ query }) => {
-  const response = await api.dataset.get(query.dataset_id)
+  const response = await api.dataset.get(query.datasetId)
 
   if (response.ok && response) {
     return {
