@@ -1,15 +1,15 @@
 import { Box, Paragraph } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
+import { ExampleCard } from 'components/ExampleCard'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
-import { HeadMapIcon } from '../../images/graphic-heatmap.svg'
-import { PathwayIcon } from '../../images/graphic-pathway.svg'
-import { WaySignsIcon } from '../../images/graphic-way-signs.svg'
-import { ExampleCard } from './ExampleCard'
+import { HeadMapIcon } from '../images/graphic-heatmap.svg'
+import { PathwayIcon } from '../images/graphic-pathway.svg'
+import { WaySignsIcon } from '../images/graphic-way-signs.svg'
 
-export const Examples = () => {
+export const HomeExamples = () => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -120,4 +120,4 @@ export const Examples = () => {
   )
 }
 
-export default Examples
+export default HomeExamples

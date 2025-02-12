@@ -10,7 +10,7 @@ import { links } from 'config'
 const PRubik = styled(Paragraph)`
   font-family: 'Rubik', sans-serif;
 `
-export const CCDL = () => {
+export const AboutCCDL = () => {
   const { viewport, setResponsive } = useResponsive()
 
   return (
@@ -87,4 +87,4 @@ export const CCDL = () => {
   )
 }
 
-export default CCDL
+export default AboutCCDL

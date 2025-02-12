@@ -1,12 +1,12 @@
 import { Box } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
+import { DocumentCard } from 'components/DocumentCard'
 import { Button } from 'components/shared/Button'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
-import { DocumentCard } from './DocumentCard'
 
-export const Documents = () => {
+export const HomeDocuments = () => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -53,4 +53,4 @@ export const Documents = () => {
   )
 }
 
-export default Documents
+export default HomeDocuments

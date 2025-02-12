@@ -1,14 +1,14 @@
 import { Box } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
+import { FeatureCard } from 'components/FeatureCard'
 import { Anchor } from 'components/shared/Anchor'
 import { FixedContainer } from 'components/shared/FixedContainer'
 import { Row } from 'components/shared/Row'
 import { links } from 'config'
-import { FolderIcon } from '../../images/graphic-folder.svg'
-import { SearchIcon } from '../../images/graphic-search.svg'
-import { FeatureCard } from './FeatureCard'
+import { FolderIcon } from '../images/graphic-folder.svg'
+import { SearchIcon } from '../images/graphic-search.svg'
 
-export const Features = () => {
+export const HomeFeatures = () => {
   const { viewport, setResponsive } = useResponsive()
 
   return (
@@ -61,4 +61,4 @@ export const Features = () => {
   )
 }
 
-export default Features
+export default HomeFeatures

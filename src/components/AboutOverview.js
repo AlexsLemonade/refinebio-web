@@ -51,7 +51,7 @@ const Card = ({
   )
 }
 
-export const Overview = () => {
+export const AboutOverview = () => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -106,4 +106,4 @@ export const Overview = () => {
   )
 }
 
-export default Overview
+export default AboutOverview
