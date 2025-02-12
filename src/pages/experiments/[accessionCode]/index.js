@@ -6,8 +6,6 @@ export const AccessionCode = () => {
 }
 
 export const getServerSideProps = async ({ query }) => {
-  console.log({ query })
-
   const experiment = await api.experiments.get(query.accessionCode)
   // returns 404
   if (!experiment) {
@@ -15,8 +13,6 @@ export const getServerSideProps = async ({ query }) => {
       notFound: true
     }
   }
-
-  console.log({ experiment })
 
   // redirects to the experiment page
   return {
