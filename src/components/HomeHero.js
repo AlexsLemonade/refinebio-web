@@ -9,7 +9,7 @@ import { SearchBox } from 'components/shared/SearchBox'
 export const HomeHero = () => {
   const { setResponsive } = useResponsive()
   const { navigateToSearch } = useSearchManager()
-  const queries = ['Notch', 'medulloblastoma', 'GSE24528']
+  const exampleSearches = ['Notch', 'medulloblastoma', 'GSE24528']
 
   const handleSubmit = (val) => {
     navigateToSearch((val && { search: val }) || '')
@@ -51,13 +51,13 @@ export const HomeHero = () => {
           width="100%"
         >
           <Text size="xlarge">Try searching for:</Text>
-          {queries.map((query) => (
+          {exampleSearches.map((es) => (
             <Button
-              key={query}
-              label={<Text size="xlarge">{query}</Text>}
+              key={es}
+              label={<Text size="xlarge">{es}</Text>}
               link
               margin={{ top: setResponsive('small') }}
-              onClick={() => navigateToSearch({ search: query })}
+              onClick={() => navigateToSearch({ search: es })}
             />
           ))}
         </Box>
