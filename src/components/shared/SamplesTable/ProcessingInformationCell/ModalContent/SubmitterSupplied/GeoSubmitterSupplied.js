@@ -1,6 +1,9 @@
 import { Box, Heading, Paragraph } from 'grommet'
 import { Anchor } from 'components/Anchor'
-import { InformationList, InformationItem } from 'components/InformationList'
+import {
+  InformationList,
+  InformationItem
+} from 'components/shared/InformationList'
 import { links } from 'config'
 
 export const GeoSubmitterSupplied = ({

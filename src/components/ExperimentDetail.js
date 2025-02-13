@@ -13,7 +13,10 @@ import { ExperimentCardAction } from 'components/ExperimentCardAction'
 import { ExperimentCardHeader } from 'components/ExperimentCardHeader'
 import { ExperimentCardMeta } from 'components/ExperimentCardMeta'
 import { FixedContainer } from 'components/FixedContainer'
-import { InformationList, InformationItem } from 'components/InformationList'
+import {
+  InformationList,
+  InformationItem
+} from 'components/shared/InformationList'
 import { TextHighlight } from 'components/TextHighlight'
 
 export const ExperimentDetail = ({ experiment }) => {

@@ -5,7 +5,7 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { api } from 'api'
 import getDatasetState from 'helpers/getDatasetState'
-import { Error } from 'components/Error'
+import { Error } from 'components/shared/Error'
 import { FixedContainer } from 'components/FixedContainer'
 import { Row } from 'components/Row'
 import {

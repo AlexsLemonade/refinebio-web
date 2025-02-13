@@ -3,7 +3,10 @@ import { SamplesContextProvider } from 'contexts/SamplesContext'
 import { useResponsive } from 'hooks/useResponsive'
 import { Column } from 'components/Column'
 import { Row } from 'components/Row'
-import { SamplesTable, SamplesTableAction } from 'components/SamplesTable'
+import {
+  SamplesTable,
+  SamplesTableAction
+} from 'components/shared/SamplesTable'
 
 export const ExperimentSamplesTable = ({ experiment }) => {
   const { setResponsive } = useResponsive()

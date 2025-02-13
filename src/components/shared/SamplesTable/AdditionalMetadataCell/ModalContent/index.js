@@ -4,7 +4,10 @@ import { Box, Heading, Text } from 'grommet'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import { useResponsive } from 'hooks/useResponsive'
 import { LabelTextInput } from 'components/LabelTextInput'
-import { InformationList, InformationItem } from 'components/InformationList'
+import {
+  InformationList,
+  InformationItem
+} from 'components/shared/InformationList'
 import { InlineMessage } from 'components/InlineMessage'
 import { Row } from 'components/Row'
 import { TextNull } from 'components/TextNull'

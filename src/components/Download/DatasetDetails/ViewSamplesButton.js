@@ -1,7 +1,7 @@
 import { Box, Heading } from 'grommet'
 import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
-import { SamplesTable } from 'components/SamplesTable'
+import { SamplesTable } from 'components/shared/SamplesTable'
 import { TextCapitalized } from 'components/TextCapitalized'
 import { Button } from 'components/Button'
 import { Modal } from 'components/Modal'
