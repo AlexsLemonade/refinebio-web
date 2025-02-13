@@ -14,14 +14,14 @@ import parseDefaultSearchParams from 'helpers/parseDefaultSearchParams'
 import { isLegacyUrl, getNewQueryParams } from 'helpers/supportLegacyUrl'
 import { Button } from 'components/shared/Button'
 import { BoxBlock } from 'components/shared/BoxBlock'
+import { ExperimentCard } from 'components/shared/ExperimentCard'
 import { FixedContainer } from 'components/shared/FixedContainer'
-import { LayerResponsive } from 'components/shared/LayerResponsive'
 import { Icon } from 'components/shared/Icon'
+import { LayerResponsive } from 'components/shared/LayerResponsive'
 import { PageTitle } from 'components/shared/PageTitle'
 import { Pagination } from 'components/shared/Pagination'
 import { SearchBox } from 'components/shared/SearchBox'
 import { SearchInfoBanner } from 'components/SearchResults/SearchInfoBanner'
-import { SearchCard } from 'components/shared/SearchCard'
 import { Spinner } from 'components/shared/Spinner'
 import {
   RequestSearchFormAlert,
@@ -167,7 +167,7 @@ export const Search = ({ query, response }) => {
                   {results.map((result, i) =>
                     result.isMatchedAccessionCode ? (
                       <Fragment key={result.accession_code}>
-                        <SearchCard
+                        <ExperimentCard
                           key={result.accession_code}
                           experiment={result}
                         />
@@ -188,7 +188,7 @@ export const Search = ({ query, response }) => {
                           )}
                       </Fragment>
                     ) : (
-                      <SearchCard
+                      <ExperimentCard
                         key={result.accession_code}
                         experiment={result}
                       />

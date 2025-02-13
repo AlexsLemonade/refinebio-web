@@ -15,9 +15,9 @@ import {
   InformationItem
 } from 'components/shared/InformationList'
 import { TextHighlight } from 'components/shared/TextHighlight'
-import { SearchCardHeader } from 'components/shared/SearchCard/SearchCardHeader'
-import { SearchCardAction } from 'components/shared/SearchCard/SearchCardAction'
-import { SearchCardMeta } from 'components/shared/SearchCard/SearchCardMeta'
+import { ExperimentCardAction } from 'components/shared/ExperimentCardAction'
+import { ExperimentCardHeader } from 'components/shared/ExperimentCardHeader'
+import { ExperimentCardMeta } from 'components/shared/ExperimentCardMeta'
 
 export const ExperimentDetail = ({ experiment }) => {
   const { setResponsive } = useResponsive()
@@ -48,17 +48,17 @@ export const ExperimentDetail = ({ experiment }) => {
           margin={{ bottom: 'medium' }}
         >
           <Box gridArea="header">
-            <SearchCardHeader experiment={experiment} />
+            <ExperimentCardHeader experiment={experiment} />
           </Box>
           <Box
             gridArea="ctas"
             margin={{ top: setResponsive('none', 'large') }}
             align="end"
           >
-            <SearchCardAction experiment={experiment} />
+            <ExperimentCardAction experiment={experiment} />
           </Box>
           <Box gridArea="meta">
-            <SearchCardMeta experiment={experiment} size="medium" />
+            <ExperimentCardMeta experiment={experiment} size="medium" />
           </Box>
         </Grid>
         <Box margin={{ bottom: 'medium' }}>

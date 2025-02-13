@@ -1,7 +1,7 @@
 import { useModal } from 'hooks/useModal'
 import { Button } from 'components/shared/Button'
 import { Modal } from 'components/shared/Modal'
-import { DownloadNowModal } from './DownloadNowModal'
+import { DownloadNowModal } from 'components/shared/DownloadNowModal'
 
 export const DownloadNowButton = ({
   experiment,

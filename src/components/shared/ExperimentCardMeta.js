@@ -12,7 +12,7 @@ import { Row } from 'components/shared/Row'
 import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
 
-export const SearchCardMeta = ({ experiment, size = 'small' }) => {
+export const ExperimentCardMeta = ({ experiment, size = 'small' }) => {
   const { setResponsive } = useResponsive()
   const {
     num_downloadable_samples: downloadableSamples,
@@ -93,4 +93,4 @@ export const SearchCardMeta = ({ experiment, size = 'small' }) => {
   )
 }
 
-export default SearchCardMeta
+export default ExperimentCardMeta

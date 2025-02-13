@@ -5,11 +5,11 @@ import { useResponsive } from 'hooks/useResponsive'
 import { getFormattedExperiment } from 'helpers/formatDatasetAction'
 import getTechnologyFromExperiment from 'helpers/getTechnologyFromExperiment'
 import { DatasetActionButton } from 'components/shared/DatasetActionButton'
-import { DownloadNowButton } from './DownloadNowButton'
-import { ProcessingDatasetPill } from './ProcessingDatasetPill'
-import { RequestExperimentFormButton } from './RequestExperimentFormButton'
+import { DownloadNowButton } from 'components/shared/DownloadNowButton'
+import { ProcessingDatasetPill } from 'components/shared/ProcessingDatasetPill'
+import { RequestExperimentFormButton } from 'components/shared/RequestExperimentFormButton'
 
-export const SearchCardAction = ({ experiment }) => {
+export const ExperimentCardAction = ({ experiment }) => {
   const { setResponsive } = useResponsive()
   const {
     accession_code: accessionCode,
@@ -58,4 +58,4 @@ export const SearchCardAction = ({ experiment }) => {
   )
 }
 
-export default memo(SearchCardAction)
+export default memo(ExperimentCardAction)

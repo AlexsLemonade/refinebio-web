@@ -4,12 +4,12 @@ import formatURLString from 'helpers/formatURLString'
 import gtag from 'analytics/gtag'
 import { Button } from 'components/shared/Button'
 
-export const SearchCardFooter = ({ experiment }) => {
+export const ExperimentCardFooter = ({ experiment }) => {
   const { accession_code: accessionCode, title } = experiment
   const { push } = useRouter()
 
   const handleClick = () => {
-    gtag.trackExperimentPageClick(SearchCardFooter)
+    gtag.trackExperimentPageClick(ExperimentCardFooter)
     push({
       pathname: `/experiments/${accessionCode}/${formatURLString(title)}`,
       query: { ref: 'view-samples' }
@@ -23,4 +23,4 @@ export const SearchCardFooter = ({ experiment }) => {
   )
 }
 
-export default SearchCardFooter
+export default ExperimentCardFooter

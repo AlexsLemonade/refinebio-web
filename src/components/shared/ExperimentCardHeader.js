@@ -6,12 +6,12 @@ import { IconBadge } from 'components/shared/IconBadge'
 import { Anchor } from 'components/shared/Anchor'
 import { TextHighlight } from 'components/shared/TextHighlight'
 
-export const SearchCardHeader = ({ experiment, isLinked = false }) => {
+export const ExperimentCardHeader = ({ experiment, isLinked = false }) => {
   const { accession_code: accessionCode, title } = experiment
   const { setResponsive } = useResponsive()
 
   const handleClick = () => {
-    gtag.trackExperimentPageClick(SearchCardHeader)
+    gtag.trackExperimentPageClick(ExperimentCardHeader)
   }
 
   return (
@@ -49,4 +49,4 @@ export const SearchCardHeader = ({ experiment, isLinked = false }) => {
   )
 }
 
-export default SearchCardHeader
+export default ExperimentCardHeader
