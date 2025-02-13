@@ -1,5 +1,5 @@
-import { FixedContainer } from 'components/shared/FixedContainer'
-import { Error } from 'components/shared/Error'
+import { Error } from 'components/Error'
+import { FixedContainer } from 'components/FixedContainer'
 
 export const ErrorPage = ({ statusCode }) => (
   <FixedContainer>

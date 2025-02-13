@@ -3,10 +3,10 @@ import { useRouter } from 'next/router'
 import { Box, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 import isMatchPath from 'helpers/isMatchPath'
-import { Anchor } from 'components/shared/Anchor'
-import { Button as SharedButton } from 'components/shared/Button'
-import { List } from 'components/shared/List'
-import { Icon } from 'components/shared/Icon'
+import { Anchor } from 'components/Anchor'
+import { Button as SharedButton } from 'components/Button'
+import { List } from 'components/List'
+import { Icon } from 'components/Icon'
 
 const Button = styled(SharedButton)`
   ${({ theme, light }) =>

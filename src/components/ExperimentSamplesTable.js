@@ -1,12 +1,9 @@
 import { Heading } from 'grommet'
 import { SamplesContextProvider } from 'contexts/SamplesContext'
 import { useResponsive } from 'hooks/useResponsive'
-import { Column } from 'components/shared/Column'
-import { Row } from 'components/shared/Row'
-import {
-  SamplesTable,
-  SamplesTableAction
-} from 'components/shared/SamplesTable'
+import { Column } from 'components/Column'
+import { Row } from 'components/Row'
+import { SamplesTable, SamplesTableAction } from 'components/SamplesTable'
 
 export const ExperimentSamplesTable = ({ experiment }) => {
   const { setResponsive } = useResponsive()

@@ -1,8 +1,8 @@
 import { Box, Heading, Text } from 'grommet'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
-import { Button } from 'components/shared/Button'
-import { SearchBox } from 'components/shared/SearchBox'
+import { Button } from 'components/Button'
+import { SearchBox } from 'components/SearchBox'
 
 export const HeroBody = () => {
   const { setResponsive } = useResponsive()

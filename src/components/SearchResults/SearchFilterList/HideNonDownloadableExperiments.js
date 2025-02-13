@@ -1,5 +1,5 @@
 import { useSearchManager } from 'hooks/useSearchManager'
-import { CheckBox } from 'components/shared/CheckBox'
+import { CheckBox } from 'components/CheckBox'
 import { options } from 'config'
 
 export const HideNonDownloadableExperiments = () => {

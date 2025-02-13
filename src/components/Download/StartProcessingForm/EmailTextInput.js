@@ -1,4 +1,4 @@
-import { TextInput } from 'components/shared/TextInput'
+import { TextInput } from 'components/TextInput'
 
 export const EmailTextInput = ({ error, touched, value, handleChange }) => {
   return (

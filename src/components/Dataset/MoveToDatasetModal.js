@@ -3,11 +3,11 @@ import { Box, Form, Heading } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
-import { Anchor } from 'components/shared/Anchor'
-import { Button } from 'components/shared/Button'
-import { Icon } from 'components/shared/Icon'
-import { RadioButtonGroup } from 'components/shared/RadioButtonGroup'
-import { Row } from 'components/shared/Row'
+import { Anchor } from 'components/Anchor'
+import { Button } from 'components/Button'
+import { Icon } from 'components/Icon'
+import { RadioButtonGroup } from 'components/RadioButtonGroup'
+import { Row } from 'components/Row'
 
 export const MoveToDatasetModal = ({ value, onChange, onReset, onSubmit }) => {
   const { setResponsive } = useResponsive()

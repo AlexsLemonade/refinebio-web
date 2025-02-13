@@ -1,7 +1,7 @@
 import { Box, Heading, Paragraph } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { Column } from 'components/shared/Column'
-import { Row } from 'components/shared/Row'
+import { Column } from 'components/Column'
+import { Row } from 'components/Row'
 
 export const FeatureCard = ({ heading, body, svgIcon, ...props }) => {
   const { setResponsive } = useResponsive()

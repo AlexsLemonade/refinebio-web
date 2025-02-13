@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Anchor as SharedAnchor } from 'components/shared/Anchor'
+import { Anchor as SharedAnchor } from 'components/Anchor'
 
 const Anchor = styled(SharedAnchor)`
   ${({ theme, light, viewport }) => css`

@@ -1,10 +1,10 @@
 import { Box, Heading } from 'grommet'
 import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
-import { SamplesTable } from 'components/shared/SamplesTable'
-import { TextCapitalized } from 'components/shared/TextCapitalized'
-import { Button } from 'components/shared/Button'
-import { Modal } from 'components/shared/Modal'
+import { SamplesTable } from 'components/SamplesTable'
+import { TextCapitalized } from 'components/TextCapitalized'
+import { Button } from 'components/Button'
+import { Modal } from 'components/Modal'
 
 export const ViewSamplesButton = ({ dataset, modalTitle, isImmutable }) => {
   const { setResponsive } = useResponsive()
