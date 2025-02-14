@@ -1,13 +1,13 @@
 import { memo } from 'react'
 import { Box, Grid } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { SearchCardHeader } from './SearchCardHeader'
-import { SearchCardBody } from './SearchCardBody'
-import { SearchCardFooter } from './SearchCardFooter'
-import { SearchCardAction } from './SearchCardAction'
-import { SearchCardMeta } from './SearchCardMeta'
+import { ExperimentCardAction } from 'components/shared/ExperimentCardAction'
+import { ExperimentCardHeader } from 'components/shared/ExperimentCardHeader'
+import { ExperimentCardBody } from 'components/shared/ExperimentCardBody'
+import { ExperimentCardFooter } from 'components/shared/ExperimentCardFooter'
+import { ExperimentCardMeta } from 'components/shared/ExperimentCardMeta'
 
-export const SearchCard = ({ experiment }) => {
+export const ExperimentCard = ({ experiment }) => {
   const { viewport, setResponsive } = useResponsive()
 
   return (
@@ -38,25 +38,25 @@ export const SearchCard = ({ experiment }) => {
         }}
       >
         <Box gridArea="header">
-          <SearchCardHeader experiment={experiment} isLinked />
+          <ExperimentCardHeader experiment={experiment} isLinked />
         </Box>
         <Box gridArea="ctas" margin={{ top: setResponsive('none', 'large') }}>
           <Box align={setResponsive('start', 'end')} width="100%">
-            <SearchCardAction experiment={experiment} />
+            <ExperimentCardAction experiment={experiment} />
           </Box>
         </Box>
         <Box gridArea="meta">
-          <SearchCardMeta experiment={experiment} />
+          <ExperimentCardMeta experiment={experiment} />
         </Box>
       </Grid>
       {viewport !== 'small' && (
         <>
-          <SearchCardBody experiment={experiment} />
-          <SearchCardFooter experiment={experiment} />
+          <ExperimentCardBody experiment={experiment} />
+          <ExperimentCardFooter experiment={experiment} />
         </>
       )}
     </Box>
   )
 }
 
-export default memo(SearchCard)
+export default memo(ExperimentCard)

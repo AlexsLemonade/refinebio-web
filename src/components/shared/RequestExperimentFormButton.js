@@ -3,7 +3,7 @@ import { useRefinebio } from 'hooks/useRefinebio'
 import { Button } from 'components/shared/Button'
 import { InlineMessage } from 'components/shared/InlineMessage'
 import { ModalPage } from 'components/shared/ModalPage'
-import { RequestExperimentForm } from './RequestExperimentForm'
+import { RequestExperimentForm } from 'components/shared/RequestExperimentForm'
 
 export const RequestExperimentFormButton = ({ accessionCode }) => {
   const { requestedExperiments } = useRefinebio()

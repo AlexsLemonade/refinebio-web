@@ -7,7 +7,7 @@ import { Anchor } from 'components/shared/Anchor'
 import { TextHighlight } from 'components/shared/TextHighlight'
 import { TextNull } from 'components/shared/TextNull'
 
-export const SearchCardBody = ({ experiment, charLimit = 300 }) => {
+export const ExperimentCardBody = ({ experiment, charLimit = 300 }) => {
   const {
     alternate_accession_code: alternateAccessionCode,
     description,
@@ -123,4 +123,4 @@ export const SearchCardBody = ({ experiment, charLimit = 300 }) => {
   )
 }
 
-export default SearchCardBody
+export default ExperimentCardBody

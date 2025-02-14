@@ -2,7 +2,7 @@ import { Box } from 'grommet'
 import { useModal } from 'hooks/useModal'
 import { Modal } from 'components/shared/Modal'
 import { Pill } from 'components/shared/Pill'
-import { ProcessingDatasetPillModal } from './ProcessingDatasetPillModal'
+import { ProcessingDatasetPillModal } from 'components/shared/ProcessingDatasetPillModal'
 
 // show the processing pill while one-off experiment is being processed
 export const ProcessingDatasetPill = ({ accessionCode }) => {
