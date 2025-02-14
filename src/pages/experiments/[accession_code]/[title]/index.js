@@ -30,10 +30,11 @@ export const Experiment = ({ experiment }) => {
 
   const scrollToTable = () => {
     const offset = (headerRef.current.offsetHeight || 0) + 10
-    const tableTop =
-      tableContainerRef.current.getBoundingClientRect().top +
-      window.scrollY -
-      offset
+    const tableTop = tableContainerRef.current
+      ? tableContainerRef.current.getBoundingClientRect().top +
+        window.scrollY -
+        offset
+      : 0
     scrollTo({
       top: tableTop
     })
