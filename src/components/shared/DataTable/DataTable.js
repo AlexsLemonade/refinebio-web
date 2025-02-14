@@ -10,7 +10,7 @@ import {
 import { useSticky } from 'react-table-sticky'
 import { Box, Text } from 'grommet'
 import { useIntersectObserver } from 'hooks/useIntersectObserver'
-import { BoxBlock } from 'components/shared/BoxBlock'
+import { BoxBlock } from 'components/BoxBlock'
 import { Resizer } from './Resizer'
 import { SortBy } from './SortBy'
 import { Table, TableHeader, TableBody, TableRow, TableCell } from './Table'

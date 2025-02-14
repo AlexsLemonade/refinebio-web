@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { Box } from 'grommet'
-import { Icon } from 'components/shared/Icon'
+import { Icon } from 'components/Icon'
 
 const Border = memo(({ isSorted }) => (
   <Box

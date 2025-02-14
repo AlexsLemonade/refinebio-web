@@ -4,7 +4,7 @@ import { HomeDocuments } from 'components/HomeDocuments'
 import { HomeExamples } from 'components/HomeExamples'
 import { HomeFeatures } from 'components/HomeFeatures'
 import { HomeHero } from 'components/HomeHero'
-import { SignUpBlock } from 'components/shared/SignUpBlock'
+import { SignUpBlock } from 'components/SignUpBlock'
 
 const Home = () => {
   const { setResponsive } = useResponsive()

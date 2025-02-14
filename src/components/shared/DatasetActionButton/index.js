@@ -1,6 +1,6 @@
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useDatasetAction } from 'hooks/useDatasetAction'
-import { Button } from 'components/shared/Button'
+import { Button } from 'components/Button'
 import { AddRemainingDatasetButton } from './AddRemainingDatasetButton'
 import { AddToDatasetButton } from './AddToDatasetButton'
 import { RemoveDatasetButton } from './RemoveDatasetButton'

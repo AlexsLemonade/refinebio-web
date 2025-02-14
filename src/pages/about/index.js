@@ -3,7 +3,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import { AboutCCDL } from 'components/AboutCCDL'
 import { AboutHero } from 'components/AboutHero'
 import { AboutOverview } from 'components/AboutOverview'
-import { FixedContainer } from 'components/shared/FixedContainer'
+import { FixedContainer } from 'components/FixedContainer'
 
 const About = () => {
   const { setResponsive } = useResponsive()

@@ -1,8 +1,8 @@
 import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import formatNumbers from 'helpers/formatNumbers'
-import { Button } from 'components/shared/Button'
-import { InlineMessage } from 'components/shared/InlineMessage'
+import { Button } from 'components/Button'
+import { InlineMessage } from 'components/InlineMessage'
 
 export const AddRemainingDatasetButton = ({ dataToAdd, samplesInDataset }) => {
   const { loading, addSamples } = useDatasetManager()

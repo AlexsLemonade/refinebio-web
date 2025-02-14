@@ -1,6 +1,6 @@
 import { Box, Heading } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { Row } from 'components/shared/Row'
+import { Row } from 'components/Row'
 
 export const Template = ({
   heading,

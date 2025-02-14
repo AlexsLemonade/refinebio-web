@@ -3,8 +3,8 @@ import { useResponsive } from 'hooks/useResponsive'
 import abbreviateNumbers from 'helpers/abbreviateNumbers'
 import formatBytes from 'helpers/formatBytes'
 import formatNumbers from 'helpers/formatNumbers'
-import { FixedContainer } from 'components/shared/FixedContainer'
-import { Hero } from 'components/shared/Hero'
+import { FixedContainer } from 'components/FixedContainer'
+import { Hero } from 'components/Hero'
 import { cache } from 'config'
 
 const Block = ({ count, text }) => {

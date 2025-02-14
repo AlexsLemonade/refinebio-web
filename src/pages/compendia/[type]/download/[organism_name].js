@@ -1,32 +1,29 @@
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
-import { Box, Heading, Paragraph } from 'grommet'
+import { useEffect, useState } from 'react'
+import { Box } from 'grommet'
 import { useRefinebio } from 'hooks/useRefinebio'
 import { useDownloadCompendium } from 'hooks/useDownloadCompendium'
 import { useResponsive } from 'hooks/useResponsive'
 import { api } from 'api'
 import { compendia } from 'config'
-import { Button } from 'components/shared/Button'
-import { Column } from 'components/shared/Column'
+import { Column } from 'components/Column'
 import { Error } from 'components/shared/Error'
-import { FixedContainer } from 'components/shared/FixedContainer'
-import { Icon } from 'components/shared/Icon'
-import { Row } from 'components/shared/Row'
+import { FixedContainer } from 'components/FixedContainer'
+import { Row } from 'components/Row'
 import { Explore } from 'components/Compendia/Explore'
-import formatString from 'helpers/formatString'
-import { Spinner } from 'components/shared/Spinner'
+import { FileDownloadForm } from 'components/Compendia/FileDownloadForm'
+import { FileDownloadReady } from 'components/Compendia/FileDownloadReady'
 
 export const DownloadCompendium = ({ compendium }) => {
   const { setResponsive } = useResponsive()
-  const { push, query } = useRouter()
   const { acceptedTerms } = useRefinebio()
   const { error, downloadUrl } = useDownloadCompendium(compendium)
+  const [downloadReady, setDownloadReady] = useState(false)
 
   useEffect(() => {
-    // TODO: File a issue for handling shared links with no token (e.g., modal popup or pre-polulate form)
-    // redirects users to the selected compendia tab if no acceptedTerms
-    if (!acceptedTerms) push(`/compendia/${query.type}`)
-  }, [acceptedTerms])
+    if (acceptedTerms && downloadUrl) {
+      setDownloadReady(true)
+    }
+  }, [acceptedTerms, downloadUrl])
 
   if (error) {
     return (
@@ -41,9 +38,6 @@ export const DownloadCompendium = ({ compendium }) => {
     )
   }
 
-  // shows Spinner until the download URL is ready
-  if (!downloadUrl) return <Spinner />
-
   return (
     <FixedContainer>
       <Box
@@ -53,27 +47,15 @@ export const DownloadCompendium = ({ compendium }) => {
           bottom: 'xlarge'
         }}
       >
-        <Row justify="center" width={setResponsive('100%', '70%')}>
-          <Column align={setResponsive('center', 'start')}>
-            <Box direction="row" gap="xxsmall" margin={{ bottom: 'small' }}>
-              <Heading level={1}>
-                <Icon color="success" name="Success" /> Downloading{' '}
-                {formatString(compendium.primary_organism_name || '')}{' '}
-                compendium...
-              </Heading>
-            </Box>
-            <Box direction="start" gap="xsmall">
-              <Paragraph>If the download did not start,</Paragraph>
-              {downloadUrl && (
-                <Button
-                  label="click here."
-                  href={downloadUrl}
-                  link
-                  linkFontSize="16px"
-                />
-              )}
-            </Box>
-          </Column>
+        <Row justify="center" width={setResponsive('100%', '85%')}>
+          {downloadReady ? (
+            <FileDownloadReady
+              compendium={compendium}
+              downloadUrl={downloadUrl}
+            />
+          ) : (
+            <FileDownloadForm compendium={compendium} />
+          )}
           <Column
             align="center"
             margin={{

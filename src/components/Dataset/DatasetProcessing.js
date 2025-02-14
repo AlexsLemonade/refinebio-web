@@ -1,9 +1,9 @@
 import { Box, Heading, Paragraph } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
-import { Column } from 'components/shared/Column'
-import { IconProcessingGears } from 'components/shared/IconProcessingGears'
-import { Row } from 'components/shared/Row'
+import { Column } from 'components/Column'
+import { IconProcessingGears } from 'components/IconProcessingGears'
+import { Row } from 'components/Row'
 import { DatasetExplore } from './DatasetExplore'
 
 export const DatasetProcessing = ({ dataset }) => {

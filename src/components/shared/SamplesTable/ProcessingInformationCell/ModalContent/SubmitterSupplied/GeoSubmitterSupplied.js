@@ -1,5 +1,5 @@
 import { Box, Heading, Paragraph } from 'grommet'
-import { Anchor } from 'components/shared/Anchor'
+import { Anchor } from 'components/Anchor'
 import {
   InformationList,
   InformationItem

@@ -1,7 +1,7 @@
 import { Box, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 import { useResponsive } from 'hooks/useResponsive'
-import { Row } from 'components/shared/Row'
+import { Row } from 'components/Row'
 
 export const SuppliedProtocolList = styled(Box)`
   ${({ theme }) => css`

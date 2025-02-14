@@ -4,11 +4,11 @@ import gtag from 'analytics/gtag'
 import { cache, links } from 'config'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
-import { Anchor } from 'components/shared/Anchor'
-import { Button } from 'components/shared/Button'
-import { Column } from 'components/shared/Column'
-import { InlineMessage } from 'components/shared/InlineMessage'
-import { Row } from 'components/shared/Row'
+import { Anchor } from 'components/Anchor'
+import { Button } from 'components/Button'
+import { Column } from 'components/Column'
+import { InlineMessage } from 'components/InlineMessage'
+import { Row } from 'components/Row'
 
 export const DatasetRegenerate = ({ dataset }) => {
   const { worker_version: workerVersion } = dataset
