@@ -51,10 +51,7 @@ export const DownloadNowModal = ({
   }
 
   useEffect(() => {
-    if (formValues) {
-      setAcceptedTerms(formValues.terms)
-      if (acceptedTerms) submit()
-    }
+    if (acceptedTerms && formValues) submit()
   }, [acceptedTerms, formValues])
 
   return (
@@ -83,6 +80,7 @@ export const DownloadNowModal = ({
         onSubmit={async (values, { setSubmitting }) => {
           const { terms, ...rest } = values
           setFormValues(rest)
+          setAcceptedTerms(terms)
           setSubmitting(false)
         }}
       >

@@ -45,10 +45,7 @@ export const StartProcessingForm = ({ dataset }) => {
   }
 
   useEffect(() => {
-    if (formValues) {
-      setAcceptedTerms(formValues.terms)
-      if (acceptedTerms) submit()
-    }
+    if (acceptedTerms && formValues) submit()
   }, [acceptedTerms, formValues])
 
   return (
@@ -63,6 +60,7 @@ export const StartProcessingForm = ({ dataset }) => {
       onSubmit={async (values, { setSubmitting }) => {
         const { terms, ...rest } = values
         setFormValues(rest)
+        setAcceptedTerms(terms)
         setSubmitting(false)
       }}
     >
