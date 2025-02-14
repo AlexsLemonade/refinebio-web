@@ -13,7 +13,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import getArrayCounts from 'helpers/getArrayCounts'
 import formatNumbers from 'helpers/formatNumbers'
 import formatString from 'helpers/formatString'
-import { Row } from 'components/shared/Row'
+import { Row } from 'components/Row'
 import { TotalRow } from './TotalRow'
 
 export const DatasetSummary = ({ dataset }) => {

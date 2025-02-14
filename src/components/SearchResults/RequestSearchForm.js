@@ -4,11 +4,11 @@ import { Box, Form, Heading, Paragraph, Text } from 'grommet'
 import { validationSchemas } from 'config'
 import requestData from 'helpers/requestData'
 import { useResponsive } from 'hooks/useResponsive'
-import { FormField } from 'components/shared/FormField'
-import { RequestForm } from 'components/shared/RequestForm'
-import { TextInput } from 'components/shared/TextInput'
-import { TextNull } from 'components/shared/TextNull'
-import { TextRequired } from 'components/shared/TextRequired'
+import { FormField } from 'components/FormField'
+import { RequestForm } from 'components/RequestForm'
+import { TextInput } from 'components/TextInput'
+import { TextNull } from 'components/TextNull'
+import { TextRequired } from 'components/TextRequired'
 
 export const RequestSearchForm = ({ onSubmit = () => {} }) => {
   const {

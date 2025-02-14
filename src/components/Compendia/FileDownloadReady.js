@@ -2,9 +2,9 @@ import { Heading, Box, Paragraph } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import formatBytes from 'helpers/formatBytes'
 import formatString from 'helpers/formatString'
-import { Button } from 'components/shared/Button'
-import { Column } from 'components/shared/Column'
-import { Icon } from 'components/shared/Icon'
+import { Button } from 'components/Button'
+import { Column } from 'components/Column'
+import { Icon } from 'components/Icon'
 
 export const FileDownloadReady = ({ compendium, downloadUrl }) => {
   const { setResponsive } = useResponsive()

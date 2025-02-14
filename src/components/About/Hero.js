@@ -4,8 +4,8 @@ import abbreviateNumbers from 'helpers/abbreviateNumbers'
 import formatBytes from 'helpers/formatBytes'
 import formatNumbers from 'helpers/formatNumbers'
 import { cache } from 'config'
-import { FixedContainer } from 'components/shared/FixedContainer'
-import { Hero as SharedHero } from 'components/shared/Hero'
+import { FixedContainer } from 'components/FixedContainer'
+import { Hero as SharedHero } from 'components/Hero'
 
 const HeroHeader = () => {
   const { viewport, setResponsive } = useResponsive()

@@ -1,9 +1,9 @@
 import { Box, Heading } from 'grommet'
-import { Alert } from 'components/shared/Alert'
-import { Anchor } from 'components/shared/Anchor'
-import { CheckBox } from 'components/shared/CheckBox'
-import { ExpandableBlock } from 'components/shared/ExpandableBlock'
-import { Icon } from 'components/shared/Icon'
+import { Alert } from 'components/Alert'
+import { Anchor } from 'components/Anchor'
+import { CheckBox } from 'components/CheckBox'
+import { ExpandableBlock } from 'components/ExpandableBlock'
+import { Icon } from 'components/Icon'
 import { links } from 'config'
 
 export const AdvancedOptions = ({

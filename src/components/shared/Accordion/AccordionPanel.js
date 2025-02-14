@@ -1,8 +1,8 @@
 import { Children } from 'react'
 import { Box, Text } from 'grommet'
 import isFunction from 'helpers/isFunction'
-import { ExpandableBlock } from 'components/shared/ExpandableBlock'
-import { Icon } from 'components/shared/Icon'
+import { ExpandableBlock } from 'components/ExpandableBlock'
+import { Icon } from 'components/Icon'
 
 export const AccordionPanel = ({
   title,

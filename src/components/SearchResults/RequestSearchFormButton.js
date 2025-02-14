@@ -1,6 +1,6 @@
 import { useModal } from 'hooks/useModal'
-import { Button } from 'components/shared/Button'
-import { ModalPage } from 'components/shared/ModalPage'
+import { Button } from 'components/Button'
+import { ModalPage } from 'components/ModalPage'
 import { RequestSearchForm } from './RequestSearchForm'
 
 export const RequestSearchFormButton = ({ size }) => {

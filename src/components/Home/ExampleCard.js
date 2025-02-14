@@ -1,6 +1,6 @@
 import { Box, Heading, Paragraph } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { Column } from 'components/shared/Column'
+import { Column } from 'components/Column'
 
 export const ExampleCard = ({ heading, body, footer, svgIcon, ...props }) => {
   const { setResponsive } = useResponsive()

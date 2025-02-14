@@ -1,6 +1,6 @@
 import { Box } from 'grommet'
 import { useSearchManager } from 'hooks/useSearchManager'
-import { CheckBox } from 'components/shared/CheckBox'
+import { CheckBox } from 'components/CheckBox'
 
 export const SearchBooleanFilter = ({
   label,

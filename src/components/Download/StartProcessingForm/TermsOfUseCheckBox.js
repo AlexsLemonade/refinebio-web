@@ -1,7 +1,7 @@
 import { Text } from 'grommet'
 import { links } from 'config'
-import { Anchor } from 'components/shared/Anchor'
-import { CheckBox } from 'components/shared/CheckBox'
+import { Anchor } from 'components/Anchor'
+import { CheckBox } from 'components/CheckBox'
 
 export const TermsOfUseCheckBox = ({ error, touched, value, handleChange }) => {
   return (

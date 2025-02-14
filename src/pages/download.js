@@ -6,9 +6,9 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import scrollTo from 'helpers/scrollTo'
 import { Error } from 'components/shared/Error'
-import { FixedContainer } from 'components/shared/FixedContainer'
-import { Row } from 'components/shared/Row'
-import { Spinner } from 'components/shared/Spinner'
+import { FixedContainer } from 'components/FixedContainer'
+import { Row } from 'components/Row'
+import { Spinner } from 'components/Spinner'
 import { ShareDatasetButton } from 'components/Dataset'
 import {
   DatasetSummary,

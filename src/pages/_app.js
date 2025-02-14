@@ -13,7 +13,7 @@ import { SearchManagerContextProvider } from 'contexts/SearchManagerContext'
 import { ErrorPage } from 'pages/_error'
 import getPageLoader from 'helpers/getPageLoader'
 import { Layout } from 'components/Layout'
-import { PageTitle } from 'components/shared/PageTitle'
+import { PageTitle } from 'components/PageTitle'
 
 getPageLoader()
 const Fallback = () => <ErrorPage />

@@ -1,6 +1,6 @@
 import { Children, cloneElement, useState } from 'react'
 import { Box } from 'grommet'
-import { CheckBox } from 'components/shared/CheckBox'
+import { CheckBox } from 'components/CheckBox'
 
 export const Accordion = (props) => {
   const getChildrenCount = () => {

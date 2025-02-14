@@ -12,17 +12,17 @@ import getParsedAccessionCodes from 'helpers/getParsedAccessionCodes'
 import getPageNumber from 'helpers/getPageNumber'
 import parseDefaultSearchParams from 'helpers/parseDefaultSearchParams'
 import { isLegacyUrl, getNewQueryParams } from 'helpers/supportLegacyUrl'
-import { Button } from 'components/shared/Button'
-import { BoxBlock } from 'components/shared/BoxBlock'
-import { FixedContainer } from 'components/shared/FixedContainer'
-import { LayerResponsive } from 'components/shared/LayerResponsive'
-import { Icon } from 'components/shared/Icon'
-import { PageTitle } from 'components/shared/PageTitle'
-import { Pagination } from 'components/shared/Pagination'
-import { SearchBox } from 'components/shared/SearchBox'
+import { Button } from 'components/Button'
+import { BoxBlock } from 'components/BoxBlock'
+import { ExperimentCard } from 'components/ExperimentCard'
+import { FixedContainer } from 'components/FixedContainer'
+import { Icon } from 'components/Icon'
+import { LayerResponsive } from 'components/LayerResponsive'
+import { PageTitle } from 'components/PageTitle'
+import { Pagination } from 'components/Pagination'
+import { SearchBox } from 'components/SearchBox'
 import { SearchInfoBanner } from 'components/SearchResults/SearchInfoBanner'
-import { SearchCard } from 'components/shared/SearchCard'
-import { Spinner } from 'components/shared/Spinner'
+import { Spinner } from 'components/Spinner'
 import {
   RequestSearchFormAlert,
   NoSearchResults,
@@ -167,7 +167,7 @@ export const Search = ({ query, response }) => {
                   {results.map((result, i) =>
                     result.isMatchedAccessionCode ? (
                       <Fragment key={result.accession_code}>
-                        <SearchCard
+                        <ExperimentCard
                           key={result.accession_code}
                           experiment={result}
                         />
@@ -188,7 +188,7 @@ export const Search = ({ query, response }) => {
                           )}
                       </Fragment>
                     ) : (
-                      <SearchCard
+                      <ExperimentCard
                         key={result.accession_code}
                         experiment={result}
                       />

@@ -1,8 +1,8 @@
 import { Text } from 'grommet'
 import isString from 'helpers/isString'
 import isValidURL from 'helpers/isValidURL'
-import { Anchor } from 'components/shared/Anchor'
-import { TextHighlight } from 'components/shared/TextHighlight'
+import { Anchor } from 'components/Anchor'
+import { TextHighlight } from 'components/TextHighlight'
 
 export const AnnotationText = ({ value }) => {
   if (isString(value)) {

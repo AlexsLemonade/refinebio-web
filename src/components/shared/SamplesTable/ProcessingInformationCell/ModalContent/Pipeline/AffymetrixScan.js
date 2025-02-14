@@ -1,5 +1,5 @@
 import { Text } from 'grommet'
-import { Anchor } from 'components/shared/Anchor'
+import { Anchor } from 'components/Anchor'
 import { links } from 'config'
 import { ProtocolDescription } from './ProtocolDescription'
 

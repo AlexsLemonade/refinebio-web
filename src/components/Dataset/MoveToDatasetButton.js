@@ -4,8 +4,8 @@ import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useModal } from 'hooks/useModal'
 import formatNumbers from 'helpers/formatNumbers'
-import { Button as SharedButton } from 'components/shared/Button'
-import { Modal } from 'components/shared/Modal'
+import { Button as SharedButton } from 'components/Button'
+import { Modal } from 'components/Modal'
 import { MoveToDatasetModal } from './MoveToDatasetModal'
 
 const Button = ({ onClick }) => (

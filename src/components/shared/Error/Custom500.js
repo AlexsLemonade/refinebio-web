@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Paragraph } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { Button } from 'components/shared/Button'
+import { Button } from 'components/Button'
 import { Template } from './Template'
 
 export const Custom500 = ({ ...props }) => {

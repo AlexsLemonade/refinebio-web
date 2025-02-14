@@ -1,5 +1,5 @@
 import { Box, Paragraph, Text } from 'grommet'
-import { Anchor } from 'components/shared/Anchor'
+import { Anchor } from 'components/Anchor'
 
 export const SRASubmitterSupplied = ({ protocol_info: protocolInfo }) => (
   <Box pad={{ horizontal: 'large' }}>
