@@ -3,9 +3,9 @@ import { Box, Heading, Paragraph, Text } from 'grommet'
 import { useCompendiaContext } from 'hooks/useCompendiaContext'
 import { useResponsive } from 'hooks/useResponsive'
 import getReadable from 'helpers/getReadable'
-import { Column } from 'components/shared/Column'
-import { FixedContainer } from 'components/shared/FixedContainer'
-import { Row } from 'components/shared/Row'
+import { Column } from 'components/Column'
+import { FixedContainer } from 'components/FixedContainer'
+import { Row } from 'components/Row'
 import { DownloadBlockForm } from './DownloadBlockForm'
 
 export const DownloadBlock = () => {

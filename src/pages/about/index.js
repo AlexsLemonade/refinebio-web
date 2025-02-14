@@ -1,6 +1,6 @@
 import { Box } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { FixedContainer } from 'components/shared/FixedContainer'
+import { FixedContainer } from 'components/FixedContainer'
 import { CCDL, Overview, Hero } from 'components/About'
 
 const About = () => {

@@ -2,7 +2,7 @@ import { Box, Grid, Select } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { useSearchManager } from 'hooks/useSearchManager'
 import getReadableOptions from 'helpers/getReadableOptions'
-import { PageSizes } from 'components/shared/PageSizes'
+import { PageSizes } from 'components/PageSizes'
 import { AddPageToDatasetButton } from './AddPageToDatasetButton'
 import { HideNonDownloadableExperiments } from './SearchFilterList'
 

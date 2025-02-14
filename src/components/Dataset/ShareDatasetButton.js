@@ -6,10 +6,10 @@ import { useResponsive } from 'hooks/useResponsive'
 import { useTimeoutInCallback } from 'hooks/useTimeoutInCallback'
 import { useCopyToClipboard } from 'hooks/useCopyToClipboard'
 import getDomain from 'helpers/getDomain'
-import { Button } from 'components/shared/Button'
-import { InlineMessage } from 'components/shared/InlineMessage'
-import { Modal } from 'components/shared/Modal'
-import { TextInput } from 'components/shared/TextInput'
+import { Button } from 'components/Button'
+import { InlineMessage } from 'components/InlineMessage'
+import { Modal } from 'components/Modal'
+import { TextInput } from 'components/TextInput'
 
 export const ShareDatasetButton = ({ dataset }) => {
   const { openModal } = useModal()

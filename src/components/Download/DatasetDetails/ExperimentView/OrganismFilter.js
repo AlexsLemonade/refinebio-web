@@ -1,7 +1,7 @@
 import { Box, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import formatString from 'helpers/formatString'
-import { RadioButtonGroup } from 'components/shared/RadioButtonGroup'
+import { RadioButtonGroup } from 'components/RadioButtonGroup'
 
 export const OrganismFilter = ({
   dataset,

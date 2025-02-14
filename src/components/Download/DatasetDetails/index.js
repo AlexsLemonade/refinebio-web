@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Box, Heading, Tabs, Tab } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { Row } from 'components/shared/Row'
+import { Row } from 'components/Row'
 import { ExperimentView } from './ExperimentView'
 import { SpeciesView } from './SpeciesView'
 import { RemoveAllButton } from './RemoveAllButton'

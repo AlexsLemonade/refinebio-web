@@ -7,10 +7,10 @@ import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import { api } from 'api'
 import scrollTo from 'helpers/scrollTo'
-import { Button } from 'components/shared/Button'
-import { FixedContainer } from 'components/shared/FixedContainer'
-import { PageTitle } from 'components/shared/PageTitle'
-import { Spinner } from 'components/shared/Spinner'
+import { Button } from 'components/Button'
+import { FixedContainer } from 'components/FixedContainer'
+import { PageTitle } from 'components/PageTitle'
+import { Spinner } from 'components/Spinner'
 import { ExperimentDetail } from 'components/ExperimentDetail'
 import { ExperimentSamplesTable } from 'components/ExperimentSamplesTable'
 
@@ -30,10 +30,11 @@ export const Experiment = ({ experiment }) => {
 
   const scrollToTable = () => {
     const offset = (headerRef.current.offsetHeight || 0) + 10
-    const tableTop =
-      tableContainerRef.current.getBoundingClientRect().top +
-      window.scrollY -
-      offset
+    const tableTop = tableContainerRef.current
+      ? tableContainerRef.current.getBoundingClientRect().top +
+        window.scrollY -
+        offset
+      : 0
     scrollTo({
       top: tableTop
     })

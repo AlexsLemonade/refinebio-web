@@ -3,14 +3,14 @@ import { nanoid } from 'nanoid'
 import { Box, Heading, Text } from 'grommet'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
 import { useResponsive } from 'hooks/useResponsive'
-import { LabelTextInput } from 'components/shared/LabelTextInput'
+import { LabelTextInput } from 'components/LabelTextInput'
 import {
   InformationList,
   InformationItem
 } from 'components/shared/InformationList'
-import { InlineMessage } from 'components/shared/InlineMessage'
-import { Row } from 'components/shared/Row'
-import { TextNull } from 'components/shared/TextNull'
+import { InlineMessage } from 'components/InlineMessage'
+import { Row } from 'components/Row'
+import { TextNull } from 'components/TextNull'
 import { Annotation } from './Annotation'
 
 export const ModalContent = ({ annotations }) => {

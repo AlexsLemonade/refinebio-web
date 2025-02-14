@@ -1,6 +1,6 @@
 import { Box } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { SignUpBlock } from 'components/shared/SignUpBlock'
+import { SignUpBlock } from 'components/SignUpBlock'
 import { Documents, Examples, Features, Hero } from 'components/Home'
 
 const Home = () => {

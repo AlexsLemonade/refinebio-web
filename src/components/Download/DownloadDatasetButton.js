@@ -1,6 +1,6 @@
 import { useModal } from 'hooks/useModal'
-import { Button } from 'components/shared/Button'
-import { Modal } from 'components/shared/Modal'
+import { Button } from 'components/Button'
+import { Modal } from 'components/Modal'
 import { DownloadDatasetModal } from './DownloadDatasetModal'
 
 export const DownloadDatasetButton = ({

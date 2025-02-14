@@ -1,6 +1,6 @@
 import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
-import { Button } from 'components/shared/Button'
+import { Button } from 'components/Button'
 
 export const AddToDatasetButton = ({ dataToAdd, ...props }) => {
   const { loading, addSamples } = useDatasetManager()

@@ -7,17 +7,17 @@ import { links } from 'config'
 import formatNumbers from 'helpers/formatNumbers'
 import getReadable from 'helpers/getReadable'
 import getURLForAccessionCode from 'helpers/getURLForAccessionCode'
-import { Anchor } from 'components/shared/Anchor'
-import { Button } from 'components/shared/Button'
-import { FixedContainer } from 'components/shared/FixedContainer'
+import { Anchor } from 'components/Anchor'
+import { Button } from 'components/Button'
+import { ExperimentCardAction } from 'components/ExperimentCardAction'
+import { ExperimentCardHeader } from 'components/ExperimentCardHeader'
+import { ExperimentCardMeta } from 'components/ExperimentCardMeta'
+import { FixedContainer } from 'components/FixedContainer'
 import {
   InformationList,
   InformationItem
 } from 'components/shared/InformationList'
-import { TextHighlight } from 'components/shared/TextHighlight'
-import { ExperimentCardAction } from 'components/shared/ExperimentCardAction'
-import { ExperimentCardHeader } from 'components/shared/ExperimentCardHeader'
-import { ExperimentCardMeta } from 'components/shared/ExperimentCardMeta'
+import { TextHighlight } from 'components/TextHighlight'
 
 export const ExperimentDetail = ({ experiment }) => {
   const { setResponsive } = useResponsive()

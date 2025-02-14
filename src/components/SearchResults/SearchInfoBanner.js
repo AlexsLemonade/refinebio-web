@@ -3,9 +3,9 @@ import { Box, Heading, Paragraph } from 'grommet'
 import { useLocalStorage } from 'hooks/useLocalStorage'
 import { useResponsive } from 'hooks/useResponsive'
 import { useTimeoutInCallback } from 'hooks/useTimeoutInCallback'
-import { Button } from 'components/shared/Button'
-import { ExpandableBlock } from 'components/shared/ExpandableBlock'
-import { Icon } from 'components/shared/Icon'
+import { Button } from 'components/Button'
+import { ExpandableBlock } from 'components/ExpandableBlock'
+import { Icon } from 'components/Icon'
 
 export const SearchInfoBanner = () => {
   const [userVisited, setUserVisited] = useLocalStorage('visited-before', null)

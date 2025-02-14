@@ -1,7 +1,7 @@
 import { Box } from 'grommet'
 import { links } from 'config'
-import { Anchor } from 'components/shared/Anchor'
-import { SrOnly } from 'components/shared/SrOnly'
+import { Anchor } from 'components/Anchor'
+import { SrOnly } from 'components/SrOnly'
 import { GithubLogoSvg } from '../../images/github-corner.svg'
 
 // NOTE: Set the prop 'light' to true for the dark background

@@ -1,8 +1,8 @@
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { Anchor } from 'components/shared/Anchor'
-import { Column } from 'components/shared/Column'
-import { Row } from 'components/shared/Row'
+import { Anchor } from 'components/Anchor'
+import { Column } from 'components/Column'
+import { Row } from 'components/Row'
 import { links } from 'config'
 
 export const DatasetProcessingError = ({ dataset }) => {

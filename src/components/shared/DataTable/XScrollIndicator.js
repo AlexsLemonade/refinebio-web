@@ -1,8 +1,8 @@
 import { memo } from 'react'
 import { Box } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { Button } from 'components/shared/Button'
-import { Icon } from 'components/shared/Icon'
+import { Button } from 'components/Button'
+import { Icon } from 'components/Icon'
 
 export const XScrollIndicator = ({
   isFirstCellVisible,

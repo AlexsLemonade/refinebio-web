@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { Box, Heading } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { Button } from 'components/shared/Button'
+import { Button } from 'components/Button'
 
 export const EmptyDataset = () => {
   const router = useRouter()

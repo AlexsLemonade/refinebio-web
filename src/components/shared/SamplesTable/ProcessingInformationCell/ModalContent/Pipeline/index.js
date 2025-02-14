@@ -1,6 +1,6 @@
 import { Box, Heading, Paragraph } from 'grommet'
 import isLastIndex from 'helpers/isLastIndex'
-import { Anchor } from 'components/shared/Anchor'
+import { Anchor } from 'components/Anchor'
 import { links } from 'config'
 import { PipelineSteps } from './PipelineSteps'
 import { VersionInformation } from './VersionInformation'

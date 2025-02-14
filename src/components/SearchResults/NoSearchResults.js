@@ -1,7 +1,7 @@
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import { useSearchManager } from 'hooks/useSearchManager'
 import { useResponsive } from 'hooks/useResponsive'
-import { Button } from 'components/shared/Button'
+import { Button } from 'components/Button'
 import { RequestSearchFormButton } from './RequestSearchFormButton'
 
 export const NoSearchResults = () => {

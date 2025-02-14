@@ -2,9 +2,9 @@ import { memo } from 'react'
 import moment from 'moment'
 import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
-import { Button } from 'components/shared/Button'
-import { Modal } from 'components/shared/Modal'
-import { TextNull } from 'components/shared/TextNull'
+import { Button } from 'components/Button'
+import { Modal } from 'components/Modal'
+import { TextNull } from 'components/TextNull'
 import { ModalContent } from './ModalContent'
 
 export const ProcessingInformationCell = ({

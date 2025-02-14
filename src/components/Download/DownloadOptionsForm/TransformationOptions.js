@@ -1,8 +1,8 @@
 import { Box, Select, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import getReadableOptions from 'helpers/getReadableOptions'
-import { Anchor } from 'components/shared/Anchor'
-import { Icon } from 'components/shared/Icon'
+import { Anchor } from 'components/Anchor'
+import { Icon } from 'components/Icon'
 import { links } from 'config'
 
 export const TransformationOptions = ({
