@@ -46,7 +46,6 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
   }
 
   useEffect(() => {
-    if (formValues.terms) setAcceptedTerms(formValues.terms)
     if (acceptedTerms && formValues) submit()
   }, [acceptedTerms, formValues])
 
@@ -73,6 +72,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
         onSubmit={async (values, { setSubmitting }) => {
           const { terms, ...rest } = values
           setFormValues(rest)
+          setAcceptedTerms(terms)
           setSubmitting(false)
         }}
       >
