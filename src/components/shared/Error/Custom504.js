@@ -1,6 +1,6 @@
 import { Box, Paragraph } from 'grommet'
 import { links } from 'config'
-import { Anchor } from 'components/shared/Anchor'
+import { Anchor } from 'components/Anchor'
 import { Template } from './Template'
 
 export const Custom504 = ({ ...props }) => {

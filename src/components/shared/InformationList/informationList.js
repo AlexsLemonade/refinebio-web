@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { BoxBlock } from 'components/shared/BoxBlock'
+import { BoxBlock } from 'components/BoxBlock'
 
 export const InformationList = styled(BoxBlock)`
   ${({ theme }) => css`

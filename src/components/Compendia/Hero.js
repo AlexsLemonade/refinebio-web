@@ -1,6 +1,6 @@
 import { Heading } from 'grommet'
-import { FixedContainer } from 'components/shared/FixedContainer'
-import { Hero as SharedHero } from 'components/shared/Hero'
+import { FixedContainer } from 'components/FixedContainer'
+import { Hero as SharedHero } from 'components/Hero'
 
 export const HeroHeader = () => {
   return (

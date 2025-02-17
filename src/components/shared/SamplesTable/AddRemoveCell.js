@@ -1,10 +1,10 @@
 import { memo } from 'react'
 import { Box, Text } from 'grommet'
 import { cache, links } from 'config'
-import { Anchor } from 'components/shared/Anchor'
+import { Anchor } from 'components/Anchor'
 
 import { DatasetActionButton } from 'components/shared/DatasetActionButton'
-import { Icon } from 'components/shared/Icon'
+import { Icon } from 'components/Icon'
 
 export const AddRemoveCell = ({ experimentAccessionCodes, sample }) => {
   // maps the given sample accession code to its corresponding experiment accession code

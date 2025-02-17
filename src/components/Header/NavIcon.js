@@ -1,6 +1,6 @@
 import { Box } from 'grommet'
 import styled, { css } from 'styled-components'
-import { SrOnly } from 'components/shared/SrOnly'
+import { SrOnly } from 'components/SrOnly'
 
 const IconToggle = styled(Box)`
   ${({ theme, light }) => css`

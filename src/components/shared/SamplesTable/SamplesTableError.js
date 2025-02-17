@@ -1,5 +1,5 @@
 import { Box, Text } from 'grommet'
-import { Button } from 'components/shared/Button'
+import { Button } from 'components/Button'
 import { SamplesTableEmpty } from './SamplesTableEmpty'
 
 export const SamplesTableError = ({ onClick }) => {

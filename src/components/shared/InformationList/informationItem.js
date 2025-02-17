@@ -1,7 +1,7 @@
 import { Box, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { Row } from 'components/shared/Row'
-import { TextNull } from 'components/shared/TextNull'
+import { Row } from 'components/Row'
+import { TextNull } from 'components/TextNull'
 
 export const InformationItem = ({
   field,

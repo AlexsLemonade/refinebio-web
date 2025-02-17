@@ -1,4 +1,4 @@
-import { CheckBox } from 'components/shared/CheckBox'
+import { CheckBox } from 'components/CheckBox'
 
 export const ReceiveUpdatesCheckBox = ({ value, handleChange }) => {
   return (

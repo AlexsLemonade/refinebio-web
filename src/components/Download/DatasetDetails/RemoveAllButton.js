@@ -3,9 +3,9 @@ import gtag from 'analytics/gtag'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
-import { Button } from 'components/shared/Button'
-import { Modal } from 'components/shared/Modal'
-import { Row } from 'components/shared/Row'
+import { Button } from 'components/Button'
+import { Modal } from 'components/Modal'
+import { Row } from 'components/Row'
 
 export const RemoveAllButton = () => {
   const { loading, clearDataset } = useDatasetManager()

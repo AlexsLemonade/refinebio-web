@@ -1,8 +1,8 @@
 import { Box, Text } from 'grommet'
 import styled, { css } from 'styled-components'
 import { useResponsive } from 'hooks/useResponsive'
-import { Button as SharedButton } from 'components/shared/Button'
-import { Icon } from 'components/shared/Icon'
+import { Button as SharedButton } from 'components/Button'
+import { Icon } from 'components/Icon'
 
 const Button = styled(SharedButton)`
   ${({ theme }) =>

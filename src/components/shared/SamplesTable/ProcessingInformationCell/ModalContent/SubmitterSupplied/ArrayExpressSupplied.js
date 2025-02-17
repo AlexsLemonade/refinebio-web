@@ -2,7 +2,7 @@ import { Box, Heading, Text } from 'grommet'
 import formatString from 'helpers/formatString'
 import truncateOnWord from 'helpers/truncateOnWord'
 import { Accordion, AccordionPanel } from 'components/shared/Accordion'
-import { Anchor } from 'components/shared/Anchor'
+import { Anchor } from 'components/Anchor'
 
 const Title =
   ({ protocol }) =>

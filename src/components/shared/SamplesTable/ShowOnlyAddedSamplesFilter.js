@@ -3,7 +3,7 @@ import { useDatasetAction } from 'hooks/useDatasetAction'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useSamplesContext } from 'hooks/useSamplesContext'
 import { getFormattedExperiment } from 'helpers/formatDatasetAction'
-import { CheckBox } from 'components/shared/CheckBox'
+import { CheckBox } from 'components/CheckBox'
 
 export const ShowOnlyAddedSamplesFilter = ({ experiment }) => {
   const { myDataset } = useDatasetManager()
