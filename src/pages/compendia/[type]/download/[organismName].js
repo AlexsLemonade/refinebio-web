@@ -87,7 +87,7 @@ export const DownloadCompendium = ({ compendium }) => {
 }
 
 export const getServerSideProps = async ({ query }) => {
-  const { type, organism_name: organismName } = query
+  const { type, organismName } = query
   // The routes must be the valid compendia types
   if (!compendia.types.includes(type)) return { notFound: true }
 

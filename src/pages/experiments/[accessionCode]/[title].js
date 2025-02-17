@@ -95,7 +95,7 @@ export const Experiment = ({ experiment }) => {
 }
 
 export const getServerSideProps = async ({ query }) => {
-  const response = await api.experiments.get(query.accession_code)
+  const response = await api.experiments.get(query.accessionCode)
 
   if (!response) {
     return {
