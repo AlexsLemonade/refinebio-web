@@ -1,7 +1,7 @@
 import { Box } from 'grommet'
 import styled, { css } from 'styled-components'
 
-export const ViewBlocks = styled(Box)`
+export const DatasetDetailsViewBlocks = styled(Box)`
   ${({ theme }) => css`
     > div {
       border-bottom: solid 1px ${theme.global.colors['gray-shade-40']};
@@ -16,4 +16,4 @@ export const ViewBlocks = styled(Box)`
   `}
 `
 
-export default ViewBlocks
+export default DatasetDetailsViewBlocks

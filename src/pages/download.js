@@ -5,19 +5,17 @@ import { useRouter } from 'next/router'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import scrollTo from 'helpers/scrollTo'
+import { DatasetDetails } from 'components/DatasetDetails'
+import { DatasetSummary } from 'components/DatasetSummary'
+import { DownloadOptionsForm } from 'components/DownloadOptionsForm'
+import { DownloadEmpty } from 'components/DownloadEmpty'
 import { Error } from 'components/shared/Error'
+import { FilesSummary } from 'components/FilesSummary'
 import { FixedContainer } from 'components/FixedContainer'
 import { Row } from 'components/Row'
 import { Spinner } from 'components/Spinner'
 import { ShareDatasetButton } from 'components/Dataset'
-import {
-  DatasetSummary,
-  DatasetDetails,
-  EmptyDataset,
-  DownloadOptionsForm,
-  StartProcessing,
-  FilesSummary
-} from 'components/Download'
+import { StartProcessing } from 'components/StartProcessing'
 
 export const Download = () => {
   const {
@@ -89,7 +87,7 @@ export const Download = () => {
                 top: 'basex14'
               }}
             >
-              <EmptyDataset />
+              <DownloadEmpty />
             </Box>
           )}
         </Box>

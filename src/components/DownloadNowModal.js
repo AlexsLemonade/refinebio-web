@@ -8,12 +8,12 @@ import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/Button'
-import { AdvancedOptions } from 'components/Download/DownloadOptionsForm/AdvancedOptions'
-import { AggregateOptions } from 'components/Download/DownloadOptionsForm/AggregateOptions'
-import { TransformationOptions } from 'components/Download/DownloadOptionsForm/TransformationOptions'
-import { EmailTextInput } from 'components/Download/StartProcessingForm/EmailTextInput'
-import { ReceiveUpdatesCheckBox } from 'components/Download/StartProcessingForm/ReceiveUpdatesCheckBox'
-import { TermsOfUseCheckBox } from 'components/Download/StartProcessingForm/TermsOfUseCheckBox'
+import { AdvancedOptions } from 'components/AdvancedOptions'
+import { AggregateOptions } from 'components/AggregateOptions'
+import { TransformationOptions } from 'components/TransformationOptions'
+import { EmailTextInput } from 'components/EmailTextInput'
+import { ReceiveUpdatesCheckBox } from 'components/ReceiveUpdatesCheckBox'
+import { TermsOfUseCheckBox } from 'components/TermsOfUseCheckBox'
 
 export const DownloadNowModal = ({
   experiment,

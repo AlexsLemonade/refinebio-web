@@ -10,10 +10,10 @@ import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/Button'
 import { Column } from 'components/Column'
+import { EmailTextInput } from 'components/EmailTextInput'
+import { ReceiveUpdatesCheckBox } from 'components/ReceiveUpdatesCheckBox'
 import { Row } from 'components/Row'
-import { EmailTextInput } from './EmailTextInput'
-import { ReceiveUpdatesCheckBox } from './ReceiveUpdatesCheckBox'
-import { TermsOfUseCheckBox } from './TermsOfUseCheckBox'
+import { TermsOfUseCheckBox } from 'components/TermsOfUseCheckBox'
 
 export const StartProcessingForm = ({ dataset }) => {
   const { setResponsive } = useResponsive()

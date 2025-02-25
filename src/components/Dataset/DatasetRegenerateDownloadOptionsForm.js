@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { Box, Text } from 'grommet'
 import getReadable from 'helpers/getReadable'
 import { Button } from 'components/Button'
+import { DownloadOptionsForm } from 'components/DownloadOptionsForm'
 import { ExpandableBlock } from 'components/ExpandableBlock'
-import { DownloadOptionsForm } from 'components/Download/DownloadOptionsForm'
 
 export const DatasetRegenerateDownloadOptionsForm = ({
   dataset,

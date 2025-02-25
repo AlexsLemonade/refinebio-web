@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { OrganismFilter } from './OrganismFilter'
-import { ViewBlock } from './ViewBlock'
-import { ViewBlocks } from '../ViewBlocks'
+import { DatasetDetailsExperimentViewBlock } from 'components//DatasetDetailsExperimentViewBlock'
+import { DatasetDetailsViewBlocks } from 'components/DatasetDetailsViewBlocks'
+import { ExperimentViewOrganismFilter } from 'components/DatasetDetailsExperimentViewOrganismFilter'
 
-export const ExperimentView = ({ dataset, isImmutable }) => {
+export const DatasetDetailsExperimentView = ({ dataset, isImmutable }) => {
   const defaultOption = { label: 'All Speciess', value: 'ALL' }
   const [organism, setOrganism] = useState(defaultOption.value)
   const filteredExperiments = dataset.experiments.filter(
@@ -20,25 +20,25 @@ export const ExperimentView = ({ dataset, isImmutable }) => {
   return (
     <>
       {Object.keys(dataset.organism_samples).length > 1 && (
-        <OrganismFilter
+        <ExperimentViewOrganismFilter
           dataset={dataset}
           defaultOption={defaultOption}
           organism={organism}
           setOrganism={setOrganism}
         />
       )}
-      <ViewBlocks elevation="medium" pad="medium">
+      <DatasetDetailsViewBlocks elevation="medium" pad="medium">
         {filteredExperiments.map((experiment) => (
-          <ViewBlock
+          <DatasetDetailsExperimentViewBlock
             key={experiment.accession_code}
             dataset={dataset}
             experiment={experiment}
             isImmutable={isImmutable}
           />
         ))}
-      </ViewBlocks>
+      </DatasetDetailsViewBlocks>
     </>
   )
 }
 
-export default ExperimentView
+export default DatasetDetailsExperimentView

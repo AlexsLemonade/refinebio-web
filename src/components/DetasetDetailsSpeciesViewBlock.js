@@ -5,12 +5,16 @@ import { useResponsive } from 'hooks/useResponsive'
 import formatNumbers from 'helpers/formatNumbers'
 import formatString from 'helpers/formatString'
 import { Button } from 'components/Button'
+import { DatasetDetailsViewSamplesButton } from 'components/DatasetDetailsViewSamplesButton'
 import { Pill } from 'components/Pill'
 import { Row } from 'components/Row'
 import { TextCapitalized } from 'components/TextCapitalized'
-import { ViewSamplesButton } from '../ViewSamplesButton'
 
-export const ViewBlock = ({ dataset, organismName, isImmutable }) => {
+export const DetasetDetailsSpeciesViewBlock = ({
+  dataset,
+  organismName,
+  isImmutable
+}) => {
   const { loading, removeSamples } = useDatasetManager()
   const { setResponsive } = useResponsive()
 
@@ -64,7 +68,7 @@ export const ViewBlock = ({ dataset, organismName, isImmutable }) => {
             <Text margin={{ bottom: 'small' }}>
               {totalSamples} {samplesCount > 1 ? 'Samples' : 'Sample'}
             </Text>
-            <ViewSamplesButton
+            <DatasetDetailsViewSamplesButton
               dataset={dataset}
               modalTitle={formatString(organismName)}
               isImmutable={isImmutable}
@@ -87,4 +91,4 @@ export const ViewBlock = ({ dataset, organismName, isImmutable }) => {
   )
 }
 
-export default ViewBlock
+export default DetasetDetailsSpeciesViewBlock

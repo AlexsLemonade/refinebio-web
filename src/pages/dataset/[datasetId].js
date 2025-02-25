@@ -5,21 +5,19 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { api } from 'api'
 import getDatasetState from 'helpers/getDatasetState'
+import { DatasetDetails } from 'components/DatasetDetails'
+import { DatasetSummary } from 'components/DatasetSummary'
+import { DownloadDatasetButton } from 'components/DownloadDatasetButton'
 import { Error } from 'components/shared/Error'
+import { FilesSummary } from 'components/FilesSummary'
 import { FixedContainer } from 'components/FixedContainer'
 import { Row } from 'components/Row'
+import { StartProcessing } from 'components/StartProcessing'
 import {
   DatasetPageHeader,
   MoveToDatasetButton,
   ShareDatasetButton
 } from 'components/Dataset'
-import {
-  DatasetDetails,
-  DatasetSummary,
-  DownloadDatasetButton,
-  FilesSummary,
-  StartProcessing
-} from 'components/Download'
 
 export const Dataset = ({ dataset }) => {
   const {

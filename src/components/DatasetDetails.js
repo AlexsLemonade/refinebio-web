@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Box, Heading, Tabs, Tab } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
+import { DatasetDetailsExperimentView } from 'components/DatasetDetailsExperimentView'
+import { DatasetDetailsSpeciesView } from 'components/DatasetDetailsSpeciesView'
+import { RemoveAllButton } from 'components/RemoveAllButton'
 import { Row } from 'components/Row'
-import { ExperimentView } from './ExperimentView'
-import { SpeciesView } from './SpeciesView'
-import { RemoveAllButton } from './RemoveAllButton'
 
 export const DatasetDetails = ({ dataset, isImmutable }) => {
   const { setResponsive } = useResponsive()
@@ -15,11 +15,21 @@ export const DatasetDetails = ({ dataset, isImmutable }) => {
   const tabs = [
     {
       label: 'Species View',
-      component: <SpeciesView dataset={dataset} isImmutable={isImmutable} />
+      component: (
+        <DatasetDetailsSpeciesView
+          dataset={dataset}
+          isImmutable={isImmutable}
+        />
+      )
     },
     {
       label: 'Experiment View',
-      component: <ExperimentView dataset={dataset} isImmutable={isImmutable} />
+      component: (
+        <DatasetDetailsExperimentView
+          dataset={dataset}
+          isImmutable={isImmutable}
+        />
+      )
     }
   ]
 

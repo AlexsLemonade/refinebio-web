@@ -1,5 +1,5 @@
 import { Box, Heading, Paragraph } from 'grommet'
-import { StartProcessingForm } from './StartProcessingForm'
+import { StartProcessingForm } from 'components/StartProcessingForm'
 
 // paths: /download?start=true, /dataset/[dataset_id]?start=true
 // renders this component when no email in localStorage
