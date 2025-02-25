@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import { Box, Heading } from 'grommet'
 import pickObjectPropByKey from 'helpers/pickObjectPropByKey'
-import { Accordion, AccordionPanel } from 'components/shared/Accordion'
+import { Accordion, AccordionPanel } from 'components/Accordion'
 import { ProcessorVersion } from './ProcessorVersion'
 import { VersionItem } from './VersionList'
 

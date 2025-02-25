@@ -1,16 +1,16 @@
 import { Box, Paragraph } from 'grommet'
 import { links } from 'config'
 import { Anchor } from 'components/Anchor'
-import { Template } from './Template'
+import { ErrorTemplate } from 'components/ErrorTemplate'
 
-export const Custom504 = ({ ...props }) => {
+export const Error504 = ({ ...props }) => {
   // makes text align center for a single column
   // and sets max width to auto
   const isColumn = props.direction === 'column'
   const textAlign = isColumn ? 'center' : 'start'
 
   return (
-    <Template
+    <ErrorTemplate
       heading="We’re a little overwhelmed at the moment."
       body={
         <Box width={{ max: isColumn ? 'auto' : '540px' }}>
@@ -37,4 +37,4 @@ export const Custom504 = ({ ...props }) => {
   )
 }
 
-export default Custom504
+export default Error504

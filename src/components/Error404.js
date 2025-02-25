@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Button } from 'components/Button'
-import { Template } from './Template'
+import { ErrorTemplate } from 'components/ErrorTemplate'
 
-export const Custom404 = ({ ...props }) => {
+export const Error404 = ({ ...props }) => {
   const { back, events } = useRouter()
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export const Custom404 = ({ ...props }) => {
   }
 
   return (
-    <Template
+    <ErrorTemplate
       heading="The page you are looking for isn’t expressed."
       body={
         <Button
@@ -36,4 +36,4 @@ export const Custom404 = ({ ...props }) => {
   )
 }
 
-export default Custom404
+export default Error404

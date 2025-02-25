@@ -3,9 +3,9 @@ import { useRouter } from 'next/router'
 import { Box, Paragraph } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/Button'
-import { Template } from './Template'
+import { ErrorTemplate } from 'components/ErrorTemplate'
 
-export const Custom500 = ({ ...props }) => {
+export const Error500 = ({ ...props }) => {
   const { back, events } = useRouter()
   const { setResponsive } = useResponsive()
 
@@ -21,7 +21,7 @@ export const Custom500 = ({ ...props }) => {
   }
 
   return (
-    <Template
+    <ErrorTemplate
       heading=" Uh-oh something went wrong!"
       body={
         <Box
@@ -41,4 +41,4 @@ export const Custom500 = ({ ...props }) => {
   )
 }
 
-export default Custom500
+export default Error500

@@ -2,7 +2,7 @@ import { Box, Heading } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Row } from 'components/Row'
 
-export const Template = ({
+export const ErrorTemplate = ({
   heading,
   body,
   img,
@@ -49,4 +49,4 @@ export const Template = ({
   )
 }
 
-export default Template
+export default ErrorTemplate
