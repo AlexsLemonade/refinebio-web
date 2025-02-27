@@ -1,9 +1,9 @@
 import { Box, Heading, Paragraph } from 'grommet'
-import { StartProcessingForm } from 'components/StartProcessingForm'
+import { DatasetStartProcessingForm } from 'components/DatasetStartProcessingForm'
 
 // paths: /download?start=true, /dataset/[dataset_id]?start=true
 // renders this component when no email in localStorage
-export const StartProcessing = ({ dataset }) => (
+export const DatasetStartProcessing = ({ dataset }) => (
   <Box align="center" alignSelf="center" width="640px">
     <Heading level={1} margin={{ bottom: 'medium' }}>
       We're almost ready to start putting your download files together!
@@ -13,7 +13,7 @@ export const StartProcessing = ({ dataset }) => (
       are ready. It usually takes about 15-20 minutes.
     </Paragraph>
     <Box margin={{ top: 'medium' }} alignSelf="start">
-      <StartProcessingForm dataset={dataset} />
+      <DatasetStartProcessingForm dataset={dataset} />
     </Box>
     <Box
       margin={{ top: 'basex8', bottom: 'xlarge' }}
@@ -31,4 +31,4 @@ export const StartProcessing = ({ dataset }) => (
   </Box>
 )
 
-export default StartProcessing
+export default DatasetStartProcessing

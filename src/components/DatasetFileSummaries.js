@@ -6,11 +6,11 @@ import getDatasetState from 'helpers/getDatasetState'
 import getDownloadFilesData from 'helpers/getDownloadFilesData'
 import { Anchor } from 'components/Anchor'
 import { Column } from 'components/Column'
+import { DatasetRegenerateDownloadOptionsForm } from 'components/Dataset/DatasetRegenerateDownloadOptionsForm'
 import { InlineMessage } from 'components/InlineMessage'
 import { Row } from 'components/Row'
-import { DatasetRegenerateDownloadOptionsForm } from 'components/Dataset/DatasetRegenerateDownloadOptionsForm'
 
-const Card = ({ description, format, index, title }) => {
+const DatasetFileSummary = ({ description, format, index, title }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -35,7 +35,7 @@ const Card = ({ description, format, index, title }) => {
   )
 }
 
-export const FilesSummary = ({ dataset }) => {
+export const DatasetFileSummaries = ({ dataset }) => {
   const { setResponsive } = useResponsive()
   const { isProcessed } = getDatasetState(dataset) // sets visibility of the download options form for processed datasets
   const [regeneratedDataset, setRegeneratedDataset] = useState(
@@ -60,7 +60,7 @@ export const FilesSummary = ({ dataset }) => {
         margin={{ bottom: 'medium' }}
       >
         {fileSummaries.files.map((fileSummary, i) => (
-          <Card
+          <DatasetFileSummary
             key={fileSummary.title}
             description={fileSummary.description}
             format={fileSummary.format}
@@ -92,4 +92,4 @@ export const FilesSummary = ({ dataset }) => {
   )
 }
 
-export default FilesSummary
+export default DatasetFileSummaries

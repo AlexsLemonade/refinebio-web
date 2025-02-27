@@ -3,7 +3,7 @@ import { Box, Heading } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/Button'
 
-export const DownloadEmpty = () => {
+export const DatasetEmpty = () => {
   const router = useRouter()
   const { setResponsive } = useResponsive()
 
@@ -35,4 +35,4 @@ export const DownloadEmpty = () => {
   )
 }
 
-export default DownloadEmpty
+export default DatasetEmpty

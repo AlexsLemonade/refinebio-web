@@ -5,17 +5,17 @@ import { useRouter } from 'next/router'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import scrollTo from 'helpers/scrollTo'
-import { DatasetDetails } from 'components/DatasetDetails'
+import { DatasetSamples } from 'components/DatasetSamples'
+import { DatasetDownloadOptionsForm } from 'components/DatasetDownloadOptionsForm'
+import { DatasetEmpty } from 'components/DatasetEmpty'
+import { DatasetStartProcessing } from 'components/DatasetStartProcessing'
 import { DatasetSummary } from 'components/DatasetSummary'
-import { DownloadOptionsForm } from 'components/DownloadOptionsForm'
-import { DownloadEmpty } from 'components/DownloadEmpty'
 import { Error } from 'components/shared/Error'
-import { FilesSummary } from 'components/FilesSummary'
+import { DatasetFileSummaries } from 'components/DatasetFileSummaries'
 import { FixedContainer } from 'components/FixedContainer'
 import { Row } from 'components/Row'
 import { Spinner } from 'components/Spinner'
 import { ShareDatasetButton } from 'components/Dataset'
-import { StartProcessing } from 'components/StartProcessing'
 
 export const Download = () => {
   const {
@@ -74,20 +74,20 @@ export const Download = () => {
                 </Heading>
                 <ShareDatasetButton dataset={myDataset} />
               </Row>
-              <DownloadOptionsForm dataset={myDataset} />
-              <FilesSummary dataset={myDataset} />
+              <DatasetDownloadOptionsForm dataset={myDataset} />
+              <DatasetFileSummaries dataset={myDataset} />
               <DatasetSummary dataset={myDataset} />
-              <DatasetDetails dataset={myDataset} />
+              <DatasetSamples dataset={myDataset} />
             </>
           ) : start ? (
-            <StartProcessing dataset={myDataset} />
+            <DatasetStartProcessing dataset={myDataset} />
           ) : (
             <Box
               pad={{
                 top: 'basex14'
               }}
             >
-              <DownloadEmpty />
+              <DatasetEmpty />
             </Box>
           )}
         </Box>

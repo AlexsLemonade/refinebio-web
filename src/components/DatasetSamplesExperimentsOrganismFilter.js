@@ -3,7 +3,7 @@ import { useResponsive } from 'hooks/useResponsive'
 import formatString from 'helpers/formatString'
 import { RadioButtonGroup } from 'components/RadioButtonGroup'
 
-export const ExperimentViewOrganismFilter = ({
+export const DatasetSamplesExperimentsOrganismFilter = ({
   dataset,
   defaultOption,
   organism,
@@ -37,4 +37,4 @@ export const ExperimentViewOrganismFilter = ({
   )
 }
 
-export default ExperimentViewOrganismFilter
+export default DatasetSamplesExperimentsOrganismFilter

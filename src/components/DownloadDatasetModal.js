@@ -21,7 +21,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
   const { setResponsive } = useResponsive()
   const { email, startProcessingDataset } = useDatasetManager()
   const { acceptedTerms, setAcceptedTerms } = useRefinebio()
-  const { StartProcessingFormSchema } = validationSchemas
+  const { DatasetStartProcessingFormSchema } = validationSchemas
   const [formValues, setFormValues] = useState(null)
 
   const submit = async () => {
@@ -67,7 +67,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
           email_ccdl_ok: true,
           terms: acceptedTerms
         }}
-        validationSchema={StartProcessingFormSchema}
+        validationSchema={DatasetStartProcessingFormSchema}
         validateOnChange={false}
         onSubmit={async (values, { setSubmitting }) => {
           const { terms, ...rest } = values

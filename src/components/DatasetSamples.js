@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { Box, Heading, Tabs, Tab } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
-import { DatasetDetailsExperimentView } from 'components/DatasetDetailsExperimentView'
-import { DatasetDetailsSpeciesView } from 'components/DatasetDetailsSpeciesView'
+import { DatasetSamplesExperiments } from 'components/DatasetSamplesExperiments'
+import { DatasetSamplesOrganisms } from 'components/DatasetSamplesOrganisms'
 import { RemoveAllButton } from 'components/RemoveAllButton'
 import { Row } from 'components/Row'
 
-export const DatasetDetails = ({ dataset, isImmutable }) => {
+export const DatasetSamples = ({ dataset, isImmutable }) => {
   const { setResponsive } = useResponsive()
   const [activeIndex, setActiveIndex] = useState(0)
   const handleActive = (nextIndex) => setActiveIndex(nextIndex)
@@ -16,16 +16,13 @@ export const DatasetDetails = ({ dataset, isImmutable }) => {
     {
       label: 'Species View',
       component: (
-        <DatasetDetailsSpeciesView
-          dataset={dataset}
-          isImmutable={isImmutable}
-        />
+        <DatasetSamplesOrganisms dataset={dataset} isImmutable={isImmutable} />
       )
     },
     {
       label: 'Experiment View',
       component: (
-        <DatasetDetailsExperimentView
+        <DatasetSamplesExperiments
           dataset={dataset}
           isImmutable={isImmutable}
         />
@@ -54,4 +51,4 @@ export const DatasetDetails = ({ dataset, isImmutable }) => {
   )
 }
 
-export default DatasetDetails
+export default DatasetSamples

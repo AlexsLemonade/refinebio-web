@@ -5,14 +5,14 @@ import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { api } from 'api'
 import getDatasetState from 'helpers/getDatasetState'
-import { DatasetDetails } from 'components/DatasetDetails'
+import { DatasetSamples } from 'components/DatasetSamples'
+import { DatasetStartProcessing } from 'components/DatasetStartProcessing'
 import { DatasetSummary } from 'components/DatasetSummary'
 import { DownloadDatasetButton } from 'components/DownloadDatasetButton'
 import { Error } from 'components/shared/Error'
-import { FilesSummary } from 'components/FilesSummary'
+import { DatasetFileSummaries } from 'components/DatasetFileSummaries'
 import { FixedContainer } from 'components/FixedContainer'
 import { Row } from 'components/Row'
-import { StartProcessing } from 'components/StartProcessing'
 import {
   DatasetPageHeader,
   MoveToDatasetButton,
@@ -36,7 +36,7 @@ export const Dataset = ({ dataset }) => {
   if (start) {
     return (
       <FixedContainer>
-        <StartProcessing dataset={dataset} />
+        <DatasetStartProcessing dataset={dataset} />
       </FixedContainer>
     )
   }
@@ -71,9 +71,9 @@ export const Dataset = ({ dataset }) => {
             {isNotProcessed && <DownloadDatasetButton dataset={dataset} />}
           </Row>
         </Row>
-        <FilesSummary dataset={dataset} />
+        <DatasetFileSummaries dataset={dataset} />
         <DatasetSummary dataset={dataset} />
-        <DatasetDetails dataset={dataset} isImmutable />
+        <DatasetSamples dataset={dataset} isImmutable />
       </Box>
     </FixedContainer>
   )

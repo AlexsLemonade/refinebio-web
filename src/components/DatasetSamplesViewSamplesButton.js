@@ -6,7 +6,7 @@ import { TextCapitalized } from 'components/TextCapitalized'
 import { Button } from 'components/Button'
 import { Modal } from 'components/Modal'
 
-export const DatasetDetailsViewSamplesButton = ({
+export const DatasetSamplesViewSamplesButton = ({
   dataset,
   modalTitle,
   isImmutable
@@ -47,4 +47,4 @@ export const DatasetDetailsViewSamplesButton = ({
   )
 }
 
-export default DatasetDetailsViewSamplesButton
+export default DatasetSamplesViewSamplesButton
