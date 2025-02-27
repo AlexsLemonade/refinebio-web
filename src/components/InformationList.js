@@ -1,7 +1,17 @@
+import styled, { css } from 'styled-components'
 import { Box, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
+import { BoxBlock } from 'components/BoxBlock'
 import { Row } from 'components/Row'
 import { TextNull } from 'components/TextNull'
+
+export const InformationList = styled(BoxBlock)`
+  ${({ theme }) => css`
+    > div:nth-of-type(odd) {
+      background: ${theme.global.colors['gray-shade-5']};
+    }
+  `}
+`
 
 export const InformationItem = ({
   field,
@@ -39,5 +49,3 @@ export const InformationItem = ({
     </Row>
   )
 }
-
-export default InformationItem
