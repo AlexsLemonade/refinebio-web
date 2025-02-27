@@ -2,14 +2,14 @@ import { Box, Heading } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Row } from 'components/Row'
 
-export const ErrorTemplate = ({
+export const ErrorCode = ({
   heading,
-  body,
   img,
   align = 'start',
   direction = 'row',
   marginTop = 'basex15',
-  marginBottom = 'none'
+  marginBottom = 'none',
+  children
 }) => {
   const { setResponsive } = useResponsive()
 
@@ -30,7 +30,7 @@ export const ErrorTemplate = ({
         <Heading level={1} margin={{ bottom: 'small' }} size="medium">
           {heading}
         </Heading>
-        {body}
+        {children}
       </Box>
       <Box
         aria-hidden
@@ -49,4 +49,4 @@ export const ErrorTemplate = ({
   )
 }
 
-export default ErrorTemplate
+export default ErrorCode

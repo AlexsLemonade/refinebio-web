@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Button } from 'components/Button'
-import { ErrorTemplate } from 'components/ErrorTemplate'
+import { ErrorCode } from 'components/ErrorCode'
 
 export const Error404 = ({ ...props }) => {
   const { back, events } = useRouter()
@@ -18,21 +18,20 @@ export const Error404 = ({ ...props }) => {
   }
 
   return (
-    <ErrorTemplate
+    <ErrorCode
       heading="The page you are looking for isn’t expressed."
-      body={
-        <Button
-          label="Go Back"
-          margin={{ top: 'large' }}
-          primary
-          responsive
-          onClick={goBack}
-        />
-      }
       img="/tubey-reward-poster.svg"
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
-    />
+    >
+      <Button
+        label="Go Back"
+        margin={{ top: 'large' }}
+        primary
+        responsive
+        onClick={goBack}
+      />
+    </ErrorCode>
   )
 }
 
