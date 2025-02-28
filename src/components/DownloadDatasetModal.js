@@ -9,19 +9,19 @@ import { useRefinebio } from 'hooks/useRefinebio'
 import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/Button'
-import { AdvancedOptions } from 'components/Download/DownloadOptionsForm/AdvancedOptions'
-import { AggregateOptions } from 'components/Download/DownloadOptionsForm/AggregateOptions'
-import { TransformationOptions } from 'components/Download/DownloadOptionsForm/TransformationOptions'
-import { EmailTextInput } from 'components/Download/StartProcessingForm/EmailTextInput'
-import { ReceiveUpdatesCheckBox } from 'components/Download/StartProcessingForm/ReceiveUpdatesCheckBox'
-import { TermsOfUseCheckBox } from 'components/Download/StartProcessingForm/TermsOfUseCheckBox'
+import { AggregateOptions } from 'components/AggregateOptions'
+import { AdvancedOptions } from 'components/AdvancedOptions'
+import { EmailTextInput } from 'components/EmailTextInput'
+import { ReceiveUpdatesCheckBox } from 'components/ReceiveUpdatesCheckBox'
+import { TermsOfUseCheckBox } from 'components/TermsOfUseCheckBox'
+import { TransformationOptions } from 'components/TransformationOptions'
 
 export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
   const { push } = useRouter()
   const { setResponsive } = useResponsive()
   const { email, startProcessingDataset } = useDatasetManager()
   const { acceptedTerms, setAcceptedTerms } = useRefinebio()
-  const { StartProcessingFormSchema } = validationSchemas
+  const { DatasetStartProcessingFormSchema } = validationSchemas
   const [formValues, setFormValues] = useState(null)
 
   const submit = async () => {
@@ -67,7 +67,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
           email_ccdl_ok: true,
           terms: acceptedTerms
         }}
-        validationSchema={StartProcessingFormSchema}
+        validationSchema={DatasetStartProcessingFormSchema}
         validateOnChange={false}
         onSubmit={async (values, { setSubmitting }) => {
           const { terms, ...rest } = values

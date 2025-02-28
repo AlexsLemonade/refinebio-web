@@ -13,8 +13,8 @@ import { useResponsive } from 'hooks/useResponsive'
 import getArrayCounts from 'helpers/getArrayCounts'
 import formatNumbers from 'helpers/formatNumbers'
 import formatString from 'helpers/formatString'
+import { DatasetSummaryTotalRow } from 'components/DatasetSummaryTotalRow'
 import { Row } from 'components/Row'
-import { TotalRow } from './TotalRow'
 
 export const DatasetSummary = ({ dataset }) => {
   const { setResponsive } = useResponsive()
@@ -63,7 +63,7 @@ export const DatasetSummary = ({ dataset }) => {
                 </TableCell>
               </TableRow>
             ))}
-            <TotalRow dataset={dataset} />
+            <DatasetSummaryTotalRow dataset={dataset} />
           </TableBody>
         </Table>
       </Row>

@@ -5,19 +5,17 @@ import { useRouter } from 'next/router'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import scrollTo from 'helpers/scrollTo'
+import { DatasetSamples } from 'components/DatasetSamples'
+import { DatasetDownloadOptionsForm } from 'components/DatasetDownloadOptionsForm'
+import { DatasetEmpty } from 'components/DatasetEmpty'
+import { DatasetFileSummaries } from 'components/DatasetFileSummaries'
+import { DatasetStartProcessing } from 'components/DatasetStartProcessing'
+import { DatasetSummary } from 'components/DatasetSummary'
 import { Error } from 'components/Error'
 import { FixedContainer } from 'components/FixedContainer'
 import { Row } from 'components/Row'
 import { Spinner } from 'components/Spinner'
 import { ShareDatasetButton } from 'components/Dataset'
-import {
-  DatasetSummary,
-  DatasetDetails,
-  EmptyDataset,
-  DownloadOptionsForm,
-  StartProcessing,
-  FilesSummary
-} from 'components/Download'
 
 export const Download = () => {
   const {
@@ -76,20 +74,20 @@ export const Download = () => {
                 </Heading>
                 <ShareDatasetButton dataset={myDataset} />
               </Row>
-              <DownloadOptionsForm dataset={myDataset} />
-              <FilesSummary dataset={myDataset} />
+              <DatasetDownloadOptionsForm dataset={myDataset} />
+              <DatasetFileSummaries dataset={myDataset} />
               <DatasetSummary dataset={myDataset} />
-              <DatasetDetails dataset={myDataset} />
+              <DatasetSamples dataset={myDataset} />
             </>
           ) : start ? (
-            <StartProcessing dataset={myDataset} />
+            <DatasetStartProcessing dataset={myDataset} />
           ) : (
             <Box
               pad={{
                 top: 'basex14'
               }}
             >
-              <EmptyDataset />
+              <DatasetEmpty />
             </Box>
           )}
         </Box>

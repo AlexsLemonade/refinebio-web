@@ -12,7 +12,7 @@ import { AdvancedOptionsToggle } from './AdvancedOptionsToggle'
 import { AggregateOptions } from './AggregateOptions'
 import { TransformationOptions } from './TransformationOptions'
 
-export const DownloadOptionsForm = ({
+export const DatasetDownloadOptionsForm = ({
   dataset,
   buttonLabel = 'Download',
   onOptionsChange = null // if not defined dataset changes will persist on the API
@@ -125,4 +125,4 @@ export const DownloadOptionsForm = ({
   )
 }
 
-export default DownloadOptionsForm
+export default DatasetDownloadOptionsForm
