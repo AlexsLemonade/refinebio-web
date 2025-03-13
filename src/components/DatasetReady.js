@@ -9,9 +9,9 @@ import { Anchor } from 'components/Anchor'
 import { Button } from 'components/Button'
 import { CheckBox } from 'components/CheckBox'
 import { Column } from 'components/Column'
+import { DatasetExplore } from 'components/DatasetExplore'
 import { Row } from 'components/Row'
 import { links } from 'config'
-import { DatasetExplore } from './DatasetExplore'
 
 export const DatasetReady = ({ dataset }) => {
   const { setResponsive } = useResponsive()

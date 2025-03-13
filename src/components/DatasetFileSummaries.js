@@ -6,7 +6,7 @@ import getDatasetState from 'helpers/getDatasetState'
 import getDownloadFilesData from 'helpers/getDownloadFilesData'
 import { Anchor } from 'components/Anchor'
 import { Column } from 'components/Column'
-import { DatasetRegenerateDownloadOptionsForm } from 'components/Dataset/DatasetRegenerateDownloadOptionsForm'
+import { DatasetRegenerateDownloadOptionsForm } from 'components/DatasetRegenerateDownloadOptionsForm'
 import { InlineMessage } from 'components/InlineMessage'
 import { Row } from 'components/Row'
 

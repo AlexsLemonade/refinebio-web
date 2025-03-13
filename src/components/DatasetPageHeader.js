@@ -3,10 +3,10 @@ import { Box } from 'grommet'
 import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
 import getDatasetState from 'helpers/getDatasetState'
+import { DatasetNotProcessed } from 'components/DatasetNotProcessed'
+import { DatasetProcessingError } from 'components/DatasetProcessingError'
+import { DatasetRegenerate } from 'components/DatasetRegenerate'
 import { FixedContainer } from 'components/FixedContainer'
-import { DatasetNotProcessed } from './DatasetNotProcessed'
-import { DatasetProcessingError } from './DatasetProcessingError'
-import { DatasetRegenerate } from './DatasetRegenerate'
 
 const DatasetProcessing = dynamic(() => import('./DatasetProcessing'), {
   ssr: false
