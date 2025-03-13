@@ -21,14 +21,12 @@ import { LayerResponsive } from 'components/LayerResponsive'
 import { PageTitle } from 'components/PageTitle'
 import { Pagination } from 'components/Pagination'
 import { SearchBox } from 'components/SearchBox'
-import { SearchInfoBanner } from 'components/SearchResults/SearchInfoBanner'
+import { SearchBulkActions } from 'components/SearchBulkActions'
+import { SearchFilterList } from 'components/SearchFilterList'
+import { SearchInfoBanner } from 'components/SearchInfoBanner'
+import { SearchNoResults } from 'components/SearchNoResults'
+import { SearchRequestFormAlert } from 'components/SearchRequestFormAlert'
 import { Spinner } from 'components/Spinner'
-import {
-  RequestSearchFormAlert,
-  NoSearchResults,
-  SearchBulkActions,
-  SearchFilterList
-} from 'components/SearchResults'
 
 export const Search = ({ query, response }) => {
   const { setFacetNames, setSearchParams, updatePage, updateSearchTerm } =
@@ -196,7 +194,7 @@ export const Search = ({ query, response }) => {
                   )}
                   {(results.length < 10 ||
                     page === Math.ceil(totalResults / limit)) && (
-                    <RequestSearchFormAlert />
+                    <SearchRequestFormAlert />
                   )}
                 </Box>
 
@@ -216,7 +214,7 @@ export const Search = ({ query, response }) => {
               </Box>
             </Grid>
           )}
-          {!isResults && search && <NoSearchResults />}
+          {!isResults && search && <SearchNoResults />}
         </FixedContainer>
       </TextHighlightContextProvider>
     </>

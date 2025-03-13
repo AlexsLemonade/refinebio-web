@@ -10,7 +10,7 @@ import { TextInput } from 'components/TextInput'
 import { TextNull } from 'components/TextNull'
 import { TextRequired } from 'components/TextRequired'
 
-export const RequestSearchForm = ({ onSubmit = () => {} }) => {
+export const SearchRequestForm = ({ onSubmit = () => {} }) => {
   const {
     query: { search: searchTerm },
     push
@@ -153,4 +153,4 @@ export const RequestSearchForm = ({ onSubmit = () => {} }) => {
   )
 }
 
-export default RequestSearchForm
+export default SearchRequestForm

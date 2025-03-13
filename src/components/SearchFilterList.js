@@ -7,8 +7,8 @@ import formatNumbers from 'helpers/formatNumbers'
 import getReadable from 'helpers/getReadable'
 import isLastIndex from 'helpers/isLastIndex'
 import { Button } from 'components/Button'
-import { SearchFilter } from './SearchFilter'
-import { SearchBooleanFilter } from './SearchBooleanFilter'
+import { SearchBooleanFilter } from 'components/SearchBooleanFilter'
+import { SearchFilter } from 'components/SearchFilter'
 
 export const SearchFilterList = ({
   facets: apiFacets,
