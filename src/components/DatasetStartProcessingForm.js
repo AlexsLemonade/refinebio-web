@@ -10,17 +10,17 @@ import { useResponsive } from 'hooks/useResponsive'
 import subscribeEmail from 'helpers/subscribeEmail'
 import { Button } from 'components/Button'
 import { Column } from 'components/Column'
+import { EmailTextInput } from 'components/EmailTextInput'
+import { ReceiveUpdatesCheckBox } from 'components/ReceiveUpdatesCheckBox'
 import { Row } from 'components/Row'
-import { EmailTextInput } from './EmailTextInput'
-import { ReceiveUpdatesCheckBox } from './ReceiveUpdatesCheckBox'
-import { TermsOfUseCheckBox } from './TermsOfUseCheckBox'
+import { TermsOfUseCheckBox } from 'components/TermsOfUseCheckBox'
 
-export const StartProcessingForm = ({ dataset }) => {
+export const DatasetStartProcessingForm = ({ dataset }) => {
   const { setResponsive } = useResponsive()
   const { push } = useRouter()
   const { email, startProcessingDataset } = useDatasetManager()
   const { acceptedTerms, setAcceptedTerms } = useRefinebio()
-  const { StartProcessingFormSchema } = validationSchemas
+  const { DatasetStartProcessingFormSchema } = validationSchemas
   const [formValues, setFormValues] = useState(null)
 
   const submit = async () => {
@@ -29,7 +29,7 @@ export const StartProcessingForm = ({ dataset }) => {
         formValues.email_address
       )
       if (subscribeEmailResponse.status !== 'error') {
-        gtag.trackEmailSubscription(StartProcessingForm)
+        gtag.trackEmailSubscription(DatasetStartProcessingForm)
       }
     }
 
@@ -55,7 +55,7 @@ export const StartProcessingForm = ({ dataset }) => {
         email_ccdl_ok: true,
         terms: acceptedTerms
       }}
-      validationSchema={StartProcessingFormSchema}
+      validationSchema={DatasetStartProcessingFormSchema}
       validateOnChange={false}
       onSubmit={async (values, { setSubmitting }) => {
         const { terms, ...rest } = values
@@ -114,4 +114,4 @@ export const StartProcessingForm = ({ dataset }) => {
   )
 }
 
-export default StartProcessingForm
+export default DatasetStartProcessingForm

@@ -28,7 +28,7 @@ const RequestDataFormSchema = yup.object().shape({
     .required('Are you using this for pediatric cancer research?')
 })
 
-const StartProcessingFormSchema = yup.object().shape({
+const DatasetStartProcessingFormSchema = yup.object().shape({
   email_address: yup
     .string()
     .email('Please enter a vaild email')
@@ -43,5 +43,5 @@ const StartProcessingFormSchema = yup.object().shape({
 
 export default {
   RequestDataFormSchema,
-  StartProcessingFormSchema
+  DatasetStartProcessingFormSchema
 }

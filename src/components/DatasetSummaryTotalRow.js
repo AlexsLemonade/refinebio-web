@@ -4,7 +4,7 @@ import { TableCell, TableRow, Text } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import formatNumbers from 'helpers/formatNumbers'
 
-export const TotalRow = ({ dataset }) => {
+export const DatasetSummaryTotalRow = ({ dataset }) => {
   const { getTotalExperiments, getTotalSamples } = useDatasetManager()
   const totals = useMemo(() => {
     return [getTotalSamples(dataset.data), getTotalExperiments(dataset.data)]
@@ -22,4 +22,4 @@ export const TotalRow = ({ dataset }) => {
   )
 }
 
-export default TotalRow
+export default DatasetSummaryTotalRow
