@@ -7,13 +7,17 @@ import formatString from 'helpers/formatString'
 import formatURLString from 'helpers/formatURLString'
 import { Anchor } from 'components/Anchor'
 import { Button } from 'components/Button'
+import { DatasetSamplesViewSamplesButton } from 'components/DatasetSamplesViewSamplesButton'
 import { IconBadge } from 'components/IconBadge'
 import { Pill } from 'components/Pill'
 import { Row } from 'components/Row'
 import { TextNull } from 'components/TextNull'
-import { ViewSamplesButton } from '../ViewSamplesButton'
 
-export const ViewBlock = ({ dataset, experiment, isImmutable }) => {
+export const DatasetSamplesExperiment = ({
+  dataset,
+  experiment,
+  isImmutable
+}) => {
   const { loading, formatSampleMetadata, removeExperiment } =
     useDatasetManager()
   const { setResponsive } = useResponsive()
@@ -91,7 +95,7 @@ export const ViewBlock = ({ dataset, experiment, isImmutable }) => {
               </Box>
             </Box>
             {addedSamples.length > 0 && (
-              <ViewSamplesButton
+              <DatasetSamplesViewSamplesButton
                 dataset={dataset}
                 modalTitle={accessionCode}
                 isImmutable={isImmutable}
@@ -114,4 +118,4 @@ export const ViewBlock = ({ dataset, experiment, isImmutable }) => {
   )
 }
 
-export default ViewBlock
+export default DatasetSamplesExperiment

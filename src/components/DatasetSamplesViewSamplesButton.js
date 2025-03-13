@@ -6,7 +6,11 @@ import { TextCapitalized } from 'components/TextCapitalized'
 import { Button } from 'components/Button'
 import { Modal } from 'components/Modal'
 
-export const ViewSamplesButton = ({ dataset, modalTitle, isImmutable }) => {
+export const DatasetSamplesViewSamplesButton = ({
+  dataset,
+  modalTitle,
+  isImmutable
+}) => {
   const { setResponsive } = useResponsive()
   const { openModal } = useModal()
   const id = `view-samples-${dataset.id}-${modalTitle}`
@@ -43,4 +47,4 @@ export const ViewSamplesButton = ({ dataset, modalTitle, isImmutable }) => {
   )
 }
 
-export default ViewSamplesButton
+export default DatasetSamplesViewSamplesButton
