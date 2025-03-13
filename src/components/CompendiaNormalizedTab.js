@@ -2,9 +2,9 @@ import { memo } from 'react'
 import { Box, Heading, Text } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/Button'
+import { CompendiaDownloadBlock } from 'components/CompendiaDownloadBlock'
 import { FixedContainer } from 'components/FixedContainer'
 import { links } from 'config'
-import { CompendiaDownloadBlock } from './CompendiaDownloadBlock'
 
 export const CompendiaNormalizedTab = () => {
   const { setResponsive } = useResponsive()

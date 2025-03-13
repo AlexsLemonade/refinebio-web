@@ -6,12 +6,12 @@ import { useResponsive } from 'hooks/useResponsive'
 import { api } from 'api'
 import { compendia } from 'config'
 import { Column } from 'components/Column'
-import { Error } from 'components/Error'
-import { FixedContainer } from 'components/FixedContainer'
-import { Row } from 'components/Row'
 import { CompendiaExplore } from 'components/CompendiaExplore'
 import { CompendiaFileDownloadForm } from 'components/CompendiaFileDownloadForm'
 import { CompendiaFileDownloadReady } from 'components/CompendiaFileDownloadReady'
+import { Error } from 'components/Error'
+import { FixedContainer } from 'components/FixedContainer'
+import { Row } from 'components/Row'
 
 export const DownloadCompendium = ({ compendium }) => {
   const { setResponsive } = useResponsive()

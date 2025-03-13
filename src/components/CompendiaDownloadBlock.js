@@ -4,9 +4,9 @@ import { useCompendiaContext } from 'hooks/useCompendiaContext'
 import { useResponsive } from 'hooks/useResponsive'
 import getReadable from 'helpers/getReadable'
 import { Column } from 'components/Column'
+import { CompendiaDownloadBlockForm } from 'components/CompendiaDownloadBlockForm'
 import { FixedContainer } from 'components/FixedContainer'
 import { Row } from 'components/Row'
-import { CompendiaDownloadBlockForm } from './CompendiaDownloadBlockForm'
 
 export const CompendiaDownloadBlock = () => {
   const { setResponsive } = useResponsive()

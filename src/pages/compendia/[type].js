@@ -5,11 +5,11 @@ import { useResponsive } from 'hooks/useResponsive'
 import { api } from 'api'
 import { compendia as CompendiaConfig } from 'config'
 import getReadable from 'helpers/getReadable'
-import { SignUpBlock } from 'components/SignUpBlock'
-import { Tabs } from 'components/Tabs'
 import { CompendiaHero } from 'components/CompendiaHero'
 import { CompendiaNormalizedTab } from 'components/CompendiaNormalizedTab'
 import { CompendiaRNASeqTab } from 'components/CompendiaRNASeqTab'
+import { SignUpBlock } from 'components/SignUpBlock'
+import { Tabs } from 'components/Tabs'
 
 export const Compendia = ({ compendia, type }) => {
   const { setResponsive } = useResponsive()
