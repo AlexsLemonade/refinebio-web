@@ -6,7 +6,7 @@ import { Button } from 'components/Button'
 import { Column } from 'components/Column'
 import { Icon } from 'components/Icon'
 
-export const FileDownloadReady = ({ compendium, downloadUrl }) => {
+export const CompendiaFileDownloadReady = ({ compendium, downloadUrl }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -35,4 +35,4 @@ export const FileDownloadReady = ({ compendium, downloadUrl }) => {
   )
 }
 
-export default FileDownloadReady
+export default CompendiaFileDownloadReady

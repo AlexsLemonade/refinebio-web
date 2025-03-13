@@ -7,23 +7,23 @@ import { compendia as CompendiaConfig } from 'config'
 import getReadable from 'helpers/getReadable'
 import { SignUpBlock } from 'components/SignUpBlock'
 import { Tabs } from 'components/Tabs'
-import { Hero } from 'components/Compendia/Hero'
-import { NormalizedTab } from 'components/Compendia/NormalizedTab'
-import { RNASeqTab } from 'components/Compendia/RNASeqTab'
+import { CompendiaHero } from 'components/CompendiaHero'
+import { CompendiaNormalizedTab } from 'components/CompendiaNormalizedTab'
+import { CompendiaRNASeqTab } from 'components/CompendiaRNASeqTab'
 
 export const Compendia = ({ compendia, type }) => {
   const { setResponsive } = useResponsive()
   const { push } = useRouter()
 
   const tabConfigs = [
-    { type: 'normalized', Component: NormalizedTab },
-    { type: 'rna-seq', Component: RNASeqTab }
+    { type: 'normalized', Component: CompendiaNormalizedTab },
+    { type: 'rna-seq', Component: CompendiaRNASeqTab }
   ]
   const activeIndex = tabConfigs.findIndex((config) => config.type === type)
 
   return (
     <Box pad={{ top: setResponsive('basex7', 'basex7', 'basex10') }}>
-      <Hero />
+      <CompendiaHero />
       <CompendiaContextProvider initialCompendia={compendia} initialType={type}>
         <Tabs activeIndex={activeIndex} text>
           {tabConfigs.map((config) => (

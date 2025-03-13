@@ -6,9 +6,9 @@ import getReadable from 'helpers/getReadable'
 import { Column } from 'components/Column'
 import { FixedContainer } from 'components/FixedContainer'
 import { Row } from 'components/Row'
-import { DownloadBlockForm } from './DownloadBlockForm'
+import { CompendiaDownloadBlockForm } from './CompendiaDownloadBlockForm'
 
-export const DownloadBlock = () => {
+export const CompendiaDownloadBlock = () => {
   const { setResponsive } = useResponsive()
   const { type } = useCompendiaContext()
 
@@ -83,7 +83,7 @@ export const DownloadBlock = () => {
               }}
               width="100%"
             >
-              <DownloadBlockForm />
+              <CompendiaDownloadBlockForm />
             </Column>
           </Row>
         </FixedContainer>
@@ -92,4 +92,4 @@ export const DownloadBlock = () => {
   )
 }
 
-export default memo(DownloadBlock)
+export default memo(CompendiaDownloadBlock)

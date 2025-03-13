@@ -53,7 +53,7 @@ const DropdownOption = ({ label, selected, onClick }) => (
   />
 )
 
-export const DownloadBlockForm = () => {
+export const CompendiaDownloadBlockForm = () => {
   const { setResponsive } = useResponsive()
   const { acceptedTerms, setAcceptedTerms } = useRefinebio()
   const [isTermsChecked, setIsTermsChecked] = useState(acceptedTerms)
@@ -218,4 +218,4 @@ export const DownloadBlockForm = () => {
   )
 }
 
-export default memo(DownloadBlockForm)
+export default memo(CompendiaDownloadBlockForm)

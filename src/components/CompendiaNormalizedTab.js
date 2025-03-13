@@ -4,14 +4,14 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/Button'
 import { FixedContainer } from 'components/FixedContainer'
 import { links } from 'config'
-import { DownloadBlock } from './DownloadBlock'
+import { CompendiaDownloadBlock } from './CompendiaDownloadBlock'
 
-export const NormalizedTab = () => {
+export const CompendiaNormalizedTab = () => {
   const { setResponsive } = useResponsive()
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 350, delay: 200 }}>
-      <DownloadBlock />
+      <CompendiaDownloadBlock />
       <FixedContainer
         pad={{
           horizontal: setResponsive('large', 'medium', 'basex15'),
@@ -66,4 +66,4 @@ export const NormalizedTab = () => {
   )
 }
 
-export default memo(NormalizedTab)
+export default memo(CompendiaNormalizedTab)

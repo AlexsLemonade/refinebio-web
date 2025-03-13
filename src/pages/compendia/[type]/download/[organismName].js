@@ -9,9 +9,9 @@ import { Column } from 'components/Column'
 import { Error } from 'components/Error'
 import { FixedContainer } from 'components/FixedContainer'
 import { Row } from 'components/Row'
-import { Explore } from 'components/Compendia/Explore'
-import { FileDownloadForm } from 'components/Compendia/FileDownloadForm'
-import { FileDownloadReady } from 'components/Compendia/FileDownloadReady'
+import { CompendiaExplore } from 'components/CompendiaExplore'
+import { CompendiaFileDownloadForm } from 'components/CompendiaFileDownloadForm'
+import { CompendiaFileDownloadReady } from 'components/CompendiaFileDownloadReady'
 
 export const DownloadCompendium = ({ compendium }) => {
   const { setResponsive } = useResponsive()
@@ -49,12 +49,12 @@ export const DownloadCompendium = ({ compendium }) => {
       >
         <Row justify="center" width={setResponsive('100%', '85%')}>
           {downloadReady ? (
-            <FileDownloadReady
+            <CompendiaFileDownloadReady
               compendium={compendium}
               downloadUrl={downloadUrl}
             />
           ) : (
-            <FileDownloadForm compendium={compendium} />
+            <CompendiaFileDownloadForm compendium={compendium} />
           )}
           <Column
             align="center"
@@ -80,7 +80,7 @@ export const DownloadCompendium = ({ compendium }) => {
         </Row>
       </Box>
       <Box>
-        <Explore />
+        <CompendiaExplore />
       </Box>
     </FixedContainer>
   )
