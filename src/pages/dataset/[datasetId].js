@@ -6,18 +6,16 @@ import { useResponsive } from 'hooks/useResponsive'
 import { api } from 'api'
 import getDatasetState from 'helpers/getDatasetState'
 import { DatasetFileSummaries } from 'components/DatasetFileSummaries'
+import { DatasetPageHeader } from 'components/DatasetPageHeader'
 import { DatasetSamples } from 'components/DatasetSamples'
 import { DatasetStartProcessing } from 'components/DatasetStartProcessing'
 import { DatasetSummary } from 'components/DatasetSummary'
 import { DownloadDatasetButton } from 'components/DownloadDatasetButton'
 import { Error } from 'components/Error'
 import { FixedContainer } from 'components/FixedContainer'
+import { MoveToDatasetButton } from 'components/MoveToDatasetButton'
 import { Row } from 'components/Row'
-import {
-  DatasetPageHeader,
-  MoveToDatasetButton,
-  ShareDatasetButton
-} from 'components/Dataset'
+import { ShareDatasetButton } from 'components/ShareDatasetButton'
 
 export const Dataset = ({ dataset }) => {
   const {

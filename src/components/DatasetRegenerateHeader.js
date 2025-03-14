@@ -10,7 +10,7 @@ import { Column } from 'components/Column'
 import { InlineMessage } from 'components/InlineMessage'
 import { Row } from 'components/Row'
 
-export const DatasetRegenerate = ({ dataset }) => {
+export const DatasetRegenerateHeader = ({ dataset }) => {
   const { worker_version: workerVersion } = dataset
   const { push } = useRouter()
   const { createDataset, updateDataset } = useDatasetManager()
@@ -118,4 +118,4 @@ export const DatasetRegenerate = ({ dataset }) => {
   )
 }
 
-export default DatasetRegenerate
+export default DatasetRegenerateHeader

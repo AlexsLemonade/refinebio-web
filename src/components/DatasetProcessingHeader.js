@@ -2,11 +2,11 @@ import { Box, Heading, Paragraph } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useResponsive } from 'hooks/useResponsive'
 import { Column } from 'components/Column'
+import { DatasetExplore } from 'components/DatasetExplore'
 import { IconProcessingGears } from 'components/IconProcessingGears'
 import { Row } from 'components/Row'
-import { DatasetExplore } from './DatasetExplore'
 
-export const DatasetProcessing = ({ dataset }) => {
+export const DatasetProcessingHeader = ({ dataset }) => {
   const { setResponsive } = useResponsive()
   const { email } = useDatasetManager()
 
@@ -43,4 +43,4 @@ export const DatasetProcessing = ({ dataset }) => {
   )
 }
 
-export default DatasetProcessing
+export default DatasetProcessingHeader

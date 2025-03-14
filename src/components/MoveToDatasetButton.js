@@ -6,7 +6,7 @@ import { useModal } from 'hooks/useModal'
 import formatNumbers from 'helpers/formatNumbers'
 import { Button as SharedButton } from 'components/Button'
 import { Modal } from 'components/Modal'
-import { MoveToDatasetModal } from './MoveToDatasetModal'
+import { MoveToDatasetModal } from 'components/MoveToDatasetModal'
 
 const Button = ({ onClick }) => (
   <SharedButton

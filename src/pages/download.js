@@ -14,8 +14,8 @@ import { DatasetSummary } from 'components/DatasetSummary'
 import { Error } from 'components/Error'
 import { FixedContainer } from 'components/FixedContainer'
 import { Row } from 'components/Row'
+import { ShareDatasetButton } from 'components/ShareDatasetButton'
 import { Spinner } from 'components/Spinner'
-import { ShareDatasetButton } from 'components/Dataset'
 
 export const Download = () => {
   const {

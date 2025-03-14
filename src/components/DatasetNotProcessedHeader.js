@@ -1,7 +1,7 @@
 import { Box, Heading } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 
-export const DatasetNotProcessed = () => {
+export const DatasetNotProcessedHeader = () => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -13,4 +13,4 @@ export const DatasetNotProcessed = () => {
   )
 }
 
-export default DatasetNotProcessed
+export default DatasetNotProcessedHeader
