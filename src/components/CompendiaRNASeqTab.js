@@ -4,10 +4,10 @@ import { useResponsive } from 'hooks/useResponsive'
 import { Anchor } from 'components/Anchor'
 import { Button } from 'components/Button'
 import { Column } from 'components/Column'
+import { CompendiaDownloadBlock } from 'components/CompendiaDownloadBlock'
 import { FixedContainer } from 'components/FixedContainer'
 import { Row } from 'components/Row'
 import { links } from 'config'
-import { DownloadBlock } from './DownloadBlock'
 
 const Card = ({ heading, pad, children }) => {
   const { setResponsive } = useResponsive()
@@ -31,12 +31,12 @@ const Card = ({ heading, pad, children }) => {
   )
 }
 
-export const RNASeqTab = () => {
+export const CompendiaRNASeqTab = () => {
   const { setResponsive } = useResponsive()
 
   return (
     <Box animation={{ type: 'fadeIn', duration: 350, delay: 200 }}>
-      <DownloadBlock />
+      <CompendiaDownloadBlock />
       <FixedContainer>
         <Row
           direction={setResponsive('column', 'column', 'row')}
@@ -114,4 +114,4 @@ export const RNASeqTab = () => {
   )
 }
 
-export default memo(RNASeqTab)
+export default memo(CompendiaRNASeqTab)

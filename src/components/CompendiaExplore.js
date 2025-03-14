@@ -17,7 +17,7 @@ const ListItem = ({ href, text }) => (
   </Box>
 )
 
-export const Explore = () => {
+export const CompendiaExplore = () => {
   const { setResponsive } = useResponsive()
 
   const exploreLinks = [
@@ -78,4 +78,4 @@ export const Explore = () => {
   )
 }
 
-export default Explore
+export default CompendiaExplore

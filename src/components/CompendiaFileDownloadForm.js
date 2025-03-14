@@ -11,7 +11,7 @@ import { Column } from 'components/Column'
 import { Row } from 'components/Row'
 import { links } from 'config'
 
-export const FileDownloadForm = ({ compendium }) => {
+export const CompendiaFileDownloadForm = ({ compendium }) => {
   const { setResponsive } = useResponsive()
   const { acceptedTerms, setAcceptedTerms } = useRefinebio()
   const [isTermsChecked, setIsTermsChecked] = useState(acceptedTerms)
@@ -81,4 +81,4 @@ export const FileDownloadForm = ({ compendium }) => {
   )
 }
 
-export default FileDownloadForm
+export default CompendiaFileDownloadForm

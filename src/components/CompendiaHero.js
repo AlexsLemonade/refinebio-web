@@ -16,7 +16,7 @@ export const HeroHeader = () => {
     </Heading>
   )
 }
-export const Hero = () => {
+export const CompendiaHero = () => {
   return (
     <FixedContainer width="850px">
       <SharedHero header={<HeroHeader />} marginBottom="basex7" />
@@ -24,4 +24,4 @@ export const Hero = () => {
   )
 }
 
-export default Hero
+export default CompendiaHero
