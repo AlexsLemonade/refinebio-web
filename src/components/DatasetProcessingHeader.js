@@ -6,7 +6,7 @@ import { DatasetExplore } from 'components/DatasetExplore'
 import { IconProcessingGears } from 'components/IconProcessingGears'
 import { Row } from 'components/Row'
 
-export const DatasetProcessing = ({ dataset }) => {
+export const DatasetProcessingHeader = ({ dataset }) => {
   const { setResponsive } = useResponsive()
   const { email } = useDatasetManager()
 
@@ -43,4 +43,4 @@ export const DatasetProcessing = ({ dataset }) => {
   )
 }
 
-export default DatasetProcessing
+export default DatasetProcessingHeader

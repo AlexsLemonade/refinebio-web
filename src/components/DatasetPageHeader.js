@@ -3,16 +3,19 @@ import { Box } from 'grommet'
 import { usePollDatasetStatus } from 'hooks/usePollDatasetStatus'
 import { useResponsive } from 'hooks/useResponsive'
 import getDatasetState from 'helpers/getDatasetState'
-import { DatasetNotProcessed } from 'components/DatasetNotProcessed'
-import { DatasetProcessingError } from 'components/DatasetProcessingError'
-import { DatasetRegenerate } from 'components/DatasetRegenerate'
+import { DatasetNotProcessedHeader } from 'components/DatasetNotProcessedHeader'
+import { DatasetProcessingErrorHeader } from 'components/DatasetProcessingErrorHeader'
+import { DatasetRegenerateHeader } from 'components/DatasetRegenerateHeader'
 import { FixedContainer } from 'components/FixedContainer'
 
-const DatasetProcessing = dynamic(() => import('./DatasetProcessing'), {
-  ssr: false
-})
+const DatasetProcessingHeader = dynamic(
+  () => import('./DatasetProcessingHeader'),
+  {
+    ssr: false
+  }
+)
 
-const DatasetReady = dynamic(() => import('./DatasetReady'), {
+const DatasetReadyHeader = dynamic(() => import('./DatasetReadyHeader'), {
   ssr: false
 })
 
@@ -26,11 +29,11 @@ export const DatasetPageHeader = ({ dataset }) => {
     : 'none'
 
   const datasetStateComponents = {
-    isNotProcessed: DatasetNotProcessed,
-    isProcessing: DatasetProcessing,
-    isFailed: DatasetProcessingError,
-    isReady: DatasetReady,
-    isReadyExpired: DatasetRegenerate
+    isNotProcessed: DatasetNotProcessedHeader,
+    isProcessing: DatasetProcessingHeader,
+    isFailed: DatasetProcessingErrorHeader,
+    isReady: DatasetReadyHeader,
+    isReadyExpired: DatasetRegenerateHeader
   }
 
   const Component =

@@ -5,7 +5,7 @@ import { Column } from 'components/Column'
 import { Row } from 'components/Row'
 import { links } from 'config'
 
-export const DatasetProcessingError = ({ dataset }) => {
+export const DatasetProcessingErrorHeader = ({ dataset }) => {
   const { setResponsive } = useResponsive()
 
   return (
@@ -89,4 +89,4 @@ export const DatasetProcessingError = ({ dataset }) => {
   )
 }
 
-export default DatasetProcessingError
+export default DatasetProcessingErrorHeader

@@ -13,7 +13,7 @@ import { DatasetExplore } from 'components/DatasetExplore'
 import { Row } from 'components/Row'
 import { links } from 'config'
 
-export const DatasetReady = ({ dataset }) => {
+export const DatasetReadyHeader = ({ dataset }) => {
   const { setResponsive } = useResponsive()
   const { downloadDataset } = useDatasetManager()
   const { acceptedTerms, setAcceptedTerms } = useRefinebio()
@@ -123,4 +123,4 @@ export const DatasetReady = ({ dataset }) => {
   )
 }
 
-export default DatasetReady
+export default DatasetReadyHeader
