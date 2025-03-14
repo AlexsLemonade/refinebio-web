@@ -3,8 +3,8 @@ import { useResponsive } from 'hooks/useResponsive'
 import { useSearchManager } from 'hooks/useSearchManager'
 import getReadableOptions from 'helpers/getReadableOptions'
 import { PageSizes } from 'components/PageSizes'
-import { AddPageToDatasetButton } from './AddPageToDatasetButton'
-import { HideNonDownloadableExperiments } from './SearchFilterList'
+import { AddPageToDatasetButton } from 'components/AddPageToDatasetButton'
+import { HideNonDownloadableExperiments } from 'components/HideNonDownloadableExperiments'
 
 export const SearchBulkActions = ({ response, query }) => {
   const { results, totalResults } = response
