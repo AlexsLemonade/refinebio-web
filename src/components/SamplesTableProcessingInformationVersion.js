@@ -1,11 +1,73 @@
 import { nanoid } from 'nanoid'
-import { Box, Heading } from 'grommet'
+import styled, { css } from 'styled-components'
+import { Box, Heading, Text } from 'grommet'
 import pickObjectPropByKey from 'helpers/pickObjectPropByKey'
 import { Accordion, AccordionPanel } from 'components/Accordion'
-import { ProcessorVersion } from './ProcessorVersion'
-import { VersionItem } from './VersionList'
 
-export const VersionInformation = ({ results }) => {
+const List = styled(Box)`
+  ${({ theme }) => css`
+    > div:nth-of-type(odd) {
+      background: ${theme.global.colors['gray-shade-5']};
+    }
+  `}
+`
+
+const Item = ({ title, version, versions }) => {
+  return (
+    <Box direction={version ? 'row' : 'column'} pad={{ vertical: 'xsmall' }}>
+      <Box width={{ min: '160px' }}>
+        <Heading level={5} responsive={false} weight="500">
+          {title}
+        </Heading>
+      </Box>
+      {versions &&
+        Object.keys(versions).map((v) => (
+          <Box key={v} direction="row">
+            <Box margin={{ right: 'medium' }} width={{ min: '160px' }}>
+              <Text textAlign="end">{v}</Text>
+            </Box>
+            <Box>
+              <Text>{versions[v]}</Text>
+            </Box>
+          </Box>
+        ))}
+      {version && (
+        <Box margin={{ left: 'medium' }}>
+          <Text>{version}</Text>
+        </Box>
+      )}
+    </Box>
+  )
+}
+
+const ProcessorVersion = ({ processor }) => {
+  const vevrsionItems = [
+    { title: 'OS Packages', versions: processor.environment.os_pkg },
+    {
+      title: 'Python',
+      versions: processor.environment.python
+    },
+    {
+      title: 'OS Distribution',
+      version: processor.environment.os_distribution
+    }
+  ]
+
+  return (
+    <List>
+      {vevrsionItems.map((versionItem) => (
+        <Item
+          key={versionItem.title}
+          title={versionItem.title}
+          version={versionItem.version}
+          versions={versionItem.versions}
+        />
+      ))}
+    </List>
+  )
+}
+
+export const SamplesTableProcessingInformationVersion = ({ results }) => {
   // returns an object with the primary versions that should be displayed in the modal
   // https://github.com/AlexsLemonade/refinebio-frontend/issues/65#issuecomment-401174943
   // (relevance) https://github.com/AlexsLemonade/refinebio-frontend/issues/293#issuecomment-420753323
@@ -38,9 +100,7 @@ export const VersionInformation = ({ results }) => {
     return (
       <AccordionPanel
         key={processor.name}
-        title={
-          <VersionItem title={processor.name} versions={primaryPackages} />
-        }
+        title={<Item title={processor.name} versions={primaryPackages} />}
       >
         <ProcessorVersion
           processor={processor}
@@ -80,7 +140,7 @@ export const VersionInformation = ({ results }) => {
           Genome Build
         </Heading>
         {verionItems.map((versionItem) => (
-          <VersionItem key={nanoid()} versions={versionItem} />
+          <Item key={nanoid()} versions={versionItem} />
         ))}
       </Box>
     )
@@ -99,4 +159,4 @@ export const VersionInformation = ({ results }) => {
   )
 }
 
-export default VersionInformation
+export default SamplesTableProcessingInformationVersion
