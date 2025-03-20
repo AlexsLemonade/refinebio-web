@@ -3,10 +3,10 @@ import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/Button'
 import { Modal } from 'components/Modal'
+import { SamplesTableAdditionalMetadataModal } from 'components/SamplesTableAdditionalMetadataModal'
 import { TextNull } from 'components/TextNull'
-import { ModalContent } from './ModalContent'
 
-export const AdditionalMetadataCell = ({
+export const SamplesTableAdditionalMetadataCell = ({
   row: { original: sample },
   linkFontSize = '14px'
 }) => {
@@ -34,9 +34,9 @@ export const AdditionalMetadataCell = ({
       center={false}
       width={setResponsive('100vw', '100vw', '950px')}
     >
-      <ModalContent annotations={annotations} />
+      <SamplesTableAdditionalMetadataModal annotations={annotations} />
     </Modal>
   )
 }
 
-export default memo(AdditionalMetadataCell)
+export default memo(SamplesTableAdditionalMetadataCell)

@@ -4,10 +4,10 @@ import { useModal } from 'hooks/useModal'
 import { useResponsive } from 'hooks/useResponsive'
 import { Button } from 'components/Button'
 import { Modal } from 'components/Modal'
+import { SamplesTableProcessingInformationModal } from 'components/SamplesTableProcessingInformationModal'
 import { TextNull } from 'components/TextNull'
-import { ModalContent } from './ModalContent'
 
-export const ProcessingInformationCell = ({
+export const SamplesTableProcessingInformationCell = ({
   row: { original: sample },
   linkFontSize = '14px'
 }) => {
@@ -50,9 +50,12 @@ export const ProcessingInformationCell = ({
       center={false}
       width={setResponsive('100vw', '100vw', '950px')}
     >
-      <ModalContent results={computationalResults} sample={sample} />
+      <SamplesTableProcessingInformationModal
+        results={computationalResults}
+        sample={sample}
+      />
     </Modal>
   )
 }
 
-export default memo(ProcessingInformationCell)
+export default memo(SamplesTableProcessingInformationCell)

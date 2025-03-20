@@ -4,8 +4,9 @@ import { useAsyncDebounce } from 'react-table'
 import { useSamplesContext } from 'hooks/useSamplesContext'
 import { useResponsive } from 'hooks/useResponsive'
 import { TextHighlightContextProvider } from 'contexts/TextHighlightContext'
-import formatString from 'helpers/formatString'
 import getPageNumber from 'helpers/getPageNumber'
+import formatString from 'helpers/formatString'
+import { links } from 'config'
 import { Anchor } from 'components/Anchor'
 import { BoxBlock } from 'components/BoxBlock'
 import { DataTable, ExpandTableButton } from 'components/shared/DataTable'
@@ -15,17 +16,14 @@ import { Overlay } from 'components/Ovevrlay'
 import { PageSizes } from 'components/PageSizes'
 import { Pagination } from 'components/Pagination'
 import { Row } from 'components/Row'
+import { SamplesTableAdditionalMetadataCell } from 'components/SamplesTableAdditionalMetadataCell'
+import { SamplesTableAddRemoveCell } from 'components/SamplesTableAddRemoveCell'
+import { SamplesTableCell } from 'components/SamplesTableCell'
+import { SamplesTableEmpty } from 'components/SamplesTableEmpty'
+import { SamplesTableError } from 'components/SamplesTableError'
+import { SamplesTableProcessingInformationCell } from 'components/SamplesTableProcessingInformationCell'
+import { ShowOnlyAddedSamplesFilter } from 'components/ShowOnlyAddedSamplesFilter'
 import { TextNull } from 'components/TextNull'
-import { links } from 'config'
-import { SamplesTableEmpty } from './SamplesTableEmpty'
-import { SamplesTableError } from './SamplesTableError'
-import { AccessionCodeCell } from './AccessionCodeCell'
-import { AddRemoveCell } from './AddRemoveCell'
-import { AdditionalMetadataCell } from './AdditionalMetadataCell'
-import { ProcessingInformationCell } from './ProcessingInformationCell'
-import { SampleMetadataCell } from './SampleMetadataCell'
-import { ShowOnlyAddedSamplesFilter } from './ShowOnlyAddedSamplesFilter'
-import { TitleCell } from './TitleCell'
 
 export const SamplesTable = ({
   experiment, // for the experiment page
@@ -69,7 +67,7 @@ export const SamplesTable = ({
         Header: 'Add/Remove',
         // eslint-disable-next-line react/no-unstable-nested-components
         Cell: ({ row: { original: sample } }) => (
-          <AddRemoveCell
+          <SamplesTableAddRemoveCell
             experimentAccessionCodes={experimentAccessionCodes}
             sample={sample}
           />
@@ -82,13 +80,13 @@ export const SamplesTable = ({
       {
         Header: 'Accession Code',
         accessor: 'accession_code',
-        Cell: AccessionCodeCell,
+        Cell: SamplesTableCell,
         maxWidth: 160
       },
       {
         Header: 'Title',
         accessor: 'title',
-        Cell: TitleCell
+        Cell: SamplesTableCell
       },
       {
         id: 'id',
@@ -100,21 +98,21 @@ export const SamplesTable = ({
         id: column,
         accessor: column,
         Header: formatString(column),
-        Cell: SampleMetadataCell
+        Cell: SamplesTableCell
       })),
       {
         Header: 'Processing Information',
         disableSortBy: true,
         id: 'processing_information',
         width: 180,
-        Cell: ProcessingInformationCell
+        Cell: SamplesTableProcessingInformationCell
       },
       {
         Header: 'Additional Metadata',
         disableSortBy: true,
         id: 'additional_metadata',
         width: 180,
-        Cell: AdditionalMetadataCell
+        Cell: SamplesTableAdditionalMetadataCell
       }
     ]
     // makes columns stick to left only for 'large' (enough screen real estate)

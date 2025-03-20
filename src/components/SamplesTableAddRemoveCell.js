@@ -6,7 +6,10 @@ import { Anchor } from 'components/Anchor'
 import { DatasetActionButton } from 'components/shared/DatasetActionButton'
 import { Icon } from 'components/Icon'
 
-export const AddRemoveCell = ({ experimentAccessionCodes, sample }) => {
+export const SamplesTableAddRemoveCell = ({
+  experimentAccessionCodes,
+  sample
+}) => {
   // maps the given sample accession code to its corresponding experiment accession code
   // (as the dataset.data structure) to support adding/removing samples via API
   // e.g., { experimentAccession: [ sampleAccession ]}
@@ -48,4 +51,4 @@ export const AddRemoveCell = ({ experimentAccessionCodes, sample }) => {
   return <DatasetActionButton data={datasetData} label="Add" secondary />
 }
 
-export default memo(AddRemoveCell)
+export default memo(SamplesTableAddRemoveCell)

@@ -50,7 +50,7 @@ const Step = ({ label, img: { url, height, width } }) => {
   )
 }
 
-export const PipelineSteps = ({ results }) => {
+export const SamplesTableProcessingInformationPipelineSteps = ({ results }) => {
   return (
     <Box
       align="center"
@@ -80,4 +80,4 @@ export const PipelineSteps = ({ results }) => {
   )
 }
 
-export default PipelineSteps
+export default SamplesTableProcessingInformationPipelineSteps

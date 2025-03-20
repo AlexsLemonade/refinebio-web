@@ -1,13 +1,13 @@
 import { memo } from 'react'
 import { Box, Heading } from 'grommet'
 import isEmptyObject from 'helpers/isEmptyObject'
+import { links } from 'config'
 import { Anchor } from 'components/Anchor'
 import { Pill } from 'components/Pill'
-import { links } from 'config'
-import { Pipeline } from './Pipeline'
-import { SubmitterSupplied } from './SubmitterSupplied'
+import { SamplesTableProcessingInformationPipeline } from 'components/SamplesTableProcessingInformationPipeline'
+import { SamplesTableProcessingInformationSubmitterSupplied } from 'components/SamplesTableProcessingInformationSubmitterSupplied'
 
-export const ModalContent = ({ results, sample }) => {
+export const SamplesTableProcessingInformationModal = ({ results, sample }) => {
   const pipelinesText = results.map((result) => result.processor.name)
   const isSubmitterProcessed = pipelinesText.every(
     (pipelineText) => pipelineText === 'Submitter-processed'
@@ -53,7 +53,7 @@ export const ModalContent = ({ results, sample }) => {
                   status="success"
                 />
               </Box>
-              <Pipeline
+              <SamplesTableProcessingInformationPipeline
                 isSubmitterProcessed={isSubmitterProcessed}
                 pipelinesText={pipelinesText}
                 results={results}
@@ -69,7 +69,7 @@ export const ModalContent = ({ results, sample }) => {
         )}
 
         {!isEmptyObject(sample.protocol_info) && (
-          <SubmitterSupplied
+          <SamplesTableProcessingInformationSubmitterSupplied
             isSubmitterProcessed={isSubmitterProcessed}
             protocolInfo={sample.protocol_info}
             sample={sample}
@@ -80,4 +80,4 @@ export const ModalContent = ({ results, sample }) => {
   )
 }
 
-export default memo(ModalContent)
+export default memo(SamplesTableProcessingInformationModal)

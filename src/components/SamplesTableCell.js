@@ -1,12 +1,13 @@
+import { memo } from 'react'
 import { TextHighlight } from 'components/TextHighlight'
 import { TextNull } from 'components/TextNull'
 
-export const SampleMetadataCell = ({ value }) => {
+export const SamplesTableCell = ({ value, nullText = 'N/A' }) => {
   return value ? (
     <TextHighlight>{value}</TextHighlight>
   ) : (
-    <TextNull text="N/A" />
+    <TextNull text={nullText} />
   )
 }
 
-export default SampleMetadataCell
+export default memo(SamplesTableCell)
