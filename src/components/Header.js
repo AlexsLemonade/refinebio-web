@@ -4,9 +4,9 @@ import { Box, Header as GrommetHeader } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import isMatchPath from 'helpers/isMatchPath'
 import { FixedContainer } from 'components/FixedContainer'
-import { GlobalNav } from './GlobalNav'
-import { GithubAnchor } from './GithubAnchor'
-import { LogoAnchor } from './LogoAnchor'
+import { GithubLogoAnchor } from 'components/GithubLogoAnchor'
+import { GlobalNav } from 'components/GlobalNav'
+import { LogoAnchor } from 'components/LogoAnchor'
 
 export const Header = forwardRef(({ light = false }, ref) => {
   const router = useRouter()
@@ -51,7 +51,7 @@ export const Header = forwardRef(({ light = false }, ref) => {
           <GlobalNav light={light} toggle={toggle} setToggle={setToggle} />
         </Box>
       </FixedContainer>
-      {viewport === 'large' && <GithubAnchor light={light} />}
+      {viewport === 'large' && <GithubLogoAnchor light={light} />}
     </GrommetHeader>
   )
 })

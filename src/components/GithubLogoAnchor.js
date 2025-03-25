@@ -2,10 +2,10 @@ import { Box } from 'grommet'
 import { links } from 'config'
 import { Anchor } from 'components/Anchor'
 import { SrOnly } from 'components/SrOnly'
-import { GithubLogoSvg } from '../../images/github-corner.svg'
+import { GithubLogoSvg } from '../images/github-corner.svg'
 
 // NOTE: Set the prop 'light' to true for the dark background
-export const GithubAnchor = ({ light = false }) => {
+export const GithubLogoAnchor = ({ light = false }) => {
   return (
     <Box light={light}>
       <Anchor color={light ? 'white' : 'alex-navy'} href={links.alsf_github}>
@@ -16,4 +16,4 @@ export const GithubAnchor = ({ light = false }) => {
   )
 }
 
-export default GithubAnchor
+export default GithubLogoAnchor

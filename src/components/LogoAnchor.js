@@ -1,7 +1,7 @@
 import { Box } from 'grommet'
 import { Anchor } from 'components/Anchor'
 import { SrOnly } from 'components/SrOnly'
-import { LogoSvg } from '../../images/logo.svg'
+import { LogoSvg } from '../images/logo.svg'
 
 // NOTE: Set the prop 'light' to true for the dark background
 
