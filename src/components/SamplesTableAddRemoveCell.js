@@ -2,8 +2,7 @@ import { memo } from 'react'
 import { Box, Text } from 'grommet'
 import { cache, links } from 'config'
 import { Anchor } from 'components/Anchor'
-
-import { DatasetActionButton } from 'components/shared/DatasetActionButton'
+import { DatasetActionButton } from 'components/DatasetActionButton'
 import { Icon } from 'components/Icon'
 
 export const SamplesTableAddRemoveCell = ({

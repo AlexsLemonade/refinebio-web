@@ -1,9 +1,9 @@
 import { useDatasetManager } from 'hooks/useDatasetManager'
 import { useDatasetAction } from 'hooks/useDatasetAction'
 import { Button } from 'components/Button'
-import { AddRemainingDatasetButton } from './AddRemainingDatasetButton'
-import { AddToDatasetButton } from './AddToDatasetButton'
-import { RemoveDatasetButton } from './RemoveDatasetButton'
+import { AddRemainingDatasetButton } from 'components/AddRemainingDatasetButton'
+import { AddToDatasetButton } from 'components/AddToDatasetButton'
+import { RemoveDatasetButton } from 'components/RemoveDatasetButton'
 
 export const DatasetActionButton = ({
   accessionCode,

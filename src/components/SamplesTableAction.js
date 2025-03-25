@@ -1,7 +1,7 @@
 import { Box } from 'grommet'
 import { useResponsive } from 'hooks/useResponsive'
 import { getFormattedExperiment } from 'helpers/formatDatasetAction'
-import { DatasetActionButton } from 'components/shared/DatasetActionButton'
+import { DatasetActionButton } from 'components/DatasetActionButton'
 
 export const SamplesTableAction = ({ experiment }) => {
   const { setResponsive } = useResponsive()
