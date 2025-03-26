@@ -37,7 +37,7 @@ export const DatasetExplore = ({ dataset }) => {
   const rnaSeqLinks = [
     {
       text: 'Convert ENSEMBL IDs to Gene Symbols',
-      href: links.refinebio_github_gene_id_annotation
+      href: links.refinebio_github_gene_id_annotation_rnaseq
     },
     {
       text: 'Follow an example differential expression analysis',
