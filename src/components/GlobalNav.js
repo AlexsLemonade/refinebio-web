@@ -6,13 +6,13 @@ import { useResponsive } from 'hooks/useResponsive'
 import { links } from 'config'
 import isMatchPath from 'helpers/isMatchPath'
 import { BadgedButton } from 'components/BadgedButton'
+import { Icon } from 'components/Icon'
 import { LayerResponsive } from 'components/LayerResponsive'
 import { List } from 'components/List'
-import { Icon } from 'components/Icon'
-import { LogoAnchor } from './LogoAnchor'
-import { NavDropDown } from './NavDropDown'
-import { NavLink } from './NavLink'
-import { NavIcon } from './NavIcon'
+import { LogoAnchor } from 'components/LogoAnchor'
+import { NavDropDown } from 'components/NavDropDown'
+import { NavIcon } from 'components/NavIcon'
+import { NavLink } from 'components/NavLink'
 
 export const GlobalNav = ({ light = false, toggle = false, setToggle }) => {
   const router = useRouter()
