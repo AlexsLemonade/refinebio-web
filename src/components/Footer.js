@@ -8,14 +8,22 @@ import {
 } from 'grommet'
 import styled, { css } from 'styled-components'
 import { useResponsive } from 'hooks/useResponsive'
-import { Anchor } from 'components/shared/Anchor'
-import { Button } from 'components/shared/Button'
-import { Column } from 'components/shared/Column'
-import { FixedContainer } from 'components/shared/FixedContainer'
-import { Icon } from 'components/shared/Icon'
-import { Row } from 'components/shared/Row'
+import { Anchor } from 'components/Anchor'
+import { Button } from 'components/Button'
+import { Column } from 'components/Column'
+import { FixedContainer } from 'components/FixedContainer'
+import { Icon } from 'components/Icon'
+import { Row } from 'components/Row'
 import { cache, contributors, links } from 'config'
 import { CoinIcon } from '../images/coin.svg'
+
+const BlueskyLink = styled(Anchor)`
+  ${({ theme }) => css`
+    &:hover {
+      color: ${theme.global.colors.bluesky};
+    }
+  `}
+`
 
 const TwitterLink = styled(Anchor)`
   ${({ theme }) => css`
@@ -85,11 +93,18 @@ export const Footer = () => {
                   target="_blank"
                 />
                 <Box align="center" direction="row" gap="medium">
+                  <BlueskyLink
+                    color={anchorColor}
+                    href={links.ccdl_bluesky}
+                    icon={<Icon link name="Bluesky" />}
+                    size="18px"
+                    pad="0"
+                    rel="noopener noreferrer"
+                  />
                   <TwitterLink
                     color={anchorColor}
                     href={links.ccdl_twitter}
                     icon={<Icon link name="Twitter" />}
-                    margin={{ horizontal: setResponsive('xsmall', 'none') }}
                     pad="0"
                     rel="noopener noreferrer"
                   />
@@ -146,7 +161,8 @@ export const Footer = () => {
                 URL:{' '}
                 <Anchor
                   color="black"
-                  label="https://www.refine.bio"
+                  label={links.refinebio}
+                  href={links.refinebio}
                   rel="nofollow"
                 />
               </Text>
@@ -175,7 +191,11 @@ export const Footer = () => {
               href="/license"
             />
             <Anchor color={anchorColor} label="Privacy" href="/privacy" />
-            <Anchor color={anchorColor} label="Terms of Use" href="/terms" />
+            <Anchor
+              color={anchorColor}
+              label="Terms of Use"
+              href={links.terms_of_use}
+            />
             <Anchor
               color={anchorColor}
               label="Contact"

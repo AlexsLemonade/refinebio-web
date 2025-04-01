@@ -1,17 +1,11 @@
-import { FixedContainer } from 'components/shared/FixedContainer'
-import { Custom404 } from 'components/Error/Custom404'
-import { Custom500 } from 'components/Error/Custom500'
-import { Custom504 } from 'components/Error/Custom504'
+import { Error } from 'components/Error'
+import { FixedContainer } from 'components/FixedContainer'
 
-export const ErrorPage = ({ statusCode }) => {
-  return (
-    <FixedContainer>
-      {statusCode === 404 && <Custom404 />}
-      {statusCode === 500 && <Custom500 />}
-      {statusCode === 504 && <Custom504 />}
-    </FixedContainer>
-  )
-}
+export const ErrorPage = ({ statusCode }) => (
+  <FixedContainer>
+    <Error statusCode={statusCode} />
+  </FixedContainer>
+)
 
 ErrorPage.getInitialProps = async ({ err }) => {
   return {

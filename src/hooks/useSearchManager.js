@@ -1,176 +1,166 @@
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { SearchManagerContext } from 'contexts/SearchManagerContext'
 import { options } from 'config'
+import {
+  getQueryParamValueWith,
+  getQueryParamValueWithout
+} from 'helpers/getQueryParamValue'
+import parseDefaultSearchParams from 'helpers/parseDefaultSearchParams'
 
 export const useSearchManager = () => {
+  const { facetNames, setFacetNames, searchParams, setSearchParams } =
+    useContext(SearchManagerContext)
   const {
-    search: searchState,
-    setSearch: setSearchState,
-    config: configState,
-    setConfig: setConfigState
-  } = useContext(SearchManagerContext)
-  const {
-    search: {
-      clientOnlyFilterQueries,
-      commonQueries,
-      formattedFacetNames,
-      pageSizes,
-      sortby
-    }
+    search: { numDownloadableSamples }
   } = options
   const router = useRouter()
-  const search = searchState
-  const setSearch = setSearchState
-  const config = configState
-  const setConfig = setConfigState
 
   /* Common */
-  const resetPage = () => {
-    delete search.p
-    setSearch({ ...search })
+  const updatePage = (page) => {
+    const offset = (page - 1) * searchParams.limit
+
+    if (offset === searchParams.offset) return
+
+    setSearchParams({
+      ...searchParams,
+      offset
+    })
   }
 
-  const updatePage = (newPage) => {
-    if (newPage === 1) {
-      delete search.p
-    } else {
-      search.p = newPage
-    }
+  const updatePageSize = (limit) => {
+    if (limit === searchParams.limit) return
 
-    setSearch({ ...search })
-    updateSearchQuery()
+    setSearchParams({
+      ...searchParams,
+      limit,
+      offset: 0 // resets page on page size changes
+    })
   }
 
-  const updatePageSize = (newPageSize) => {
-    if (newPageSize === pageSizes[0]) {
-      delete search.size
-    } else {
-      search.size = newPageSize
-    }
+  const updateSortBy = (ordering) => {
+    if (ordering === searchParams.ordering) return
 
-    setSearch({ ...search })
-    updateSearchQuery(true)
+    setSearchParams({
+      ...searchParams,
+      ordering
+    })
   }
 
-  const updateSortBy = (newSortOrder) => {
-    if (newSortOrder === sortby[0].value) {
-      delete search.sortby
-    } else {
-      search.sortby = newSortOrder
-    }
-
-    setSearch({ ...search })
-    updateSearchQuery()
+  const updateSearchParam = (paramName, newValue) => {
+    setSearchParams({
+      ...searchParams,
+      [paramName]: newValue
+    })
   }
 
   /* Filters */
-  // removes all the applied filtes except for the 'empty'
-  const clearAllFilters = () => {
-    ;(config.filterOptions || []).forEach((key) => {
-      if (key in search) delete search[key]
-    })
-
-    setSearch({ ...search })
-    updateSearchQuery(true)
-  }
-
-  // returns true if any filters that are applied, otherwise false
-  const hasAppliedFilters = () => {
-    if (!search) return false
-
-    return (
-      (config.filterOptions || []).filter(
-        (filterOption) => filterOption in search
-      ).length > 0
-    )
-  }
-
-  const isFilterChecked = (key, val) => {
-    if (!(key in search)) return false
-
-    if (val) {
-      return search[key].includes(val)
+  const defaultSearchParams = useMemo(parseDefaultSearchParams, [])
+  const nonFilterSearchParams = [
+    'limit',
+    'ordering',
+    'search',
+    numDownloadableSamples.key
+  ]
+  const keepAfterClear = nonFilterSearchParams.reduce((acc, cur) => {
+    if (typeof searchParams[cur] !== 'undefined') {
+      acc[cur] = searchParams[cur]
     }
 
-    return key in search
+    return acc
+  }, {})
+
+  const canClearFilter = Object.keys(searchParams)
+    .filter((key) => !nonFilterSearchParams.includes(key))
+    .some((key) => !(key in defaultSearchParams))
+
+  const clearAllFilters = () =>
+    setSearchParams(parseDefaultSearchParams(keepAfterClear))
+
+  const isFilterChecked = (key, value) => {
+    if (!(key in searchParams)) return false
+
+    if (value) {
+      return searchParams[key].includes(value)
+    }
+
+    return true
   }
 
-  // toggles a filter option in facets
-  const toggleFilter = (checked, key, val, updateQuery = true) => {
-    if (clientOnlyFilterQueries.includes(key)) {
-      if (checked) {
-        delete search[key]
+  // removes a filter if the given value is undefined, otherwise adds it
+  // supports three states for a boolean filter (e.g., true, false, null)
+  const updateFilterValue = (filter, value) => {
+    setSearchParams((prev) => {
+      const updatedQuery = { ...prev }
+
+      if (value === undefined) {
+        delete updatedQuery[filter]
       } else {
-        search[key] = true
+        updatedQuery[filter] = value
       }
-    } else {
-      // eslint-disable-next-line no-lonely-if
-      if (checked) {
-        if (search[key] !== undefined) {
-          search[key].push(val)
-        } else {
-          search[key] = [val]
-        }
-      } else if (search[key].length > 0) {
-        search[key] = search[key].filter((item) => item !== val)
-        if (search[key].length === 0) delete search[key]
-      }
-    }
 
-    setSearch({ ...search })
-    // skips the query update on mobile/table devices
-    if (updateQuery) {
-      updateSearchQuery(true)
-    }
+      // resets page on filter toggle
+      updatedQuery.offset = 0
+
+      return updatedQuery
+    })
+  }
+
+  // toggles a facet filter and tracks its order for the API call
+  // removes a filter if the given value is undefined, otherwise adds it
+  const toggleFilter = (filter, value) => {
+    const filterOrders = searchParams.filter_order
+      ? searchParams.filter_order.split(',')
+      : []
+
+    setSearchParams((prev) => {
+      const updatedQuery = { ...prev }
+      const prevFilterValue = searchParams[filter]
+
+      // adds value if not already checked, otherwise removes it
+      if (!isFilterChecked(filter, value)) {
+        updatedQuery[filter] = getQueryParamValueWith(prevFilterValue, value)
+        // adds the filter to filter_order(client-only) for tracking
+        filterOrders.push(filter)
+      } else {
+        updatedQuery[filter] = getQueryParamValueWithout(prevFilterValue, value)
+        // removes the filter from filter_order(client-only) for tracking
+        filterOrders.splice(filterOrders.lastIndexOf(filter), 1)
+
+        if (updatedQuery[filter] === undefined) {
+          delete updatedQuery[filter]
+        }
+      }
+
+      // removes filter_order(client-only) if empty
+      if (filterOrders.length === 0) {
+        delete updatedQuery.filter_order
+      } else {
+        // otherwise converts to string for URL
+        updatedQuery.filter_order = filterOrders.join(',')
+      }
+
+      // resets page on filter toggle
+      updatedQuery.offset = 0
+
+      return updatedQuery
+    })
   }
 
   /* Search Term */
-  const updateSearchTerm = (newSearchTerm) => {
-    if (newSearchTerm === '') {
-      delete search.search
-    } else {
-      search.search = newSearchTerm
-    }
+  const updateSearchTerm = (search) => {
+    if (search === searchParams.search) return
 
-    setSearch({ ...search })
-    updateSearchQuery(true)
-  }
-
-  /* Other */
-  // converts the facets to API supported format
-  const formatFacetNames = (facetNames) => {
-    const formattedNames = []
-
-    for (const name of facetNames) {
-      if (Object.keys(formattedFacetNames).includes(name)) {
-        formattedNames.push(formattedFacetNames[name])
-      } else {
-        formattedNames.push(name)
+    setSearchParams((prev) => {
+      const updatedQuery = {
+        ...prev,
+        search,
+        offset: 0 // resets page on search term changes
       }
-    }
 
-    return formattedNames
-  }
-
-  // returns client-only query parameter from url
-  const getSearchQueryParam = (queryParams) => {
-    const temp = {}
-    Object.keys(queryParams).forEach((key) => {
-      if (!Object.keys(commonQueries).includes(key)) {
-        if (Object.values(formattedFacetNames).includes(key)) {
-          if (typeof queryParams[key] === 'string') {
-            temp[key] = [queryParams[key]]
-          } else {
-            temp[key] = queryParams[key]
-          }
-        } else {
-          temp[key] = queryParams[key]
-        }
-      }
+      if (search === '') delete updatedQuery.search
+      return updatedQuery
     })
-
-    return temp
   }
 
   // handles search requests from non-search page and
@@ -182,34 +172,20 @@ export const useSearchManager = () => {
     })
   }
 
-  // updates URL query string
-  const updateSearchQuery = (reset = false) => {
-    if (reset) {
-      resetPage()
-    }
-
-    router.push({
-      query: {
-        ...search
-      }
-    })
-  }
-
   return {
-    search,
-    setSearch,
-    config,
-    setConfig,
+    facetNames,
+    setFacetNames,
+    searchParams,
+    setSearchParams,
+    canClearFilter,
     clearAllFilters,
-    formatFacetNames,
-    getSearchQueryParam,
-    hasAppliedFilters,
     isFilterChecked,
     navigateToSearch,
+    updateSearchParam,
     toggleFilter,
+    updateFilterValue,
     updatePage,
     updatePageSize,
-    updateSearchQuery,
     updateSearchTerm,
     updateSortBy
   }

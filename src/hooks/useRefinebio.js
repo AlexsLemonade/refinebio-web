@@ -3,32 +3,40 @@ import { RefinebioContext } from 'contexts/RefinebioContext'
 
 export const useRefinebio = () => {
   const {
-    dataset,
-    setDataset,
-    datasetId,
-    setDatasetId,
-    downloadOptions,
-    setDownloadOptions,
+    myDataset,
+    setMyDataset,
+    datasetAccessions,
+    setDatasetAccessions,
+    myDatasetId,
+    setMyDatasetId,
     email,
     setEmail,
-    processingExperiments,
-    setProcessingExperiments,
+    processingDatasets,
+    setProcessingDatasets,
+    requestedExperiments,
+    setRequestedExperiments,
+    acceptedTerms,
     token,
-    setToken
+    setAcceptedTerms,
+    tokenPromise
   } = useContext(RefinebioContext)
 
   return {
-    dataset,
-    setDataset,
-    datasetId,
-    setDatasetId,
-    downloadOptions,
-    setDownloadOptions,
+    myDataset,
+    setMyDataset,
+    datasetAccessions,
+    setDatasetAccessions,
+    myDatasetId,
+    setMyDatasetId,
     email,
     setEmail,
-    processingExperiments,
-    setProcessingExperiments,
+    processingDatasets,
+    setProcessingDatasets,
+    requestedExperiments,
+    setRequestedExperiments,
+    acceptedTerms,
     token,
-    setToken
+    setAcceptedTerms,
+    tokenPromise
   }
 }

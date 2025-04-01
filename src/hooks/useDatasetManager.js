@@ -1,33 +1,74 @@
 import { useContext, useState } from 'react'
 import { DatasetManagerContext } from 'contexts/DatasetManagerContext'
-import { useToken } from 'hooks/useToken'
+import { useRefinebio } from 'hooks/useRefinebio'
 import differenceOfArrays from 'helpers/differenceOfArrays'
 import formatString from 'helpers/formatString'
+import getDatasetState from 'helpers/getDatasetState'
 import isEmptyObject from 'helpers/isEmptyObject'
 import unionizeArrays from 'helpers/unionizeArrays'
 import { api } from 'api'
 
 export const useDatasetManager = () => {
   const {
-    dataset,
-    setDataset,
-    datasetId,
-    setDatasetId,
+    myDataset,
+    setMyDataset,
+    datasetAccessions,
+    setDatasetAccessions,
+    myDatasetId,
+    setMyDatasetId,
     email,
     setEmail,
-    token
+    processingDatasets,
+    setProcessingDatasets
   } = useContext(DatasetManagerContext)
-  const { createToken, resetToken, validateToken } = useToken()
-  const [error, setError] = useState(false)
+  const { acceptedTerms, tokenPromise } = useRefinebio()
+
+  const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  /* Dataset */
+  /* --- Dataset Methods --- */
+  /* Processing Dataset */
+  const addToProcessingDatasets = (id, accessionCode) => {
+    // if one-off, adds an accession code and a dataset ID to datasetAccessions
+    if (accessionCode) {
+      setDatasetAccessions({ ...datasetAccessions, [accessionCode]: id })
+    }
+    // adds a dataset ID to processingDatasets[] for polling
+    setProcessingDatasets((prev) => {
+      if (prev.includes(id)) return prev
+      return [...prev, id]
+    })
+  }
+
+  // returns a dataset ID of the processing experiment's accession code
+  const getProcessingDatasetByAccession = (accessionCode) =>
+    datasetAccessions[accessionCode]
+
+  // removes the processing dataset ID when finish processing
+  const removeFromProcessingDatasets = (id) => {
+    // if one-off, returns the matched accession code by the given dataset ID
+    const accesionCode = Object.keys(datasetAccessions).find(
+      (k) => datasetAccessions[k] === id
+    )
+    // if found, removes it from datasetAccessions
+    if (accesionCode) {
+      setDatasetAccessions((prev) => {
+        const temp = { ...prev }
+        delete temp[accesionCode]
+        return temp
+      })
+    }
+
+    setProcessingDatasets((prev) => prev.filter((i) => i !== id))
+  }
+
+  /* Common */
   const clearDataset = async (id = '') => {
     setLoading(true)
-    const params = { data: {} }
-    const response = await api.dataset.update(id || datasetId, params)
+    const body = { data: {} }
+    const response = await updateDataset(id || myDatasetId, body)
 
-    setDataset(response)
+    setMyDataset(response)
     setLoading(false)
   }
 
@@ -35,168 +76,169 @@ export const useDatasetManager = () => {
     const params = { data: {}, ...(email ? { email_address: email } : {}) }
     const response = await api.dataset.create(params)
 
-    // stores the newly created dataset Id to localStorge
+    // stores the newly created dataset ID to localStorge
     if (setCurrentDatasetId) {
-      setDatasetId(response.id)
+      setMyDatasetId(response.id)
     }
 
     return response.id
   }
 
-  const downloadDataset = async (id, downloadUrl) => {
-    let href = ''
-
-    if (validateToken() && downloadUrl) {
-      href = downloadUrl
-    } else {
-      // creates a new token and requests a download url with API-Key
-      const tokenId = await createToken()
-      const { download_url: url } = await getDataset(id, tokenId)
-      href = url
+  const downloadDataset = async (id) => {
+    if (!acceptedTerms) {
+      throw new Error('Terms of Use must be accepted to proceed.')
     }
 
-    window.location.href = href
+    const response = await getDataset(id, await tokenPromise)
+    window.location.href = response.download_url
   }
 
-  const getDataset = async (id = '', tokenId = '') => {
-    if (!id && !datasetId) return null
+  const getDataset = async (id) => {
+    if (!id && !myDatasetId) return null // TODO: Throw an error
 
     setLoading(true)
-    const headers =
-      token || tokenId
-        ? {
-            'API-KEY': token || tokenId
-          }
-        : {}
-    const response = await api.dataset.get(id || datasetId, headers)
-    const formattedResponse = {
-      ...response,
-      experiments: formatExperiments(response.experiments)
+
+    const headers = {}
+
+    if (acceptedTerms) {
+      headers['API-KEY'] = await tokenPromise
     }
 
-    if (!id && datasetId) {
-      setDataset(formattedResponse)
+    const response = await api.dataset.get(id || myDatasetId, headers)
+    const { ok, statusCode } = response
+
+    if (ok && isMyDatasetId(id)) {
+      setMyDataset(response)
+    }
+
+    // sets the error if any, otherwise resets it
+    setError(ok ? null : statusCode)
+
+    const { isProcessing } = getDatasetState(response)
+    // removes the dataset ID from processingDatasets[] once it finishes processing
+    if (!isProcessing) {
+      removeFromProcessingDatasets(response.id)
     }
 
     setLoading(false)
 
-    return formattedResponse
+    return response
   }
 
-  const startProcessingDataset = async (id, options) => {
-    const isCurrentDatasetId = id === datasetId
-    // validate the existing token or create a new token if none
-    const tokenId = validateToken() ? token : await resetToken()
-    const { data, emailAddress, receiveUpdates } = options
-    const params = {
-      data,
-      email_address: emailAddress,
-      ...(options.aggregate_by ? { aggregate_by: options.aggregate_by } : {}),
-      ...(options.scale_by ? { scale_by: options.scale_by } : {}),
-      ...(options.aggregate_by ? { aggregate_by: options.aggregate_by } : {}),
-      ...(options.quantile_normalize
-        ? { quantile_normalize: options.quantile_normalize }
-        : {}),
-      ...(receiveUpdates ? { email_ccdl_ok: true } : {}),
-      start: true,
-      token_id: tokenId
+  // checks if the given dataset ID is myDatasetId
+  const isMyDatasetId = (id) => id === myDatasetId
+
+  const startProcessingDataset = async (
+    options,
+    id = null, // no dataset ID initially for one-off download
+    accessionCode = null // for one-off download
+  ) => {
+    if (!acceptedTerms) {
+      throw new Error('Terms of Use must be accepted to proceed.')
     }
-    const response = await updateDataset(
-      isCurrentDatasetId ? id : await createDataset(),
-      params
-    )
+
+    const body = {
+      ...options,
+      start: true
+    }
+
+    const processingDatasetId = isMyDatasetId(id)
+      ? myDatasetId
+      : await createDataset() // creates new dataset ID for one-off download and shared dataset
+    const response = await updateDataset(processingDatasetId, body)
+    // adds this dataset ID to processingDatasets[] for polling
+    addToProcessingDatasets(processingDatasetId, accessionCode)
     // saves the user's newly entered email or replace the existing one
-    setEmail(emailAddress)
+    setEmail(options.email_address)
     // deletes the locally saved dataset data once it has started processing (no longer mutable)
-    if (isCurrentDatasetId) {
-      setDataset({})
-      setDatasetId(null)
+    if (id && isMyDatasetId(id)) {
+      setMyDataset({})
+      setMyDatasetId(null)
     }
 
     return response
   }
 
-  const updateDataset = async (id, params) => {
-    const isCurrentDatasetId = id === datasetId
-    const response = await api.dataset.update(id, params)
+  const updateDataset = async (id, body) => {
+    const headers = {}
 
-    if (isCurrentDatasetId) {
-      setDataset({
-        ...response,
-        experiments: formatExperiments(response.experiments)
-      })
+    if (acceptedTerms) {
+      headers['API-KEY'] = await tokenPromise
+    }
+
+    const response = await api.dataset.update(id, body, headers)
+
+    if (isMyDatasetId(id)) {
+      setMyDataset(response)
     }
 
     return response
   }
 
-  /* Experiment */
-  const getTotalExperiments = (data) =>
-    isEmptyObject(data) ? 0 : Object.keys(data).length
+  // copies the specified properties from the given dataset
+  // for dataset regeneration
+  const getDatasetPropertiesFrom = (sourceDataset) => {
+    const includeKeys = [
+      'is_processed',
+      'is_available',
+      'success',
+      'organism_samples' // for the download files summary UI change
+    ]
 
-  // formats the sample and experiment arrays from the API response
-  // to objects with experiment accession codes as their keys for UI
-  const formatExperiments = (experiments = []) => {
-    if (!experiments.length) return {}
-
-    return experiments.reduce(
-      (acc, experiment) => ({
-        ...acc,
-        [experiment.accession_code]: experiment
-      }),
+    return includeKeys.reduce(
+      (acc, key) =>
+        key in sourceDataset
+          ? { ...acc, [key]: structuredClone(sourceDataset[key]) }
+          : acc,
       {}
     )
   }
 
+  /* --- Experiment Methods --- */
+  /* Experiment */
+  const getTotalExperiments = (data) =>
+    isEmptyObject(data) ? 0 : Object.keys(data).length
+
   const removeExperiment = async (experimentAccessionCode) => {
     setLoading(true)
-    const params = { data: {} }
+    const body = { data: {} }
 
-    for (const experiment in dataset.data) {
+    for (const experiment in myDataset.data) {
       if (experimentAccessionCode.includes(experiment)) continue
-      params.data[experiment] = dataset.data[experiment]
+      body.data[experiment] = myDataset.data[experiment]
     }
 
-    const response = await api.dataset.update(datasetId, params)
-    setDataset({
-      ...response,
-      experiments: formatExperiments(response.experiments)
-    })
+    const response = await updateDataset(myDatasetId, body)
+    setMyDataset(response)
     setLoading(false)
   }
 
   /* Sample */
   const addSamples = async (data) => {
     setLoading(true)
-    const params = { data: dataset ? { ...dataset.data } : {} }
+    const body = { data: myDataset ? { ...myDataset.data } : {} }
 
     for (const accessionCode of Object.keys(data)) {
       if (data[accessionCode].all) {
         // the key 'ALL' is used to add all samples in an experiment
         // (ref) https://github.com/AlexsLemonade/refinebio-frontend/issues/496#issuecomment-456543865
-        params.data[accessionCode] = ['ALL']
+        body.data[accessionCode] = ['ALL']
       } else {
-        params.data[accessionCode] = unionizeArrays(
-          params.data[accessionCode] || [],
+        body.data[accessionCode] = unionizeArrays(
+          body.data[accessionCode] || [],
           data[accessionCode]
         )
       }
     }
 
-    const response = await api.dataset.update(
-      datasetId || (await createDataset(true)),
-      params
+    const response = await updateDataset(
+      myDatasetId || (await createDataset(true)),
+      body
     )
-    setDataset({
-      ...response,
-      experiments: formatExperiments(response.experiments)
-    })
+    setMyDataset(response)
     setLoading(false)
 
-    return {
-      ...response,
-      experiments: formatExperiments(response.experiments)
-    }
+    return response
   }
 
   // formats the sample metadata names for UI (e.g., 'specimen_part' to 'Specimen part')
@@ -206,39 +248,33 @@ export const useDatasetManager = () => {
     isEmptyObject(data) ? 0 : unionizeArrays(...Object.values(data)).length
 
   const removeSamples = async (data) => {
-    const params = { data: { ...dataset.data } }
+    const body = { data: { ...myDataset.data } }
 
     for (const accessionCode of Object.keys(data)) {
-      if (!params.data[accessionCode]) continue
+      if (!body.data[accessionCode]) continue
 
       const samplesStillSelected = differenceOfArrays(
-        params.data[accessionCode],
+        body.data[accessionCode],
         data[accessionCode]
       )
 
       if (samplesStillSelected.length > 0) {
-        params.data[accessionCode] = samplesStillSelected
+        body.data[accessionCode] = samplesStillSelected
       } else {
-        delete params.data[accessionCode]
+        delete body.data[accessionCode]
       }
     }
 
     setLoading(true)
-    const response = await api.dataset.update(datasetId, params)
-    setDataset({
-      ...response,
-      experiments: formatExperiments(response.experiments)
-    })
+    const response = await updateDataset(myDatasetId, body)
+    setMyDataset(response)
     setLoading(false)
   }
 
   const replaceSamples = async (data) => {
     setLoading(true)
-    const response = await api.dataset.update(datasetId, { data })
-    setDataset({
-      ...response,
-      experiments: formatExperiments(response.experiments)
-    })
+    const response = await updateDataset(myDatasetId, { data })
+    setMyDataset(response)
     setLoading(false)
   }
 
@@ -246,16 +282,25 @@ export const useDatasetManager = () => {
     email,
     error,
     setError,
-    dataset,
-    datasetId,
+    datasetAccessions,
+    setDatasetAccessions,
+    myDataset,
+    myDatasetId,
     loading,
-    token,
+    processingDatasets,
+    setProcessingDatasets,
+    // Processing Dataset
+    getProcessingDatasetByAccession,
+    // Common
     clearDataset,
     createDataset,
     downloadDataset,
     getDataset,
+    getDatasetPropertiesFrom,
+    isMyDatasetId,
     startProcessingDataset,
     updateDataset,
+    // Experiment
     getTotalExperiments,
     removeExperiment,
     addSamples,

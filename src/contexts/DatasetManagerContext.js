@@ -5,49 +5,42 @@ export const DatasetManagerContext = createContext({})
 
 export const DatasetManagerContextProvider = ({ children }) => {
   const {
-    dataset: datasetState,
-    setDataset: setDatasetState,
-    datasetId: datasetIdState,
-    downloadOptions: downloadOptionsState,
-    setDownloadOptions: setDownloadOptionsState,
-    setDatasetId: setDatasetIdState,
-    email: emailState,
-    setEmail: setEmailState,
-    token: tokenState
+    myDataset,
+    setMyDataset,
+    datasetAccessions,
+    setDatasetAccessions,
+    myDatasetId,
+    setMyDatasetId,
+    email,
+    setEmail,
+    processingDatasets,
+    setProcessingDatasets
   } = useRefinebio()
-
-  const dataset = datasetState
-  const setDataset = setDatasetState
-  const datasetId = datasetIdState
-  const downloadOptions = downloadOptionsState
-  const setDownloadOptions = setDownloadOptionsState
-  const setDatasetId = setDatasetIdState
-  const email = emailState
-  const setEmail = setEmailState
-  const token = tokenState
 
   const value = useMemo(
     () => ({
-      dataset,
-      setDataset,
-      datasetId,
-      setDatasetId,
-      downloadOptions,
-      setDownloadOptions,
+      myDataset,
+      setMyDataset,
+      datasetAccessions,
+      setDatasetAccessions,
+      myDatasetId,
+      setMyDatasetId,
       email,
       setEmail,
-      token
+      processingDatasets,
+      setProcessingDatasets
     }),
     [
-      dataset,
-      setDataset,
-      datasetId,
-      setDatasetId,
-      downloadOptions,
-      setDownloadOptions,
+      myDataset,
+      setMyDataset,
+      datasetAccessions,
+      setDatasetAccessions,
+      myDatasetId,
+      setMyDatasetId,
       email,
       setEmail,
-      token
+      processingDatasets,
+      setProcessingDatasets
     ]
   )
 
