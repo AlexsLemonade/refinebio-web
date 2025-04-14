@@ -25,10 +25,12 @@ export const links = {
     'https://docs.refine.bio/en/latest/main_text.html#aggregations',
   refinebio_docs_collapsing_by_genus:
     'https://docs.refine.bio/en/latest/main_text.html#collapsing-by-genus',
-  refinebio_docs_getting_started_with_species_compendia:
-    'https://docs.refine.bio/en/latest/getting_started.html#getting-started-with-species-compendia',
-  refinebio_docs_species_compendia:
-    'https://docs.refine.bio/en/latest/main_text.html#species-compendia',
+  refinebio_docs_getting_started_with_refinebio_compendia:
+    'https://docs.refine.bio/en/latest/getting_started.html#getting-started-with-normalized-compendia',
+  refinebio_docs_learn_how_the_normalized_compendia_are_created:
+    'https://docs.refine.bio/en/latest/main_text.html#normalized-compendia',
+  refinebio_docs_learn_how_the_rna_seq_compendia_are_created:
+    'https://docs.refine.bio/en/latest/main_text.html#rna-seq-sample-compendia',
   refinebio_docs_harmonized_metadata:
     'https://docs.refine.bio/en/latest/main_text.html#refine-bio-harmonized-metadata',
   refinebio_docs_normalized_compendia:

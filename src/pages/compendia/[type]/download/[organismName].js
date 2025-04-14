@@ -13,7 +13,7 @@ import { Error } from 'components/Error'
 import { FixedContainer } from 'components/FixedContainer'
 import { Row } from 'components/Row'
 
-export const DownloadCompendium = ({ compendium }) => {
+export const DownloadCompendium = ({ compendium, type }) => {
   const { setResponsive } = useResponsive()
   const { acceptedTerms } = useRefinebio()
   const { error, downloadUrl } = useDownloadCompendium(compendium)
@@ -80,7 +80,7 @@ export const DownloadCompendium = ({ compendium }) => {
         </Row>
       </Box>
       <Box>
-        <CompendiaExplore />
+        <CompendiaExplore type={type} />
       </Box>
     </FixedContainer>
   )
@@ -107,7 +107,8 @@ export const getServerSideProps = async ({ query }) => {
 
     return {
       props: {
-        compendium
+        compendium,
+        type
       }
     }
   }
