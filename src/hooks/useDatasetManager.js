@@ -93,7 +93,7 @@ export const useDatasetManager = () => {
     window.location.href = response.download_url
   }
 
-  const getDataset = async (id) => {
+  const getDataset = async (id = myDatasetId) => {
     if (!id && !myDatasetId) return null // TODO: Throw an error
 
     setLoading(true)
