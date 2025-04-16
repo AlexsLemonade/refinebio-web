@@ -35,6 +35,11 @@ const TableHeader = styled(Box)`
 const TableBody = styled(Box)`
   position: relative;
   z-index: 0;
+  > div {
+    &:hover > div {
+      background: ${rowHoverBG};
+      cursor: pointer;
+  }
 `
 
 const TableRow = styled(Box)`
@@ -47,9 +52,6 @@ const TableRow = styled(Box)`
     &:nth-child(even) {
       > div {
         background: ${theme.global.colors[alternateRowBg]};
-      }
-      &:hover div {
-        background: ${rowHoverBG};
       }
     }
   `}
