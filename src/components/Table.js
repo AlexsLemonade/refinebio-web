@@ -48,9 +48,10 @@ const TableRow = styled(Box)`
       > div {
         background: ${theme.global.colors[alternateRowBg]};
       }
-      &:hover div {
-        background: ${rowHoverBG};
-      }
+    }
+    &:hover > div {
+      background: ${rowHoverBG};
+      cursor: pointer;
     }
   `}
 `

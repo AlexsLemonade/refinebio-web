@@ -39,7 +39,7 @@ export const DatasetSamplesExperiment = ({
         <Box margin={{ bottom: 'xsmall' }} width={{ max: '640px' }}>
           <Heading level={5} responsive={false} weight="700">
             <Anchor
-              href={`experiments/${accessionCode}/${formatURLString(
+              href={`/experiments/${accessionCode}/${formatURLString(
                 experiment.title
               )}`}
               label={experiment.title}

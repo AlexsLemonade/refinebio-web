@@ -17,17 +17,25 @@ const ListItem = ({ href, text }) => (
   </Box>
 )
 
-export const CompendiaExplore = () => {
+export const CompendiaExplore = ({ type }) => {
   const { setResponsive } = useResponsive()
+
+  const isNormalized = type === 'normalized'
+  const learnHowLinkText = isNormalized
+    ? 'Learn how the normalized compendia are created'
+    : 'Learn how the RNA-seq compendia are created'
+  const linkHerf = isNormalized
+    ? links.refinebio_docs_learn_how_the_normalized_compendia_are_created
+    : links.refinebio_docs_learn_how_the_rna_seq_compendia_are_created
 
   const exploreLinks = [
     {
-      text: ' Get started with the species compendia',
-      href: links.refinebio_docs_getting_started_with_species_compendia
+      text: 'Get started with the refine.bio compendia',
+      href: links.refinebio_docs_getting_started_with_refinebio_compendia
     },
     {
-      text: 'Learn how the species compendia are created',
-      href: links.refinebio_docs_species_compendia
+      text: learnHowLinkText,
+      href: linkHerf
     },
     {
       text: 'See our exploratory analyses in test species compendia',
