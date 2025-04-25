@@ -1,0 +1,52 @@
+import { Box, Heading, Paragraph } from 'grommet'
+import { useDatasetManager } from 'hooks/useDatasetManager'
+import { useModal } from 'hooks/useModal'
+import { useResponsive } from 'hooks/useResponsive'
+import getDomain from 'helpers/getDomain'
+import { Anchor } from 'components/shared/Anchor'
+import { Button } from 'components/shared/Button'
+import { IconProcessingGears } from 'components/shared/IconProcessingGears'
+
+export const ProcessingDatasetPillModal = ({ datasetId, id }) => {
+  const { email } = useDatasetManager()
+  const { closeModal } = useModal()
+  const { setResponsive } = useResponsive()
+
+  return (
+    <Box
+      pad={{
+        horizontal: setResponsive('medium', 'xlarge'),
+        vertical: setResponsive('medium', 'large')
+      }}
+      align="center"
+    >
+      <Box margin={{ bottom: 'small' }}>
+        <Heading level={1}>Your dataset is being processed.</Heading>
+      </Box>
+
+      <Paragraph>
+        An email with a download link will be sent to <strong>{email}</strong>{' '}
+        when the dataset is ready or you can track the status{' '}
+        <Anchor
+          label="here"
+          href={`${getDomain()}/dataset/${datasetId}`}
+          target="_self"
+        />
+        .
+      </Paragraph>
+      <Box margin={{ vertical: 'large' }}>
+        <IconProcessingGears width={114} height={104} />
+      </Box>
+      <Box>
+        <Button
+          label="Continue Browsing"
+          secondary
+          responsive
+          onClick={() => closeModal(id)}
+        />
+      </Box>
+    </Box>
+  )
+}
+
+export default ProcessingDatasetPillModal

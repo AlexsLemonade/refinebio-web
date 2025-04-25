@@ -18,7 +18,7 @@ const Template = (args) => {
   return (
     <>
       {args.error && (
-        <InlineMessage label="Error Message" labelOnly type="error" />
+        <InlineMessage label="Error Message" labelOnly color="error" />
       )}
       <TextInput {...args} />
     </>

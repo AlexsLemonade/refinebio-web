@@ -42,27 +42,30 @@ export const useDatasetAction = (datasetData = {}, datasetDataChanges = {}) => {
     const datasetDataOneKeys = Object.keys(datasetDataOne)
     const datasetDataTwoKeys = Object.keys(datasetDataTwo)
 
-    if (!hasSameElements(datasetDataOneKeys, datasetDataTwoKeys)) return false
+    if (!hasSameElements(datasetDataOneKeys, datasetDataTwoKeys)) {
+      return false
+    }
 
     for (const accession of datasetDataOneKeys) {
-      const dataOne = datasetDataOne[accession]
-      const dataTwo = datasetDataTwo[accession]
-
-      if (dataOne.all) {
-        if (dataOne.total !== dataTwo.length) {
+      if (datasetDataOne[accession].all) {
+        if (
+          datasetDataOne[accession].total !== datasetDataTwo[accession].length
+        ) {
           return false
         }
         continue
       }
-
-      if (dataTwo.all) {
-        if (dataTwo.total !== dataOne.length) {
+      if (datasetDataTwo[accession].all) {
+        if (
+          datasetDataTwo[accession].total !== datasetDataOne[accession].length
+        ) {
           return false
         }
         continue
       }
-
-      if (!hasSameElements(dataOne, dataTwo)) {
+      if (
+        !hasSameElements(datasetDataOne[accession], datasetDataTwo[accession])
+      ) {
         return false
       }
     }

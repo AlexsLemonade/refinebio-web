@@ -1,7 +1,7 @@
 import http from 'helpers/http'
 
-const endpoint = 'samples'
+const url = 'samples/'
 
 export default {
-  get: (params) => http.get(`${endpoint}/`, params)
+  get: (params) => http.get(url, params)
 }

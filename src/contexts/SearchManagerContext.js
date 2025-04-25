@@ -3,18 +3,17 @@ import { createContext, useMemo, useState } from 'react'
 export const SearchManagerContext = createContext({})
 
 export const SearchManagerContextProvider = ({ children }) => {
-  const [facetNames, setFacetNames] = useState([])
-  const [searchParams, setSearchParams] = useState({})
+  const [config, setConfig] = useState({})
+  const [search, setSearch] = useState({})
 
   const value = useMemo(
     () => ({
-      facetNames,
-      setFacetNames,
-
-      searchParams,
-      setSearchParams
+      config,
+      setConfig,
+      search,
+      setSearch
     }),
-    [facetNames, setFacetNames, searchParams, setSearchParams]
+    [config, setConfig, search, setSearch]
   )
 
   return (

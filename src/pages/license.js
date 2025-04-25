@@ -1,7 +1,7 @@
 import { Heading, Paragraph } from 'grommet'
-import { List } from 'components/List'
-import { ListItem } from 'components/ListItem'
-import { PageStatic } from 'components/PageStatic'
+import { List } from 'components/shared/List'
+import { ListItem } from 'components/shared/ListItem'
+import { PageStatic } from 'components/shared/PageStatic'
 
 export const License = () => (
   <PageStatic pageTitle="License -">

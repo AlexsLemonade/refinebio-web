@@ -1,10 +1,10 @@
 import { Heading, Paragraph } from 'grommet'
 import styled from 'styled-components'
 import { links } from 'config'
-import { Anchor } from 'components/Anchor'
-import { List as ShardList } from 'components/List'
-import { ListItem } from 'components/ListItem'
-import { PageStatic } from 'components/PageStatic'
+import { Anchor } from 'components/shared/Anchor'
+import { List as ShardList } from 'components/shared/List'
+import { ListItem } from 'components/shared/ListItem'
+import { PageStatic } from 'components/shared/PageStatic'
 
 const List = styled(ShardList)`
   p {

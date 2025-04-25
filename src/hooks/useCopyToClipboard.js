@@ -4,7 +4,7 @@ import { useState } from 'react'
 export const useCopyToClipboard = () => {
   const [value, setValue] = useState(null)
 
-  const copyText = async (text) => {
+  const handdleCopy = async (text) => {
     if (!navigator?.clipboard) {
       // eslint-disable-next-line no-console
       console.warn('Clipboard not supported')
@@ -26,5 +26,5 @@ export const useCopyToClipboard = () => {
     }
   }
 
-  return [value, copyText]
+  return [value, handdleCopy]
 }

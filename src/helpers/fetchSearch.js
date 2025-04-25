@@ -1,37 +1,15 @@
 import { api } from 'api'
-import { getTranslateFacetName } from 'helpers/facetNameTranslation'
-import getParsedAccessionCodes from './getParsedAccessionCodes'
+import getAccessionCodesQueryParam from './getAccessionCodesQueryParam'
 import getUniqElementsBy from './getUniqElementsBy'
 
-export default async (queryParams, filterOrders) => {
-  const response = await api.search.get(queryParams)
-  const { count: totalResults } = response
-  let { results, facets } = response
-
-  if (filterOrders.length > 0) {
-    const lastFilterOrderName = filterOrders[filterOrders.length - 1]
-
-    const { facets: previousFacets } = await api.search.get({
-      ...queryParams,
-      limit: 1,
-      [lastFilterOrderName]: undefined // We need to use 'downloadable_organism'
-    })
-
-    const translatedLastFilterOrderName = getTranslateFacetName(
-      filterOrders[filterOrders.length - 1]
-    )
-
-    facets = {
-      ...facets,
-      [translatedLastFilterOrderName]:
-        previousFacets[translatedLastFilterOrderName] // We need to use 'downloadable_organism_names'
-    }
-  }
-  /* Accession Codes */
-  const accessionCodes = getParsedAccessionCodes(queryParams.search)
+export default async (queryString, currentPage) => {
+  const response = await api.search.get(queryString)
+  let { results } = response
+  const { count: totalResults, facets } = response
+  const accessionCodes = getAccessionCodesQueryParam(queryString.search)
 
   // makes requests for accession codes only from the first page
-  if (accessionCodes.length > 0 && queryParams.offset === 0) {
+  if (accessionCodes.length > 0 && currentPage === 1) {
     const accessionCodesResponse = await Promise.all(
       accessionCodes.map((code) =>
         api.search.get({
@@ -39,6 +17,7 @@ export default async (queryParams, filterOrders) => {
         })
       )
     )
+
     const matchedAccessionCodes = []
       .concat(...accessionCodesResponse.map((data) => data.results))
       .map((result) => ({
@@ -60,11 +39,5 @@ export default async (queryParams, filterOrders) => {
     }
   }
 
-  return {
-    facets,
-    results,
-    totalResults,
-    ok: response.ok,
-    statusCode: response.statusCode
-  }
+  return { facets, results, totalResults }
 }

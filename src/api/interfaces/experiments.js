@@ -1,10 +1,10 @@
 import http from 'helpers/http'
 
-const endpoint = 'experiments'
+const url = 'experiments/'
 
 export default {
   get: (accessionCode) => {
-    const path = `${endpoint}/${accessionCode}/`
+    const path = `${url}${accessionCode}/`
 
     return http.get(path)
   }

@@ -1,12 +1,16 @@
+// TEMPORARY for testing
 import fetch from 'isomorphic-unfetch'
 
-const host = process.env.API_HOST
-const apiVersion = process.env.API_VERSION
+// Store the last api version detected - used to detect updates to the api
+// while the app is running.
+const host = 'https://api.refine.bio'
+const apiVersion = 'v1'
 
+// Returns the fulfilled promise using isomorphic-unfetc with async/await
 export default async (url, params = false) => {
   const apiUrl = url.startsWith('http') ? url : `${host}/${apiVersion}/${url}`
+
   let response
-  let result
 
   try {
     response = await (params ? fetch(apiUrl, params) : fetch(apiUrl))
@@ -14,12 +18,12 @@ export default async (url, params = false) => {
     return {
       ok: false,
       message: `Network error when fetching ${apiUrl}`,
-      statusCode: 504,
+      status: e.status,
       error: e
     }
   }
 
-  // checks for backend version to ensure it hasn't changed since the last deploy
+  // check backend version to ensure it hasn't changed since the last deploy
   if (response.headers) {
     const sourceRevision = response.headers.get('x-source-revision')
 
@@ -28,37 +32,30 @@ export default async (url, params = false) => {
       !!apiVersion &&
       !sourceRevision.includes(apiVersion)
     ) {
-      return {
-        ok: false,
-        message: 'Refinebio API version mismatch',
-        statusCode: 404
-      }
+      throw new Error('Refinebio API version mismatch')
     }
   }
 
-  // checks for parsing error (temporarily returns 500)
+  let result
+
   try {
     result = await response.json()
   } catch (e) {
-    return {
-      message: 'Error occurred while parsing the data',
-      statusCode: 500
-    }
+    result = { error: true, message: 'Error when fetching response' }
   }
 
-  // checks for an exception (only rejected when there is a network problem)
+  /**
+   * You only get an exception (rejection) when there's a network problem.
+   * When the server answers, you have to check whether it's good or not.
+   */
   if (!response.ok) {
     return {
       ok: false,
-      message: `${response.status} error occurred`,
-      statusCode: response.status,
+      message: `${response.status} error`,
+      status: response.status,
       result
     }
   }
 
-  return {
-    ...result,
-    ok: response.ok,
-    statusCode: response.status
-  }
+  return result
 }

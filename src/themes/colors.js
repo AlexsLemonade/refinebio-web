@@ -27,13 +27,13 @@ export const colors = {
   'brand-shade-60': '#162B46',
   // Alex's Yellow (new)
   'alex-yellow': '#FFDD00',
-  // Alex's Yellow
-  'alex-yellow-base': '#F3E500',
-  'alex-yellow-tint-90': '#FFFDE4',
-  'alex-yellow-tint-40': '#FFF55E',
-  'alex-yellow-shade-10': '#DACE00',
-  'alex-yellow-shade-20': '#C2B700',
-  'alex-yellow-shade-30': '#AAA000',
+  // Alex's Yellow (old)
+  'alex-yellow-old': '#F3E500',
+  'alex-yellow-old-tint-90': '#FFFDE4',
+  'alex-yellow-old-tint-40': '#FFF55E',
+  'alex-yellow-old-shade-10': '#DACE00',
+  'alex-yellow-old-shade-20': '#C2B700',
+  'alex-yellow-old-shade-30': '#AAA000',
   // Coral
   coral: '#E56E60',
   'coral-tint-90': '#FCF0EF',
@@ -101,7 +101,6 @@ export const colors = {
   rgba6: 'rgba(0, 0, 0, 0.6)',
   rgba3: 'rgba(0, 0, 0, 0.3)',
   // Social Media
-  bluesky: '#1185FE',
   twitter: '#55acee',
   // default font color
   text: {

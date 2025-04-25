@@ -11,31 +11,16 @@ const moduleExports = () => {
 
   // Set the env variables for 'staging' if not 'production'
   const env = {
-    API_HOST: isProduction ? process.env.API_HOST : process.env.STAGE_API_HOST,
+    API_PATH: isProduction ? process.env.API_PATH : process.env.STAGE_API_PATH,
     API_VERSION: isProduction
       ? process.env.API_VERSION
       : process.env.STAGE_API_VERSION,
-    GA4_MEASUREMENT_ID: isProduction
-      ? process.env.GA4_MEASUREMENT_ID
-      : process.env.STAGE_GA4_MEASUREMENT_ID,
-    GITHUB_TOKEN: isProduction
-      ? process.env.GITHUB_TOKEN
-      : process.env.STAGE_GITHUB_TOKEN,
-    GITHUB_ENDPOINT: isProduction
-      ? process.env.GITHUB_ENDPOINT
-      : process.env.STAGE_GITHUB_ENDPOINT,
-    HUBSPOT_ACCESS_TOKEN: isProduction
-      ? process.env.HUBSPOT_ACCESS_TOKEN
-      : process.env.STAGE_HUBSPOT_ACCESS_TOKEN,
     SENTRY_DSN: isProduction
       ? process.env.SENTRY_DSN
       : process.env.STAGE_SENTRY_DSN,
     SENTRY_ENV: isProduction
       ? process.env.SENTRY_ENV
-      : process.env.STAGE_SENTRY_ENV,
-    SLACK_HOOK_URL: isProduction
-      ? process.env.SLACK_HOOK_URL
-      : process.env.STAGE_SLACK_HOOK_URL
+      : process.env.STAGE_SENTRY_ENV
   }
 
   return {

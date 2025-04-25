@@ -1,24 +1,23 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Main } from 'grommet'
-import { useLayoutRefs } from 'hooks/useLayoutRefs'
 import { useBand } from 'hooks/useBand'
 import { useResponsive } from 'hooks/useResponsive'
 import { useMatchMedia } from 'hooks/useMatchMedia'
 import isMatchPath from 'helpers/isMatchPath'
-import { BackToTopButton } from 'components/BackToTopButton'
-import { Band } from 'components/Band'
+import { BackToTopButton } from 'components/shared/BackToTopButton'
+import { Band } from 'components/shared/Band'
+import { Notification } from 'components/shared/Notification'
 import { Footer } from 'components/Footer'
 import { Header } from 'components/Header'
-import { Notification } from 'components/Notification'
 
 export const Layout = ({ children }) => {
   const router = useRouter()
+  const { pathname } = router
   const isMax420 = useMatchMedia('(max-width: 420px)')
   const { band, setBand } = useBand()
   const { setResponsive } = useResponsive()
-  const { headerRef } = useLayoutRefs()
-  const { pathname } = router
+
   const pathWithBand = ['/', '/about', '/compendia/[type]']
 
   useEffect(() => {
@@ -41,10 +40,7 @@ export const Layout = ({ children }) => {
           light={isMatchPath(pathname, '/compendia/[type]')}
         />
       )}
-      <Header
-        ref={headerRef}
-        light={band && !isMatchPath(pathname, '/compendia/[type]')}
-      />
+      <Header light={band && !isMatchPath(pathname, '/compendia/[type]')} />
       <Main role="main">{children}</Main>
       <Footer />
       <BackToTopButton />
