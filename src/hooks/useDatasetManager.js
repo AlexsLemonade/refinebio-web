@@ -126,7 +126,7 @@ export const useDatasetManager = () => {
   }
 
   // checks if the given dataset ID is myDatasetId
-  const isMyDatasetId = (id) => id === myDatasetId
+  const isMyDatasetId = (id) => myDatasetId !== null && id === myDatasetId
 
   const startProcessingDataset = async (
     options,
@@ -145,11 +145,14 @@ export const useDatasetManager = () => {
     const processingDatasetId = isMyDatasetId(id)
       ? myDatasetId
       : await createDataset() // creates new dataset ID for one-off download and shared dataset
+
     const response = await updateDataset(processingDatasetId, body)
+
     // adds this dataset ID to processingDatasets[] for polling
     addToProcessingDatasets(processingDatasetId, accessionCode)
     // saves the user's newly entered email or replace the existing one
     setEmail(options.email_address)
+
     // deletes the locally saved dataset data once it has started processing (no longer mutable)
     if (id && isMyDatasetId(id)) {
       setMyDataset({})
