@@ -44,7 +44,7 @@ export const DatasetExplore = ({ dataset }) => {
       href: links.refinebio_github_differential_expression_rnaseq
     },
     {
-      text: 'Follow a example pathway analysis',
+      text: 'Follow an example pathway analysis',
       href: links.refinebio_github_pathway_analysis_rnaseq
     },
     {
@@ -62,7 +62,7 @@ export const DatasetExplore = ({ dataset }) => {
       href: links.refinebio_github_differential_expression_microarray
     },
     {
-      text: 'Follow a example pathway analysis',
+      text: 'Follow an example pathway analysis',
       href: links.refinebio_github_pathway_analysis_microarray
     },
     {
