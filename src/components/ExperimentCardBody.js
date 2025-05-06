@@ -19,7 +19,7 @@ export const ExperimentCardBody = ({ experiment, charLimit = 300 }) => {
   const [toggleDesciption, setToggleDescription] = useState(
     description.length > charLimit
   )
-  const isArrayExpress =
+  const isGEOD =
     alternateAccessionCode && alternateAccessionCode.startsWith('E-GEOD')
 
   return (
@@ -97,7 +97,7 @@ export const ExperimentCardBody = ({ experiment, charLimit = 300 }) => {
           Alternate Accession IDs
         </Heading>
         {alternateAccessionCode ? (
-          isArrayExpress ? (
+          isGEOD ? (
             <TextHighlight>{alternateAccessionCode}</TextHighlight>
           ) : (
             <Anchor
