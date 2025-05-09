@@ -34,7 +34,10 @@ export const DatasetStartProcessingForm = ({ dataset }) => {
     }
 
     const downloadOptions = {
+      aggregate_by: dataset.aggregate_by,
       data: dataset.data,
+      scale_by: dataset.scale_by,
+      quantile_normalize: dataset.quantile_normalize,
       ...formValues
     }
 
