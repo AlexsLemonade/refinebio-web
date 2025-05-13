@@ -66,7 +66,7 @@ export const useSamplesContext = () => {
   /* Sort Order */
   const updateSortBy = (newSortBy) => {
     setSamplesQuery((prev) => {
-      if (newSortBy !== prev.ordering) return prev
+      if (newSortBy === prev.ordering) return prev
 
       const updatedQuery = { ...prev }
 
