@@ -33,12 +33,7 @@ export const DatasetStartProcessingForm = ({ dataset }) => {
       }
     }
 
-    const downloadOptions = {
-      data: dataset.data,
-      ...formValues
-    }
-
-    const { id } = await startProcessingDataset(downloadOptions, dataset.id)
+    const { id } = await startProcessingDataset(formValues, dataset.id)
     const pathname = `/dataset/${id}`
     push({ pathname }, pathname)
     gtag.trackDatasetDownloadOptions(dataset)
@@ -51,6 +46,10 @@ export const DatasetStartProcessingForm = ({ dataset }) => {
   return (
     <Formik
       initialValues={{
+        aggregate_by: dataset.aggregate_by,
+        data: dataset.data,
+        scale_by: dataset.scale_by,
+        quantile_normalize: dataset.quantile_normalize,
         email_address: email || '',
         email_ccdl_ok: true,
         terms: acceptedTerms
