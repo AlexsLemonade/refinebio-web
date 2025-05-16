@@ -7,9 +7,11 @@ import { AddPageToDatasetButton } from 'components/AddPageToDatasetButton'
 import { HideNonDownloadableExperiments } from 'components/HideNonDownloadableExperiments'
 
 export const SearchBulkActions = ({ response, query }) => {
-  const { results, totalResults } = response
   const { updatePageSize, updateSortBy } = useSearchManager()
   const { getForBreakpoint, setResponsive } = useResponsive()
+  const { results, totalResults } = response
+  const isResults = results?.length > 0
+
   const sortByValues = [
     '_score',
     '-num_downloadable_samples',
@@ -94,42 +96,46 @@ export const SearchBulkActions = ({ response, query }) => {
           column: 'xsmall'
         }}
       >
-        <Box gridArea="page-display" justify="center">
-          <Box align="center" direction="row">
-            <PageSizes
-              ofLabel="results"
-              pageSizeLabel="Total Samples"
-              pageSize={query.limit}
-              totalPages={totalResults}
-              onPageSizeChange={updatePageSize}
-            />
-          </Box>
-        </Box>
-        <Box gridArea="sort-by">
-          <Box align="center" direction="row">
-            Sort by
-            <Box width="208px">
-              <Select
-                options={getReadableOptions(sortByValues)}
-                labelKey="label"
-                value={query.ordering}
-                valueKey={{ key: 'value', reduce: true }}
-                margin={{ horizontal: 'xxsmall' }}
-                onChange={({ value: nextValue }) => updateSortBy(nextValue)}
-              />
+        {isResults && (
+          <>
+            <Box gridArea="page-display" justify="center">
+              <Box align="center" direction="row">
+                <PageSizes
+                  ofLabel="results"
+                  pageSizeLabel="Total Samples"
+                  pageSize={query.limit}
+                  totalPages={totalResults}
+                  onPageSizeChange={updatePageSize}
+                />
+              </Box>
             </Box>
-          </Box>
-        </Box>
-        <Box gridArea="add-page">
-          <Box align={setResponsive('start', 'end')}>
-            <AddPageToDatasetButton
-              label="Add Page to Dataset"
-              secondary
-              responsive={setResponsive(true, false)}
-              dataToAdd={results}
-            />
-          </Box>
-        </Box>
+            <Box gridArea="sort-by">
+              <Box align="center" direction="row">
+                Sort by
+                <Box width="208px">
+                  <Select
+                    options={getReadableOptions(sortByValues)}
+                    labelKey="label"
+                    value={query.ordering}
+                    valueKey={{ key: 'value', reduce: true }}
+                    margin={{ horizontal: 'xxsmall' }}
+                    onChange={({ value: nextValue }) => updateSortBy(nextValue)}
+                  />
+                </Box>
+              </Box>
+            </Box>
+            <Box gridArea="add-page">
+              <Box align={setResponsive('start', 'end')}>
+                <AddPageToDatasetButton
+                  label="Add Page to Dataset"
+                  secondary
+                  responsive={setResponsive(true, false)}
+                  dataToAdd={results}
+                />
+              </Box>
+            </Box>
+          </>
+        )}
         <Box gridArea="hide-non-downloadble">
           <HideNonDownloadableExperiments />
         </Box>
