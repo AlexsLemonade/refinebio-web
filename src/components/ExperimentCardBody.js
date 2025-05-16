@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { useState } from 'react'
 import { Box, Heading, Paragraph, Text } from 'grommet'
 import { useDatasetManager } from 'hooks/useDatasetManager'
@@ -18,6 +19,8 @@ export const ExperimentCardBody = ({ experiment, charLimit = 300 }) => {
   const [toggleDesciption, setToggleDescription] = useState(
     description.length > charLimit
   )
+  const isGEOD =
+    alternateAccessionCode && alternateAccessionCode.startsWith('E-GEOD')
 
   return (
     <Box pad={{ top: 'medium', bottom: 'small' }}>
@@ -94,11 +97,15 @@ export const ExperimentCardBody = ({ experiment, charLimit = 300 }) => {
           Alternate Accession IDs
         </Heading>
         {alternateAccessionCode ? (
-          <Anchor
-            href={getURLForAccessionCode(alternateAccessionCode)}
-            target="_blank"
-            label={<TextHighlight>{alternateAccessionCode}</TextHighlight>}
-          />
+          isGEOD ? (
+            <TextHighlight>{alternateAccessionCode}</TextHighlight>
+          ) : (
+            <Anchor
+              href={getURLForAccessionCode(alternateAccessionCode)}
+              target="_blank"
+              label={<TextHighlight>{alternateAccessionCode}</TextHighlight>}
+            />
+          )
         ) : (
           <TextNull text="None" />
         )}

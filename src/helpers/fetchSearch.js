@@ -27,14 +27,17 @@ export default async (queryParams, filterOrders) => {
         previousFacets[translatedLastFilterOrderName] // We need to use 'downloadable_organism_names'
     }
   }
-  /* Accession Codes */
+
+  /* Accession Codes and related results */
   const accessionCodes = getParsedAccessionCodes(queryParams.search)
+  const numHideDownloadable = queryParams.num_downloadable_samples__gt
 
   // makes requests for accession codes only from the first page
   if (accessionCodes.length > 0 && queryParams.offset === 0) {
     const accessionCodesResponse = await Promise.all(
       accessionCodes.map((code) =>
         api.search.get({
+          num_downloadable_samples__gt: numHideDownloadable,
           search: [`accession_code:${code}`, `alternate_accession_code:${code}`]
         })
       )

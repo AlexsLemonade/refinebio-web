@@ -142,9 +142,7 @@ export const useDatasetManager = () => {
       start: true
     }
 
-    const processingDatasetId = isMyDatasetId(id)
-      ? myDatasetId
-      : await createDataset() // creates new dataset ID for one-off download and shared dataset
+    const processingDatasetId = id || (await createDataset()) // creates a new dataset ID for one-off download
 
     const response = await updateDataset(processingDatasetId, body)
 
