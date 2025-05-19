@@ -20,6 +20,9 @@ export const ExperimentDetail = ({ experiment }) => {
   const { setResponsive } = useResponsive()
   const { navigateToSearch } = useSearchManager()
 
+  const alternateAccessionCode = experiment.alternate_accession_code
+  const isGEOD = alternateAccessionCode.startsWith('E-GEOD')
+
   return (
     <FixedContainer>
       <Box elevation="medium" pad="large" margin={{ bottom: 'basex6' }}>
@@ -169,21 +172,21 @@ export const ExperimentDetail = ({ experiment }) => {
             <InformationItem
               field="Alternate Accession IDs"
               value={
-                <Anchor
-                  label={
-                    <TextHighlight>
-                      {experiment.alternate_accession_code}
-                    </TextHighlight>
-                  }
-                  href={getURLForAccessionCode(
-                    experiment.alternate_accession_code
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
+                isGEOD ? (
+                  <TextHighlight>{alternateAccessionCode}</TextHighlight>
+                ) : (
+                  <Anchor
+                    label={
+                      <TextHighlight>{alternateAccessionCode}</TextHighlight>
+                    }
+                    href={getURLForAccessionCode(alternateAccessionCode)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                )
               }
               fallback="None"
-              forceFallback={!experiment.alternate_accession_code}
+              forceFallback={!alternateAccessionCode}
             />
           </InformationList>
         </Box>

@@ -73,7 +73,7 @@ export const DatasetFileSummaries = ({ dataset }) => {
         label={
           <>
             All data you download from refine.bio has been uniformly processed
-            and normalized. Learn more.{' '}
+            and normalized.{' '}
             <Anchor
               href={links.refinebio_docs_standard_pipeline}
               label="Learn More"

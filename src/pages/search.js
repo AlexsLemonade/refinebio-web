@@ -99,122 +99,125 @@ export const Search = ({ query, response }) => {
               onSubmit={handleSubmit}
             />
           </Box>
-          {isResults && (
-            <Grid
-              areas={[
-                { name: 'side', start: [0, 1], end: [0, 1] },
-                { name: 'main', start: [1, 1], end: [1, 1] }
-              ]}
-              columns={setResponsive(['auto'], ['auto'], [sideWidth, 'auto'])}
-              rows={['auto', 'auto']}
-              gap={{
-                row: 'none',
-                column: setResponsive('none', 'none', '2%')
-              }}
+          <Grid
+            areas={[
+              { name: 'side', start: [0, 1], end: [0, 1] },
+              { name: 'main', start: [1, 1], end: [1, 1] }
+            ]}
+            columns={setResponsive(['auto'], ['auto'], [sideWidth, 'auto'])}
+            rows={['auto', 'auto']}
+            gap={{
+              row: 'none',
+              column: setResponsive('none', 'none', '2%')
+            }}
+          >
+            <LayerResponsive
+              position="left"
+              show={showMobileFilterList}
+              tabletMode
             >
-              <LayerResponsive
-                position="left"
-                show={showMobileFilterList}
-                tabletMode
+              <BoxBlock
+                gridArea="side"
+                height={setResponsive('100vh', '100vh', 'auto')}
+                margin={{ top: 'large' }}
+                pad={{
+                  left: setResponsive('basex7', 'basex7', 'none'),
+                  right: setResponsive('basex7', 'basex7', 'large'),
+                  top: setResponsive('large', 'large', 'none')
+                }}
+                // TODO: dynamically set the max height for laptop / desktop devices based on vh and page sizes
+                width={setResponsive('100vw', '100vw', sideWidth)}
+                style={{ overflowY: 'auto' }}
               >
-                <BoxBlock
-                  gridArea="side"
-                  height={setResponsive('100vh', '100vh', 'auto')}
-                  margin={{ top: 'large' }}
-                  pad={{
-                    left: setResponsive('basex7', 'basex7', 'none'),
-                    right: setResponsive('basex7', 'basex7', 'large'),
-                    top: setResponsive('large', 'large', 'none')
-                  }}
-                  // TODO: dynamically set the max height for laptop / desktop devices based on vh and page sizes
-                  width={setResponsive('100vw', '100vw', sideWidth)}
-                  style={{ overflowY: 'auto' }}
-                >
-                  {viewport !== 'large' && (
-                    <Box align="end" margin={{ bottom: 'small' }}>
-                      <Box
-                        aria-label="Close Filters"
-                        role="button"
-                        style={{ boxShadow: 'none' }}
-                        width="max-content"
-                        onClick={() => setShowMobileFilterList(false)}
-                      >
-                        <Icon name="Close" size="large" />
-                      </Box>
-                    </Box>
-                  )}
-                  <SearchFilterList
-                    facets={facets}
-                    onToggle={() => setShowMobileFilterList(false)}
-                  />
-                </BoxBlock>
-              </LayerResponsive>
-              <Box gridArea="main" height={{ min: '85vh' }}>
                 {viewport !== 'large' && (
-                  <Button
-                    aria-label="Open Filters"
-                    label="Filter"
-                    icon={<Icon name="Filter" size="small" />}
-                    margin={{ bottom: 'medium' }}
-                    secondary
-                    onClick={() => setShowMobileFilterList(true)}
-                  />
+                  <Box align="end" margin={{ bottom: 'small' }}>
+                    <Box
+                      aria-label="Close Filters"
+                      role="button"
+                      style={{ boxShadow: 'none' }}
+                      width="max-content"
+                      onClick={() => setShowMobileFilterList(false)}
+                    >
+                      <Icon name="Close" size="large" />
+                    </Box>
+                  </Box>
                 )}
-                <SearchBulkActions response={response} query={query} />
-                <Box animation={{ type: 'fadeIn', duration: 300 }}>
-                  {results.map((result, i) =>
-                    result.isMatchedAccessionCode ? (
-                      <Fragment key={result.accession_code}>
+                <SearchFilterList
+                  facets={facets}
+                  isResults={isResults}
+                  onToggle={() => setShowMobileFilterList(false)}
+                />
+              </BoxBlock>
+            </LayerResponsive>
+            <Box gridArea="main" height={{ min: '85vh' }}>
+              {viewport !== 'large' && (
+                <Button
+                  aria-label="Open Filters"
+                  label="Filter"
+                  icon={<Icon name="Filter" size="small" />}
+                  margin={{ bottom: 'medium' }}
+                  secondary
+                  onClick={() => setShowMobileFilterList(true)}
+                />
+              )}
+              <SearchBulkActions response={response} query={query} />
+              {isResults ? (
+                <>
+                  <Box animation={{ type: 'fadeIn', duration: 300 }}>
+                    {results.map((result, i) =>
+                      result.isMatchedAccessionCode ? (
+                        <Fragment key={result.accession_code}>
+                          <ExperimentCard
+                            key={result.accession_code}
+                            experiment={result}
+                          />
+                          {results[i + 1] &&
+                            !results[i + 1].isMatchedAccessionCode && (
+                              <Box
+                                border={{ color: 'gray-shade-5', side: 'top' }}
+                                margin={{ vertical: 'large' }}
+                                style={{ position: 'relative' }}
+                              >
+                                <Heading
+                                  level={3}
+                                  style={{ position: 'absolute', top: '-12px' }}
+                                >
+                                  Related Results for '{search}'
+                                </Heading>
+                              </Box>
+                            )}
+                        </Fragment>
+                      ) : (
                         <ExperimentCard
                           key={result.accession_code}
                           experiment={result}
                         />
-                        {results[i + 1] &&
-                          !results[i + 1].isMatchedAccessionCode && (
-                            <Box
-                              border={{ color: 'gray-shade-5', side: 'top' }}
-                              margin={{ vertical: 'large' }}
-                              style={{ position: 'relative' }}
-                            >
-                              <Heading
-                                level={3}
-                                style={{ position: 'absolute', top: '-12px' }}
-                              >
-                                Related Results for '{search}'
-                              </Heading>
-                            </Box>
-                          )}
-                      </Fragment>
-                    ) : (
-                      <ExperimentCard
-                        key={result.accession_code}
-                        experiment={result}
-                      />
-                    )
-                  )}
-                  {(results.length < 10 ||
-                    page === Math.ceil(totalResults / limit)) && (
-                    <SearchRequestFormAlert />
-                  )}
-                </Box>
-
-                <Box
-                  align="center"
-                  direction="row"
-                  justify="center"
-                  margin={{ top: 'medium' }}
-                >
-                  <Pagination
-                    page={page}
-                    pageSize={limit}
-                    totalPages={totalResults}
-                    onPageChange={updatePage}
-                  />
-                </Box>
-              </Box>
-            </Grid>
-          )}
-          {!isResults && search && <SearchNoResults />}
+                      )
+                    )}
+                    {(results.length < 10 ||
+                      page === Math.ceil(totalResults / limit)) && (
+                      <SearchRequestFormAlert />
+                    )}
+                  </Box>
+                  <Box
+                    align="center"
+                    direction="row"
+                    justify="center"
+                    margin={{ top: 'medium' }}
+                  >
+                    <Pagination
+                      page={page}
+                      pageSize={limit}
+                      totalPages={totalResults}
+                      onPageChange={updatePage}
+                    />
+                  </Box>
+                </>
+              ) : (
+                <SearchNoResults />
+              )}
+            </Box>
+          </Grid>
         </FixedContainer>
       </TextHighlightContextProvider>
     </>
