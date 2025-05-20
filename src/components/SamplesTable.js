@@ -215,6 +215,7 @@ export const SamplesTable = ({
               columns={columns}
               data={data || []}
               defaultColumn={defaultColumn}
+              defaultSortId="accession_code"
               hasTableData={hasSamples}
               hiddenColumns={columns
                 .filter((column) => column.isVisible === false)
