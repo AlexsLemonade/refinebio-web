@@ -21,7 +21,7 @@ export default (dataset) => {
         format: 'tsv'
       },
       {
-        title: '1 Aggregate Metadata File',
+        title: `1 ${aggregateBy} Metadata File`,
         description: '1 file per download',
         format: 'json'
       }
