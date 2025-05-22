@@ -70,12 +70,8 @@ export const useSamplesContext = () => {
 
       const updatedQuery = { ...prev }
 
-      if (newSortBy) {
-        updatedQuery.ordering = newSortBy
-      } else {
-        // fetch with accession code by default
-        updatedQuery.ordering = 'accession_code'
-      }
+      // fetch with accession code by default
+      updatedQuery.ordering = newSortBy || 'accession_code'
 
       return updatedQuery
     })
