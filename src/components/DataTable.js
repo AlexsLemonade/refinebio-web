@@ -40,12 +40,12 @@ export const DataTable = ({
     root: tableRef.current,
     rootMargin: '0px',
     threshold: 0.99
-  }).isIntersecting
+  })
   const isLastCellVisible = useIntersectObserver(lastCellRef, {
     root: tableRef.current,
     rootMargin: '0px',
     threshold: 0.8
-  }).isIntersecting
+  })
   const columns = useMemo(() => tableColumns, [tableColumns])
   const data = useMemo(() => tableData, [tableData])
   const tableInstance = useTable(

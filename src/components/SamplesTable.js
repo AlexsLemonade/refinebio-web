@@ -209,7 +209,16 @@ export const SamplesTable = ({
             )}
           </Box>
         </Row>
-        <BoxBlock>
+        <BoxBlock
+          border={modalView && { color: 'gray-shade-20' }}
+          height={{ max: modalView ? '65vh' : 'auto' }}
+          pad={{ right: modalView ? 'small' : '0px' }}
+          style={
+            modalView && {
+              overflowY: 'scroll'
+            }
+          }
+        >
           <TextHighlightContextProvider match={samplesQuery.filter_by}>
             <DataTable
               columns={columns}
