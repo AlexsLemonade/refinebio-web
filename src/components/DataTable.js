@@ -26,6 +26,7 @@ export const DataTable = ({
   columns: tableColumns,
   data: tableData,
   defaultColumn = {},
+  defaultSortId = '',
   hasTableData,
   hiddenColumns = [],
   manualPagination = false,
@@ -53,7 +54,15 @@ export const DataTable = ({
       columns,
       data,
       defaultColumn,
-      initialState: { hiddenColumns },
+      initialState: {
+        hiddenColumns,
+        sortBy: [
+          {
+            id: defaultSortId,
+            desc: false
+          }
+        ]
+      },
       manualPagination,
       autoResetSortBy: false
     },
