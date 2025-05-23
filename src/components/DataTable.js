@@ -31,6 +31,7 @@ export const DataTable = ({
   manualPagination = false,
   tableExpanded,
   tableHeight, // required for the expanded table view
+  modalView = false,
   onSortByChange = () => {}
 }) => {
   const tableRef = useRef(null)
@@ -120,7 +121,7 @@ export const DataTable = ({
           <Table
             {...getTableProps()}
             ref={tableRef}
-            height={{ max: tableHeight }}
+            height={{ max: tableHeight || modalView ? '60vh' : 'auto' }}
           >
             <TableHeader className="header">
               {headerGroups.map((headerGroup) => (
