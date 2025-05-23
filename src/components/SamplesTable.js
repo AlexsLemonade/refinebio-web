@@ -223,6 +223,7 @@ export const SamplesTable = ({
               manualPagination
               tableHeight={tableHeight}
               tableExpanded={tableExpanded}
+              modalView
               onSortByChange={updateSortBy}
             />
             {!hasSamples && samplesQuery.filter_by && (
