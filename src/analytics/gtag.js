@@ -47,7 +47,7 @@ const trackDownloadNormalizedCompendia = (compendia) => {
 const trackDatasetAction = (Component) => {
   const payload = {}
   payload.dataset_action = Component.name
-  event('dataset_action', payload)
+  event('click_dataset_action', payload)
 }
 // tracks the number of dataset downloads by dataset ID
 const trackDatasetDownload = (dataset) => {
@@ -59,12 +59,12 @@ const trackDatasetDownload = (dataset) => {
 const trackDatasetDownloadOptions = (dataset) => {
   const payload = {}
   payload.dataset_download_options = getFormattedDatasetOptions(dataset)
-  event('dataset_download_options', payload)
+  event('set_dataset_download_options', payload)
 }
 // tracks the number of one-off downloads by accession code
 const trackOneOffExperimentDownload = (experiment) => {
   const payload = {}
-  payload.one_off_experiment_download = experiment.accession_code
+  payload.experiment_accession_code = experiment.accession_code
   event('one_off_experiment_download', payload)
 }
 // tracks the dataset's state (expired or valid) and download options change (initial and updated)
@@ -80,7 +80,7 @@ const trackRegeneratedDataset = (dataset, regeneratedDataset) => {
 // tracks user clicks on the share dataset button by dataset ID
 const trackSharedDataset = (dataset) => {
   const payload = {}
-  payload.shared_dataset_id = dataset.id
+  payload.dataset_id = dataset.id
   event('shared_dataset', payload)
 }
 
@@ -90,14 +90,14 @@ const trackSharedDataset = (dataset) => {
 const trackExperimentPageClick = (Component) => {
   const payload = {}
   payload.experiment_page_click_from = Component.name
-  event('page_view', payload)
+  event('click_experiment_page', payload)
 }
 // tracks the explore links that users click on after downloads
 const trackExploredUsageClick = (link) => {
   // sets the dimension key for dataset or compendia usage
   const payload = {}
   payload.explored_usage_link = link
-  event(`click`, payload)
+  event(`click_explored_usage_link`, payload)
 }
 // tracks internal and external link clicks
 const trackLink = (link) => {
@@ -132,7 +132,7 @@ const trackFilterType = (type) => {
 const trackToggleFilterItem = (isChecked, item) => {
   const payload = {}
   payload.toggled_filter_item = getToggledFilterItem(isChecked, item)
-  event('toggled_filter_item', payload)
+  event('toggle_filter_item', payload)
 }
 
 const trackSearchQuery = (query) => {
