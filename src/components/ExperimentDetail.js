@@ -21,7 +21,7 @@ export const ExperimentDetail = ({ experiment }) => {
   const { navigateToSearch } = useSearchManager()
 
   const alternateAccessionCode = experiment.alternate_accession_code
-  const isArrayExpress = alternateAccessionCode.startsWith('E-GEOD')
+  const isGEOD = alternateAccessionCode.startsWith('E-GEOD')
 
   return (
     <FixedContainer>
@@ -172,7 +172,7 @@ export const ExperimentDetail = ({ experiment }) => {
             <InformationItem
               field="Alternate Accession IDs"
               value={
-                isArrayExpress ? (
+                isGEOD ? (
                   <TextHighlight>{alternateAccessionCode}</TextHighlight>
                 ) : (
                   <Anchor
