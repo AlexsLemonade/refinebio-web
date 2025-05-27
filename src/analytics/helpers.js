@@ -15,18 +15,20 @@ const supportedEvents = [
   'compendia_rnaseq_download',
   'compendia_normalized_download',
   // Dataset
+  'click_dataset_action',
   'dataset_download',
-  'dataset_action',
-  'dataset_download_options',
+  'set_dataset_download_options',
   'one_off_experiment_download',
   'regenerated_dataset',
   'shared_dataset',
   // Links
+  'click_experiment_page',
+  'click_explored_usage_link',
   'click_external_link',
   'click_internal_link',
   // Search
   'filter_type',
-  'toggled_filter_item',
+  'toggle_filter_item',
   'search_text'
 ]
 const supportedDimensions = [
@@ -39,7 +41,7 @@ const supportedDimensions = [
   'dataset_action',
   'dataset_download_options',
   'dataset_id',
-  'one_off_experiment_download',
+  'experiment_accession_code',
   'regenerated_download_options_change',
   'regenerated_state',
   // Links
@@ -51,7 +53,6 @@ const supportedDimensions = [
   'filter_combination',
   'filter_type',
   'toggled_filter_item',
-  'shared_dataset_id',
   'search_text'
 ]
 export const event = (eventName, value = {}, nonInteraction = false) => {
