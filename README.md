@@ -2,7 +2,7 @@
 
 # refine.bio Web
 
-This is a web application for [refine.bio](https://github.com/AlexsLemonade/refinebio) that enables users to search, build, and download custom datasets for their needs including gene expression matrices and sample metadata.
+This is a web client for [refine.bio](https://github.com/AlexsLemonade/refinebio) that enables users to search, build, and download custom datasets for their needs including gene expression matrices and sample metadata.
 
 <details>
 
@@ -156,7 +156,9 @@ We use [ESlint](https://eslint.org) to statically analyze our JS code to correct
 
 ## Support
 
-refine.bio web is developed by [Childhood Cancer Data Lab](https://www.ccdatalab.org) and powered by [Alex's Lemonade Stand Foundation](https://www.alexslemonade.org). You can [support](https://www.ccdatalab.org/donate-link) the CCDL’s efforts to give researchers the tools to create a healthier, more prosperous future for kids fighting cancer and beyond.
+refine.bio is developed by [Childhood Cancer Data Lab](https://www.ccdatalab.org) and powered by [Alex's Lemonade Stand Foundation](https://www.alexslemonade.org). 
+
+You can [support](https://www.ccdatalab.org/donate-link) the CCDL’s efforts to give researchers the tools to create a healthier, more prosperous future for kids fighting cancer and beyond.
 
 ## License
 
