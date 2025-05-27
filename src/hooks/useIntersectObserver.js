@@ -4,27 +4,24 @@ import { useState, useEffect } from 'react'
 // Returns a state 'target' which includes the ref's intersection status
 
 export const useIntersectObserver = (ref, options) => {
-  const [target, setTarget] = useState({})
-
-  const callback = (entries) => {
-    const [entry] = entries
-
-    setTarget({
-      boundingClientRect: entry.boundingClientRect,
-      isIntersecting: entry.isIntersecting,
-      target: entry.target
-    })
-  }
+  const [isIntersecting, setIsIntersecting] = useState(false)
 
   useEffect(() => {
-    // create an instance of IntersectionObserver and register the ref
+    const callback = (entries) => {
+      const [entry] = entries
+      setIsIntersecting(entry.isIntersecting)
+    }
+
     const observer = new IntersectionObserver(callback, options)
-    if (ref.current) observer.observe(ref.current)
+
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
 
     return () => {
       observer.disconnect()
     }
-  }, [])
+  }, [ref, options])
 
-  return target
+  return isIntersecting
 }
