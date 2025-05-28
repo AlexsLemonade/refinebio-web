@@ -35,4 +35,6 @@ export const RemoveDatasetButton = ({ dataToRemove }) => {
   )
 }
 
+RemoveDatasetButton.displayName = 'RemoveDatasetButton'
+
 export default RemoveDatasetButton

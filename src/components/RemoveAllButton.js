@@ -62,4 +62,6 @@ export const RemoveAllButton = () => {
   )
 }
 
+RemoveAllButton.displayName = 'RemoveAllButton'
+
 export default RemoveAllButton

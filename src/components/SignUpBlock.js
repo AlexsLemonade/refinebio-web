@@ -111,4 +111,6 @@ export const SignUpBlock = () => {
   )
 }
 
+SignUpBlock.displayName = 'SignUpBlock'
+
 export default SignUpBlock

@@ -113,4 +113,6 @@ export const DatasetStartProcessingForm = ({ dataset }) => {
   )
 }
 
+DatasetStartProcessingForm.displayName = 'DatasetStartProcessingForm'
+
 export default DatasetStartProcessingForm

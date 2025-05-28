@@ -157,4 +157,6 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
   )
 }
 
+DownloadDatasetModal.displayName = 'DownloadDatasetModal'
+
 export default DownloadDatasetModal

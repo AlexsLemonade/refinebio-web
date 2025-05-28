@@ -82,4 +82,6 @@ export const MoveToDatasetButton = ({ dataset }) => {
   )
 }
 
+MoveToDatasetButton.displayName = 'MoveToDatasetButton'
+
 export default MoveToDatasetButton

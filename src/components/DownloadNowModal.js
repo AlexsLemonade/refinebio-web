@@ -169,4 +169,6 @@ export const DownloadNowModal = ({
   )
 }
 
+DownloadNowModal.displayName = 'DownloadNowModal'
+
 export default DownloadNowModal

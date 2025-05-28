@@ -22,4 +22,6 @@ export const AddToDatasetButton = ({ dataToAdd, ...props }) => {
   )
 }
 
+AddToDatasetButton.displayName = 'AddToDatasetButton'
+
 export default AddToDatasetButton

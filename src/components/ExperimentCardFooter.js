@@ -23,4 +23,6 @@ export const ExperimentCardFooter = ({ experiment }) => {
   )
 }
 
+ExperimentCardFooter.displayName = 'ExperimentCardFooter'
+
 export default ExperimentCardFooter

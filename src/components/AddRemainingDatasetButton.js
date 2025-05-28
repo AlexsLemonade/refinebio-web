@@ -33,4 +33,6 @@ export const AddRemainingDatasetButton = ({ dataToAdd, samplesInDataset }) => {
   )
 }
 
+AddRemainingDatasetButton.displayName = 'AddRemainingDatasetButton'
+
 export default AddRemainingDatasetButton

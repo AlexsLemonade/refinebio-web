@@ -49,4 +49,6 @@ export const ExperimentCardHeader = ({ experiment, isLinked = false }) => {
   )
 }
 
+ExperimentCardHeader.displayName = 'ExperimentCardHeader'
+
 export default ExperimentCardHeader
