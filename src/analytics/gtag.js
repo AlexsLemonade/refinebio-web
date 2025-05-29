@@ -13,9 +13,9 @@ import {
 
 /* --- General --- */
 // tracks email subscriptions and the user-subscribed location
-const trackEmailSubscription = (Component) => {
+const trackEmailSubscription = (componentName) => {
   const payload = {}
-  payload.subscription_click_from = Component.name
+  payload.subscription_click_from = componentName
   event('email_subscription', payload)
 }
 
@@ -44,9 +44,9 @@ const trackDownloadNormalizedCompendia = (compendia) => {
 
 /* --- Datasets --- */
 // tracks user clicks on the dataset actions buttons
-const trackDatasetAction = (Component) => {
+const trackDatasetAction = (componentName) => {
   const payload = {}
-  payload.dataset_action = Component.name
+  payload.dataset_action = componentName
   event('click_dataset_action', payload)
 }
 // tracks the number of dataset downloads by dataset ID
@@ -87,9 +87,9 @@ const trackSharedDataset = (dataset) => {
 /* --- Links --- */
 // tracks click-through to the experiment page from search results
 // used to create a report to differentiate which component users click
-const trackExperimentPageClick = (Component) => {
+const trackExperimentPageClick = (componentName) => {
   const payload = {}
-  payload.experiment_page_click_from = Component.name
+  payload.experiment_page_click_from = componentName
   event('click_experiment_page', payload)
 }
 // tracks the explore links that users click on after downloads

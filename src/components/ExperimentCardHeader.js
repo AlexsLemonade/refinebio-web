@@ -11,7 +11,7 @@ export const ExperimentCardHeader = ({ experiment, isLinked = false }) => {
   const { setResponsive } = useResponsive()
 
   const handleClick = () => {
-    gtag.trackExperimentPageClick(ExperimentCardHeader)
+    gtag.trackExperimentPageClick('ExperimentCardHeader')
   }
 
   return (

@@ -29,7 +29,7 @@ export const DatasetStartProcessingForm = ({ dataset }) => {
         formValues.email_address
       )
       if (subscribeEmailResponse.status !== 'error') {
-        gtag.trackEmailSubscription(DatasetStartProcessingForm)
+        gtag.trackEmailSubscription('DatasetStartProcessingForm')
       }
     }
 
