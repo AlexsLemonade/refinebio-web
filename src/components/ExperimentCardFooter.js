@@ -9,7 +9,7 @@ export const ExperimentCardFooter = ({ experiment }) => {
   const { push } = useRouter()
 
   const handleClick = () => {
-    gtag.trackExperimentPageClick(ExperimentCardFooter)
+    gtag.trackExperimentPageClick('ExperimentCardFooter')
     push({
       pathname: `/experiments/${accessionCode}/${formatURLString(title)}`,
       query: { ref: 'view-samples' }

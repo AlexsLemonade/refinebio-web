@@ -30,7 +30,7 @@ export const DownloadDatasetModal = ({ dataset, id, closeModal }) => {
         formValues.email_address
       )
       if (subscribeEmailResponse.status !== 'error') {
-        gtag.trackEmailSubscription(DownloadDatasetModal)
+        gtag.trackEmailSubscription('DownloadDatasetModal')
       }
     }
 

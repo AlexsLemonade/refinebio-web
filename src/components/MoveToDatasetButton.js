@@ -57,7 +57,7 @@ export const MoveToDatasetButton = ({ dataset }) => {
 
   const handleSubmit = async () => {
     await handlers[action]()
-    gtag.trackDatasetAction(MoveToDatasetModal)
+    gtag.trackDatasetAction('MoveToDatasetModal')
     handleReset()
   }
 

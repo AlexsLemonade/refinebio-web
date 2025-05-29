@@ -33,7 +33,7 @@ export const DownloadNowModal = ({
         formValues.email_address
       )
       if (subscribeEmailResponse.status !== 'error') {
-        gtag.trackEmailSubscription(DownloadNowModal)
+        gtag.trackEmailSubscription('DownloadNowModal')
       }
     }
 
