@@ -7,7 +7,7 @@ export const AddToDatasetButton = ({ dataToAdd, ...props }) => {
 
   const handleClick = () => {
     addSamples(dataToAdd)
-    gtag.trackDatasetAction(AddToDatasetButton)
+    gtag.trackDatasetAction('AddToDatasetButton')
   }
 
   return (

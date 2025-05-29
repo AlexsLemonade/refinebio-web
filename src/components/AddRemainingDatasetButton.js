@@ -9,7 +9,7 @@ export const AddRemainingDatasetButton = ({ dataToAdd, samplesInDataset }) => {
 
   const handleClick = () => {
     addSamples(dataToAdd)
-    gtag.trackDatasetAction(AddRemainingDatasetButton)
+    gtag.trackDatasetAction('AddRemainingDatasetButton')
   }
 
   return (

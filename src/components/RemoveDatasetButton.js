@@ -11,7 +11,7 @@ export const RemoveDatasetButton = ({ dataToRemove }) => {
 
   const handleClick = () => {
     removeSamples(dataToRemove)
-    gtag.trackDatasetAction(RemoveDatasetButton)
+    gtag.trackDatasetAction('RemoveDatasetButton')
   }
 
   return (
