@@ -4,6 +4,8 @@
 // Vercel for GitHub:
 // https://vercel.com/docs/concepts/git/vercel-for-github#configuring-for-github
 
+// eslint-disable-next-line import/no-extraneous-dependencies
+const TerserPlugin = require('terser-webpack-plugin')
 const { withSentryConfig } = require('@sentry/nextjs')
 
 const moduleExports = () => {
@@ -55,9 +57,22 @@ const moduleExports = () => {
       hideSourceMaps: true
     },
     swcMinify: true,
-    webpack(config) {
-      // eslint-disable-next-line no-param-reassign
-      // config.infrastructureLogging = { debug: /PackFileCache/ }
+    webpack(baseConfig) {
+      const config = { ...baseConfig }
+      // Keep component names for GA4 tracking in production
+      if (isProduction) {
+        config.optimization = {
+          ...config.optimization,
+          minimizer: [
+            ...config.optimization.minimizer,
+            new TerserPlugin({
+              terserOptions: {
+                keep_fnames: true
+              }
+            })
+          ]
+        }
+      }
       return config
     }
   }
